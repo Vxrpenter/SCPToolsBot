@@ -1,0 +1,24 @@
+# The bot token get from here https://discord.com/developers/
+token: ""
+# The guild id get using developer mode in discord and then right-clicking on the server, then copy id
+# \__ go to Settings > Advanced > Developer Mode
+guild_id:
+
+#Channel id's.  Get by right-clicking the channel and copying the id
+channel_ids:
+  support_id:
+  regulars_id:
+
+# The activity type if the bot [COMPETING, CUSTOM_STATUS, LISTENING, PLAYING, WATCHING]
+activity_type: "PLAYING"
+# The text being displayed
+activity_content: "/help"
+
+# Commands that are activated by default remove to deactivate, default ["help"]
+commands: ["help"]
+# Command settings
+# 'default_permissions' is pretty clear, find all permissions in this Javadoc https://docs.jda.wiki/net/dv8tion/jda/api/Permission.html.
+command_settings:
+  help:
+    default_permissions: ["ADMINISTRATOR"]
+    description: "Command annotations and explanations"
