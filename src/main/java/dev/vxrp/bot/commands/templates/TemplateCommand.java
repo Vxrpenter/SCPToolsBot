@@ -38,7 +38,10 @@ public class TemplateCommand extends ListenerAdapter {
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event) {
         if (event.getComponentId().equals("paste_rules")) {
+            event.reply("Pasting rules...").setEphemeral(true).queue();
+            logger.warn("Rule pasting might take a while and the usage of the parser may create performance issues");
             RulesTemplateUnit.pasteRules(Objects.requireNonNull(event.getGuild()), event.getChannelId());
+
         }
         if (event.getComponentId().equals("update_rules")) {
             RulesTemplateUnit.updateRules(Objects.requireNonNull(event.getGuild()),event.getChannelId(), event.getMessageId());

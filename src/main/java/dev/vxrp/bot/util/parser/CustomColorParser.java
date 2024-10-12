@@ -12,30 +12,6 @@ import java.util.regex.Pattern;
 public class CustomColorParser {
     // This parser is still a work in progress and also probably inefficient
 
-    private static final Pattern PINK_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=pink>).+?(?=</color>|$)");
-    private static final Pattern RED_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=red>).+?(?=</color>|$)");
-    private static final Pattern BROWN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=brown>).+?(?=</color>|$)");
-    private static final Pattern SILVER_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=silver>).+?(?=</color>|$)");
-    private static final Pattern LIGHT_GREEN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=light_green>).+?(?=</color>|$)");
-    private static final Pattern CRIMSON_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=crimson>).+?(?=</color>|$)");
-    private static final Pattern CYAN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=cyan>).+?(?=</color>|$)");
-    private static final Pattern AQUA_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=aqua>).+?(?=</color>|$)");
-    private static final Pattern DEEP_PINK_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=deep_pink>).+?(?=</color>|$)");
-    private static final Pattern TOMATO_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=tomato>).+?(?=</color>|$)");
-    private static final Pattern YELLOW_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=yellow>).+?(?=</color>|$)");
-    private static final Pattern MAGENTA_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=magenta>).+?(?=</color>|$)");
-    private static final Pattern BLUE_GREEN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=blue_green>).+?(?=</color>|$)");
-    private static final Pattern ORANGE_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=orange>).+?(?=</color>|$)");
-    private static final Pattern LIME_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=lime>).+?(?=</color>|$)");
-    private static final Pattern GREEN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=green>).+?(?=</color>|$)");
-    private static final Pattern EMERALD_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=emerald>).+?(?=</color>|$)");
-    private static final Pattern CARMINE_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=carmine>).+?(?=</color>|$)");
-    private static final Pattern NICKEL_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=nickel>).+?(?=</color>|$)");
-    private static final Pattern MINT_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=mint>).+?(?=</color>|$)");
-    private static final Pattern ARMY_GREEN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=army_green>).+?(?=</color>|$)");
-    private static final Pattern PUMPKIN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=army_green>).+?(?=</color>|$)");
-
-
     public static String parse(String input) {
         Map<String, String> tokens = new HashMap<>();
 
@@ -45,7 +21,7 @@ public class CustomColorParser {
                 CARMINE_COLOR_TAG_PATTERN, NICKEL_COLOR_TAG_PATTERN, MINT_COLOR_TAG_PATTERN, ARMY_GREEN_COLOR_TAG_PATTERN, PUMPKIN_COLOR_TAG_PATTERN);
 
         LinkedList<String> matcherList = new LinkedList<>();
-        for (int i = 0; i < 21; i++) {
+        for (int i = 0; i < patternList.size(); i++) {
             Matcher matcher = patternList.get(i).matcher(input);
             //Loop through
             while(matcher.find()) {
@@ -62,7 +38,31 @@ public class CustomColorParser {
             assert finalValue != null;
             input = input.replace(tokens.get(obj), finalValue);
         }
-        return input;
+
+        Map<String, String> linkList = new HashMap<>();
+        List<String> linkTextsList = new ArrayList<>();
+        Matcher matcher = LINK_TAG_PATTERN.matcher(input);
+        while (matcher.find()) {
+            Matcher linkTextMatcher = Pattern.compile("(?<=<link="+matcher.group()+">).+?(?=</link>|$)").matcher(input);
+            while (linkTextMatcher.find()) {
+                linkTextsList.add(linkTextMatcher.group());
+                linkList.put(linkTextMatcher.group(), matcher.group());
+            }
+        }
+
+        for (String obj : linkTextsList) {
+            String link = linkList.get(obj);
+            input = input.replace("<link="+link+">"+obj+"</link>", obj+"("+link+")");
+        }
+
+        input = input.replaceAll("</align>", "");
+        input = input.replaceAll("<align=center>", "ㅤ");
+        input = input.replaceAll("<size=.*?>", "");
+        input = input.replaceAll("</size>", "");
+        input = input.replaceAll("(?m)^[ \t]*\r?\n", "");
+        input = input.replaceAll("ㅤ", "");
+        input = "ㅤ"+input;
+        return input.trim();
     }
 
     private static DCColor translator(SLColors colors) {
@@ -147,4 +147,28 @@ public class CustomColorParser {
         }
         return null;
     }
+
+    private static final Pattern LINK_TAG_PATTERN = Pattern.compile("(?<=<link=).+?(?=>|$)");
+    private static final Pattern PINK_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=pink>).+?(?=</color>|$)");
+    private static final Pattern RED_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=red>).+?(?=</color>|$)");
+    private static final Pattern BROWN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=brown>).+?(?=</color>|$)");
+    private static final Pattern SILVER_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=silver>).+?(?=</color>|$)");
+    private static final Pattern LIGHT_GREEN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=light_green>).+?(?=</color>|$)");
+    private static final Pattern CRIMSON_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=crimson>).+?(?=</color>|$)");
+    private static final Pattern CYAN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=cyan>).+?(?=</color>|$)");
+    private static final Pattern AQUA_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=aqua>).+?(?=</color>|$)");
+    private static final Pattern DEEP_PINK_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=deep_pink>).+?(?=</color>|$)");
+    private static final Pattern TOMATO_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=tomato>).+?(?=</color>|$)");
+    private static final Pattern YELLOW_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=yellow>).+?(?=</color>|$)");
+    private static final Pattern MAGENTA_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=magenta>).+?(?=</color>|$)");
+    private static final Pattern BLUE_GREEN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=blue_green>).+?(?=</color>|$)");
+    private static final Pattern ORANGE_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=orange>).+?(?=</color>|$)");
+    private static final Pattern LIME_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=lime>).+?(?=</color>|$)");
+    private static final Pattern GREEN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=green>).+?(?=</color>|$)");
+    private static final Pattern EMERALD_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=emerald>).+?(?=</color>|$)");
+    private static final Pattern CARMINE_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=carmine>).+?(?=</color>|$)");
+    private static final Pattern NICKEL_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=nickel>).+?(?=</color>|$)");
+    private static final Pattern MINT_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=mint>).+?(?=</color>|$)");
+    private static final Pattern ARMY_GREEN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=army_green>).+?(?=</color>|$)");
+    private static final Pattern PUMPKIN_COLOR_TAG_PATTERN = Pattern.compile("(?<=<color=pumpkin>).+?(?=</color>|$)");
 }

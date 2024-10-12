@@ -3,11 +3,13 @@ package dev.vxrp.bot.commands.templates;
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.util.CONFIG;
 import dev.vxrp.bot.util.PastebinUtil;
+import dev.vxrp.bot.util.parser.CustomColorParser;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,9 +25,9 @@ public class RulesTemplateUnit  {
             channel.sendMessage("Failed to retrieve rules").queue();
             return null;
         }
+
         return new EmbedBuilder()
-                .setThumbnail(guild.getIconUrl())
-                .setDescription(rules)
+                .setDescription("```ansi\n"+ CustomColorParser.parse(rules) +"\n```")
                 .setFooter(ScpTools.getConfigManager().getString(CONFIG.RULES.EMBED_FOOTER), guild.getIconUrl());
     }
 
