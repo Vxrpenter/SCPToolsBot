@@ -1,4 +1,4 @@
-package dev.vxrp.bot.config;
+package dev.vxrp.bot.config.util;
 
 public class CONFIG {
     public static final String ACTIVITY_TYPE = "activity_type";
@@ -12,12 +12,10 @@ public class CONFIG {
         public static final class DEFAULT_PERMISSIONS {
             public static final String HELP = "command_settings.help.default_permissions";
             public static final String TEMPLATE = "command_settings.template.default_permissions";
-            public static final String INFO = "command_settings.info.default_permissions";
         }
         public static final class DESCRIPTIONS {
             public static final String HELP = "command_settings.help.description";
             public static final String TEMPLATE = "command_settings.template.description";
-            public static final String INFO = "command_settings.info.description";
         }
     }
 }

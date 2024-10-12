@@ -10,6 +10,7 @@ import java.awt.*;
 public class HelpCommand extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+        if (!event.getName().equals("help")) return;
         event.replyEmbeds(new EmbedBuilder()
                 .setColor(Color.BLACK)
                         .setDescription("""

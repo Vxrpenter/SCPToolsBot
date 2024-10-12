@@ -1,4 +1,4 @@
-package dev.vxrp.bot.config;
+package dev.vxrp.bot.config.managers;
 
 import org.bspfsystems.yamlconfiguration.file.YamlConfiguration;
 
@@ -11,12 +11,12 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ConfigManager {
-    public final Path configPath = Paths.get("./config.yml");
+    public final Path configPath = Paths.get("./configs/config.yml");
 
     public ConfigManager(){
         File tokenFile = new File(configPath.toString());
         if (!tokenFile.exists()) {
-            InputStream inputStream = getClass().getResourceAsStream("/config.yml");
+            InputStream inputStream = getClass().getResourceAsStream("/configs/config.yml");
             try (FileOutputStream os = new FileOutputStream(tokenFile)) {
                 assert inputStream != null;
                 os.write(inputStream.readAllBytes());
@@ -27,7 +27,7 @@ public class ConfigManager {
         }
     }
 
-    private final YamlConfiguration getYamlConfig() {
+    private YamlConfiguration getYamlConfig() {
         final File file = new File(configPath.toString());
         return YamlConfiguration.loadConfiguration(file);
     }

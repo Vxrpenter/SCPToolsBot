@@ -1,7 +1,7 @@
 package dev.vxrp.bot.commands.templates;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.config.CONFIG;
+import dev.vxrp.bot.config.util.CONFIG;
 import dev.vxrp.bot.util.PastebinUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
