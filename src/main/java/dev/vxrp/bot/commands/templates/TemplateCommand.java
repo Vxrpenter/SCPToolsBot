@@ -1,7 +1,7 @@
 package dev.vxrp.bot.commands.templates;
 
 import dev.vxrp.bot.support.Support;
-import dev.vxrp.bot.util.Enmus.DCColor;
+import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.colors.ColorTool;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;

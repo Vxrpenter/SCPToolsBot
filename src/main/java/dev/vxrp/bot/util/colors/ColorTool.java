@@ -1,8 +1,8 @@
 package dev.vxrp.bot.util.colors;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.util.Enmus.DCColor;
-import dev.vxrp.bot.util.Enmus.SLColors;
+import dev.vxrp.bot.util.Enums.DCColor;
+import dev.vxrp.bot.util.Enums.SLColors;
 
 import java.util.*;
 
@@ -37,18 +37,5 @@ public class ColorTool {
             }
         }
         return null;
-    }
-
-    private static DCColor translator(SLColors colors) {
-        List objects = ScpTools.getColorTranslationManager().getList("Scp_Colors_List");
-        Map<String, String> objecting = new HashMap<>();
-
-        for (Object object : objects) {
-            String object2 = object.toString().replace("{", "").replace("}", "");
-
-            objecting.put(object2.split("=")[0], object2.split("=")[1]);
-        }
-
-        return DCColor.valueOf(objecting.get(colors.toString()));
     }
 }

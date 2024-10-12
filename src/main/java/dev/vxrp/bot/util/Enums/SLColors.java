@@ -1,4 +1,4 @@
-package dev.vxrp.bot.util.Enmus;
+package dev.vxrp.bot.util.Enums;
 
 public enum SLColors {
     PINK,
