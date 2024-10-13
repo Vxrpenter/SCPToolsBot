@@ -25,3 +25,6 @@ command_settings:
   template:
     default_permissions: ["ADMINISTRATOR"]
     description: "Command for pasting certain templates"
+
+support_settings:
+  roles_access_tickets: []

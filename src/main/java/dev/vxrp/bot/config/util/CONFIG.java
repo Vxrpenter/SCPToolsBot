@@ -18,4 +18,7 @@ public class CONFIG {
             public static final String TEMPLATE = "command_settings.template.description";
         }
     }
+    public static final class SUPPORT_SETTINGS {
+        public static final String ROLES_ACCESS_TICKETS = "support_settings.roles_access_tickets";
+    }
 }

@@ -7,13 +7,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class ColorTranslationManager {
-    public final Path configPath = Paths.get("./configs/colortranslations.yml");
+public class ColorConfigManager {
+    public final Path configPath = Paths.get("./configs/colorconfig.yml");
 
-    public ColorTranslationManager(){
+    public ColorConfigManager(){
         File tokenFile = new File(configPath.toString());
         if (!tokenFile.exists()) {
-            InputStream inputStream = getClass().getResourceAsStream("/configs/colorstranslations.yml");
+            InputStream inputStream = getClass().getResourceAsStream("/configs/colorconfig.yml");
             try (FileOutputStream os = new FileOutputStream(tokenFile)) {
                 assert inputStream != null;
                 os.write(inputStream.readAllBytes());

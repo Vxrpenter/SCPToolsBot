@@ -30,7 +30,6 @@ public class TranslationManager {
         final File file = new File(configPath.toString());
         return YamlConfiguration.loadConfiguration(file);
     }
-    public List<String> getString(String key) {
-        return getYamlConfig().getStringList(key);
-    }
+
+    public String getString(String key) {return getYamlConfig().getString(key);}
 }

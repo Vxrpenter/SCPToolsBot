@@ -1,15 +1,16 @@
 package dev.vxrp.bot;
 
+import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.commands.CommandManager;
 import dev.vxrp.bot.commands.help.HelpCommand;
 import dev.vxrp.bot.commands.templates.TemplateCommand;
-import dev.vxrp.bot.config.managers.ColorTranslationManager;
+import dev.vxrp.bot.config.managers.ColorConfigManager;
 import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.config.util.CONFIG;
 import dev.vxrp.bot.config.managers.ConfigManager;
+import dev.vxrp.bot.events.ModalListener;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.Enums.DCColor;
-import dev.vxrp.bot.util.parser.CustomColorParser;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -25,7 +26,7 @@ import java.util.*;
 public class ScpTools {
     static ConfigManager configManager;
     static TranslationManager translationManager;
-    static ColorTranslationManager colorTranslationManager;
+    static ColorConfigManager colorConfigManager;
 
     public final static Logger logger = LoggerFactory.getLogger(ScpTools.class);
     public static void main(String[] args) {
@@ -38,7 +39,7 @@ public class ScpTools {
 
         configManager = new ConfigManager();
         translationManager = new TranslationManager();
-        colorTranslationManager = new ColorTranslationManager();
+        colorConfigManager = new ColorConfigManager();
 
         Activity.ActivityType activityType = Activity.ActivityType.valueOf(configManager.getString(CONFIG.ACTIVITY_TYPE));
         logger.info("ActivityType set to {}", ColorTool.apply(DCColor.RED, activityType.toString()));
@@ -57,7 +58,8 @@ public class ScpTools {
                 .build();
 
         new CommandManager().Initialize(api);
-        api.addEventListener(new TemplateCommand(), new HelpCommand());
+        api.addEventListener(new TemplateCommand(), new HelpCommand(),new ButtonListener(), new ModalListener());
+        logger.info("Initialized Listeners");
     }
 
     public static ConfigManager getConfigManager() {
@@ -66,7 +68,7 @@ public class ScpTools {
     public static TranslationManager getTranslationManager() {
         return translationManager;
     }
-    public static ColorTranslationManager getColorTranslationManager() {
-        return colorTranslationManager;
+    public static ColorConfigManager getColorConfigManager() {
+        return colorConfigManager;
     }
 }

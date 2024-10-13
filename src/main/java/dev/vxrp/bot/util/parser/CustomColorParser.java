@@ -21,13 +21,13 @@ public class CustomColorParser {
                 CARMINE_COLOR_TAG_PATTERN, NICKEL_COLOR_TAG_PATTERN, MINT_COLOR_TAG_PATTERN, ARMY_GREEN_COLOR_TAG_PATTERN, PUMPKIN_COLOR_TAG_PATTERN);
 
         LinkedList<String> matcherList = new LinkedList<>();
-        for (int i = 0; i < patternList.size(); i++) {
-            Matcher matcher = patternList.get(i).matcher(input);
+        for (Pattern pattern : patternList) {
+            Matcher matcher = pattern.matcher(input);
             //Loop through
-            while(matcher.find()) {
+            while (matcher.find()) {
                 matcherList.add(matcher.group());
 
-                String colorsTags = patternList.get(i).toString().replace("(?<=", "").replace(").+?(?=", matcher.group()).replace("|$)", "");
+                String colorsTags = pattern.toString().replace("(?<=", "").replace(").+?(?=", matcher.group()).replace("|$)", "");
                 tokens.put(matcher.group(), colorsTags);
             }
         }
@@ -66,7 +66,7 @@ public class CustomColorParser {
     }
 
     private static DCColor translator(SLColors colors) {
-        List objects = ScpTools.getColorTranslationManager().getList("Scp_Colors_List");
+        List objects = ScpTools.getColorConfigManager().getList("Scp_Colors_List");
         Map<String, String> objecting = new HashMap<>();
 
         for (Object object : objects) {
