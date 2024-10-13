@@ -1,6 +1,8 @@
 package dev.vxrp.bot.events.modals;
 
+import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;
+import dev.vxrp.bot.config.util.CONFIG;
 import dev.vxrp.bot.config.util.TRANSLATIONS;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.colors.ColorTool;
@@ -13,9 +15,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.slf4j.Logger;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.EnumSet;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Support {
@@ -25,6 +25,7 @@ public class Support {
         Member member = event.getMember();
         assert member != null;
         String userName = Objects.requireNonNull(member.getUser().getGlobalName());
+        String userID = Objects.requireNonNull(member.getUser().getId());
         Guild guild = event.getGuild();
         if (guild == null) return;
 
@@ -35,26 +36,48 @@ public class Support {
         String date = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
 
         builder.setThumbnail(member.getUser().getAvatarUrl());
-        builder.setTitle(translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_TITLE).replace("%user%", name));
+        builder.setTitle(translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_TITLE).replace("%name%", name));
         builder.setDescription(translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_BODY)
                 .replace("%subject%", subject)
-                .replace("%user%", userName)
                 .replace("%body%", body)
         );
-        builder.setFooter("Erstellt am: "+date+" um "+time+"Uhr", event.getGuild().getIconUrl());
-
+        builder.setFooter(translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_FOOTER)
+                        .replace("%date%", date)
+                        .replace("%time%", time),
+                event.getGuild().getIconUrl());
 
         guild.createTextChannel(name)
                 .addPermissionOverride(event.getMember(), EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND), null)
                 .addPermissionOverride(guild.getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
                 .setSlowmode(1)
                 .queue(textChannel -> {
-                    event.reply(":white_check_mark: Your ticket has been created and will be reviewed in the next 24h  - <#"+textChannel.getId()+">").setEphemeral(true).queue();
+                    event.reply(translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_CREATED)
+                            .replace("%channel%", "<#"+textChannel.getId()+">")).setEphemeral(true).queue();
+
+                    List<String> roleIDs = ScpTools.getConfigManager().getStringList(CONFIG.SUPPORT_SETTINGS.ROLES_ACCESS_TICKETS);
+                    for (String id : roleIDs) {
+                        textChannel.upsertPermissionOverride(
+                                Objects.requireNonNull(guild.getRoleById(id)))
+                                .grant(EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND))
+                                .queue();
+                    }
+                    textChannel.sendMessageEmbeds(new EmbedBuilder()
+                            .setDescription("""
+                                    ```ansi
+                                     ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎\sTicket Status: [2;32m[1;32mOpen[0m[2;32m[0m ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎\s
+                                     ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎\sHandler: [2;31m[1;31mNone[0m[2;31m[0m | Creator: [2;31m[1;31m[1;33m"""+userName+"""
+                                     [0m[1;31m[0m[2;31m[0m
+                                    ```
+                                    """)
+                            .build()).queue();
                     textChannel.sendMessageEmbeds(builder.build())
                             .addActionRow(
-                                    Button.danger("closeticket", "Close Ticket")
+                                    Button.danger("close_support_ticket:"+userID+":", "Close Ticket"),
+                                    Button.primary("claim_support_ticket:"+userID+":", "Claim Ticket"),
+                                    Button.secondary("settings_support_ticket", "Settings")
                             ).queue();
                 });
-        logger.info("Created new support ticket by user "+ ColorTool.apply(DCColor.GREEN, userName)+" - under name "+ColorTool.apply(DCColor.RED, name));
+
+        logger.info("Created new support ticket by user {} - under name {}", ColorTool.apply(DCColor.GREEN, userName), ColorTool.apply(DCColor.RED, name));
     }
 }

@@ -25,6 +25,8 @@ public class TRANSLATIONS {
         public static final class TICKET {
             public static final String SUPPORT_TITLE = "support.ticket_support_title";
             public static final String SUPPORT_BODY = "support.ticket_support_body";
+            public static final String SUPPORT_FOOTER = "support.ticket_support_footer";
+            public static final String SUPPORT_CREATED = "support.ticket_support_created";
         }
     }
 }

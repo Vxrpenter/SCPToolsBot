@@ -4,6 +4,7 @@ import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.events.buttons.Rules;
 import dev.vxrp.bot.events.buttons.Support;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
@@ -28,6 +29,17 @@ public class ButtonListener extends ListenerAdapter {
         }
         if (event.getComponentId().equals("createNewUnban")) {
             Support.createUnbanTicket(event, translationManager);
+        }
+        if (event.getComponentId().startsWith("close_support_ticket")) {
+            User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
+            Support.closeTicket(event, user);
+        }
+        if (event.getComponentId().startsWith("claim_support_ticket")) {
+            User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
+            Support.claimTicket(event, user);
+        }
+        if (event.getComponentId().equals("settings_support_ticket")) {
+
         }
     }
 }

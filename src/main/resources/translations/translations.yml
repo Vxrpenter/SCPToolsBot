@@ -1,3 +1,5 @@
+# You can use any form of discord formatting in these translations
+
 #
 # Support
 #
@@ -43,17 +45,26 @@ support:
   modal_unban_third_title: "Reason to Unban"
   modal_unban_third_placeholder: "Why should you be unbanned?"
 
-  ticket_support_title: "%user% Ticket"
+  ticket_support_title: "%name%"
   ticket_support_body: "
-                        Support Ticket getting reviewed, may take up to 24h\n
+                        Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+                       
+                        __**Ticket Subject:**__\n
+                        ```%subject%```
                         
-                        **Ticket Information:**\n
-                        - Ticket Subject: %subject%\n
-                        
-                        - Ticket Status: **:white_check_mark: Open**\n
-                        
-                        **Ticket by:** %user%\n
-                        
-                        **Content of ticket:**\n
-                        %body%
+                        __**Content of ticket:**__\n
+                        ```%body%```
                         "
+  ticket_support_footer: "Created on the %date% at %time%h"
+  ticket_support_created: "Your ticket has been created - %channel%"
+
+  ticket_denied_close: "
+                        ```ansi\n
+                        \u001B[1;31Task Denied  \u001B[0mYou cannot close a ticket you created\n
+                        ```
+                        "
+  ticket_denied_claim: "
+                          ```ansi\n
+                          \u001B[1;31Task Denied  \u001B[0mYou cannot claim a ticket you created\n
+                          ```
+                          "
