@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://github.com/user-attachments/assets/6529281b-d5ef-46ea-b0f2-7c63e1cdcdd5" height="240" width="200"/>
 
-  ![GitHub Release](https://img.shields.io/github/v/release/Vxrpenter/SCPToolsBot?include_prereleases&sort=date&display_name=tag&style=for-the-badge&label=LATEST%20RELEASE&color=%23c9631f)&nbsp;
+  <a href="https://github.com/Vxrpenter/SCPToolsBot/releases"><img src="https://img.shields.io/github/v/release/Vxrpenter/SCPToolsBot?include_prereleases&sort=date&display_name=tag&style=for-the-badge&label=LATEST%20RELEASE&color=%23c9631f"/></a>&nbsp;
   ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/vxrpenter/ScpToolsBot/total?style=for-the-badge&color=%23c9631f)&nbsp;
 
   | Languages                                                                                                                                                                                                                                                                                             | Api's |
