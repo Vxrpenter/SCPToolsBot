@@ -38,4 +38,4 @@ This means that the unban process failed because the user is not banned/the ban 
 
 ---
 > [!NOTE]
-> If you are getting an error, not stated in this explanation and or not able to fix it, please create an issue so the issue can be resolved
+> If you are getting an error, not stated in this documentation and are not able to fix it, please create an issue so the issue can be resolved
