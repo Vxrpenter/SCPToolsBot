@@ -19,6 +19,14 @@ public class CONFIG {
         }
     }
     public static final class SUPPORT_SETTINGS {
-        public static final String ROLES_ACCESS_TICKETS = "support_settings.roles_access_tickets";
+        public static final String ROLES_ACCESS_SUPPORT_TICKETS = "support_settings.roles_access_support_tickets";
+        public static final String ROLES_ACCESS_UNBAN_TICKETS = "support_settings.roles_access_unban_tickets";
+        public static final String UNBAN_CHANNEL_ID = "support_settings.unban_channel_id";
+    }
+    public static final class CEDMOD {
+        public static final String ACTIVE = "cedmod.active";
+        public static final String INSTANCE_URL = "cedmod.instance_url";
+        public static final String API_KEY = "cedmod.api_key";
+        public static final String MASTER_BAN_LIST_ID = "cedmod.master_ban_list_id";
     }
 }

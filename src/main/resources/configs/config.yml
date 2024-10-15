@@ -27,4 +27,16 @@ command_settings:
     description: "Command for pasting certain templates"
 
 support_settings:
-  roles_access_tickets: []
+  roles_access_support_tickets: []
+  roles_access_unban_tickets: []
+  unban_channel_id: ""
+
+cedmod:
+  # Should Cedmod integration features be established or deactivated?
+  active: false
+  # Include https://
+  instance_url: ""
+  # Exclude Bearer, just plain api key
+  api_key: ""
+  # This bot is only able to unban people that are on this banlist (feature for multi banlist bans coming in the future)
+  master_ban_list_id: ""

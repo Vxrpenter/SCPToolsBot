@@ -21,6 +21,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("org.bspfsystems:yamlconfiguration:2.0.2")
     implementation("org.apache.commons:commons-lang3:3.4")
+    implementation("com.google.code.gson:gson:2.11.0")
 }
 
 tasks.test {

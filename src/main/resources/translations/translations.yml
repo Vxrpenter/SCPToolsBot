@@ -58,13 +58,18 @@ support:
   ticket_support_footer: "Created on the %date% at %time%h"
   ticket_support_created: "Your ticket has been created - %channel%"
 
-  ticket_denied_close: "
-                        ```ansi\n
-                        \u001B[1;31Task Denied  \u001B[0mYou cannot close a ticket you created\n
-                        ```
+  ticket_unban_title: "%name%"
+  ticket_unban_body: "
+                        Unban Request is getting reviewed. A response from our moderation team may take a bit\n
+                        
+                        __**Steam ID:**__
+                        ||%steamID%||
+                       
+                        __**Ban Reason:**__\n
+                        ```%reason%```
+                        
+                        __**Reasoning for unban:**__\n
+                        ```%reasoning%```
                         "
-  ticket_denied_claim: "
-                          ```ansi\n
-                          \u001B[1;31Task Denied  \u001B[0mYou cannot claim a ticket you created\n
-                          ```
-                          "
+  ticket_unban_footer: "Created on the %date% at %time%h"
+  ticket_unban_created: "Your unban request has been issued"
