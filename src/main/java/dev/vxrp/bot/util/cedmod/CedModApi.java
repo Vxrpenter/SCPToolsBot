@@ -15,9 +15,9 @@ public class CedModApi {
     private static final Logger logger = LoggerFactory.getLogger(CedModApi.class);
     private static final OkHttpClient client = new OkHttpClient();
 
-    public static void executeUnban(String instanceURL, String apiKey, String banID) throws IOException {
+    public static void executeUnban(String instanceURL, String apiKey, String banID, String reason) throws IOException {
         if (banID == null) return;
-        String json = "{\"logReason\":\"this is a reason\"}";
+        String json = "{\"logReason\":\""+reason+"\"}";
 
         RequestBody requestBody =  RequestBody.create(json, MediaType.parse("application/json"));
 

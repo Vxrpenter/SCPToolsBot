@@ -21,12 +21,21 @@ public class TRANSLATIONS {
             public static final String UNBAN_SECOND_PLACEHOLDER = "support.modal_unban_second_placeholder";
             public static final String UNBAN_THIRD_TITLE = "support.modal_unban_third_title";
             public static final String UNBAN_THIRD_PLACEHOLDER = "support.modal_unban_third_placeholder";
+
+            public static final String REASON_ACTION_TITLE = "support.modal_reason_action_title";
+            public static final String REASON_ACTION_FIRST_TITLE = "support.modal_reason_action_first_title";
+            public static final String REASON_ACTION_FIRST_PLACEHOLDER = "support.modal_reason_action_first_placeholder";
         }
         public static final class TICKET {
             public static final String SUPPORT_TITLE = "support.ticket_support_title";
             public static final String SUPPORT_BODY = "support.ticket_support_body";
             public static final String SUPPORT_FOOTER = "support.ticket_support_footer";
             public static final String SUPPORT_CREATED = "support.ticket_support_created";
+
+            public static final String UNBAN_TITLE = "support.ticket_unban_title";
+            public static final String UNBAN_BODY = "support.ticket_unban_body";
+            public static final String UNBAN_FOOTER = "support.ticket_unban_footer";
+            public static final String UNBAN_CREATED = "support.ticket_unban_created";
         }
     }
 }

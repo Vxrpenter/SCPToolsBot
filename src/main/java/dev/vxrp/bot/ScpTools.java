@@ -9,6 +9,7 @@ import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.config.util.CONFIG;
 import dev.vxrp.bot.config.managers.ConfigManager;
 import dev.vxrp.bot.events.ModalListener;
+import dev.vxrp.bot.util.cedmod.CedModApi;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.Enums.DCColor;
 import net.dv8tion.jda.api.JDA;
@@ -20,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -29,7 +31,7 @@ public class ScpTools {
     static ColorConfigManager colorConfigManager;
 
     public final static Logger logger = LoggerFactory.getLogger(ScpTools.class);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         List<String> folders = Arrays.asList("configs", "translations");
         for (String folder : folders) {
             String folderPath = Paths.get(folder).toString();

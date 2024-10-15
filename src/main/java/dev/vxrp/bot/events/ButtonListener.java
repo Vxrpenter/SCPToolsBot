@@ -4,11 +4,14 @@ import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.events.buttons.Rules;
 import dev.vxrp.bot.events.buttons.Support;
+import dev.vxrp.bot.events.buttons.Unban;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 public class ButtonListener extends ListenerAdapter {
     public final Logger logger = LoggerFactory.getLogger(ButtonListener.class);
@@ -27,9 +30,6 @@ public class ButtonListener extends ListenerAdapter {
         if (event.getComponentId().equals("createNewTicket")) {
             Support.createSupportTicket(event, translationManager);
         }
-        if (event.getComponentId().equals("createNewUnban")) {
-            Support.createUnbanTicket(event, translationManager);
-        }
         if (event.getComponentId().startsWith("close_support_ticket")) {
             User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
             Support.closeTicket(event, user);
@@ -39,6 +39,24 @@ public class ButtonListener extends ListenerAdapter {
             Support.claimTicket(event, user);
         }
         if (event.getComponentId().equals("settings_support_ticket")) {
+            //WIP
+            event.reply("Feature currently under development").queue();
+        }
+
+        if (event.getComponentId().equals("createNewUnban")) {
+            Unban.createUnbanTicket(event, translationManager);
+        }
+        if (event.getComponentId().startsWith("accept_support_ticket")) {
+            User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
+            Unban.acceptTicket(event, translationManager, user);
+        }
+        if (event.getComponentId().startsWith("dismiss_unban_ticket")) {
+            User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
+            Unban.dismissTicket(event, translationManager, user);
+        }
+        if (event.getComponentId().equals("settings_unban_ticket")) {
+            //WIP
+            event.reply("Feature currently under development").queue();
 
         }
     }

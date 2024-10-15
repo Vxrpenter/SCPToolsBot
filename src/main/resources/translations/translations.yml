@@ -45,6 +45,10 @@ support:
   modal_unban_third_title: "Reason to Unban"
   modal_unban_third_placeholder: "Why should you be unbanned?"
 
+  modal_reason_action_title: "Action Reasoning"
+  modal_reason_action_first_title: "Reason"
+  modal_reason_action_first_placeholder: "What is the reason for your action?"
+
   ticket_support_title: "%name%"
   ticket_support_body: "
                         Support Ticket getting reviewed. A response from our moderation team may take a bit\n
