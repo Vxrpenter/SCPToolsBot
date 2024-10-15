@@ -109,7 +109,7 @@ public class Support {
                                 event.getGuild().getIconUrl(), event.getUser()).build())
                 .addActionRow(
                         Button.success("accept_support_ticket:"+userID+":"+steamID+":", "Accept Ticket"),
-                        Button.danger("dismiss_unban_ticket:"+userID+":", "Dismiss Ticket"),
+                        Button.danger("dismiss_unban_ticket:"+userID+":"+steamID+":", "Dismiss Ticket"),
                         Button.secondary("settings_unban_ticket", "Settings")
                 ).queue();
 

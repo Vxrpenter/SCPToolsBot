@@ -66,8 +66,8 @@ support:
   ticket_unban_body: "
                         Unban Request is getting reviewed. A response from our moderation team may take a bit\n
                         
-                        __**Steam ID:**__
-                        ||%steamID%||
+                        __**Steam ID:**__\n
+                        ||%steamID%||\n
                        
                         __**Ban Reason:**__\n
                         ```%reason%```
@@ -77,3 +77,27 @@ support:
                         "
   ticket_unban_footer: "Created on the %date% at %time%h"
   ticket_unban_created: "Your unban request has been issued"
+
+  ticket_unban_message_accepted: "
+                        Your unban request under the steam ID (see down below) was accepted. You may now join the
+                        server again without any punishment. We are sorry for the inconvenience and hope that you
+                        will enjoy our Server again\n
+                        
+                        __**Steam ID:**__\n
+                        ||%steamID%||\n
+                        
+                        __**Acceptance Reason:**__\n
+                        ```%reason%```
+                        "
+  ticket_unban_message_dismissed: "
+                        Your unban request under the steam ID (see down below) was dismissed, you may not appeal this
+                        ban again until given permission by server administration or if this case resolves and another
+                        one arises\n
+                        
+                        __**Steam ID:**__\n
+                        ||%steamID%||\n
+                        
+                        __**Dismiss Reason:**__\n
+                        ```%reason%```
+                        "
+  ticket_unban_message_sent: "Your answer was sent and actions corresponding to it have been taken"

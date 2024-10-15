@@ -36,6 +36,9 @@ public class TRANSLATIONS {
             public static final String UNBAN_BODY = "support.ticket_unban_body";
             public static final String UNBAN_FOOTER = "support.ticket_unban_footer";
             public static final String UNBAN_CREATED = "support.ticket_unban_created";
+            public static final String UNBAN_MESSAGE_ACCEPTED = "support.ticket_unban_message_accepted";
+            public static final String UNBAN_MESSAGE_DISMISSED = "support.ticket_unban_message_dismissed";
+            public static final String UNBAN_MESSAGE_SENT = "support.ticket_unban_message_sent";
         }
     }
 }
