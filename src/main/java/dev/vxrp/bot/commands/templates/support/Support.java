@@ -1,4 +1,4 @@
-package dev.vxrp.bot.support;
+package dev.vxrp.bot.commands.templates.support;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;

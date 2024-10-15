@@ -1,4 +1,4 @@
-package dev.vxrp.bot.commands.templates;
+package dev.vxrp.bot.commands.templates.rules;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.util.CONFIG;
@@ -9,7 +9,6 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
