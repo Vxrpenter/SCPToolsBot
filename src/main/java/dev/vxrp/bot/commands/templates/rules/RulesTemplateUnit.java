@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,7 +32,7 @@ public class RulesTemplateUnit  {
                 .setFooter(ScpTools.getConfigManager().getString(CONFIG.RULES.EMBED_FOOTER), guild.getIconUrl());
     }
 
-    public static void pasteRules(SlashCommandInteractionEvent event) {
+    public static void pasteRules(ButtonInteractionEvent event) {
         event.getChannel().sendMessageEmbeds(Objects.requireNonNull(embed(event.getGuild(), event.getChannel().asTextChannel())).build()).queue();
     }
     public static void updateRules(Guild guild, String channelID,String messageId) {

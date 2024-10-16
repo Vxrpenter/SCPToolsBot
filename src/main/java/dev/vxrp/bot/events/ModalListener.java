@@ -21,7 +21,7 @@ public class ModalListener extends ListenerAdapter {
             Support.createSupportTicket(event, translationManager, logger);
         }
         if (event.getModalId().equals("unbanTicket")) {
-            Support.createUnbanTicket(event, translationManager, logger);
+            Unban.createUnbanTicket(event, translationManager, logger);
         }
 
         if (event.getModalId().startsWith("reason_action_unban_accept")) {
