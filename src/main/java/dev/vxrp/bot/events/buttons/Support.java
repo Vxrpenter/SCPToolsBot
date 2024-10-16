@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events.buttons;
 
+import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.config.util.TRANSLATIONS;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -15,7 +16,9 @@ import net.dv8tion.jda.api.interactions.modals.Modal;
 import java.util.List;
 
 public class Support {
-    public static void createSupportTicket(ButtonInteractionEvent event, TranslationManager translationManager) {
+    private static final TranslationManager translationManager = ScpTools.getTranslationManager();
+
+    public static void createSupportTicket(ButtonInteractionEvent event) {
         if (event.getComponentId().equals("createNewTicket")) {
             event.replyModal(
                     Modal.create("supportTicket", translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_TITLE))

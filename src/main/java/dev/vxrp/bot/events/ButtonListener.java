@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 public class ButtonListener extends ListenerAdapter {
     public final Logger logger = LoggerFactory.getLogger(ButtonListener.class);
-    TranslationManager translationManager = ScpTools.getTranslationManager();
 
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event) {
@@ -26,7 +25,7 @@ public class ButtonListener extends ListenerAdapter {
         }
         // Support
         if (event.getComponentId().equals("createNewTicket")) {
-            Support.createSupportTicket(event, translationManager);
+            Support.createSupportTicket(event);
         }
         if (event.getComponentId().startsWith("close_support_ticket")) {
             User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
@@ -42,18 +41,18 @@ public class ButtonListener extends ListenerAdapter {
         }
 
         if (event.getComponentId().equals("createNewUnban")) {
-            Unban.createUnbanTicket(event, translationManager);
+            Unban.createUnbanTicket(event);
         }
         if (event.getComponentId().startsWith("accept_support_ticket")) {
             User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
             if (user != null) {
-                Unban.acceptTicket(event, translationManager, user);
+                Unban.acceptTicket(event, user);
             }
         }
         if (event.getComponentId().startsWith("dismiss_unban_ticket")) {
             User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
             if (user != null) {
-                Unban.dismissTicket(event, translationManager, user);
+                Unban.dismissTicket(event, user);
             }
         }
         if (event.getComponentId().equals("settings_unban_ticket")) {
