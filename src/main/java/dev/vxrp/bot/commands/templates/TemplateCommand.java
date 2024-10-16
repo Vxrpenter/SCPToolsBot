@@ -1,5 +1,6 @@
 package dev.vxrp.bot.commands.templates;
 
+import dev.vxrp.bot.commands.templates.deregistration.DeRegistration;
 import dev.vxrp.bot.commands.templates.support.Support;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.colors.ColorTool;
@@ -31,7 +32,7 @@ public class TemplateCommand extends ListenerAdapter {
             Support.pasteSupportTemplate(Objects.requireNonNull(event.getGuild()), event.getChannelId());
         }
         if (template.equals("deregistration")) {
-
+            DeRegistration.pasteDeRegisterTemplate();
         }
         logger.info("User {} executed command template with args '{}'", ColorTool.apply(DCColor.GREEN, event.getUser().getGlobalName()), template);
     }
