@@ -29,10 +29,10 @@ public class TemplateCommand extends ListenerAdapter {
                     .setEphemeral(true).queue();
         }
         if (template.equals("support")) {
-            Support.pasteSupportTemplate(Objects.requireNonNull(event.getGuild()), event.getChannelId());
+            Support.pasteSupportTemplate(event);
         }
         if (template.equals("deregistration")) {
-            DeRegistration.pasteDeRegisterTemplate();
+            DeRegistration.pasteDeRegisterTemplate(event);
         }
         logger.info("User {} executed command template with args '{}'", ColorTool.apply(DCColor.GREEN, event.getUser().getGlobalName()), template);
     }

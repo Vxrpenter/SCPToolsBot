@@ -11,8 +11,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
 public class ButtonListener extends ListenerAdapter {
     public final Logger logger = LoggerFactory.getLogger(ButtonListener.class);
     TranslationManager translationManager = ScpTools.getTranslationManager();
