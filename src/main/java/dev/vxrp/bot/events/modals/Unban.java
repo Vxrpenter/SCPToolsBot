@@ -27,7 +27,9 @@ import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Unban {
-    public static void createUnbanTicket(ModalInteractionEvent event, TranslationManager translationManager, Logger logger) {
+    private static final TranslationManager translationManager = ScpTools.getTranslationManager();
+
+    public static void createUnbanTicket(ModalInteractionEvent event, Logger logger) {
         Member member = event.getMember();
         assert member != null;
         String userName = Objects.requireNonNull(member.getUser().getGlobalName());

@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events.buttons;
 
+import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.config.util.TRANSLATIONS;
 import net.dv8tion.jda.api.entities.User;
@@ -12,7 +13,9 @@ import net.dv8tion.jda.api.interactions.modals.Modal;
 import java.util.Objects;
 
 public class Unban {
-    public static void createUnbanTicket(ButtonInteractionEvent event, TranslationManager translationManager) {
+    private static final TranslationManager translationManager = ScpTools.getTranslationManager();
+
+    public static void createUnbanTicket(ButtonInteractionEvent event) {
         event.replyModal(
                 Modal.create("unbanTicket", translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.UNBAN_TITLE))
                         .addComponents(
@@ -32,7 +35,7 @@ public class Unban {
                         .build()).queue();
     }
 
-    public static void dismissTicket(ButtonInteractionEvent event, TranslationManager translationManager, User user) {
+    public static void dismissTicket(ButtonInteractionEvent event, User user) {
         String steamID = Objects.requireNonNull(event.getButton().getId()).split(":")[2];
         event.replyModal(
                 Modal.create("reason_action_reason_dismiss:"+user.getId()+":"+steamID+":"+event.getMessageId()+":", translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.REASON_ACTION_TITLE))
@@ -44,7 +47,7 @@ public class Unban {
                         ))).build()).queue();
     }
 
-    public static void acceptTicket(ButtonInteractionEvent event, TranslationManager translationManager, User user) {
+    public static void acceptTicket(ButtonInteractionEvent event, User user) {
         String steamID = Objects.requireNonNull(event.getButton().getId()).split(":")[2];
         event.replyModal(
                 Modal.create("reason_action_unban_accept:"+user.getId()+":"+steamID+":"+event.getMessageId()+":", translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.REASON_ACTION_TITLE))

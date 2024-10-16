@@ -1,7 +1,5 @@
 package dev.vxrp.bot.events;
 
-import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.events.modals.Support;
 import dev.vxrp.bot.events.modals.Unban;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
@@ -13,15 +11,14 @@ import java.io.IOException;
 
 public class ModalListener extends ListenerAdapter {
     public final Logger logger = LoggerFactory.getLogger(ModalListener.class);
-    TranslationManager translationManager = ScpTools.getTranslationManager();
 
     @Override
     public void onModalInteraction(ModalInteractionEvent event) {
         if (event.getModalId().equals("supportTicket")) {
-            Support.createSupportTicket(event, translationManager, logger);
+            Support.createSupportTicket(event, logger);
         }
         if (event.getModalId().equals("unbanTicket")) {
-            Unban.createUnbanTicket(event, translationManager, logger);
+            Unban.createUnbanTicket(event, logger);
         }
 
         if (event.getModalId().startsWith("reason_action_unban_accept")) {

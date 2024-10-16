@@ -21,7 +21,9 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Support {
-    public static void createSupportTicket(ModalInteractionEvent event, TranslationManager translationManager, Logger logger) {
+    private static final TranslationManager translationManager = ScpTools.getTranslationManager();
+
+    public static void createSupportTicket(ModalInteractionEvent event, Logger logger) {
         Member member = event.getMember();
         assert member != null;
         String userName = Objects.requireNonNull(member.getUser().getGlobalName());
