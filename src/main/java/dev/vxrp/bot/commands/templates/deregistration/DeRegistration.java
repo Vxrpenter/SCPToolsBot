@@ -1,19 +1,17 @@
-package dev.vxrp.bot.commands.templates.support;
+package dev.vxrp.bot.commands.templates.deregistration;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.config.util.TRANSLATIONS;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
 import java.awt.*;
 
-public class Support {
+public class DeRegistration {
     private static final TranslationManager translationManager = ScpTools.getTranslationManager();
 
-    public static void pasteSupportTemplate(SlashCommandInteractionEvent event) {
+    public static void pasteDeRegisterTemplate(SlashCommandInteractionEvent event) {
         event.getChannel().sendMessageEmbeds(new EmbedBuilder()
                         .setColor(Color.decode("#5865F2"))
                         .setTitle(translationManager.getString(TRANSLATIONS.SUPPORT.FIRST_TITLE))
@@ -28,8 +26,7 @@ public class Support {
                         .setColor(Color.DARK_GRAY)
                         .build())
                 .addActionRow(
-                        Button.success("createNewTicket", "Create Support Ticket").withEmoji(Emoji.fromUnicode("📩")),
-                        Button.danger("createNewUnban", "File Unban Request").withEmoji(Emoji.fromUnicode("📩"))
+
                 ).queue();
     }
 }

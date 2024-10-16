@@ -1,10 +1,6 @@
 package dev.vxrp.bot.util.colors;
 
-import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.util.Enums.DCColor;
-import dev.vxrp.bot.util.Enums.SLColors;
-
-import java.util.*;
 
 public class ColorTool {
 
