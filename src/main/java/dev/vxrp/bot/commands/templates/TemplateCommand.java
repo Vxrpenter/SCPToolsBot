@@ -26,11 +26,13 @@ public class TemplateCommand extends ListenerAdapter {
                             Button.danger("update_rules", "Update Rules")
                     )
                     .setEphemeral(true).queue();
-            logger.info("User {} executed command template with args 'rules'", ColorTool.apply(DCColor.GREEN, event.getUser().getGlobalName()));
         }
         if (template.equals("support")) {
             Support.pasteSupportTemplate(Objects.requireNonNull(event.getGuild()), event.getChannelId());
-            logger.info("User {} executed command template with args 'support'", ColorTool.apply(DCColor.GREEN, event.getUser().getGlobalName()));
         }
+        if (template.equals("deregistration")) {
+
+        }
+        logger.info("User {} executed command template with args '{}'", ColorTool.apply(DCColor.GREEN, event.getUser().getGlobalName()), template);
     }
 }

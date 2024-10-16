@@ -35,7 +35,11 @@ public class CommandManager {
                     .setDefaultPermissions(DefaultMemberPermissions.enabledFor(new PermissionListConverter(templateDefaultPermissions).convert()))
                     .addOptions(
                             new OptionData(OptionType.STRING, "template", "What template are you referring to", true)
-                                    .addChoice("rules", "rules").addChoice("support", "support")
+                                    .addChoice("rules", "rules")
+                                    .addChoice("support", "support")
+                                    .addChoice("deregistration", "deregistration")
+                                    .addChoice("regulars", "regulars")
+                                    .addChoice("adminpanel", "adminpanel")
                     ));
         }
         for (String command : activeCommands) {
