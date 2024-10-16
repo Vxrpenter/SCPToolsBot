@@ -46,11 +46,15 @@ public class ButtonListener extends ListenerAdapter {
         }
         if (event.getComponentId().startsWith("accept_support_ticket")) {
             User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
-            Unban.acceptTicket(event, translationManager, user);
+            if (user != null) {
+                Unban.acceptTicket(event, translationManager, user);
+            }
         }
         if (event.getComponentId().startsWith("dismiss_unban_ticket")) {
             User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
-            Unban.dismissTicket(event, translationManager, user);
+            if (user != null) {
+                Unban.dismissTicket(event, translationManager, user);
+            }
         }
         if (event.getComponentId().equals("settings_unban_ticket")) {
             //WIP

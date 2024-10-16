@@ -31,14 +31,8 @@ public class ConfigManager {
         final File file = new File(configPath.toString());
         return YamlConfiguration.loadConfiguration(file);
     }
-    public Object getObject(String key) {
-        return getYamlConfig().getConfigurationSection(key);
-    }
     public String getString(String key) {
         return getYamlConfig().getString(key);
-    }
-    public int getInt(String key) {
-        return getYamlConfig().getInt(key);
     }
     public boolean getBoolean(String key) {
         return getYamlConfig().getBoolean(key);
