@@ -12,6 +12,8 @@
 ## What is ScpToolsBot
 ScpToolsBot is a discord bot application written in Java for Scp Secret Laboratory discord servers. It includes support functions, cedmod api syncing, community and even team management features
 
+If you need any more information check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki)
+
 ## Installation
 1. Download the `.jar` file from the latest **STABLE** release
 2. Install `JDK-17` or higher on your machine
