@@ -101,3 +101,15 @@ support:
                         ```%reason%```
                         "
   ticket_unban_message_sent: "Your answer was sent and actions corresponding to it have been taken"
+
+notice_of_departure:
+  first_title: "Notice of Departure for Discord and Secret Lab"
+  first_body: "
+                        If you know that you are not going to be able to come online for a specified time, please fill out this form\n
+                        
+                        __**Information to give:**__\n
+                        - How to long will you be away, FORMAT: **[dd.MM.yyyy]**\n
+                        - Please provide a short explanation on why you will be away without any details\n
+                        
+                        Every timespan over 1 year will not be accepted and will be asked to leave the team
+                        "

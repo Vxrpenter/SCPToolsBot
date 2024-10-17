@@ -41,4 +41,8 @@ public class TRANSLATIONS {
             public static final String UNBAN_MESSAGE_SENT = "support.ticket_unban_message_sent";
         }
     }
+    public static final class NOTICE_OF_DEPARTURE {
+        public static final String FIRST_TITLE = "notice_of_departure.first_title";
+        public static final String FIRST_BODY = "notice_of_departure.first_body";
+    }
 }

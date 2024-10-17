@@ -37,7 +37,7 @@ public class CommandManager {
                             new OptionData(OptionType.STRING, "template", "What template are you referring to", true)
                                     .addChoice("rules", "rules")
                                     .addChoice("support", "support")
-                                    .addChoice("deregistration", "deregistration")
+                                    .addChoice("notice of departure", "notice_of_departure")
                                     .addChoice("regulars", "regulars")
                                     .addChoice("adminpanel", "adminpanel")
                     ));
