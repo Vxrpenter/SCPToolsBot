@@ -19,6 +19,7 @@ ScpToolsBot is a discord bot application written in Java for Scp Secret Laborato
 4. The process will automatically crash and create two new folders called `configs` and `translations`. Go into the `configs` folder and edit the `config.yml` file
 5. After putting in required info start the bot again and it should be running
 
+Get a full guide [here](https://github.com/Vxrpenter/SCPToolsBot/wiki/Installation)
 ## Handling Issues
 **Bot not starting, why?**
 - Outdated JDK, install higher version
@@ -36,6 +37,9 @@ This means that no banId could be found meaning that the user isn't banned
 
 This means that the unban process failed because the user is not banned/the ban id is invalid and does not exist
 
+Get a full guide [here](https://github.com/Vxrpenter/SCPToolsBot/wiki/Issue-Handling)
+
 ---
+
 > [!NOTE]
 > If you are getting an error, not stated in this documentation and are not able to fix it, please create an issue so the issue can be resolved
