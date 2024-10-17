@@ -1,4 +1,4 @@
-package dev.vxrp.bot.util;
+package dev.vxrp.bot.util.converter;
 
 import net.dv8tion.jda.api.Permission;
 

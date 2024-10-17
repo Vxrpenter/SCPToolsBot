@@ -1,4 +1,4 @@
-package dev.vxrp.bot.util;
+package dev.vxrp.bot.util.pastebin;
 
 import java.io.BufferedReader;
 import java.io.IOException;
