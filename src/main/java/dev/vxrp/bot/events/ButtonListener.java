@@ -43,21 +43,24 @@ public class ButtonListener extends ListenerAdapter {
         if (event.getComponentId().equals("createNewUnban")) {
             Unban.createUnbanTicket(event);
         }
-        if (event.getComponentId().startsWith("accept_support_ticket")) {
-            User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
-            if (user != null) {
+        if (event.getComponentId().startsWith("accept_unban_ticket")) {
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
                 Unban.acceptTicket(event, user);
-            }
+            });
         }
         if (event.getComponentId().startsWith("dismiss_unban_ticket")) {
-            User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
-            if (user != null) {
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
                 Unban.dismissTicket(event, user);
-            }
+            });
         }
         if (event.getComponentId().equals("settings_unban_ticket")) {
             //WIP
             event.reply("Feature currently under development").queue();
+
+        }
+
+        //Notice of Departure
+        if (event.getComponentId().equals("file_nod")) {
 
         }
     }

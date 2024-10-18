@@ -48,19 +48,19 @@ public class Support {
                     List<String> roleIDs = ScpTools.getConfigManager().getStringList(CONFIG.SUPPORT_SETTINGS.ROLES_ACCESS_SUPPORT_TICKETS);
                     for (String id : roleIDs) {
                         textChannel.upsertPermissionOverride(
-                                Objects.requireNonNull(guild.getRoleById(id)))
+                                        Objects.requireNonNull(guild.getRoleById(id)))
                                 .grant(EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND))
                                 .queue();
                     }
                     textChannel.sendMessageEmbeds(StatsBuilder.buildStatus(userName).build()).queue();
                     textChannel.sendMessageEmbeds( builder(translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_TITLE).replace("%name%", name),
-                            translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_BODY)
-                                    .replace("%subject%", subject)
-                                    .replace("%body%", body),
-                            translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_FOOTER)
-                                    .replace("%date%", date)
-                                    .replace("%time%", time),
-                            event.getGuild().getIconUrl(), event.getUser()).build())
+                                    translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_BODY)
+                                            .replace("%subject%", subject)
+                                            .replace("%body%", body),
+                                    translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_FOOTER)
+                                            .replace("%date%", date)
+                                            .replace("%time%", time),
+                                    event.getGuild().getIconUrl(), event.getUser()).build())
                             .addActionRow(
                                     Button.danger("close_support_ticket:"+userID+":", "Close Ticket"),
                                     Button.primary("claim_support_ticket:"+userID+":", "Claim Ticket"),

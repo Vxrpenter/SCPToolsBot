@@ -14,7 +14,7 @@ rules:
   pastebin: ""
   embed_footer: "Official Server Ruleset"
 
-# Commands that are activated by default remove to deactivate, default ["help"]
+# Commands that are activated by default remove to deactivate, default ["help", "template"]]
 commands: ["help", "template"]
 # Command settings
 # 'default_permissions' is pretty clear, find all permissions in this Javadoc https://docs.jda.wiki/net/dv8tion/jda/api/Permission.html.
@@ -27,8 +27,11 @@ command_settings:
     description: "Command for pasting certain templates"
 
 support_settings:
+  # Enter ROLEIDS of roles to automatically add to new tickets
   roles_access_support_tickets: []
+  # Enter ROLEIDS of roles that should be able to interact with unban requests
   roles_access_unban_tickets: []
+  # Which channel should unban requests be send to
   unban_channel_id: ""
 
 cedmod:
@@ -36,7 +39,7 @@ cedmod:
   active: false
   # Include https://
   instance_url: ""
-  # Exclude Bearer, just plain api key
+  # Exclude Bearer, put plain api key
   api_key: ""
   # This bot is only able to unban people that are on this banlist (feature for multi banlist bans coming in the future)
   master_ban_list_id: ""
