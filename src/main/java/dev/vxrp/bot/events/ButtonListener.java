@@ -1,7 +1,5 @@
 package dev.vxrp.bot.events;
 
-import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.events.buttons.Rules;
 import dev.vxrp.bot.events.buttons.Support;
 import dev.vxrp.bot.events.buttons.Unban;

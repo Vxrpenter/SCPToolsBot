@@ -29,4 +29,8 @@ public class CONFIG {
         public static final String API_KEY = "cedmod.api_key";
         public static final String MASTER_BAN_LIST_ID = "cedmod.master_ban_list_id";
     }
+    public static final class NOTICE_OF_DEPARTURE {
+        public static final String DESCISION_CHANNEL_ID = "notice_of_departure.decision_channel_id";
+        public static final String NOTICE_CHANNEL_ID = "notice_of_departure.notice_channel_id";
+    }
 }

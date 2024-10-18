@@ -1,8 +1,7 @@
 package dev.vxrp.bot.commands.templates.noticeOfDeparture;
 
-import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.config.managers.TranslationManager;
-import dev.vxrp.bot.config.util.TRANSLATIONS;
+import dev.vxrp.bot.util.configuration.LoadedConfigurations;
+import dev.vxrp.bot.util.configuration.translations.groups.NoticeOfDepartureGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
@@ -10,13 +9,13 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import java.awt.*;
 
 public class NoticeOfDeparture {
-    private static final TranslationManager translationManager = ScpTools.getTranslationManager();
+    private static final NoticeOfDepartureGroup translations = LoadedConfigurations.getNoticeOfDepartureMemoryLoad();
 
     public static void pasteDeRegisterTemplate(SlashCommandInteractionEvent event) {
         event.getChannel().sendMessageEmbeds(new EmbedBuilder()
                         .setColor(Color.decode("#5865F2"))
-                        .setTitle(translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.FIRST_TITLE))
-                        .setDescription(translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.FIRST_BODY))
+                        .setTitle(translations.getFirst_title())
+                        .setDescription(translations.getFirst_body())
                         .setColor(Color.DARK_GRAY)
                         .build())
                 .addActionRow(

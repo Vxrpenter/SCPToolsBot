@@ -11,6 +11,7 @@ import dev.vxrp.bot.config.managers.ConfigManager;
 import dev.vxrp.bot.events.ModalListener;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.Enums.DCColor;
+import dev.vxrp.bot.util.configuration.translations.TranslationLoader;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -40,6 +41,13 @@ public class ScpTools {
         configManager = new ConfigManager();
         translationManager = new TranslationManager();
         colorConfigManager = new ColorConfigManager();
+
+        try {
+            new TranslationLoader();
+            logger.info("Loaded translations into memory");
+        } catch (Exception e) {
+            logger.error("Could not load translation to memory {}", e.getMessage());
+        }
 
         Activity.ActivityType activityType = Activity.ActivityType.valueOf(configManager.getString(CONFIG.ACTIVITY_TYPE));
         logger.info("ActivityType set to {}", ColorTool.apply(DCColor.RED, activityType.toString()));
