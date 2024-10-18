@@ -1,4 +1,4 @@
-package dev.vxrp.bot.config.util;
+package dev.vxrp.bot.util.configuration.util;
 
 public class TRANSLATIONS {
     public static final class SUPPORT {

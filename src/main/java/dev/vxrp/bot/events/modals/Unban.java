@@ -1,14 +1,13 @@
 package dev.vxrp.bot.events.modals;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.config.util.CONFIG;
-import dev.vxrp.bot.config.util.TRANSLATIONS;
+import dev.vxrp.bot.util.configuration.util.CONFIG;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.cedmod.CedModApi;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.translations.groups.SupportGroup;
+import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
@@ -48,7 +47,7 @@ public class Unban {
         TextChannel textChannel = event.getGuild().getTextChannelById(ScpTools.getConfigManager().getString(CONFIG.SUPPORT_SETTINGS.UNBAN_CHANNEL_ID));
 
         assert textChannel != null;
-        event.reply(translations.getTicket_unban_created()
+        event.reply(translations.ticket_unban_created()
                 .replace("%channel%", "<#"+textChannel.getId()+">")).setEphemeral(true).queue();
 
         List<String> roleIDs = ScpTools.getConfigManager().getStringList(CONFIG.SUPPORT_SETTINGS.ROLES_ACCESS_UNBAN_TICKETS);
@@ -60,12 +59,12 @@ public class Unban {
         }
         textChannel.sendMessageEmbeds(
                         StatsBuilder.buildStatus(userName).build(),
-                        builder(translations.getTicket_unban_title().replace("%name%", name),
-                                translations.getTicket_unban_body()
+                        builder(translations.ticket_unban_title().replace("%name%", name),
+                                translations.ticket_unban_body()
                                         .replace("%steamID%", steamID)
                                         .replace("%reason%", reason)
                                         .replace("%reasoning%", reasoning),
-                                translations.getTicket_unban_footer()
+                                translations.ticket_unban_footer()
                                         .replace("%date%", date)
                                         .replace("%time%", time),
                                 event.getGuild().getIconUrl(), event.getUser()).build())
@@ -95,7 +94,7 @@ public class Unban {
         bannedUser.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
                 StatsBuilder.buildAccepted(bannedUser.getGlobalName()).build(),
                         new EmbedBuilder()
-                        .setDescription(translations.getTicket_unban_message_accepted()
+                        .setDescription(translations.ticket_unban_message_accepted()
                                 .replace("%steamID%", steamID)
                                 .replace("%reason%", reason))
                         .build()
@@ -103,7 +102,7 @@ public class Unban {
 
         CedModApi.executeUnban(instanceUrl, apiKey, banID, reason);
 
-        event.reply(translations.getTicket_unban_message_sent()).setEphemeral(true).queue();
+        event.reply(translations.ticket_unban_message_sent()).setEphemeral(true).queue();
     }
     public static void dismissUnban(ModalInteractionEvent event) {
         String messageID = event.getModalId().split(":")[3];
@@ -117,7 +116,7 @@ public class Unban {
             user.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
                     StatsBuilder.buildDismissed(event.getUser().getGlobalName()).build(),
                     new EmbedBuilder()
-                            .setDescription(translations.getTicket_unban_message_dismissed()
+                            .setDescription(translations.ticket_unban_message_dismissed()
                                     .replace("%steamID%", steamID)
                                     .replace("%reason%", reason))
                             .build()
@@ -125,7 +124,7 @@ public class Unban {
         });
 
 
-        event.reply(translations.getTicket_unban_message_sent()).setEphemeral(true).queue();
+        event.reply(translations.ticket_unban_message_sent()).setEphemeral(true).queue();
     }
 
     private static EmbedBuilder builder(String title, String body, String footerText, String IconURL, User user) {
