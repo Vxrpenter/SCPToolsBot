@@ -35,5 +35,7 @@ public class TemplateCommand extends ListenerAdapter {
             NoticeOfDeparture.pasteDeRegisterTemplate(event);
         }
         logger.info("User {} executed command template with args '{}'", ColorTool.apply(DCColor.GREEN, event.getUser().getGlobalName()), template);
+
+
     }
 }

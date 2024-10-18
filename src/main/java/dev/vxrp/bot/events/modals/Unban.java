@@ -69,7 +69,7 @@ public class Unban {
                                         .replace("%time%", time),
                                 event.getGuild().getIconUrl(), event.getUser()).build())
                 .addActionRow(
-                        Button.success("accept_support_ticket:"+userID+":"+steamID+":", "Accept Ticket"),
+                        Button.success("accept_unban_ticket:"+userID+":"+steamID+":", "Accept Ticket"),
                         Button.danger("dismiss_unban_ticket:"+userID+":"+steamID+":", "Dismiss Ticket"),
                         Button.secondary("settings_unban_ticket", "Settings")
                 ).queue();
@@ -109,18 +109,20 @@ public class Unban {
 
         Objects.requireNonNull(Objects.requireNonNull(event.getGuild()).getTextChannelById(Objects.requireNonNull(event.getChannelId()))).deleteMessageById(messageID).queue();
 
-        User bannedUser = Objects.requireNonNull(Objects.requireNonNull(event.getGuild()).getMemberById(event.getModalId().split(":")[1])).getUser();
         String steamID = event.getModalId().split(":")[2];
         String reason = Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString();
 
-        bannedUser.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
-                        StatsBuilder.buildDismissed(event.getUser().getGlobalName()).build(),
-                        new EmbedBuilder()
-                                .setDescription(ScpTools.getTranslationManager().getString(TRANSLATIONS.SUPPORT.TICKET.UNBAN_MESSAGE_DISMISSED)
-                                        .replace("%steamID%", steamID)
-                                        .replace("%reason%", reason))
-                                .build()
-        )).queue();
+        event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> {
+            user.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
+                    StatsBuilder.buildDismissed(event.getUser().getGlobalName()).build(),
+                    new EmbedBuilder()
+                            .setDescription(ScpTools.getTranslationManager().getString(TRANSLATIONS.SUPPORT.TICKET.UNBAN_MESSAGE_DISMISSED)
+                                    .replace("%steamID%", steamID)
+                                    .replace("%reason%", reason))
+                            .build()
+            )).queue();
+        });
+
 
         event.reply(ScpTools.getTranslationManager().getString(TRANSLATIONS.SUPPORT.TICKET.UNBAN_MESSAGE_SENT)).setEphemeral(true).queue();
     }
