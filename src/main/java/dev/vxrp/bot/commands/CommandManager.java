@@ -1,7 +1,7 @@
 package dev.vxrp.bot.commands;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.config.util.CONFIG;
+import dev.vxrp.bot.util.configuration.util.CONFIG;
 import dev.vxrp.bot.util.converter.PermissionListConverter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;

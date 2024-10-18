@@ -2,10 +2,10 @@ package dev.vxrp.bot.util.configuration.translations;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;
-import dev.vxrp.bot.config.util.TRANSLATIONS;
+import dev.vxrp.bot.util.configuration.util.TRANSLATIONS;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.translations.groups.NoticeOfDepartureGroup;
-import dev.vxrp.bot.util.configuration.translations.groups.SupportGroup;
+import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
+import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 
 public class TranslationLoader {
     public TranslationLoader() {

@@ -1,7 +1,7 @@
 package dev.vxrp.bot.commands.templates.rules;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.config.util.CONFIG;
+import dev.vxrp.bot.util.configuration.util.CONFIG;
 import dev.vxrp.bot.util.pastebin.PastebinUtil;
 import dev.vxrp.bot.util.parser.CustomColorParser;
 import net.dv8tion.jda.api.EmbedBuilder;

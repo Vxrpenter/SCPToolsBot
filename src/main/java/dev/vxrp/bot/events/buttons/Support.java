@@ -1,7 +1,7 @@
 package dev.vxrp.bot.events.buttons;
 
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.translations.groups.SupportGroup;
+import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -20,15 +20,15 @@ public class Support {
     public static void createSupportTicket(ButtonInteractionEvent event) {
         if (event.getComponentId().equals("createNewTicket")) {
             event.replyModal(
-                    Modal.create("supportTicket", translations.getModal_support_title())
+                    Modal.create("supportTicket", translations.modal_support_title())
                             .addComponents(
                                     ActionRow.of(shortModal(
-                                            translations.getModal_support_first_title(),
-                                            translations.getModal_support_first_placeholder()
+                                            translations.modal_support_first_title(),
+                                            translations.modal_support_first_placeholder()
                                     )),
                                     ActionRow.of(paragraphModal(
-                                            translations.getModal_support_second_title(),
-                                                    translations.getModal_support_second_placeholder())))
+                                            translations.modal_support_second_title(),
+                                                    translations.modal_support_second_placeholder())))
                             .build()).queue();
         }
     }

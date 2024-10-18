@@ -1,7 +1,7 @@
 package dev.vxrp.bot.util.configuration;
 
-import dev.vxrp.bot.util.configuration.translations.groups.NoticeOfDepartureGroup;
-import dev.vxrp.bot.util.configuration.translations.groups.SupportGroup;
+import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
+import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 
 import java.util.HashSet;
 import java.util.Iterator;

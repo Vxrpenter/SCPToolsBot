@@ -6,7 +6,7 @@ import dev.vxrp.bot.commands.help.HelpCommand;
 import dev.vxrp.bot.commands.templates.TemplateCommand;
 import dev.vxrp.bot.config.managers.ColorConfigManager;
 import dev.vxrp.bot.config.managers.TranslationManager;
-import dev.vxrp.bot.config.util.CONFIG;
+import dev.vxrp.bot.util.configuration.util.CONFIG;
 import dev.vxrp.bot.config.managers.ConfigManager;
 import dev.vxrp.bot.events.ModalListener;
 import dev.vxrp.bot.util.colors.ColorTool;
