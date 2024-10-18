@@ -1,12 +1,12 @@
 package dev.vxrp.bot.events.modals;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.config.util.CONFIG;
-import dev.vxrp.bot.config.util.TRANSLATIONS;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.colors.ColorTool;
+import dev.vxrp.bot.util.configuration.LoadedConfigurations;
+import dev.vxrp.bot.util.configuration.translations.groups.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
@@ -21,7 +21,7 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Support {
-    private static final TranslationManager translationManager = ScpTools.getTranslationManager();
+    private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
 
     public static void createSupportTicket(ModalInteractionEvent event, Logger logger) {
         Member member = event.getMember();
@@ -42,7 +42,7 @@ public class Support {
                 .addPermissionOverride(guild.getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
                 .setSlowmode(1)
                 .queue(textChannel -> {
-                    event.reply(translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_CREATED)
+                    event.reply(translations.getTicket_support_created()
                             .replace("%channel%", "<#"+textChannel.getId()+">")).setEphemeral(true).queue();
 
                     List<String> roleIDs = ScpTools.getConfigManager().getStringList(CONFIG.SUPPORT_SETTINGS.ROLES_ACCESS_SUPPORT_TICKETS);
@@ -53,11 +53,11 @@ public class Support {
                                 .queue();
                     }
                     textChannel.sendMessageEmbeds(StatsBuilder.buildStatus(userName).build()).queue();
-                    textChannel.sendMessageEmbeds( builder(translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_TITLE).replace("%name%", name),
-                                    translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_BODY)
+                    textChannel.sendMessageEmbeds(builder(translations.getTicket_support_title().replace("%name%", name),
+                                    translations.getTicket_support_body()
                                             .replace("%subject%", subject)
                                             .replace("%body%", body),
-                                    translationManager.getString(TRANSLATIONS.SUPPORT.TICKET.SUPPORT_FOOTER)
+                                    translations.getTicket_support_footer()
                                             .replace("%date%", date)
                                             .replace("%time%", time),
                                     event.getGuild().getIconUrl(), event.getUser()).build())

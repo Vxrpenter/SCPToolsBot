@@ -29,10 +29,16 @@ command_settings:
 support_settings:
   # Enter ROLEIDS of roles to automatically add to new tickets
   roles_access_support_tickets: []
-  # Enter ROLEIDS of roles that should be able to interact with unban requests
+  # Enter ROLEIDS of roles that should be able to interact with unbanning requests
   roles_access_unban_tickets: []
-  # Which channel should unban requests be send to
+  # Which channel should unban requests be sent to
   unban_channel_id: ""
+
+notice_of_departure:
+  # Which channel should the form be sent to be accepted by moderators?
+  decision_channel_id: ""
+  # Which channel should the departures be sent to?
+  notice_channel_id: ""
 
 cedmod:
   # Should Cedmod integration features be established or deactivated?

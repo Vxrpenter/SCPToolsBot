@@ -1,8 +1,7 @@
 package dev.vxrp.bot.events.buttons;
 
-import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.config.managers.TranslationManager;
-import dev.vxrp.bot.config.util.TRANSLATIONS;
+import dev.vxrp.bot.util.configuration.LoadedConfigurations;
+import dev.vxrp.bot.util.configuration.translations.groups.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -16,20 +15,20 @@ import net.dv8tion.jda.api.interactions.modals.Modal;
 import java.util.List;
 
 public class Support {
-    private static final TranslationManager translationManager = ScpTools.getTranslationManager();
+    private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
 
     public static void createSupportTicket(ButtonInteractionEvent event) {
         if (event.getComponentId().equals("createNewTicket")) {
             event.replyModal(
-                    Modal.create("supportTicket", translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_TITLE))
+                    Modal.create("supportTicket", translations.getModal_support_title())
                             .addComponents(
                                     ActionRow.of(shortModal(
-                                            translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_FIRST_TITLE),
-                                            translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_FIRST_PLACEHOLDER)
+                                            translations.getModal_support_first_title(),
+                                            translations.getModal_support_first_placeholder()
                                     )),
                                     ActionRow.of(paragraphModal(
-                                            translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_SECOND_TITLE),
-                                            translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_SECOND_PLACEHOLDER))))
+                                            translations.getModal_support_second_title(),
+                                                    translations.getModal_support_second_placeholder())))
                             .build()).queue();
         }
     }
