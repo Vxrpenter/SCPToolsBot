@@ -18,7 +18,7 @@ public class TranslationLoader {
                 translationManager.getString(TRANSLATIONS.SUPPORT.SECOND_BODY),
                 translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_TITLE),
                 translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_FIRST_TITLE),
-                translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_SECOND_TITLE),
+                translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_FIRST_PLACEHOLDER),
                 translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_SECOND_TITLE),
                 translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.SUPPORT_SECOND_PLACEHOLDER),
                 translationManager.getString(TRANSLATIONS.SUPPORT.MODAL.UNBAN_TITLE),
@@ -46,7 +46,12 @@ public class TranslationLoader {
 
         NoticeOfDepartureGroup noticeOfDepartureGroup = new NoticeOfDepartureGroup(
                 translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.FIRST_TITLE),
-                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.FIRST_BODY)
+                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.FIRST_BODY),
+                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.MODAL.TILE),
+                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.MODAL.FIRST_TITLE),
+                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.MODAL.FIRST_PLACEHOLDER),
+                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.MODAL.SECOND_TITLE),
+                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.MODAL.SECOND_PLACEHOLDER)
         );
 
         LoadedConfigurations.setSupportTranslationMemoryLoad(supportGroup);
