@@ -44,5 +44,13 @@ public class TRANSLATIONS {
     public static final class NOTICE_OF_DEPARTURE {
         public static final String FIRST_TITLE = "notice_of_departure.first_title";
         public static final String FIRST_BODY = "notice_of_departure.first_body";
+
+        public static final class MODAL {
+            public static final String TILE = "notice_of_departure.modal_title";
+            public static final String FIRST_TITLE = "notice_of_departure.modal_first_title";
+            public static final String FIRST_PLACEHOLDER = "notice_of_departure.modal_first_placeholder";
+            public static final String SECOND_TITLE = "notice_of_departure.modal_second_title";
+            public static final String SECOND_PLACEHOLDER = "notice_of_departure.modal_second_placeholder";
+        }
     }
 }

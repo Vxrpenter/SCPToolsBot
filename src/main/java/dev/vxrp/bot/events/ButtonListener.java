@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events;
 
+import dev.vxrp.bot.events.buttons.NoticeOfDeparture;
 import dev.vxrp.bot.events.buttons.Rules;
 import dev.vxrp.bot.events.buttons.Support;
 import dev.vxrp.bot.events.buttons.Unban;
@@ -59,7 +60,7 @@ public class ButtonListener extends ListenerAdapter {
 
         //Notice of Departure
         if (event.getComponentId().equals("file_nod")) {
-
+            NoticeOfDeparture.createNoticeOfDeparture(event);
         }
     }
 }

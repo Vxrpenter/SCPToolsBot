@@ -1,4 +1,5 @@
 # You can use any form of discord formatting in these translations
+# The bot will load the translations in memory on startup. To apply changes, restart the bot
 
 #
 # Support
@@ -114,4 +115,8 @@ notice_of_departure:
                         Every timespan over 1 year will not be accepted and will be asked to leave the team
                         "
 
-  modal_
+  modal_title: "File Notice of Departure"
+  modal_first_title: "Away time?"
+  modal_first_placeholder: "How long will you be away **[dd.MM.yyyy]**"
+  modal_second_title: "Explanation"
+  modal_second_placeholder: "Why are you going to be away [exclude details]"
