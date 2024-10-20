@@ -15,6 +15,8 @@ ScpToolsBot is a discord bot application written in Java for Scp Secret Laborato
 If you need any more information check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki)
 
 ## Installation
+This bot application should be installed on a alltime running server with good internet connection to handle requests fast and be online all the time
+
 1. Download the `.jar` file from the latest **STABLE** release
 2. Install `JDK-17` or higher on your machine
 3. Run the jar using `java -jar <filename>`
