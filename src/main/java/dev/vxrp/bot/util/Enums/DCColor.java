@@ -8,5 +8,6 @@ public enum DCColor {
     LIGHT_BLUE,
     PINK,
     TEAL,
-    WHITE
+    WHITE,
+    BOLD
 }

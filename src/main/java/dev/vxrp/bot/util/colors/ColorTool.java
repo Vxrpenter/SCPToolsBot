@@ -33,6 +33,9 @@ public class ColorTool {
             case WHITE -> {
                 return "\u001B[2;37m"+text+"\u001B[0m";
             }
+            case BOLD -> {
+                return "\u001B[1;2m"+text+"\u001B[0m";
+            }
         }
         return null;
     }
