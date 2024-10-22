@@ -27,6 +27,9 @@ public class NoticeOfDeparture {
         String[] givenDate = Objects.requireNonNull(event.getValue("nod_timeframe")).getAsString().split("\\.");
         String reason = Objects.requireNonNull(event.getValue("nod_reason")).getAsString();
 
+        String day = new SimpleDateFormat("dd").format(Calendar.getInstance().getTime());
+        String month = new SimpleDateFormat("MM").format(Calendar.getInstance().getTime());
+        String year = new SimpleDateFormat("yyyy").format(Calendar.getInstance().getTime());
         event.reply(translations.ticket_created()).setEphemeral(true).queue();
 
         assert channel != null;
@@ -36,9 +39,12 @@ public class NoticeOfDeparture {
                         .setTitle(translations.ticket_title().replace("%number%", String.valueOf(ThreadLocalRandom.current().nextInt(1938, 9750))))
                         .setThumbnail(Objects.requireNonNull(event.getMember()).getUser().getAvatarUrl())
                         .setDescription(translations.ticket_body()
-                                .replace("%day%", ColorTool.apply(DCColor.GREEN, givenDate[0]))
-                                .replace("%month%", ColorTool.apply(DCColor.RED, givenDate[1]))
-                                .replace("%year%", ColorTool.apply(DCColor.GOLD, givenDate[2]))
+                                .replace("%current_day%", ColorTool.apply(DCColor.BOLD, day))
+                                .replace("%current_month%", ColorTool.apply(DCColor.BOLD, month))
+                                .replace("%current_year%", ColorTool.apply(DCColor.BOLD, year))
+                                .replace("%day%", ColorTool.apply(DCColor.BOLD, givenDate[0]))
+                                .replace("%month%", ColorTool.apply(DCColor.BOLD, givenDate[1]))
+                                .replace("%year%", ColorTool.apply(DCColor.BOLD, givenDate[2]))
                                 .replace("%reason%", reason))
                         .setFooter(translations.ticket_footer()
                                 .replace("%date%", date)

@@ -129,7 +129,7 @@ notice_of_departure:
                         ```If accepted this user and the date will be added to the database and you will be notified when it runs out```\n
                         __**Timespan**__\n
                         ```ansi\n
-                        %day%.%month%.%year%
+                        %current_day%.%current_month%.%current_year% till %day%.%month%.%year%
                         ```\n
                         
                         __**Reason:**__\n
