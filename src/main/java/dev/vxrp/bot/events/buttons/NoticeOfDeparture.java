@@ -30,7 +30,7 @@ public class NoticeOfDeparture {
         return TextInput.create("nod_timeframe", title, TextInputStyle.SHORT)
                 .setPlaceholder(placeholder)
                 .setRequired(true)
-                .setMinLength(10)
+                .setMinLength(8)
                 .setMaxLength(10)
                 .build();
     }
