@@ -1,4 +1,6 @@
 # You can use any form of discord formatting in these translations
+# \n will apply a linebreak
+# Everything surrounded like this: %value% will be replaced
 # The bot will load the translations in memory on startup. To apply changes, restart the bot
 
 #
@@ -122,11 +124,15 @@ notice_of_departure:
   modal_second_placeholder: "Why are you going to be away [exclude details]"
 
   ticket_title: "Notice of departure - #%number%"
+  # If you remove the ```ansi ``` then the color rendering will be messed up, so be careful
   ticket_body: " 
-                        __**Timespan**__ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ 
-                        ```%day%.%month%.%year%```
+                        ```If accepted this user and the date will be added to the database and you will be notified when it runs out```\n
+                        __**Timespan**__\n
+                        ```ansi\n
+                        %day%.%month%.%year%
+                        ```\n
                         
-                        __**Reason:**__
+                        __**Reason:**__\n
                         ```%reason%```
                         "
   ticket_footer: "Created on the %date% at %time%h"
