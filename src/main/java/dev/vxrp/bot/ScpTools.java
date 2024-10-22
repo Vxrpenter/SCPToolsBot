@@ -31,6 +31,28 @@ public class ScpTools {
 
     public final static Logger logger = LoggerFactory.getLogger(ScpTools.class);
     public static void main(String[] args) {
+        initializeConfigs();
+        loadConfigs();
+
+        Activity.ActivityType activityType = Activity.ActivityType.valueOf(configManager.getString(CONFIG.ACTIVITY_TYPE));
+        logger.info("ActivityType set to {}", ColorTool.apply(DCColor.RED, activityType.toString()));
+        String activityContent = configManager.getString(CONFIG.ACTIVITY_CONTENT);
+        logger.info("ActivityContent set to {}", ColorTool.apply(DCColor.RED, activityContent));
+
+        checkGuildID();
+        initializeBot(activityType, activityContent);
+    }
+
+    private static void loadConfigs() {
+        try {
+            new TranslationLoader();
+            logger.info("Loaded translations into memory");
+        } catch (Exception e) {
+            logger.error("Could not load translation to memory {}", e.getMessage());
+        }
+    }
+
+    private static void initializeConfigs() {
         List<String> folders = Arrays.asList("configs", "translations");
         for (String folder : folders) {
             String folderPath = Paths.get(folder).toString();
@@ -38,28 +60,33 @@ public class ScpTools {
             logger.info("Loading configs from {}", folderPath);
         }
 
-        configManager = new ConfigManager();
-        translationManager = new TranslationManager();
-        colorConfigManager = new ColorConfigManager();
-
         try {
-            new TranslationLoader();
-            logger.info("Loaded translations into memory");
+            configManager = new ConfigManager();
         } catch (Exception e) {
-            logger.error("Could not load translation to memory {}", e.getMessage());
+            logger.error("Could not load configs from configManager : {}", e.getMessage());
         }
+        try {
+            translationManager = new TranslationManager();
+        } catch (Exception e) {
+            logger.error("Could not load configs from translationManager : {}", e.getMessage());
+        }
+        try {
+            colorConfigManager = new ColorConfigManager();
+        } catch (Exception e) {
+            logger.error("Could not load configs from colorConfigManager : {}", e.getMessage());
+        }
+    }
 
-        Activity.ActivityType activityType = Activity.ActivityType.valueOf(configManager.getString(CONFIG.ACTIVITY_TYPE));
-        logger.info("ActivityType set to {}", ColorTool.apply(DCColor.RED, activityType.toString()));
-        String activityContent = configManager.getString(CONFIG.ACTIVITY_CONTENT);
-        logger.info("ActivityContent set to {}", ColorTool.apply(DCColor.RED, activityContent));
+    private static void checkGuildID() {
         if (configManager.getString("guild_id") == null || Objects.equals(configManager.getString("guild_id"), "")) {
             logger.error("Guild id is {}. Process shutting down", ColorTool.apply(DCColor.RED, "null"));
             return;
         } else {
             logger.info("Launching under guild id {}", ColorTool.apply(DCColor.GREEN, configManager.getString("guild_id")));
         }
+    }
 
+    private static void initializeBot(Activity.ActivityType activityType, String activityContent) {
         JDA api = JDABuilder.createDefault(configManager.getToken(), GatewayIntent.MESSAGE_CONTENT)
                 .setActivity(Activity.of(activityType, activityContent))
                 .disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
