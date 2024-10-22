@@ -1,6 +1,8 @@
 package dev.vxrp.bot.util.configuration.util;
 
 public class CONFIG {
+    public static final String TOKEN = "token";
+    public static final String GUILD_ID = "guild_id";
     public static final String ACTIVITY_TYPE = "activity_type";
     public static final String ACTIVITY_CONTENT = "activity_content";
     public static final String COMMANDS = "commands";
