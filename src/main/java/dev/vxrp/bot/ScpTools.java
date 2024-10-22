@@ -6,6 +6,7 @@ import dev.vxrp.bot.commands.help.HelpCommand;
 import dev.vxrp.bot.commands.templates.TemplateCommand;
 import dev.vxrp.bot.config.managers.ColorConfigManager;
 import dev.vxrp.bot.config.managers.TranslationManager;
+import dev.vxrp.bot.util.configuration.configs.ConfigLoader;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
 import dev.vxrp.bot.config.managers.ConfigManager;
 import dev.vxrp.bot.events.ModalListener;
@@ -49,6 +50,12 @@ public class ScpTools {
             logger.info("Loaded translations into memory");
         } catch (Exception e) {
             logger.error("Could not load translation to memory {}", e.getMessage());
+        }
+        try {
+            new ConfigLoader();
+            logger.info("Loaded config into memory");
+        } catch (Exception e) {
+            logger.error("Could not load config to memory {}", e.getMessage());
         }
     }
 

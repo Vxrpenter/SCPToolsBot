@@ -1,5 +1,6 @@
 package dev.vxrp.bot.util.configuration;
 
+import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 
@@ -7,8 +8,22 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class LoadedConfigurations {
+    public static HashSet<ConfigGroup> configMemoryLoad = new HashSet<>();
     public static HashSet<SupportGroup> supportTranslationMemoryLoad  = new HashSet<>();
     public static HashSet<NoticeOfDepartureGroup> noticeOfDepartureMemoryLoad  = new HashSet<>();
+
+    public static ConfigGroup getConfigMemoryLoad() {
+        Iterator<ConfigGroup> iterator = configMemoryLoad.iterator();
+        ConfigGroup configGroup = null;
+        while (iterator.hasNext()) {
+            configGroup = iterator.next();
+        }
+        return configGroup;
+    }
+
+    public static void setConfigMemoryLoad(ConfigGroup configGroup) {
+        LoadedConfigurations.configMemoryLoad.add(configGroup);
+    }
 
     public static SupportGroup getSupportTranslationMemoryLoad() {
         Iterator<SupportGroup> iterator = supportTranslationMemoryLoad.iterator();
