@@ -1,10 +1,12 @@
 package dev.vxrp.bot.util.colors;
 
 import dev.vxrp.bot.util.Enums.DCColor;
+import org.jetbrains.annotations.NotNull;
 
 public class ColorTool {
 
 
+    @NotNull
     public static String apply(DCColor color, String text) {
         switch (color) {
             case DARK_GRAY -> {
