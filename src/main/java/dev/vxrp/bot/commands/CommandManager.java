@@ -1,6 +1,8 @@
 package dev.vxrp.bot.commands;
 
 import dev.vxrp.bot.ScpTools;
+import dev.vxrp.bot.util.configuration.LoadedConfigurations;
+import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
 import dev.vxrp.bot.util.converter.PermissionListConverter;
 import net.dv8tion.jda.api.JDA;
@@ -16,22 +18,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandManager {
-    public final static Logger logger = LoggerFactory.getLogger(CommandManager.class);
-    public CommandManager() {}
+    private final static Logger logger = LoggerFactory.getLogger(CommandManager.class);
+    private final static ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
+
     public void Initialize(JDA api) {
-        List<String> activeCommands = ScpTools.getConfigManager().getStringList(CONFIG.COMMANDS);
-        List<String> helpDefaultPermissions = ScpTools.getConfigManager().getStringList(CONFIG.COMMAND_SETTINGS.DEFAULT_PERMISSIONS.HELP);
-        List<String> templateDefaultPermissions = ScpTools.getConfigManager().getStringList(CONFIG.COMMAND_SETTINGS.DEFAULT_PERMISSIONS.TEMPLATE);
+        List<String> activeCommands = configs.commands();
+        List<String> helpDefaultPermissions = configs.command_setting_help_default_permissions();
+        List<String> templateDefaultPermissions = configs.command_settings_template_default_permissions();
 
         List<CommandData> commands = new ArrayList<>();
         if (activeCommands.contains("help")) {
-            commands.add(Commands.slash("help", ScpTools.getConfigManager().getString(CONFIG.COMMAND_SETTINGS.DESCRIPTIONS.HELP))
+            commands.add(Commands.slash("help", configs.command_settings_help_description())
                     .setDefaultPermissions(DefaultMemberPermissions.enabledFor(new PermissionListConverter(helpDefaultPermissions).convert())));
         } else {
             logger.warn("Command help is deactivated, it is highly recommended to leave this command on");
         }
         if (activeCommands.contains("template")) {
-            commands.add(Commands.slash("template", ScpTools.getConfigManager().getString(CONFIG.COMMAND_SETTINGS.DESCRIPTIONS.TEMPLATE))
+            commands.add(Commands.slash("template", configs.command_settings_template_descriptions())
                     .setDefaultPermissions(DefaultMemberPermissions.enabledFor(new PermissionListConverter(templateDefaultPermissions).convert()))
                     .addOptions(
                             new OptionData(OptionType.STRING, "template", "What template are you referring to", true)

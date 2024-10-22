@@ -1,6 +1,8 @@
 package dev.vxrp.bot.commands.templates.rules;
 
 import dev.vxrp.bot.ScpTools;
+import dev.vxrp.bot.util.configuration.LoadedConfigurations;
+import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
 import dev.vxrp.bot.util.pastebin.PastebinUtil;
 import dev.vxrp.bot.util.parser.CustomColorParser;
@@ -16,10 +18,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class RulesTemplateUnit  {
+    private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
     private static EmbedBuilder embed(Guild guild, TextChannel channel) {
         String rules;
         try {
-            rules = PastebinUtil.getPasteBin("https://pastebin.com/raw/"+ScpTools.getConfigManager().getString(CONFIG.RULES.PASTEBIN));
+            rules = PastebinUtil.getPasteBin("https://pastebin.com/raw/"+configs.rules_pastebin());
         } catch (IOException e) {
             assert channel != null;
             channel.sendMessage("Failed to retrieve rules").queue();
@@ -28,7 +31,7 @@ public class RulesTemplateUnit  {
 
         return new EmbedBuilder()
                 .setDescription("```ansi\n"+ CustomColorParser.parse(rules) +"\n```")
-                .setFooter(ScpTools.getConfigManager().getString(CONFIG.RULES.EMBED_FOOTER), guild.getIconUrl());
+                .setFooter(configs.rules_embed_footer(), guild.getIconUrl());
     }
 
     public static void pasteRules(ButtonInteractionEvent event) {
