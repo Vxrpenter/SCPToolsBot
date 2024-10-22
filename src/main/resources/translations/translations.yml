@@ -65,7 +65,7 @@ support:
 
   ticket_unban_title: "%name%"
   ticket_unban_body: "
-                        Unban Request is getting reviewed. A response from our moderation team may take a bit\n
+                        Unban Request is getting reviewed.\n
                         
                         __**Steam ID:**__\n
                         ||%steamID%||\n
@@ -120,3 +120,14 @@ notice_of_departure:
   modal_first_placeholder: "How long will you be away **[dd.MM.yyyy]**"
   modal_second_title: "Explanation"
   modal_second_placeholder: "Why are you going to be away [exclude details]"
+
+  ticket_title: "Notice of departure - #%number%"
+  ticket_body: " 
+                        __**Timespan**__ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ 
+                        ```%day%.%month%.%year%```
+                        
+                        __**Reason:**__
+                        ```%reason%```
+                        "
+  ticket_footer: "Created on the %date% at %time%h"
+  ticket_created: "Your notice will be reviewed real soon"

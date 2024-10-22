@@ -2,6 +2,7 @@ package dev.vxrp.bot.util.configuration.configs;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.ConfigManager;
+import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
 
@@ -30,5 +31,7 @@ public class ConfigLoader {
                 configManager.getString(CONFIG.CEDMOD.INSTANCE_URL),
                 configManager.getString(CONFIG.CEDMOD.API_KEY),
                 configManager.getString(CONFIG.CEDMOD.MASTER_BAN_LIST_ID));
+
+        LoadedConfigurations.setConfigMemoryLoad(configGroup);
     }
 }
