@@ -8,5 +8,5 @@ public record ConfigGroup(String token, String guild_id, String activity_type, S
                           String command_settings_template_descriptions, List<String> support_settings_roles_access_support_tickets,
                           List<String> support_settings_roles_access_unban_tickets, String support_settings_unban_channel_id,
                           String notice_of_departure_decision_channel_id, String notice_of_departure_notice_channel_id, boolean cedmod_active,
-                          String cedmod_instance_url, String cedmod_api_key, String cedmod_cedmod) {
+                          String cedmod_instance_url, String cedmod_api_key, String cedmod_master_banlist_id) {
 }

@@ -1,6 +1,7 @@
 package dev.vxrp.bot.events.modals;
 
 import dev.vxrp.bot.ScpTools;
+import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
@@ -22,6 +23,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Support {
     private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
+    private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
 
     public static void createSupportTicket(ModalInteractionEvent event, Logger logger) {
         Member member = event.getMember();
@@ -45,7 +47,7 @@ public class Support {
                     event.reply(translations.ticket_support_created()
                             .replace("%channel%", "<#"+textChannel.getId()+">")).setEphemeral(true).queue();
 
-                    List<String> roleIDs = ScpTools.getConfigManager().getStringList(CONFIG.SUPPORT_SETTINGS.ROLES_ACCESS_SUPPORT_TICKETS);
+                    List<String> roleIDs = configs.support_settings_roles_access_support_tickets();
                     for (String id : roleIDs) {
                         textChannel.upsertPermissionOverride(
                                         Objects.requireNonNull(guild.getRoleById(id)))

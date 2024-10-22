@@ -1,7 +1,6 @@
 package dev.vxrp.bot.events.modals;
 
-import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.util.configuration.util.CONFIG;
+import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.cedmod.CedModApi;
@@ -28,6 +27,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Unban {
     private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
+    private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
 
     public static void createUnbanTicket(ModalInteractionEvent event, Logger logger) {
         Member member = event.getMember();
@@ -44,13 +44,13 @@ public class Unban {
         String time = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
         String date = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
 
-        TextChannel textChannel = event.getGuild().getTextChannelById(ScpTools.getConfigManager().getString(CONFIG.SUPPORT_SETTINGS.UNBAN_CHANNEL_ID));
+        TextChannel textChannel = event.getGuild().getTextChannelById(configs.support_settings_unban_channel_id());
 
         assert textChannel != null;
         event.reply(translations.ticket_unban_created()
                 .replace("%channel%", "<#"+textChannel.getId()+">")).setEphemeral(true).queue();
 
-        List<String> roleIDs = ScpTools.getConfigManager().getStringList(CONFIG.SUPPORT_SETTINGS.ROLES_ACCESS_UNBAN_TICKETS);
+        List<String> roleIDs = configs.support_settings_roles_access_unban_tickets();
         for (String id : roleIDs) {
             textChannel.upsertPermissionOverride(
                             Objects.requireNonNull(guild.getRoleById(id)))
@@ -86,9 +86,9 @@ public class Unban {
         String steamID = event.getModalId().split(":")[2];
         String reason = Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString();
 
-        String instanceUrl = ScpTools.getConfigManager().getString(CONFIG.CEDMOD.INSTANCE_URL);
-        String apiKey = ScpTools.getConfigManager().getString(CONFIG.CEDMOD.API_KEY);
-        String banListID = ScpTools.getConfigManager().getString(CONFIG.CEDMOD.MASTER_BAN_LIST_ID);
+        String instanceUrl = configs.cedmod_instance_url();
+        String apiKey = configs.cedmod_api_key();
+        String banListID = configs.cedmod_master_banlist_id();
         String banID = CedModApi.getBanId(instanceUrl, apiKey, banListID, steamID);
 
         bannedUser.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
