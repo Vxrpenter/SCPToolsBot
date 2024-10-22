@@ -52,5 +52,11 @@ public class TRANSLATIONS {
             public static final String SECOND_TITLE = "notice_of_departure.modal_second_title";
             public static final String SECOND_PLACEHOLDER = "notice_of_departure.modal_second_placeholder";
         }
+        public static final class TICKET {
+            public static final String TITLE = "notice_of_departure.ticket_title";
+            public static final String BODY = "notice_of_departure.ticket_body";
+            public static final String FOOTER = "notice_of_departure.ticket_footer";
+            public static final String CREATED = "notice_of_departure.ticket_created";
+        }
     }
 }
