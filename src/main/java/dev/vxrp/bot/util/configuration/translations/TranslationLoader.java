@@ -62,7 +62,10 @@ public class TranslationLoader {
                 translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.TICKET.CREATED),
                 translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.TICKET.MESSAGE_ACCEPTED),
                 translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.TICKET.MESSAGE_DISMISSED),
-                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.TICKET.MESSAGE_SENT));
+                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.TICKET.MESSAGE_SENT),
+                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.NOTICE.TITLE),
+                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.NOTICE.BODY),
+                translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.NOTICE.FOOTER));
 
         LoadedConfigurations.setSupportTranslationMemoryLoad(supportGroup);
         LoadedConfigurations.setNoticeOfDepartureMemoryLoad(noticeOfDepartureGroup);

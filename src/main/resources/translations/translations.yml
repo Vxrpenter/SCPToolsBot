@@ -130,7 +130,7 @@ notice_of_departure:
                         __**Timespan**__\n
                         ```ansi\n
                         %current_day%.%current_month%.%current_year% till %day%.%month%.%year%
-                        ```\n
+                        ```
                         
                         __**Reason:**__\n
                         ```%reason%```
@@ -139,7 +139,10 @@ notice_of_departure:
   ticket_created: "Your notice will be reviewed real soon"
 
   ticket_accepted: "
-                        Your notice of departure was accepted. You may now take your time off without any consequences. 
+                        Your notice of departure was accepted. You may now take your time off without any consequences. \n
+                        
+                        __**Acceptance Timeframe:**__\n
+                        ```%timeframe%```
                         
                         __**Acceptance Reason:**__\n
                         ```%reason%```
@@ -152,3 +155,19 @@ notice_of_departure:
                         ```%reason%```
                         "
   ticket_message_sent: "Your answer was sent and actions corresponding to it have been taken"
+
+  notice_title: "Notice of Departure - %user%"
+  notice_body: "
+                        This Notice of Departure can always be revoked by pressing the button down below.
+                        This will also be periodically checked if still valid or not\n
+                        
+                        __**Accepted by:**__\n
+                        %user%\n
+                        
+                        __**Acceptance Reason:**__\n
+                        ```%timeframe%```
+                        
+                        __**Acceptance Reason:**__\n
+                        ```%reason%```
+                        "
+  notice_footer: "Created on the %date% at %time%h"

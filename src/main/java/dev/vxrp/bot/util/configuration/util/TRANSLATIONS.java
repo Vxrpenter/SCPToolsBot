@@ -62,5 +62,10 @@ public class TRANSLATIONS {
             public static final String MESSAGE_DISMISSED = "notice_of_departure.ticket_dismissed";
             public static final String MESSAGE_SENT = "notice_of_departure.ticket_message_sent";
         }
+        public static final class NOTICE {
+            public static final String TITLE = "notice_of_departure.notice_title";
+            public static final String BODY = "notice_of_departure.notice_body";
+            public static final String FOOTER = "notice_of_departure.notice_footer";
+        }
     }
 }

@@ -36,8 +36,11 @@ public class ModalListener extends ListenerAdapter {
         if (event.getModalId().equals("notice_of_departure")) {
             NoticeOfDeparture.createNewNoticeOfDeparture(event);
         }
+        if (event.getModalId().startsWith("reason_action_accepted_nod")) {
+            event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> NoticeOfDeparture.acceptNoticeOfDeparture(event, user));
+        }
         if (event.getModalId().startsWith("reason_action_dismiss_nod")) {
-            event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> NoticeOfDeparture.dismissUnban(event, user));
+            event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> NoticeOfDeparture.dismissNoticeOfDeparture(event, user));
         }
     }
 }
