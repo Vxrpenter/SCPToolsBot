@@ -27,12 +27,14 @@ public class ButtonListener extends ListenerAdapter {
             Support.createSupportTicket(event);
         }
         if (event.getComponentId().startsWith("close_support_ticket")) {
-            User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
-            Support.closeTicket(event, user);
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
+                Support.closeTicket(event, user);
+            });
         }
         if (event.getComponentId().startsWith("claim_support_ticket")) {
-            User user = event.getJDA().getUserById(event.getComponentId().split(":")[1]);
-            Support.claimTicket(event, user);
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
+                Support.claimTicket(event, user);
+            });
         }
         if (event.getComponentId().equals("settings_support_ticket")) {
             //WIP
@@ -61,6 +63,11 @@ public class ButtonListener extends ListenerAdapter {
         //Notice of Departure
         if (event.getComponentId().equals("file_nod")) {
             NoticeOfDeparture.createNoticeOfDeparture(event);
+        }
+        if (event.getComponentId().startsWith("dismiss_ticket_notice_of_departure")) {
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
+                NoticeOfDeparture.dismissNoticeOfDeparture(event, user);
+            });
         }
     }
 }
