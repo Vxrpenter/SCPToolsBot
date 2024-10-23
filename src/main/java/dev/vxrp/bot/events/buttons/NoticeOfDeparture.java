@@ -10,6 +10,9 @@ import net.dv8tion.jda.api.interactions.components.text.TextInput;
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.modals.Modal;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class NoticeOfDeparture {
     private static final NoticeOfDepartureGroup translations = LoadedConfigurations.getNoticeOfDepartureMemoryLoad();
     private static final SupportGroup reason_action = LoadedConfigurations.getSupportTranslationMemoryLoad();
@@ -29,6 +32,20 @@ public class NoticeOfDeparture {
                                         translations.modal_second_placeholder()
                                 )))
                         .build()).queue();
+    }
+
+    public static void acceptedNoticeOfDeparture(ButtonInteractionEvent event, User user) {
+        String start_time = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
+        String end_time = event.getComponentId().split(":")[2];
+
+        event.replyModal(
+                Modal.create("reason_action_accepted_nod:"+user.getId()+":"+event.getMessageId()+":"+end_time+":"+start_time+":", reason_action.modal_reason_action_title())
+                        .addComponents(ActionRow.of(shortModal(
+                                "reason_action_reason",
+                                reason_action.modal_reason_action_first_title(),
+                                reason_action.modal_reason_action_first_placeholder(),
+                                10, 100
+                        ))).build()).queue();
     }
 
     public static void dismissNoticeOfDeparture(ButtonInteractionEvent event, User user) {

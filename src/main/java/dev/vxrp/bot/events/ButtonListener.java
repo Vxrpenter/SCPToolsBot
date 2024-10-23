@@ -48,12 +48,14 @@ public class ButtonListener extends ListenerAdapter {
         if (event.getComponentId().equals("settings_unban_ticket")) {
             //WIP
             event.reply("Feature currently under development").queue();
-
         }
 
         //Notice of Departure
         if (event.getComponentId().equals("file_nod")) {
             NoticeOfDeparture.createNoticeOfDeparture(event);
+        }
+        if (event.getComponentId().startsWith("accept_ticket_notice_of_departure")) {
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> NoticeOfDeparture.acceptedNoticeOfDeparture(event, user));
         }
         if (event.getComponentId().startsWith("dismiss_ticket_notice_of_departure")) {
             event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> NoticeOfDeparture.dismissNoticeOfDeparture(event, user));

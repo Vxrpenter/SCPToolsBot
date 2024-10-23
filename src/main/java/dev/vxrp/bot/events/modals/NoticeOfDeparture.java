@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events.modals;
 
+import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.colors.ColorTool;
@@ -12,6 +13,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Objects;
@@ -21,10 +23,11 @@ public class NoticeOfDeparture {
     private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
     private static final NoticeOfDepartureGroup translations = LoadedConfigurations.getNoticeOfDepartureMemoryLoad();
 
+    private static final String time = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
+    private static final String date = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
+
     public static void createNewNoticeOfDeparture(ModalInteractionEvent event) {
         TextChannel channel = Objects.requireNonNull(event.getGuild()).getTextChannelById(configs.notice_of_departure_decision_channel_id());
-        String time = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
-        String date = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
         String[] givenDate = Objects.requireNonNull(event.getValue("nod_timeframe")).getAsString().split("\\.");
         String reason = Objects.requireNonNull(event.getValue("nod_reason")).getAsString();
 
@@ -52,12 +55,57 @@ public class NoticeOfDeparture {
                                 .replace("%time%", time))
                         .build())
                 .addActionRow(
-                        Button.success("accept_ticket_notice_of_departure", "Accept Ticket"),
+                        Button.success("accept_ticket_notice_of_departure"+":"+event.getUser().getId()+":"+ Objects.requireNonNull(event.getValue("nod_timeframe")).getAsString()+":", "Accept Ticket"),
                         Button.danger("dismiss_ticket_notice_of_departure"+":"+event.getUser().getId()+":", "Dismiss Ticket")
                 ).queue();
     }
 
-    public static void dismissUnban(ModalInteractionEvent event, User user) {
+    public static void acceptNoticeOfDeparture(ModalInteractionEvent event, User user) {
+        String messageID = event.getModalId().split(":")[2];
+        Objects.requireNonNull(Objects.requireNonNull(event.getGuild()).getTextChannelById(Objects.requireNonNull(event.getChannelId()))).deleteMessageById(messageID).queue();
+
+        String reason = Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString();
+        user.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
+                StatsBuilder.buildAccepted(event.getUser().getGlobalName()).build(),
+                new EmbedBuilder()
+                        .setDescription(translations.ticket_accepted()
+                                .replace("%timeframe%", event.getModalId().split(":")[3]+" till " +event.getModalId().split(":")[4])
+                                .replace("%reason%", reason))
+                        .build()
+        )).queue();
+
+        Objects.requireNonNull(event.getGuild().getTextChannelById(LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_notice_channel_id())).sendMessageEmbeds(
+                StatsBuilder.buildStatus(Objects.requireNonNull(event.getMember()).getUser().getGlobalName()).build(),
+                new EmbedBuilder()
+                        .setTitle(translations.notice_title()
+                                .replace("%user%", Objects.requireNonNull(user.getGlobalName())))
+                        .setThumbnail(Objects.requireNonNull(event.getMember()).getUser().getAvatarUrl())
+                        .setDescription(translations.notice_body()
+                                .replace("%user%", "<@"+event.getUser().getId()+">")
+                                .replace("%timeframe%", event.getModalId().split(":")[3]+" till " +event.getModalId().split(":")[4])
+                                .replace("%reason%", Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString()))
+                        .setFooter(translations.notice_footer()
+                                .replace("%date%", date)
+                                .replace("%time%", time))
+                        .build())
+                .addActionRow(
+                        Button.danger("revoke_notice_of_departure", "Revoke Notice of Departure")
+                ).queue(message -> {
+                    try {
+                        ScpTools.getSqliteManager().addNoticeOfDeparture(
+                                user.getId(),
+                                LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_notice_channel_id()+":"+message.getId(),
+                                event.getModalId().split(":")[4],
+                                event.getModalId().split(":")[3]
+                        );
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+        event.reply(translations.ticket_message_sent()).setEphemeral(true).queue();
+    }
+
+    public static void dismissNoticeOfDeparture(ModalInteractionEvent event, User user) {
         String messageID = event.getModalId().split(":")[2];
         Objects.requireNonNull(Objects.requireNonNull(event.getGuild()).getTextChannelById(Objects.requireNonNull(event.getChannelId()))).deleteMessageById(messageID).queue();
 
