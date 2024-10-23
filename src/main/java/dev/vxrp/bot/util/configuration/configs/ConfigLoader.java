@@ -5,8 +5,12 @@ import dev.vxrp.bot.config.managers.ConfigManager;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ConfigLoader {
+    private final static Logger logger = LoggerFactory.getLogger(ConfigLoader.class);
+
     public ConfigLoader() {
         ConfigManager configManager = ScpTools.getConfigManager();
 
@@ -33,5 +37,6 @@ public class ConfigLoader {
                 configManager.getString(CONFIG.CEDMOD.MASTER_BAN_LIST_ID));
 
         LoadedConfigurations.setConfigMemoryLoad(configGroup);
+        logger.info("Loaded config into memory");
     }
 }

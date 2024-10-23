@@ -32,8 +32,8 @@ public class ScpTools {
     static TranslationManager translationManager;
     static ColorConfigManager colorConfigManager;
     static SqliteManager sqliteManager;
-
     private final static Logger logger = LoggerFactory.getLogger(ScpTools.class);
+
     public static void main(String[] args) throws SQLException {
         initializeConfigs();
         initializeSqlite();
@@ -59,13 +59,11 @@ public class ScpTools {
     private static void loadConfigs() {
         try {
             new TranslationLoader();
-            logger.info("Loaded translations into memory");
         } catch (Exception e) {
             logger.error("Could not load translation to memory {}", e.getMessage());
         }
         try {
             new ConfigLoader();
-            logger.info("Loaded config into memory");
         } catch (Exception e) {
             logger.error("Could not load config to memory {}", e.getMessage());
         }
