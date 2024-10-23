@@ -1,6 +1,5 @@
 package dev.vxrp.bot.database.sqlite;
 
-import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.colors.ColorTool;
 import org.slf4j.Logger;

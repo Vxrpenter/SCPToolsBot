@@ -6,8 +6,12 @@ import dev.vxrp.bot.util.configuration.util.TRANSLATIONS;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TranslationLoader {
+    private final static Logger logger = LoggerFactory.getLogger(TranslationLoader.class);
+
     public TranslationLoader() {
         TranslationManager translationManager = ScpTools.getTranslationManager();
 
@@ -59,5 +63,6 @@ public class TranslationLoader {
 
         LoadedConfigurations.setSupportTranslationMemoryLoad(supportGroup);
         LoadedConfigurations.setNoticeOfDepartureMemoryLoad(noticeOfDepartureGroup);
+        logger.info("Loaded translations into memory");
     }
 }
