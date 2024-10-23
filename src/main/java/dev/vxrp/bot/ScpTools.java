@@ -1,5 +1,6 @@
 package dev.vxrp.bot;
 
+import dev.vxrp.bot.database.sqlite.SqliteManager;
 import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.commands.CommandManager;
 import dev.vxrp.bot.commands.help.HelpCommand;
@@ -23,16 +24,19 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.*;
 
 public class ScpTools {
     static ConfigManager configManager;
     static TranslationManager translationManager;
     static ColorConfigManager colorConfigManager;
+    static SqliteManager sqliteManager;
 
-    public final static Logger logger = LoggerFactory.getLogger(ScpTools.class);
-    public static void main(String[] args) {
+    private final static Logger logger = LoggerFactory.getLogger(ScpTools.class);
+    public static void main(String[] args) throws SQLException {
         initializeConfigs();
+        initializeSqlite();
         loadConfigs();
 
         Activity.ActivityType activityType = Activity.ActivityType.valueOf(configManager.getString(CONFIG.ACTIVITY_TYPE));
@@ -42,6 +46,14 @@ public class ScpTools {
 
         checkGuildID();
         initializeBot(activityType, activityContent);
+    }
+
+    private static void initializeSqlite() {
+        try {
+            sqliteManager = new SqliteManager(System.getProperty("user.dir")+"\\sqlite\\data.db");
+        } catch (SQLException e) {
+            logger.error("Could not correctly set up Sqlite database {}", e.getMessage());
+        }
     }
 
     private static void loadConfigs() {
@@ -60,11 +72,11 @@ public class ScpTools {
     }
 
     private static void initializeConfigs() {
-        List<String> folders = Arrays.asList("configs", "translations");
+        List<String> folders = Arrays.asList("configs", "translations", "sqlite");
         for (String folder : folders) {
             String folderPath = Paths.get(folder).toString();
             new File(folderPath).mkdirs();
-            logger.info("Loading configs from {}", folderPath);
+            logger.info("Created folder {}", folderPath);
         }
 
         try {
