@@ -114,7 +114,11 @@ public class SqliteManager {
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM notice_of_departure WHERE id=?")) {
             statement.setString(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
-                return new NoticeOfDeparture(resultSet.getString("channel_message_id"), resultSet.getString("start_time"), resultSet.getString("end_time"));
+                return new NoticeOfDeparture(
+                        resultSet.getString("channel_message_id").split(":")[1],
+                        resultSet.getString("channel_message_id").split(":")[2],
+                        resultSet.getString("start_time"),
+                        resultSet.getString("end_time"));
             }
         }
     }
