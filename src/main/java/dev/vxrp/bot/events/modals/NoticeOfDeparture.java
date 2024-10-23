@@ -7,6 +7,7 @@ import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
@@ -52,7 +53,23 @@ public class NoticeOfDeparture {
                         .build())
                 .addActionRow(
                         Button.success("accept_ticket_notice_of_departure", "Accept Ticket"),
-                        Button.danger("dismiss_ticket_notice_of_departure", "Dismiss Ticket")
+                        Button.danger("dismiss_ticket_notice_of_departure"+":"+event.getUser().getId()+":", "Dismiss Ticket")
                 ).queue();
+    }
+
+    public static void dismissUnban(ModalInteractionEvent event, User user) {
+        String messageID = event.getModalId().split(":")[2];
+        Objects.requireNonNull(Objects.requireNonNull(event.getGuild()).getTextChannelById(Objects.requireNonNull(event.getChannelId()))).deleteMessageById(messageID).queue();
+
+        String reason = Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString();
+        user.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
+                StatsBuilder.buildDismissed(event.getUser().getGlobalName()).build(),
+                new EmbedBuilder()
+                        .setDescription(translations.ticket_dismissed()
+                                .replace("%reason%", reason))
+                        .build()
+        )).queue();
+
+        event.reply(translations.ticket_message_sent()).setEphemeral(true).queue();
     }
 }

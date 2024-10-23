@@ -137,3 +137,18 @@ notice_of_departure:
                         "
   ticket_footer: "Created on the %date% at %time%h"
   ticket_created: "Your notice will be reviewed real soon"
+
+  ticket_accepted: "
+                        Your notice of departure was accepted. You may now take your time off without any consequences. 
+                        
+                        __**Acceptance Reason:**__\n
+                        ```%reason%```
+                        "
+  ticket_dismissed: "
+                         Your notice of departure was dismissed. You are not allowed to take time off.
+                         If you still need to, please talk with a higher staff member about leaving the team\n
+                        
+                        __**Dismiss Reason:**__\n
+                        ```%reason%```
+                        "
+  ticket_message_sent: "Your answer was sent and actions corresponding to it have been taken"
