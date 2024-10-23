@@ -123,4 +123,7 @@ public class ScpTools {
     public static ColorConfigManager getColorConfigManager() {
         return colorConfigManager;
     }
+    public static SqliteManager getSqliteManager() {
+        return sqliteManager;
+    }
 }

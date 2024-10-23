@@ -2,6 +2,7 @@ package dev.vxrp.bot.database.sqlite;
 
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.colors.ColorTool;
+import dev.vxrp.bot.util.objects.NoticeOfDeparture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +22,8 @@ public class SqliteManager {
                     "end_time TEXT NOT NULL" +
                     ");");
         }
-        logger.info("Set up Sqlite database correctly");
+        logger.info("{} - Set up Sqlite database correctly",
+                ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")));
     }
 
     public void addNoticeOfDeparture(String id,String start_time, String end_time) throws SQLException {
@@ -30,7 +32,8 @@ public class SqliteManager {
             statement.setString(2, start_time);
             statement.setString(3, end_time);
             statement.executeUpdate();
-            logger.info("Added notice of departure - id:{} , start_time:{} , end_time:{}",
+            logger.info("{} - Added notice of departure - id:{} , start_time:{} , end_time:{}",
+                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, start_time),
                     ColorTool.apply(DCColor.GOLD, end_time));
@@ -43,7 +46,8 @@ public class SqliteManager {
             statement.setString(2, end_time);
             statement.setString(3, id);
             statement.executeUpdate();
-            logger.info("Updated notice of departure - id:{} , start_time:{} , end_time:{}",
+            logger.info("{} - Updated notice of departure - id: {} , start_time: {} , end_time: {}",
+                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, start_time),
                     ColorTool.apply(DCColor.GOLD, end_time));
@@ -55,7 +59,8 @@ public class SqliteManager {
             statement.setString(1, start_time);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.info("Updated start_time - id:{} , start_time:{}",
+            logger.info("{} - Updated start_time - id: {} , start_time: {}",
+                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, start_time));
         }
@@ -66,9 +71,29 @@ public class SqliteManager {
             statement.setString(1, end_time);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.info("Updated end_time - id:{} , end_time:{}",
+            logger.info("{} - Updated end_time - id: {} , end_time: {}",
+                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, end_time));
+        }
+    }
+
+    public void deleteNoticeOfDeparture(String id) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement("DELETE FROM notice_of_departure WHERE id=?")) {
+            statement.setString(1, id);
+            statement.executeUpdate();
+            logger.info("{} - Deleted notice of departure - id: {}",
+                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
+                    ColorTool.apply(DCColor.RED, id));
+        }
+    }
+
+    public NoticeOfDeparture getNoticeOfDeparture(String id) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM notice_of_departure WHERE id=?")) {
+            statement.setString(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return new NoticeOfDeparture(resultSet.getString("start_time"), resultSet.getString("end_time"));
+            }
         }
     }
 
