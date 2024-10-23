@@ -33,7 +33,7 @@ public class NoticeOfDeparture {
 
     public static void dismissNoticeOfDeparture(ButtonInteractionEvent event, User user) {
         event.replyModal(
-                Modal.create("reason_action_dismiss_nod:"+user.getId()+":", reason_action.modal_reason_action_title())
+                Modal.create("reason_action_dismiss_nod:"+user.getId()+":"+event.getMessageId()+":", reason_action.modal_reason_action_title())
                         .addComponents(ActionRow.of(shortModal(
                                 "reason_action_reason",
                                 reason_action.modal_reason_action_first_title(),

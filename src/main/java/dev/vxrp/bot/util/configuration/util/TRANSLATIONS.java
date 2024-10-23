@@ -57,6 +57,10 @@ public class TRANSLATIONS {
             public static final String BODY = "notice_of_departure.ticket_body";
             public static final String FOOTER = "notice_of_departure.ticket_footer";
             public static final String CREATED = "notice_of_departure.ticket_created";
+
+            public static final String MESSAGE_ACCEPTED = "notice_of_departure.ticket_accepted";
+            public static final String MESSAGE_DISMISSED = "notice_of_departure.ticket_dismissed";
+            public static final String MESSAGE_SENT = "notice_of_departure.ticket_message_sent";
         }
     }
 }

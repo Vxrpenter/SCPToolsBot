@@ -30,11 +30,14 @@ public class ModalListener extends ListenerAdapter {
             }
         }
         if (event.getModalId().startsWith("reason_action_reason_dismiss")) {
-            Unban.dismissUnban(event);
+            event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> Unban.dismissUnban(event, user));
         }
 
         if (event.getModalId().equals("notice_of_departure")) {
             NoticeOfDeparture.createNewNoticeOfDeparture(event);
+        }
+        if (event.getModalId().startsWith("reason_action_dismiss_nod")) {
+            event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> NoticeOfDeparture.dismissUnban(event, user));
         }
     }
 }

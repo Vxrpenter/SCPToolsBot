@@ -104,7 +104,7 @@ public class Unban {
 
         event.reply(translations.ticket_unban_message_sent()).setEphemeral(true).queue();
     }
-    public static void dismissUnban(ModalInteractionEvent event) {
+    public static void dismissUnban(ModalInteractionEvent event, User user) {
         String messageID = event.getModalId().split(":")[3];
 
         Objects.requireNonNull(Objects.requireNonNull(event.getGuild()).getTextChannelById(Objects.requireNonNull(event.getChannelId()))).deleteMessageById(messageID).queue();
@@ -112,16 +112,14 @@ public class Unban {
         String steamID = event.getModalId().split(":")[2];
         String reason = Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString();
 
-        event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> {
-            user.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
-                    StatsBuilder.buildDismissed(event.getUser().getGlobalName()).build(),
-                    new EmbedBuilder()
-                            .setDescription(translations.ticket_unban_message_dismissed()
-                                    .replace("%steamID%", steamID)
-                                    .replace("%reason%", reason))
-                            .build()
-            )).queue();
-        });
+        user.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
+                StatsBuilder.buildDismissed(event.getUser().getGlobalName()).build(),
+                new EmbedBuilder()
+                        .setDescription(translations.ticket_unban_message_dismissed()
+                                .replace("%steamID%", steamID)
+                                .replace("%reason%", reason))
+                        .build()
+        )).queue();
 
 
         event.reply(translations.ticket_unban_message_sent()).setEphemeral(true).queue();

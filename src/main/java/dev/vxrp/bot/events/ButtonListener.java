@@ -4,7 +4,6 @@ import dev.vxrp.bot.events.buttons.NoticeOfDeparture;
 import dev.vxrp.bot.events.buttons.Rules;
 import dev.vxrp.bot.events.buttons.Support;
 import dev.vxrp.bot.events.buttons.Unban;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
@@ -27,14 +26,10 @@ public class ButtonListener extends ListenerAdapter {
             Support.createSupportTicket(event);
         }
         if (event.getComponentId().startsWith("close_support_ticket")) {
-            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
-                Support.closeTicket(event, user);
-            });
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> Support.closeTicket(event, user));
         }
         if (event.getComponentId().startsWith("claim_support_ticket")) {
-            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
-                Support.claimTicket(event, user);
-            });
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> Support.claimTicket(event, user));
         }
         if (event.getComponentId().equals("settings_support_ticket")) {
             //WIP
@@ -45,14 +40,10 @@ public class ButtonListener extends ListenerAdapter {
             Unban.createUnbanTicket(event);
         }
         if (event.getComponentId().startsWith("accept_unban_ticket")) {
-            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
-                Unban.acceptTicket(event, user);
-            });
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> Unban.acceptTicket(event, user));
         }
         if (event.getComponentId().startsWith("dismiss_unban_ticket")) {
-            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
-                Unban.dismissTicket(event, user);
-            });
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> Unban.dismissTicket(event, user));
         }
         if (event.getComponentId().equals("settings_unban_ticket")) {
             //WIP
@@ -65,9 +56,7 @@ public class ButtonListener extends ListenerAdapter {
             NoticeOfDeparture.createNoticeOfDeparture(event);
         }
         if (event.getComponentId().startsWith("dismiss_ticket_notice_of_departure")) {
-            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
-                NoticeOfDeparture.dismissNoticeOfDeparture(event, user);
-            });
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> NoticeOfDeparture.dismissNoticeOfDeparture(event, user));
         }
     }
 }
