@@ -1,14 +1,13 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
     application
     id("com.gradleup.shadow") version("8.3.3")
     id("java")
 }
 
+
 application.mainClass = "dev.vxrp.bot.ScpTools" //
 group = "dev.vxrp"
-version = "1.0-SNAPSHOT"
+version= "0.2.0"
 
 val jdaVersion = "5.0.0-beta.24" //
 
