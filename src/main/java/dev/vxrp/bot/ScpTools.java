@@ -67,9 +67,11 @@ public class ScpTools {
     }
 
     private static void initializeSqlite() {
+        File file = new File(System.getProperty("user.dir")+"\\sqlite\\data.db");
         try {
+            file.createNewFile();
             sqliteManager = new SqliteManager(System.getProperty("user.dir")+"\\sqlite\\data.db");
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             logger.error("Could not correctly set up Sqlite database {}", e.getMessage());
         }
     }

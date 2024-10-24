@@ -16,8 +16,10 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class NoticeOfDeparture {
     private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
@@ -37,6 +39,11 @@ public class NoticeOfDeparture {
         event.reply(translations.ticket_created()).setEphemeral(true).queue();
 
         assert channel != null;
+        List<String> pingRoles = LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_roles_access_notices()
+                .stream()
+                .map(id -> "<@&" + id + ">")
+                .collect(Collectors.toList());
+
         channel.sendMessageEmbeds(
                 StatsBuilder.buildStatus(Objects.requireNonNull(event.getMember()).getUser().getGlobalName()).build(),
                 new EmbedBuilder()
@@ -57,7 +64,12 @@ public class NoticeOfDeparture {
                 .addActionRow(
                         Button.success("accept_ticket_notice_of_departure"+":"+event.getUser().getId()+":"+ Objects.requireNonNull(event.getValue("nod_timeframe")).getAsString()+":", "Accept Ticket"),
                         Button.danger("dismiss_ticket_notice_of_departure"+":"+event.getUser().getId()+":", "Dismiss Ticket")
-                ).queue();
+                ).queue(message -> {
+                    message.editMessage(String.join("", pingRoles)).queue();
+                });
+        channel.sendMessage(String.join("", pingRoles)).queue(message -> {
+            message.delete().queue();
+        });
     }
 
     public static void acceptNoticeOfDeparture(ModalInteractionEvent event, User user) {

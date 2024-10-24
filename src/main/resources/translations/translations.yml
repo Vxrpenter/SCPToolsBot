@@ -119,7 +119,7 @@ notice_of_departure:
 
   modal_title: "File Notice of Departure"
   modal_first_title: "Away time?"
-  modal_first_placeholder: "How long will you be away **[dd.MM.yyyy]**"
+  modal_first_placeholder: "How long will you be away [dd.MM.yyyy]"
   modal_second_title: "Explanation"
   modal_second_placeholder: "Why are you going to be away [exclude details]"
 
