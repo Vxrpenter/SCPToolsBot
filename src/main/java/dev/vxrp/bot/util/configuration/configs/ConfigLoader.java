@@ -34,7 +34,7 @@ public class ConfigLoader {
                 configManager.getStringList(CONFIG.NOTICE_OF_DEPARTURE.ROLES_ACCESS_NOTICES),
                 configManager.getBoolean(CONFIG.NOTICE_OF_DEPARTURE.CHECK_ON_STARTUP),
                 configManager.getString(CONFIG.NOTICE_OF_DEPARTURE.CHECK_TYPE),
-                configManager.getString(CONFIG.NOTICE_OF_DEPARTURE.CHECK_RATE),
+                configManager.getInt(CONFIG.NOTICE_OF_DEPARTURE.CHECK_RATE),
                 configManager.getBoolean(CONFIG.CEDMOD.ACTIVE),
                 configManager.getString(CONFIG.CEDMOD.INSTANCE_URL),
                 configManager.getString(CONFIG.CEDMOD.API_KEY),

@@ -34,6 +34,9 @@ public class ConfigManager {
     public String getString(String key) {
         return getYamlConfig().getString(key);
     }
+    public int getInt(String key) {
+        return getYamlConfig().getInt(key);
+    }
     public boolean getBoolean(String key) {
         return getYamlConfig().getBoolean(key);
     }

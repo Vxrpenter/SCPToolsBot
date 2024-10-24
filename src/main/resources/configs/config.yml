@@ -46,7 +46,7 @@ notice_of_departure:
   # Put the following in the type: [NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS]
   check_type: "HOURS"
   # The rate at that the notices are checked.
-  check_rate: "1"
+  check_rate: 1
 
 cedmod:
   # Should Cedmod integration features be established or deactivated?
