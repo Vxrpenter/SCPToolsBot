@@ -3,7 +3,7 @@ package dev.vxrp.bot.events.modals;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
-import dev.vxrp.bot.util.cedmod.CedModApi;
+import dev.vxrp.bot.util.api.cedmod.CedModApi;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;

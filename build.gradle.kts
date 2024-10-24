@@ -24,6 +24,14 @@ dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
 }
 
-tasks.test {
-    useJUnitPlatform()
+val createVersionProperties by tasks.registering(WriteProperties::class) {
+    val filePath = sourceSets.main.map {
+        it.output.resourcesDir!!.resolve("vxrp/dev/version.properties")
+    }
+    destinationFile = filePath
+
+    property("version", project.version.toString())
+}
+tasks.classes {
+    dependsOn(createVersionProperties)
 }
