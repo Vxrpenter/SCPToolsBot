@@ -171,3 +171,33 @@ notice_of_departure:
                         ```%reason%```
                         "
   notice_footer: "Created on the %date% at %time%h"
+
+  notice_ended: "
+                        Your Notice of Departure has ended and all your benefits going with it have been revoked \n
+                        
+                        __**Timeframe:**__\n
+                        ```%timeframe%```
+                        "
+  notice_revoked: "
+                        Your Notice of Departure has been revoked and all benefits going with at do not apply anymore \n
+                        
+                        __**Timeframe:**__\n
+                        ```%timeframe%```
+                        "
+  notice_ended_replace: "
+                        ```ansi
+                        
+                        &reset&&teal&&bold&&underline&Original Data&reset&
+                        
+                        Original issuer: &gold&&bold&%user%&reset&
+                        
+                        Original Message Type: &gold&&bold&Notice of Departure&reset&
+                        
+                        
+                        &teal&&bold&&underline&Change Data&reset&
+                        
+                        Dealt with on: &gold&&bold&%date%&reset&
+                        
+                        Dealt with by: &gold&&bold&%actionTaker%
+                        ```
+                        "

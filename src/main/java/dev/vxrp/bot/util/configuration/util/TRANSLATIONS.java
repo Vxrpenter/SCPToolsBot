@@ -67,5 +67,8 @@ public class TRANSLATIONS {
             public static final String BODY = "notice_of_departure.notice_body";
             public static final String FOOTER = "notice_of_departure.notice_footer";
         }
+        public static final String ENDED = "notice_of_departure.notice_ended";
+        public static final String REVOKED = "notice_of_departure.notice_revoked";
+        public static final String ENDED_REPLACE = "notice_of_departure.notice_ended_replace";
     }
 }

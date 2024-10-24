@@ -9,5 +9,6 @@ public enum DCColor {
     PINK,
     TEAL,
     WHITE,
-    BOLD
+    BOLD,
+    UNDERLINE
 }

@@ -28,13 +28,13 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class ScpTools {
+    private final static Logger logger = LoggerFactory.getLogger(ScpTools.class);
     static ConfigManager configManager;
     static TranslationManager translationManager;
     static ColorConfigManager colorConfigManager;
     static SqliteManager sqliteManager;
-    private final static Logger logger = LoggerFactory.getLogger(ScpTools.class);
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         initializeConfigs();
         initializeSqlite();
         loadConfigs();
@@ -74,7 +74,7 @@ public class ScpTools {
         for (String folder : folders) {
             String folderPath = Paths.get(folder).toString();
             new File(folderPath).mkdirs();
-            logger.info("Created folder {}", folderPath);
+            logger.info("Initializing folder {}", folderPath);
         }
 
         try {
