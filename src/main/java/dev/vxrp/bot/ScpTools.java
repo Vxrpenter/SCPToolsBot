@@ -119,7 +119,6 @@ public class ScpTools {
 
     private static void noticeOfDepartureCheckups(JDA api) {
         ConfigGroup config = LoadedConfigurations.getConfigMemoryLoad();
-
         RepeatTask.repeatWithScheduledExecutorService(
                 CheckNoticeOfDeparture.runNoticeOfDepartureCheck(api),
                 config.notice_of_departure_check_rate(),
