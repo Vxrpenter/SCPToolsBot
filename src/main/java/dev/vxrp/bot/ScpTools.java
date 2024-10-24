@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.*;
@@ -110,8 +111,7 @@ public class ScpTools {
 
     private static void checkGuildID() {
         if (configManager.getString("guild_id") == null || Objects.equals(configManager.getString("guild_id"), "")) {
-            logger.error("Guild id is {}. Process shutting down", ColorTool.apply(DCColor.RED, "null"));
-            return;
+            logger.error("Guild id is {}. Invalid but moving on", ColorTool.apply(DCColor.RED, "null"));
         } else {
             logger.info("Launching under guild id {}", ColorTool.apply(DCColor.GREEN, configManager.getString("guild_id")));
         }
