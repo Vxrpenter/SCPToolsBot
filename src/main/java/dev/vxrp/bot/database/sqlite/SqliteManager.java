@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SqliteManager {
     private final Connection connection;
@@ -110,13 +112,31 @@ public class SqliteManager {
         }
     }
 
+    public List<NoticeOfDeparture> getEveryNoticeOfDeparture() throws SQLException {
+        List<NoticeOfDeparture> noticeOfDepartureList = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM notice_of_departure")) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    noticeOfDepartureList.add(new NoticeOfDeparture(
+                            resultSet.getString("id"),
+                            resultSet.getString("channel_message_id").split(":")[0],
+                            resultSet.getString("channel_message_id").split(":")[1],
+                            resultSet.getString("start_time"),
+                            resultSet.getString("end_time")));
+                }
+            }
+        }
+        return noticeOfDepartureList;
+    }
+
     public NoticeOfDeparture getNoticeOfDeparture(String id) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM notice_of_departure WHERE id=?")) {
             statement.setString(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 return new NoticeOfDeparture(
+                        resultSet.getString("id"),
+                        resultSet.getString("channel_message_id").split(":")[0],
                         resultSet.getString("channel_message_id").split(":")[1],
-                        resultSet.getString("channel_message_id").split(":")[2],
                         resultSet.getString("start_time"),
                         resultSet.getString("end_time"));
             }

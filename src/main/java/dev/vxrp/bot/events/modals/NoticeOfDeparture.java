@@ -69,7 +69,7 @@ public class NoticeOfDeparture {
                 StatsBuilder.buildAccepted(event.getUser().getGlobalName()).build(),
                 new EmbedBuilder()
                         .setDescription(translations.ticket_accepted()
-                                .replace("%timeframe%", event.getModalId().split(":")[3]+" till " +event.getModalId().split(":")[4])
+                                .replace("%timeframe%", event.getModalId().split(":")[4]+" till " +event.getModalId().split(":")[3])
                                 .replace("%reason%", reason))
                         .build()
         )).queue();
@@ -82,7 +82,7 @@ public class NoticeOfDeparture {
                         .setThumbnail(Objects.requireNonNull(event.getMember()).getUser().getAvatarUrl())
                         .setDescription(translations.notice_body()
                                 .replace("%user%", "<@"+event.getUser().getId()+">")
-                                .replace("%timeframe%", event.getModalId().split(":")[3]+" till " +event.getModalId().split(":")[4])
+                                .replace("%timeframe%", event.getModalId().split(":")[4]+" till " +event.getModalId().split(":")[3])
                                 .replace("%reason%", Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString()))
                         .setFooter(translations.notice_footer()
                                 .replace("%date%", date)

@@ -39,6 +39,14 @@ notice_of_departure:
   decision_channel_id: ""
   # Which channel should the departures be sent to?
   notice_channel_id: ""
+  # List of role's that are able to accept/dismiss/revoke notices (INPUT ID'S ONLY)
+  roles_access_notices: []
+  # ONLY CHANGE THIS IF YOU KNOW WHAT YOU'RE DOING
+  check_on_startup: true
+  # Put the following in the type: [NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS]
+  check_type: "HOURS"
+  # The rate at that the notices are checked.
+  check_rate: "1"
 
 cedmod:
   # Should Cedmod integration features be established or deactivated?

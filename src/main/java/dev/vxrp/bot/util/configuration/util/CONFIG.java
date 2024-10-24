@@ -25,14 +25,18 @@ public class CONFIG {
         public static final String ROLES_ACCESS_UNBAN_TICKETS = "support_settings.roles_access_unban_tickets";
         public static final String UNBAN_CHANNEL_ID = "support_settings.unban_channel_id";
     }
+    public static final class NOTICE_OF_DEPARTURE {
+        public static final String DESCISION_CHANNEL_ID = "notice_of_departure.decision_channel_id";
+        public static final String NOTICE_CHANNEL_ID = "notice_of_departure.notice_channel_id";
+        public static final String ROLES_ACCESS_NOTICES = "notice_of_departure.roles_access_notices";
+        public static final String CHECK_ON_STARTUP = "notice_of_departure.check_on_startup";
+        public static final String CHECK_TYPE = "notice_of_departure.check_type";
+        public static final String CHECK_RATE = "notice_of_departure.check_rate";
+    }
     public static final class CEDMOD {
         public static final String ACTIVE = "cedmod.active";
         public static final String INSTANCE_URL = "cedmod.instance_url";
         public static final String API_KEY = "cedmod.api_key";
         public static final String MASTER_BAN_LIST_ID = "cedmod.master_ban_list_id";
-    }
-    public static final class NOTICE_OF_DEPARTURE {
-        public static final String DESCISION_CHANNEL_ID = "notice_of_departure.decision_channel_id";
-        public static final String NOTICE_CHANNEL_ID = "notice_of_departure.notice_channel_id";
     }
 }
