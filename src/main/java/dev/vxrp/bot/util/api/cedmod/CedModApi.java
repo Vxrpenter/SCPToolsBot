@@ -1,4 +1,4 @@
-package dev.vxrp.bot.util.cedmod;
+package dev.vxrp.bot.util.api.cedmod;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;

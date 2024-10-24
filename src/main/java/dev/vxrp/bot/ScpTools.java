@@ -8,6 +8,7 @@ import dev.vxrp.bot.commands.templates.TemplateCommand;
 import dev.vxrp.bot.config.managers.ColorConfigManager;
 import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.runnables.CheckNoticeOfDeparture;
+import dev.vxrp.bot.util.api.github.GitHubApi;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.configs.ConfigLoader;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
@@ -40,7 +41,9 @@ public class ScpTools {
     static ColorConfigManager colorConfigManager;
     static SqliteManager sqliteManager;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        GitHubApi.CheckForUpdatesByTags("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags");
+
         initializeConfigs();
         initializeSqlite();
         loadConfigs();
