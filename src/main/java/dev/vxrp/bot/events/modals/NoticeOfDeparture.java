@@ -91,7 +91,7 @@ public class NoticeOfDeparture {
                 new EmbedBuilder()
                         .setTitle(translations.notice_title()
                                 .replace("%user%", Objects.requireNonNull(user.getGlobalName())))
-                        .setThumbnail(Objects.requireNonNull(event.getMember()).getUser().getAvatarUrl())
+                        .setThumbnail(user.getAvatarUrl())
                         .setDescription(translations.notice_body()
                                 .replace("%user%", "<@"+event.getUser().getId()+">")
                                 .replace("%timeframe%", event.getModalId().split(":")[4]+" till " +event.getModalId().split(":")[3])

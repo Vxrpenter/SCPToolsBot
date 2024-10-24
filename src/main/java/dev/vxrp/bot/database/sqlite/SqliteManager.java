@@ -37,6 +37,10 @@ public class SqliteManager {
     }
 
     public void addNoticeOfDeparture(String id, String channel_message_id, String start_time, String end_time) throws SQLException {
+        if (exists(id)) {
+            logger.warn("Notice of Departure already exists in Sqlite database... opting for deletion");
+            deleteNoticeOfDeparture(id);
+        }
         try (PreparedStatement statement = connection.prepareStatement("INSERT INTO notice_of_departure VALUES (?,?,?,?)")) {
             statement.setString(1, id);
             statement.setString(2, channel_message_id);
@@ -171,14 +175,12 @@ public class SqliteManager {
     }
 
     public boolean exists(String id) {
-        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM notice_of_departure WHERE id=?")) {
+        try (PreparedStatement statement = connection.prepareStatement("SELECT EXISTS(SELECT 1 FROM notice_of_departure WHERE id=?);")) {
             statement.setString(1, id);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                return true;
-            } catch (SQLException e) {
-                return false;
-            }
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.getInt(1) == 1;
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
