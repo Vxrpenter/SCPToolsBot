@@ -9,10 +9,15 @@ activity_type: "PLAYING"
 # The text being displayed
 activity_content: "/help"
 
-# Rules Settings
 rules:
+  # Pastebin id of the SCP:SL ruleset
   pastebin: ""
+  # The text that is going to be displayed on the rule footer
   embed_footer: "Official Server Ruleset"
+
+logging:
+  # Channel id of the ticket logging channel
+  ticket_logging_channel_id: ""
 
 # Commands that are activated by default remove to deactivate, default ["help", "template"]]
 commands: ["help", "template"]
