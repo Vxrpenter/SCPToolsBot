@@ -1,8 +1,10 @@
 package dev.vxrp.bot.events.buttons;
 
+import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
@@ -57,6 +59,17 @@ public class NoticeOfDeparture {
                                 reason_action.modal_reason_action_first_placeholder(),
                                 10, 100
                         ))).build()).queue();
+    }
+
+    public static void revokeNoticeOfDeparture(ButtonInteractionEvent event, User user) {
+        user.openPrivateChannel().queue(privateChannel ->
+                privateChannel.sendMessageEmbeds(
+                        StatsBuilder.buildRevoked(user.getGlobalName()).build(),
+                        new EmbedBuilder()
+                                .setDescription(translations.notice_revoked()
+                                        .replace("%timeframe%", event.getComponentId().split(":")[3]+" till "+event.getComponentId().split(":")[2]))
+                                .build()
+                ).queue());
     }
 
     private static TextInput shortModal(String id,String title, String placeholder, int min, int max) {

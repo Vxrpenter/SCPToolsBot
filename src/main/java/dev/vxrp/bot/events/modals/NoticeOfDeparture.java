@@ -89,7 +89,8 @@ public class NoticeOfDeparture {
                                 .replace("%time%", time))
                         .build())
                 .addActionRow(
-                        Button.danger("revoke_notice_of_departure", "Revoke Notice of Departure")
+                        Button.danger("revoke_notice_of_departure"+":"+
+                                user.getId()+":"+event.getModalId().split(":")[4]+":"+event.getModalId().split(":")[4]+":", "Revoke Notice of Departure")
                 ).queue(message -> {
                     try {
                         ScpTools.getSqliteManager().addNoticeOfDeparture(
