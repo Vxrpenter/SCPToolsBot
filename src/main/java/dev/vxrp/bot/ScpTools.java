@@ -7,13 +7,17 @@ import dev.vxrp.bot.commands.help.HelpCommand;
 import dev.vxrp.bot.commands.templates.TemplateCommand;
 import dev.vxrp.bot.config.managers.ColorConfigManager;
 import dev.vxrp.bot.config.managers.TranslationManager;
+import dev.vxrp.bot.runnables.CheckNoticeOfDeparture;
+import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.configs.ConfigLoader;
+import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
 import dev.vxrp.bot.config.managers.ConfigManager;
 import dev.vxrp.bot.events.ModalListener;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.configuration.translations.TranslationLoader;
+import dev.vxrp.bot.util.general.RepeatTask;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -26,6 +30,7 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class ScpTools {
     private final static Logger logger = LoggerFactory.getLogger(ScpTools.class);
@@ -45,7 +50,16 @@ public class ScpTools {
         logger.info("ActivityContent set to {}", ColorTool.apply(DCColor.RED, activityContent));
 
         checkGuildID();
-        initializeBot(activityType, activityContent);
+        JDA api = JDABuilder.createDefault(configManager.getToken(), GatewayIntent.MESSAGE_CONTENT)
+                .setActivity(Activity.of(activityType, activityContent))
+                .disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
+                .build();
+
+        new CommandManager().Initialize(api);
+        api.addEventListener(new TemplateCommand(), new HelpCommand(),new ButtonListener(), new ModalListener());
+        logger.info("Initialized Listeners");
+
+        noticeOfDepartureCheckups(api);
     }
 
     private static void initializeSqlite() {
@@ -103,15 +117,13 @@ public class ScpTools {
         }
     }
 
-    private static void initializeBot(Activity.ActivityType activityType, String activityContent) {
-        JDA api = JDABuilder.createDefault(configManager.getToken(), GatewayIntent.MESSAGE_CONTENT)
-                .setActivity(Activity.of(activityType, activityContent))
-                .disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
-                .build();
+    private static void noticeOfDepartureCheckups(JDA api) {
+        ConfigGroup config = LoadedConfigurations.getConfigMemoryLoad();
 
-        new CommandManager().Initialize(api);
-        api.addEventListener(new TemplateCommand(), new HelpCommand(),new ButtonListener(), new ModalListener());
-        logger.info("Initialized Listeners");
+        RepeatTask.repeatWithScheduledExecutorService(
+                CheckNoticeOfDeparture.runNoticeOfDepartureCheck(api),
+                config.notice_of_departure_check_rate(),
+                TimeUnit.valueOf(config.notice_of_departure_check_type()));
     }
 
     public static ConfigManager getConfigManager() {
