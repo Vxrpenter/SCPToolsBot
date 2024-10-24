@@ -20,6 +20,8 @@ Currently the bot comes with:
 - SL ruleparsing
 - Text translation for features
 - Configurable commands
+- Notice of Departure for staff
+- Automatic notice of departure runout detection
 
 More coming soon, look [here](https://github.com/Vxrpenter/SCPToolsBot/wiki/Feature-Overview) for more complete overview
 
