@@ -13,6 +13,7 @@ import java.util.List;
 public class SqliteManager {
     private final Connection connection;
     private final Logger logger = LoggerFactory.getLogger(SqliteManager.class);
+    private final String prefix = ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite"));
 
     public SqliteManager(String path) throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite:"+path);
@@ -24,8 +25,7 @@ public class SqliteManager {
                     "start_time TEXT NOT NULL," +
                     "end_time TEXT NOT NULL" +
                     ");");
-            logger.info("{} - Set up table {} with rows: {}, {}, {}, {}",
-                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
+            logger.info("{} - Set up table {} with rows: {}, {}, {}, {}", prefix,
                     ColorTool.apply(DCColor.GOLD, "notice_of_departure"),
                     ColorTool.apply(DCColor.GREEN, "id"),
                     ColorTool.apply(DCColor.GREEN, "channel_message_id"),
@@ -47,8 +47,7 @@ public class SqliteManager {
             statement.setString(3, start_time);
             statement.setString(4, end_time);
             statement.executeUpdate();
-            logger.info("{} - Added notice of departure - id: {}, channel_message_id: {} , start_time: {} , end_time: {}",
-                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
+            logger.info("{} - Added notice of departure - id: {}, channel_message_id: {} , start_time: {} , end_time: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GREEN, channel_message_id),
                     ColorTool.apply(DCColor.GOLD, start_time),
@@ -57,13 +56,17 @@ public class SqliteManager {
     }
 
     public void updateNoticeOfDeparture(String id, String channel_message_id, String start_time, String end_time) throws SQLException {
+        if (!exists(id)) {
+            logger.error("{} - Failed to update notice of departure with id: {}. Id does not exist", prefix,
+                    ColorTool.apply(DCColor.GREEN, id));
+            return;
+        }
         try (PreparedStatement statement = connection.prepareStatement("UPDATE notice_of_departure SET start_time=?, end_time=? WHERE id=?")) {
             statement.setString(1, start_time);
             statement.setString(2, end_time);
             statement.setString(3, id);
             statement.executeUpdate();
-            logger.info("{} - Updated notice of departure - id: {} , start_time: {} , end_time: {}",
-                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
+            logger.info("{} - Updated notice of departure - id: {} , start_time: {} , end_time: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, start_time),
                     ColorTool.apply(DCColor.GOLD, end_time));
@@ -71,47 +74,63 @@ public class SqliteManager {
     }
 
     public void updateChannelMessageId(String id, String channel_message_id) throws SQLException {
+        if (!exists(id)) {
+            logger.error("{} - Failed to update notice of departure channel and message id with id: {}. Id does not exist", prefix,
+                    ColorTool.apply(DCColor.GREEN, id));
+            return;
+        }
         try (PreparedStatement statement = connection.prepareStatement("UPDATE notice_of_departure SET start_time=? WHERE id=?")) {
             statement.setString(1, channel_message_id);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.info("{} - Updated start_time - id: {} , channel_message_id: {}",
-                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
+            logger.info("{} - Updated start_time - id: {} , channel_message_id: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, channel_message_id));
         }
     }
 
     public void updateStartTime(String id,String start_time) throws SQLException {
+        if (!exists(id)) {
+            logger.error("{} - Failed to update notice of departure start time with id: {}. Id does not exist", prefix,
+                    ColorTool.apply(DCColor.GREEN, id));
+            return;
+        }
         try (PreparedStatement statement = connection.prepareStatement("UPDATE notice_of_departure SET start_time=? WHERE id=?")) {
             statement.setString(1, start_time);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.info("{} - Updated start_time - id: {} , start_time: {}",
-                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
+            logger.info("{} - Updated start_time - id: {} , start_time: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, start_time));
         }
     }
 
     public void updateEndTime(String id,String end_time) throws SQLException {
+        if (!exists(id)) {
+            logger.error("{} - Failed to update notice of departure end time with id: {}. Id does not exist", prefix,
+                    ColorTool.apply(DCColor.GREEN, id));
+            return;
+        }
         try (PreparedStatement statement = connection.prepareStatement("UPDATE notice_of_departure SET end_time=? WHERE id=?")) {
             statement.setString(1, end_time);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.info("{} - Updated end_time - id: {} , end_time: {}",
-                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
+            logger.info("{} - Updated end_time - id: {} , end_time: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, end_time));
         }
     }
 
     public void deleteNoticeOfDeparture(String id) throws SQLException {
+        if (!exists(id)) {
+            logger.error("{} - Failed to delete notice of departure with id: {}. Id does not exist", prefix,
+                    ColorTool.apply(DCColor.GREEN, id));
+            return;
+        }
         try (PreparedStatement statement = connection.prepareStatement("DELETE FROM notice_of_departure WHERE id=?")) {
             statement.setString(1, id);
             statement.executeUpdate();
-            logger.info("{} - Deleted notice of departure - id: {}",
-                    ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")),
+            logger.info("{} - Deleted notice of departure - id: {}", prefix,
                     ColorTool.apply(DCColor.RED, id));
         }
     }
