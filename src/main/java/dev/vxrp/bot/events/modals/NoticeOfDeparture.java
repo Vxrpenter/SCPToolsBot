@@ -135,6 +135,9 @@ public class NoticeOfDeparture {
     }
 
     public static void revokeNoticeOfDeparture(ModalInteractionEvent event, User user) throws SQLException {
+        ScpTools.getSqliteManager().deleteNoticeOfDeparture(user.getId());
+        Objects.requireNonNull(event.getMessage()).delete().queue();
+        event.reply(translations.notice_revoked_message()).setEphemeral(true).queue();
         user.openPrivateChannel().queue(privateChannel ->
                 privateChannel.sendMessageEmbeds(
                         StatsBuilder.buildRevoked(user.getGlobalName()).build(),
@@ -144,7 +147,5 @@ public class NoticeOfDeparture {
                                         .replace("%reason%", Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString()))
                                 .build()
                 ).queue());
-        Objects.requireNonNull(event.getMessage()).delete().queue();
-        ScpTools.getSqliteManager().deleteNoticeOfDeparture(user.getId());
     }
 }
