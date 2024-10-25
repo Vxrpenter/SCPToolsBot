@@ -179,7 +179,7 @@ notice_of_departure:
                         ```%timeframe%```
                         "
   notice_revoked: "
-                        Your Notice of Departure has been revoked and all benefits going with at do not apply anymore \n
+                        Your Notice of Departure has been revoked and all benefits going with that do not apply anymore \n
                         
                         __**Timeframe:**__\n
                         ```%timeframe%```

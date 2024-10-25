@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class CheckNoticeOfDeparture  {
@@ -41,40 +42,48 @@ public class CheckNoticeOfDeparture  {
                             logger.info("Found invalid notice of departure");
                             MessageChannel channel = api.getTextChannelById(notice.channel_id());
 
-                            Objects.requireNonNull(channel).retrieveMessageById(notice.message_id()).queue(message -> {
-                                List<String> pingRoles = LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_roles_access_notices()
-                                        .stream()
-                                        .map(id -> "<@&" + id + ">")
-                                        .collect(Collectors.toList());
+                            assert channel != null;
 
-                                message.editMessage(String.join("", pingRoles)).queue();
-                                channel.sendMessage(String.join("", pingRoles)).queue(ping -> ping.delete().queue());
-                                message.editMessageEmbeds(new EmbedBuilder()
-                                                .setDescription(ColorTool.useCustomColorCodes(translations.notice_ended_replace()
-                                                        .replace("%user%", Objects.requireNonNull(user.getGlobalName()))
-                                                        .replace("%date%", now.toString())
-                                                        .replace("%actionTaker%", "AUTOMATIC DETECTION UNIT")))
-                                                .build())
-                                        .setActionRow(
-                                                Button.danger("delete_notice_of_departure", "Delete Processed Notice of Departure")
-                                        ).queue();
-                                logger.info("Updated official notice of departure message in {}", channel.getName());
+                            channel.retrieveMessageById(notice.message_id()).onErrorMap(e -> null).queue(message -> {
+                                if (message == null) {
+                                    logger.info("Found that message of notice does not exist... opting for deletion of database entry");
+                                } else {
+                                    List<String> pingRoles = LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_roles_access_notices()
+                                            .stream()
+                                            .map(id -> "<@&" + id + ">")
+                                            .collect(Collectors.toList());
+
+                                    message.editMessage(String.join("", pingRoles)).queue();
+                                    channel.sendMessage(String.join("", pingRoles)).queue(ping -> ping.delete().queue());
+                                    message.editMessageEmbeds(new EmbedBuilder()
+                                                    .setDescription(ColorTool.useCustomColorCodes(translations.notice_ended_replace()
+                                                            .replace("%user%", Objects.requireNonNull(user.getGlobalName()))
+                                                            .replace("%date%", now.toString())
+                                                            .replace("%actionTaker%", "AUTOMATIC DETECTION UNIT")))
+                                                    .build())
+                                            .setActionRow(
+                                                    Button.danger("delete_notice_of_departure", "Delete Processed Notice of Departure")
+                                            ).queue();
+                                    logger.info("Updated official notice of departure message in {}", channel.getName());
+                                }
                             });
 
-                            Objects.requireNonNull(user).openPrivateChannel().queue(privateChannel -> privateChannel.sendMessageEmbeds(
-                                    StatsBuilder.buildEnded(user.getGlobalName()).build(),
-                                    new EmbedBuilder().setDescription(
-                                            translations.notice_ended()
-                                                    .replace("%timeframe%", notice.start_time()+" till "+notice.end_time()))
-                                            .build()
-                            ).queue());
-                            logger.info("Send private message about invalid notice of departure to {}", user.getGlobalName());
-                            try {
-                                sqliteManager.deleteNoticeOfDeparture(notice.id());
-                            } catch (SQLException e) {
-                                throw new RuntimeException(e);
-                            }
-                            logger.info(ColorTool.apply(DCColor.GOLD, "------------------------------------------------------------------------"));
+                            Objects.requireNonNull(user).openPrivateChannel().queue(privateChannel -> {
+                                privateChannel.sendMessageEmbeds(
+                                        StatsBuilder.buildEnded(user.getGlobalName()).build(),
+                                        new EmbedBuilder().setDescription(
+                                                        translations.notice_ended()
+                                                                .replace("%timeframe%", notice.start_time()+" till "+notice.end_time()))
+                                                .build()
+                                ).queue();
+                                logger.info("Send private message about invalid notice of departure to {}", user.getGlobalName());
+                                try {
+                                    sqliteManager.deleteNoticeOfDeparture(notice.id());
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                logger.info(ColorTool.apply(DCColor.GOLD, "------------------------------------------------------------------------"));
+                            });
                         });
                     }
                 }
