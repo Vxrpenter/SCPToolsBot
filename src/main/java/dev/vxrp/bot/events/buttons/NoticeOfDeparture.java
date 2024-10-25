@@ -61,8 +61,6 @@ public class NoticeOfDeparture {
 
     // Fires when notice of departure is revoked by button press. Opens up a modal to put in a reason for the user
     public static void revokeNoticeOfDeparture(ButtonInteractionEvent event, User user) {
-        event.getMessage().delete().queue();
-        event.reply(translations.notice_revoked()).setEphemeral(true).queue();
         event.replyModal(
                 Modal.create("reason_action_revoke_nod:"+user.getId()+":"+event.getComponentId().split(":")[3]+":"+event.getComponentId().split(":")[2]+":", reason_action.modal_reason_action_title())
                         .addComponents(ActionRow.of(shortModal(
@@ -75,7 +73,7 @@ public class NoticeOfDeparture {
 
     public static void deleteNoticeOfDeparture(ButtonInteractionEvent event) {
         event.getMessage().delete().queue();
-        event.reply(translations.notice_revoked()).setEphemeral(true).queue();
+        event.reply(translations.notice_deleted_ended_replace()).setEphemeral(true).queue();
     }
 
     private static TextInput shortModal(String id,String title, String placeholder, int min, int max) {
