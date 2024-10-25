@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ModalListener extends ListenerAdapter {
     public final Logger logger = LoggerFactory.getLogger(ModalListener.class);
@@ -41,6 +42,15 @@ public class ModalListener extends ListenerAdapter {
         }
         if (event.getModalId().startsWith("reason_action_dismiss_nod")) {
             event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> NoticeOfDeparture.dismissNoticeOfDeparture(event, user));
+        }
+        if (event.getModalId().startsWith("reason_action_revoke_nod")) {
+            event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> {
+                try {
+                    NoticeOfDeparture.revokeNoticeOfDeparture(event, user);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
     }
 }

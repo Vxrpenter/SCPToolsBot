@@ -64,7 +64,7 @@ public class ButtonListener extends ListenerAdapter {
             event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> NoticeOfDeparture.revokeNoticeOfDeparture(event, user));
         }
         if (event.getComponentId().equals("delete_notice_of_departure")) {
-            event.getMessage().delete().queue();
+            NoticeOfDeparture.deleteNoticeOfDeparture(event);
         }
     }
 }

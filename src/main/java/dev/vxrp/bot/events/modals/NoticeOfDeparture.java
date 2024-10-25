@@ -133,4 +133,18 @@ public class NoticeOfDeparture {
 
         event.reply(translations.ticket_message_sent()).setEphemeral(true).queue();
     }
+
+    public static void revokeNoticeOfDeparture(ModalInteractionEvent event, User user) throws SQLException {
+        user.openPrivateChannel().queue(privateChannel ->
+                privateChannel.sendMessageEmbeds(
+                        StatsBuilder.buildRevoked(user.getGlobalName()).build(),
+                        new EmbedBuilder()
+                                .setDescription(translations.notice_revoked()
+                                        .replace("%timeframe%", event.getModalId().split(":")[3]+" till "+event.getModalId().split(":")[2])
+                                        .replace("%reason%", Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString()))
+                                .build()
+                ).queue());
+        Objects.requireNonNull(event.getMessage()).delete().queue();
+        ScpTools.getSqliteManager().deleteNoticeOfDeparture(user.getId());
+    }
 }

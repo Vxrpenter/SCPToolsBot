@@ -183,7 +183,12 @@ notice_of_departure:
                         
                         __**Timeframe:**__\n
                         ```%timeframe%```
+                        
+                        __**Acceptance Reason:**__\n
+                        ```%reason%```
                         "
+  notice_revoked_message: "The notice was correctly revoked"
+
   notice_ended_replace: "
                         ```ansi
                         
@@ -201,3 +206,5 @@ notice_of_departure:
                         Dealt with by: &gold&&bold&%actionTaker%
                         ```
                         "
+
+  notice_deleted_ended_replace_message: "The notice was deleted"

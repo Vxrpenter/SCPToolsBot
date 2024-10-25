@@ -69,6 +69,8 @@ public class TRANSLATIONS {
         }
         public static final String ENDED = "notice_of_departure.notice_ended";
         public static final String REVOKED = "notice_of_departure.notice_revoked";
+        public static final String REVOKED_MESSAGE = "notice_of_departure.notice_revoked_message";
         public static final String ENDED_REPLACE = "notice_of_departure.notice_ended_replace";
+        public static final String DELETED_ENDED_REPLACE_MESSAGE = "notice_of_departure.notice_deleted_ended_replace_message";
     }
 }
