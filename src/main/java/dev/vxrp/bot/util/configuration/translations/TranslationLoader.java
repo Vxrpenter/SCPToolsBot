@@ -2,7 +2,7 @@ package dev.vxrp.bot.util.configuration.translations;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;
-import dev.vxrp.bot.util.configuration.groups.ButtonsGroup;
+import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
 import dev.vxrp.bot.util.configuration.util.TRANSLATIONS;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
@@ -73,7 +73,7 @@ public class TranslationLoader {
                 translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.ENDED_REPLACE),
                 translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.DELETED_ENDED_REPLACE_MESSAGE));
 
-        ButtonsGroup buttonsGroup = new ButtonsGroup(
+        ButtonGroup buttonsGroup = new ButtonGroup(
                 translationManager.getString(TRANSLATIONS.BUTTONS.PASTE_RULES),
                 translationManager.getString(TRANSLATIONS.BUTTONS.UPDATE_RULES),
                 translationManager.getString(TRANSLATIONS.BUTTONS.CREATE_NEW_SUPPORT_TICKET),
@@ -84,6 +84,7 @@ public class TranslationLoader {
                 translationManager.getString(TRANSLATIONS.BUTTONS.ACCEPT_UNBAN_TICKET),
                 translationManager.getString(TRANSLATIONS.BUTTONS.DISMISS_UNBAN_TICKET),
                 translationManager.getString(TRANSLATIONS.BUTTONS.SETTINGS_UNBAN_TICKET),
+                translationManager.getString(TRANSLATIONS.BUTTONS.FILE_NOTICE_OF_DEPARTURE),
                 translationManager.getString(TRANSLATIONS.BUTTONS.ACCEPT_NOTICE_OF_DEPARTURE_TICKET),
                 translationManager.getString(TRANSLATIONS.BUTTONS.DISMISS_NOTICE_OF_DEPARTURE_TICKET),
                 translationManager.getString(TRANSLATIONS.BUTTONS.REVOKE_NOTICE_OF_DEPARTURE),

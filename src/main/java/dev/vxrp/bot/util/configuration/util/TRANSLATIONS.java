@@ -87,6 +87,7 @@ public class TRANSLATIONS {
         public static final String DISMISS_UNBAN_TICKET = "buttons.dismiss_unban_ticket";
         public static final String SETTINGS_UNBAN_TICKET = "buttons.settings_unban_ticket";
 
+        public static final String FILE_NOTICE_OF_DEPARTURE = "buttons.file_notice_of_departure";
         public static final String ACCEPT_NOTICE_OF_DEPARTURE_TICKET = "buttons.accept_notice_of_departure_ticket";
         public static final String DISMISS_NOTICE_OF_DEPARTURE_TICKET = "buttons.dismiss_notice_of_departure_ticket";
         public static final String REVOKE_NOTICE_OF_DEPARTURE = "buttons.revoke_notice_of_departure";

@@ -5,7 +5,7 @@ import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.groups.ButtonsGroup;
+import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class NoticeOfDeparture {
     private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
     private static final NoticeOfDepartureGroup translations = LoadedConfigurations.getNoticeOfDepartureMemoryLoad();
-    private static final ButtonsGroup buttons = LoadedConfigurations.getButtonsMemoryLoad();
+    private static final ButtonGroup buttons = LoadedConfigurations.getButtonMemoryLoad();
 
     private static final String time = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
     private static final String date = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
