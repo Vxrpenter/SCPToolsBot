@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events.modals;
 
+import dev.vxrp.bot.util.configuration.groups.ButtonsGroup;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
@@ -28,6 +29,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Unban {
     private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
     private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
+    private static final ButtonsGroup buttons = LoadedConfigurations.getButtonsMemoryLoad();
 
     public static void createUnbanTicket(ModalInteractionEvent event, Logger logger) {
         Member member = event.getMember();
@@ -69,9 +71,9 @@ public class Unban {
                                         .replace("%time%", time)),
                                 event.getGuild().getIconUrl(), event.getUser()).build())
                 .addActionRow(
-                        Button.success("accept_unban_ticket:"+userID+":"+steamID+":", "Accept Ticket"),
-                        Button.danger("dismiss_unban_ticket:"+userID+":"+steamID+":", "Dismiss Ticket"),
-                        Button.secondary("settings_unban_ticket", "Settings")
+                        Button.success("accept_unban_ticket:"+userID+":"+steamID+":", buttons.accept_unban_ticket()),
+                        Button.danger("dismiss_unban_ticket:"+userID+":"+steamID+":", buttons.dismiss_unban_ticket()),
+                        Button.secondary("settings_unban_ticket", buttons.settings_unban_ticket())
                 ).queue();
 
         logger.info("Created new unban request by user {} - under name {}", ColorTool.apply(DCColor.GREEN, userName), ColorTool.apply(DCColor.RED, name));

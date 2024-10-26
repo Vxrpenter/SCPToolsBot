@@ -40,7 +40,8 @@ public class ConfigLoader {
                 configManager.getString(CONFIG.CEDMOD.API_KEY),
                 configManager.getString(CONFIG.CEDMOD.MASTER_BAN_LIST_ID));
 
+        logger.warn("Loading configurations, this could take some time...");
         LoadedConfigurations.setConfigMemoryLoad(configGroup);
-        logger.info("Loaded config into memory");
+        logger.info("Loaded configurations");
     }
 }

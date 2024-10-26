@@ -5,6 +5,7 @@ import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
+import dev.vxrp.bot.util.configuration.groups.ButtonsGroup;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 public class NoticeOfDeparture {
     private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
     private static final NoticeOfDepartureGroup translations = LoadedConfigurations.getNoticeOfDepartureMemoryLoad();
+    private static final ButtonsGroup buttons = LoadedConfigurations.getButtonsMemoryLoad();
 
     private static final String time = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
     private static final String date = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
@@ -62,8 +64,8 @@ public class NoticeOfDeparture {
                                 .replace("%time%", time)))
                         .build())
                 .addActionRow(
-                        Button.success("accept_ticket_notice_of_departure"+":"+event.getUser().getId()+":"+ Objects.requireNonNull(event.getValue("nod_timeframe")).getAsString()+":", "Accept Ticket"),
-                        Button.danger("dismiss_ticket_notice_of_departure"+":"+event.getUser().getId()+":", "Dismiss Ticket")
+                        Button.success("accept_ticket_notice_of_departure"+":"+event.getUser().getId()+":"+ Objects.requireNonNull(event.getValue("nod_timeframe")).getAsString()+":", buttons.accept_notice_of_departure_ticket()),
+                        Button.danger("dismiss_ticket_notice_of_departure"+":"+event.getUser().getId()+":", buttons.dismiss_notice_of_departure_ticket())
                 ).queue(message -> {
                     message.editMessage(String.join("", pingRoles)).queue();
                 });
@@ -102,7 +104,7 @@ public class NoticeOfDeparture {
                         .build())
                 .addActionRow(
                         Button.danger("revoke_notice_of_departure"+":"+
-                                user.getId()+":"+event.getModalId().split(":")[4]+":"+event.getModalId().split(":")[4]+":", "Revoke Notice of Departure")
+                                user.getId()+":"+event.getModalId().split(":")[4]+":"+event.getModalId().split(":")[4]+":", buttons.revoke_notice_of_departure())
                 ).queue(message -> {
                     try {
                         ScpTools.getSqliteManager().addNoticeOfDeparture(
