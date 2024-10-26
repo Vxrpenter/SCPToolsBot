@@ -32,7 +32,13 @@ public class GitHubApi {
         Response response = call.execute();
 
         assert response.body() != null;
-        JsonArray tagArray = JsonParser.parseString(response.body().string()).getAsJsonArray();
+        JsonArray tagArray = null;
+        try {
+            tagArray = JsonParser.parseString(response.body().string()).getAsJsonArray();
+        } catch (IllegalStateException e) {
+            logger.error("Not able to get latest version from github, probably exceeded rate limit... skipping");
+            return;
+        }
 
         String tag = tagArray.get(tagArray.size() -1).getAsJsonObject().get("ref").getAsString()
                 .replace("refs/tags/v.", "");
