@@ -73,4 +73,7 @@ public class TRANSLATIONS {
         public static final String ENDED_REPLACE = "notice_of_departure.notice_ended_replace";
         public static final String DELETED_ENDED_REPLACE_MESSAGE = "notice_of_departure.notice_deleted_ended_replace_message";
     }
+    public static final class BUTTONS {
+
+    }
 }
