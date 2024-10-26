@@ -209,4 +209,22 @@ notice_of_departure:
 
   notice_deleted_ended_replace_message: "The notice was deleted"
 
+# You can't use color codes for the following button translations
 buttons:
+  paste_rules: "Paste Rules"
+  update_rules: "Update Rules"
+
+  create_new_support_ticket: "Create Support Ticket"
+  close_support_ticket: "Close Ticket"
+  claim_support_ticket: "Claim Ticket"
+  settings_support_ticket: "Settings"
+
+  create_new_unban_ticket: "File Unban Request"
+  accept_unban_ticket: "Accept Ticket"
+  dismiss_unban_ticket: "Dismiss Ticket"
+  settings_unban_ticket: "Settings"
+
+  accept_notice_of_departure_ticket: "Accept Ticket"
+  dismiss_notice_of_departure_ticket: "Dismiss Ticket"
+  revoke_notice_of_departure: "Revoke Notice of Departure"
+  delete_notice_of_departure: "Delete Processed Notice of Departure"

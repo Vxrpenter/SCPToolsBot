@@ -74,6 +74,22 @@ public class TRANSLATIONS {
         public static final String DELETED_ENDED_REPLACE_MESSAGE = "notice_of_departure.notice_deleted_ended_replace_message";
     }
     public static final class BUTTONS {
+        public static final String PASTE_RULES = "buttons.paste_rules";
+        public static final String UPDATE_RULES = "buttons.update_rules";
 
+        public static final String CREATE_NEW_SUPPORT_TICKET = "buttons.create_new_support_ticket";
+        public static final String CLOSE_SUPPORT_TICKET = "buttons.close_support_ticket";
+        public static final String CLAIM_SUPPORT_TICKET = "buttons.claim_support_ticket";
+        public static final String SETTINGS_SUPPORT_TICKET = "buttons.settings_support_ticket";
+
+        public static final String CREATE_NEW_UNBAN_TICKET = "buttons.create_new_unban_ticket";
+        public static final String ACCEPT_UNBAN_TICKET = "buttons.accept_unban_ticket";
+        public static final String DISMISS_UNBAN_TICKET = "buttons.dismiss_unban_ticket";
+        public static final String SETTINGS_UNBAN_TICKET = "buttons.settings_unban_ticket";
+
+        public static final String ACCEPT_NOTICE_OF_DEPARTURE_TICKET = "buttons.accept_notice_of_departure_ticket";
+        public static final String DISMISS_NOTICE_OF_DEPARTURE_TICKET = "buttons.dismiss_notice_of_departure_ticket";
+        public static final String REVOKE_NOTICE_OF_DEPARTURE = "buttons.revoke_notice_of_departure";
+        public static final String DELETE_NOTICE_OF_DEPARTURE = "buttons.delete_notice_of_departure";
     }
 }

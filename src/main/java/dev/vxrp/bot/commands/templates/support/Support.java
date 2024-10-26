@@ -2,6 +2,7 @@ package dev.vxrp.bot.commands.templates.support;
 
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
+import dev.vxrp.bot.util.configuration.groups.ButtonsGroup;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
@@ -12,6 +13,7 @@ import java.awt.*;
 
 public class Support {
     private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
+    private static final ButtonsGroup buttons = LoadedConfigurations.getButtonsMemoryLoad();
 
     public static void pasteSupportTemplate(SlashCommandInteractionEvent event) {
         event.getChannel().sendMessageEmbeds(new EmbedBuilder()
@@ -28,8 +30,8 @@ public class Support {
                         .setColor(Color.DARK_GRAY)
                         .build())
                 .addActionRow(
-                        Button.success("createNewTicket", "Create Support Ticket").withEmoji(Emoji.fromUnicode("📩")),
-                        Button.danger("createNewUnban", "File Unban Request").withEmoji(Emoji.fromUnicode("📩"))
+                        Button.success("createNewTicket", buttons.create_new_support_ticket()).withEmoji(Emoji.fromUnicode("📩")),
+                        Button.danger("createNewUnban", buttons.create_new_unban_ticket()).withEmoji(Emoji.fromUnicode("📩"))
                 ).queue();
     }
 }

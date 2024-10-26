@@ -6,6 +6,7 @@ import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
+import dev.vxrp.bot.util.configuration.groups.ButtonsGroup;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
 import dev.vxrp.bot.util.objects.NoticeOfDeparture;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -22,8 +23,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CheckNoticeOfDeparture  {
-    private final static Logger logger = LoggerFactory.getLogger(ScpTools.class);
+    private final static Logger logger = LoggerFactory.getLogger(CheckNoticeOfDeparture.class);
     private static final NoticeOfDepartureGroup translations = LoadedConfigurations.getNoticeOfDepartureMemoryLoad();
+    private static final ButtonsGroup buttons = LoadedConfigurations.getButtonsMemoryLoad();
 
     public static Runnable runNoticeOfDepartureCheck(JDA api) {
         return () -> {
@@ -61,7 +63,7 @@ public class CheckNoticeOfDeparture  {
                                                             .replace("%actionTaker%", "AUTOMATIC DETECTION UNIT"))))
                                                     .build())
                                             .setActionRow(
-                                                    Button.danger("delete_notice_of_departure", "Delete Processed Notice of Departure")
+                                                    Button.danger("delete_notice_of_departure", buttons.delete_notice_of_departure())
                                             ).queue();
                                     logger.info("Updated official notice of departure message in {}", channel.getName());
                                 }

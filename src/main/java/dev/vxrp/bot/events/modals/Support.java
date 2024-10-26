@@ -1,6 +1,7 @@
 package dev.vxrp.bot.events.modals;
 
 import dev.vxrp.bot.ScpTools;
+import dev.vxrp.bot.util.configuration.groups.ButtonsGroup;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
 import dev.vxrp.bot.util.Enums.DCColor;
@@ -24,6 +25,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Support {
     private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
     private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
+    private static final ButtonsGroup buttons = LoadedConfigurations.getButtonsMemoryLoad();
 
     public static void createSupportTicket(ModalInteractionEvent event, Logger logger) {
         Member member = event.getMember();
@@ -64,9 +66,9 @@ public class Support {
                                             .replace("%time%", time)),
                                     event.getGuild().getIconUrl(), event.getUser()).build())
                             .addActionRow(
-                                    Button.danger("close_support_ticket:"+userID+":", "Close Ticket"),
-                                    Button.primary("claim_support_ticket:"+userID+":", "Claim Ticket"),
-                                    Button.secondary("settings_support_ticket", "Settings")
+                                    Button.danger("close_support_ticket:"+userID+":", buttons.close_support_ticket()),
+                                    Button.primary("claim_support_ticket:"+userID+":", buttons.claim_support_ticket()),
+                                    Button.secondary("settings_support_ticket", buttons.settings_support_ticket())
                             ).queue();
                 });
 
