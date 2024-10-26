@@ -47,8 +47,8 @@ public class Unban {
         TextChannel textChannel = event.getGuild().getTextChannelById(configs.support_settings_unban_channel_id());
 
         assert textChannel != null;
-        event.reply(translations.ticket_unban_created()
-                .replace("%channel%", "<#"+textChannel.getId()+">")).setEphemeral(true).queue();
+        event.reply(ColorTool.useCustomColorCodes(translations.ticket_unban_created()
+                .replace("%channel%", "<#"+textChannel.getId()+">"))).setEphemeral(true).queue();
 
         List<String> roleIDs = configs.support_settings_roles_access_unban_tickets();
         for (String id : roleIDs) {
@@ -59,14 +59,14 @@ public class Unban {
         }
         textChannel.sendMessageEmbeds(
                         StatsBuilder.buildStatus(userName).build(),
-                        builder(translations.ticket_unban_title().replace("%name%", name),
-                                translations.ticket_unban_body()
+                        builder(ColorTool.useCustomColorCodes(translations.ticket_unban_title().replace("%name%", name)),
+                                ColorTool.useCustomColorCodes(translations.ticket_unban_body()
                                         .replace("%steamID%", steamID)
                                         .replace("%reason%", reason)
-                                        .replace("%reasoning%", reasoning),
-                                translations.ticket_unban_footer()
+                                        .replace("%reasoning%", reasoning)),
+                                ColorTool.useCustomColorCodes(translations.ticket_unban_footer()
                                         .replace("%date%", date)
-                                        .replace("%time%", time),
+                                        .replace("%time%", time)),
                                 event.getGuild().getIconUrl(), event.getUser()).build())
                 .addActionRow(
                         Button.success("accept_unban_ticket:"+userID+":"+steamID+":", "Accept Ticket"),
@@ -94,15 +94,15 @@ public class Unban {
         bannedUser.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
                 StatsBuilder.buildAccepted(bannedUser.getGlobalName()).build(),
                         new EmbedBuilder()
-                        .setDescription(translations.ticket_unban_message_accepted()
+                        .setDescription(ColorTool.useCustomColorCodes(translations.ticket_unban_message_accepted()
                                 .replace("%steamID%", steamID)
-                                .replace("%reason%", reason))
+                                .replace("%reason%", reason)))
                         .build()
                         )).queue();
 
         CedModApi.executeUnban(instanceUrl, apiKey, banID, reason);
 
-        event.reply(translations.ticket_unban_message_sent()).setEphemeral(true).queue();
+        event.reply(ColorTool.useCustomColorCodes(translations.ticket_unban_message_sent())).setEphemeral(true).queue();
     }
     public static void dismissUnban(ModalInteractionEvent event, User user) {
         String messageID = event.getModalId().split(":")[3];
@@ -115,14 +115,14 @@ public class Unban {
         user.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
                 StatsBuilder.buildDismissed(event.getUser().getGlobalName()).build(),
                 new EmbedBuilder()
-                        .setDescription(translations.ticket_unban_message_dismissed()
+                        .setDescription(ColorTool.useCustomColorCodes(translations.ticket_unban_message_dismissed()
                                 .replace("%steamID%", steamID)
-                                .replace("%reason%", reason))
+                                .replace("%reason%", reason)))
                         .build()
         )).queue();
 
 
-        event.reply(translations.ticket_unban_message_sent()).setEphemeral(true).queue();
+        event.reply(ColorTool.useCustomColorCodes(translations.ticket_unban_message_sent())).setEphemeral(true).queue();
     }
 
     private static EmbedBuilder builder(String title, String body, String footerText, String IconURL, User user) {

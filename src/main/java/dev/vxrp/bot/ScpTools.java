@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.*;
@@ -67,10 +68,11 @@ public class ScpTools {
     }
 
     private static void initializeSqlite() {
-        File file = new File(System.getProperty("user.dir")+"\\sqlite\\data.db");
+        Path path = Paths.get(".").toAbsolutePath().normalize();
+        File file = new File(path+"\\sqlite\\data.db");
         try {
             file.createNewFile();
-            sqliteManager = new SqliteManager(System.getProperty("user.dir")+"\\sqlite\\data.db");
+            sqliteManager = new SqliteManager(path+"\\sqlite\\data.db");
         } catch (SQLException | IOException e) {
             logger.error("Could not correctly set up Sqlite database {}", e.getMessage());
         }
