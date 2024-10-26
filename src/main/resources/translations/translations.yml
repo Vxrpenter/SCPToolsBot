@@ -224,6 +224,7 @@ buttons:
   dismiss_unban_ticket: "Dismiss Ticket"
   settings_unban_ticket: "Settings"
 
+  file_notice_of_departure: "File Notice of Departure"
   accept_notice_of_departure_ticket: "Accept Ticket"
   dismiss_notice_of_departure_ticket: "Dismiss Ticket"
   revoke_notice_of_departure: "Revoke Notice of Departure"

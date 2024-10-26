@@ -1,6 +1,6 @@
 package dev.vxrp.bot.events.modals;
 
-import dev.vxrp.bot.util.configuration.groups.ButtonsGroup;
+import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
@@ -29,7 +29,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Unban {
     private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
     private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
-    private static final ButtonsGroup buttons = LoadedConfigurations.getButtonsMemoryLoad();
+    private static final ButtonGroup buttons = LoadedConfigurations.getButtonMemoryLoad();
 
     public static void createUnbanTicket(ModalInteractionEvent event, Logger logger) {
         Member member = event.getMember();

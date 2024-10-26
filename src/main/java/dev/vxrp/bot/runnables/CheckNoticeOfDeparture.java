@@ -6,7 +6,7 @@ import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.groups.ButtonsGroup;
+import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
 import dev.vxrp.bot.util.objects.NoticeOfDeparture;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class CheckNoticeOfDeparture  {
     private final static Logger logger = LoggerFactory.getLogger(CheckNoticeOfDeparture.class);
     private static final NoticeOfDepartureGroup translations = LoadedConfigurations.getNoticeOfDepartureMemoryLoad();
-    private static final ButtonsGroup buttons = LoadedConfigurations.getButtonsMemoryLoad();
+    private static final ButtonGroup buttons = LoadedConfigurations.getButtonMemoryLoad();
 
     public static Runnable runNoticeOfDepartureCheck(JDA api) {
         return () -> {

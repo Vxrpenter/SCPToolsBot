@@ -1,11 +1,10 @@
 package dev.vxrp.bot.util.configuration;
 
-import dev.vxrp.bot.util.configuration.groups.ButtonsGroup;
+import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 
-import javax.swing.*;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -13,7 +12,7 @@ public class LoadedConfigurations {
     public static HashSet<ConfigGroup> configMemoryLoad = new HashSet<>();
     public static HashSet<SupportGroup> supportTranslationMemoryLoad  = new HashSet<>();
     public static HashSet<NoticeOfDepartureGroup> noticeOfDepartureMemoryLoad  = new HashSet<>();
-    public static HashSet<ButtonsGroup> buttonsMemoryLoad  = new HashSet<>();
+    public static HashSet<ButtonGroup> buttonsMemoryLoad  = new HashSet<>();
 
     public static ConfigGroup getConfigMemoryLoad() {
         Iterator<ConfigGroup> iterator = configMemoryLoad.iterator();
@@ -54,16 +53,16 @@ public class LoadedConfigurations {
         LoadedConfigurations.noticeOfDepartureMemoryLoad.add(noticeOfDepartureMemoryLoad);
     }
 
-    public static ButtonsGroup getButtonsMemoryLoad() {
-        Iterator<ButtonsGroup> iterator = buttonsMemoryLoad.iterator();
-        ButtonsGroup buttonsGroup = null;
+    public static ButtonGroup getButtonMemoryLoad() {
+        Iterator<ButtonGroup> iterator = buttonsMemoryLoad.iterator();
+        ButtonGroup buttonsGroup = null;
         while (iterator.hasNext()) {
             buttonsGroup = iterator.next();
         }
         return buttonsGroup;
     }
 
-    public static void setButtonsMemoryLoad(ButtonsGroup buttonsMemoryLoad) {
+    public static void setButtonsMemoryLoad(ButtonGroup buttonsMemoryLoad) {
         LoadedConfigurations.buttonsMemoryLoad.add(buttonsMemoryLoad);
     }
 }

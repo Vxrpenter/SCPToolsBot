@@ -2,7 +2,7 @@ package dev.vxrp.bot.commands.templates.support;
 
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.groups.ButtonsGroup;
+import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
@@ -13,7 +13,7 @@ import java.awt.*;
 
 public class Support {
     private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
-    private static final ButtonsGroup buttons = LoadedConfigurations.getButtonsMemoryLoad();
+    private static final ButtonGroup buttons = LoadedConfigurations.getButtonMemoryLoad();
 
     public static void pasteSupportTemplate(SlashCommandInteractionEvent event) {
         event.getChannel().sendMessageEmbeds(new EmbedBuilder()
