@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events.buttons;
 
+import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
@@ -19,17 +20,17 @@ public class NoticeOfDeparture {
 
     public static void createNoticeOfDeparture(ButtonInteractionEvent event) {
         event.replyModal(
-                Modal.create("notice_of_departure", translations.modal_title())
+                Modal.create("notice_of_departure", ColorTool.useCustomColorCodes(translations.modal_title()))
                         .addComponents(
                                 ActionRow.of(shortModal(
                                         "nod_timeframe",
-                                        translations.modal_first_title(),
-                                        translations.modal_first_placeholder(),
+                                        ColorTool.useCustomColorCodes(translations.modal_first_title()),
+                                        ColorTool.useCustomColorCodes(translations.modal_first_placeholder()),
                                         8,10
                                 )),
                                 ActionRow.of(paragraphModal(
-                                        translations.modal_second_title(),
-                                        translations.modal_second_placeholder()
+                                        ColorTool.useCustomColorCodes(translations.modal_second_title()),
+                                        ColorTool.useCustomColorCodes(translations.modal_second_placeholder())
                                 )))
                         .build()).queue();
     }
@@ -39,22 +40,22 @@ public class NoticeOfDeparture {
         String end_time = event.getComponentId().split(":")[2];
 
         event.replyModal(
-                Modal.create("reason_action_accepted_nod:"+user.getId()+":"+event.getMessageId()+":"+end_time+":"+start_time+":", reason_action.modal_reason_action_title())
+                Modal.create("reason_action_accepted_nod:"+user.getId()+":"+event.getMessageId()+":"+end_time+":"+start_time+":", ColorTool.useCustomColorCodes(reason_action.modal_reason_action_title()))
                         .addComponents(ActionRow.of(shortModal(
                                 "reason_action_reason",
-                                reason_action.modal_reason_action_first_title(),
-                                reason_action.modal_reason_action_first_placeholder(),
+                                ColorTool.useCustomColorCodes(reason_action.modal_reason_action_first_title()),
+                                ColorTool.useCustomColorCodes(reason_action.modal_reason_action_first_placeholder()),
                                 10, 100
                         ))).build()).queue();
     }
 
     public static void dismissNoticeOfDeparture(ButtonInteractionEvent event, User user) {
         event.replyModal(
-                Modal.create("reason_action_dismiss_nod:"+user.getId()+":"+event.getMessageId()+":", reason_action.modal_reason_action_title())
+                Modal.create("reason_action_dismiss_nod:"+user.getId()+":"+event.getMessageId()+":", ColorTool.useCustomColorCodes(reason_action.modal_reason_action_title()))
                         .addComponents(ActionRow.of(shortModal(
                                 "reason_action_reason",
-                                reason_action.modal_reason_action_first_title(),
-                                reason_action.modal_reason_action_first_placeholder(),
+                                ColorTool.useCustomColorCodes(reason_action.modal_reason_action_first_title()),
+                                ColorTool.useCustomColorCodes(reason_action.modal_reason_action_first_placeholder()),
                                 10, 100
                         ))).build()).queue();
     }
@@ -62,18 +63,18 @@ public class NoticeOfDeparture {
     // Fires when notice of departure is revoked by button press. Opens up a modal to put in a reason for the user
     public static void revokeNoticeOfDeparture(ButtonInteractionEvent event, User user) {
         event.replyModal(
-                Modal.create("reason_action_revoke_nod:"+user.getId()+":"+event.getComponentId().split(":")[3]+":"+event.getComponentId().split(":")[2]+":", reason_action.modal_reason_action_title())
+                Modal.create("reason_action_revoke_nod:"+user.getId()+":"+event.getComponentId().split(":")[3]+":"+event.getComponentId().split(":")[2]+":", ColorTool.useCustomColorCodes( reason_action.modal_reason_action_title()))
                         .addComponents(ActionRow.of(shortModal(
                                 "reason_action_reason",
-                                reason_action.modal_reason_action_first_title(),
-                                reason_action.modal_reason_action_first_placeholder(),
+                                ColorTool.useCustomColorCodes(reason_action.modal_reason_action_first_title()),
+                                ColorTool.useCustomColorCodes(reason_action.modal_reason_action_first_placeholder()),
                                 10, 100
                         ))).build()).queue();
     }
 
     public static void deleteNoticeOfDeparture(ButtonInteractionEvent event) {
         event.getMessage().delete().queue();
-        event.reply(translations.notice_deleted_ended_replace()).setEphemeral(true).queue();
+        event.reply(ColorTool.useCustomColorCodes(translations.notice_deleted_ended_replace())).setEphemeral(true).queue();
     }
 
     private static TextInput shortModal(String id,String title, String placeholder, int min, int max) {

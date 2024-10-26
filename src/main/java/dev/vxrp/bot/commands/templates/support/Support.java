@@ -1,5 +1,6 @@
 package dev.vxrp.bot.commands.templates.support;
 
+import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -15,15 +16,15 @@ public class Support {
     public static void pasteSupportTemplate(SlashCommandInteractionEvent event) {
         event.getChannel().sendMessageEmbeds(new EmbedBuilder()
                         .setColor(Color.decode("#5865F2"))
-                        .setTitle(translations.first_title())
-                        .setDescription(translations.first_body())
+                        .setTitle(ColorTool.useCustomColorCodes(translations.first_title()))
+                        .setDescription(ColorTool.useCustomColorCodes(translations.first_body()))
                         .setColor(Color.DARK_GRAY)
                         .build())
                 .queue();
         event.getChannel().sendMessageEmbeds(new EmbedBuilder()
                         .setColor(Color.decode("#5865F2"))
-                        .setTitle(translations.second_title())
-                        .setDescription(translations.second_body())
+                        .setTitle(ColorTool.useCustomColorCodes(translations.second_title()))
+                        .setDescription(ColorTool.useCustomColorCodes(translations.second_body()))
                         .setColor(Color.DARK_GRAY)
                         .build())
                 .addActionRow(

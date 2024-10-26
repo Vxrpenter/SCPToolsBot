@@ -36,7 +36,7 @@ public class NoticeOfDeparture {
         String day = new SimpleDateFormat("dd").format(Calendar.getInstance().getTime());
         String month = new SimpleDateFormat("MM").format(Calendar.getInstance().getTime());
         String year = new SimpleDateFormat("yyyy").format(Calendar.getInstance().getTime());
-        event.reply(translations.ticket_created()).setEphemeral(true).queue();
+        event.reply(ColorTool.useCustomColorCodes(translations.ticket_created())).setEphemeral(true).queue();
 
         assert channel != null;
         List<String> pingRoles = LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_roles_access_notices()
@@ -47,19 +47,19 @@ public class NoticeOfDeparture {
         channel.sendMessageEmbeds(
                 StatsBuilder.buildStatus(Objects.requireNonNull(event.getMember()).getUser().getGlobalName()).build(),
                 new EmbedBuilder()
-                        .setTitle(translations.ticket_title().replace("%number%", String.valueOf(ThreadLocalRandom.current().nextInt(1938, 9750))))
+                        .setTitle(ColorTool.useCustomColorCodes(translations.ticket_title().replace("%number%", String.valueOf(ThreadLocalRandom.current().nextInt(1938, 9750)))))
                         .setThumbnail(Objects.requireNonNull(event.getMember()).getUser().getAvatarUrl())
-                        .setDescription(translations.ticket_body()
+                        .setDescription(ColorTool.useCustomColorCodes(translations.ticket_body()
                                 .replace("%current_day%", ColorTool.apply(DCColor.BOLD, day))
                                 .replace("%current_month%", ColorTool.apply(DCColor.BOLD, month))
                                 .replace("%current_year%", ColorTool.apply(DCColor.BOLD, year))
                                 .replace("%day%", ColorTool.apply(DCColor.BOLD, givenDate[0]))
                                 .replace("%month%", ColorTool.apply(DCColor.BOLD, givenDate[1]))
                                 .replace("%year%", ColorTool.apply(DCColor.BOLD, givenDate[2]))
-                                .replace("%reason%", reason))
-                        .setFooter(translations.ticket_footer()
+                                .replace("%reason%", reason)))
+                        .setFooter(ColorTool.useCustomColorCodes(translations.ticket_footer()
                                 .replace("%date%", date)
-                                .replace("%time%", time))
+                                .replace("%time%", time)))
                         .build())
                 .addActionRow(
                         Button.success("accept_ticket_notice_of_departure"+":"+event.getUser().getId()+":"+ Objects.requireNonNull(event.getValue("nod_timeframe")).getAsString()+":", "Accept Ticket"),
@@ -80,25 +80,25 @@ public class NoticeOfDeparture {
         user.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
                 StatsBuilder.buildAccepted(event.getUser().getGlobalName()).build(),
                 new EmbedBuilder()
-                        .setDescription(translations.ticket_accepted()
+                        .setDescription(ColorTool.useCustomColorCodes(translations.ticket_accepted()
                                 .replace("%timeframe%", event.getModalId().split(":")[4]+" till " +event.getModalId().split(":")[3])
-                                .replace("%reason%", reason))
+                                .replace("%reason%", reason)))
                         .build()
         )).queue();
 
         Objects.requireNonNull(event.getGuild().getTextChannelById(LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_notice_channel_id())).sendMessageEmbeds(
                 StatsBuilder.buildStatus(Objects.requireNonNull(event.getMember()).getUser().getGlobalName()).build(),
                 new EmbedBuilder()
-                        .setTitle(translations.notice_title()
-                                .replace("%user%", Objects.requireNonNull(user.getGlobalName())))
+                        .setTitle(ColorTool.useCustomColorCodes(translations.notice_title()
+                                .replace("%user%", Objects.requireNonNull(user.getGlobalName()))))
                         .setThumbnail(user.getAvatarUrl())
-                        .setDescription(translations.notice_body()
+                        .setDescription(ColorTool.useCustomColorCodes(translations.notice_body()
                                 .replace("%user%", "<@"+event.getUser().getId()+">")
                                 .replace("%timeframe%", event.getModalId().split(":")[4]+" till " +event.getModalId().split(":")[3])
-                                .replace("%reason%", Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString()))
-                        .setFooter(translations.notice_footer()
+                                .replace("%reason%", Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString())))
+                        .setFooter(ColorTool.useCustomColorCodes(translations.notice_footer()
                                 .replace("%date%", date)
-                                .replace("%time%", time))
+                                .replace("%time%", time)))
                         .build())
                 .addActionRow(
                         Button.danger("revoke_notice_of_departure"+":"+
@@ -115,7 +115,7 @@ public class NoticeOfDeparture {
                         throw new RuntimeException(e);
                     }
                 });
-        event.reply(translations.ticket_message_sent()).setEphemeral(true).queue();
+        event.reply(ColorTool.useCustomColorCodes(translations.ticket_message_sent())).setEphemeral(true).queue();
     }
 
     public static void dismissNoticeOfDeparture(ModalInteractionEvent event, User user) {
@@ -126,25 +126,25 @@ public class NoticeOfDeparture {
         user.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
                 StatsBuilder.buildDismissed(event.getUser().getGlobalName()).build(),
                 new EmbedBuilder()
-                        .setDescription(translations.ticket_dismissed()
-                                .replace("%reason%", reason))
+                        .setDescription(ColorTool.useCustomColorCodes(translations.ticket_dismissed()
+                                .replace("%reason%", reason)))
                         .build()
         )).queue();
 
-        event.reply(translations.ticket_message_sent()).setEphemeral(true).queue();
+        event.reply(ColorTool.useCustomColorCodes(translations.ticket_message_sent())).setEphemeral(true).queue();
     }
 
     public static void revokeNoticeOfDeparture(ModalInteractionEvent event, User user) throws SQLException {
         ScpTools.getSqliteManager().deleteNoticeOfDeparture(user.getId());
         Objects.requireNonNull(event.getMessage()).delete().queue();
-        event.reply(translations.notice_revoked_message()).setEphemeral(true).queue();
+        event.reply(ColorTool.useCustomColorCodes(translations.notice_revoked_message())).setEphemeral(true).queue();
         user.openPrivateChannel().queue(privateChannel ->
                 privateChannel.sendMessageEmbeds(
                         StatsBuilder.buildRevoked(user.getGlobalName()).build(),
                         new EmbedBuilder()
-                                .setDescription(translations.notice_revoked()
+                                .setDescription(ColorTool.useCustomColorCodes(translations.notice_revoked()
                                         .replace("%timeframe%", event.getModalId().split(":")[3]+" till "+event.getModalId().split(":")[2])
-                                        .replace("%reason%", Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString()))
+                                        .replace("%reason%", Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString())))
                                 .build()
                 ).queue());
     }

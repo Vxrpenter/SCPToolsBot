@@ -44,8 +44,8 @@ public class Support {
                 .addPermissionOverride(guild.getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
                 .setSlowmode(1)
                 .queue(textChannel -> {
-                    event.reply(translations.ticket_support_created()
-                            .replace("%channel%", "<#"+textChannel.getId()+">")).setEphemeral(true).queue();
+                    event.reply(ColorTool.useCustomColorCodes(translations.ticket_support_created()
+                            .replace("%channel%", "<#"+textChannel.getId()+">"))).setEphemeral(true).queue();
 
                     List<String> roleIDs = configs.support_settings_roles_access_support_tickets();
                     for (String id : roleIDs) {
@@ -55,13 +55,13 @@ public class Support {
                                 .queue();
                     }
                     textChannel.sendMessageEmbeds(StatsBuilder.buildStatus(userName).build()).queue();
-                    textChannel.sendMessageEmbeds(builder(translations.ticket_support_title().replace("%name%", name),
-                                    translations.ticket_support_body()
+                    textChannel.sendMessageEmbeds(builder(ColorTool.useCustomColorCodes(translations.ticket_support_title().replace("%name%", name)),
+                                    ColorTool.useCustomColorCodes(translations.ticket_support_body()
                                             .replace("%subject%", subject)
-                                            .replace("%body%", body),
-                                    translations.ticket_support_footer()
+                                            .replace("%body%", body)),
+                                    ColorTool.useCustomColorCodes(translations.ticket_support_footer()
                                             .replace("%date%", date)
-                                            .replace("%time%", time),
+                                            .replace("%time%", time)),
                                     event.getGuild().getIconUrl(), event.getUser()).build())
                             .addActionRow(
                                     Button.danger("close_support_ticket:"+userID+":", "Close Ticket"),
