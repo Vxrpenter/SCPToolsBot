@@ -3,7 +3,21 @@ package dev.vxrp.bot.util.colors;
 import dev.vxrp.bot.util.Enums.DCColor;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class ColorTool {
+
+    public static final String DARK_GRAY = "\u001B[2;30m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String GOLD = "\u001B[33m";
+    public static final String LIGHT_BLUE = "\u001B[34m";
+    public static final String PINK = "\u001B[35m";
+    public static final String TEAL = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
+    public static final String BOLD = "\u001B[1;2m";
+    public static final String UNDERLINE = "\u001B[4;2m";
+    public static final String RESET = "\u001B[0m";
 
 
     @NotNull
