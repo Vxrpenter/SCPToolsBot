@@ -84,11 +84,11 @@ public class TranslationLoader {
                 translationManager.getString(TRANSLATIONS.BUTTONS.ACCEPT_UNBAN_TICKET),
                 translationManager.getString(TRANSLATIONS.BUTTONS.DISMISS_UNBAN_TICKET),
                 translationManager.getString(TRANSLATIONS.BUTTONS.SETTINGS_UNBAN_TICKET),
-                translationManager.getString(TRANSLATIONS.BUTTONS.FILE_NOTICE_OF_DEPARTURE),
                 translationManager.getString(TRANSLATIONS.BUTTONS.ACCEPT_NOTICE_OF_DEPARTURE_TICKET),
                 translationManager.getString(TRANSLATIONS.BUTTONS.DISMISS_NOTICE_OF_DEPARTURE_TICKET),
                 translationManager.getString(TRANSLATIONS.BUTTONS.REVOKE_NOTICE_OF_DEPARTURE),
-                translationManager.getString(TRANSLATIONS.BUTTONS.DELETE_NOTICE_OF_DEPARTURE));
+                translationManager.getString(TRANSLATIONS.BUTTONS.DELETE_NOTICE_OF_DEPARTURE),
+                translationManager.getString(TRANSLATIONS.BUTTONS.FILE_NOTICE_OF_DEPARTURE));
 
         logger.warn("Loading translations, this could take some time...");
         LoadedConfigurations.setButtonsMemoryLoad(buttonsGroup);
