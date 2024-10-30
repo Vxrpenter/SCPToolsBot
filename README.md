@@ -10,7 +10,7 @@
 </div>
 
 ## What is ScpToolsBot
-ScpToolsBot is a discord bot application written in Java for Scp Secret Laboratory discord servers. It includes support functions, cedmod api syncing, community and team management features
+ScpToolsBot is a discord bot application written in Java for Scp Secret Laboratory discord servers. It includes support functions, cedmod api syncing including community and team management features
 
 If you need any more information check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki)
 
