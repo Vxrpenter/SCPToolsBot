@@ -2,6 +2,8 @@ package dev.vxrp.bot.util.configuration.configs;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.ConfigManager;
+import dev.vxrp.bot.util.Enums.DCColor;
+import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
@@ -47,7 +49,16 @@ public class ConfigLoader {
                 configManager.getString(CONFIG.CEDMOD.MASTER_BAN_LIST_ID));
 
         logger.warn("Loading configurations, this could take some time...");
+        for (var component : configGroup.getClass().getRecordComponents()) {
+            try {
+                logger.trace("Added value to button translations - {}", component.getAccessor().invoke(configGroup));
+            } catch (Exception e) {debuggerErrorHandler(e);}
+        }
         LoadedConfigurations.setConfigMemoryLoad(configGroup);
         logger.info("Loaded configurations");
+    }
+
+    private static void debuggerErrorHandler(Exception e) {
+        logger.debug("{} Could not log the exact configuration value (this error can be ignored) - Stacktrace {}", ColorTool.apply(DCColor.RED, "ERROR") ,e.getMessage());
     }
 }

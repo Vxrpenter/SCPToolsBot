@@ -2,6 +2,7 @@ package dev.vxrp.bot.util.configuration.translations;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;
+import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
 import dev.vxrp.bot.util.configuration.util.TRANSLATIONS;
@@ -91,11 +92,32 @@ public class TranslationLoader {
                 translationManager.getString(TRANSLATIONS.BUTTONS.FILE_NOTICE_OF_DEPARTURE));
 
         logger.warn("Loading translations, this could take some time...");
+        for (var component : buttonsGroup.getClass().getRecordComponents()) {
+            try {
+                logger.trace("Added value to button translations - {}", component.getAccessor().invoke(buttonsGroup));
+            } catch (Exception e) {debuggerErrorHandler(e);}
+        }
         LoadedConfigurations.setButtonsMemoryLoad(buttonsGroup);
         logger.info("Loaded button translations");
+
+        for (var component : supportGroup.getClass().getRecordComponents()) {
+            try {
+                logger.trace("Added value to support translations - {}", component.getAccessor().invoke(supportGroup));
+            } catch (Exception e) {debuggerErrorHandler(e);}
+        }
         LoadedConfigurations.setSupportTranslationMemoryLoad(supportGroup);
         logger.info("Loaded support translations");
+
+        for (var component : noticeOfDepartureGroup.getClass().getRecordComponents()) {
+            try {
+                logger.trace("Added value to notice of departure translations - {}", component.getAccessor().invoke(noticeOfDepartureGroup));
+            } catch (Exception e) {debuggerErrorHandler(e);}
+        }
         LoadedConfigurations.setNoticeOfDepartureMemoryLoad(noticeOfDepartureGroup);
         logger.info("Loaded notice of departure translations");
+    }
+
+    private static void debuggerErrorHandler(Exception e) {
+        logger.debug("{} Could not log the exact translation value (this error can be ignored) - Stacktrace {}", ColorTool.apply(DCColor.RED, "ERROR") ,e.getMessage());
     }
 }
