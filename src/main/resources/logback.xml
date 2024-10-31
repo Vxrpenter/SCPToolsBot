@@ -16,9 +16,9 @@
         <file>logs/latest.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>logs/${time}-%i.log</fileNamePattern>
+            <fileNamePattern>logs/${time}-%i.log.gz</fileNamePattern>
             <minIndex>1</minIndex>
-            <maxIndex>10000000000000000000</maxIndex>
+            <maxIndex>21</maxIndex>
         </rollingPolicy>
 
         <triggeringPolicy class="dev.vxrp.bot.util.logback.RollPerSessionTriggeringPolicy"/>
