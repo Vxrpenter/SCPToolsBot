@@ -18,15 +18,15 @@ public class Support {
     public static void pasteSupportTemplate(SlashCommandInteractionEvent event) {
         event.getChannel().sendMessageEmbeds(new EmbedBuilder()
                         .setColor(Color.decode("#5865F2"))
-                        .setTitle(ColorTool.useCustomColorCodes(translations.first_title()))
-                        .setDescription(ColorTool.useCustomColorCodes(translations.first_body()))
+                        .setTitle(translations.first_title())
+                        .setDescription(translations.first_body())
                         .setColor(Color.DARK_GRAY)
                         .build())
                 .queue();
         event.getChannel().sendMessageEmbeds(new EmbedBuilder()
                         .setColor(Color.decode("#5865F2"))
-                        .setTitle(ColorTool.useCustomColorCodes(translations.second_title()))
-                        .setDescription(ColorTool.useCustomColorCodes(translations.second_body()))
+                        .setTitle(translations.second_title())
+                        .setDescription(translations.second_body())
                         .setColor(Color.DARK_GRAY)
                         .build())
                 .addActionRow(

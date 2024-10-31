@@ -1,6 +1,5 @@
 package dev.vxrp.bot.events.buttons;
 
-import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 import net.dv8tion.jda.api.entities.User;
@@ -17,32 +16,32 @@ public class Unban {
 
     public static void createUnbanTicket(ButtonInteractionEvent event) {
         event.replyModal(
-                Modal.create("unbanTicket", ColorTool.useCustomColorCodes(translations.modal_unban_title()))
+                Modal.create("unbanTicket", translations.modal_unban_title())
                         .addComponents(
                                 ActionRow.of(shortModal(
                                         "unban_steamID",
-                                        ColorTool.useCustomColorCodes(translations.modal_unban_first_title()),
-                                        ColorTool.useCustomColorCodes(translations.modal_unban_first_placeholder()),
+                                        translations.modal_unban_first_title(),
+                                        translations.modal_unban_first_placeholder(),
                                         17, 17)),
                                 ActionRow.of(shortModal(
                                         "unban_ban_reason",
-                                        ColorTool.useCustomColorCodes(translations.modal_unban_second_title()),
-                                        ColorTool.useCustomColorCodes(translations.modal_unban_second_placeholder()),
+                                        translations.modal_unban_second_title(),
+                                        translations.modal_unban_second_placeholder(),
                                         5, 100)),
                                 ActionRow.of(paragraphModal(
-                                        ColorTool.useCustomColorCodes(translations.modal_unban_third_title()),
-                                        ColorTool.useCustomColorCodes(translations.modal_unban_third_placeholder()))))
+                                        translations.modal_unban_third_title(),
+                                        translations.modal_unban_third_placeholder())))
                         .build()).queue();
     }
 
     public static void dismissTicket(ButtonInteractionEvent event, User user) {
         String steamID = Objects.requireNonNull(event.getButton().getId()).split(":")[2];
         event.replyModal(
-                Modal.create("reason_action_reason_dismiss:"+user.getId()+":"+steamID+":"+event.getMessageId()+":", ColorTool.useCustomColorCodes(translations.modal_reason_action_title()))
+                Modal.create("reason_action_reason_dismiss:"+user.getId()+":"+steamID+":"+event.getMessageId()+":", translations.modal_reason_action_title())
                         .addComponents(ActionRow.of(shortModal(
                                 "reason_action_reason",
-                                ColorTool.useCustomColorCodes(translations.modal_reason_action_first_title()),
-                                ColorTool.useCustomColorCodes(translations.modal_reason_action_first_placeholder()),
+                                translations.modal_reason_action_first_title(),
+                                translations.modal_reason_action_first_placeholder(),
                                 10, 100
                         ))).build()).queue();
     }
@@ -50,11 +49,11 @@ public class Unban {
     public static void acceptTicket(ButtonInteractionEvent event, User user) {
         String steamID = Objects.requireNonNull(event.getButton().getId()).split(":")[2];
         event.replyModal(
-                Modal.create("reason_action_unban_accept:"+user.getId()+":"+steamID+":"+event.getMessageId()+":", ColorTool.useCustomColorCodes(translations.modal_reason_action_title()))
+                Modal.create("reason_action_unban_accept:"+user.getId()+":"+steamID+":"+event.getMessageId()+":", translations.modal_reason_action_title())
                         .addComponents(ActionRow.of(shortModal(
                                 "reason_action_reason",
-                                ColorTool.useCustomColorCodes(translations.modal_reason_action_first_title()),
-                                ColorTool.useCustomColorCodes(translations.modal_reason_action_first_placeholder()),
+                                translations.modal_reason_action_first_title(),
+                                translations.modal_reason_action_first_placeholder(),
                                 10, 100
                         ))).build()).queue();
     }

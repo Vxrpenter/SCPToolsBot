@@ -1,6 +1,5 @@
 package dev.vxrp.bot.events.buttons;
 
-import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -21,15 +20,15 @@ public class Support {
     public static void createSupportTicket(ButtonInteractionEvent event) {
         if (event.getComponentId().equals("createNewTicket")) {
             event.replyModal(
-                    Modal.create("supportTicket", ColorTool.useCustomColorCodes(translations.modal_support_title()))
+                    Modal.create("supportTicket", translations.modal_support_title())
                             .addComponents(
                                     ActionRow.of(shortModal(
-                                            ColorTool.useCustomColorCodes(translations.modal_support_first_title()),
-                                            ColorTool.useCustomColorCodes(translations.modal_support_first_placeholder())
+                                            translations.modal_support_first_title(),
+                                            translations.modal_support_first_placeholder()
                                     )),
                                     ActionRow.of(paragraphModal(
-                                            ColorTool.useCustomColorCodes(translations.modal_support_second_title()),
-                                            ColorTool.useCustomColorCodes(translations.modal_support_second_placeholder()))))
+                                            translations.modal_support_second_title(),
+                                            translations.modal_support_second_placeholder())))
                             .build()).queue();
         }
     }
