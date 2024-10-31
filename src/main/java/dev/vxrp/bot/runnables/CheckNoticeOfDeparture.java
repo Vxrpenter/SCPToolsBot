@@ -62,10 +62,10 @@ public class CheckNoticeOfDeparture  {
                                     message.editMessage(String.join("", pingRoles)).queue();
                                     channel.sendMessage(String.join("", pingRoles)).queue(ping -> ping.delete().queue());
                                     message.editMessageEmbeds(new EmbedBuilder()
-                                                    .setDescription(ColorTool.useCustomColorCodes(ColorTool.useCustomColorCodes(translations.notice_ended_replace()
+                                                    .setDescription(translations.notice_ended_replace()
                                                             .replace("%user%", Objects.requireNonNull(user.getGlobalName()))
                                                             .replace("%date%", now.toString())
-                                                            .replace("%actionTaker%", "AUTOMATIC DETECTION UNIT"))))
+                                                            .replace("%actionTaker%", "AUTOMATIC DETECTION UNIT"))
                                                     .build())
                                             .setActionRow(
                                                     Button.danger("delete_notice_of_departure", buttons.delete_notice_of_departure())
@@ -77,8 +77,8 @@ public class CheckNoticeOfDeparture  {
                             Objects.requireNonNull(user).openPrivateChannel().queue(privateChannel -> {
                                 privateChannel.sendMessageEmbeds(
                                         StatsBuilder.buildEnded(user.getGlobalName()).build(),
-                                        new EmbedBuilder().setDescription(ColorTool.useCustomColorCodes(translations.notice_ended()
-                                                        .replace("%timeframe%", notice.start_time()+" till "+notice.end_time())))
+                                        new EmbedBuilder().setDescription(translations.notice_ended()
+                                                        .replace("%timeframe%", notice.start_time()+" till "+notice.end_time()))
                                                 .build()
                                 ).queue();
                                 logger.info("Send private message about invalid notice of departure to {}", user.getGlobalName());
