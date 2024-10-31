@@ -16,7 +16,8 @@ public class ConfigLoader {
 
         ConfigGroup configGroup = new ConfigGroup(
                 configManager.getString(CONFIG.TOKEN),
-                configManager.getString(CONFIG.GUILD_ID),
+                configManager.getBoolean(CONFIG.DEBUG),
+                configManager.getBoolean(CONFIG.ADVANCED_DEBUG),
                 configManager.getString(CONFIG.ACTIVITY_TYPE),
                 configManager.getString(CONFIG.ACTIVITY_CONTENT),
                 configManager.getString(CONFIG.RULES.PASTEBIN),

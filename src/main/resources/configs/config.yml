@@ -1,8 +1,10 @@
 # The bot token get from here https://discord.com/developers/
 token: ""
-# The guild id. Get using developer mode in discord and then right-clicking on the server, then copy id
-# \__ go to Settings > Advanced > Developer Mode
-guild_id: ""
+
+# Should debug mode be activated?
+debug: false
+# Should additional debug mode be applied?
+advanced_debug: true
 
 # The activity type of the bot [COMPETING, CUSTOM_STATUS, LISTENING, PLAYING, WATCHING]
 activity_type: "PLAYING"

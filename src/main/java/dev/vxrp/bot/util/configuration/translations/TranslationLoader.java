@@ -2,6 +2,7 @@ package dev.vxrp.bot.util.configuration.translations;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;
+import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
 import dev.vxrp.bot.util.configuration.util.TRANSLATIONS;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
@@ -17,7 +18,7 @@ public class TranslationLoader {
         TranslationManager translationManager = ScpTools.getTranslationManager();
 
         SupportGroup supportGroup = new SupportGroup(
-                translationManager.getString(TRANSLATIONS.SUPPORT.FIRST_TITLE),
+                ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.SUPPORT.FIRST_TITLE)),
                 translationManager.getString(TRANSLATIONS.SUPPORT.FIRST_BODY),
                 translationManager.getString(TRANSLATIONS.SUPPORT.SECOND_TITLE),
                 translationManager.getString(TRANSLATIONS.SUPPORT.SECOND_BODY),
