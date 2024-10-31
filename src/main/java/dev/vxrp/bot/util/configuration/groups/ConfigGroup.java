@@ -2,7 +2,7 @@ package dev.vxrp.bot.util.configuration.groups;
 
 import java.util.List;
 
-public record ConfigGroup(String token, String guild_id, String activity_type, String activity_content,
+public record ConfigGroup(String token, boolean debug, boolean advanced_debug, String activity_type, String activity_content,
                           String rules_pastebin, String rules_embed_footer, boolean do_logging, String ticket_logging_channel_id,
                           String notice_of_departures_logging_channel_id, boolean do_database_logging, String database_logging_channel_id, List<String> commands,
                           List<String> command_setting_help_default_permissions, String command_settings_help_description, List<String> command_settings_template_default_permissions,

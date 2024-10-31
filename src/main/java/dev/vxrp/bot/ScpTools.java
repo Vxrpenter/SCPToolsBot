@@ -1,5 +1,10 @@
 package dev.vxrp.bot;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.classic.spi.LoggingEvent;
+import ch.qos.logback.core.Appender;
 import dev.vxrp.bot.database.sqlite.SqliteManager;
 import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.commands.CommandManager;
@@ -47,6 +52,7 @@ public class ScpTools {
 
         initializeConfigs();
         initializeSqlite();
+        setLoggingLevel();
         loadConfigs();
 
         Activity.ActivityType activityType = Activity.ActivityType.valueOf(configManager.getString(CONFIG.ACTIVITY_TYPE));
@@ -54,7 +60,6 @@ public class ScpTools {
         String activityContent = configManager.getString(CONFIG.ACTIVITY_CONTENT);
         logger.info("ActivityContent set to {}", ColorTool.apply(DCColor.RED, activityContent));
 
-        checkGuildID();
         JDA api = JDABuilder.createDefault(configManager.getToken(), GatewayIntent.MESSAGE_CONTENT)
                 .setActivity(Activity.of(activityType, activityContent))
                 .disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
@@ -65,6 +70,16 @@ public class ScpTools {
         logger.info("Initialized Listeners");
 
         noticeOfDepartureCheckups(api);
+    }
+
+    private static void setLoggingLevel() {
+        Level level = Level.INFO;
+        if (configManager.getBoolean(CONFIG.DEBUG)) {level = Level.DEBUG;}
+        if (configManager.getBoolean(CONFIG.ADVANCED_DEBUG)) {level = Level.TRACE;}
+
+        final LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
+        final ch.qos.logback.classic.Logger log = loggerContext.exists(org.slf4j.Logger.ROOT_LOGGER_NAME);
+        log.setLevel(level);
     }
 
     private static void initializeSqlite() {
@@ -103,24 +118,19 @@ public class ScpTools {
             configManager = new ConfigManager();
         } catch (Exception e) {
             logger.error("Could not load configs from configManager : {}", e.getMessage());
+            System.exit(1);
         }
         try {
             translationManager = new TranslationManager();
         } catch (Exception e) {
             logger.error("Could not load configs from translationManager : {}", e.getMessage());
+            System.exit(1);
         }
         try {
             colorConfigManager = new ColorConfigManager();
         } catch (Exception e) {
             logger.error("Could not load configs from colorConfigManager : {}", e.getMessage());
-        }
-    }
-
-    private static void checkGuildID() {
-        if (configManager.getString("guild_id") == null || Objects.equals(configManager.getString("guild_id"), "")) {
-            logger.error("Guild id is {}. Invalid but moving on", ColorTool.apply(DCColor.RED, "null"));
-        } else {
-            logger.info("Launching under guild id {}", ColorTool.apply(DCColor.GREEN, configManager.getString("guild_id")));
+            System.exit(1);
         }
     }
 
