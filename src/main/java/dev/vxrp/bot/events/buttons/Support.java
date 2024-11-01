@@ -1,9 +1,8 @@
 package dev.vxrp.bot.events.buttons;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.database.sqlite.SqliteManager;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.groups.SupportGroup;
+import dev.vxrp.bot.util.configuration.records.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;

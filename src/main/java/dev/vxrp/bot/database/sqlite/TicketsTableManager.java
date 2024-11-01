@@ -3,6 +3,9 @@ package dev.vxrp.bot.database.sqlite;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.Enums.TicketIdentifier;
 import dev.vxrp.bot.util.colors.ColorTool;
+import dev.vxrp.bot.util.records.NoticeOfDeparture;
+import dev.vxrp.bot.util.records.Ticket;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +41,26 @@ public class TicketsTableManager {
                     ColorTool.apply(DCColor.GOLD, creation_date),
                     ColorTool.apply(DCColor.GOLD, creatorId),
                     ColorTool.apply(DCColor.GOLD, handlerId));
+        }
+    }
+
+    public Ticket getTicket(String id) throws SQLException {
+        if (!existsId(id)) {
+            logger.error("{} - Failed to get ticket with id: {}. Id does not exist", prefix,
+                    ColorTool.apply(DCColor.GREEN, id));
+            return null;
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM tickets WHERE id=?")) {
+            statement.setString(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return new Ticket(
+                        resultSet.getString("id"),
+                        TicketIdentifier.valueOf(resultSet.getString("identifier")),
+                        resultSet.getString("creation_date"),
+                        resultSet.getString("creatorId"),
+                        resultSet.getString("handlerId"));
+            }
         }
     }
 

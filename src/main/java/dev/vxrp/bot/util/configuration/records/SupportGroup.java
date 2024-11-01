@@ -1,4 +1,4 @@
-package dev.vxrp.bot.util.configuration.groups;
+package dev.vxrp.bot.util.configuration.records;
 
 public record SupportGroup(String first_title, String first_body, String second_title, String second_body,
                            String modal_support_title, String modal_support_first_title,

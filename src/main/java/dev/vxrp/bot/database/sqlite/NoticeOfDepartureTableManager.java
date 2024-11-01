@@ -2,7 +2,7 @@ package dev.vxrp.bot.database.sqlite;
 
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.colors.ColorTool;
-import dev.vxrp.bot.util.objects.NoticeOfDeparture;
+import dev.vxrp.bot.util.records.NoticeOfDeparture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

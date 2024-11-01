@@ -4,12 +4,12 @@ import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.colors.ColorTool;
-import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
+import dev.vxrp.bot.util.configuration.records.ButtonGroup;
+import dev.vxrp.bot.util.configuration.records.LoggingGroup;
 import dev.vxrp.bot.util.configuration.util.TRANSLATIONS;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
-import dev.vxrp.bot.util.configuration.groups.SupportGroup;
-import dev.vxrp.bot.util.logger.LoggerManager;
+import dev.vxrp.bot.util.configuration.records.NoticeOfDepartureGroup;
+import dev.vxrp.bot.util.configuration.records.SupportGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -75,6 +75,10 @@ public class TranslationLoader {
                 ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.ENDED_REPLACE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.NOTICE_OF_DEPARTURE.DELETED_ENDED_REPLACE_MESSAGE)));
 
+        LoggingGroup loggingGroup = new LoggingGroup(
+                ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.SINGLE_MESSAGE_LOG_TEMPLATE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.SUPPORT_MESSAGE_LOGGING_ACTION)));
+
         ButtonGroup buttonsGroup = new ButtonGroup(
                 translationManager.getString(TRANSLATIONS.BUTTONS.PASTE_RULES),
                 translationManager.getString(TRANSLATIONS.BUTTONS.UPDATE_RULES),
@@ -109,6 +113,14 @@ public class TranslationLoader {
         }
         LoadedConfigurations.setSupportTranslationMemoryLoad(supportGroup);
         logger.info("Loaded support translations");
+
+        for (var component : loggingGroup.getClass().getRecordComponents()) {
+            try {
+                logger.trace("Added value to logging translations - {}", component.getAccessor().invoke(loggingGroup));
+            } catch (Exception e) {debuggerErrorHandler(e);}
+        }
+        LoadedConfigurations.setLoggingMemoryLoad(loggingGroup);
+        logger.info("Loaded logging translations");
 
         for (var component : noticeOfDepartureGroup.getClass().getRecordComponents()) {
             try {

@@ -1,4 +1,4 @@
-package dev.vxrp.bot.util.configuration.groups;
+package dev.vxrp.bot.util.configuration.records;
 
 public record ButtonGroup(String paste_rules, String update_rules, String create_new_support_ticket,
                           String close_support_ticket, String claim_support_ticket, String settings_support_ticket,

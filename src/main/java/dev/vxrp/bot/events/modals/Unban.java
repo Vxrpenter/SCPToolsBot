@@ -1,13 +1,13 @@
 package dev.vxrp.bot.events.modals;
 
-import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
-import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
+import dev.vxrp.bot.util.configuration.records.ButtonGroup;
+import dev.vxrp.bot.util.configuration.records.ConfigGroup;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.api.cedmod.CedModApi;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.groups.SupportGroup;
+import dev.vxrp.bot.util.configuration.records.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;

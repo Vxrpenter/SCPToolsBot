@@ -1,15 +1,14 @@
 package dev.vxrp.bot.runnables;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.database.sqlite.NoticeOfDepartureTableManager;
 import dev.vxrp.bot.database.sqlite.SqliteManager;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
-import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
-import dev.vxrp.bot.util.objects.NoticeOfDeparture;
+import dev.vxrp.bot.util.configuration.records.ButtonGroup;
+import dev.vxrp.bot.util.configuration.records.NoticeOfDepartureGroup;
+import dev.vxrp.bot.util.records.NoticeOfDeparture;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
