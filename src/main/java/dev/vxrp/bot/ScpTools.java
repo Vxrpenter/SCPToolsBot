@@ -2,9 +2,6 @@ package dev.vxrp.bot;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.classic.spi.LoggingEvent;
-import ch.qos.logback.core.Appender;
 import dev.vxrp.bot.database.sqlite.SqliteManager;
 import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.commands.CommandManager;
@@ -13,6 +10,7 @@ import dev.vxrp.bot.commands.templates.TemplateCommand;
 import dev.vxrp.bot.config.managers.ColorConfigManager;
 import dev.vxrp.bot.config.managers.TranslationManager;
 import dev.vxrp.bot.runnables.CheckNoticeOfDeparture;
+import dev.vxrp.bot.util.Enums.TicketIdentifier;
 import dev.vxrp.bot.util.api.github.GitHubApi;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.configs.ConfigLoader;

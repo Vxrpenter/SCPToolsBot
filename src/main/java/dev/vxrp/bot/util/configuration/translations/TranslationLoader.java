@@ -9,6 +9,7 @@ import dev.vxrp.bot.util.configuration.util.TRANSLATIONS;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
+import dev.vxrp.bot.util.logger.LoggerManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,6 +91,7 @@ public class TranslationLoader {
                 translationManager.getString(TRANSLATIONS.BUTTONS.REVOKE_NOTICE_OF_DEPARTURE),
                 translationManager.getString(TRANSLATIONS.BUTTONS.DELETE_NOTICE_OF_DEPARTURE),
                 translationManager.getString(TRANSLATIONS.BUTTONS.FILE_NOTICE_OF_DEPARTURE));
+
 
         logger.warn("Loading translations, this could take some time...");
         for (var component : buttonsGroup.getClass().getRecordComponents()) {

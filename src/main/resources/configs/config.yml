@@ -4,7 +4,7 @@ token: ""
 # Should debug mode be activated?
 debug: false
 # Should additional debug mode be applied?
-advanced_debug: true
+advanced_debug: false
 
 # The activity type of the bot [COMPETING, CUSTOM_STATUS, LISTENING, PLAYING, WATCHING]
 activity_type: "PLAYING"

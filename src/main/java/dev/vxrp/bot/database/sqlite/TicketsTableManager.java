@@ -1,0 +1,97 @@
+package dev.vxrp.bot.database.sqlite;
+
+import dev.vxrp.bot.util.Enums.DCColor;
+import dev.vxrp.bot.util.Enums.TicketIdentifier;
+import dev.vxrp.bot.util.colors.ColorTool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class TicketsTableManager {
+    private final Connection connection;
+    private final Logger logger = LoggerFactory.getLogger(TicketsTableManager.class);
+    private final String prefix = ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite"));
+
+    public TicketsTableManager(Connection connection) {
+        this.connection = connection;
+    }
+
+    public void addTicket(String id, TicketIdentifier identifier, String creation_date, String creatorId, String handlerId) throws SQLException {
+        if (existsId(id)) {
+            logger.warn("{} - Ticket already exists in Sqlite database... opting for deletion", prefix);
+            deleteTicket(id);
+        }
+        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO tickets VALUES (?, ?, ?, ?, ?)")) {
+            statement.setString(1, id);
+            statement.setString(2, identifier.toString());
+            statement.setString(3, creation_date);
+            statement.setString(4, creatorId);
+            statement.setString(5, handlerId);
+            statement.executeUpdate();
+            logger.info("{} - Added ticket - id: {}, identifier: {} , creation_date: {} , creatorId: {} , handlerId {}", prefix,
+                    ColorTool.apply(DCColor.GREEN, id),
+                    ColorTool.apply(DCColor.GREEN, identifier.toString()),
+                    ColorTool.apply(DCColor.GOLD, creation_date),
+                    ColorTool.apply(DCColor.GOLD, creatorId),
+                    ColorTool.apply(DCColor.GOLD, handlerId));
+        }
+    }
+
+    public void updateHandler(String id, String handlerId) throws SQLException {
+        if (!existsId(id)) {
+            logger.error("{} - Failed to update ticket with id: {}. Id does not exist", prefix,
+                    ColorTool.apply(DCColor.GREEN, id));
+            return;
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement("UPDATE tickets SET handlerId = ? WHERE id = ?")) {
+            statement.setString(1, handlerId);
+            statement.setString(2, id);
+            statement.executeUpdate();
+            logger.info("{} - Updated handler of ticket - id: {} , handlerId: {}", prefix,
+                    ColorTool.apply(DCColor.GREEN, id),
+                    ColorTool.apply(DCColor.GOLD, handlerId));
+        }
+    }
+
+    public void deleteTicket(String id) throws SQLException {
+        if  (!existsId(id)) {
+            logger.error("{} - Failed to delete ticket with id: {}. Id does not exist", prefix,
+                    ColorTool.apply(DCColor.GREEN, id));
+            return;
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement("DELETE FROM ticket WHERE id=?")) {
+            statement.setString(1, id);
+            statement.execute();
+            logger.info("{} - Deleted ticket - id: {}", prefix,
+                    ColorTool.apply(DCColor.RED, id));
+        }
+    }
+
+    public boolean existsId(String id) {
+        try (PreparedStatement statement = connection.prepareStatement("SELECT EXISTS(SELECT 1 FROM tickets WHERE id=?);")) {
+            statement.setString(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.getInt(1) == 1;
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean existsIdentifier(TicketIdentifier identifier) {
+        try (PreparedStatement statement = connection.prepareStatement("SELECT EXISTS(SELECT 1 FROM tickets WHERE identifier=?);")) {
+            statement.setString(1, identifier.toString());
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.getInt(1) == 1;
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            return false;
+        }
+    }
+}

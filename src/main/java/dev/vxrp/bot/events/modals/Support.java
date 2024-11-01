@@ -1,5 +1,7 @@
 package dev.vxrp.bot.events.modals;
 
+import dev.vxrp.bot.ScpTools;
+import dev.vxrp.bot.util.Enums.TicketIdentifier;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
 import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
@@ -16,6 +18,7 @@ import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.slf4j.Logger;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -68,8 +71,12 @@ public class Support {
                                     Button.primary("claim_support_ticket:"+userID+":", buttons.claim_support_ticket()),
                                     Button.secondary("settings_support_ticket", buttons.settings_support_ticket())
                             ).queue();
+                    try {
+                        ScpTools.getSqliteManager().getTicketsTableManager().addTicket(textChannel.getId(), TicketIdentifier.SUPPORT, date, userName, null);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 });
-
         logger.info("Created new support ticket by user {} - under name {}", ColorTool.apply(DCColor.GREEN, userName), ColorTool.apply(DCColor.RED, name));
     }
 

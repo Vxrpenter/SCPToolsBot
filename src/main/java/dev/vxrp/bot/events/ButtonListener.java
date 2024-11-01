@@ -9,6 +9,8 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.SQLException;
+
 public class ButtonListener extends ListenerAdapter {
     public final Logger logger = LoggerFactory.getLogger(ButtonListener.class);
 
@@ -26,14 +28,26 @@ public class ButtonListener extends ListenerAdapter {
             Support.createSupportTicket(event);
         }
         if (event.getComponentId().startsWith("close_support_ticket")) {
-            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> Support.closeTicket(event, user));
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
+                try {
+                    Support.closeTicket(event, user);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
         if (event.getComponentId().startsWith("claim_support_ticket")) {
-            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> Support.claimTicket(event, user));
+            event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
+                try {
+                    Support.claimTicket(event, user);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
         if (event.getComponentId().equals("settings_support_ticket")) {
             //WIP
-            event.reply("Feature currently under development").queue();
+            event.reply("Feature currently under development").setEphemeral(true).queue();
         }
 
         if (event.getComponentId().equals("createNewUnban")) {
@@ -47,7 +61,7 @@ public class ButtonListener extends ListenerAdapter {
         }
         if (event.getComponentId().equals("settings_unban_ticket")) {
             //WIP
-            event.reply("Feature currently under development").queue();
+            event.reply("Feature currently under development").setEphemeral(true).queue();
         }
 
         //Notice of Departure

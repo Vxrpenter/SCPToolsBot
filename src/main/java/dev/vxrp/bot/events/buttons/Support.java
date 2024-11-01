@@ -1,5 +1,7 @@
 package dev.vxrp.bot.events.buttons;
 
+import dev.vxrp.bot.ScpTools;
+import dev.vxrp.bot.database.sqlite.SqliteManager;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.groups.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -12,6 +14,7 @@ import net.dv8tion.jda.api.interactions.components.text.TextInput;
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.modals.Modal;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class Support {
@@ -33,7 +36,7 @@ public class Support {
         }
     }
 
-    public static void closeTicket(ButtonInteractionEvent event, User user) {
+    public static void closeTicket(ButtonInteractionEvent event, User user) throws SQLException {
         if (event.getUser() == user) {
             event.reply("""
                     ```ansi
@@ -42,10 +45,11 @@ public class Support {
                     """).setEphemeral(true).queue();
             return;
         }
+        ScpTools.getSqliteManager().getTicketsTableManager().deleteTicket(event.getChannelId());
         event.getMessageChannel().delete().queue();
     }
 
-    public static void claimTicket(ButtonInteractionEvent event, User user) {
+    public static void claimTicket(ButtonInteractionEvent event, User user) throws SQLException {
         if (event.getUser() == user) {
             event.reply("""
                     ```ansi
@@ -60,10 +64,13 @@ public class Support {
         actionRow.add(1, Button.primary("claim_support_ticket", "Claim Ticket").asDisabled());
         event.getMessage().editMessage(event.getMessage().getContentRaw()).setActionRow(actionRow).queue();
 
+        ScpTools.getSqliteManager().getTicketsTableManager().updateHandler(event.getChannelId(), event.getUser().getId());
         event.replyEmbeds(new EmbedBuilder()
                 .setDescription("""
-                        This Ticket has been claimed by <@808746591829229601>
-                        """)
+                        This Ticket has been claimed by %user%
+                        """
+                        .replace("%user%", "<@"+event.getUser().getId()+">")
+                )
                 .build()).queue();
     }
 

@@ -1,6 +1,7 @@
 package dev.vxrp.bot.runnables;
 
 import dev.vxrp.bot.ScpTools;
+import dev.vxrp.bot.database.sqlite.NoticeOfDepartureTableManager;
 import dev.vxrp.bot.database.sqlite.SqliteManager;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
@@ -32,7 +33,7 @@ public class CheckNoticeOfDeparture  {
             logger.info("Checking notice of departures...");
             SqliteManager sqliteManager = ScpTools.getSqliteManager();
             try {
-                for (NoticeOfDeparture notice : sqliteManager.getEveryNoticeOfDeparture()) {
+                for (NoticeOfDeparture notice : sqliteManager.getNoticeOfDepartureTableManager().getEveryNoticeOfDeparture()) {
                     String status = ColorTool.apply(DCColor.GREEN, "CLEAN");
                     String[] startTimes = notice.end_time().split("\\.");
 
@@ -83,7 +84,7 @@ public class CheckNoticeOfDeparture  {
                                 ).queue();
                                 logger.info("Send private message about invalid notice of departure to {}", user.getGlobalName());
                                 try {
-                                    sqliteManager.deleteNoticeOfDeparture(notice.id());
+                                    sqliteManager.getNoticeOfDepartureTableManager().deleteNoticeOfDeparture(notice.id());
                                 } catch (SQLException e) {
                                     throw new RuntimeException(e);
                                 }
