@@ -88,7 +88,7 @@ public class TicketsTableManager {
             return;
         }
 
-        try (PreparedStatement statement = connection.prepareStatement("DELETE FROM ticket WHERE id=?")) {
+        try (PreparedStatement statement = connection.prepareStatement("DELETE FROM tickets WHERE id=?")) {
             statement.setString(1, id);
             statement.execute();
             logger.info("{} - Deleted ticket - id: {}", prefix,

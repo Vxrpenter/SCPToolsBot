@@ -26,6 +26,7 @@ public class ConfigLoader {
                 configManager.getString(CONFIG.RULES.EMBED_FOOTER),
                 configManager.getBoolean(CONFIG.LOGGING.DO_LOGGING),
                 configManager.getString(CONFIG.LOGGING.TICKET_CHANNEL_ID),
+                configManager.getString(CONFIG.LOGGING.TICKET_BACKUP_CHANNEL_ID),
                 configManager.getString(CONFIG.LOGGING.NOTICE_OF_DEPARTURE_CHANNEL_ID),
                 configManager.getBoolean(CONFIG.LOGGING.DO_DATABASE_LOGGING),
                 configManager.getString(CONFIG.LOGGING.DATABASE_CHANNEL_ID),

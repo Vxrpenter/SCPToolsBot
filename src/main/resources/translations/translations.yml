@@ -225,6 +225,15 @@ logging:
                         %message%
                         ```
                         "
+  close_log_template: "
+                        %action%\n
+                        
+                        **Logging Level**\n
+                        ```ansi
+                        
+                        %level%
+                        ```
+                        "
 
   support_message_logging_action: "
                         ✏️ Send message in channel %channel% by user %user%\n
@@ -233,6 +242,18 @@ logging:
                         Ticket Id - **%id%**\n
                         Creator - **%creator%**\n
                         Handler - **%handler%**\n
+                        
+                        *Ticket created - **%date%***
+                        "
+  support_ticket_close_logging_action: "
+                        ❌ Ticket with id: **%id%** closed by user %user%\n
+                        %filler%
+                        Ticket Type - **%type%**\n
+                        Ticket Id - **%id%**\n
+                        Creator - **%creator%**\n
+                        Handler - **%handler%**\n
+                        
+                        State before closed - **%state%**\n
                         
                         *Ticket created - **%date%***
                         "

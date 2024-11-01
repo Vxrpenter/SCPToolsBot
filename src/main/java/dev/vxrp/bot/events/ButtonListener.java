@@ -31,7 +31,7 @@ public class ButtonListener extends ListenerAdapter {
             event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> {
                 try {
                     Support.closeTicket(event, user);
-                } catch (SQLException e) {
+                } catch (SQLException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             });

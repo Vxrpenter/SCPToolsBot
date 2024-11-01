@@ -29,7 +29,7 @@ public class Support {
                     event.getMessage().getContentRaw(),
                     Objects.requireNonNull(event.getAuthor()).getAvatarUrl(),
                     Level.INFO,
-                    "1301703681414008903",
+                    LoadedConfigurations.getConfigMemoryLoad().ticket_logging_channel_id(),
                     Color.ORANGE);
         }
     }
