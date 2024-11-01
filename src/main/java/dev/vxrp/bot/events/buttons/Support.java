@@ -71,7 +71,7 @@ public class Support {
         event.getMessageChannel().delete().queue();
     }
 
-    public static void claimTicket(ButtonInteractionEvent event, User user) throws SQLException {
+    public static void claimTicket(ButtonInteractionEvent event, User user) throws SQLException, InterruptedException {
         if (event.getUser() == user) {
             event.reply("""
                     ```ansi

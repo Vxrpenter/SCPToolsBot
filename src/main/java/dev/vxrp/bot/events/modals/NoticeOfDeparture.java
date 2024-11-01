@@ -113,7 +113,7 @@ public class NoticeOfDeparture {
                                 event.getModalId().split(":")[4],
                                 event.getModalId().split(":")[3]
                         );
-                    } catch (SQLException e) {
+                    } catch (SQLException | InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                 });
@@ -136,7 +136,7 @@ public class NoticeOfDeparture {
         event.reply(translations.ticket_message_sent()).setEphemeral(true).queue();
     }
 
-    public static void revokeNoticeOfDeparture(ModalInteractionEvent event, User user) throws SQLException {
+    public static void revokeNoticeOfDeparture(ModalInteractionEvent event, User user) throws SQLException, InterruptedException {
         ScpTools.getSqliteManager().getNoticeOfDepartureTableManager().deleteNoticeOfDeparture(user.getId());
         Objects.requireNonNull(event.getMessage()).delete().queue();
         event.reply(translations.notice_revoked_message()).setEphemeral(true).queue();

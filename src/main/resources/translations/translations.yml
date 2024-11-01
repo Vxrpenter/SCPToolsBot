@@ -225,6 +225,19 @@ logging:
   close_log_template: "
                         %action%\n
                         "
+  database_log_template: "
+                        **SQL Statement**\n
+                        ```ansi
+                        
+                        %statement%
+                        ```
+                        
+                        **Output data**\n
+                        ```ansi
+                        
+                        %output%
+                        ```
+                        "
 
   support_message_logging_action: "
                         ✏️ Send message in channel %channel% by user %user%\n

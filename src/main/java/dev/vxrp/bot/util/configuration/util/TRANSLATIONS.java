@@ -77,6 +77,7 @@ public class TRANSLATIONS {
         public static final String SINGLE_MESSAGE_LOG_TEMPLATE = "logging.single_message_log_template";
         public static final String CREATE_LOG_TEMPLATE = "logging.create_log_template";
         public static final String CLOSE_LOG_TEMPLATE = "logging.close_log_template";
+        public static final String DATABASE_LOG_TEMPLATE = "logging.database_log_template";
         public static final String SUPPORT_MESSAGE_LOGGING_ACTION = "logging.support_message_logging_action";
         public static final String SUPPORT_TICKET_CREATE_ACTION = "logging.support_ticket_create_logging_action";
         public static final String SUPPORT_TICKET_CLOSE_ACTION = "logging.support_ticket_close_logging_action";
