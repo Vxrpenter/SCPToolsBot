@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events;
 
+import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import org.slf4j.Logger;
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.events.messages.Support;
@@ -14,6 +15,7 @@ public class MessageListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         if (event.getAuthor().isBot()) return;
+        if (!LoadedConfigurations.getConfigMemoryLoad().do_logging()) return;
 
         if (ScpTools.getSqliteManager().getTicketsTableManager().existsId(event.getMessage().getChannelId())) {
             try {

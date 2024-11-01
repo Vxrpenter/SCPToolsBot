@@ -3,7 +3,11 @@ package dev.vxrp.bot.events.buttons;
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.records.SupportGroup;
+import dev.vxrp.bot.util.logger.LoggerManager;
+import dev.vxrp.bot.util.records.Ticket;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageHistory;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
@@ -12,11 +16,17 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.text.TextInput;
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.modals.Modal;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 
+import java.awt.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Support {
+    private final static Logger logger = LoggerFactory.getLogger(Support.class);
     private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
 
     public static void createSupportTicket(ButtonInteractionEvent event) {
@@ -35,7 +45,7 @@ public class Support {
         }
     }
 
-    public static void closeTicket(ButtonInteractionEvent event, User user) throws SQLException {
+    public static void closeTicket(ButtonInteractionEvent event, User user) throws SQLException, InterruptedException {
         if (event.getUser() == user) {
             event.reply("""
                     ```ansi
@@ -44,6 +54,20 @@ public class Support {
                     """).setEphemeral(true).queue();
             return;
         }
+
+        Ticket ticket = ScpTools.getSqliteManager().getTicketsTableManager().getTicket(event.getMessage().getChannelId());
+        new LoggerManager(event.getJDA()).closeLog(
+                LoadedConfigurations.getLoggingMemoryLoad().support_ticket_close_logging_action()
+                        .replace("%id%", ticket.id())
+                        .replace("%user%", "<@"+event.getUser().getId()+">")
+                        .replace("%type%", ticket.identifier().toString())
+                        .replace("%creator%", "<@"+ticket.creatorId()+">")
+                        .replace("%handler%", "<@"+ticket.handlerId()+">").replace("<@null>", "None")
+                        .replace("%state%", "OPEN")
+                        .replace("%date%", ticket.creation_date()),
+                Level.INFO,
+                LoadedConfigurations.getConfigMemoryLoad().ticket_logging_channel_id(), Color.RED);
+
         ScpTools.getSqliteManager().getTicketsTableManager().deleteTicket(event.getChannelId());
         event.getMessageChannel().delete().queue();
     }

@@ -22,6 +22,8 @@ logging:
   do_logging: true
   # Channel id of the ticket logging channel
   ticket_logging_channel_id: ""
+  # Channel id of the ticket backup logging channel
+  ticket_backup_logging_channel_id: ""
   # Channel id of notice of departure logging channel
   notice_of_departures_logging_channel_id: ""
   # Channel id of database logging channel. Will log all database activity to a discord channel

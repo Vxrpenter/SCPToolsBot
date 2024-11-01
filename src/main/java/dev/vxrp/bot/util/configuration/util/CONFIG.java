@@ -7,11 +7,12 @@ public class CONFIG {
     public static final String ACTIVITY_TYPE = "activity_type";
     public static final String ACTIVITY_CONTENT = "activity_content";
     public static final class LOGGING {
-        public static final String DO_LOGGING = "logging.";
-        public static final String TICKET_CHANNEL_ID = "logging.";
-        public static final String NOTICE_OF_DEPARTURE_CHANNEL_ID = "logging.";
-        public static final String DO_DATABASE_LOGGING = "logging.";
-        public static final String DATABASE_CHANNEL_ID = "logging.";
+        public static final String DO_LOGGING = "logging.do_logging";
+        public static final String TICKET_CHANNEL_ID = "logging.ticket_logging_channel_id";
+        public static final String TICKET_BACKUP_CHANNEL_ID = "logging.ticket_backup_logging_channel_id";
+        public static final String NOTICE_OF_DEPARTURE_CHANNEL_ID = "logging.notice_of_departures_logging_channel_id";
+        public static final String DO_DATABASE_LOGGING = "logging.do_database_logging";
+        public static final String DATABASE_CHANNEL_ID = "logging.database_logging_channel_id";
     }
     public static final String COMMANDS = "commands";
     public static final class RULES {

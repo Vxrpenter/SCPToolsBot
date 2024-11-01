@@ -5,6 +5,7 @@ import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.slf4j.event.Level;
 
 import java.awt.*;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 
 public class LoggerManager {
@@ -32,32 +34,44 @@ public class LoggerManager {
                     .setDescription(LoadedConfigurations.getLoggingMemoryLoad().single_message_log_template()
                             .replace("%action%", action.replace("%filler%", filler))
                             .replace("%level%", levelConverter(level))
-                            .replace("%message%", message.strip())).build();
+                            .replace("%message%", message.strip().replace("```", "<@CODEBLOCK>"))).build();
 
             Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
         } catch (IllegalArgumentException e) {
+            logger.warn("Could not correctly print out message log because of too many characters... opting for empty embed");
             MessageEmbed info = new EmbedBuilder()
                     .setColor(color)
                     .setAuthor(user.getName(), null, thumbnailURL)
                     .setDescription(LoadedConfigurations.getLoggingMemoryLoad().single_message_log_template()
                             .replace("%action%", action.replace("%filler%", filler))
                             .replace("%level%", levelConverter(level))
-                            .replace("%message%", "")).build();
-            logger.warn("Could not correctly print out message log because of too many characters opting for empty embed");
+                            .replace("%message%", ColorTool.useCustomColorCodes("&red&&bold&Too long for Embed...&reset&"))).build();
             Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info, new EmbedBuilder().setColor(color).setDescription(message).build()).queue();
         }
     }
 
-    public void multiMessageLog(String[] messages, URL ThumbnailURL, Level level, String channelID) {
-
+    public void multiMessageLog(List<Message> messages, String action, Level level, String channelID) {
+        messages.forEach(message -> {
+            try {
+                singleMessageLog(message.getAuthor(), action, message.getContentRaw(), message.getAuthor().getAvatarUrl(),level, channelID, Color.CYAN);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public void creationLog() {
 
     }
 
-    public void deletionLog() {
+    public void closeLog(String action, Level level, String channelID, Color color) throws InterruptedException {
+        MessageEmbed info = new EmbedBuilder()
+                .setColor(color)
+                .setDescription(LoadedConfigurations.getLoggingMemoryLoad().close_log_template()
+                        .replace("%action%", action.replace("%filler%", filler))
+                        .replace("%level%", levelConverter(level))).build();
 
+        Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
     }
 
     public void databaseLog() {
