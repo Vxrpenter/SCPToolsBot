@@ -77,8 +77,10 @@ public class TranslationLoader {
 
         LoggingGroup loggingGroup = new LoggingGroup(
                 ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.SINGLE_MESSAGE_LOG_TEMPLATE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.CREATE_LOG_TEMPLATE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.CLOSE_LOG_TEMPLATE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.SUPPORT_MESSAGE_LOGGING_ACTION)),
+                ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.SUPPORT_TICKET_CREATE_ACTION)),
                 ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.SUPPORT_TICKET_CLOSE_ACTION)));
 
         ButtonGroup buttonsGroup = new ButtonGroup(

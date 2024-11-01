@@ -9,6 +9,7 @@ import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.records.SupportGroup;
+import dev.vxrp.bot.util.logger.LoggerManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
@@ -18,9 +19,11 @@ import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.slf4j.Logger;
 
+import java.awt.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Support {
@@ -71,9 +74,21 @@ public class Support {
                                     Button.primary("claim_support_ticket:"+userID+":", buttons.claim_support_ticket()),
                                     Button.secondary("settings_support_ticket", buttons.settings_support_ticket())
                             ).queue();
+
                     try {
+                        new LoggerManager(event.getJDA()).creationLog(event.getUser(),
+                                LoadedConfigurations.getLoggingMemoryLoad().support_ticket_create_logging_action()
+                                        .replace("%id%", textChannel.getId())
+                                        .replace("%channel%", "<#"+textChannel.getId()+">")
+                                        .replace("%user%", "<@"+userID+">")
+                                        .replace("%type%", TicketIdentifier.SUPPORT.toString())
+                                        .replace("%creator%", "<@"+userID+">")
+                                        .replace("%handler%", "None")
+                                        .replace("%date%", date),
+                                LoadedConfigurations.getConfigMemoryLoad().ticket_logging_channel_id(),
+                                Color.GREEN);
                         ScpTools.getSqliteManager().getTicketsTableManager().addTicket(textChannel.getId(), TicketIdentifier.SUPPORT, date, userID, null);
-                    } catch (SQLException e) {
+                    } catch (SQLException | InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                 });

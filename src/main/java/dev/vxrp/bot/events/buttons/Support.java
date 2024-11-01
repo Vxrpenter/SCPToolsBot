@@ -56,7 +56,7 @@ public class Support {
         }
 
         Ticket ticket = ScpTools.getSqliteManager().getTicketsTableManager().getTicket(event.getMessage().getChannelId());
-        new LoggerManager(event.getJDA()).closeLog(
+        new LoggerManager(event.getJDA()).closeLog(event.getUser(),
                 LoadedConfigurations.getLoggingMemoryLoad().support_ticket_close_logging_action()
                         .replace("%id%", ticket.id())
                         .replace("%user%", "<@"+event.getUser().getId()+">")
@@ -65,7 +65,6 @@ public class Support {
                         .replace("%handler%", "<@"+ticket.handlerId()+">").replace("<@null>", "None")
                         .replace("%state%", "OPEN")
                         .replace("%date%", ticket.creation_date()),
-                Level.INFO,
                 LoadedConfigurations.getConfigMemoryLoad().ticket_logging_channel_id(), Color.RED);
 
         ScpTools.getSqliteManager().getTicketsTableManager().deleteTicket(event.getChannelId());

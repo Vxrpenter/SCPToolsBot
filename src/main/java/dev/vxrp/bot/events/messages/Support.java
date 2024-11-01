@@ -5,7 +5,6 @@ import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.logger.LoggerManager;
 import dev.vxrp.bot.util.records.Ticket;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import org.slf4j.event.Level;
 
 import java.awt.*;
 import java.sql.SQLException;
@@ -28,7 +27,6 @@ public class Support {
                             .replace("%date%", ticket.creation_date()),
                     event.getMessage().getContentRaw(),
                     Objects.requireNonNull(event.getAuthor()).getAvatarUrl(),
-                    Level.INFO,
                     LoadedConfigurations.getConfigMemoryLoad().ticket_logging_channel_id(),
                     Color.ORANGE);
         }
