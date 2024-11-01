@@ -82,7 +82,10 @@ public class TranslationLoader {
                 ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.DATABASE_LOG_TEMPLATE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.SUPPORT_MESSAGE_LOGGING_ACTION)),
                 ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.SUPPORT_TICKET_CREATE_ACTION)),
-                ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.SUPPORT_TICKET_CLOSE_ACTION)));
+                ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.SUPPORT_TICKET_CLOSE_ACTION)),
+                ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.NOTICE_OF_DEPARTURE_CREATE_ACTION)),
+                ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.NOTICE_OF_DEPARTURE_DISMISS_ACTION)),
+                ColorTool.useCustomColorCodes(translationManager.getString(TRANSLATIONS.LOGGING.NOTICE_OF_DEPARTURE_CLOSE_ACTION)));
 
         ButtonGroup buttonsGroup = new ButtonGroup(
                 translationManager.getString(TRANSLATIONS.BUTTONS.PASTE_RULES),

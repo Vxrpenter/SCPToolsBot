@@ -81,6 +81,9 @@ public class TRANSLATIONS {
         public static final String SUPPORT_MESSAGE_LOGGING_ACTION = "logging.support_message_logging_action";
         public static final String SUPPORT_TICKET_CREATE_ACTION = "logging.support_ticket_create_logging_action";
         public static final String SUPPORT_TICKET_CLOSE_ACTION = "logging.support_ticket_close_logging_action";
+        public static final String NOTICE_OF_DEPARTURE_CREATE_ACTION = "logging.notice_of_departure_create_logging_action";
+        public static final String NOTICE_OF_DEPARTURE_DISMISS_ACTION = "logging.notice_of_departure_dismiss_logging_action";
+        public static final String NOTICE_OF_DEPARTURE_CLOSE_ACTION = "logging.notice_of_departure_close_logging_action";
     }
     public static final class BUTTONS {
         public static final String PASTE_RULES = "buttons.paste_rules";
