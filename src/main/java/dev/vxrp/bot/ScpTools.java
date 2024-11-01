@@ -22,6 +22,7 @@ import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.configuration.translations.TranslationLoader;
 import dev.vxrp.bot.util.general.RepeatTask;
+import dev.vxrp.bot.util.logger.LoggerManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -44,12 +45,12 @@ public class ScpTools {
     static TranslationManager translationManager;
     static ColorConfigManager colorConfigManager;
     static SqliteManager sqliteManager;
+    static LoggerManager loggerManager;
 
     public static void main(String[] args) throws IOException {
         GitHubApi.CheckForUpdatesByTags("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags");
 
         initializeConfigs();
-        initializeSqlite();
         setLoggingLevel();
         loadConfigs();
 
@@ -68,6 +69,8 @@ public class ScpTools {
                         new ModalListener(),
                         new MessageListener())
                 .build();
+        loggerManager = new LoggerManager(api);
+        initializeSqlite();
         logger.info("Initialized Listeners");
 
         new CommandManager().Initialize(api);
@@ -91,7 +94,7 @@ public class ScpTools {
         try {
             file.createNewFile();
             sqliteManager = new SqliteManager(path+"\\sqlite\\data.db");
-        } catch (SQLException | IOException e) {
+        } catch (SQLException | IOException | InterruptedException e) {
             logger.error("Could not correctly set up Sqlite database {}", e.getMessage());
         }
     }
@@ -157,4 +160,5 @@ public class ScpTools {
     public static SqliteManager getSqliteManager() {
         return sqliteManager;
     }
+    public static LoggerManager getLoggerManager() {return loggerManager;}
 }

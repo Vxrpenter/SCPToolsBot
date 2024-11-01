@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -77,8 +79,23 @@ public class LoggerManager {
         Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
     }
 
-    public void databaseLog() {
+    public void databaseLog(String sqlStatement, String output, String channelID, Color color) throws InterruptedException {
+        if (!LoadedConfigurations.getConfigMemoryLoad().do_database_logging()) return;
+        String time = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
+        String date = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
 
+        MessageEmbed info = new EmbedBuilder()
+                .setColor(color)
+                .setAuthor("Database Manager",
+                        "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/java/dev/vxrp/bot/database/sqlite/SqliteManager.java",
+                        "https://toppng.com/uploads/preview/database-database-icon-11563207079binxarjjyp.png")
+                .setDescription(LoadedConfigurations.getLoggingMemoryLoad().database_log_template()
+                        .replace("%statement%", sqlStatement)
+                        .replace("%output%", output))
+                .setFooter("Statement sent on the "+date+" at "+time+"h")
+                .build();
+
+        Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
     }
 
     private String levelConverter(Level level) {

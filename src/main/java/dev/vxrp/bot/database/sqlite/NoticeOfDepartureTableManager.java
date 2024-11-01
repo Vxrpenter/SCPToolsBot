@@ -1,11 +1,14 @@
 package dev.vxrp.bot.database.sqlite;
 
+import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.colors.ColorTool;
+import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.records.NoticeOfDeparture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +22,12 @@ public class NoticeOfDepartureTableManager {
         this.connection = connection;
     }
 
-    public void addNoticeOfDeparture(String id, String channel_message_id, String start_time, String end_time) throws SQLException {
+    public void addNoticeOfDeparture(String id, String channel_message_id, String start_time, String end_time) throws SQLException, InterruptedException {
         if (exists(id)) {
             logger.warn("{} - Notice of Departure already exists in Sqlite database... opting for deletion", prefix);
             deleteNoticeOfDeparture(id);
         }
-        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO notice_of_departure VALUES (?,?,?,?)")) {
+        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO notice_of_departure VALUES (?, ?, ?, ?)")) {
             statement.setString(1, id);
             statement.setString(2, channel_message_id);
             statement.setString(3, start_time);
@@ -35,6 +38,14 @@ public class NoticeOfDepartureTableManager {
                     ColorTool.apply(DCColor.GREEN, channel_message_id),
                     ColorTool.apply(DCColor.GOLD, start_time),
                     ColorTool.apply(DCColor.GOLD, end_time));
+            ScpTools.getLoggerManager().databaseLog(
+                    "INSERT INTO notice_of_departure VALUES (?, ?, ?, ?)",
+                    "Created new notice of departure with value id: "+ColorTool.apply(DCColor.GREEN, id)+
+                            ", channel_message_id: "+ColorTool.apply(DCColor.GREEN, channel_message_id)+
+                            ", start_time: "+ColorTool.apply(DCColor.GOLD, start_time)+
+                            ", end_time: "+ColorTool.apply(DCColor.GOLD, end_time),
+                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    Color.ORANGE);
         }
     }
 
@@ -104,7 +115,7 @@ public class NoticeOfDepartureTableManager {
         }
     }
 
-    public void deleteNoticeOfDeparture(String id) throws SQLException {
+    public void deleteNoticeOfDeparture(String id) throws SQLException, InterruptedException {
         if (!exists(id)) {
             logger.error("{} - Failed to delete notice of departure with id: {}. Id does not exist", prefix,
                     ColorTool.apply(DCColor.GREEN, id));
@@ -115,13 +126,23 @@ public class NoticeOfDepartureTableManager {
             statement.executeUpdate();
             logger.info("{} - Deleted notice of departure - id: {}", prefix,
                     ColorTool.apply(DCColor.RED, id));
+            ScpTools.getLoggerManager().databaseLog(
+                    "DELETE FROM notice_of_departure WHERE id=?",
+                    "Deleted notice of departure id: "+ColorTool.apply(DCColor.GREEN, id),
+                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    Color.ORANGE);
         }
     }
 
-    public List<NoticeOfDeparture> getEveryNoticeOfDeparture() throws SQLException {
+    public List<NoticeOfDeparture> getEveryNoticeOfDeparture() throws SQLException, InterruptedException {
         List<NoticeOfDeparture> noticeOfDepartureList = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM notice_of_departure")) {
             try (ResultSet resultSet = statement.executeQuery()) {
+                ScpTools.getLoggerManager().databaseLog(
+                        "SELECT * FROM notice_of_departure",
+                        "Selected every notice of departure",
+                        LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                        Color.ORANGE);
                 while (resultSet.next()) {
                     noticeOfDepartureList.add(new NoticeOfDeparture(
                             resultSet.getString("id"),

@@ -47,7 +47,7 @@ public class ModalListener extends ListenerAdapter {
             event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> {
                 try {
                     NoticeOfDeparture.revokeNoticeOfDeparture(event, user);
-                } catch (SQLException e) {
+                } catch (SQLException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             });

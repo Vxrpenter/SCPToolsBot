@@ -60,8 +60,8 @@ public class Support {
                                 .grant(EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND))
                                 .queue();
                     }
-                    textChannel.sendMessageEmbeds(StatsBuilder.buildStatus(userName).build()).queue();
-                    textChannel.sendMessageEmbeds(builder(translations.ticket_support_title().replace("%name%", name),
+                    textChannel.sendMessageEmbeds(StatsBuilder.buildStatus(userName).build(),
+                            builder(translations.ticket_support_title().replace("%name%", name),
                                     translations.ticket_support_body()
                                             .replace("%subject%", subject)
                                             .replace("%body%", body),

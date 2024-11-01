@@ -84,7 +84,7 @@ public class CheckNoticeOfDeparture  {
                                 logger.info("Send private message about invalid notice of departure to {}", user.getGlobalName());
                                 try {
                                     sqliteManager.getNoticeOfDepartureTableManager().deleteNoticeOfDeparture(notice.id());
-                                } catch (SQLException e) {
+                                } catch (SQLException | InterruptedException e) {
                                     throw new RuntimeException(e);
                                 }
                                 logger.info(ColorTool.apply(DCColor.GOLD, "------------------------------------------------------------------------"));
