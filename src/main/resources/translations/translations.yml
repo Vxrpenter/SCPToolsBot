@@ -209,6 +209,9 @@ notice_of_departure:
 
   notice_deleted_ended_replace_message: "The notice was deleted"
 
+logging:
+
+
 # You can't use color codes for the following button translations
 buttons:
   paste_rules: "Paste Rules"

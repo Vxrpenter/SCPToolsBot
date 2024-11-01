@@ -107,7 +107,7 @@ public class NoticeOfDeparture {
                                 user.getId()+":"+event.getModalId().split(":")[4]+":"+event.getModalId().split(":")[4]+":", buttons.revoke_notice_of_departure())
                 ).queue(message -> {
                     try {
-                        ScpTools.getSqliteManager().addNoticeOfDeparture(
+                        ScpTools.getSqliteManager().getNoticeOfDepartureTableManager().addNoticeOfDeparture(
                                 user.getId(),
                                 LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_notice_channel_id()+":"+message.getId(),
                                 event.getModalId().split(":")[4],
@@ -137,7 +137,7 @@ public class NoticeOfDeparture {
     }
 
     public static void revokeNoticeOfDeparture(ModalInteractionEvent event, User user) throws SQLException {
-        ScpTools.getSqliteManager().deleteNoticeOfDeparture(user.getId());
+        ScpTools.getSqliteManager().getNoticeOfDepartureTableManager().deleteNoticeOfDeparture(user.getId());
         Objects.requireNonNull(event.getMessage()).delete().queue();
         event.reply(translations.notice_revoked_message()).setEphemeral(true).queue();
         user.openPrivateChannel().queue(privateChannel ->
