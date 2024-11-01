@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 
 import java.awt.*;
-import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,14 +25,13 @@ public class LoggerManager {
         this.api = api;
     }
 
-    public void singleMessageLog(User user, String action, String message, String thumbnailURL, Level level, String channelID, Color color) throws InterruptedException {
+    public void singleMessageLog(User user, String action, String message, String thumbnailURL, String channelID, Color color) throws InterruptedException {
         try {
             MessageEmbed info = new EmbedBuilder()
                     .setColor(color)
                     .setAuthor(user.getName(), null, thumbnailURL)
                     .setDescription(LoadedConfigurations.getLoggingMemoryLoad().single_message_log_template()
                             .replace("%action%", action.replace("%filler%", filler))
-                            .replace("%level%", levelConverter(level))
                             .replace("%message%", message.strip().replace("```", "<@CODEBLOCK>"))).build();
 
             Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
@@ -44,32 +42,37 @@ public class LoggerManager {
                     .setAuthor(user.getName(), null, thumbnailURL)
                     .setDescription(LoadedConfigurations.getLoggingMemoryLoad().single_message_log_template()
                             .replace("%action%", action.replace("%filler%", filler))
-                            .replace("%level%", levelConverter(level))
                             .replace("%message%", ColorTool.useCustomColorCodes("&red&&bold&Too long for Embed...&reset&"))).build();
             Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info, new EmbedBuilder().setColor(color).setDescription(message).build()).queue();
         }
     }
 
-    public void multiMessageLog(List<Message> messages, String action, Level level, String channelID) {
+    public void multiMessageLog(List<Message> messages, String action, String channelID) {
         messages.forEach(message -> {
             try {
-                singleMessageLog(message.getAuthor(), action, message.getContentRaw(), message.getAuthor().getAvatarUrl(),level, channelID, Color.CYAN);
+                singleMessageLog(message.getAuthor(), action, message.getContentRaw(), message.getAuthor().getAvatarUrl(), channelID, Color.CYAN);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         });
     }
 
-    public void creationLog() {
-
-    }
-
-    public void closeLog(String action, Level level, String channelID, Color color) throws InterruptedException {
+    public void creationLog(User user, String action, String channelID, Color color) throws InterruptedException {
         MessageEmbed info = new EmbedBuilder()
                 .setColor(color)
+                .setAuthor(user.getGlobalName(), null, user.getAvatarUrl())
                 .setDescription(LoadedConfigurations.getLoggingMemoryLoad().close_log_template()
-                        .replace("%action%", action.replace("%filler%", filler))
-                        .replace("%level%", levelConverter(level))).build();
+                        .replace("%action%", action.replace("%filler%", filler))).build();
+
+        Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
+    }
+
+    public void closeLog(User user, String action, String channelID, Color color) throws InterruptedException {
+        MessageEmbed info = new EmbedBuilder()
+                .setColor(color)
+                .setAuthor(user.getGlobalName(), null, user.getAvatarUrl())
+                .setDescription(LoadedConfigurations.getLoggingMemoryLoad().close_log_template()
+                        .replace("%action%", action.replace("%filler%", filler))).build();
 
         Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
     }

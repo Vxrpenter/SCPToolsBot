@@ -213,30 +213,31 @@ logging:
   single_message_log_template: "
                         %action%\n
                         
-                        **Logging Level**\n
-                        ```ansi
-                        
-                        %level%
-                        ```
-                        
                         **Message**\n
                         ```ansi
                         
                         %message%
                         ```
                         "
+  create_log_template: "
+                        %action%\n
+                        "
   close_log_template: "
                         %action%\n
-                        
-                        **Logging Level**\n
-                        ```ansi
-                        
-                        %level%
-                        ```
                         "
 
   support_message_logging_action: "
                         ✏️ Send message in channel %channel% by user %user%\n
+                        %filler%
+                        Ticket Type - **%type%**\n
+                        Ticket Id - **%id%**\n
+                        Creator - **%creator%**\n
+                        Handler - **%handler%**\n
+                        
+                        *Ticket created - **%date%***
+                        "
+  support_ticket_create_logging_action: "
+                        ✅ Ticket with id: **%id%** created %channel% by user %user%\n
                         %filler%
                         Ticket Type - **%type%**\n
                         Ticket Id - **%id%**\n
