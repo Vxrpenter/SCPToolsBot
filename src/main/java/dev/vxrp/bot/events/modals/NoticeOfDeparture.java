@@ -14,6 +14,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
+import java.awt.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -65,13 +66,9 @@ public class NoticeOfDeparture {
                         .build())
                 .addActionRow(
                         Button.success("accept_ticket_notice_of_departure"+":"+event.getUser().getId()+":"+ Objects.requireNonNull(event.getValue("nod_timeframe")).getAsString()+":", buttons.accept_notice_of_departure_ticket()),
-                        Button.danger("dismiss_ticket_notice_of_departure"+":"+event.getUser().getId()+":", buttons.dismiss_notice_of_departure_ticket())
-                ).queue(message -> {
-                    message.editMessage(String.join("", pingRoles)).queue();
-                });
-        channel.sendMessage(String.join("", pingRoles)).queue(message -> {
-            message.delete().queue();
-        });
+                        Button.danger("dismiss_ticket_notice_of_departure"+":"+event.getUser().getId()+":"+ Objects.requireNonNull(event.getValue("nod_timeframe")).getAsString()+":", buttons.dismiss_notice_of_departure_ticket())
+                ).queue(message -> message.editMessage(String.join("", pingRoles)).queue());
+        channel.sendMessage(String.join("", pingRoles)).queue(message -> message.delete().queue());
     }
 
     public static void acceptNoticeOfDeparture(ModalInteractionEvent event, User user) {
@@ -104,9 +101,21 @@ public class NoticeOfDeparture {
                         .build())
                 .addActionRow(
                         Button.danger("revoke_notice_of_departure"+":"+
-                                user.getId()+":"+event.getModalId().split(":")[4]+":"+event.getModalId().split(":")[4]+":", buttons.revoke_notice_of_departure())
+                                user.getId()+":"+event.getModalId().split(":")[4]+":"+event.getModalId().split(":")[3]+":", buttons.revoke_notice_of_departure())
                 ).queue(message -> {
                     try {
+                        ScpTools.getLoggerManager().creationLog(event.getUser(),
+                                LoadedConfigurations.getLoggingMemoryLoad().notice_of_departure_create_logging_action()
+                                        .replace("%id%", user.getId())
+                                        .replace("%message%", message.getJumpUrl())
+                                        .replace("%user%", "<@"+event.getUser().getId()+">")
+                                        .replace("%creator%", "<@"+user.getId()+">")
+                                        .replace("%expiration%", event.getModalId().split(":")[3])
+                                        .replace("%date%", event.getModalId().split(":")[4])
+                                        .replace("%reason%", reason),
+                                LoadedConfigurations.getConfigMemoryLoad().notice_of_departures_logging_channel_id(),
+                                Color.GREEN);
+
                         ScpTools.getSqliteManager().getNoticeOfDepartureTableManager().addNoticeOfDeparture(
                                 user.getId(),
                                 LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_notice_channel_id()+":"+message.getId(),
@@ -120,7 +129,7 @@ public class NoticeOfDeparture {
         event.reply(translations.ticket_message_sent()).setEphemeral(true).queue();
     }
 
-    public static void dismissNoticeOfDeparture(ModalInteractionEvent event, User user) {
+    public static void dismissNoticeOfDeparture(ModalInteractionEvent event, User user) throws InterruptedException {
         String messageID = event.getModalId().split(":")[2];
         Objects.requireNonNull(Objects.requireNonNull(event.getGuild()).getTextChannelById(Objects.requireNonNull(event.getChannelId()))).deleteMessageById(messageID).queue();
 
@@ -132,6 +141,18 @@ public class NoticeOfDeparture {
                                 .replace("%reason%", reason))
                         .build()
         )).queue();
+
+        ScpTools.getLoggerManager().creationLog(event.getUser(),
+                LoadedConfigurations.getLoggingMemoryLoad().notice_of_departure_dismiss_logging_action()
+                        .replace("%id%", user.getId())
+                        .replace("%user%", "<@"+event.getUser().getId()+">")
+                        .replace("%creator%", "<@"+user.getId()+">")
+                        .replace("%handler%", "<@"+event.getUser().getId()+">")
+                        .replace("%expiration%", event.getModalId().split(":")[3])
+                        .replace("%date%", event.getModalId().split(":")[4])
+                        .replace("%reason%", reason),
+                LoadedConfigurations.getConfigMemoryLoad().notice_of_departures_logging_channel_id(),
+                Color.RED);
 
         event.reply(translations.ticket_message_sent()).setEphemeral(true).queue();
     }
@@ -149,5 +170,16 @@ public class NoticeOfDeparture {
                                         .replace("%reason%", Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString()))
                                 .build()
                 ).queue());
+        ScpTools.getLoggerManager().creationLog(event.getUser(),
+                LoadedConfigurations.getLoggingMemoryLoad().notice_of_departure_close_logging_action()
+                        .replace("%id%", user.getId())
+                        .replace("%user%", "<@"+event.getUser().getId()+">")
+                        .replace("%creator%", "<@"+user.getId()+">")
+                        .replace("%handler%", "<@"+event.getUser().getId()+">")
+                        .replace("%expiration%", event.getModalId().split(":")[2])
+                        .replace("%date%", event.getModalId().split(":")[3])
+                        .replace("%reason%", Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString()),
+                LoadedConfigurations.getConfigMemoryLoad().notice_of_departures_logging_channel_id(),
+                Color.RED);
     }
 }

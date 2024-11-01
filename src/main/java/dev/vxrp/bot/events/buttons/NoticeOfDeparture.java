@@ -49,8 +49,11 @@ public class NoticeOfDeparture {
     }
 
     public static void dismissNoticeOfDeparture(ButtonInteractionEvent event, User user) {
+        String start_time = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
+        String end_time = event.getComponentId().split(":")[2];
+
         event.replyModal(
-                Modal.create("reason_action_dismiss_nod:"+user.getId()+":"+event.getMessageId()+":", reason_action.modal_reason_action_title())
+                Modal.create("reason_action_dismiss_nod:"+user.getId()+":"+event.getMessageId()+":"+end_time+":"+start_time+":", reason_action.modal_reason_action_title())
                         .addComponents(ActionRow.of(shortModal(
                                 "reason_action_reason",
                                 reason_action.modal_reason_action_first_title(),

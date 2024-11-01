@@ -41,7 +41,13 @@ public class ModalListener extends ListenerAdapter {
             event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> NoticeOfDeparture.acceptNoticeOfDeparture(event, user));
         }
         if (event.getModalId().startsWith("reason_action_dismiss_nod")) {
-            event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> NoticeOfDeparture.dismissNoticeOfDeparture(event, user));
+            event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> {
+                try {
+                    NoticeOfDeparture.dismissNoticeOfDeparture(event, user);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
         if (event.getModalId().startsWith("reason_action_revoke_nod")) {
             event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> {

@@ -227,7 +227,7 @@ logging:
                         "
   database_log_template: "
                         **SQL Statement**\n
-                        ```ansi
+                        ```sql
                         
                         %statement%
                         ```
@@ -270,6 +270,53 @@ logging:
                         State before closed - **%state%**\n
                         
                         *Ticket created - **%date%***
+                        "
+  notice_of_departure_create_logging_action: "
+                        ✅ Notice of Departure with id: **%id%** created %message% by user %user%\n
+                        %filler%
+                        Ticket Id - **%id%**\n
+                        Creator - **%creator%**\n
+                        Expiration Date - **%expiration%**\n
+
+                        *Ticket created - **%date%***\n
+                        
+                        **Reason**\n
+                        ```ansi
+                        
+                        %reason%
+                        ```
+                        "
+  notice_of_departure_dismiss_logging_action: "
+                          ❌ Notice of Departure with id: **%id%** dismissed by %user%\n
+                          %filler%
+                          Ticket Id - **%id%**\n
+                          Creator - **%creator%**\n
+                          Handler - **%handler%**\n
+                          Expiration Date - **%expiration%**\n
+
+                          *Ticket created - **%date%***\n
+
+                          **Reason**\n
+                          ```ansi
+
+                          %reason%
+                          ```
+                          "
+  notice_of_departure_close_logging_action: "
+                        ❌ Notice of Departure with id: **%id%** revoked by %user%\n
+                        %filler%
+                        Ticket Id - **%id%**\n
+                        Creator - **%creator%**\n
+                        Handler - **%handler%**\n
+                        Expiration Date - **%expiration%**\n
+                        
+                        *Ticket created - **%date%***\n
+                        
+                        **Reason**\n
+                        ```ansi
+                        
+                        %reason%
+                        ```
                         "
 
 # You can't use color codes for the following button translations
