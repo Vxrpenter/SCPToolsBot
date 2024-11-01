@@ -1,9 +1,6 @@
 package dev.vxrp.bot.util.configuration;
 
-import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
-import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
-import dev.vxrp.bot.util.configuration.groups.NoticeOfDepartureGroup;
-import dev.vxrp.bot.util.configuration.groups.SupportGroup;
+import dev.vxrp.bot.util.configuration.records.*;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -13,6 +10,7 @@ public class LoadedConfigurations {
     public static HashSet<SupportGroup> supportTranslationMemoryLoad  = new HashSet<>();
     public static HashSet<NoticeOfDepartureGroup> noticeOfDepartureMemoryLoad  = new HashSet<>();
     public static HashSet<ButtonGroup> buttonsMemoryLoad  = new HashSet<>();
+    public static HashSet<LoggingGroup> loggingButtonMemoryLoad  = new HashSet<>();
 
     public static ConfigGroup getConfigMemoryLoad() {
         Iterator<ConfigGroup> iterator = configMemoryLoad.iterator();
@@ -64,5 +62,18 @@ public class LoadedConfigurations {
 
     public static void setButtonsMemoryLoad(ButtonGroup buttonsMemoryLoad) {
         LoadedConfigurations.buttonsMemoryLoad.add(buttonsMemoryLoad);
+    }
+
+    public static LoggingGroup getLoggingMemoryLoad() {
+        Iterator<LoggingGroup> iterator = loggingButtonMemoryLoad.iterator();
+        LoggingGroup loggingGroup = null;
+        while (iterator.hasNext()) {
+            loggingGroup = iterator.next();
+        }
+        return loggingGroup;
+    }
+
+    public static void setLoggingMemoryLoad(LoggingGroup loggingMemoryLoad) {
+        LoadedConfigurations.loggingButtonMemoryLoad.add(loggingMemoryLoad);
     }
 }

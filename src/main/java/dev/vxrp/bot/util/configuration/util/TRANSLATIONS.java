@@ -73,6 +73,10 @@ public class TRANSLATIONS {
         public static final String ENDED_REPLACE = "notice_of_departure.notice_ended_replace";
         public static final String DELETED_ENDED_REPLACE_MESSAGE = "notice_of_departure.notice_deleted_ended_replace_message";
     }
+    public static final class LOGGING {
+        public static final String SINGLE_MESSAGE_LOG_TEMPLATE = "logging.single_message_log_template";
+        public static final String SUPPORT_MESSAGE_LOGGING_ACTION = "logging.support_message_logging_action";
+    }
     public static final class BUTTONS {
         public static final String PASTE_RULES = "buttons.paste_rules";
         public static final String UPDATE_RULES = "buttons.update_rules";

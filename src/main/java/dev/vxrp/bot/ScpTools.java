@@ -9,12 +9,12 @@ import dev.vxrp.bot.commands.help.HelpCommand;
 import dev.vxrp.bot.commands.templates.TemplateCommand;
 import dev.vxrp.bot.config.managers.ColorConfigManager;
 import dev.vxrp.bot.config.managers.TranslationManager;
+import dev.vxrp.bot.events.MessageListener;
 import dev.vxrp.bot.runnables.CheckNoticeOfDeparture;
-import dev.vxrp.bot.util.Enums.TicketIdentifier;
 import dev.vxrp.bot.util.api.github.GitHubApi;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.configs.ConfigLoader;
-import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
+import dev.vxrp.bot.util.configuration.records.ConfigGroup;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
 import dev.vxrp.bot.config.managers.ConfigManager;
 import dev.vxrp.bot.events.ModalListener;
@@ -58,14 +58,19 @@ public class ScpTools {
         String activityContent = configManager.getString(CONFIG.ACTIVITY_CONTENT);
         logger.info("ActivityContent set to {}", ColorTool.apply(DCColor.RED, activityContent));
 
-        JDA api = JDABuilder.createDefault(configManager.getToken(), GatewayIntent.MESSAGE_CONTENT)
+        JDA api = JDABuilder.createDefault(configManager.getToken(), GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
                 .setActivity(Activity.of(activityType, activityContent))
                 .disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
+                .addEventListeners(
+                        new TemplateCommand(),
+                        new HelpCommand(),
+                        new ButtonListener(),
+                        new ModalListener(),
+                        new MessageListener())
                 .build();
+        logger.info("Initialized Listeners");
 
         new CommandManager().Initialize(api);
-        api.addEventListener(new TemplateCommand(), new HelpCommand(),new ButtonListener(), new ModalListener());
-        logger.info("Initialized Listeners");
 
         noticeOfDepartureCheckups(api);
     }

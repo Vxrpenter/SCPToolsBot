@@ -1,4 +1,4 @@
-package dev.vxrp.bot.util.configuration.groups;
+package dev.vxrp.bot.util.configuration.records;
 
 import java.util.List;
 

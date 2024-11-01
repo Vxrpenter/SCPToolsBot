@@ -3,12 +3,12 @@ package dev.vxrp.bot.events.modals;
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.util.Enums.TicketIdentifier;
 import dev.vxrp.bot.util.colors.ColorTool;
-import dev.vxrp.bot.util.configuration.groups.ButtonGroup;
-import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
+import dev.vxrp.bot.util.configuration.records.ButtonGroup;
+import dev.vxrp.bot.util.configuration.records.ConfigGroup;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.builder.StatsBuilder;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.groups.SupportGroup;
+import dev.vxrp.bot.util.configuration.records.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
@@ -72,7 +72,7 @@ public class Support {
                                     Button.secondary("settings_support_ticket", buttons.settings_support_ticket())
                             ).queue();
                     try {
-                        ScpTools.getSqliteManager().getTicketsTableManager().addTicket(textChannel.getId(), TicketIdentifier.SUPPORT, date, userName, null);
+                        ScpTools.getSqliteManager().getTicketsTableManager().addTicket(textChannel.getId(), TicketIdentifier.SUPPORT, date, userID, null);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }

@@ -5,7 +5,7 @@ import dev.vxrp.bot.config.managers.ConfigManager;
 import dev.vxrp.bot.util.Enums.DCColor;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.groups.ConfigGroup;
+import dev.vxrp.bot.util.configuration.records.ConfigGroup;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
