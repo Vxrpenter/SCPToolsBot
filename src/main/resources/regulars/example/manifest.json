@@ -1,6 +1,6 @@
 {
-  "name" : "",
-  "description" : "",
+  "name" : "Example",
+  "description" : "Just an example",
   "custom_role" : {
     "use" : false,
     "id" : ""

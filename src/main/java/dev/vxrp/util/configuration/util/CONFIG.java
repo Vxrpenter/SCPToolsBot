@@ -29,6 +29,12 @@ public class CONFIG {
             public static final String TEMPLATE = "command_settings.template.description";
         }
     }
+    public static final class CEDMOD {
+        public static final String ACTIVE = "cedmod.active";
+        public static final String INSTANCE_URL = "cedmod.instance_url";
+        public static final String API_KEY = "cedmod.api_key";
+        public static final String MASTER_BAN_LIST_ID = "cedmod.master_ban_list_id";
+    }
     public static final class SUPPORT_SETTINGS {
         public static final String ROLES_ACCESS_SUPPORT_TICKETS = "support_settings.roles_access_support_tickets";
         public static final String ROLES_ACCESS_UNBAN_TICKETS = "support_settings.roles_access_unban_tickets";
@@ -42,10 +48,9 @@ public class CONFIG {
         public static final String CHECK_TYPE = "notice_of_departure.check_type";
         public static final String CHECK_RATE = "notice_of_departure.check_rate";
     }
-    public static final class CEDMOD {
-        public static final String ACTIVE = "cedmod.active";
-        public static final String INSTANCE_URL = "cedmod.instance_url";
-        public static final String API_KEY = "cedmod.api_key";
-        public static final String MASTER_BAN_LIST_ID = "cedmod.master_ban_list_id";
+    public static final class REGULARS {
+        public static final String CREATE_EXAMPLE_CONFIGURATION = "regulars.create_example_configuration";
+        public static final String ONLY_LOAD_CERTAIN_FOLDERS = "regulars.only_load_certain_folder";
+        public static final String ONLY_LOAD_FOLDERS = "regulars.only_load_folders";
     }
 }
