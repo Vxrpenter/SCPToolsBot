@@ -7,8 +7,8 @@ import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.commands.CommandManager;
 import dev.vxrp.bot.commands.help.HelpCommand;
 import dev.vxrp.bot.commands.templates.TemplateCommand;
-import dev.vxrp.bot.config.managers.ColorConfigManager;
-import dev.vxrp.bot.config.managers.TranslationManager;
+import dev.vxrp.bot.config.managers.configuration.ColorConfigManager;
+import dev.vxrp.bot.config.managers.translations.TranslationManager;
 import dev.vxrp.bot.events.MessageListener;
 import dev.vxrp.bot.runnables.CheckNoticeOfDeparture;
 import dev.vxrp.bot.util.api.github.GitHubApi;
@@ -16,7 +16,7 @@ import dev.vxrp.bot.util.configuration.LoadedConfigurations;
 import dev.vxrp.bot.util.configuration.configs.ConfigLoader;
 import dev.vxrp.bot.util.configuration.records.ConfigGroup;
 import dev.vxrp.bot.util.configuration.util.CONFIG;
-import dev.vxrp.bot.config.managers.ConfigManager;
+import dev.vxrp.bot.config.managers.configuration.ConfigManager;
 import dev.vxrp.bot.events.ModalListener;
 import dev.vxrp.bot.util.colors.ColorTool;
 import dev.vxrp.bot.util.Enums.DCColor;
@@ -54,10 +54,8 @@ public class ScpTools {
         setLoggingLevel();
         loadConfigs();
 
-        Activity.ActivityType activityType = Activity.ActivityType.valueOf(configManager.getString(CONFIG.ACTIVITY_TYPE));
-        logger.info("ActivityType set to {}", ColorTool.apply(DCColor.RED, activityType.toString()));
-        String activityContent = configManager.getString(CONFIG.ACTIVITY_CONTENT);
-        logger.info("ActivityContent set to {}", ColorTool.apply(DCColor.RED, activityContent));
+        Activity.ActivityType activityType = Activity.ActivityType.valueOf(LoadedConfigurations.getConfigMemoryLoad().activity_type());
+        String activityContent = LoadedConfigurations.getConfigMemoryLoad().activity_content();
 
         JDA api = JDABuilder.createDefault(configManager.getToken(), GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
                 .setActivity(Activity.of(activityType, activityContent))
