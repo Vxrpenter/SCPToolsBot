@@ -1,6 +1,6 @@
 package dev.vxrp.bot.events;
 
-import dev.vxrp.bot.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.LoadedConfigurations;
 import org.slf4j.Logger;
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.events.messages.Support;

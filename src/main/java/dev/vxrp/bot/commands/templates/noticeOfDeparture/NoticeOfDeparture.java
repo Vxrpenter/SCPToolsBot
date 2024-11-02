@@ -1,8 +1,8 @@
 package dev.vxrp.bot.commands.templates.noticeOfDeparture;
 
-import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.records.ButtonGroup;
-import dev.vxrp.bot.util.configuration.records.NoticeOfDepartureGroup;
+import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.records.ButtonGroup;
+import dev.vxrp.util.configuration.records.NoticeOfDepartureGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;

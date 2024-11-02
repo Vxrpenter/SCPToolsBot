@@ -1,10 +1,10 @@
 package dev.vxrp.bot.database.sqlite;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.util.Enums.DCColor;
-import dev.vxrp.bot.util.colors.ColorTool;
-import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.records.NoticeOfDeparture;
+import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.colors.ColorTool;
+import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.records.NoticeOfDeparture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

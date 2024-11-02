@@ -3,7 +3,7 @@ token: ""
 
 # Should debug mode be activated?
 debug: false
-# Should additional debug mode be applied?
+# Should additional debug info be displayed?
 advanced_debug: false
 
 # The activity type of the bot [COMPETING, CUSTOM_STATUS, LISTENING, PLAYING, WATCHING]
@@ -30,7 +30,7 @@ logging:
   do_database_logging: true
   database_logging_channel_id: ""
 
-# Commands that are activated by default remove to deactivate, default ["help", "template"]]
+# Commands that are activated by default remove to deactivate, default ["help", "template"]
 commands: ["help", "template"]
 # Command settings
 # 'default_permissions' is pretty clear, find all permissions in this Javadoc https://docs.jda.wiki/net/dv8tion/jda/api/Permission.html.
@@ -41,6 +41,16 @@ command_settings:
   template:
     default_permissions: ["ADMINISTRATOR"]
     description: "Command for pasting certain templates"
+
+cedmod:
+  # Should Cedmod integration features be established or deactivated?
+  active: false
+  # Include https://
+  instance_url: ""
+  # Exclude Bearer, put plain api key
+  api_key: ""
+  # This bot is only able to unban people that are on this banlist (feature for multi banlist bans coming in the future)
+  master_ban_list_id: ""
 
 support_settings:
   # Enter ROLEIDS of roles to automatically add to new tickets
@@ -64,12 +74,10 @@ notice_of_departure:
   # The rate at that the notices are checked.
   check_rate: 1
 
-cedmod:
-  # Should Cedmod integration features be established or deactivated?
-  active: false
-  # Include https://
-  instance_url: ""
-  # Exclude Bearer, put plain api key
-  api_key: ""
-  # This bot is only able to unban people that are on this banlist (feature for multi banlist bans coming in the future)
-  master_ban_list_id: ""
+regulars:
+  # Should example configuration be created (deactivate if you want to delete the example config)
+  create_example_configuration: true
+  # Should the bot only load from specified folder within the /regulars/ folder?
+  only_load_certain_folder: false
+  # Specify which folders should be specified if the option above is active
+  only_load_folders: []

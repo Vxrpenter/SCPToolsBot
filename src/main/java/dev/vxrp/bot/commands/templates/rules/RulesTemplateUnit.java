@@ -1,9 +1,9 @@
 package dev.vxrp.bot.commands.templates.rules;
 
-import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.records.ConfigGroup;
-import dev.vxrp.bot.util.pastebin.PastebinUtil;
-import dev.vxrp.bot.util.parser.CustomColorParser;
+import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.records.ConfigGroup;
+import dev.vxrp.util.pastebin.PastebinUtil;
+import dev.vxrp.util.parser.CustomColorParser;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;

@@ -1,8 +1,8 @@
 package dev.vxrp.bot.commands.templates.support;
 
-import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.records.ButtonGroup;
-import dev.vxrp.bot.util.configuration.records.SupportGroup;
+import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.records.ButtonGroup;
+import dev.vxrp.util.configuration.records.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;

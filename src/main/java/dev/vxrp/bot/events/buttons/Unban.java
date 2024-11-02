@@ -1,7 +1,7 @@
 package dev.vxrp.bot.events.buttons;
 
-import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.records.SupportGroup;
+import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.records.SupportGroup;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.ActionRow;

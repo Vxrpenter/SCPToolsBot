@@ -1,0 +1,22 @@
+{"roles" : [
+  {
+    "id" : "",
+    "description" : "",
+    "playtime_requirements" : 25
+  },
+  {
+    "id" : "",
+    "description" : "",
+    "playtime_requirements" : 50
+  },
+  {
+    "id" : "",
+    "description" : "",
+    "playtime_requirements" : 100
+  },
+  {
+    "id" : "",
+    "description" : "",
+    "playtime_requirements" : 200
+  }
+]}
