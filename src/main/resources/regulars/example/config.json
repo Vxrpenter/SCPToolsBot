@@ -1,5 +1,4 @@
-{"roles" : [
-  {
+[{
     "id" : "",
     "description" : "",
     "playtime_requirements" : 25
@@ -19,4 +18,4 @@
     "description" : "",
     "playtime_requirements" : 200
   }
-]}
+]

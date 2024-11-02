@@ -2,6 +2,7 @@ package dev.vxrp.bot;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
+import dev.vxrp.bot.config.managers.regulars.RegularsManager;
 import dev.vxrp.bot.database.sqlite.SqliteManager;
 import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.commands.CommandManager;
@@ -30,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -44,6 +46,7 @@ public class ScpTools {
     static ColorConfigManager colorConfigManager;
     static SqliteManager sqliteManager;
     static LoggerManager loggerManager;
+    static RegularsManager regularsManager;
 
     public static void main(String[] args) throws IOException {
         GitHubApi.CheckForUpdatesByTags("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags");
@@ -51,6 +54,7 @@ public class ScpTools {
         initializeConfigs();
         setLoggingLevel();
         loadConfigs();
+        initializeRegulars();
 
         Activity.ActivityType activityType = Activity.ActivityType.valueOf(LoadedConfigurations.getConfigMemoryLoad().activity_type());
         String activityContent = LoadedConfigurations.getConfigMemoryLoad().activity_content();
@@ -85,7 +89,7 @@ public class ScpTools {
     }
 
     private static void initializeSqlite() {
-        Path path = Paths.get(".").toAbsolutePath().normalize();
+        Path path = Path.of(System.getProperty("user.dir"));
         File file = new File(path+"\\sqlite\\data.db");
         try {
             file.createNewFile();
@@ -105,6 +109,15 @@ public class ScpTools {
             new ConfigLoader();
         } catch (Exception e) {
             logger.error("Could not load config to memory {}", e.getMessage());
+        }
+    }
+
+    private static void initializeRegulars() {
+        try {
+            regularsManager = new RegularsManager(Path.of(System.getProperty("user.dir")));
+            regularsManager.getConfig();
+        } catch (IOException | NullPointerException e) {
+            logger.error("Could not initialize regulars configs {}", e.getMessage());
         }
     }
 
@@ -144,17 +157,11 @@ public class ScpTools {
                 TimeUnit.valueOf(config.notice_of_departure_check_type()));
     }
 
-    public static ConfigManager getConfigManager() {
-        return configManager;
-    }
-    public static TranslationManager getTranslationManager() {
-        return translationManager;
-    }
-    public static ColorConfigManager getColorConfigManager() {
-        return colorConfigManager;
-    }
-    public static SqliteManager getSqliteManager() {
-        return sqliteManager;
-    }
+    public static ConfigManager getConfigManager() {return configManager;}
+    public static TranslationManager getTranslationManager() {return translationManager;}
+    public static ColorConfigManager getColorConfigManager() {return colorConfigManager;}
+    public static SqliteManager getSqliteManager() {return sqliteManager;}
     public static LoggerManager getLoggerManager() {return loggerManager;}
+    public static RegularsManager getRegularsManager() {return regularsManager;}
+
 }
