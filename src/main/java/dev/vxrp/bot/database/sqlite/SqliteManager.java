@@ -16,12 +16,14 @@ import java.sql.Statement;
 public class SqliteManager {
     private final TicketsTableManager ticketsTableManager;
     private final NoticeOfDepartureTableManager noticeOfDepartureTableManager;
+    private final RegularsTableManager regularsTableManager;
 
     public SqliteManager(String path) throws SQLException, InterruptedException {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:" + path);
 
         ticketsTableManager = new TicketsTableManager(connection);
         noticeOfDepartureTableManager = new NoticeOfDepartureTableManager(connection);
+        regularsTableManager = new RegularsTableManager(connection);
         Logger logger = LoggerFactory.getLogger(SqliteManager.class);
         String prefix = ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite"));
         try (Statement statement = connection.createStatement()) {
@@ -97,5 +99,8 @@ public class SqliteManager {
     }
     public NoticeOfDepartureTableManager getNoticeOfDepartureTableManager() {
         return noticeOfDepartureTableManager;
+    }
+    public RegularsTableManager getRegularsTableManager() {
+        return regularsTableManager;
     }
 }
