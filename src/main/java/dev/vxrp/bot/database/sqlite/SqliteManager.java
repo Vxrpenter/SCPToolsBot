@@ -33,7 +33,7 @@ public class SqliteManager {
                             "creatorId TEXT NOT NULL," +
                             "handlerId TEXT," +
                             "PRIMARY KEY ( id, identifier ));");
-            logger.info("{} - Set up table {} with rows: {}, {}, {}, {}, {}", prefix,
+            logger.debug("{} - Set up table {} with rows: {}, {}, {}, {}, {}", prefix,
                     ColorTool.apply(DCColor.GOLD, "tickets"),
                     ColorTool.apply(DCColor.RED, "id"),
                     ColorTool.apply(DCColor.RED, "identifier"),
@@ -54,7 +54,7 @@ public class SqliteManager {
                             "start_time TEXT NOT NULL," +
                             "end_time TEXT NOT NULL" +
                             ");");
-            logger.info("{} - Set up table {} with rows: {}, {}, {}, {}", prefix,
+            logger.debug("{} - Set up table {} with rows: {}, {}, {}, {}", prefix,
                     ColorTool.apply(DCColor.GOLD, "notice_of_departure"),
                     ColorTool.apply(DCColor.RED, "id"),
                     ColorTool.apply(DCColor.GREEN, "channel_message_id"),
@@ -67,8 +67,29 @@ public class SqliteManager {
                     LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
                     Color.ORANGE);
         }
-        logger.info("{} - Set up Sqlite database correctly",
-                ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite")));
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(
+                    "CREATE TABLE IF NOT EXISTS regulars (" +
+                            "id TEXT PRIMARY KEY," +
+                            "group_role TEXT," +
+                            "role TEXT NOT NULL," +
+                            "time INT NOT NULL" +
+                            ");"
+            );
+            logger.debug("{} - Set up table {} with rows: {}, {}, {}, {}", prefix,
+                    ColorTool.apply(DCColor.GOLD, "regulars"),
+                    ColorTool.apply(DCColor.RED, "id"),
+                    ColorTool.apply(DCColor.GREEN, "group_role"),
+                    ColorTool.apply(DCColor.GREEN, "role"),
+                    ColorTool.apply(DCColor.GREEN, "time"));
+
+            ScpTools.getLoggerManager().databaseLog(
+                    "CREATE TABLE IF NOT EXISTS regulars (id TEXT PRIMARY KEY, group_role TEXT NOT NULL, role TEXT NOT NULL, time INT NOT NULL);",
+                    "Created Table with all rows",
+                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    Color.ORANGE);
+        }
+        logger.info("Set up Sqlite database correctly");
     }
 
     public TicketsTableManager getTicketsTableManager() {

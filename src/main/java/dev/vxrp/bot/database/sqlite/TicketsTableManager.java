@@ -36,13 +36,12 @@ public class TicketsTableManager {
             statement.setString(4, creatorId);
             statement.setString(5, handlerId);
             statement.executeUpdate();
-            logger.info("{} - Added ticket - id: {}, identifier: {} , creation_date: {} , creatorId: {} , handlerId: {}", prefix,
+            logger.debug("{} - Added ticket - id: {}, identifier: {} , creation_date: {} , creatorId: {} , handlerId: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GREEN, identifier.toString()),
                     ColorTool.apply(DCColor.GOLD, creation_date),
                     ColorTool.apply(DCColor.GOLD, creatorId),
                     ColorTool.apply(DCColor.GOLD, handlerId));
-            System.out.println(statement.getResultSet());
             ScpTools.getLoggerManager().databaseLog(
                     "INSERT INTO tickets VALUES (?, ?, ?, ?, ?)",
                     "Created new ticket with value id: "+ColorTool.apply(DCColor.GREEN, id)+
@@ -94,7 +93,7 @@ public class TicketsTableManager {
             statement.setString(1, handlerId);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.info("{} - Updated handler of ticket - id: {} , handlerId: {}", prefix,
+            logger.debug("{} - Updated handler of ticket - id: {} , handlerId: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, handlerId));
             ScpTools.getLoggerManager().databaseLog(
@@ -116,7 +115,7 @@ public class TicketsTableManager {
         try (PreparedStatement statement = connection.prepareStatement("DELETE FROM tickets WHERE id=?")) {
             statement.setString(1, id);
             statement.execute();
-            logger.info("{} - Deleted ticket - id: {}", prefix,
+            logger.debug("{} - Deleted ticket - id: {}", prefix,
                     ColorTool.apply(DCColor.RED, id));
             ScpTools.getLoggerManager().databaseLog(
                     "DELETE FROM tickets WHERE id=?",

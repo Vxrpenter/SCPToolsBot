@@ -33,7 +33,7 @@ public class NoticeOfDepartureTableManager {
             statement.setString(3, start_time);
             statement.setString(4, end_time);
             statement.executeUpdate();
-            logger.info("{} - Added notice of departure - id: {}, channel_message_id: {} , start_time: {} , end_time: {}", prefix,
+            logger.debug("{} - Added notice of departure - id: {}, channel_message_id: {} , start_time: {} , end_time: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GREEN, channel_message_id),
                     ColorTool.apply(DCColor.GOLD, start_time),
@@ -60,7 +60,7 @@ public class NoticeOfDepartureTableManager {
             statement.setString(2, end_time);
             statement.setString(3, id);
             statement.executeUpdate();
-            logger.info("{} - Updated notice of departure - id: {} , start_time: {} , end_time: {}", prefix,
+            logger.debug("{} - Updated notice of departure - id: {} , start_time: {} , end_time: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, start_time),
                     ColorTool.apply(DCColor.GOLD, end_time));
@@ -77,7 +77,7 @@ public class NoticeOfDepartureTableManager {
             statement.setString(1, channel_message_id);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.info("{} - Updated start_time - id: {} , channel_message_id: {}", prefix,
+            logger.debug("{} - Updated start_time - id: {} , channel_message_id: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, channel_message_id));
         }
@@ -93,7 +93,7 @@ public class NoticeOfDepartureTableManager {
             statement.setString(1, start_time);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.info("{} - Updated start_time - id: {} , start_time: {}", prefix,
+            logger.debug("{} - Updated start_time - id: {} , start_time: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, start_time));
         }
@@ -109,7 +109,7 @@ public class NoticeOfDepartureTableManager {
             statement.setString(1, end_time);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.info("{} - Updated end_time - id: {} , end_time: {}", prefix,
+            logger.debug("{} - Updated end_time - id: {} , end_time: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, end_time));
         }
@@ -124,7 +124,7 @@ public class NoticeOfDepartureTableManager {
         try (PreparedStatement statement = connection.prepareStatement("DELETE FROM notice_of_departure WHERE id=?")) {
             statement.setString(1, id);
             statement.executeUpdate();
-            logger.info("{} - Deleted notice of departure - id: {}", prefix,
+            logger.debug("{} - Deleted notice of departure - id: {}", prefix,
                     ColorTool.apply(DCColor.RED, id));
             ScpTools.getLoggerManager().databaseLog(
                     "DELETE FROM notice_of_departure WHERE id=?",
