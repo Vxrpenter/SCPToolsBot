@@ -1,13 +1,11 @@
 package dev.vxrp.bot.events.buttons;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.records.SupportGroup;
-import dev.vxrp.bot.util.logger.LoggerManager;
-import dev.vxrp.bot.util.records.Ticket;
+import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.records.SupportGroup;
+import dev.vxrp.util.logger.LoggerManager;
+import dev.vxrp.util.records.Ticket;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageHistory;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
@@ -18,11 +16,9 @@ import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.modals.Modal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.event.Level;
 
 import java.awt.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Support {

@@ -1,13 +1,13 @@
 package dev.vxrp.bot.events.modals;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.util.Enums.DCColor;
-import dev.vxrp.bot.util.builder.StatsBuilder;
-import dev.vxrp.bot.util.colors.ColorTool;
-import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.records.ButtonGroup;
-import dev.vxrp.bot.util.configuration.records.ConfigGroup;
-import dev.vxrp.bot.util.configuration.records.NoticeOfDepartureGroup;
+import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.builder.StatsBuilder;
+import dev.vxrp.util.colors.ColorTool;
+import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.records.ButtonGroup;
+import dev.vxrp.util.configuration.records.ConfigGroup;
+import dev.vxrp.util.configuration.records.NoticeOfDepartureGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;

@@ -1,14 +1,11 @@
 package dev.vxrp.bot.database.sqlite;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.util.Enums.DCColor;
-import dev.vxrp.bot.util.Enums.TicketIdentifier;
-import dev.vxrp.bot.util.colors.ColorTool;
-import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.logger.LoggerManager;
-import dev.vxrp.bot.util.records.NoticeOfDeparture;
-import dev.vxrp.bot.util.records.Ticket;
-import org.jetbrains.annotations.NotNull;
+import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.TicketIdentifier;
+import dev.vxrp.util.colors.ColorTool;
+import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.records.Ticket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,8 +67,6 @@ public class TicketsTableManager {
 
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                logger.info("{} - Selected ticket with id: {}", prefix,
-                        ColorTool.apply(DCColor.GREEN, id));
                 ScpTools.getLoggerManager().databaseLog(
                         "SELECT * FROM tickets WHERE id=?",
                         "Selected ticket id: "+ColorTool.apply(DCColor.GREEN, id),

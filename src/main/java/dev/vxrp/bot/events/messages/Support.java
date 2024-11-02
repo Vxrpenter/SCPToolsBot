@@ -1,9 +1,9 @@
 package dev.vxrp.bot.events.messages;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.logger.LoggerManager;
-import dev.vxrp.bot.util.records.Ticket;
+import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.logger.LoggerManager;
+import dev.vxrp.util.records.Ticket;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;

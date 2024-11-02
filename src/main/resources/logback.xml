@@ -21,7 +21,7 @@
             <maxIndex>21</maxIndex>
         </rollingPolicy>
 
-        <triggeringPolicy class="dev.vxrp.bot.util.logback.RollPerSessionTriggeringPolicy"/>
+        <triggeringPolicy class="dev.vxrp.util.logback.RollPerSessionTriggeringPolicy"/>
     </appender>
     <root level="INFO">
         <appender-ref ref="STDOUT" />

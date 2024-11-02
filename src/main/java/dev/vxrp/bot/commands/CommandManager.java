@@ -1,8 +1,8 @@
 package dev.vxrp.bot.commands;
 
-import dev.vxrp.bot.util.configuration.LoadedConfigurations;
-import dev.vxrp.bot.util.configuration.records.ConfigGroup;
-import dev.vxrp.bot.util.converter.PermissionListConverter;
+import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.records.ConfigGroup;
+import dev.vxrp.util.converter.PermissionListConverter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
