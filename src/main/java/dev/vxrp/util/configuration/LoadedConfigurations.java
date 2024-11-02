@@ -1,6 +1,5 @@
 package dev.vxrp.util.configuration;
 
-import dev.vxrp.bot.util.configuration.records.*;
 import dev.vxrp.util.configuration.records.*;
 
 import java.util.HashSet;
