@@ -115,7 +115,6 @@ public class ScpTools {
     private static void initializeRegulars() {
         try {
             regularsManager = new RegularsManager(Path.of(System.getProperty("user.dir")));
-            regularsManager.getConfig();
         } catch (IOException | NullPointerException e) {
             logger.error("Could not initialize regulars configs {}", e.getMessage());
         }

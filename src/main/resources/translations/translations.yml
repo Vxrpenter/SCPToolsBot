@@ -209,6 +209,11 @@ notice_of_departure:
 
   notice_deleted_ended_replace_message: "The notice was deleted"
 
+regulars:
+  first_title: ""
+  first_body: ""
+  first_footer: ""
+
 logging:
   single_message_log_template: "
                         %action%\n

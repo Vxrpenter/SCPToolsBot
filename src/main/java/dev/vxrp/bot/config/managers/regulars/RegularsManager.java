@@ -95,6 +95,23 @@ public class RegularsManager {
         return configs;
     }
 
+    public List<RegularConfig> getSingleConfig(Regular regular) throws IOException {
+        List<RegularConfig> configs = new ArrayList<>();
+
+        JsonArray config = regular.config().get("roles").getAsJsonArray();
+
+        for (JsonElement object : config) {
+            JsonObject jsonObject = object.getAsJsonObject();
+
+            RegularConfig regularConfig = new RegularConfig(
+                    jsonObject.get("id").getAsString(),
+                    jsonObject.get("description").getAsString(),
+                    jsonObject.get("playtime_requirements").getAsInt());
+            configs.add(regularConfig);
+        }
+        return configs;
+    }
+
     public List<File> folders() {
         List<File> folders = new ArrayList<>();
         Collections.addAll(folders, Objects.requireNonNull(new File(path + "/regulars/").listFiles()));
