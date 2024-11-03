@@ -5,6 +5,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class ColorTool {
 
+    private static final String filler = "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
+            "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
+            "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
+            "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
+            "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
+            "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
+            "\u200E \u200E \u200E \u200E \u200E \u200E \u200E";
     public static final String DARK_GRAY = "\u001B[2;30m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
@@ -67,7 +74,8 @@ public class ColorTool {
                 .replace("&white&", "\u001B[2;37m")
                 .replace("&bold&", "\u001B[1;2m")
                 .replace("&reset&", "\u001B[0m")
-                .replace("&underline&", "\u001B[4;2m");
+                .replace("&underline&", "\u001B[4;2m")
+                .replace("%filler%", filler);
 
     }
     @NotNull

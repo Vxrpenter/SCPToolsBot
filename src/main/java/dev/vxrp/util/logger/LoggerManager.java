@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class LoggerManager {
-    private final String filler = "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E";
     private final static Logger logger = LoggerFactory.getLogger(LoggerManager.class);
     private final JDA api;
 
@@ -33,7 +32,7 @@ public class LoggerManager {
                     .setColor(color)
                     .setAuthor(user.getName(), null, thumbnailURL)
                     .setDescription(LoadedConfigurations.getLoggingMemoryLoad().single_message_log_template()
-                            .replace("%action%", action.replace("%filler%", filler))
+                            .replace("%action%", action)
                             .replace("%message%", message.strip().replace("```", "<@CODEBLOCK>"))).build();
 
             Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
@@ -43,7 +42,7 @@ public class LoggerManager {
                     .setColor(color)
                     .setAuthor(user.getName(), null, thumbnailURL)
                     .setDescription(LoadedConfigurations.getLoggingMemoryLoad().single_message_log_template()
-                            .replace("%action%", action.replace("%filler%", filler))
+                            .replace("%action%", action)
                             .replace("%message%", ColorTool.useCustomColorCodes("&red&&bold&Too long for Embed...&reset&"))).build();
             Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info, new EmbedBuilder().setColor(color).setDescription(message).build()).queue();
         }
@@ -64,7 +63,7 @@ public class LoggerManager {
                 .setColor(color)
                 .setAuthor(user.getGlobalName(), null, user.getAvatarUrl())
                 .setDescription(LoadedConfigurations.getLoggingMemoryLoad().close_log_template()
-                        .replace("%action%", action.replace("%filler%", filler))).build();
+                        .replace("%action%", action)).build();
 
         Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
     }
@@ -74,7 +73,7 @@ public class LoggerManager {
                 .setColor(color)
                 .setAuthor(user.getGlobalName(), null, user.getAvatarUrl())
                 .setDescription(LoadedConfigurations.getLoggingMemoryLoad().close_log_template()
-                        .replace("%action%", action.replace("%filler%", filler))).build();
+                        .replace("%action%", action)).build();
 
         Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
     }
