@@ -246,7 +246,7 @@ logging:
 
   support_message_logging_action: "
                         ✏️ Send message in channel %channel% by user %user%\n
-                        %filler%
+                        &filler&
                         Ticket Type - **%type%**\n
                         Ticket Id - **%id%**\n
                         Creator - **%creator%**\n
@@ -256,7 +256,7 @@ logging:
                         "
   support_ticket_create_logging_action: "
                         ✅ Ticket with id: **%id%** created %channel% by user %user%\n
-                        %filler%
+                        &filler&
                         Ticket Type - **%type%**\n
                         Ticket Id - **%id%**\n
                         Creator - **%creator%**\n
@@ -266,7 +266,7 @@ logging:
                         "
   support_ticket_close_logging_action: "
                         ❌ Ticket with id: **%id%** closed by user %user%\n
-                        %filler%
+                        &filler&
                         Ticket Type - **%type%**\n
                         Ticket Id - **%id%**\n
                         Creator - **%creator%**\n
@@ -278,7 +278,7 @@ logging:
                         "
   notice_of_departure_create_logging_action: "
                         ✅ Notice of Departure with id: **%id%** created %message% by user %user%\n
-                        %filler%
+                        &filler&
                         Ticket Id - **%id%**\n
                         Creator - **%creator%**\n
                         Expiration Date - **%expiration%**\n
@@ -293,7 +293,7 @@ logging:
                         "
   notice_of_departure_dismiss_logging_action: "
                           ❌ Notice of Departure with id: **%id%** dismissed by %user%\n
-                          %filler%
+                          &filler&
                           Ticket Id - **%id%**\n
                           Creator - **%creator%**\n
                           Handler - **%handler%**\n
@@ -309,7 +309,7 @@ logging:
                           "
   notice_of_departure_close_logging_action: "
                         ❌ Notice of Departure with id: **%id%** revoked by %user%\n
-                        %filler%
+                        &filler&
                         Ticket Id - **%id%**\n
                         Creator - **%creator%**\n
                         Handler - **%handler%**\n

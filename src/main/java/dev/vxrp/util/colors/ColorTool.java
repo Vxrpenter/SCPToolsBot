@@ -75,7 +75,7 @@ public class ColorTool {
                 .replace("&bold&", "\u001B[1;2m")
                 .replace("&reset&", "\u001B[0m")
                 .replace("&underline&", "\u001B[4;2m")
-                .replace("%filler%", filler);
+                .replace("&filler&", filler);
 
     }
     @NotNull
@@ -113,6 +113,9 @@ public class ColorTool {
             }
             case "&underline&" -> {
                 return "\u001B[4;2m";
+            }
+            case "&filler&" -> {
+                return filler;
             }
         }
         return colorCode;
