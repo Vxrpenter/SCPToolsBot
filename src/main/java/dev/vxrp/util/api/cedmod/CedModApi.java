@@ -7,6 +7,7 @@ import dev.vxrp.util.colors.ColorTool;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,15 @@ public class CedModApi {
     private static final Logger logger = LoggerFactory.getLogger(CedModApi.class);
     private static final OkHttpClient client = new OkHttpClient();
 
-    public static void executeUnban(String instanceURL, String apiKey, String banID, String reason) throws IOException {
+    private final String instanceURL;
+    private final String apiKey;
+
+    public CedModApi(String instanceURL, String apiKey) {
+        this.instanceURL = instanceURL;
+        this.apiKey = apiKey;
+    }
+
+    public void executeUnban(String banID, String reason) throws IOException {
         if (banID == null) return;
         String json = "{\"logReason\":\""+reason+"\"}";
 
@@ -35,7 +44,7 @@ public class CedModApi {
             logger.error("Unbanning of {} ID failed, does it exist? ({})", ColorTool.apply(DCColor.RED, banID), response.code());
         }
     }
-    public static String getBanId(String instanceURL, String apiKey, String banList, String userID) throws IOException {
+    public String getBanId(String banList, String userID) throws IOException {
 
         Request request = new Request.Builder()
                 .url(instanceURL+"/Api/Ban/Query?q="+userID+"%40steam&banList="+banList+"&max=10&page=0&idOnly=true")
@@ -57,5 +66,25 @@ public class CedModApi {
             logger.error("Couldn't commence HTTP request to get banID, is the user banned?\n {}", e.getLocalizedMessage());
         }
         return null;
+    }
+    public double getActivity(String userID, String days) throws IOException {
+
+        Request request = new Request.Builder()
+                .url(instanceURL+"/Api/Player/Query?q="+userID+"&max=10&page=0&staffOnly=false&create=false&sortLabel=id_field&activityMin="+days+"&basicStats=true&moderationData=false")
+                .header("Authorization", "Bearer "+apiKey)
+                .build();
+
+        Call call = client.newCall(request);
+        Response response = call.execute();
+
+        try {
+            assert response.body() != null;
+            JsonArray array = JsonParser.parseString(response.body().string()).getAsJsonObject().getAsJsonArray("players");
+
+            return array.get(0).getAsJsonObject().get("activity").getAsDouble();
+        } catch (IndexOutOfBoundsException e) {
+            logger.error("Couldn't commence HTTP request to get activity, is the user not present?\n {}", e.getLocalizedMessage());
+        }
+        return 0;
     }
 }

@@ -22,28 +22,31 @@ public class RegularsTableManager {
         this.connection = connection;
     }
 
-    public void addRegular(String id, String group_role, String role, int time) throws SQLException, InterruptedException {
+    public void addRegular(String id, String group_role, String role, int time, String time_last_checked) throws SQLException, InterruptedException {
         if (exists(id)) {
             logger.warn("{} - Regular already exists in Sqlite database... opting for deletion", prefix);
             deleteRegular(id);
         }
-        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO regulars VALUES (?, ?, ?, ?)")) {
+        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO regulars VALUES (?, ?, ?, ?, ?)")) {
             statement.setString(1, id);
             statement.setString(2, group_role);
             statement.setString(3, role);
             statement.setInt(4, time);
+            statement.setString(5, time_last_checked);
             statement.executeUpdate();
-            logger.debug("{} - Added regular - id: {}, group_role: {} , role: {} , time: {}", prefix,
+            logger.debug("{} - Added regular - id: {}, group_role: {} , role: {} , time: {}, time_last_checked: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GREEN, group_role),
                     ColorTool.apply(DCColor.GOLD, role),
-                    ColorTool.apply(DCColor.GOLD, String.valueOf(time)));
+                    ColorTool.apply(DCColor.GOLD, String.valueOf(time)),
+                    ColorTool.apply(DCColor.GOLD, time_last_checked));
             ScpTools.getLoggerManager().databaseLog(
-                    "INSERT INTO regular VALUES (?, ?, ?, ?)",
+                    "INSERT INTO regular VALUES (?, ?, ?, ?, ?)",
                     "Created new regular with value id: "+ColorTool.apply(DCColor.GREEN, id)+
-                            ", channel_message_id: "+ColorTool.apply(DCColor.GREEN, group_role)+
-                            ", start_time: "+ColorTool.apply(DCColor.GOLD, role)+
-                            ", end_time: "+ColorTool.apply(DCColor.GOLD, String.valueOf(time)),
+                            ", group_role: "+ColorTool.apply(DCColor.GREEN, group_role)+
+                            ", role: "+ColorTool.apply(DCColor.GOLD, role)+
+                            ", time: "+ColorTool.apply(DCColor.GOLD, time+
+                            ", time_last_checked: "+ColorTool.apply(DCColor.GOLD, time_last_checked)),
                     LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
                     Color.ORANGE);
         }
@@ -59,7 +62,7 @@ public class RegularsTableManager {
             statement.setString(1, group_role);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.debug("{} - Updated start_time - id: {} , group_role: {}", prefix,
+            logger.debug("{} - Updated group_role - id: {} , group_role: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, group_role));
         }
@@ -75,7 +78,7 @@ public class RegularsTableManager {
             statement.setString(1, role);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.debug("{} - Updated start_time - id: {} , role: {}", prefix,
+            logger.debug("{} - Updated role - id: {} , role: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, role));
         }
@@ -91,9 +94,25 @@ public class RegularsTableManager {
             statement.setString(1, String.valueOf(time));
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.debug("{} - Updated start_time - id: {} , time: {}", prefix,
+            logger.debug("{} - Updated time - id: {} , time: {}", prefix,
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, String.valueOf(time)));
+        }
+    }
+
+    public void updateTimeLastChecked(String id, String time_last_checked) throws SQLException {
+        if (!exists(id)) {
+            logger.error("{} - Failed to update regular time_last_checked with id: {}. Id does not exist", prefix,
+                    ColorTool.apply(DCColor.GREEN, id));
+            return;
+        }
+        try (PreparedStatement statement = connection.prepareStatement("UPDATE regular SET time_last_checked=? WHERE id=?")) {
+            statement.setString(1, time_last_checked);
+            statement.setString(2, id);
+            statement.executeUpdate();
+            logger.debug("{} - Updated time_last_checked - id: {} , time: {}", prefix,
+                    ColorTool.apply(DCColor.GREEN, id),
+                    ColorTool.apply(DCColor.GOLD, time_last_checked));
         }
     }
 
