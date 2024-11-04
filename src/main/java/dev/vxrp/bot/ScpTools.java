@@ -12,6 +12,7 @@ import dev.vxrp.bot.config.managers.configuration.ColorConfigManager;
 import dev.vxrp.bot.config.managers.translations.TranslationManager;
 import dev.vxrp.bot.events.MessageListener;
 import dev.vxrp.bot.runnables.CheckNoticeOfDeparture;
+import dev.vxrp.util.api.cedmod.CedModApi;
 import dev.vxrp.util.api.github.GitHubApi;
 import dev.vxrp.util.configuration.LoadedConfigurations;
 import dev.vxrp.util.configuration.configs.ConfigLoader;
@@ -31,11 +32,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -47,6 +49,7 @@ public class ScpTools {
     static SqliteManager sqliteManager;
     static LoggerManager loggerManager;
     static RegularsManager regularsManager;
+    static CedModApi cedModApi;
 
     public static void main(String[] args) throws IOException {
         GitHubApi.CheckForUpdatesByTags("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags");
@@ -55,6 +58,7 @@ public class ScpTools {
         setLoggingLevel();
         loadConfigs();
         initializeRegulars();
+        initializeCedModApi();
 
         Activity.ActivityType activityType = Activity.ActivityType.valueOf(LoadedConfigurations.getConfigMemoryLoad().activity_type());
         String activityContent = LoadedConfigurations.getConfigMemoryLoad().activity_content();
@@ -120,6 +124,19 @@ public class ScpTools {
         }
     }
 
+    private static void initializeCedModApi() throws IOException {
+        String instanceUrl = LoadedConfigurations.getConfigMemoryLoad().cedmod_instance_url();
+        String apiKey = LoadedConfigurations.getConfigMemoryLoad().cedmod_api_key();
+
+        cedModApi = new CedModApi(instanceUrl, apiKey);
+
+        //Little reminder for later testing
+
+        //double hours = cedModApi.getActivity("user", "time") / 3600;
+        //System.out.println(hours > 50.0);
+        //System.out.println(hours);
+    }
+
     private static void initializeConfigs() {
         List<String> folders = Arrays.asList("configs", "translations", "sqlite");
         for (String folder : folders) {
@@ -162,5 +179,6 @@ public class ScpTools {
     public static SqliteManager getSqliteManager() {return sqliteManager;}
     public static LoggerManager getLoggerManager() {return loggerManager;}
     public static RegularsManager getRegularsManager() {return regularsManager;}
+    public static CedModApi getCedModApi() {return cedModApi;}
 
 }

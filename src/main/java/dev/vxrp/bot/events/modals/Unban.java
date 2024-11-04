@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events.modals;
 
+import dev.vxrp.bot.ScpTools;
 import dev.vxrp.util.configuration.records.ButtonGroup;
 import dev.vxrp.util.configuration.records.ConfigGroup;
 import dev.vxrp.util.Enums.DCColor;
@@ -88,10 +89,8 @@ public class Unban {
         String steamID = event.getModalId().split(":")[2];
         String reason = Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString();
 
-        String instanceUrl = configs.cedmod_instance_url();
-        String apiKey = configs.cedmod_api_key();
         String banListID = configs.cedmod_master_banlist_id();
-        String banID = CedModApi.getBanId(instanceUrl, apiKey, banListID, steamID);
+        String banID = ScpTools.getCedModApi().getBanId(banListID, steamID);
 
         bannedUser.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessageEmbeds(
                 StatsBuilder.buildAccepted(bannedUser.getGlobalName()).build(),
@@ -102,7 +101,7 @@ public class Unban {
                         .build()
                         )).queue();
 
-        CedModApi.executeUnban(instanceUrl, apiKey, banID, reason);
+        ScpTools.getCedModApi().executeUnban(banID, reason);
 
         event.reply(translations.ticket_unban_message_sent()).setEphemeral(true).queue();
     }

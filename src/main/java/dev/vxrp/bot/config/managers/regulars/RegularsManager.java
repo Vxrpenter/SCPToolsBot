@@ -115,6 +115,7 @@ public class RegularsManager {
     public List<File> folders() {
         List<File> folders = new ArrayList<>();
         Collections.addAll(folders, Objects.requireNonNull(new File(path + "/regulars/").listFiles()));
+
         return folders;
     }
 
