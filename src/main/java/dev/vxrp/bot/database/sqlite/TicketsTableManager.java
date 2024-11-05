@@ -18,7 +18,6 @@ import java.sql.SQLException;
 public class TicketsTableManager {
     private final Connection connection;
     private final Logger logger = LoggerFactory.getLogger(TicketsTableManager.class);
-    private final String prefix = ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite"));
 
     public TicketsTableManager(Connection connection) {
         this.connection = connection;
@@ -26,7 +25,7 @@ public class TicketsTableManager {
 
     public void addTicket(String id, TicketIdentifier identifier, String creation_date, String creatorId, String handlerId) throws SQLException, InterruptedException {
         if (existsId(id)) {
-            logger.warn("{} - Ticket already exists in Sqlite database... opting for deletion", prefix);
+            logger.warn("Ticket already exists in Sqlite database... opting for deletion");
             deleteTicket(id);
         }
         try (PreparedStatement statement = connection.prepareStatement("INSERT INTO tickets VALUES (?, ?, ?, ?, ?)")) {
@@ -36,7 +35,7 @@ public class TicketsTableManager {
             statement.setString(4, creatorId);
             statement.setString(5, handlerId);
             statement.executeUpdate();
-            logger.debug("{} - Added ticket - id: {}, identifier: {} , creation_date: {} , creatorId: {} , handlerId: {}", prefix,
+            logger.debug("Added ticket - id: {}, identifier: {} , creation_date: {} , creatorId: {} , handlerId: {}",
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GREEN, identifier.toString()),
                     ColorTool.apply(DCColor.GOLD, creation_date),
@@ -56,7 +55,7 @@ public class TicketsTableManager {
 
     public Ticket getTicket(String id) throws SQLException, InterruptedException {
         if (!existsId(id)) {
-            logger.error("{} - Failed to get ticket with id: {}. Id does not exist", prefix,
+            logger.error("Failed to get ticket with id: {}. Id does not exist",
                     ColorTool.apply(DCColor.GREEN, id));
             return null;
         }
@@ -84,7 +83,7 @@ public class TicketsTableManager {
 
     public void updateHandler(String id, String handlerId) throws SQLException, InterruptedException {
         if (!existsId(id)) {
-            logger.error("{} - Failed to update ticket with id: {}. Id does not exist", prefix,
+            logger.error("Failed to update ticket with id: {}. Id does not exist",
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
@@ -93,7 +92,7 @@ public class TicketsTableManager {
             statement.setString(1, handlerId);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.debug("{} - Updated handler of ticket - id: {} , handlerId: {}", prefix,
+            logger.debug("Updated handler of ticket - id: {} , handlerId: {}",
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, handlerId));
             ScpTools.getLoggerManager().databaseLog(
@@ -107,7 +106,7 @@ public class TicketsTableManager {
 
     public void deleteTicket(String id) throws SQLException, InterruptedException {
         if  (!existsId(id)) {
-            logger.error("{} - Failed to delete ticket with id: {}. Id does not exist", prefix,
+            logger.error("Failed to delete ticket with id: {}. Id does not exist",
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
@@ -115,7 +114,7 @@ public class TicketsTableManager {
         try (PreparedStatement statement = connection.prepareStatement("DELETE FROM tickets WHERE id=?")) {
             statement.setString(1, id);
             statement.execute();
-            logger.debug("{} - Deleted ticket - id: {}", prefix,
+            logger.debug("Deleted ticket - id: {}",
                     ColorTool.apply(DCColor.RED, id));
             ScpTools.getLoggerManager().databaseLog(
                     "DELETE FROM tickets WHERE id=?",

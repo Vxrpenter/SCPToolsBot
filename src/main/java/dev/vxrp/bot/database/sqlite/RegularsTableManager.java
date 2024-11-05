@@ -16,7 +16,6 @@ import java.sql.SQLException;
 public class RegularsTableManager {
     private final Connection connection;
     private final Logger logger = LoggerFactory.getLogger(RegularsTableManager.class);
-    private final String prefix = ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite"));
 
     public RegularsTableManager(Connection connection) {
         this.connection = connection;
@@ -24,7 +23,7 @@ public class RegularsTableManager {
 
     public void addRegular(String id, String group_role, String role, int time, String time_last_checked) throws SQLException, InterruptedException {
         if (exists(id)) {
-            logger.warn("{} - Regular already exists in Sqlite database... opting for deletion", prefix);
+            logger.warn("Regular already exists in Sqlite database... opting for deletion");
             deleteRegular(id);
         }
         try (PreparedStatement statement = connection.prepareStatement("INSERT INTO regulars VALUES (?, ?, ?, ?, ?)")) {
@@ -34,7 +33,7 @@ public class RegularsTableManager {
             statement.setInt(4, time);
             statement.setString(5, time_last_checked);
             statement.executeUpdate();
-            logger.debug("{} - Added regular - id: {}, group_role: {} , role: {} , time: {}, time_last_checked: {}", prefix,
+            logger.debug("Added regular - id: {}, group_role: {} , role: {} , time: {}, time_last_checked: {}",
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GREEN, group_role),
                     ColorTool.apply(DCColor.GOLD, role),
@@ -54,7 +53,7 @@ public class RegularsTableManager {
 
     public void updateGroupRole(String id, String group_role) throws SQLException {
         if (!exists(id)) {
-            logger.error("{} - Failed to update regular group_role with id: {}. Id does not exist", prefix,
+            logger.error("Failed to update regular group_role with id: {}. Id does not exist",
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
@@ -62,7 +61,7 @@ public class RegularsTableManager {
             statement.setString(1, group_role);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.debug("{} - Updated group_role - id: {} , group_role: {}", prefix,
+            logger.debug("Updated group_role - id: {} , group_role: {}",
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, group_role));
         }
@@ -70,7 +69,7 @@ public class RegularsTableManager {
 
     public void updateRole(String id, String role) throws SQLException {
         if (!exists(id)) {
-            logger.error("{} - Failed to update regular role with id: {}. Id does not exist", prefix,
+            logger.error("Failed to update regular role with id: {}. Id does not exist",
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
@@ -78,7 +77,7 @@ public class RegularsTableManager {
             statement.setString(1, role);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.debug("{} - Updated role - id: {} , role: {}", prefix,
+            logger.debug("Updated role - id: {} , role: {}",
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, role));
         }
@@ -86,7 +85,7 @@ public class RegularsTableManager {
 
     public void updateTime(String id, int time) throws SQLException {
         if (!exists(id)) {
-            logger.error("{} - Failed to update regular time with id: {}. Id does not exist", prefix,
+            logger.error("Failed to update regular time with id: {}. Id does not exist",
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
@@ -94,7 +93,7 @@ public class RegularsTableManager {
             statement.setString(1, String.valueOf(time));
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.debug("{} - Updated time - id: {} , time: {}", prefix,
+            logger.debug("Updated time - id: {} , time: {}",
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, String.valueOf(time)));
         }
@@ -102,7 +101,7 @@ public class RegularsTableManager {
 
     public void updateTimeLastChecked(String id, String time_last_checked) throws SQLException {
         if (!exists(id)) {
-            logger.error("{} - Failed to update regular time_last_checked with id: {}. Id does not exist", prefix,
+            logger.error("Failed to update regular time_last_checked with id: {}. Id does not exist",
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
@@ -110,7 +109,7 @@ public class RegularsTableManager {
             statement.setString(1, time_last_checked);
             statement.setString(2, id);
             statement.executeUpdate();
-            logger.debug("{} - Updated time_last_checked - id: {} , time: {}", prefix,
+            logger.debug("Updated time_last_checked - id: {} , time: {}",
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, time_last_checked));
         }
@@ -118,14 +117,14 @@ public class RegularsTableManager {
 
     public void deleteRegular(String id) throws SQLException, InterruptedException {
         if (!exists(id)) {
-            logger.error("{} - Failed to delete regular with id: {}. Id does not exist", prefix,
+            logger.error("Failed to delete regular with id: {}. Id does not exist",
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
         try (PreparedStatement statement = connection.prepareStatement("DELETE FROM regulars WHERE id=?")) {
             statement.setString(1, id);
             statement.executeUpdate();
-            logger.debug("{} - Deleted regular - id: {}", prefix,
+            logger.debug("Deleted regular - id: {}",
                     ColorTool.apply(DCColor.RED, id));
             ScpTools.getLoggerManager().databaseLog(
                     "DELETE FROM regulars WHERE id=?",
