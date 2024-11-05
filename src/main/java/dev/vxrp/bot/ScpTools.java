@@ -36,8 +36,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -77,7 +75,7 @@ public class ScpTools {
         initializeSqlite();
         logger.info("Initialized Listeners");
 
-        new CommandManager().Initialize(api);
+        new CommandManager(api);
 
         noticeOfDepartureCheckups(api);
     }
