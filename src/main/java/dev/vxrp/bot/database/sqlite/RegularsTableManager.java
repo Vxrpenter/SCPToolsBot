@@ -4,6 +4,7 @@ import dev.vxrp.bot.ScpTools;
 import dev.vxrp.util.Enums.DCColor;
 import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.records.regular.RegularMember;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegularsTableManager {
     private final Connection connection;
@@ -21,27 +24,30 @@ public class RegularsTableManager {
         this.connection = connection;
     }
 
-    public void addRegular(String id, String group_role, String role, int time, String time_last_checked) throws SQLException, InterruptedException {
+    public void addRegular(String id, String user_name, String group_role, String role, int time, String time_last_checked) throws SQLException, InterruptedException {
         if (exists(id)) {
             logger.warn("Regular already exists in Sqlite database... opting for deletion");
             deleteRegular(id);
         }
-        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO regulars VALUES (?, ?, ?, ?, ?)")) {
+        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO regulars VALUES (?, ?, ?, ?, ?, ?)")) {
             statement.setString(1, id);
-            statement.setString(2, group_role);
-            statement.setString(3, role);
-            statement.setInt(4, time);
-            statement.setString(5, time_last_checked);
+            statement.setString(2, user_name);
+            statement.setString(3, group_role);
+            statement.setString(4, role);
+            statement.setInt(5, time);
+            statement.setString(6, time_last_checked);
             statement.executeUpdate();
-            logger.debug("Added regular - id: {}, group_role: {} , role: {} , time: {}, time_last_checked: {}",
+            logger.debug("Added regular - id: {}, user_name {}, group_role: {} , role: {} , time: {}, time_last_checked: {}",
                     ColorTool.apply(DCColor.GREEN, id),
+                    ColorTool.apply(DCColor.GREEN, user_name),
                     ColorTool.apply(DCColor.GREEN, group_role),
                     ColorTool.apply(DCColor.GOLD, role),
                     ColorTool.apply(DCColor.GOLD, String.valueOf(time)),
                     ColorTool.apply(DCColor.GOLD, time_last_checked));
             ScpTools.getLoggerManager().databaseLog(
-                    "INSERT INTO regular VALUES (?, ?, ?, ?, ?)",
+                    "INSERT INTO regular VALUES (?, ?, ?, ?, ?, ?)",
                     "Created new regular with value id: "+ColorTool.apply(DCColor.GREEN, id)+
+                            ", user_name: "+ColorTool.apply(DCColor.GREEN, user_name)+
                             ", group_role: "+ColorTool.apply(DCColor.GREEN, group_role)+
                             ", role: "+ColorTool.apply(DCColor.GOLD, role)+
                             ", time: "+ColorTool.apply(DCColor.GOLD, time+
@@ -83,14 +89,14 @@ public class RegularsTableManager {
         }
     }
 
-    public void updateTime(String id, int time) throws SQLException {
+    public void updateTime(String id, double time) throws SQLException {
         if (!exists(id)) {
             logger.error("Failed to update regular time with id: {}. Id does not exist",
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
         try (PreparedStatement statement = connection.prepareStatement("UPDATE regular SET time=? WHERE id=?")) {
-            statement.setString(1, String.valueOf(time));
+            statement.setDouble(1, time);
             statement.setString(2, id);
             statement.executeUpdate();
             logger.debug("Updated time - id: {} , time: {}",
@@ -113,6 +119,24 @@ public class RegularsTableManager {
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, time_last_checked));
         }
+    }
+
+    public List<RegularMember> getEveryRegular() throws SQLException {
+        List<RegularMember> regularMembers = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM regulars")) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    regularMembers.add(new RegularMember(
+                            resultSet.getString("id"),
+                            resultSet.getString("user_name"),
+                            resultSet.getString("group_role"),
+                            resultSet.getString("role"),
+                            resultSet.getDouble("time"),
+                            resultSet.getString("time_last_checked")));
+                }
+            }
+        }
+        return regularMembers;
     }
 
     public void deleteRegular(String id) throws SQLException, InterruptedException {
