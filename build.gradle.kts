@@ -9,7 +9,7 @@ application.mainClass = "dev.vxrp.bot.ScpTools" //
 group = "dev.vxrp"
 version= "0.2.6"
 
-val jdaVersion = "5.0.0-beta.24" //
+val jdaVersion = "5.2.0" //
 
 repositories {
     mavenCentral()
