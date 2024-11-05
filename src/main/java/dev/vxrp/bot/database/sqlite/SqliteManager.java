@@ -77,7 +77,7 @@ public class SqliteManager {
                             "id TEXT PRIMARY KEY," +
                             "group_role TEXT," +
                             "role TEXT NOT NULL," +
-                            "time INT NOT NULL" +
+                            "time INT NOT NULL," +
                             "time_last_checked TEXT NOT NULL" +
                             ");"
             );
