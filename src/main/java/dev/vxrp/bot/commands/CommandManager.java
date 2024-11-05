@@ -19,7 +19,7 @@ public class CommandManager {
     private final static Logger logger = LoggerFactory.getLogger(CommandManager.class);
     private final static ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
 
-    public void Initialize(JDA api) {
+    public CommandManager(JDA api) {
         List<String> activeCommands = configs.commands();
         List<String> helpDefaultPermissions = configs.command_setting_help_default_permissions();
         List<String> templateDefaultPermissions = configs.command_settings_template_default_permissions();
