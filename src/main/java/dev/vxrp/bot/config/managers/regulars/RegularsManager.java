@@ -6,8 +6,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.records.Regular;
-import dev.vxrp.util.records.RegularConfig;
+import dev.vxrp.util.records.regular.Regular;
+import dev.vxrp.util.records.regular.RegularConfig;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;

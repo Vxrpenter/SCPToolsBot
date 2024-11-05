@@ -8,7 +8,7 @@ import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.configuration.LoadedConfigurations;
 import dev.vxrp.util.configuration.records.ButtonGroup;
 import dev.vxrp.util.configuration.records.NoticeOfDepartureGroup;
-import dev.vxrp.util.records.NoticeOfDeparture;
+import dev.vxrp.util.records.noticeOfDeparture.NoticeOfDeparture;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;

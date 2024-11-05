@@ -4,7 +4,7 @@ import dev.vxrp.bot.ScpTools;
 import dev.vxrp.util.configuration.LoadedConfigurations;
 import dev.vxrp.util.configuration.records.SupportGroup;
 import dev.vxrp.util.logger.LoggerManager;
-import dev.vxrp.util.records.Ticket;
+import dev.vxrp.util.records.ticket.Ticket;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
