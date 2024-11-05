@@ -4,7 +4,7 @@ import dev.vxrp.bot.ScpTools;
 import dev.vxrp.util.Enums.DCColor;
 import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.records.NoticeOfDeparture;
+import dev.vxrp.util.records.noticeOfDeparture.NoticeOfDeparture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
