@@ -7,14 +7,16 @@ import dev.vxrp.util.colors.ColorTool;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CedModApi {
     private static final Logger logger = LoggerFactory.getLogger(CedModApi.class);
-    private static final OkHttpClient client = new OkHttpClient();
+    private static final OkHttpClient client = new OkHttpClient.Builder()
+            .readTimeout(60, TimeUnit.SECONDS)
+            .build();
 
     private final String instanceURL;
     private final String apiKey;
