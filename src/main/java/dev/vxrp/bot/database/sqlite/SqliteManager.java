@@ -1,6 +1,7 @@
 package dev.vxrp.bot.database.sqlite;
 
 import dev.vxrp.bot.ScpTools;
+import dev.vxrp.bot.database.queue.QueueManager;
 import dev.vxrp.util.Enums.DCColor;
 import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.configuration.LoadedConfigurations;
@@ -17,6 +18,7 @@ public class SqliteManager {
     private final TicketsTableManager ticketsTableManager;
     private final NoticeOfDepartureTableManager noticeOfDepartureTableManager;
     private final RegularsTableManager regularsTableManager;
+    private final QueueManager queueManager;
 
     public SqliteManager(String path) throws SQLException, InterruptedException {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:" + path);
@@ -24,8 +26,8 @@ public class SqliteManager {
         ticketsTableManager = new TicketsTableManager(connection);
         noticeOfDepartureTableManager = new NoticeOfDepartureTableManager(connection);
         regularsTableManager = new RegularsTableManager(connection);
+        queueManager = new QueueManager(connection);
         Logger logger = LoggerFactory.getLogger(SqliteManager.class);
-        String prefix = ColorTool.apply(DCColor.GOLD, ColorTool.apply(DCColor.BOLD, "SQLite"));
         try (Statement statement = connection.createStatement()) {
             statement.execute(
                     "CREATE TABLE IF NOT EXISTS tickets (" +
@@ -35,7 +37,7 @@ public class SqliteManager {
                             "creatorId TEXT NOT NULL," +
                             "handlerId TEXT," +
                             "PRIMARY KEY ( id, identifier ));");
-            logger.debug("{} - Set up table {} with rows: {}, {}, {}, {}, {}", prefix,
+            logger.debug("Set up table {} with rows: {}, {}, {}, {}, {}",
                     ColorTool.apply(DCColor.GOLD, "tickets"),
                     ColorTool.apply(DCColor.RED, "id"),
                     ColorTool.apply(DCColor.RED, "identifier"),
@@ -56,7 +58,7 @@ public class SqliteManager {
                             "start_time TEXT NOT NULL," +
                             "end_time TEXT NOT NULL" +
                             ");");
-            logger.debug("{} - Set up table {} with rows: {}, {}, {}, {}", prefix,
+            logger.debug("Set up table {} with rows: {}, {}, {}, {}",
                     ColorTool.apply(DCColor.GOLD, "notice_of_departure"),
                     ColorTool.apply(DCColor.RED, "id"),
                     ColorTool.apply(DCColor.GREEN, "channel_message_id"),
@@ -79,7 +81,7 @@ public class SqliteManager {
                             "time_last_checked TEXT NOT NULL" +
                             ");"
             );
-            logger.debug("{} - Set up table {} with rows: {}, {}, {}, {}, {}", prefix,
+            logger.debug("Set up table {} with rows: {}, {}, {}, {}, {}",
                     ColorTool.apply(DCColor.GOLD, "regulars"),
                     ColorTool.apply(DCColor.RED, "id"),
                     ColorTool.apply(DCColor.GREEN, "group_role"),
@@ -96,13 +98,8 @@ public class SqliteManager {
         logger.info("Set up Sqlite database correctly");
     }
 
-    public TicketsTableManager getTicketsTableManager() {
-        return ticketsTableManager;
-    }
-    public NoticeOfDepartureTableManager getNoticeOfDepartureTableManager() {
-        return noticeOfDepartureTableManager;
-    }
-    public RegularsTableManager getRegularsTableManager() {
-        return regularsTableManager;
-    }
+    public TicketsTableManager getTicketsTableManager() {return ticketsTableManager;}
+    public NoticeOfDepartureTableManager getNoticeOfDepartureTableManager() {return noticeOfDepartureTableManager;}
+    public RegularsTableManager getRegularsTableManager() {return regularsTableManager;}
+    public QueueManager getQueueManager() {return queueManager;}
 }

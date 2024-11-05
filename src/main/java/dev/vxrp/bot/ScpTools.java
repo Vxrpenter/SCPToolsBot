@@ -3,6 +3,7 @@ package dev.vxrp.bot;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import dev.vxrp.bot.config.managers.regulars.RegularsManager;
+import dev.vxrp.bot.database.queue.QueueManager;
 import dev.vxrp.bot.database.sqlite.SqliteManager;
 import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.commands.CommandManager;
@@ -35,6 +36,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -96,6 +98,7 @@ public class ScpTools {
         try {
             file.createNewFile();
             sqliteManager = new SqliteManager(path+"\\sqlite\\data.db");
+            sqliteManager.getQueueManager();
         } catch (SQLException | IOException | InterruptedException e) {
             logger.error("Could not correctly set up Sqlite database {}", e.getMessage());
         }
@@ -178,5 +181,4 @@ public class ScpTools {
     public static LoggerManager getLoggerManager() {return loggerManager;}
     public static RegularsManager getRegularsManager() {return regularsManager;}
     public static CedModApi getCedModApi() {return cedModApi;}
-
 }
