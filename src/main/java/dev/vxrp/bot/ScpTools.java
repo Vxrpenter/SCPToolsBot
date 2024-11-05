@@ -12,6 +12,7 @@ import dev.vxrp.bot.config.managers.configuration.ColorConfigManager;
 import dev.vxrp.bot.config.managers.translations.TranslationManager;
 import dev.vxrp.bot.events.MessageListener;
 import dev.vxrp.bot.runnables.CheckNoticeOfDeparture;
+import dev.vxrp.bot.runnables.CheckPlaytime;
 import dev.vxrp.util.api.cedmod.CedModApi;
 import dev.vxrp.util.api.github.GitHubApi;
 import dev.vxrp.util.configuration.LoadedConfigurations;
@@ -77,7 +78,7 @@ public class ScpTools {
 
         new CommandManager(api);
 
-        noticeOfDepartureCheckups(api);
+        runCheckups(api);
     }
 
     private static void setLoggingLevel() {
@@ -126,14 +127,7 @@ public class ScpTools {
     private static void initializeCedModApi() throws IOException {
         String instanceUrl = LoadedConfigurations.getConfigMemoryLoad().cedmod_instance_url();
         String apiKey = LoadedConfigurations.getConfigMemoryLoad().cedmod_api_key();
-
         cedModApi = new CedModApi(instanceUrl, apiKey);
-
-        //Little reminder for later testing
-
-        //double hours = cedModApi.getActivity("user", "time")/3600;
-        //System.out.println(hours > 50.0);
-        //System.out.println(hours);
     }
 
     private static void initializeConfigs() {
@@ -164,12 +158,16 @@ public class ScpTools {
         }
     }
 
-    private static void noticeOfDepartureCheckups(JDA api) {
+    private static void runCheckups(JDA api) {
         ConfigGroup config = LoadedConfigurations.getConfigMemoryLoad();
         RepeatTask.repeatWithScheduledExecutorService(
                 CheckNoticeOfDeparture.runNoticeOfDepartureCheck(api),
                 config.notice_of_departure_check_rate(),
                 TimeUnit.valueOf(config.notice_of_departure_check_type()));
+        RepeatTask.repeatWithScheduledExecutorService(
+                CheckPlaytime.runPlaytimeCheck(api),
+                1, TimeUnit.HOURS
+        );
     }
 
     public static ConfigManager getConfigManager() {return configManager;}
