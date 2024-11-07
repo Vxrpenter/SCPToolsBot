@@ -63,7 +63,7 @@ public class RegularsTableManager {
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
-        try (PreparedStatement statement = connection.prepareStatement("UPDATE regular SET group_role=? WHERE id=?")) {
+        try (PreparedStatement statement = connection.prepareStatement("UPDATE regulars SET group_role=? WHERE id=?")) {
             statement.setString(1, group_role);
             statement.setString(2, id);
             statement.executeUpdate();
@@ -79,7 +79,7 @@ public class RegularsTableManager {
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
-        try (PreparedStatement statement = connection.prepareStatement("UPDATE regular SET role=? WHERE id=?")) {
+        try (PreparedStatement statement = connection.prepareStatement("UPDATE regulars SET role=? WHERE id=?")) {
             statement.setString(1, role);
             statement.setString(2, id);
             statement.executeUpdate();
@@ -95,7 +95,7 @@ public class RegularsTableManager {
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
-        try (PreparedStatement statement = connection.prepareStatement("UPDATE regular SET time=? WHERE id=?")) {
+        try (PreparedStatement statement = connection.prepareStatement("UPDATE regulars SET time=? WHERE id=?")) {
             statement.setDouble(1, time);
             statement.setString(2, id);
             statement.executeUpdate();
@@ -111,7 +111,7 @@ public class RegularsTableManager {
                     ColorTool.apply(DCColor.GREEN, id));
             return;
         }
-        try (PreparedStatement statement = connection.prepareStatement("UPDATE regular SET time_last_checked=? WHERE id=?")) {
+        try (PreparedStatement statement = connection.prepareStatement("UPDATE regulars SET time_last_checked=? WHERE id=?")) {
             statement.setString(1, time_last_checked);
             statement.setString(2, id);
             statement.executeUpdate();
@@ -137,6 +137,22 @@ public class RegularsTableManager {
             }
         }
         return regularMembers;
+    }
+
+    public RegularMember getRegular(String id) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM regulars WHERE id=?")) {
+            statement.setString(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return new RegularMember(
+                        resultSet.getString(id),
+                        resultSet.getString("user_name"),
+                        resultSet.getString("group_role"),
+                        resultSet.getString("role"),
+                        resultSet.getDouble("time"),
+                        resultSet.getString("time_last_checked")
+                );
+            }
+        }
     }
 
     public void deleteRegular(String id) throws SQLException, InterruptedException {

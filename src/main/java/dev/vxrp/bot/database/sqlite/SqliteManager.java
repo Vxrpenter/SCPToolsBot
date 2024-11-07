@@ -77,9 +77,9 @@ public class SqliteManager {
                             "id TEXT PRIMARY KEY," +
                             "user_name TEXT NOT NULL," +
                             "group_role TEXT," +
-                            "role TEXT NOT NULL," +
-                            "time DOUBLE NOT NULL," +
-                            "time_last_checked TEXT NOT NULL" +
+                            "role TEXT," +
+                            "time DOUBLE," +
+                            "time_last_checked TEXT" +
                             ");"
             );
             logger.debug("Set up table {} with rows: {}, {}, {}, {}, {}, {}",
