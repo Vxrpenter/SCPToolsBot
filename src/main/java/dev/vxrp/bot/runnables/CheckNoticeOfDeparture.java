@@ -44,7 +44,6 @@ public class CheckNoticeOfDeparture  {
 
                     if (now.isEqual(end_date) || now.isAfter(end_date)) {
                         api.awaitReady().retrieveUserById(notice.id()).queue(user -> {
-                            logger.info(ColorTool.useCustomColorCodes("&reset&&gold&----------------------- &reset&&red&AUTOMATIC DETECTION UNIT&reset&&gold& ----------------------&reset&"));
                             logger.info("Found invalid notice of departure");
                             MessageChannel channel = api.getTextChannelById(notice.channel_id());
 
@@ -87,7 +86,6 @@ public class CheckNoticeOfDeparture  {
                                 } catch (SQLException | InterruptedException e) {
                                     throw new RuntimeException(e);
                                 }
-                                logger.info(ColorTool.apply(DCColor.GOLD, "------------------------------------------------------------------------"));
                             });
                         });
                     }
