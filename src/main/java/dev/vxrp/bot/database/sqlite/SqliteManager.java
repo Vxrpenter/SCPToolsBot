@@ -7,7 +7,9 @@ import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.configuration.LoadedConfigurations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sqlite.SQLiteDataSource;
 
+import javax.sql.DataSource;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +23,9 @@ public class SqliteManager {
     private final QueueManager queueManager;
 
     public SqliteManager(String path) throws SQLException, InterruptedException {
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:" + path);
+        SQLiteDataSource ds = new SQLiteDataSource();
+        ds.setUrl("jdbc:sqlite:" + path);
+        Connection connection = ds.getConnection();
 
         ticketsTableManager = new TicketsTableManager(connection);
         noticeOfDepartureTableManager = new NoticeOfDepartureTableManager(connection);
