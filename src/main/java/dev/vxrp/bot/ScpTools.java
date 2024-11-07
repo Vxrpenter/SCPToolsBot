@@ -27,6 +27,7 @@ import dev.vxrp.util.logger.LoggerManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.slf4j.Logger;
@@ -49,8 +50,9 @@ public class ScpTools {
     static LoggerManager loggerManager;
     static RegularsManager regularsManager;
     static CedModApi cedModApi;
+    static Guild guild;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         GitHubApi.CheckForUpdatesByTags("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags");
 
         initializeConfigs();
@@ -77,7 +79,11 @@ public class ScpTools {
         logger.info("Initialized Listeners");
 
         new CommandManager(api);
-
+        guild = api.awaitReady().getGuildById(configManager.getString("guild_id"));
+        if (guild == null) {
+            logger.error("GUILD ID NULL... SHUTTING DOWN");
+            System.exit(1);
+        }
         runCheckups(api);
     }
 
@@ -177,4 +183,5 @@ public class ScpTools {
     public static LoggerManager getLoggerManager() {return loggerManager;}
     public static RegularsManager getRegularsManager() {return regularsManager;}
     public static CedModApi getCedModApi() {return cedModApi;}
+    public static Guild getGuild() {return guild;}
 }
