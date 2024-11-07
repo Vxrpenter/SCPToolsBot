@@ -91,7 +91,10 @@ public class CheckPlaytime {
                                         }
                                     }
                                 } catch (SQLException e) {
-                                    logger.error("");
+                                    assert role != null;
+                                    logger.error("Could not correctly add roles to the regular database id: {}, role: {}",
+                                            ColorTool.apply(DCColor.RED, element.id()),
+                                            ColorTool.apply(DCColor.RED, role.getName()));
                                 }
                             });
                         }
