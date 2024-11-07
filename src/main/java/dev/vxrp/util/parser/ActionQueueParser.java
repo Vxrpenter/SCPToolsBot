@@ -13,8 +13,8 @@ public class ActionQueueParser {
         if (!id.equals(regularId)) return null;
         JsonArray arguments = object.get("arguments").getAsJsonArray();
 
-        String userId = object.get("userId").getAsString();
-        int timeframe = object.get("timeframe").getAsInt();
+        String userId = arguments.get(0).getAsJsonObject().get("userId").getAsString();
+        int timeframe = arguments.get(0).getAsJsonObject().get("timeframe").getAsInt();
 
         return new RegularActionQueue(userId, timeframe);
     }
