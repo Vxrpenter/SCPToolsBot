@@ -1,5 +1,6 @@
 # The bot token get from here https://discord.com/developers/
 token: ""
+guild_id: ""
 
 # Should debug mode be activated?
 debug: false

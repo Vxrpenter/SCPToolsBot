@@ -121,7 +121,7 @@ public class RegularsTableManager {
         }
     }
 
-    public List<RegularMember> getEveryRegular() throws SQLException {
+    public List<RegularMember> getEveryRegularMember() throws SQLException {
         List<RegularMember> regularMembers = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM regulars")) {
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -139,12 +139,12 @@ public class RegularsTableManager {
         return regularMembers;
     }
 
-    public RegularMember getRegular(String id) throws SQLException {
+    public RegularMember getRegularMember(String id) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM regulars WHERE id=?")) {
             statement.setString(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 return new RegularMember(
-                        resultSet.getString(id),
+                        id,
                         resultSet.getString("user_name"),
                         resultSet.getString("group_role"),
                         resultSet.getString("role"),
