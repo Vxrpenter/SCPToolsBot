@@ -117,7 +117,7 @@ public class CheckPlaytime {
         members = regularsTableManager.getEveryRegularMember();
 
         for (RegularMember member : members) {
-            if (!queueManager.exists(member.id())) {
+            if (!queueManager.exists(member.id()) && !regularsTableManager.getRegularMember(member.id()).deactivated()) {
                 write(member);
             } else if (queueManager.getProcessed(member.id())) {
                 queueManager.deleteAction(member.id());
