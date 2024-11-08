@@ -13,6 +13,8 @@ import dev.vxrp.bot.config.managers.translations.TranslationManager;
 import dev.vxrp.bot.events.MessageListener;
 import dev.vxrp.bot.runnables.CheckNoticeOfDeparture;
 import dev.vxrp.bot.runnables.CheckPlaytime;
+import dev.vxrp.util.Enums.DatabaseType;
+import dev.vxrp.util.Enums.PredefinedDatabases;
 import dev.vxrp.util.api.cedmod.CedModApi;
 import dev.vxrp.util.api.github.GitHubApi;
 import dev.vxrp.util.configuration.LoadedConfigurations;
@@ -98,14 +100,26 @@ public class ScpTools {
     }
 
     private static void initializeSqlite() {
-        Path path = Path.of(System.getProperty("user.dir"));
-        File file = new File(path+"\\sqlite\\data.db");
-        try {
-            file.createNewFile();
-            sqliteManager = new SqliteManager(path+"\\sqlite\\data.db");
-            sqliteManager.getQueueManager();
-        } catch (SQLException | IOException | InterruptedException e) {
-            logger.error("Could not correctly set up Sqlite database {}", e.getMessage());
+        ConfigGroup config = LoadedConfigurations.getConfigMemoryLoad();
+        if (Objects.equals(config.use_predefined_database_sets(), PredefinedDatabases.SQLITE.toString())) {
+            Path path = Path.of(System.getProperty("user.dir"));
+            File file = new File(path+"\\sqlite\\data.db");
+            try {
+                file.createNewFile();
+                sqliteManager = new SqliteManager(path+"\\sqlite\\data.db");
+            } catch (SQLException | IOException | InterruptedException e) {
+                logger.error("Could not correctly set up Sqlite database {}", e.getMessage());
+            }
+        }
+        if (Objects.equals(config.use_predefined_database_sets(), PredefinedDatabases.NONE.toString())) {
+            String url = config.custom_url();
+            DatabaseType type = DatabaseType.valueOf(config.custom_type());
+            String username = config.custom_username();
+            String password = config.custom_password();
+
+            logger.error("CUSTOM DATABASE - You have enabled an unfinished feature. For further process please deactivate the feature until it is supported");
+
+            //Later database code goes here
         }
     }
 
