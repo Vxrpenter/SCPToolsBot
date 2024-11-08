@@ -29,29 +29,32 @@ public class RegularsTableManager {
             logger.warn("Regular already exists in Sqlite database... opting for deletion");
             deleteRegular(id);
         }
-        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO regulars VALUES (?, ?, ?, ?, ?, ?)")) {
+        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO regulars VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             statement.setString(1, id);
             statement.setString(2, user_name);
             statement.setString(3, group_role);
             statement.setString(4, role);
             statement.setInt(5, time);
             statement.setString(6, time_last_checked);
+            statement.setBoolean(7, false);
             statement.executeUpdate();
-            logger.debug("Added regular - id: {}, user_name {}, group_role: {} , role: {} , time: {}, time_last_checked: {}",
+            logger.debug("Added regular - id: {}, user_name {}, group_role: {} , role: {} , time: {}, time_last_checked: {}, deactivated: {}",
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GREEN, user_name),
                     ColorTool.apply(DCColor.GREEN, group_role),
                     ColorTool.apply(DCColor.GOLD, role),
                     ColorTool.apply(DCColor.GOLD, String.valueOf(time)),
-                    ColorTool.apply(DCColor.GOLD, time_last_checked));
+                    ColorTool.apply(DCColor.GOLD, time_last_checked),
+                    ColorTool.apply(DCColor.GOLD, String.valueOf(false)));
             ScpTools.getLoggerManager().databaseLog(
-                    "INSERT INTO regular VALUES (?, ?, ?, ?, ?, ?)",
+                    "INSERT INTO regular VALUES (?, ?, ?, ?, ?, ?, ?)",
                     "Created new regular with value id: "+ColorTool.apply(DCColor.GREEN, id)+
                             ", user_name: "+ColorTool.apply(DCColor.GREEN, user_name)+
                             ", group_role: "+ColorTool.apply(DCColor.GREEN, group_role)+
                             ", role: "+ColorTool.apply(DCColor.GOLD, role)+
                             ", time: "+ColorTool.apply(DCColor.GOLD, time+
-                            ", time_last_checked: "+ColorTool.apply(DCColor.GOLD, time_last_checked)),
+                            ", time_last_checked: "+ColorTool.apply(DCColor.GOLD, time_last_checked))+
+                            ", deactivated: "+ColorTool.apply(DCColor.GOLD, String.valueOf(false)),
                     LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
                     Color.ORANGE);
         }
@@ -121,6 +124,22 @@ public class RegularsTableManager {
         }
     }
 
+    public void updateDeactivated(String id, boolean deactivated) throws SQLException {
+        if (!exists(id)) {
+            logger.error("Failed to update regular deactivated with id: {}. Id does not exist",
+                    ColorTool.apply(DCColor.GREEN, id));
+            return;
+        }
+        try (PreparedStatement statement = connection.prepareStatement("UPDATE regulars SET deactivated=? WHERE id=?")) {
+            statement.setBoolean(1, deactivated);
+            statement.setString(2, id);
+            statement.executeUpdate();
+            logger.debug("Updated deactivated - id: {} , time: {}",
+                    ColorTool.apply(DCColor.GREEN, id),
+                    ColorTool.apply(DCColor.GOLD, String.valueOf(deactivated)));
+        }
+    }
+
     public List<RegularMember> getEveryRegularMember() throws SQLException {
         List<RegularMember> regularMembers = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM regulars")) {
@@ -132,7 +151,8 @@ public class RegularsTableManager {
                             resultSet.getString("group_role"),
                             resultSet.getString("role"),
                             resultSet.getDouble("time"),
-                            resultSet.getString("time_last_checked")));
+                            resultSet.getString("time_last_checked"),
+                            resultSet.getBoolean("deactivated")));
                 }
             }
         }
@@ -149,7 +169,8 @@ public class RegularsTableManager {
                         resultSet.getString("group_role"),
                         resultSet.getString("role"),
                         resultSet.getDouble("time"),
-                        resultSet.getString("time_last_checked")
+                        resultSet.getString("time_last_checked"),
+                        resultSet.getBoolean("deactivated")
                 );
             }
         }
