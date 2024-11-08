@@ -81,7 +81,8 @@ public class SqliteManager {
                             "group_role TEXT," +
                             "role TEXT," +
                             "time DOUBLE," +
-                            "time_last_checked TEXT" +
+                            "time_last_checked TEXT," +
+                            "deactivated BOOLEAN NOT NULL" +
                             ");"
             );
             logger.debug("Set up table {} with rows: {}, {}, {}, {}, {}, {}",
