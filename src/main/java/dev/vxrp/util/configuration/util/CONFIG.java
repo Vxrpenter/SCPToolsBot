@@ -2,6 +2,7 @@ package dev.vxrp.util.configuration.util;
 
 public class CONFIG {
     public static final String TOKEN = "token";
+    public static final String LOAD_TRANSLATION = "load_translation";
     public static final String DEBUG = "debug";
     public static final String ADVANCED_DEBUG = "advanced_debug";
     public static final String ACTIVITY_TYPE = "activity_type";

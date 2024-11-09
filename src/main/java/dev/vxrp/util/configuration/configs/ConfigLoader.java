@@ -18,6 +18,7 @@ public class ConfigLoader {
 
         ConfigGroup configGroup = new ConfigGroup(
                 configManager.getString(CONFIG.TOKEN),
+                configManager.getString(CONFIG.LOAD_TRANSLATION),
                 configManager.getBoolean(CONFIG.DEBUG),
                 configManager.getBoolean(CONFIG.ADVANCED_DEBUG),
                 configManager.getString(CONFIG.ACTIVITY_TYPE),

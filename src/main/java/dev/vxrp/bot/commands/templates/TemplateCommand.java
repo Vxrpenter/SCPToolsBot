@@ -1,6 +1,7 @@
 package dev.vxrp.bot.commands.templates;
 
 import dev.vxrp.bot.commands.templates.noticeOfDeparture.NoticeOfDeparture;
+import dev.vxrp.bot.commands.templates.regulars.Regulars;
 import dev.vxrp.bot.commands.templates.support.Support;
 import dev.vxrp.util.Enums.DCColor;
 import dev.vxrp.util.colors.ColorTool;
@@ -36,10 +37,23 @@ public class TemplateCommand extends ListenerAdapter {
             Support.pasteSupportTemplate(event);
         }
         if (template.equals("notice_of_departure")) {
-            NoticeOfDeparture.pasteDeRegisterTemplate(event);
+            if (LoadedConfigurations.getConfigMemoryLoad().cedmod_active()) {
+                NoticeOfDeparture.pasteDeRegisterTemplate(event);
+            } else {
+                event.reply(noCedmodError).setEphemeral(true).queue();
+                logger.warn("An action of /template notice_of_departure was cancelled do to cedmod compatibility not being active");
+            }
+        }
+        if  (template.equals("regulars")) {
+            if (LoadedConfigurations.getConfigMemoryLoad().cedmod_active()) {
+                Regulars.pasteRegularTemplate(event);
+            } else {
+                event.reply(noCedmodError).setEphemeral(true).queue();
+                logger.warn("An action of /template regulars was cancelled do to cedmod compatibility not being active");
+            }
         }
         logger.info("User {} executed command template with args '{}'", ColorTool.apply(DCColor.GREEN, event.getUser().getGlobalName()), template);
-
-
     }
+
+    private final String noCedmodError = "Cedmod compatibility is not active, so this template is disabled";
 }

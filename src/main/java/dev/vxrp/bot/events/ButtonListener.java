@@ -4,6 +4,7 @@ import dev.vxrp.bot.events.buttons.NoticeOfDeparture;
 import dev.vxrp.bot.events.buttons.Rules;
 import dev.vxrp.bot.events.buttons.Support;
 import dev.vxrp.bot.events.buttons.Unban;
+import dev.vxrp.util.configuration.LoadedConfigurations;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
@@ -12,7 +13,8 @@ import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
 
 public class ButtonListener extends ListenerAdapter {
-    public final Logger logger = LoggerFactory.getLogger(ButtonListener.class);
+    private final Logger logger = LoggerFactory.getLogger(ButtonListener.class);
+    private final String noCedmodError = "Cedmod compatibility is not active, so this template is disabled";
 
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event) {
@@ -51,7 +53,12 @@ public class ButtonListener extends ListenerAdapter {
         }
 
         if (event.getComponentId().equals("createNewUnban")) {
-            Unban.createUnbanTicket(event);
+            if (LoadedConfigurations.getConfigMemoryLoad().cedmod_active()) {
+                Unban.createUnbanTicket(event);
+            } else {
+                event.reply(noCedmodError).setEphemeral(true).queue();
+                logger.warn("An action called createNewUnban was cancelled do to cedmod compatibility not being active");
+            }
         }
         if (event.getComponentId().startsWith("accept_unban_ticket")) {
             event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> Unban.acceptTicket(event, user));
@@ -66,7 +73,12 @@ public class ButtonListener extends ListenerAdapter {
 
         //Notice of Departure
         if (event.getComponentId().equals("file_nod")) {
-            NoticeOfDeparture.createNoticeOfDeparture(event);
+            if (LoadedConfigurations.getConfigMemoryLoad().cedmod_active()) {
+                NoticeOfDeparture.createNoticeOfDeparture(event);
+            } else {
+                event.reply(noCedmodError).setEphemeral(true).queue();
+                logger.warn("An action called file notice of departure was cancelled do to cedmod compatibility not being active");
+            }
         }
         if (event.getComponentId().startsWith("accept_ticket_notice_of_departure")) {
             event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> NoticeOfDeparture.acceptedNoticeOfDeparture(event, user));

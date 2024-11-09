@@ -1,5 +1,9 @@
 package dev.vxrp.bot.commands.templates.regulars;
 
-public class Regulars {
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
+public class Regulars {
+    public static void pasteRegularTemplate(SlashCommandInteractionEvent event) {
+
+    }
 }

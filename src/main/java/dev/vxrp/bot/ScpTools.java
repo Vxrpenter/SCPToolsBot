@@ -125,14 +125,14 @@ public class ScpTools {
 
     private static void loadConfigs() {
         try {
-            new TranslationLoader();
-        } catch (Exception e) {
-            logger.error("Could not load translation to memory {}", e.getMessage());
-        }
-        try {
             new ConfigLoader();
         } catch (Exception e) {
             logger.error("Could not load config to memory {}", e.getMessage());
+        }
+        try {
+            new TranslationLoader();
+        } catch (Exception e) {
+            logger.error("Could not load translation to memory {}", e.getMessage());
         }
     }
 

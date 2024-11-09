@@ -2,6 +2,9 @@
 token: ""
 guild_id: ""
 
+# Translations
+load_translation: "en_us"
+
 # Should debug mode be activated?
 debug: false
 # Should additional debug info be displayed?
@@ -25,7 +28,6 @@ database:
   custom_username: ""
   # Here you have to enter the password of your db session
   custom_password: ""
-
 
 rules:
   # Pastebin id of the SCP:SL ruleset

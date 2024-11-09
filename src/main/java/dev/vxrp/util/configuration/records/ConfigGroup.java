@@ -2,7 +2,7 @@ package dev.vxrp.util.configuration.records;
 
 import java.util.List;
 
-public record ConfigGroup(String token, boolean debug, boolean advanced_debug, String activity_type, String activity_content,
+public record ConfigGroup(String token, String load_translation, boolean debug, boolean advanced_debug, String activity_type, String activity_content,
                           String use_predefined_database_sets, String custom_url, String custom_type, String custom_username, String custom_password,
                           String rules_pastebin, String rules_embed_footer,
                           boolean do_logging, String ticket_logging_channel_id, String ticket_backup_logging_channel_id, String notice_of_departures_logging_channel_id, boolean do_database_logging, String database_logging_channel_id,
