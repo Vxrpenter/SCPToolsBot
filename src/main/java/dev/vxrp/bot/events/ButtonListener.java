@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events;
 
+import dev.vxrp.bot.commands.help.HelpCommand;
 import dev.vxrp.bot.events.buttons.NoticeOfDeparture;
 import dev.vxrp.bot.events.buttons.Rules;
 import dev.vxrp.bot.events.buttons.Support;
@@ -18,6 +19,27 @@ public class ButtonListener extends ListenerAdapter {
 
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event) {
+        // Help
+        if (event.getComponentId().startsWith("help_first_page")) {
+            event.deferEdit().queue(_ -> event.getChannel().editMessageEmbedsById(event.getMessageId(), HelpCommand.pages().getFirst())
+                    .setActionRow(HelpCommand.actionRow(0)).queue());
+        }
+        if (event.getComponentId().startsWith("help_last_page")) {
+            event.deferEdit().queue(_ -> event.getChannel().editMessageEmbedsById(event.getMessageId(), HelpCommand.pages().getLast())
+                    .setActionRow(HelpCommand.actionRow(5)).queue());
+        }
+
+        if (event.getComponentId().startsWith("help_go_back")) {
+            int page = Integer.parseInt(event.getComponentId().split(":")[1])-1;
+            event.deferEdit().queue(_ -> event.getChannel().editMessageEmbedsById(event.getMessageId(), HelpCommand.pages().get(page))
+                    .setActionRow(HelpCommand.actionRow(page)).queue());
+        }
+        if (event.getComponentId().startsWith("help_go_forward")) {
+            int page = Integer.parseInt(event.getComponentId().split(":")[1])+1;
+            event.deferEdit().queue(_ -> event.getChannel().editMessageEmbedsById(event.getMessageId(), HelpCommand.pages().get(page))
+                    .setActionRow(HelpCommand.actionRow(page)).queue());
+        }
+
         // Rules
         if (event.getComponentId().equals("paste_rules")) {
             Rules.paste(logger, event);
