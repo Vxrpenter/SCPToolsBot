@@ -73,12 +73,7 @@ public class ButtonListener extends ListenerAdapter {
 
         //Notice of Departure
         if (event.getComponentId().equals("file_nod")) {
-            if (LoadedConfigurations.getConfigMemoryLoad().cedmod_active()) {
-                NoticeOfDeparture.createNoticeOfDeparture(event);
-            } else {
-                event.reply(noCedmodError).setEphemeral(true).queue();
-                logger.warn("An action called file notice of departure was cancelled do to cedmod compatibility not being active");
-            }
+            NoticeOfDeparture.createNoticeOfDeparture(event);
         }
         if (event.getComponentId().startsWith("accept_ticket_notice_of_departure")) {
             event.getJDA().retrieveUserById(event.getComponentId().split(":")[1]).queue(user -> NoticeOfDeparture.acceptedNoticeOfDeparture(event, user));
