@@ -14,6 +14,7 @@ import java.util.Objects;
 public class Unban {
     private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
 
+
     public static void createUnbanTicket(ButtonInteractionEvent event) {
         event.replyModal(
                 Modal.create("unbanTicket", translations.modal_unban_title())
