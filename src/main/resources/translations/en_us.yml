@@ -1,7 +1,12 @@
 # You can use any form of discord formatting in these translations
+#
 # \n will apply a linebreak
+#
 # Everything surrounded like this: %value% will be replaced
+#
 # The bot will load the translations in memory on startup. To apply changes, restart the bot
+#
+# Find color codes and how to use them here https://github.com/Vxrpenter/SCPToolsBot/wiki/Configuring-Translations
 
 #
 # Support
@@ -105,6 +110,9 @@ support:
                         "
   ticket_unban_message_sent: "Your answer was sent and actions corresponding to it have been taken"
 
+#
+# Notice of Departure
+#
 notice_of_departure:
   first_title: "Notice of Departure for Discord and Secret Lab"
   first_body: "
@@ -209,11 +217,24 @@ notice_of_departure:
 
   notice_deleted_ended_replace_message: "The notice was deleted"
 
+#
+# Regulars
+#
 regulars:
-  first_title: ""
-  first_body: ""
-  first_footer: ""
+  first_title: "Activate Regular Syncing"
+  first_body: "
+                        This feature allows you to sync your server playtime with the server and to give you roles for reaching certain timeframes
+                        "
 
+  first_role_template: "   
+                        Role: %role%\n
+                        Description: %description%\n
+                        TimeFrame: %timeframe%\n
+                        "
+
+#
+# Logging
+#
 logging:
   single_message_log_template: "
                         %action%\n
@@ -324,6 +345,10 @@ logging:
                         ```
                         "
 
+#
+# Buttons
+#
+
 # You can't use color codes for the following button translations
 buttons:
   paste_rules: "Paste Rules"
@@ -344,3 +369,7 @@ buttons:
   dismiss_notice_of_departure_ticket: "Dismiss Ticket"
   revoke_notice_of_departure: "Revoke Notice of Departure"
   delete_notice_of_departure: "Delete Processed Notice of Departure"
+
+  sync_regulars: "Sync Regulars"
+  deactivate_sync_regulars: "Deactivate Sync"
+  remove_sync_regulars: "Remove Sync"

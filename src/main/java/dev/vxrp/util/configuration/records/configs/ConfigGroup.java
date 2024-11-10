@@ -1,4 +1,4 @@
-package dev.vxrp.util.configuration.records;
+package dev.vxrp.util.configuration.records.configs;
 
 import java.util.List;
 

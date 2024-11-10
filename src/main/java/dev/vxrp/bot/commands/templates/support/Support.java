@@ -1,8 +1,9 @@
 package dev.vxrp.bot.commands.templates.support;
 
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.ButtonGroup;
-import dev.vxrp.util.configuration.records.SupportGroup;
+import dev.vxrp.bot.ScpTools;
+import dev.vxrp.util.Enums.LoadIndex;
+import dev.vxrp.util.configuration.records.translation.ButtonGroup;
+import dev.vxrp.util.configuration.records.translation.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -11,8 +12,8 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import java.awt.*;
 
 public class Support {
-    private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
-    private static final ButtonGroup buttons = LoadedConfigurations.getButtonMemoryLoad();
+    private static final SupportGroup translations = (SupportGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.SUPPORT_GROUP);
+    private static final ButtonGroup buttons = (ButtonGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.BUTTON_GROUP);
 
     public static void pasteSupportTemplate(SlashCommandInteractionEvent event) {
         event.getChannel().sendMessageEmbeds(new EmbedBuilder()

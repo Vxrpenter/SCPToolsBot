@@ -1,11 +1,13 @@
 package dev.vxrp.bot.events;
 
+import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.commands.help.HelpCommand;
 import dev.vxrp.bot.events.buttons.NoticeOfDeparture;
 import dev.vxrp.bot.events.buttons.Rules;
 import dev.vxrp.bot.events.buttons.Support;
 import dev.vxrp.bot.events.buttons.Unban;
-import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.Enums.LoadIndex;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
@@ -15,7 +17,7 @@ import java.sql.SQLException;
 
 public class ButtonListener extends ListenerAdapter {
     private final Logger logger = LoggerFactory.getLogger(ButtonListener.class);
-    private final String noCedmodError = "Cedmod compatibility is not active, so this template is disabled";
+    private final ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
 
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event) {
@@ -75,10 +77,10 @@ public class ButtonListener extends ListenerAdapter {
         }
 
         if (event.getComponentId().equals("createNewUnban")) {
-            if (LoadedConfigurations.getConfigMemoryLoad().cedmod_active()) {
+            if (config.cedmod_active()) {
                 Unban.createUnbanTicket(event);
             } else {
-                event.reply(noCedmodError).setEphemeral(true).queue();
+                event.reply("Cedmod compatibility is not active, so this template is disabled").setEphemeral(true).queue();
                 logger.warn("An action called createNewUnban was cancelled do to cedmod compatibility not being active");
             }
         }

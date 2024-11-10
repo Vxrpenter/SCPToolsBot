@@ -2,23 +2,22 @@ package dev.vxrp.util.configuration.translations;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.translations.TranslationManager;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.colors.ColorTool;
-import dev.vxrp.util.configuration.records.ButtonGroup;
-import dev.vxrp.util.configuration.records.LoggingGroup;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
+import dev.vxrp.util.configuration.records.translation.*;
 import dev.vxrp.util.configuration.util.TRANSLATIONS;
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.NoticeOfDepartureGroup;
-import dev.vxrp.util.configuration.records.SupportGroup;
+import dev.vxrp.util.configuration.ConfigurationLoadManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TranslationLoader {
     private final static Logger logger = LoggerFactory.getLogger(TranslationLoader.class);
 
-    public TranslationLoader() {
+    public TranslationLoader(ConfigurationLoadManager configurations) {
         TranslationManager translationManager = ScpTools.getTranslationManager();
-        String translation = LoadedConfigurations.getConfigMemoryLoad().load_translation();
+        ConfigGroup configGroup = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
+        String translation = configGroup.load_translation();
 
         SupportGroup supportGroup = new SupportGroup(
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.SUPPORT.FIRST_TITLE)),
@@ -76,6 +75,12 @@ public class TranslationLoader {
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.NOTICE_OF_DEPARTURE.ENDED_REPLACE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.NOTICE_OF_DEPARTURE.DELETED_ENDED_REPLACE_MESSAGE)));
 
+        RegularsGroup regularsGroup = new RegularsGroup(
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.FIRST_TITLE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.FIRST_BODY)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.FIRST_ROLE_TEMPLATE))
+        );
+
         LoggingGroup loggingGroup = new LoggingGroup(
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.LOGGING.SINGLE_MESSAGE_LOG_TEMPLATE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.LOGGING.CREATE_LOG_TEMPLATE)),
@@ -103,44 +108,11 @@ public class TranslationLoader {
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.DISMISS_NOTICE_OF_DEPARTURE_TICKET),
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.REVOKE_NOTICE_OF_DEPARTURE),
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.DELETE_NOTICE_OF_DEPARTURE),
-                translationManager.getString(translation, TRANSLATIONS.BUTTONS.FILE_NOTICE_OF_DEPARTURE));
+                translationManager.getString(translation, TRANSLATIONS.BUTTONS.FILE_NOTICE_OF_DEPARTURE),
+                translationManager.getString(translation, TRANSLATIONS.BUTTONS.SYNC_REGULARS),
+                translationManager.getString(translation, TRANSLATIONS.BUTTONS.DEACTIVATE_SYNC_REGULARS),
+                translationManager.getString(translation, TRANSLATIONS.BUTTONS.REMOVE_SYNC_REGULARS));
 
-
-        logger.warn("Loading translations, this could take some time...");
-        for (var component : buttonsGroup.getClass().getRecordComponents()) {
-            try {
-                logger.trace("Added value to button translations - {}", component.getAccessor().invoke(buttonsGroup));
-            } catch (Exception e) {debuggerErrorHandler(e);}
-        }
-        LoadedConfigurations.setButtonsMemoryLoad(buttonsGroup);
-        logger.info("Loaded button translations");
-
-        for (var component : supportGroup.getClass().getRecordComponents()) {
-            try {
-                logger.trace("Added value to support translations - {}", component.getAccessor().invoke(supportGroup));
-            } catch (Exception e) {debuggerErrorHandler(e);}
-        }
-        LoadedConfigurations.setSupportTranslationMemoryLoad(supportGroup);
-        logger.info("Loaded support translations");
-
-        for (var component : loggingGroup.getClass().getRecordComponents()) {
-            try {
-                logger.trace("Added value to logging translations - {}", component.getAccessor().invoke(loggingGroup));
-            } catch (Exception e) {debuggerErrorHandler(e);}
-        }
-        LoadedConfigurations.setLoggingMemoryLoad(loggingGroup);
-        logger.info("Loaded logging translations");
-
-        for (var component : noticeOfDepartureGroup.getClass().getRecordComponents()) {
-            try {
-                logger.trace("Added value to notice of departure translations - {}", component.getAccessor().invoke(noticeOfDepartureGroup));
-            } catch (Exception e) {debuggerErrorHandler(e);}
-        }
-        LoadedConfigurations.setNoticeOfDepartureMemoryLoad(noticeOfDepartureGroup);
-        logger.info("Loaded notice of departure translations");
-    }
-
-    private static void debuggerErrorHandler(Exception e) {
-        logger.debug("{} Could not log the exact translation value (this error can be ignored) - Stacktrace {}", ColorTool.apply(DCColor.RED, "ERROR") ,e.getMessage());
+        configurations.addTranslations(supportGroup, noticeOfDepartureGroup, regularsGroup, loggingGroup, buttonsGroup);
     }
 }

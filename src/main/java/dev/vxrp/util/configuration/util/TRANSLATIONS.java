@@ -73,6 +73,11 @@ public class TRANSLATIONS {
         public static final String ENDED_REPLACE = "notice_of_departure.notice_ended_replace";
         public static final String DELETED_ENDED_REPLACE_MESSAGE = "notice_of_departure.notice_deleted_ended_replace_message";
     }
+    public static final class REGULARS {
+        public static final String FIRST_TITLE = "regulars.first_title";
+        public static final String FIRST_BODY = "regulars.first_body";
+        public static final String FIRST_ROLE_TEMPLATE = "regulars.first_role_template";
+    }
     public static final class LOGGING {
         public static final String SINGLE_MESSAGE_LOG_TEMPLATE = "logging.single_message_log_template";
         public static final String CREATE_LOG_TEMPLATE = "logging.create_log_template";
@@ -104,5 +109,9 @@ public class TRANSLATIONS {
         public static final String DISMISS_NOTICE_OF_DEPARTURE_TICKET = "buttons.dismiss_notice_of_departure_ticket";
         public static final String REVOKE_NOTICE_OF_DEPARTURE = "buttons.revoke_notice_of_departure";
         public static final String DELETE_NOTICE_OF_DEPARTURE = "buttons.delete_notice_of_departure";
+
+        public static final String SYNC_REGULARS = "buttons.sync_regulars";
+        public static final String DEACTIVATE_SYNC_REGULARS = "buttons.deactivate_sync_regulars";
+        public static final String REMOVE_SYNC_REGULARS = "buttons.remove_sync_regulars";
     }
 }

@@ -1,8 +1,10 @@
 package dev.vxrp.bot.commands.templates.noticeOfDeparture;
 
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.ButtonGroup;
-import dev.vxrp.util.configuration.records.NoticeOfDepartureGroup;
+import dev.vxrp.bot.ScpTools;
+import dev.vxrp.util.Enums.LoadIndex;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
+import dev.vxrp.util.configuration.records.translation.ButtonGroup;
+import dev.vxrp.util.configuration.records.translation.NoticeOfDepartureGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
@@ -10,8 +12,8 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import java.awt.*;
 
 public class NoticeOfDeparture {
-    private static final NoticeOfDepartureGroup translations = LoadedConfigurations.getNoticeOfDepartureMemoryLoad();
-    private static final ButtonGroup buttons = LoadedConfigurations.getButtonMemoryLoad();
+    private static final NoticeOfDepartureGroup translations = (NoticeOfDepartureGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.NOTICE_OF_DEPARTURE_GROUP);
+    private static final ButtonGroup buttons = (ButtonGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.BUTTON_GROUP);
 
     public static void pasteDeRegisterTemplate(SlashCommandInteractionEvent event) {
         event.getChannel().sendMessageEmbeds(new EmbedBuilder()

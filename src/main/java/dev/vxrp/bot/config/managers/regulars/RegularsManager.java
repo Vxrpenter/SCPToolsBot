@@ -5,7 +5,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.bot.ScpTools;
+import dev.vxrp.util.Enums.LoadIndex;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.records.regular.Regular;
 import dev.vxrp.util.records.regular.RegularConfig;
 import org.jetbrains.annotations.NotNull;
@@ -16,18 +18,20 @@ import java.util.*;
 
 public class RegularsManager {
     private final Path path;
+
     public RegularsManager(Path path) throws IOException, NullPointerException {
         this.path = path;
         String folderPath = path+"/regulars/";
         new File(folderPath).mkdir();
 
-        if (LoadedConfigurations.getConfigMemoryLoad().create_example_configuration()) {
+        ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
+        if (config.create_example_configuration()) {
             String examplePath = path+"/regulars/examples/";
             new File(examplePath).mkdirs();
-            File config = new File(examplePath+"config.json");
+            File configFile = new File(examplePath+"config.json");
             File manifest = new File(examplePath+"config.json");
             manifest.createNewFile();
-            config.createNewFile();
+            configFile.createNewFile();
 
             for (String array : Arrays.asList("config.json", "manifest.json")) {
                 if (new File(examplePath+array).exists()) continue;
