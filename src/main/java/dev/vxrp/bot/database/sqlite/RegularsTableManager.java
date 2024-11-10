@@ -2,8 +2,9 @@ package dev.vxrp.bot.database.sqlite;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.colors.ColorTool;
-import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.records.regular.RegularMember;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class RegularsTableManager {
     private final Connection connection;
+    private final ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
     private final Logger logger = LoggerFactory.getLogger(RegularsTableManager.class);
 
     public RegularsTableManager(Connection connection) {
@@ -55,7 +57,7 @@ public class RegularsTableManager {
                             ", time: "+ColorTool.apply(DCColor.GOLD, time+
                             ", time_last_checked: "+ColorTool.apply(DCColor.GOLD, time_last_checked))+
                             ", deactivated: "+ColorTool.apply(DCColor.GOLD, String.valueOf(false)),
-                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    config.database_logging_channel_id(),
                     Color.ORANGE);
         }
     }
@@ -190,7 +192,7 @@ public class RegularsTableManager {
             ScpTools.getLoggerManager().databaseLog(
                     "DELETE FROM regulars WHERE id=?",
                     "Deleted regular id: "+ColorTool.apply(DCColor.GREEN, id),
-                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    config.database_logging_channel_id(),
                     Color.ORANGE);
         }
     }

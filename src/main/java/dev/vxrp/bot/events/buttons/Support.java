@@ -1,8 +1,10 @@
 package dev.vxrp.bot.events.buttons;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.SupportGroup;
+import dev.vxrp.util.Enums.LoadIndex;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
+import dev.vxrp.util.configuration.records.translation.LoggingGroup;
+import dev.vxrp.util.configuration.records.translation.SupportGroup;
 import dev.vxrp.util.logger.LoggerManager;
 import dev.vxrp.util.records.ticket.Ticket;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -22,8 +24,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Support {
-    private final static Logger logger = LoggerFactory.getLogger(Support.class);
-    private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
+    private static final SupportGroup translations = (SupportGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.SUPPORT_GROUP);
+    private static final LoggingGroup logging = (LoggingGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.LOGGING_GROUP);
+    private static final ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
 
     public static void createSupportTicket(ButtonInteractionEvent event) {
         if (event.getComponentId().equals("createNewTicket")) {
@@ -53,7 +56,7 @@ public class Support {
 
         Ticket ticket = ScpTools.getSqliteManager().getTicketsTableManager().getTicket(event.getMessage().getChannelId());
         new LoggerManager(event.getJDA()).closeLog(event.getUser(),
-                LoadedConfigurations.getLoggingMemoryLoad().support_ticket_close_logging_action()
+                logging.support_ticket_close_logging_action()
                         .replace("%id%", ticket.id())
                         .replace("%user%", "<@"+event.getUser().getId()+">")
                         .replace("%type%", ticket.identifier().toString())
@@ -61,7 +64,7 @@ public class Support {
                         .replace("%handler%", "<@"+ticket.handlerId()+">").replace("<@null>", "None")
                         .replace("%state%", "OPEN")
                         .replace("%date%", ticket.creation_date()),
-                LoadedConfigurations.getConfigMemoryLoad().ticket_logging_channel_id(), Color.RED);
+                config.ticket_logging_channel_id(), Color.RED);
 
         ScpTools.getSqliteManager().getTicketsTableManager().deleteTicket(event.getChannelId());
         event.getMessageChannel().delete().queue();
@@ -77,7 +80,7 @@ public class Support {
             return;
         }
 
-        List<ItemComponent> actionRow = event.getMessage().getActionRows().get(0).getComponents();
+        List<ItemComponent> actionRow = event.getMessage().getActionRows().getFirst().getComponents();
         actionRow.remove(1);
         actionRow.add(1, Button.primary("claim_support_ticket", "Claim Ticket").asDisabled());
         event.getMessage().editMessage(event.getMessage().getContentRaw()).setActionRow(actionRow).queue();

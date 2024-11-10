@@ -2,10 +2,8 @@ package dev.vxrp.util.configuration.configs;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.configuration.ConfigManager;
-import dev.vxrp.util.Enums.DCColor;
-import dev.vxrp.util.colors.ColorTool;
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.ConfigGroup;
+import dev.vxrp.util.configuration.ConfigurationLoadManager;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.configuration.util.CONFIG;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +11,7 @@ import org.slf4j.LoggerFactory;
 public class ConfigLoader {
     private final static Logger logger = LoggerFactory.getLogger(ConfigLoader.class);
 
-    public ConfigLoader() {
+    public ConfigLoader(ConfigurationLoadManager configurations) {
         ConfigManager configManager = ScpTools.getConfigManager();
 
         ConfigGroup configGroup = new ConfigGroup(
@@ -58,17 +56,6 @@ public class ConfigLoader {
                 configManager.getBoolean(CONFIG.REGULARS.ONLY_LOAD_CERTAIN_FOLDERS),
                 configManager.getStringList(CONFIG.REGULARS.ONLY_LOAD_FOLDERS));
 
-        logger.warn("Loading configurations, this could take some time...");
-        for (var component : configGroup.getClass().getRecordComponents()) {
-            try {
-                logger.trace("Added value to button translations - {}", component.getAccessor().invoke(configGroup));
-            } catch (Exception e) {debuggerErrorHandler(e);}
-        }
-        LoadedConfigurations.setConfigMemoryLoad(configGroup);
-        logger.info("Loaded configurations");
-    }
-
-    private static void debuggerErrorHandler(Exception e) {
-        logger.debug("{} Could not log the exact configuration value (this error can be ignored) - Stacktrace {}", ColorTool.apply(DCColor.RED, "ERROR") ,e.getMessage());
+        configurations.addConfigs(configGroup);
     }
 }

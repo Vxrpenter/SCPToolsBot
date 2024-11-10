@@ -2,12 +2,13 @@ package dev.vxrp.bot.events.modals;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.builder.StatsBuilder;
 import dev.vxrp.util.colors.ColorTool;
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.ButtonGroup;
-import dev.vxrp.util.configuration.records.ConfigGroup;
-import dev.vxrp.util.configuration.records.NoticeOfDepartureGroup;
+import dev.vxrp.util.configuration.records.translation.ButtonGroup;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
+import dev.vxrp.util.configuration.records.translation.LoggingGroup;
+import dev.vxrp.util.configuration.records.translation.NoticeOfDepartureGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -24,9 +25,10 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class NoticeOfDeparture {
-    private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
-    private static final NoticeOfDepartureGroup translations = LoadedConfigurations.getNoticeOfDepartureMemoryLoad();
-    private static final ButtonGroup buttons = LoadedConfigurations.getButtonMemoryLoad();
+    private static final ConfigGroup configs = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
+    private static final NoticeOfDepartureGroup translations = (NoticeOfDepartureGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.NOTICE_OF_DEPARTURE_GROUP);
+    private static final ButtonGroup buttons = (ButtonGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.BUTTON_GROUP);
+    private static final LoggingGroup logging = (LoggingGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.LOGGING_GROUP);
 
     private static final String time = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
     private static final String date = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
@@ -42,7 +44,7 @@ public class NoticeOfDeparture {
         event.reply(translations.ticket_created()).setEphemeral(true).queue();
 
         assert channel != null;
-        List<String> pingRoles = LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_roles_access_notices()
+        List<String> pingRoles = configs.notice_of_departure_roles_access_notices()
                 .stream()
                 .map(id -> "<@&" + id + ">")
                 .collect(Collectors.toList());
@@ -85,7 +87,7 @@ public class NoticeOfDeparture {
                         .build()
         )).queue();
 
-        Objects.requireNonNull(event.getGuild().getTextChannelById(LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_notice_channel_id())).sendMessageEmbeds(
+        Objects.requireNonNull(event.getGuild().getTextChannelById(configs.notice_of_departure_notice_channel_id())).sendMessageEmbeds(
                 StatsBuilder.buildStatus(Objects.requireNonNull(event.getMember()).getUser().getGlobalName()).build(),
                 new EmbedBuilder()
                         .setTitle(translations.notice_title()
@@ -105,7 +107,7 @@ public class NoticeOfDeparture {
                 ).queue(message -> {
                     try {
                         ScpTools.getLoggerManager().creationLog(event.getUser(),
-                                LoadedConfigurations.getLoggingMemoryLoad().notice_of_departure_create_logging_action()
+                                logging.notice_of_departure_create_logging_action()
                                         .replace("%id%", user.getId())
                                         .replace("%message%", message.getJumpUrl())
                                         .replace("%user%", "<@"+event.getUser().getId()+">")
@@ -113,12 +115,12 @@ public class NoticeOfDeparture {
                                         .replace("%expiration%", event.getModalId().split(":")[3])
                                         .replace("%date%", event.getModalId().split(":")[4])
                                         .replace("%reason%", reason),
-                                LoadedConfigurations.getConfigMemoryLoad().notice_of_departures_logging_channel_id(),
+                                configs.notice_of_departures_logging_channel_id(),
                                 Color.GREEN);
 
                         ScpTools.getSqliteManager().getNoticeOfDepartureTableManager().addNoticeOfDeparture(
                                 user.getId(),
-                                LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_notice_channel_id()+":"+message.getId(),
+                                configs.notice_of_departure_notice_channel_id()+":"+message.getId(),
                                 event.getModalId().split(":")[4],
                                 event.getModalId().split(":")[3]
                         );
@@ -143,7 +145,7 @@ public class NoticeOfDeparture {
         )).queue();
 
         ScpTools.getLoggerManager().creationLog(event.getUser(),
-                LoadedConfigurations.getLoggingMemoryLoad().notice_of_departure_dismiss_logging_action()
+                logging.notice_of_departure_dismiss_logging_action()
                         .replace("%id%", user.getId())
                         .replace("%user%", "<@"+event.getUser().getId()+">")
                         .replace("%creator%", "<@"+user.getId()+">")
@@ -151,7 +153,7 @@ public class NoticeOfDeparture {
                         .replace("%expiration%", event.getModalId().split(":")[3])
                         .replace("%date%", event.getModalId().split(":")[4])
                         .replace("%reason%", reason),
-                LoadedConfigurations.getConfigMemoryLoad().notice_of_departures_logging_channel_id(),
+                configs.notice_of_departures_logging_channel_id(),
                 Color.RED);
 
         event.reply(translations.ticket_message_sent()).setEphemeral(true).queue();
@@ -171,7 +173,7 @@ public class NoticeOfDeparture {
                                 .build()
                 ).queue());
         ScpTools.getLoggerManager().creationLog(event.getUser(),
-                LoadedConfigurations.getLoggingMemoryLoad().notice_of_departure_close_logging_action()
+                logging.notice_of_departure_close_logging_action()
                         .replace("%id%", user.getId())
                         .replace("%user%", "<@"+event.getUser().getId()+">")
                         .replace("%creator%", "<@"+user.getId()+">")
@@ -179,7 +181,7 @@ public class NoticeOfDeparture {
                         .replace("%expiration%", event.getModalId().split(":")[2])
                         .replace("%date%", event.getModalId().split(":")[3])
                         .replace("%reason%", Objects.requireNonNull(event.getValue("reason_action_reason")).getAsString()),
-                LoadedConfigurations.getConfigMemoryLoad().notice_of_departures_logging_channel_id(),
+                configs.notice_of_departures_logging_channel_id(),
                 Color.RED);
     }
 }

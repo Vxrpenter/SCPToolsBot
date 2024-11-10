@@ -1,7 +1,8 @@
 package dev.vxrp.bot.commands.templates.rules;
 
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.ConfigGroup;
+import dev.vxrp.bot.ScpTools;
+import dev.vxrp.util.Enums.LoadIndex;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.pastebin.PastebinUtil;
 import dev.vxrp.util.parser.CustomColorParser;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class RulesTemplateUnit  {
-    private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
+    private static final ConfigGroup configs = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
     private static EmbedBuilder embed(Guild guild, TextChannel channel) {
         String rules;
         try {

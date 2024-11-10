@@ -1,14 +1,13 @@
 package dev.vxrp.bot.events.modals;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.util.configuration.records.ButtonGroup;
-import dev.vxrp.util.configuration.records.ConfigGroup;
+import dev.vxrp.util.Enums.LoadIndex;
+import dev.vxrp.util.configuration.records.translation.ButtonGroup;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.Enums.DCColor;
 import dev.vxrp.util.builder.StatsBuilder;
-import dev.vxrp.util.api.cedmod.CedModApi;
 import dev.vxrp.util.colors.ColorTool;
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.SupportGroup;
+import dev.vxrp.util.configuration.records.translation.SupportGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
@@ -28,9 +27,9 @@ import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Unban {
-    private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
-    private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
-    private static final ButtonGroup buttons = LoadedConfigurations.getButtonMemoryLoad();
+    private static final SupportGroup translations = (SupportGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.SUPPORT_GROUP);
+    private static final ConfigGroup configs = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
+    private static final ButtonGroup buttons = (ButtonGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.BUTTON_GROUP);
 
     public static void createUnbanTicket(ModalInteractionEvent event, Logger logger) {
         Member member = event.getMember();

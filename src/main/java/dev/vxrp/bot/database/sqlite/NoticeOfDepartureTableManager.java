@@ -2,8 +2,9 @@ package dev.vxrp.bot.database.sqlite;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.colors.ColorTool;
-import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.records.noticeOfDeparture.NoticeOfDeparture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class NoticeOfDepartureTableManager {
     private final Connection connection;
+    private final ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
     private final Logger logger = LoggerFactory.getLogger(NoticeOfDepartureTableManager.class);
 
     public NoticeOfDepartureTableManager(Connection connection) {
@@ -43,7 +45,7 @@ public class NoticeOfDepartureTableManager {
                             ", channel_message_id: "+ColorTool.apply(DCColor.GREEN, channel_message_id)+
                             ", start_time: "+ColorTool.apply(DCColor.GOLD, start_time)+
                             ", end_time: "+ColorTool.apply(DCColor.GOLD, end_time),
-                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    config.database_logging_channel_id(),
                     Color.ORANGE);
         }
     }
@@ -63,38 +65,6 @@ public class NoticeOfDepartureTableManager {
                     ColorTool.apply(DCColor.GREEN, id),
                     ColorTool.apply(DCColor.GOLD, start_time),
                     ColorTool.apply(DCColor.GOLD, end_time));
-        }
-    }
-
-    public void updateChannelMessageId(String id, String channel_message_id) throws SQLException {
-        if (!exists(id)) {
-            logger.error("Failed to update notice of departure channel and message id with id: {}. Id does not exist",
-                    ColorTool.apply(DCColor.GREEN, id));
-            return;
-        }
-        try (PreparedStatement statement = connection.prepareStatement("UPDATE notice_of_departure SET start_time=? WHERE id=?")) {
-            statement.setString(1, channel_message_id);
-            statement.setString(2, id);
-            statement.executeUpdate();
-            logger.debug("Updated start_time - id: {} , channel_message_id: {}",
-                    ColorTool.apply(DCColor.GREEN, id),
-                    ColorTool.apply(DCColor.GOLD, channel_message_id));
-        }
-    }
-
-    public void updateStartTime(String id,String start_time) throws SQLException {
-        if (!exists(id)) {
-            logger.error("Failed to update notice of departure start time with id: {}. Id does not exist",
-                    ColorTool.apply(DCColor.GREEN, id));
-            return;
-        }
-        try (PreparedStatement statement = connection.prepareStatement("UPDATE notice_of_departure SET start_time=? WHERE id=?")) {
-            statement.setString(1, start_time);
-            statement.setString(2, id);
-            statement.executeUpdate();
-            logger.debug("Updated start_time - id: {} , start_time: {}",
-                    ColorTool.apply(DCColor.GREEN, id),
-                    ColorTool.apply(DCColor.GOLD, start_time));
         }
     }
 
@@ -128,7 +98,7 @@ public class NoticeOfDepartureTableManager {
             ScpTools.getLoggerManager().databaseLog(
                     "DELETE FROM notice_of_departure WHERE id=?",
                     "Deleted notice of departure id: "+ColorTool.apply(DCColor.GREEN, id),
-                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    config.database_logging_channel_id(),
                     Color.ORANGE);
         }
     }
@@ -140,7 +110,7 @@ public class NoticeOfDepartureTableManager {
                 ScpTools.getLoggerManager().databaseLog(
                         "SELECT * FROM notice_of_departure",
                         "Selected every notice of departure",
-                        LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                        config.database_logging_channel_id(),
                         Color.ORANGE);
                 while (resultSet.next()) {
                     noticeOfDepartureList.add(new NoticeOfDeparture(
@@ -165,33 +135,6 @@ public class NoticeOfDepartureTableManager {
                         resultSet.getString("channel_message_id").split(":")[1],
                         resultSet.getString("start_time"),
                         resultSet.getString("end_time"));
-            }
-        }
-    }
-
-    public String getStartTime(String id) throws SQLException {
-        try (PreparedStatement statement = connection.prepareStatement("SELECT start_time FROM notice_of_departure WHERE id=?")) {
-            statement.setString(1, id);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                return resultSet.getString("start_time");
-            }
-        }
-    }
-
-    public String getEndTime(String id) throws SQLException {
-        try (PreparedStatement statement = connection.prepareStatement("SELECT end_time FROM notice_of_departure WHERE id=?")) {
-            statement.setString(1, id);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                return resultSet.getString("end_time");
-            }
-        }
-    }
-
-    public String getChannelMessageId(String id) throws SQLException {
-        try (PreparedStatement statement = connection.prepareStatement("SELECT FROM channel_message_id WHERE id=?")) {
-            statement.setString(1, id);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                return resultSet.getString("channel_message_id");
             }
         }
     }

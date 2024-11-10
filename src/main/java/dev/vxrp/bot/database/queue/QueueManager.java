@@ -1,10 +1,10 @@
 package dev.vxrp.bot.database.queue;
 
-import com.google.gson.JsonObject;
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.colors.ColorTool;
-import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.records.actionQueue.ActionQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +17,7 @@ import java.util.List;
 public class QueueManager {
     // This manager is linked to the sqllite manager because it is using the sqlite database
     private final Logger logger = LoggerFactory.getLogger(QueueManager.class);
+    private final ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
     private final Connection connection;
 
     public QueueManager(Connection connection) throws SQLException, InterruptedException {
@@ -40,7 +41,7 @@ public class QueueManager {
             ScpTools.getLoggerManager().databaseLog(
                     "CREATE TABLE IF NOT EXISTS actionqueue(id TEXT PRIMARY KEY, command TEXT NOT NULL, time_added TEXT NOT NULL, processed BOOLEAN NOT NULL);",
                     "Created Table with all rows",
-                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    config.database_logging_channel_id(),
                     Color.ORANGE);
         }
     }
@@ -67,7 +68,7 @@ public class QueueManager {
                             ", command: "+ColorTool.apply(DCColor.GREEN, command)+
                             ", timeAdded: "+ColorTool.apply(DCColor.GOLD, timeAdded)+
                             ", processed: false",
-                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    config.database_logging_channel_id(),
                     Color.ORANGE);
         }
     }
@@ -84,7 +85,7 @@ public class QueueManager {
                     "UPDATE actionqueue SET processed = ? WHERE id = ?",
                     "Updated action queue with id: "+ColorTool.apply(DCColor.RED, id)+
                     ", processed: "+ColorTool.apply(DCColor.GREEN, String.valueOf(processed)),
-                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    config.database_logging_channel_id(),
                     Color.ORANGE);
         }
     }
@@ -115,7 +116,7 @@ public class QueueManager {
                         "SELECT processed FROM actionqueue WHERE id = ?",
                         "Selected processed from id : "+ColorTool.apply(DCColor.RED, id)+
                                 ", processed: "+ColorTool.apply(DCColor.GREEN, String.valueOf(resultSet.getBoolean("processed"))),
-                                LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                                config.database_logging_channel_id(),
                                 Color.ORANGE);
                 return resultSet.getBoolean("processed");
             }
@@ -133,7 +134,7 @@ public class QueueManager {
                         "SELECT command FROM actionqueue WHERE id = ?",
                         "Selected command from id : "+ColorTool.apply(DCColor.RED, id)+
                                 ", command: "+ColorTool.apply(DCColor.GREEN, resultSet.getString("command")),
-                        LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                        config.database_logging_channel_id(),
                         Color.ORANGE);
                 return resultSet.getString("command");
             }
@@ -147,21 +148,8 @@ public class QueueManager {
             logger.debug("Deleted action from queue - id: {}", id);
             ScpTools.getLoggerManager().databaseLog("DELETE FROM actionqueue WHERE id = ?",
                     "Deleted action from queue",
-            LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+            config.database_logging_channel_id(),
             Color.ORANGE);
-        }
-    }
-
-    public int count() throws SQLException, InterruptedException {
-        try (PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM actionqueue")) {
-            statement.execute();
-            try (ResultSet resultSet = statement.getResultSet()) {
-                int size = 0;
-                while (resultSet.next()) {
-                    size++;
-                }
-                return size;
-            }
         }
     }
 

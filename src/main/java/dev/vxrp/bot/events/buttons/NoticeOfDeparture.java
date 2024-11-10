@@ -1,8 +1,9 @@
 package dev.vxrp.bot.events.buttons;
 
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.NoticeOfDepartureGroup;
-import dev.vxrp.util.configuration.records.SupportGroup;
+import dev.vxrp.bot.ScpTools;
+import dev.vxrp.util.Enums.LoadIndex;
+import dev.vxrp.util.configuration.records.translation.NoticeOfDepartureGroup;
+import dev.vxrp.util.configuration.records.translation.SupportGroup;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
@@ -14,8 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class NoticeOfDeparture {
-    private static final NoticeOfDepartureGroup translations = LoadedConfigurations.getNoticeOfDepartureMemoryLoad();
-    private static final SupportGroup reason_action = LoadedConfigurations.getSupportTranslationMemoryLoad();
+    private static final NoticeOfDepartureGroup translations = (NoticeOfDepartureGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.NOTICE_OF_DEPARTURE_GROUP);
+    private static final SupportGroup reason_action = (SupportGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.SUPPORT_GROUP);
 
     public static void createNoticeOfDeparture(ButtonInteractionEvent event) {
         event.replyModal(

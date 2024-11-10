@@ -14,12 +14,13 @@ import dev.vxrp.bot.events.MessageListener;
 import dev.vxrp.bot.runnables.CheckNoticeOfDeparture;
 import dev.vxrp.bot.runnables.CheckPlaytime;
 import dev.vxrp.util.Enums.DatabaseType;
+import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.Enums.PredefinedDatabases;
 import dev.vxrp.util.api.cedmod.CedModApi;
 import dev.vxrp.util.api.github.GitHubApi;
-import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.ConfigurationLoadManager;
 import dev.vxrp.util.configuration.configs.ConfigLoader;
-import dev.vxrp.util.configuration.records.ConfigGroup;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.configuration.util.CONFIG;
 import dev.vxrp.bot.config.managers.configuration.ConfigManager;
 import dev.vxrp.bot.events.ModalListener;
@@ -53,18 +54,21 @@ public class ScpTools {
     static RegularsManager regularsManager;
     static CedModApi cedModApi;
     static Guild guild;
+    static ConfigurationLoadManager configurations;
 
     public static void main(String[] args) throws IOException, InterruptedException {
         GitHubApi.CheckForUpdatesByTags("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags");
 
+        configurations = new ConfigurationLoadManager();
         initializeConfigs();
         setLoggingLevel();
         loadConfigs();
         initializeRegulars();
         initializeCedModApi();
 
-        Activity.ActivityType activityType = Activity.ActivityType.valueOf(LoadedConfigurations.getConfigMemoryLoad().activity_type());
-        String activityContent = LoadedConfigurations.getConfigMemoryLoad().activity_content();
+        ConfigGroup config = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
+        Activity.ActivityType activityType = Activity.ActivityType.valueOf(config.activity_type());
+        String activityContent = config.activity_content();
 
         JDA api = JDABuilder.createDefault(configManager.getToken(), GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
                 .setActivity(Activity.of(activityType, activityContent))
@@ -100,7 +104,7 @@ public class ScpTools {
     }
 
     private static void initializeSqlite() {
-        ConfigGroup config = LoadedConfigurations.getConfigMemoryLoad();
+        ConfigGroup config = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
         if (Objects.equals(config.use_predefined_database_sets(), PredefinedDatabases.SQLITE.toString())) {
             Path path = Path.of(System.getProperty("user.dir"));
             File file = new File(path+"\\sqlite\\data.db");
@@ -117,23 +121,25 @@ public class ScpTools {
             String username = config.custom_username();
             String password = config.custom_password();
 
-            logger.error("CUSTOM DATABASE - You have enabled an unfinished feature. For further process please deactivate the feature until it is supported");
+            logger.warn("CUSTOM DATABASE - You have enabled an unfinished feature. For further process please deactivate the feature until it is supported");
 
             //Later database code goes here
         }
     }
 
     private static void loadConfigs() {
+
         try {
-            new ConfigLoader();
+            new ConfigLoader(configurations);
         } catch (Exception e) {
-            logger.error("Could not load config to memory {}", e.getMessage());
+            logger.error("Could not add config to load list {}", e.getMessage());
         }
         try {
-            new TranslationLoader();
+            new TranslationLoader(configurations);
         } catch (Exception e) {
-            logger.error("Could not load translation to memory {}", e.getMessage());
+            logger.error("Could not add translation to load list {}", e.getMessage());
         }
+        configurations.write();
     }
 
     private static void initializeRegulars() {
@@ -144,9 +150,10 @@ public class ScpTools {
         }
     }
 
-    private static void initializeCedModApi() throws IOException {
-        String instanceUrl = LoadedConfigurations.getConfigMemoryLoad().cedmod_instance_url();
-        String apiKey = LoadedConfigurations.getConfigMemoryLoad().cedmod_api_key();
+    private static void initializeCedModApi() {
+        ConfigGroup config = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
+        String instanceUrl = config.cedmod_instance_url();
+        String apiKey = config.cedmod_api_key();
         cedModApi = new CedModApi(instanceUrl, apiKey);
     }
 
@@ -179,7 +186,7 @@ public class ScpTools {
     }
 
     private static void runCheckups(JDA api) {
-        ConfigGroup config = LoadedConfigurations.getConfigMemoryLoad();
+        ConfigGroup config = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
         RepeatTask.repeatWithScheduledExecutorService(
                 CheckNoticeOfDeparture.runNoticeOfDepartureCheck(api),
                 config.notice_of_departure_check_rate(),
@@ -198,4 +205,5 @@ public class ScpTools {
     public static RegularsManager getRegularsManager() {return regularsManager;}
     public static CedModApi getCedModApi() {return cedModApi;}
     public static Guild getGuild() {return guild;}
+    public static ConfigurationLoadManager getConfigurations() {return configurations;}
 }

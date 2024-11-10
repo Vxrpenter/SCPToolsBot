@@ -1,4 +1,4 @@
-package dev.vxrp.util.configuration.records;
+package dev.vxrp.util.configuration.records.translation;
 
 public record SupportGroup(String first_title, String first_body, String second_title, String second_body,
                            String modal_support_title, String modal_support_first_title,
