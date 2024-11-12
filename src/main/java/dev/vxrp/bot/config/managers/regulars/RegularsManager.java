@@ -26,12 +26,8 @@ public class RegularsManager {
 
         ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
         if (config.create_example_configuration()) {
-            String examplePath = path+"/regulars/examples/";
+            String examplePath = path+"/regulars/example/";
             new File(examplePath).mkdirs();
-            File configFile = new File(examplePath+"config.json");
-            File manifest = new File(examplePath+"config.json");
-            manifest.createNewFile();
-            configFile.createNewFile();
 
             for (String array : Arrays.asList("config.json", "manifest.json")) {
                 if (new File(examplePath+array).exists()) continue;
@@ -67,20 +63,20 @@ public class RegularsManager {
         for (File file : folders()) {
             List<JsonObject> objects = loadConfigurationObjects().get(file.getName());
             JsonObject manifest = objects.get(1);
-            JsonObject config = objects.get(0);
+            System.out.println(manifest);
 
             Regular regular = new Regular(
                     manifest.get("name").getAsString(),
                     manifest.get("description").getAsString(),
                     manifest.get("custom_role").getAsJsonObject().get("use").getAsBoolean(),
                     manifest.get("custom_role").getAsJsonObject().get("id").getAsString(),
-                    config);
+                    manifest.get("config").getAsJsonObject());
             regulars.add(regular);
         }
         return regulars;
     }
 
-    public List<RegularConfig> getConfig() throws IOException {
+    public List<RegularConfig> getConfigs() throws IOException {
         List<RegularConfig> configs = new ArrayList<>();
 
         for (Regular regular : getRegulars()) {
