@@ -60,5 +60,8 @@ Get a full guide [here](https://github.com/Vxrpenter/SCPToolsBot/wiki/Issue-Hand
 > [!NOTE]
 > If you are getting an error, not stated in this documentation and are not able to fix it, please create an issue so the issue can be resolved
 
+## Star Chart
+[![Stargazers over time](https://starchart.cc/Vxrpenter/SCPToolsBot.svg?variant=dark)](https://starchart.cc/Vxrpenter/SCPToolsBot)
+
 ## Thank you's
 - Thank you to [ced777ric](https://github.com/ced777ric) for helping me with the cedmod api
