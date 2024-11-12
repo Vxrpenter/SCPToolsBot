@@ -63,14 +63,14 @@ public class RegularsManager {
         for (File file : folders()) {
             List<JsonObject> objects = loadConfigurationObjects().get(file.getName());
             JsonObject manifest = objects.get(1);
-            System.out.println(manifest);
+            JsonObject config = objects.get(0);
 
             Regular regular = new Regular(
                     manifest.get("name").getAsString(),
                     manifest.get("description").getAsString(),
                     manifest.get("custom_role").getAsJsonObject().get("use").getAsBoolean(),
                     manifest.get("custom_role").getAsJsonObject().get("id").getAsString(),
-                    manifest.get("config").getAsJsonObject());
+                    config);
             regulars.add(regular);
         }
         return regulars;
