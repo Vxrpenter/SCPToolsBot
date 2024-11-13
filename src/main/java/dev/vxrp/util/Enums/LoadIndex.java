@@ -7,4 +7,5 @@ public enum LoadIndex {
     REGULARS_GROUP,
     LOGGING_GROUP,
     BUTTON_GROUP,
+    STATUSBAR_GROUP,
 }
