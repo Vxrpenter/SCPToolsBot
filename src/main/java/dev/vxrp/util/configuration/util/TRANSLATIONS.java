@@ -124,6 +124,7 @@ public class TRANSLATIONS {
         public static final String REVOKE_NOTICE_OF_DEPARTURE = "buttons.revoke_notice_of_departure";
         public static final String DELETE_NOTICE_OF_DEPARTURE = "buttons.delete_notice_of_departure";
 
+        public static final String OPEN_REGULAR_MENU = "buttons.open_regular_menu";
         public static final String SYNC_REGULARS = "buttons.sync_regulars";
         public static final String DEACTIVATE_SYNC_REGULARS = "buttons.deactivate_sync_regulars";
         public static final String REMOVE_SYNC_REGULARS = "buttons.remove_sync_regulars";
