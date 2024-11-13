@@ -15,6 +15,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class TemplateCommand extends ListenerAdapter {
@@ -50,7 +51,11 @@ public class TemplateCommand extends ListenerAdapter {
         }
         if  (template.equals("regulars")) {
             if (config.cedmod_active()) {
-                Regulars.pasteRegularTemplate(event);
+                try {
+                    Regulars.pasteRegularTemplate(event);
+                } catch (IOException e) {
+                    logger.error("Ran into error while pasting regular template {}", e.getMessage());
+                }
             } else {
                 event.reply(noCedmodError).setEphemeral(true).queue();
                 logger.warn("An action of /template regulars was cancelled do to cedmod compatibility not being active");

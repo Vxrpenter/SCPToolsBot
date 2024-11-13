@@ -16,6 +16,7 @@ public class NoticeOfDeparture {
     private static final ButtonGroup buttons = (ButtonGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.BUTTON_GROUP);
 
     public static void pasteDeRegisterTemplate(SlashCommandInteractionEvent event) {
+        event.reply("Pasted regulars template").setEphemeral(true).queue();
         event.getChannel().sendMessageEmbeds(new EmbedBuilder()
                         .setColor(Color.decode("#5865F2"))
                         .setTitle(translations.first_title())
