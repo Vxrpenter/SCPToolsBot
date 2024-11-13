@@ -240,14 +240,17 @@ regulars:
                         Role: %role%\n
                         Description: %description%\n
                         TimeFrame: %timeframe%\n
+                        
                         "
   second_title: "Personal Regular Settings"
   second_body: "   
                         These are your personal regular settings. Only you are able to see this message and to change the settings\n
                         &filler&
                         
-                        Group: **%group%**
-                        Role: **%role%**
+                        Group: **%group%**\n
+                        
+                        Role: **%role%**\n
+                        
                         Time: **%time%**
                         "
   sync_group_select_message: "Please choose group to continue."

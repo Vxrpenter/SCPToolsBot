@@ -124,6 +124,7 @@ public class TranslationLoader {
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.REVOKE_NOTICE_OF_DEPARTURE),
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.DELETE_NOTICE_OF_DEPARTURE),
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.FILE_NOTICE_OF_DEPARTURE),
+                translationManager.getString(translation, TRANSLATIONS.BUTTONS.OPEN_REGULAR_MENU),
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.SYNC_REGULARS),
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.DEACTIVATE_SYNC_REGULARS),
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.REMOVE_SYNC_REGULARS));

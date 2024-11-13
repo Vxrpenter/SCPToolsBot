@@ -2,10 +2,7 @@ package dev.vxrp.bot.events;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.commands.help.HelpCommand;
-import dev.vxrp.bot.events.buttons.NoticeOfDeparture;
-import dev.vxrp.bot.events.buttons.Rules;
-import dev.vxrp.bot.events.buttons.Support;
-import dev.vxrp.bot.events.buttons.Unban;
+import dev.vxrp.bot.events.buttons.*;
 import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -94,7 +91,14 @@ public class ButtonListener extends ListenerAdapter {
             //WIP
             event.reply("Feature currently under development").setEphemeral(true).queue();
         }
-
+        // Regulars
+        if (event.getComponentId().equals("open_personal_regular_menu")) {
+            try {
+                Regulars.openRegularMenu(event);
+            } catch (SQLException e) {
+                logger.error("Could not open regular menu {}", e.getMessage());
+            }
+        }
         //Notice of Departure
         if (event.getComponentId().equals("file_nod")) {
             NoticeOfDeparture.createNoticeOfDeparture(event);
