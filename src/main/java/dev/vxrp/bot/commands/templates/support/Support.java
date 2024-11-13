@@ -16,14 +16,15 @@ public class Support {
     private static final ButtonGroup buttons = (ButtonGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.BUTTON_GROUP);
 
     public static void pasteSupportTemplate(SlashCommandInteractionEvent event) {
-        event.getChannel().sendMessageEmbeds(new EmbedBuilder()
+        event.reply("Pasted support template").setEphemeral(true).queue();
+        event.getChannel().sendMessageEmbeds(
+                new EmbedBuilder()
                         .setColor(Color.decode("#5865F2"))
                         .setTitle(translations.first_title())
                         .setDescription(translations.first_body())
                         .setColor(Color.DARK_GRAY)
-                        .build())
-                .queue();
-        event.getChannel().sendMessageEmbeds(new EmbedBuilder()
+                        .build(),
+                new EmbedBuilder()
                         .setColor(Color.decode("#5865F2"))
                         .setTitle(translations.second_title())
                         .setDescription(translations.second_body())
