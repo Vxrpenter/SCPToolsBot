@@ -103,15 +103,18 @@ public class ScpTools {
         log.setLevel(level);
     }
 
-    private static void initializeSqlite() {
+    private static void initializeSqlite() throws IOException {
         ConfigGroup config = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
         if (Objects.equals(config.use_predefined_database_sets(), PredefinedDatabases.SQLITE.toString())) {
             Path path = Path.of(System.getProperty("user.dir"));
-            File file = new File(path+"\\sqlite\\data.db");
-            try {
+            File file = new File(path+"/sqlite/data.db");
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
                 file.createNewFile();
-                sqliteManager = new SqliteManager(path+"\\sqlite\\data.db");
-            } catch (SQLException | IOException | InterruptedException e) {
+            }
+            try {
+                sqliteManager = new SqliteManager(path+"/sqlite/data.db");
+            } catch (SQLException | InterruptedException e) {
                 logger.error("Could not correctly set up Sqlite database {}", e.getMessage());
             }
         }
