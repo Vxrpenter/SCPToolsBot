@@ -35,7 +35,6 @@ public class CustomColorParser {
         for (String obj : matcherList) {
             String finalValue = ColorTool.apply(translator(parseColorCodeToColor(tokens.get(obj))), obj);
 
-            assert finalValue != null;
             input = input.replace(tokens.get(obj), finalValue);
         }
 
