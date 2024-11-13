@@ -78,7 +78,14 @@ public class TranslationLoader {
         RegularsGroup regularsGroup = new RegularsGroup(
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.FIRST_TITLE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.FIRST_BODY)),
-                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.FIRST_ROLE_TEMPLATE))
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.GROUP_TEMPLATE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.ROLE_TEMPLATE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SECOND_TITLE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SECOND_BODY)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_GROUP_SELECT_MESSAGE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_SELECT_MESSAGE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_REMOVE_CONFIRM_MESSAGE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_REMOVED_MESSAGE))
         );
 
         LoggingGroup loggingGroup = new LoggingGroup(
@@ -92,6 +99,14 @@ public class TranslationLoader {
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.LOGGING.NOTICE_OF_DEPARTURE_CREATE_ACTION)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.LOGGING.NOTICE_OF_DEPARTURE_DISMISS_ACTION)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.LOGGING.NOTICE_OF_DEPARTURE_CLOSE_ACTION)));
+
+        StatusbarGroup statusbarGroup = new StatusbarGroup(
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.STATUS_BAR.TICKET_STATUS)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.STATUS_BAR.NOTICE_OF_DEPARTURE_ACCEPTED)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.STATUS_BAR.NOTICE_OF_DEPARTURE_DISMISSED)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.STATUS_BAR.NOTICE_OF_DEPARTURE_ENDED)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.STATUS_BAR.NOTICE_OF_DEPARTURE_REVOKED))
+        );
 
         ButtonGroup buttonsGroup = new ButtonGroup(
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.PASTE_RULES),
@@ -113,6 +128,6 @@ public class TranslationLoader {
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.DEACTIVATE_SYNC_REGULARS),
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.REMOVE_SYNC_REGULARS));
 
-        configurations.addTranslations(supportGroup, noticeOfDepartureGroup, regularsGroup, loggingGroup, buttonsGroup);
+        configurations.addTranslations(supportGroup, noticeOfDepartureGroup, regularsGroup, loggingGroup, statusbarGroup, buttonsGroup);
     }
 }

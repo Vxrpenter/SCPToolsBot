@@ -72,7 +72,9 @@ public class ColorTool {
     public static String useCustomColorCodes(String text) {
         Matcher matcher = Pattern.compile("(?<=&filler<).+?(?=>&|$)").matcher(text);
         while (matcher.find()) {
-            text = text.replace("&filler<"+matcher.group()+">&", "\u200E ".repeat(Math.max(0, Integer.parseInt(matcher.group()))));
+            int count = Math.round((float) Integer.parseInt(matcher.group()) /2);
+
+            text = text.replace("&filler<"+matcher.group()+">&", "\u200E ".repeat(Math.max(0, count)));
         }
 
         return text

@@ -13,21 +13,22 @@ import java.util.List;
 public class ConfigurationLoadManager {
     private final static Logger logger = LoggerFactory.getLogger(ConfigurationLoadManager.class);
 
-    public List<Record> configs = new ArrayList<>();
-    public List<Record> translations = new ArrayList<>();
-    public static HashSet<Record> configLoads = new HashSet<>();
-    public static HashSet<Record> translationLoads = new HashSet<>();
+    private final List<Record> configs = new ArrayList<>();
+    private final List<Record> translations = new ArrayList<>();
+    private static final HashSet<Record> configLoads = new HashSet<>();
+    private static final HashSet<Record> translationLoads = new HashSet<>();
 
     public void addConfigs(ConfigGroup configGroup) {
         configs.add(configGroup);
     }
 
-    public void addTranslations(SupportGroup supportGroup, NoticeOfDepartureGroup noticeOfDepartureGroup, RegularsGroup regularsGroup, LoggingGroup loggingGroup, ButtonGroup buttonGroup) {
+    public void addTranslations(SupportGroup supportGroup, NoticeOfDepartureGroup noticeOfDepartureGroup, RegularsGroup regularsGroup, LoggingGroup loggingGroup, StatusbarGroup statusbarGroup, ButtonGroup buttonGroup) {
         translations.add(supportGroup);
-        translationLoads.add(noticeOfDepartureGroup);
-        translationLoads.add(regularsGroup);
-        translationLoads.add(loggingGroup);
-        translationLoads.add(buttonGroup);
+        translations.add(noticeOfDepartureGroup);
+        translations.add(regularsGroup);
+        translations.add(loggingGroup);
+        translations.add(statusbarGroup);
+        translations.add(buttonGroup);
     }
 
     public void write() {
@@ -74,7 +75,8 @@ public class ConfigurationLoadManager {
             case NOTICE_OF_DEPARTURE_GROUP -> 1;
             case REGULARS_GROUP -> 2;
             case LOGGING_GROUP -> 3;
-            case BUTTON_GROUP -> 4;
+            case STATUSBAR_GROUP -> 4;
+            case BUTTON_GROUP -> 5;
         };
     }
 }

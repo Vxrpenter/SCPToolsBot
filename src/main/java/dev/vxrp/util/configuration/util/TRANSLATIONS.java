@@ -76,7 +76,14 @@ public class TRANSLATIONS {
     public static final class REGULARS {
         public static final String FIRST_TITLE = "regulars.first_title";
         public static final String FIRST_BODY = "regulars.first_body";
-        public static final String FIRST_ROLE_TEMPLATE = "regulars.first_role_template";
+        public static final String GROUP_TEMPLATE = "regulars.group_template";
+        public static final String ROLE_TEMPLATE = "regulars.role_template";
+        public static final String SECOND_TITLE = "regulars.second_title";
+        public static final String SECOND_BODY = "regulars.second_body";
+        public static final String SYNC_GROUP_SELECT_MESSAGE = "regulars.sync_group_select_message";
+        public static final String SYNC_SELECT_MESSAGE = "regulars.sync_select_message";
+        public static final String SYNC_REMOVE_CONFIRM_MESSAGE = "regulars.sync_remove_confirm_message";
+        public static final String SYNC_REMOVED_MESSAGE = "regulars.sync_removed_message";
     }
     public static final class LOGGING {
         public static final String SINGLE_MESSAGE_LOG_TEMPLATE = "logging.single_message_log_template";
@@ -89,6 +96,13 @@ public class TRANSLATIONS {
         public static final String NOTICE_OF_DEPARTURE_CREATE_ACTION = "logging.notice_of_departure_create_logging_action";
         public static final String NOTICE_OF_DEPARTURE_DISMISS_ACTION = "logging.notice_of_departure_dismiss_logging_action";
         public static final String NOTICE_OF_DEPARTURE_CLOSE_ACTION = "logging.notice_of_departure_close_logging_action";
+    }
+    public static final class STATUS_BAR {
+        public static final String TICKET_STATUS = "status_bars.ticket_status";
+        public static final String NOTICE_OF_DEPARTURE_ACCEPTED = "status_bars.notice_of_departure_accepted";
+        public static final String NOTICE_OF_DEPARTURE_DISMISSED = "status_bars.notice_of_departure_dismissed";
+        public static final String NOTICE_OF_DEPARTURE_ENDED = "status_bars.notice_of_departure_ended";
+        public static final String NOTICE_OF_DEPARTURE_REVOKED = "status_bars.notice_of_departure_revoked";
     }
     public static final class BUTTONS {
         public static final String PASTE_RULES = "buttons.paste_rules";
