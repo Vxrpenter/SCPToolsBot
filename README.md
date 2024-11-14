@@ -23,6 +23,7 @@ Currently the bot comes with:
 - Configurable commands
 - Notice of Departure for staff
 - Automatic notice of departure runout detection
+- automatic applying of playtime roles with the regular feature
 
 More coming soon, look [here](https://github.com/Vxrpenter/SCPToolsBot/wiki/Feature-Overview) for more complete overview
 
@@ -30,7 +31,7 @@ More coming soon, look [here](https://github.com/Vxrpenter/SCPToolsBot/wiki/Feat
 This bot application should be installed on a alltime running server with good internet connection to handle requests fast and be online all the time
 
 1. Download the `.jar` file from the latest **STABLE** release
-2. Install `JDK-17` or higher on your machine
+2. Install `JDK-23` or higher on your machine
 3. Run the jar using `java -jar <filename>`
 4. The process will automatically crash and create two new folders called `configs` and `translations`. Go into the `configs` folder and edit the `config.yml` file
 5. After putting in required info start the bot again and it should be running
