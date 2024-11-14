@@ -253,8 +253,17 @@ regulars:
                         
                         Time: **%time%**
                         "
+
+  data_modal_title: "Enter SteamId and Steam Username"
+  data_modal_first_title: "SteamId"
+  data_modal_first_placeholder: "What is your steamId?"
+  data_modal_second_title: "Steam Username"
+  data_modal_second_placeholder: "What is your username?"
+
   sync_group_select_message: "Please choose group to continue."
   sync_select_message: "Regulars are now automatically synced with your account"
+  sync_deactivated: "Deactivated regular syncing"
+  sync_reactivated: "Reactivated regular syncing"
   sync_remove_confirm_message: "Do you really want to remove syncing and all data with it?"
   sync_removed_message: "Removed you from the regulars database."
 
@@ -434,4 +443,5 @@ buttons:
   open_regular_menu: "Open Settings"
   sync_regulars: "Sync Regulars"
   deactivate_sync_regulars: "Deactivate Sync"
+  reactivate_sync_regulars: "Reactivate Sync"
   remove_sync_regulars: "Remove Sync"

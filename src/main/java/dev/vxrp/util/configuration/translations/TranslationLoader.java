@@ -4,10 +4,10 @@ import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.translations.TranslationManager;
 import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.colors.ColorTool;
+import dev.vxrp.util.configuration.ConfigurationLoadManager;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.configuration.records.translation.*;
 import dev.vxrp.util.configuration.util.TRANSLATIONS;
-import dev.vxrp.util.configuration.ConfigurationLoadManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,8 +82,15 @@ public class TranslationLoader {
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.ROLE_TEMPLATE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SECOND_TITLE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SECOND_BODY)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.DATA_MODAL_TITLE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.DATA_MODAL_FIRST_TITLE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.DATA_MODAL_FIRST_PLACEHOLDER)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.DATA_MODAL_SECOND_TITLE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.DATA_MODAL_SECOND_PLACEHOLDER)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_GROUP_SELECT_MESSAGE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_SELECT_MESSAGE)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_DEACTIVATED)),
+                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_REACTIVATED)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_REMOVE_CONFIRM_MESSAGE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_REMOVED_MESSAGE))
         );
@@ -127,6 +134,7 @@ public class TranslationLoader {
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.OPEN_REGULAR_MENU),
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.SYNC_REGULARS),
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.DEACTIVATE_SYNC_REGULARS),
+                translationManager.getString(translation, TRANSLATIONS.BUTTONS.REACTIVATE_SYNC_REGULARS),
                 translationManager.getString(translation, TRANSLATIONS.BUTTONS.REMOVE_SYNC_REGULARS));
 
         configurations.addTranslations(supportGroup, noticeOfDepartureGroup, regularsGroup, loggingGroup, statusbarGroup, buttonsGroup);

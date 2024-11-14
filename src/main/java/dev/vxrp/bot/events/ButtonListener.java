@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class ButtonListener extends ListenerAdapter {
@@ -97,6 +98,37 @@ public class ButtonListener extends ListenerAdapter {
                 Regulars.openRegularMenu(event);
             } catch (SQLException e) {
                 logger.error("Could not open regular menu {}", e.getMessage());
+            }
+        }
+        if (event.getComponentId().equals("regular_sync")) {
+            try {
+                Regulars.syncRegulars(event);
+            } catch (IOException e) {
+                logger.error("Could not check for regular groups {}", e.getMessage());
+            }
+        }
+        if (event.getComponentId().equals("regular_reactivate")) {
+            try {
+                Regulars.reactivateRegulars(event);
+            } catch (SQLException e) {
+                logger.error("Could not correctly reactivate regular {}", e.getMessage());
+            }
+        }
+        if (event.getComponentId().equals("regular_deactivate")) {
+            try {
+                Regulars.deactivateSyncRegulars(event);
+            } catch (SQLException e) {
+                logger.error("Could not correctly deactivate regular {}", e.getMessage());
+            }
+        }
+        if (event.getComponentId().equals("regular_remove")) {
+            Regulars.removeSyncRegularsConfirmation(event);
+        }
+        if (event.getComponentId().startsWith("remove_sync_regular_confirm")) {
+            try {
+                Regulars.removeSyncRegulars(event);
+            } catch (SQLException | InterruptedException e) {
+                logger.error("Could not correctly remove sync regular {}", e.getMessage());
             }
         }
         //Notice of Departure
