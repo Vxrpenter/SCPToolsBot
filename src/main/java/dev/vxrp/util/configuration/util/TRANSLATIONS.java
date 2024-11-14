@@ -80,8 +80,17 @@ public class TRANSLATIONS {
         public static final String ROLE_TEMPLATE = "regulars.role_template";
         public static final String SECOND_TITLE = "regulars.second_title";
         public static final String SECOND_BODY = "regulars.second_body";
+
+        public static final String DATA_MODAL_TITLE = "regulars.data_modal_title";
+        public static final String DATA_MODAL_FIRST_TITLE = "regulars.data_modal_first_title";
+        public static final String DATA_MODAL_FIRST_PLACEHOLDER = "regulars.data_modal_first_placeholder";
+        public static final String DATA_MODAL_SECOND_TITLE = "regulars.data_modal_second_title";
+        public static final String DATA_MODAL_SECOND_PLACEHOLDER = "regulars.data_modal_second_placeholder";
+
         public static final String SYNC_GROUP_SELECT_MESSAGE = "regulars.sync_group_select_message";
         public static final String SYNC_SELECT_MESSAGE = "regulars.sync_select_message";
+        public static final String SYNC_DEACTIVATED = "regulars.sync_deactivated";
+        public static final String SYNC_REACTIVATED = "regulars.sync_reactivated";
         public static final String SYNC_REMOVE_CONFIRM_MESSAGE = "regulars.sync_remove_confirm_message";
         public static final String SYNC_REMOVED_MESSAGE = "regulars.sync_removed_message";
     }
@@ -127,6 +136,7 @@ public class TRANSLATIONS {
         public static final String OPEN_REGULAR_MENU = "buttons.open_regular_menu";
         public static final String SYNC_REGULARS = "buttons.sync_regulars";
         public static final String DEACTIVATE_SYNC_REGULARS = "buttons.deactivate_sync_regulars";
+        public static final String REACTIVATE_SYNC_REGULARS = "buttons.reactivate_sync_regulars";
         public static final String REMOVE_SYNC_REGULARS = "buttons.remove_sync_regulars";
     }
 }

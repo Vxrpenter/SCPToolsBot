@@ -2,15 +2,18 @@ package dev.vxrp.bot;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
-import dev.vxrp.bot.config.managers.regulars.RegularsManager;
-import dev.vxrp.bot.database.sqlite.SqliteManager;
-import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.commands.CommandManager;
 import dev.vxrp.bot.commands.help.HelpCommand;
 import dev.vxrp.bot.commands.templates.TemplateCommand;
 import dev.vxrp.bot.config.managers.configuration.ColorConfigManager;
+import dev.vxrp.bot.config.managers.configuration.ConfigManager;
+import dev.vxrp.bot.config.managers.regulars.RegularsManager;
 import dev.vxrp.bot.config.managers.translations.TranslationManager;
+import dev.vxrp.bot.database.sqlite.SqliteManager;
+import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.events.MessageListener;
+import dev.vxrp.bot.events.ModalListener;
+import dev.vxrp.bot.events.SelectMenuListener;
 import dev.vxrp.bot.runnables.CheckNoticeOfDeparture;
 import dev.vxrp.bot.runnables.CheckPlaytime;
 import dev.vxrp.util.Enums.DatabaseType;
@@ -21,10 +24,8 @@ import dev.vxrp.util.api.github.GitHubApi;
 import dev.vxrp.util.configuration.ConfigurationLoadManager;
 import dev.vxrp.util.configuration.configs.ConfigLoader;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
-import dev.vxrp.util.configuration.util.CONFIG;
-import dev.vxrp.bot.config.managers.configuration.ConfigManager;
-import dev.vxrp.bot.events.ModalListener;
 import dev.vxrp.util.configuration.translations.TranslationLoader;
+import dev.vxrp.util.configuration.util.CONFIG;
 import dev.vxrp.util.general.RepeatTask;
 import dev.vxrp.util.logger.LoggerManager;
 import net.dv8tion.jda.api.JDA;
@@ -41,7 +42,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class ScpTools {
@@ -78,7 +81,8 @@ public class ScpTools {
                         new HelpCommand(),
                         new ButtonListener(),
                         new ModalListener(),
-                        new MessageListener())
+                        new MessageListener(),
+                        new SelectMenuListener())
                 .build();
         loggerManager = new LoggerManager(api);
         initializeSqlite();
