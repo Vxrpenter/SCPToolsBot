@@ -1,6 +1,7 @@
 package dev.vxrp.bot.events;
 
 import dev.vxrp.bot.events.modals.NoticeOfDeparture;
+import dev.vxrp.bot.events.modals.Regulars;
 import dev.vxrp.bot.events.modals.Support;
 import dev.vxrp.bot.events.modals.Unban;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
@@ -16,13 +17,13 @@ public class ModalListener extends ListenerAdapter {
 
     @Override
     public void onModalInteraction(ModalInteractionEvent event) {
+        // Support
         if (event.getModalId().equals("supportTicket")) {
             Support.createSupportTicket(event, logger);
         }
         if (event.getModalId().equals("unbanTicket")) {
             Unban.createUnbanTicket(event, logger);
         }
-
         if (event.getModalId().startsWith("reason_action_unban_accept")) {
             try {
                 Unban.acceptUnban(event);
@@ -33,7 +34,15 @@ public class ModalListener extends ListenerAdapter {
         if (event.getModalId().startsWith("reason_action_reason_dismiss")) {
             event.getJDA().retrieveUserById(event.getModalId().split(":")[1]).queue(user -> Unban.dismissUnban(event, user));
         }
-
+        // Regulars
+        if (event.getModalId().startsWith("regulars_data_modal")) {
+            try {
+                Regulars.regularDataModal(event);
+            } catch (SQLException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        // Notice of Departure
         if (event.getModalId().equals("notice_of_departure")) {
             NoticeOfDeparture.createNewNoticeOfDeparture(event);
         }

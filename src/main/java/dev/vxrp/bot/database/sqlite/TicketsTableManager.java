@@ -2,10 +2,11 @@ package dev.vxrp.bot.database.sqlite;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.Enums.TicketIdentifier;
 import dev.vxrp.util.colors.ColorTool;
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.records.Ticket;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
+import dev.vxrp.util.records.ticket.Ticket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 
 public class TicketsTableManager {
     private final Connection connection;
+    private final ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
     private final Logger logger = LoggerFactory.getLogger(TicketsTableManager.class);
 
     public TicketsTableManager(Connection connection) {
@@ -48,7 +50,7 @@ public class TicketsTableManager {
                     ", creation_date: "+ColorTool.apply(DCColor.GOLD, creation_date)+
                     ", creatorId: "+ColorTool.apply(DCColor.GOLD, creatorId)+
                     ", handlerId: "+ColorTool.apply(DCColor.GOLD, handlerId),
-                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    config.database_logging_channel_id(),
                     Color.ORANGE);
         }
     }
@@ -68,7 +70,7 @@ public class TicketsTableManager {
                 ScpTools.getLoggerManager().databaseLog(
                         "SELECT * FROM tickets WHERE id=?",
                         "Selected ticket id: "+ColorTool.apply(DCColor.GREEN, id),
-                        LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                        config.database_logging_channel_id(),
                         Color.ORANGE);
 
                 return new Ticket(
@@ -99,7 +101,7 @@ public class TicketsTableManager {
                     "UPDATE tickets SET handlerId = ? WHERE id = ?",
                     "Updated ticket handlerId with id: "+ColorTool.apply(DCColor.GREEN, id)+
                     ", handlerId: "+ColorTool.apply(DCColor.GOLD, handlerId),
-                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    config.database_logging_channel_id(),
                     Color.ORANGE);
         }
     }
@@ -119,7 +121,7 @@ public class TicketsTableManager {
             ScpTools.getLoggerManager().databaseLog(
                     "DELETE FROM tickets WHERE id=?",
                     "Deleted ticket with id:  "+ColorTool.apply(DCColor.GREEN, id),
-                    LoadedConfigurations.getConfigMemoryLoad().database_logging_channel_id(),
+                    config.database_logging_channel_id(),
                     Color.ORANGE);
         }
     }

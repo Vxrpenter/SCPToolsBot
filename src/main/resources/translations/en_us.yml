@@ -1,7 +1,15 @@
 # You can use any form of discord formatting in these translations
+#
 # \n will apply a linebreak
+#
 # Everything surrounded like this: %value% will be replaced
+#
 # The bot will load the translations in memory on startup. To apply changes, restart the bot
+#
+# Find color codes and how to use them here https://github.com/Vxrpenter/SCPToolsBot/wiki/Configuring-Translations
+#
+# Use &filler& to fill one embed line, use &filler<count>& to specify character amount
+#
 
 #
 # Support
@@ -105,6 +113,9 @@ support:
                         "
   ticket_unban_message_sent: "Your answer was sent and actions corresponding to it have been taken"
 
+#
+# Notice of Departure
+#
 notice_of_departure:
   first_title: "Notice of Departure for Discord and Secret Lab"
   first_body: "
@@ -209,11 +220,56 @@ notice_of_departure:
 
   notice_deleted_ended_replace_message: "The notice was deleted"
 
+#
+# Regulars
+#
 regulars:
-  first_title: ""
-  first_body: ""
-  first_footer: ""
+  first_title: "Activate Regular Syncing"
+  first_body: "
+                        This feature allows you to sync your server playtime with the server and to give you roles for reaching certain timeframes
+                        "
+  group_template: "   
+                        # %group%\n
+                        Description: %description%\n
+                        
+                        Custom Role: %group_role%\n
+                        &filler&
+                        %roles%
+                        "
+  role_template: "   
+                        Role: %role%\n
+                        Description: %description%\n
+                        TimeFrame: %timeframe%\n
+                        
+                        "
+  second_title: "Personal Regular Settings"
+  second_body: "   
+                        These are your personal regular settings. Only you are able to see this message and to change the settings\n
+                        &filler&
+                        
+                        Group: **%group%**\n
+                        
+                        Role: **%role%**\n
+                        
+                        Time: **%time%**
+                        "
 
+  data_modal_title: "Enter SteamId and Steam Username"
+  data_modal_first_title: "SteamId"
+  data_modal_first_placeholder: "What is your steamId?"
+  data_modal_second_title: "Steam Username"
+  data_modal_second_placeholder: "What is your username?"
+
+  sync_group_select_message: "Please choose group to continue."
+  sync_select_message: "Regulars are now automatically synced with your account"
+  sync_deactivated: "Deactivated regular syncing"
+  sync_reactivated: "Reactivated regular syncing"
+  sync_remove_confirm_message: "Do you really want to remove syncing and all data with it?"
+  sync_removed_message: "Removed you from the regulars database."
+
+#
+# Logging
+#
 logging:
   single_message_log_template: "
                         %action%\n
@@ -324,6 +380,45 @@ logging:
                         ```
                         "
 
+#
+# Status Bars
+#
+status_bars:
+  ticket_status: "
+                        ```ansi\n
+                        &filler<37>& Ticket Status: %status%&filler<37>&
+                        &filler<20>& Handler: %handler% | Creator: %creator%
+                        ```
+                        "
+  notice_of_departure_accepted: "
+                        ```ansi\n
+                        &filler<37>& Ticket Answer: &red&Dismissed&reset&&filler<29>&
+                        &filler<25>& Creator: &gold&You&reset& | Handler: %handler%
+                        ```
+                        "
+  notice_of_departure_dismissed: "
+                          ```ansi\n
+                          &filler<37>& Ticket Answer: &green&Accepted&reset&&filler<27>&
+                          &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
+                          ```
+                          "
+  notice_of_departure_ended: "
+                              ```ansi\n
+                              &filler<27>& Notice of Departure: &red&Ended&reset&&filler<29>&
+                              &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
+                              ```
+                              "
+  notice_of_departure_revoked: "
+                            ```ansi\n
+                            &filler<27>& Notice of Departure: &red&Revoked&reset&&filler<27>&
+                            &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
+                            ```
+                            "
+
+#
+# Buttons
+#
+
 # You can't use color codes for the following button translations
 buttons:
   paste_rules: "Paste Rules"
@@ -344,3 +439,9 @@ buttons:
   dismiss_notice_of_departure_ticket: "Dismiss Ticket"
   revoke_notice_of_departure: "Revoke Notice of Departure"
   delete_notice_of_departure: "Delete Processed Notice of Departure"
+
+  open_regular_menu: "Open Settings"
+  sync_regulars: "Sync Regulars"
+  deactivate_sync_regulars: "Deactivate Sync"
+  reactivate_sync_regulars: "Reactivate Sync"
+  remove_sync_regulars: "Remove Sync"

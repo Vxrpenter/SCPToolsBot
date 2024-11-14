@@ -1,7 +1,8 @@
 package dev.vxrp.bot.commands;
 
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.ConfigGroup;
+import dev.vxrp.bot.ScpTools;
+import dev.vxrp.util.Enums.LoadIndex;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.converter.PermissionListConverter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class CommandManager {
     private final static Logger logger = LoggerFactory.getLogger(CommandManager.class);
-    private final static ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
+    private final static ConfigGroup configs = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
 
     public CommandManager(JDA api) {
         List<String> activeCommands = configs.commands();

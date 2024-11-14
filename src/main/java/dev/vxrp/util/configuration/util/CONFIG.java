@@ -2,10 +2,18 @@ package dev.vxrp.util.configuration.util;
 
 public class CONFIG {
     public static final String TOKEN = "token";
+    public static final String LOAD_TRANSLATION = "load_translation";
     public static final String DEBUG = "debug";
     public static final String ADVANCED_DEBUG = "advanced_debug";
     public static final String ACTIVITY_TYPE = "activity_type";
     public static final String ACTIVITY_CONTENT = "activity_content";
+    public static final class DATABASE {
+        public static final String USE_PREDEFINED_DATABASE_SETS = "database.use_predefined_database_sets";
+        public static final String CUSTOM_URL = "database.custom_url";
+        public static final String CUSTOM_TYPE = "database.custom_type";
+        public static final String CUSTOM_USERNAME = "database.custom_username";
+        public static final String CUSTOM_PASSWORD = "database.custom_password";
+    }
     public static final class LOGGING {
         public static final String DO_LOGGING = "logging.do_logging";
         public static final String TICKET_CHANNEL_ID = "logging.ticket_logging_channel_id";

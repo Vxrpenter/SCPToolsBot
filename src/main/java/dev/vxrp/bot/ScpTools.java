@@ -2,31 +2,36 @@ package dev.vxrp.bot;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
-import dev.vxrp.bot.config.managers.regulars.RegularsManager;
-import dev.vxrp.bot.database.queue.QueueManager;
-import dev.vxrp.bot.database.sqlite.SqliteManager;
-import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.commands.CommandManager;
 import dev.vxrp.bot.commands.help.HelpCommand;
 import dev.vxrp.bot.commands.templates.TemplateCommand;
 import dev.vxrp.bot.config.managers.configuration.ColorConfigManager;
+import dev.vxrp.bot.config.managers.configuration.ConfigManager;
+import dev.vxrp.bot.config.managers.regulars.RegularsManager;
 import dev.vxrp.bot.config.managers.translations.TranslationManager;
+import dev.vxrp.bot.database.sqlite.SqliteManager;
+import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.events.MessageListener;
+import dev.vxrp.bot.events.ModalListener;
+import dev.vxrp.bot.events.SelectMenuListener;
 import dev.vxrp.bot.runnables.CheckNoticeOfDeparture;
+import dev.vxrp.bot.runnables.CheckPlaytime;
+import dev.vxrp.util.Enums.DatabaseType;
+import dev.vxrp.util.Enums.LoadIndex;
+import dev.vxrp.util.Enums.PredefinedDatabases;
 import dev.vxrp.util.api.cedmod.CedModApi;
 import dev.vxrp.util.api.github.GitHubApi;
-import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.ConfigurationLoadManager;
 import dev.vxrp.util.configuration.configs.ConfigLoader;
-import dev.vxrp.util.configuration.records.ConfigGroup;
-import dev.vxrp.util.configuration.util.CONFIG;
-import dev.vxrp.bot.config.managers.configuration.ConfigManager;
-import dev.vxrp.bot.events.ModalListener;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.configuration.translations.TranslationLoader;
+import dev.vxrp.util.configuration.util.CONFIG;
 import dev.vxrp.util.general.RepeatTask;
 import dev.vxrp.util.logger.LoggerManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.slf4j.Logger;
@@ -36,9 +41,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class ScpTools {
@@ -50,18 +56,22 @@ public class ScpTools {
     static LoggerManager loggerManager;
     static RegularsManager regularsManager;
     static CedModApi cedModApi;
+    static Guild guild;
+    static ConfigurationLoadManager configurations;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         GitHubApi.CheckForUpdatesByTags("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags");
 
+        configurations = new ConfigurationLoadManager();
         initializeConfigs();
         setLoggingLevel();
         loadConfigs();
         initializeRegulars();
         initializeCedModApi();
 
-        Activity.ActivityType activityType = Activity.ActivityType.valueOf(LoadedConfigurations.getConfigMemoryLoad().activity_type());
-        String activityContent = LoadedConfigurations.getConfigMemoryLoad().activity_content();
+        ConfigGroup config = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
+        Activity.ActivityType activityType = Activity.ActivityType.valueOf(config.activity_type());
+        String activityContent = config.activity_content();
 
         JDA api = JDABuilder.createDefault(configManager.getToken(), GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
                 .setActivity(Activity.of(activityType, activityContent))
@@ -71,15 +81,20 @@ public class ScpTools {
                         new HelpCommand(),
                         new ButtonListener(),
                         new ModalListener(),
-                        new MessageListener())
+                        new MessageListener(),
+                        new SelectMenuListener())
                 .build();
         loggerManager = new LoggerManager(api);
         initializeSqlite();
         logger.info("Initialized Listeners");
 
         new CommandManager(api);
-
-        noticeOfDepartureCheckups(api);
+        guild = api.awaitReady().getGuildById(configManager.getString("guild_id"));
+        if (guild == null) {
+            logger.error("GUILD ID NULL... SHUTTING DOWN");
+            System.exit(1);
+        }
+        runCheckups(api);
     }
 
     private static void setLoggingLevel() {
@@ -92,29 +107,46 @@ public class ScpTools {
         log.setLevel(level);
     }
 
-    private static void initializeSqlite() {
-        Path path = Path.of(System.getProperty("user.dir"));
-        File file = new File(path+"\\sqlite\\data.db");
-        try {
-            file.createNewFile();
-            sqliteManager = new SqliteManager(path+"\\sqlite\\data.db");
-            sqliteManager.getQueueManager();
-        } catch (SQLException | IOException | InterruptedException e) {
-            logger.error("Could not correctly set up Sqlite database {}", e.getMessage());
+    private static void initializeSqlite() throws IOException {
+        ConfigGroup config = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
+        if (Objects.equals(config.use_predefined_database_sets(), PredefinedDatabases.SQLITE.toString())) {
+            Path path = Path.of(System.getProperty("user.dir"));
+            File file = new File(path+"/sqlite/data.db");
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            try {
+                sqliteManager = new SqliteManager(path+"/sqlite/data.db");
+            } catch (SQLException | InterruptedException e) {
+                logger.error("Could not correctly set up Sqlite database {}", e.getMessage());
+            }
+        }
+        if (Objects.equals(config.use_predefined_database_sets(), PredefinedDatabases.NONE.toString())) {
+            String url = config.custom_url();
+            DatabaseType type = DatabaseType.valueOf(config.custom_type());
+            String username = config.custom_username();
+            String password = config.custom_password();
+
+            logger.warn("CUSTOM DATABASE - You have enabled an unfinished feature. For further process please deactivate the feature until it is supported");
+
+            //Later database code goes here
         }
     }
 
     private static void loadConfigs() {
+
         try {
-            new TranslationLoader();
+            new ConfigLoader(configurations);
         } catch (Exception e) {
-            logger.error("Could not load translation to memory {}", e.getMessage());
+            logger.error("Could not add config to load list {}", e.getMessage());
         }
         try {
-            new ConfigLoader();
+            new TranslationLoader(configurations);
         } catch (Exception e) {
-            logger.error("Could not load config to memory {}", e.getMessage());
+            logger.error("Could not add translation to load list {}", e.getMessage());
         }
+        configurations.write();
     }
 
     private static void initializeRegulars() {
@@ -125,17 +157,11 @@ public class ScpTools {
         }
     }
 
-    private static void initializeCedModApi() throws IOException {
-        String instanceUrl = LoadedConfigurations.getConfigMemoryLoad().cedmod_instance_url();
-        String apiKey = LoadedConfigurations.getConfigMemoryLoad().cedmod_api_key();
-
+    private static void initializeCedModApi() {
+        ConfigGroup config = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
+        String instanceUrl = config.cedmod_instance_url();
+        String apiKey = config.cedmod_api_key();
         cedModApi = new CedModApi(instanceUrl, apiKey);
-
-        //Little reminder for later testing
-
-        //double hours = cedModApi.getActivity("user", "time") / 3600;
-        //System.out.println(hours > 50.0);
-        //System.out.println(hours);
     }
 
     private static void initializeConfigs() {
@@ -166,12 +192,16 @@ public class ScpTools {
         }
     }
 
-    private static void noticeOfDepartureCheckups(JDA api) {
-        ConfigGroup config = LoadedConfigurations.getConfigMemoryLoad();
+    private static void runCheckups(JDA api) {
+        ConfigGroup config = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
         RepeatTask.repeatWithScheduledExecutorService(
                 CheckNoticeOfDeparture.runNoticeOfDepartureCheck(api),
                 config.notice_of_departure_check_rate(),
                 TimeUnit.valueOf(config.notice_of_departure_check_type()));
+        RepeatTask.repeatWithScheduledExecutorService(
+                CheckPlaytime.runPlaytimeCheck(api),
+                1, TimeUnit.HOURS
+        );
     }
 
     public static ConfigManager getConfigManager() {return configManager;}
@@ -181,4 +211,6 @@ public class ScpTools {
     public static LoggerManager getLoggerManager() {return loggerManager;}
     public static RegularsManager getRegularsManager() {return regularsManager;}
     public static CedModApi getCedModApi() {return cedModApi;}
+    public static Guild getGuild() {return guild;}
+    public static ConfigurationLoadManager getConfigurations() {return configurations;}
 }
