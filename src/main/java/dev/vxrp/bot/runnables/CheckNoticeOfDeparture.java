@@ -3,12 +3,13 @@ package dev.vxrp.bot.runnables;
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.database.sqlite.SqliteManager;
 import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.builder.StatsBuilder;
 import dev.vxrp.util.colors.ColorTool;
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.ButtonGroup;
-import dev.vxrp.util.configuration.records.NoticeOfDepartureGroup;
-import dev.vxrp.util.records.NoticeOfDeparture;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
+import dev.vxrp.util.configuration.records.translation.ButtonGroup;
+import dev.vxrp.util.configuration.records.translation.NoticeOfDepartureGroup;
+import dev.vxrp.util.records.noticeOfDeparture.NoticeOfDeparture;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
@@ -24,8 +25,9 @@ import java.util.stream.Collectors;
 
 public class CheckNoticeOfDeparture  {
     private final static Logger logger = LoggerFactory.getLogger(CheckNoticeOfDeparture.class);
-    private static final NoticeOfDepartureGroup translations = LoadedConfigurations.getNoticeOfDepartureMemoryLoad();
-    private static final ButtonGroup buttons = LoadedConfigurations.getButtonMemoryLoad();
+    private static final NoticeOfDepartureGroup translations = (NoticeOfDepartureGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.NOTICE_OF_DEPARTURE_GROUP);
+    private static final ButtonGroup buttons = (ButtonGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.BUTTON_GROUP);
+    private static final ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
 
     public static Runnable runNoticeOfDepartureCheck(JDA api) {
         return () -> {
@@ -44,17 +46,16 @@ public class CheckNoticeOfDeparture  {
 
                     if (now.isEqual(end_date) || now.isAfter(end_date)) {
                         api.awaitReady().retrieveUserById(notice.id()).queue(user -> {
-                            logger.info(ColorTool.useCustomColorCodes("&reset&&gold&----------------------- &reset&&red&AUTOMATIC DETECTION UNIT&reset&&gold& ----------------------&reset&"));
                             logger.info("Found invalid notice of departure");
                             MessageChannel channel = api.getTextChannelById(notice.channel_id());
 
                             assert channel != null;
 
-                            channel.retrieveMessageById(notice.message_id()).onErrorMap(e -> null).queue(message -> {
+                            channel.retrieveMessageById(notice.message_id()).onErrorMap(_ -> null).queue(message -> {
                                 if (message == null) {
                                     logger.info("Found that message of notice does not exist... opting for deletion of database entry");
                                 } else {
-                                    List<String> pingRoles = LoadedConfigurations.getConfigMemoryLoad().notice_of_departure_roles_access_notices()
+                                    List<String> pingRoles = config.notice_of_departure_roles_access_notices()
                                             .stream()
                                             .map(id -> "<@&" + id + ">")
                                             .collect(Collectors.toList());
@@ -87,7 +88,6 @@ public class CheckNoticeOfDeparture  {
                                 } catch (SQLException | InterruptedException e) {
                                     throw new RuntimeException(e);
                                 }
-                                logger.info(ColorTool.apply(DCColor.GOLD, "------------------------------------------------------------------------"));
                             });
                         });
                     }

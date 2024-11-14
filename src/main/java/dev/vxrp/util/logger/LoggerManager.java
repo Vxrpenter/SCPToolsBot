@@ -1,8 +1,11 @@
 package dev.vxrp.util.logger;
 
+import dev.vxrp.bot.ScpTools;
 import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.colors.ColorTool;
-import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
+import dev.vxrp.util.configuration.records.translation.LoggingGroup;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
@@ -20,6 +23,8 @@ import java.util.Objects;
 
 public class LoggerManager {
     private final static Logger logger = LoggerFactory.getLogger(LoggerManager.class);
+    private final static ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
+    private final static LoggingGroup logging = (LoggingGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.LOGGING_GROUP);
     private final JDA api;
 
     public LoggerManager(JDA api) {
@@ -31,7 +36,7 @@ public class LoggerManager {
             MessageEmbed info = new EmbedBuilder()
                     .setColor(color)
                     .setAuthor(user.getName(), null, thumbnailURL)
-                    .setDescription(LoadedConfigurations.getLoggingMemoryLoad().single_message_log_template()
+                    .setDescription(logging.single_message_log_template()
                             .replace("%action%", action)
                             .replace("%message%", message.strip().replace("```", "<@CODEBLOCK>"))).build();
 
@@ -41,7 +46,7 @@ public class LoggerManager {
             MessageEmbed info = new EmbedBuilder()
                     .setColor(color)
                     .setAuthor(user.getName(), null, thumbnailURL)
-                    .setDescription(LoadedConfigurations.getLoggingMemoryLoad().single_message_log_template()
+                    .setDescription(logging.single_message_log_template()
                             .replace("%action%", action)
                             .replace("%message%", ColorTool.useCustomColorCodes("&red&&bold&Too long for Embed...&reset&"))).build();
             Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info, new EmbedBuilder().setColor(color).setDescription(message).build()).queue();
@@ -62,7 +67,7 @@ public class LoggerManager {
         MessageEmbed info = new EmbedBuilder()
                 .setColor(color)
                 .setAuthor(user.getGlobalName(), null, user.getAvatarUrl())
-                .setDescription(LoadedConfigurations.getLoggingMemoryLoad().close_log_template()
+                .setDescription(logging.close_log_template()
                         .replace("%action%", action)).build();
 
         Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
@@ -72,14 +77,14 @@ public class LoggerManager {
         MessageEmbed info = new EmbedBuilder()
                 .setColor(color)
                 .setAuthor(user.getGlobalName(), null, user.getAvatarUrl())
-                .setDescription(LoadedConfigurations.getLoggingMemoryLoad().close_log_template()
+                .setDescription(logging.close_log_template()
                         .replace("%action%", action)).build();
 
         Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
     }
 
     public void databaseLog(String sqlStatement, String output, String channelID, Color color) throws InterruptedException {
-        if (!LoadedConfigurations.getConfigMemoryLoad().do_database_logging()) return;
+        if (!config.do_database_logging()) return;
         String time = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
         String date = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
 
@@ -88,33 +93,12 @@ public class LoggerManager {
                 .setAuthor("Database Manager",
                         "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/java/dev/vxrp/bot/database/sqlite/SqliteManager.java",
                         "https://toppng.com/uploads/preview/database-database-icon-11563207079binxarjjyp.png")
-                .setDescription(LoadedConfigurations.getLoggingMemoryLoad().database_log_template()
+                .setDescription(logging.database_log_template()
                         .replace("%statement%", sqlStatement)
                         .replace("%output%", output))
                 .setFooter("Statement sent on the "+date+" at "+time+"h")
                 .build();
 
         Objects.requireNonNull(api.awaitReady().getTextChannelById(channelID)).sendMessageEmbeds(info).queue();
-    }
-
-    private String levelConverter(Level level) {
-        switch (level) {
-            case TRACE -> {
-                return ColorTool.apply(DCColor.DARK_GRAY, "TRACE");
-            }
-            case DEBUG -> {
-                return ColorTool.apply(DCColor.GOLD, "DEBUG");
-            }
-            case INFO -> {
-                return ColorTool.apply(DCColor.LIGHT_BLUE, "INFO");
-            }
-            case WARN -> {
-                return ColorTool.apply(DCColor.PINK, "WARN");
-            }
-            case ERROR -> {
-                return ColorTool.apply(DCColor.RED, "ERROR");
-            }
-        }
-        return ColorTool.apply(DCColor.TEAL, level.toString());
     }
 }

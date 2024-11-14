@@ -1,14 +1,15 @@
 package dev.vxrp.bot.events.modals;
 
 import dev.vxrp.bot.ScpTools;
+import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.Enums.TicketIdentifier;
 import dev.vxrp.util.colors.ColorTool;
-import dev.vxrp.util.configuration.records.ButtonGroup;
-import dev.vxrp.util.configuration.records.ConfigGroup;
+import dev.vxrp.util.configuration.records.translation.ButtonGroup;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.Enums.DCColor;
 import dev.vxrp.util.builder.StatsBuilder;
-import dev.vxrp.util.configuration.LoadedConfigurations;
-import dev.vxrp.util.configuration.records.SupportGroup;
+import dev.vxrp.util.configuration.records.translation.LoggingGroup;
+import dev.vxrp.util.configuration.records.translation.SupportGroup;
 import dev.vxrp.util.logger.LoggerManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -27,9 +28,10 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Support {
-    private static final SupportGroup translations = LoadedConfigurations.getSupportTranslationMemoryLoad();
-    private static final ConfigGroup configs = LoadedConfigurations.getConfigMemoryLoad();
-    private static final ButtonGroup buttons = LoadedConfigurations.getButtonMemoryLoad();
+    private static final SupportGroup translations = (SupportGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.SUPPORT_GROUP);
+    private static final ConfigGroup configs = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
+    private static final ButtonGroup buttons = (ButtonGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.BUTTON_GROUP);
+    private static final LoggingGroup logging = (LoggingGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.LOGGING_GROUP);
 
     public static void createSupportTicket(ModalInteractionEvent event, Logger logger) {
         Member member = event.getMember();
@@ -77,7 +79,7 @@ public class Support {
 
                     try {
                         new LoggerManager(event.getJDA()).creationLog(event.getUser(),
-                                LoadedConfigurations.getLoggingMemoryLoad().support_ticket_create_logging_action()
+                                logging.support_ticket_create_logging_action()
                                         .replace("%id%", textChannel.getId())
                                         .replace("%channel%", "<#"+textChannel.getId()+">")
                                         .replace("%user%", "<@"+userID+">")
@@ -85,7 +87,7 @@ public class Support {
                                         .replace("%creator%", "<@"+userID+">")
                                         .replace("%handler%", "None")
                                         .replace("%date%", date),
-                                LoadedConfigurations.getConfigMemoryLoad().ticket_logging_channel_id(),
+                                configs.ticket_logging_channel_id(),
                                 Color.GREEN);
                         ScpTools.getSqliteManager().getTicketsTableManager().addTicket(textChannel.getId(), TicketIdentifier.SUPPORT, date, userID, null);
                     } catch (SQLException | InterruptedException e) {

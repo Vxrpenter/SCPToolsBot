@@ -1,4 +1,4 @@
-package dev.vxrp.util.records;
+package dev.vxrp.util.records.regular;
 
 import com.google.gson.JsonObject;
 

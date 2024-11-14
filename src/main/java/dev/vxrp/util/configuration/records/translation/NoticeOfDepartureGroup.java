@@ -1,4 +1,4 @@
-package dev.vxrp.util.configuration.records;
+package dev.vxrp.util.configuration.records.translation;
 
 public record NoticeOfDepartureGroup(String first_title, String first_body, String modal_title, String modal_first_title,
                                      String modal_first_placeholder, String modal_second_title, String modal_second_placeholder,

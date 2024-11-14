@@ -1,5 +1,9 @@
 # The bot token get from here https://discord.com/developers/
 token: ""
+guild_id: ""
+
+# Translations
+load_translation: "en_us"
 
 # Should debug mode be activated?
 debug: false
@@ -10,6 +14,20 @@ advanced_debug: false
 activity_type: "PLAYING"
 # The text being displayed
 activity_content: "/help"
+
+database:
+  # Which predefined database set should be used, choose between [NONE, SQLITE]
+  # ** WARNING ** if you set this to none, and no other database option is given the process will crash on startup
+  use_predefined_database_sets: "SQLITE"
+  # ** WARNING ** When using custom, you may experience issues. This is a work in progress feature, so it is unstable, please report problems on the GitHub page (currently not working)
+  # Which type of custom db should be used: [SQLITE, MySQL, Postgresql, MongoDB, MariaDB]
+  custom_type: ""
+  # Here you can input a custom database url to connect to. This will only work when setting predefined to NONE
+  custom_url: ""
+  # Here you have input the custom db password
+  custom_username: ""
+  # Here you have to enter the password of your db session
+  custom_password: ""
 
 rules:
   # Pastebin id of the SCP:SL ruleset
@@ -22,8 +40,6 @@ logging:
   do_logging: true
   # Channel id of the ticket logging channel
   ticket_logging_channel_id: ""
-  # Channel id of the ticket backup logging channel
-  ticket_backup_logging_channel_id: ""
   # Channel id of notice of departure logging channel
   notice_of_departures_logging_channel_id: ""
   # Channel id of database logging channel. Will log all database activity to a discord channel

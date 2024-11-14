@@ -1,6 +1,7 @@
 package dev.vxrp.bot.events;
 
-import dev.vxrp.util.configuration.LoadedConfigurations;
+import dev.vxrp.util.Enums.LoadIndex;
+import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import org.slf4j.Logger;
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.events.messages.Support;
@@ -12,10 +13,11 @@ import java.sql.SQLException;
 
 public class MessageListener extends ListenerAdapter {
     private final Logger logger = LoggerFactory.getLogger(MessageListener.class);
+    private final ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         if (event.getAuthor().isBot()) return;
-        if (!LoadedConfigurations.getConfigMemoryLoad().do_logging()) return;
+        if (!config.do_logging()) return;
 
         if (ScpTools.getSqliteManager().getTicketsTableManager().existsId(event.getMessage().getChannelId())) {
             try {

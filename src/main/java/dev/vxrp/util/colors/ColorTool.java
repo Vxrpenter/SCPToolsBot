@@ -3,6 +3,12 @@ package dev.vxrp.util.colors;
 import dev.vxrp.util.Enums.DCColor;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ColorTool {
 
     private static final String filler = "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
@@ -12,6 +18,7 @@ public class ColorTool {
             "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
             "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
             "\u200E \u200E \u200E \u200E \u200E \u200E \u200E";
+
     public static final String DARK_GRAY = "\u001B[2;30m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
@@ -63,6 +70,13 @@ public class ColorTool {
     }
     @NotNull
     public static String useCustomColorCodes(String text) {
+        Matcher matcher = Pattern.compile("(?<=&filler<).+?(?=>&|$)").matcher(text);
+        while (matcher.find()) {
+            int count = Math.round((float) Integer.parseInt(matcher.group()) /2);
+
+            text = text.replace("&filler<"+matcher.group()+">&", "\u200E ".repeat(Math.max(0, count)));
+        }
+
         return text
                 .replace("&dark_gray&", "\u001B[2;30m")
                 .replace("&red&", "\u001B[2;31m")

@@ -8,27 +8,32 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 public class TranslationManager {
-    public final Path configPath = Paths.get("./translations/translation.yml");
 
     public TranslationManager(){
-        File tokenFile = new File(configPath.toString());
-        if (!tokenFile.exists()) {
-            InputStream inputStream = getClass().getResourceAsStream("/translations/translations.yml");
-            try (FileOutputStream os = new FileOutputStream(tokenFile)) {
-                assert inputStream != null;
-                os.write(inputStream.readAllBytes());
-                inputStream.close();
-            } catch (IOException e) {
-                e.setStackTrace(e.getStackTrace());
+        List<String> files = Arrays.asList("de_de", "en_us");
+
+        for (String file : files) {
+            File translation = new File("./translations/" + file+".yml");
+            if (!translation.exists()) {
+                InputStream inputStream = getClass().getResourceAsStream("/translations/"+file+".yml");
+                try (FileOutputStream os = new FileOutputStream(translation)) {
+                    assert inputStream != null;
+                    os.write(inputStream.readAllBytes());
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.setStackTrace(e.getStackTrace());
+                }
             }
         }
     }
-    private YamlConfiguration getYamlConfig() {
-        final File file = new File(configPath.toString());
+    private YamlConfiguration getYamlConfig(String fileName) {
+        final File file = new File(Path.of("./translations/"+fileName+".yml").toString());
         return YamlConfiguration.loadConfiguration(file);
     }
 
-    public String getString(String key) {return getYamlConfig().getString(key);}
+    public String getString(String fileName, String key) {return getYamlConfig(fileName).getString(key);}
 }

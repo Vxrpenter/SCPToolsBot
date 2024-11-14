@@ -1,4 +1,4 @@
-package dev.vxrp.util.records;
+package dev.vxrp.util.records.ticket;
 
 import dev.vxrp.util.Enums.TicketIdentifier;
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/dev/vxrp/bot/database/queue/QueueManager.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/dev/vxrp/bot/database/sqlite/NoticeOfDepartureTableManager.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/dev/vxrp/bot/database/sqlite/RegularsTableManager.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/dev/vxrp/bot/database/sqlite/SqliteManager.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/dev/vxrp/bot/database/sqlite/TicketsTableManager.java" dialect="GenericSQL" />
+  </component>
+</project>
