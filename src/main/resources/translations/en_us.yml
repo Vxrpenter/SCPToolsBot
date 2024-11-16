@@ -257,7 +257,7 @@ regulars:
   data_modal_title: "Enter SteamId and Steam Username"
   data_modal_first_title: "SteamId"
   data_modal_first_placeholder: "What is your steamId?"
-  data_modal_second_title: "Steam Username"
+  data_modal_second_title: "Cedmod Username"
   data_modal_second_placeholder: "What is your username?"
 
   sync_group_select_message: "Please choose group to continue."
