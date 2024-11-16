@@ -17,15 +17,15 @@
 support:
   first_title: "Erstelle eine Support-Ticket"
   first_body: "
-                        Wenn du ein Problem hast, das du nicht lösen kannst, dann frage unser Team.\n
+                        Wenn du ein Problem hast, das du nicht lösen kannst, dann frage unser Team\n
 
                         **Bearbeitungsdauer:**
                         Die Bearbeitung deines Tickets kann bis zu 24 Stunden dauern.
                         
-                        **Regeln für Ticketerstellung**
-                        Hinweis: Alle Serverregeln gelten auch im Support.
-                        1. Tickets dürfen nicht aus Spaß oder aus einem anderen lustigen Hintergrund erstellt werden.
-                        2. Gehe nicht in Streitigkeiten mit dem Support und bleibe beim Thema.
+                        **Regeln für Ticketerstellung**\n
+                        `Hinweis: Alle Serverregeln gelten auch im Support.`\n
+                        1. Tickets dürfen nicht aus Spaß oder aus einem anderen lustigen Hintergrund erstellt werden.\n
+                        2. Gehe nicht in Streitigkeiten mit dem Support und bleibe beim Thema.\n
                         3. Der Support sollte nicht länger als 48 Stunden auf deine Antworten warten und kann anschließend dein Ticket schließen.
                         "
   second_title: "Stelle einen Entbannungsantrag."
@@ -62,7 +62,7 @@ support:
 
   ticket_support_title: "%name%"
   ticket_support_body: "
-                        Support-Ticket wird überprüft. Eine Antwort von unserem Moderationsteam kann ein wenig Zeit in Anspruch nehmen.\n
+                        Support-Ticket wird überprüft. Eine Antwort von unserem Moderationsteam kann ein wenig Zeit in Anspruch nehmen\n
 
                         __**Ticket-Betreff:**__\n
                         ```%subject%```
@@ -91,7 +91,7 @@ support:
 
   ticket_unban_message_accepted: "
                         Dein Entsperrungsantrag unter der Steam ID (siehe unten) wurde akzeptiert. Du kannst jetzt den Server wieder betreten, ohne irgendwelche Strafen befürchten zu müssen.\n
-                        Wir entschuldigen uns für die Unannehmlichkeiten und hoffen, dass du unseren Server wieder genießen wirst.\n
+                        Wir entschuldigen uns für die Unannehmlichkeiten und hoffen, dass du unseren Server wieder genießen wirst\n
 
                         __**Steam ID:**__\n
                         ||%steamID%||\n
@@ -100,8 +100,8 @@ support:
                         ```%reason%```
                         "
   ticket_unban_message_dismissed: "
-                        Dein Entbannungsantrag unter der Steam-ID (siehe unten) wurde abgelehnt. Du kannst dieses Verbot nicht erneut anfechten, es sei denn, die Serververwaltung gibt ihre Zustimmung\n
-                        oder wenn dieser Fall gelöst ist und ein anderer auftritt.
+                        Dein Entbannungsantrag unter der Steam-ID (siehe unten) wurde abgelehnt. Du kannst dieses Verbot nicht erneut anfechten, es sei denn, die Serververwaltung gibt ihre Zustimmung
+                        oder wenn dieser Fall gelöst ist und ein anderer auftritt\n
 
                         __**Steam-ID:**__\n
                         ||%steamID%||
@@ -109,7 +109,7 @@ support:
                         __**Ablehnungsgrund:**__\n
                         ```%reason%```
                         "
-  ticket_unban_message_sent: "Die Antwort wurde gesendet und entsprechende Maßnahmen wurden ergriffen."
+  ticket_unban_message_sent: "Die Antwort wurde gesendet und entsprechende Maßnahmen wurden ergriffen"
 
 #
 # Notice of Departure
@@ -117,7 +117,7 @@ support:
 notice_of_departure:
   first_title: "Abmeldung für Discord und Secret Lab."
   first_body: "
-                        Wenn du weißt, dass Sie für eine bestimmte Zeit nicht online sein können, dann füll bitte dieses Formular aus.\n
+                        Wenn du weißt, dass Sie für eine bestimmte Zeit nicht online sein können, dann füll bitte dieses Formular aus\n
 
                         **Zu gebende Informationen:**\n
                         - Wie lange wirst du abwesend sein, FORMAT: **[dd.MM.yyyy]**\n
@@ -135,7 +135,7 @@ notice_of_departure:
   ticket_title: "Abmeldung - #%number%"
   # Wenn du dies: ```ansi ``` dann funktionert das color rendering nicht
   ticket_body: " 
-                        Wenn dieser Benutzer akzeptiert wird, wird der Benutzer und das Datum in die Datenbank aufgenommen und du wirst benachrichtigt, wenn es abläuft.\n
+                        Wenn dieser Benutzer akzeptiert wird, wird der Benutzer und das Datum in die Datenbank aufgenommen und du wirst benachrichtigt, wenn es abläuft\n
 
                         __**Zeitspanne**__\n
                         ```ansi\n
@@ -149,7 +149,7 @@ notice_of_departure:
   ticket_created: "Deine Abmeldung bald bearbeited"
 
   ticket_accepted: "
-                        Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen.\n
+                        Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n
 
                         __**Akzeptanzzeitraum:**__\n
                         ```%timeframe%```
@@ -158,7 +158,7 @@ notice_of_departure:
                         ```%reason%```
                         "
   ticket_dismissed: "
-                         Deine Abmeldung wurde abgelehnt. Es ist dir nicht gestattet, freizunehmen. Falls du dennoch musst, sprech bitte mit einem höhergestellten Mitglied über das Verlassen des Teams.\n
+                         Deine Abmeldung wurde abgelehnt. Es ist dir nicht gestattet, freizunehmen. Falls du dennoch musst, sprech bitte mit einem höhergestellten Mitglied über das Verlassen des Teams\n
 
                         __**Abweisungsgrund:**__\n
                         ```%reason%```
@@ -167,7 +167,7 @@ notice_of_departure:
 
   notice_title: "Abmeldung - %user%"
   notice_body: "
-                        Diese Abmeldung kann jederzeit durch Drücken des Buttons unten widerrufen werden. Es wird auch regelmäßig überprüft, ob die Abmeldung noch gültig ist oder nicht.\n
+                        Diese Abmeldung kann jederzeit durch Drücken des Buttons unten widerrufen werden. Es wird auch regelmäßig überprüft, ob die Abmeldung noch gültig ist oder nicht\n
 
                         __**Akzeptiert von:**__\n
                         %user%
@@ -181,13 +181,13 @@ notice_of_departure:
   notice_footer: "Erstellt am %date% um %time%Uhr"
 
   notice_ended: "
-                        Deine Abmeldung ist hiermit vorbei \n
+                        Deine Abmeldung ist hiermit vorbei\n
                         
                         __**Zeit:**__\n
                         ```%timeframe%```
                         "
   notice_revoked: "
-                        Deine Abmeldung wurde zurückgezogen \n
+                        Deine Abmeldung wurde zurückgezogen\n
                         
                         __**Zeit:**__\n
                         ```%timeframe%```
@@ -223,7 +223,7 @@ notice_of_departure:
 regulars:
   first_title: "Aktiviere Stammspieler Synchronisierung"
   first_body: "
-                        Diese Funktion ermöglicht es dir, deine Server-Spielzeit mit dem Server zu synchronisieren und dir Rollen für bestimmte Zeitrahmen zu geben.
+                        Diese Funktion ermöglicht es dir, deine Server-Spielzeit mit dem Server zu synchronisieren und dir Rollen für bestimmte Zeitrahmen zu geben
                         "
   group_template: "   
                         # %group%\n
@@ -241,7 +241,7 @@ regulars:
                         "
   second_title: "Persönliche Stammspieler Einstellungen"
   second_body: "   
-                        Dies sind deine persönlichen Stammspieler Einstellungen. Nur du kannst diese Nachricht sehen und die Einstellungen ändern.
+                        Dies sind deine persönlichen Stammspieler Einstellungen. Nur du kannst diese Nachricht sehen und die Einstellungen ändern\n
 
                         Gruppe: **%group%**
                         
