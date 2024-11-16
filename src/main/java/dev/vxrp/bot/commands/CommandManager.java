@@ -5,6 +5,8 @@ import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.converter.PermissionListConverter;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
@@ -20,33 +22,35 @@ public class CommandManager {
     private final static Logger logger = LoggerFactory.getLogger(CommandManager.class);
     private final static ConfigGroup configs = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
 
-    public CommandManager(JDA api) {
-        List<String> activeCommands = configs.commands();
-        List<String> helpDefaultPermissions = configs.command_setting_help_default_permissions();
-        List<String> templateDefaultPermissions = configs.command_settings_template_default_permissions();
+    final JDA api;
+    final List<CommandData> commands;
 
-        List<CommandData> commands = new ArrayList<>();
-        if (activeCommands.contains("help")) {
-            commands.add(Commands.slash("help", configs.command_settings_help_description())
-                    .setDefaultPermissions(DefaultMemberPermissions.enabledFor(new PermissionListConverter(helpDefaultPermissions).convert())));
+    public CommandManager(JDA api) {
+        this.api = api;
+        this.commands = new ArrayList<>();
+    }
+
+    public CommandManager addCommand(String commandName, String description, List<Permission> permissions , OptionData options) {
+        if (options != null) {
+            commands.add(Commands.slash(commandName, description)
+                    .setDefaultPermissions(DefaultMemberPermissions.enabledFor(permissions))
+                    .addOptions(options));
         } else {
-            logger.warn("Command help is deactivated, it is highly recommended to leave this command on");
+            commands.add(Commands.slash(commandName, description)
+                    .setDefaultPermissions(DefaultMemberPermissions.enabledFor(permissions)));
         }
-        if (activeCommands.contains("template")) {
-            commands.add(Commands.slash("template", configs.command_settings_template_descriptions())
-                    .setDefaultPermissions(DefaultMemberPermissions.enabledFor(new PermissionListConverter(templateDefaultPermissions).convert()))
-                    .addOptions(
-                            new OptionData(OptionType.STRING, "template", "What template are you referring to", true)
-                                    .addChoice("rules", "rules")
-                                    .addChoice("support", "support")
-                                    .addChoice("notice of departure", "notice_of_departure")
-                                    .addChoice("regulars", "regulars")
-                                    .addChoice("adminpanel", "adminpanel")
-                    ));
+
+        return this;
+    }
+
+    public void build() {
+        List<String> activeCommands = configs.commands();
+
+        for (CommandData command : commands) {
+            if (activeCommands.contains(command.getName())) continue;
+            api.updateCommands().addCommands(command).queue();
+            logger.info("Initialized command: {}", command.getName());
         }
-        for (String command : activeCommands) {
-            api.updateCommands().addCommands(commands).queue();
-            logger.info("Initialized command: {}", command);
-        }
+        api.addEventListener(new CommandListener());
     }
 }

@@ -14,10 +14,7 @@ import java.util.List;
 
 public class HelpCommand extends ListenerAdapter {
 
-    @Override
-    public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-        if (!event.getName().equals("help")) return;
-
+    public static void pasteHelp(SlashCommandInteractionEvent event) {
         event.replyEmbeds(pages().getFirst())
                 .setActionRow(actionRow(0)).queue();
     }

@@ -19,49 +19,41 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class TemplateCommand extends ListenerAdapter {
-    private final Logger logger = LoggerFactory.getLogger(TemplateCommand.class);
-    private final ButtonGroup buttons = (ButtonGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.BUTTON_GROUP);
-    private final ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
+    private final static Logger logger = LoggerFactory.getLogger(TemplateCommand.class);
+    private final static ButtonGroup buttons = (ButtonGroup) ScpTools.getConfigurations().getTranslation(LoadIndex.BUTTON_GROUP);
+    private final static ConfigGroup config = (ConfigGroup) ScpTools.getConfigurations().getConfig(LoadIndex.CONFIG_GROUP);
+    private final static String noCedmodError = "Cedmod compatibility is not active, so this template is disabled";
 
-    @Override
-    public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-        if (!event.getFullCommandName().equals("template")) return;
-        if (event.getOption("template") == null) return;
-        String template = Objects.requireNonNull(event.getOption("template")).getAsString();
 
-        if (template.equals("rules")) {
-            event.reply("Choose the rule pasting option")
-                    .addActionRow(
-                            Button.success("paste_rules", buttons.paste_rules()),
-                            Button.danger("update_rules", buttons.update_rules())
-                    )
-                    .setEphemeral(true).queue();
-        }
-        if (template.equals("support")) {
-            Support.pasteSupportTemplate(event);
-        }
-        String noCedmodError = "Cedmod compatibility is not active, so this template is disabled";
-        if (template.equals("notice_of_departure")) {
-            if (config.cedmod_active()) {
-                NoticeOfDeparture.pasteDeRegisterTemplate(event);
-            } else {
-                event.reply(noCedmodError).setEphemeral(true).queue();
-                logger.warn("An action of /template notice_of_departure was cancelled do to cedmod compatibility not being active");
-            }
-        }
-        if  (template.equals("regulars")) {
-            if (config.cedmod_active()) {
-                try {
-                    Regulars.pasteRegularTemplate(event);
-                } catch (IOException e) {
-                    logger.error("Ran into error while pasting regular template {}", e.getMessage());
-                }
-            } else {
-                event.reply(noCedmodError).setEphemeral(true).queue();
-                logger.warn("An action of /template regulars was cancelled do to cedmod compatibility not being active");
-            }
-        }
-        logger.info("User {} executed command template with args '{}'", ColorTool.apply(DCColor.GREEN, event.getUser().getGlobalName()), template);
+    public static void templateRules(SlashCommandInteractionEvent event) {
+        event.reply("Choose the rule pasting option")
+                .addActionRow(
+                        Button.success("paste_rules", buttons.paste_rules()),
+                        Button.danger("update_rules", buttons.update_rules())
+                )
+                .setEphemeral(true).queue();
     }
-
+    public static void templateSupport(SlashCommandInteractionEvent event) {
+        Support.pasteSupportTemplate(event);
+    }
+    public static void templateNoticeOfDeparture(SlashCommandInteractionEvent event) {
+        if (config.cedmod_active()) {
+            NoticeOfDeparture.pasteDeRegisterTemplate(event);
+        } else {
+            event.reply(noCedmodError).setEphemeral(true).queue();
+            logger.warn("An action of /template notice_of_departure was cancelled do to cedmod compatibility not being active");
+        }
+    }
+    public static void templateRegulars(SlashCommandInteractionEvent event) {
+        if (config.cedmod_active()) {
+            try {
+                Regulars.pasteRegularTemplate(event);
+            } catch (IOException e) {
+                logger.error("Ran into error while pasting regular template {}", e.getMessage());
+            }
+        } else {
+            event.reply(noCedmodError).setEphemeral(true).queue();
+            logger.warn("An action of /template regulars was cancelled do to cedmod compatibility not being active");
+        }
+    }
 }
