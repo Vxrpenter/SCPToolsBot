@@ -254,7 +254,7 @@ regulars:
                         Time: **%time%**
                         "
 
-  data_modal_title: "Enter SteamId and Steam Username"
+  data_modal_title: "Enter SteamId and Cedmod Username"
   data_modal_first_title: "SteamId"
   data_modal_first_placeholder: "What is your steamId?"
   data_modal_second_title: "Cedmod Username"
