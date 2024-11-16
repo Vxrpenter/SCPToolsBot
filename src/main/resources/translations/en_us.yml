@@ -251,14 +251,12 @@ regulars:
                         
                         Role: **%role%**\n
                         
-                        Time: **%time%**
+                        Time: **%time%h**
                         "
 
   data_modal_title: "Enter SteamId and Cedmod Username"
   data_modal_first_title: "SteamId"
   data_modal_first_placeholder: "What is your steamId?"
-  data_modal_second_title: "Cedmod Username"
-  data_modal_second_placeholder: "What is your username?"
 
   sync_group_select_message: "Please choose group to continue."
   sync_select_message: "Regulars are now automatically synced with your account"

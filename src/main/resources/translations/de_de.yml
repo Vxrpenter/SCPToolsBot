@@ -243,18 +243,16 @@ regulars:
   second_body: "   
                         Dies sind deine persönlichen Stammspieler Einstellungen. Nur du kannst diese Nachricht sehen und die Einstellungen ändern\n
 
-                        Gruppe: **%group%**
+                        Gruppe: **%group%**\n
                         
-                        Rolle: **%role%**
+                        Rolle: **%role%**\n
                         
-                        Zeit: **%time%**
+                        Zeit: **%time%h**\n
                         "
 
   data_modal_title: "Gib deine SteamId und deinen Cedmod Username"
   data_modal_first_title: "SteamId"
   data_modal_first_placeholder: "Was ist deine steamId?"
-  data_modal_second_title: "Cedmod Benutzername"
-  data_modal_second_placeholder: "Was ist dein Benutername?"
 
   sync_group_select_message: "Bitte wähle eine Gruppe aus, um fortzufahren."
   sync_select_message: "Stammspieler rollen werden jetzt automatisch synchronisiert"
@@ -430,7 +428,7 @@ buttons:
   dismiss_unban_ticket: "Ticket ablehnen"
   settings_unban_ticket: "Einstellungen"
 
-  file_notice_of_departure: "Entbannungsantrag stellen"
+  file_notice_of_departure: "Abmeldung anfragen"
   accept_notice_of_departure_ticket: "Ticket annehmen"
   dismiss_notice_of_departure_ticket: "Ticket ablehnen"
   revoke_notice_of_departure: "Abmeldung zurückziehen"

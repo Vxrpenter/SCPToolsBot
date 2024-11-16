@@ -85,8 +85,6 @@ public class TranslationLoader {
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.DATA_MODAL_TITLE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.DATA_MODAL_FIRST_TITLE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.DATA_MODAL_FIRST_PLACEHOLDER)),
-                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.DATA_MODAL_SECOND_TITLE)),
-                ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.DATA_MODAL_SECOND_PLACEHOLDER)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_GROUP_SELECT_MESSAGE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_SELECT_MESSAGE)),
                 ColorTool.useCustomColorCodes(translationManager.getString(translation, TRANSLATIONS.REGULARS.SYNC_DEACTIVATED)),
