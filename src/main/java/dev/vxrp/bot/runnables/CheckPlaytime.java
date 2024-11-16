@@ -14,7 +14,9 @@ import dev.vxrp.util.records.actionQueue.RegularActionQueue;
 import dev.vxrp.util.records.regular.Regular;
 import dev.vxrp.util.records.regular.RegularConfig;
 import dev.vxrp.util.records.regular.RegularMember;
+import dev.vxrp.util.records.regular.RoleHierarchy;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +25,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class CheckPlaytime {
@@ -55,6 +56,7 @@ public class CheckPlaytime {
 
                     String group_role = regularsTableManager.getRegularMember(element.id()).group_role();
                     List<RegularConfig> config = null;
+                    List<RoleHierarchy> roles = new ArrayList<>();
                     for (Regular regular : regularsManager.getRegulars()) {
                         if (group_role != null) {
                             if (regular.use_custom_role() && regular.id().equals(group_role)) {
@@ -66,24 +68,35 @@ public class CheckPlaytime {
                     }
 
                     assert config != null;
-                    for (RegularConfig regularConfig : config) {
-                        int time = regularConfig.playtime_requirements()*1000;
+                    for (int i = 0; i < config.size(); i++) {
+                        roles.add(new RoleHierarchy(i, ScpTools.getGuild().getRoleById(config.get(i).id())));
+                    }
 
-                        if (dataTime+activity >= time) {
-                            Role role = ScpTools.getGuild().getRoleById(regularConfig.id());
+                    for (int i = 0; i < config.size(); i++) {
+                        RegularConfig configElement = config.get(i);
+                        int time = configElement.playtime_requirements();
 
+                        int timeOfPlayer = (int) Math.round(regularsTableManager.getRegularMember(element.id()).time()/3600);
+
+                        if (timeOfPlayer >= time) {
+                            System.out.println(timeOfPlayer+" >"+time);
+                            Role role = ScpTools.getGuild().getRoleById(configElement.id());
+
+                            int finalI = i;
                             ScpTools.getGuild().retrieveMemberById(element.id()).queue(member -> {
                                 try {
                                     if (!member.getRoles().contains(role)) {
                                         assert role != null;
                                         if (Objects.equals(regularsTableManager.getRegularMember(element.id()).role(), role.getId())) return;
                                         regularsTableManager.updateRole(element.id(), role.getId());
-                                        ScpTools.getGuild().addRoleToMember(member, role).queue();
+                                        ScpTools.getGuild().addRoleToMember(member, role).queue(_ -> {
+                                            roles.forEach(x -> {removeIfContainsAndNotCurrentIteratorRole(member, x, role, finalI);});
+                                        });
 
                                         logger.info("Applied role: {} to user: {} after reaching the timeframe of: {}h",
                                                 ColorTool.apply(DCColor.RED, role.getName()),
                                                 ColorTool.apply(DCColor.RED, member.getUser().getGlobalName()),
-                                                ColorTool.apply(DCColor.GREEN, String.valueOf(time/1000)));
+                                                ColorTool.apply(DCColor.GREEN, String.valueOf(time)));
                                     } else {
                                         if (regularsTableManager.getRegularMember(element.id()).role() == null) {
                                             assert role != null;
@@ -99,7 +112,6 @@ public class CheckPlaytime {
                             });
                         }
                     }
-
                     queueManager.updateProcessed(element.id(), true);
                     count++;
                     TimeUnit.SECONDS.sleep(2);
@@ -112,11 +124,29 @@ public class CheckPlaytime {
         };
     }
 
+    private static void removeIfContainsAndNotCurrentIteratorRole(Member member, RoleHierarchy roleHierarchy, Role currentRole, int currentIndex) {
+        logger.trace("---------------------------------------------------------------------------------------");
+        logger.trace("Fired for: {}", ColorTool.apply(DCColor.GREEN, roleHierarchy.role().getName()));
+        logger.trace("Hierarchy Index: {}", ColorTool.apply(DCColor.GOLD, String.valueOf(roleHierarchy.hierarchyPlace())));
+        logger.trace("Current Index: {}", ColorTool.apply(DCColor.GOLD, String.valueOf(currentIndex)));
+        logger.trace("Current Role: {}", ColorTool.apply(DCColor.GREEN, currentRole.getName()));
+        logger.trace("Is not currentRole: {}", ColorTool.apply(DCColor.GREEN, String.valueOf(roleHierarchy.role() != currentRole)));
+        logger.trace("Current index is higher than place: {}", ColorTool.apply(DCColor.GREEN, String.valueOf(currentIndex > roleHierarchy.hierarchyPlace())));
+        logger.trace("---------------------------------------------------------------------------------------");
+
+        if (roleHierarchy.role() != currentRole && currentIndex > roleHierarchy.hierarchyPlace()) {
+            ScpTools.getGuild().removeRoleFromMember(member, roleHierarchy.role()).queue();
+            logger.info("Removed role : {} from user: {} because of higher existing role",
+                    roleHierarchy.role().getName(), member.getUser().getGlobalName());
+        }
+    }
+
     private static void writeToQueue() throws SQLException, InterruptedException {
         List<RegularMember> members;
         members = regularsTableManager.getEveryRegularMember();
 
         for (RegularMember member : members) {
+            System.out.println(queueManager.getProcessed(member.id()));
             if (!queueManager.exists(member.id()) && !regularsTableManager.getRegularMember(member.id()).deactivated()) {
                 write(member);
             } else if (queueManager.getProcessed(member.id())) {

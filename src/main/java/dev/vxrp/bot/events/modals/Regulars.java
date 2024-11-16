@@ -24,11 +24,10 @@ public class Regulars {
         }
         String steamId = Objects.requireNonNull(event.getValue("regular_steamId")).getAsString();
         // steamId for later implementations
-        String username = Objects.requireNonNull(event.getValue("regular_username")).getAsString();
         User user = event.getUser();
 
         ScpTools.getSqliteManager().getRegularsTableManager().addRegular(
-                user.getId(), username, roleId, null, 0, null
+                user.getId(), steamId, roleId, null, 0, null
         );
         event.reply(translations.sync_select_message()).setEphemeral(true).queue();
     }

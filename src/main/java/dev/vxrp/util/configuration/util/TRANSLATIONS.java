@@ -84,8 +84,6 @@ public class TRANSLATIONS {
         public static final String DATA_MODAL_TITLE = "regulars.data_modal_title";
         public static final String DATA_MODAL_FIRST_TITLE = "regulars.data_modal_first_title";
         public static final String DATA_MODAL_FIRST_PLACEHOLDER = "regulars.data_modal_first_placeholder";
-        public static final String DATA_MODAL_SECOND_TITLE = "regulars.data_modal_second_title";
-        public static final String DATA_MODAL_SECOND_PLACEHOLDER = "regulars.data_modal_second_placeholder";
 
         public static final String SYNC_GROUP_SELECT_MESSAGE = "regulars.sync_group_select_message";
         public static final String SYNC_SELECT_MESSAGE = "regulars.sync_select_message";

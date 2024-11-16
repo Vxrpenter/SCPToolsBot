@@ -69,9 +69,10 @@ public class CedModApi {
         }
         return null;
     }
+
     public double getActivity(String userID, String days) throws IOException {
         Request request = new Request.Builder()
-                .url(instanceURL+"/Api/Player/Query?q="+userID+"&max=10&page=0&staffOnly=false&create=false&sortLabel=id_field&activityMin="+days+"&basicStats=true&moderationData=false")
+                .url(instanceURL+"/Api/Player/Query?q="+userID+"@steam&max=10&page=0&staffOnly=false&create=false&sortLabel=id_field&activityMin="+days+"&basicStats=true&moderationData=false")
                 .header("Authorization", "Bearer "+apiKey)
                 .build();
 

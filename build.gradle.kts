@@ -7,7 +7,7 @@ plugins {
 
 application.mainClass = "dev.vxrp.bot.ScpTools" //
 group = "dev.vxrp"
-version= "0.3.0"
+version= "0.3.1"
 
 val jdaVersion = "5.2.0" //
 
