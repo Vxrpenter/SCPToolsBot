@@ -3,8 +3,6 @@ package dev.vxrp.bot;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import dev.vxrp.bot.commands.CommandManager;
-import dev.vxrp.bot.commands.help.HelpCommand;
-import dev.vxrp.bot.commands.templates.TemplateCommand;
 import dev.vxrp.bot.config.managers.configuration.ColorConfigManager;
 import dev.vxrp.bot.config.managers.configuration.ConfigManager;
 import dev.vxrp.bot.config.managers.regulars.RegularsManager;
@@ -26,12 +24,15 @@ import dev.vxrp.util.configuration.configs.ConfigLoader;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.configuration.translations.TranslationLoader;
 import dev.vxrp.util.configuration.util.CONFIG;
+import dev.vxrp.util.converter.PermissionListConverter;
 import dev.vxrp.util.general.RepeatTask;
 import dev.vxrp.util.logger.LoggerManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.slf4j.Logger;
@@ -77,8 +78,6 @@ public class ScpTools {
                 .setActivity(Activity.of(activityType, activityContent))
                 .disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
                 .addEventListeners(
-                        new TemplateCommand(),
-                        new HelpCommand(),
                         new ButtonListener(),
                         new ModalListener(),
                         new MessageListener(),
@@ -88,12 +87,13 @@ public class ScpTools {
         initializeSqlite();
         logger.info("Initialized Listeners");
 
-        new CommandManager(api);
         guild = api.awaitReady().getGuildById(configManager.getString("guild_id"));
         if (guild == null) {
             logger.error("GUILD ID NULL... SHUTTING DOWN");
             System.exit(1);
         }
+
+        initializeCommands(api);
         runCheckups(api);
     }
 
@@ -202,6 +202,20 @@ public class ScpTools {
                 CheckPlaytime.runPlaytimeCheck(api),
                 1, TimeUnit.HOURS
         );
+    }
+
+    private static void initializeCommands(JDA api) {
+        ConfigGroup config = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
+
+        new CommandManager(api)
+                .addCommand("help", config.command_settings_template_descriptions(), new PermissionListConverter(config.command_setting_help_default_permissions()).convert(), null)
+                .addCommand("template", config.command_settings_template_descriptions(), new PermissionListConverter(config.command_settings_template_default_permissions()).convert(),
+                        new OptionData(OptionType.STRING, "template", "What template are you referring to", true)
+                                .addChoice("rules", "rules")
+                                .addChoice("support", "support")
+                                .addChoice("notice of departure", "notice_of_departure")
+                                .addChoice("regulars", "regulars"))
+                .build();
     }
 
     public static ConfigManager getConfigManager() {return configManager;}
