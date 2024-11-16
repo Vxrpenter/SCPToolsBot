@@ -94,12 +94,16 @@ public class QueueManager {
         List<ActionQueue> actionQueues = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM actionqueue")) {
             try (ResultSet resultSet = statement.executeQuery()) {
-                actionQueues.add(new ActionQueue(
-                        resultSet.getString("id"),
-                        resultSet.getString("command"),
-                        resultSet.getString("time_added"),
-                        resultSet.getBoolean("processed")
-                ));
+
+
+                while (resultSet.next()) {
+                    actionQueues.add(new ActionQueue(
+                            resultSet.getString("id"),
+                            resultSet.getString("command"),
+                            resultSet.getString("time_added"),
+                            resultSet.getBoolean("processed")
+                    ));
+                }
             }
         }
         return actionQueues;
