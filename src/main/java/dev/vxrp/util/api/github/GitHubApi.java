@@ -45,7 +45,7 @@ public class GitHubApi {
 
         Properties properties = new Properties();
 
-        try (InputStream versionPropertiesStream = GitHubApi.class.getResourceAsStream("/vxrp/dev/version.properties")) {
+        try (InputStream versionPropertiesStream = GitHubApi.class.getResourceAsStream("/dev/vxrp/version.properties")) {
             if (versionPropertiesStream == null) {
                 throw new IllegalStateException("Version properties file does not exist");
             }

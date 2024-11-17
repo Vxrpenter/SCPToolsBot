@@ -1,15 +1,16 @@
 plugins {
     application
+    java
+    kotlin("jvm") version "2.0.20"
     id("com.gradleup.shadow") version("8.3.3")
-    id("java")
 }
 
 
-application.mainClass = "dev.vxrp.bot.ScpTools" //
+application.mainClass = "dev.vxrp.MainKt"
 group = "dev.vxrp"
 version= "0.3.1"
 
-val jdaVersion = "5.2.0" //
+val jdaVersion = "5.2.1"
 
 repositories {
     mavenCentral()
@@ -24,14 +25,17 @@ dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_22
+    targetCompatibility = JavaVersion.VERSION_22
+}
+
 val createVersionProperties by tasks.registering(WriteProperties::class) {
     val filePath = sourceSets.main.map {
-        it.output.resourcesDir!!.resolve("vxrp/dev/version.properties")
+        it.output.resourcesDir!!.resolve("dev/vxrp/version.properties")
     }
     destinationFile = filePath
 
     property("version", project.version.toString())
 }
-tasks.classes {
-    dependsOn(createVersionProperties)
-}
+
