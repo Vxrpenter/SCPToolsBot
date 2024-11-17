@@ -2,6 +2,7 @@ plugins {
     application
     java
     kotlin("jvm") version "2.0.20"
+    kotlin("plugin.serialization") version "2.0.20"
     id("com.gradleup.shadow") version("8.3.3")
 }
 
@@ -17,6 +18,7 @@ repositories {
 }
 
 dependencies {
+    implementation("com.charleskorn.kaml:kaml:0.65.0")
     implementation("org.xerial:sqlite-jdbc:3.45.1.0")
     implementation("net.dv8tion:JDA:$jdaVersion")
     implementation("ch.qos.logback:logback-classic:1.5.6")
