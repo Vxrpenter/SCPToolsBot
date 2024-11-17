@@ -8,12 +8,12 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ColorConfigManager {
-    public final Path configPath = Paths.get("./configs/colorconfig.yml");
+    public final Path configPath = Paths.get("configs/color-config.yml");
 
     public ColorConfigManager(){
         File tokenFile = new File(configPath.toString());
         if (!tokenFile.exists()) {
-            InputStream inputStream = getClass().getResourceAsStream("/configs/colorconfig.yml");
+            InputStream inputStream = getClass().getResourceAsStream("/configs/color-config.yml");
             try (FileOutputStream os = new FileOutputStream(tokenFile)) {
                 assert inputStream != null;
                 os.write(inputStream.readAllBytes());
