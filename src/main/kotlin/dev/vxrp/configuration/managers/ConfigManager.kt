@@ -1,5 +1,7 @@
 package dev.vxrp.configuration.managers
 
+import com.charleskorn.kaml.Yaml
+import dev.vxrp.configuration.loaders.Config
 import org.slf4j.LoggerFactory
 import java.nio.file.Files
 import java.nio.file.Path
@@ -27,5 +29,13 @@ class ConfigManager {
                 }
             }
         }
+    }
+
+    fun query(dir: String, file: Path): Config {
+        val currentFile = Path("$dir$file").toFile();
+        logger.debug("Query configuration file {}{}", dir, file)
+        val result = Yaml.default.decodeFromString(Config.serializer(), currentFile.readText())
+        logger.debug("Query of configuration file {}{} completed", dir, file)
+        return result
     }
 }
