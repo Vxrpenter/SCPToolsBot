@@ -10,6 +10,24 @@
   
 </div>
 
+<div align="center">
+  <h1>Refactor Information</h1>
+
+  
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" width="100" height="100"/><img src="https://img.icons8.com/?size=100&id=11759&format=png&color=FFFFFF" width="100" height="100"/><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" width="100" height="100"/>
+
+  ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/w/Vxrpenter/SCPToolsBot/kotlin_refactor?style=for-the-badge&color=%239141ac&link=https%3A%2F%2Fgithub.com%2FVxrpenter%2FSCPToolsBot%2Ftree%2Fkotlin_refactor&logo=kotlin)
+  ![GitHub branch status](https://img.shields.io/github/checks-status/Vxrpenter/SCPToolsBot/kotlin_refactor?style=for-the-badge&logo=kotlin&color=%239141ac)
+
+
+  <h4>SCPToolsBot is getting a full kotlin refactor. This means that there will be no more content updates until the refactor is done. All issues that are created will be fixed normally but there will be no new features.</h4>
+</div>
+
+> [!TIP]
+  > If you want to keep up with updates then you can look at [refactor branch](https://github.com/Vxrpenter/SCPToolsBot/tree/kotlin_refactor) the where new commits and changes are pushed to. The master branch will remain as is for now and before merging there will be a branch created to keep as the old java version
+
+---
+
 ## What is ScpToolsBot
 ScpToolsBot is a discord bot application written in Java for Scp Secret Laboratory discord servers. It includes support functions, cedmod api syncing including community and team management features
 
