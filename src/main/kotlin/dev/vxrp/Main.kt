@@ -16,9 +16,8 @@ fun main() {
     val translationManager = TranslationManager()
 
     initializeConfiguration(configManager, System.getProperty("user.dir"))
+    initializeTranslations(translationManager)
     val config = configManager.query(System.getProperty("user.dir"), "/configs/config.yml")
-
-    initializeTranslations(translationManager, config)
     val translation = translationManager.query(System.getProperty("user.dir"), config.loadTranslation)
 
     ScpToolsBot(config, translation)
@@ -32,7 +31,7 @@ fun initializeConfiguration(configManager: ConfigManager, dir : String) {
     configManager.create(dir, configs)
 }
 
-fun initializeTranslations(translationManager: TranslationManager, config: Config) {
+fun initializeTranslations(translationManager: TranslationManager) {
     val translations = ArrayList<Path>()
     translations.add(Path("/lang/en_us.yml"))
     translations.add(Path("/lang/de_de.yml"))
