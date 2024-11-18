@@ -1,5 +1,7 @@
 package dev.vxrp
 
+import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.configuration.managers.ConfigManager
 import dev.vxrp.configuration.managers.TranslationManager
 import org.slf4j.LoggerFactory
@@ -10,23 +12,36 @@ fun main() {
     val logger = LoggerFactory.getLogger("dev.vxrp.Main")
     logger.info("Starting up...")
 
-    initializeConfiguration()
+    val configManager = ConfigManager()
+    val translationManager = TranslationManager()
+
+    initializeConfiguration(configManager, System.getProperty("user.dir"))
+    val config = configManager.query(System.getProperty("user.dir"), "/configs/config.yml")
+
+    initializeTranslations(translationManager, config)
+    val translation = translationManager.query(System.getProperty("user.dir"), config.loadTranslation)
+
+    ScpToolsBot(config, translation)
 }
 
-fun initializeConfiguration() {
-    val dir = System.getProperty("user.dir")
-
+fun initializeConfiguration(configManager: ConfigManager, dir : String) {
     val configs = ArrayList<Path>()
     configs.add(Path("/configs/config.yml"))
     configs.add(Path("/configs/color-config.yml"))
 
-    val configManager = ConfigManager()
     configManager.create(dir, configs)
+}
 
+fun initializeTranslations(translationManager: TranslationManager, config: Config) {
     val translations = ArrayList<Path>()
-    translations.add(Path("/translations/en_us.yml"))
-    translations.add(Path("/translations/de_de.yml"))
+    translations.add(Path("/lang/en_us.yml"))
+    translations.add(Path("/lang/de_de.yml"))
 
-    val translationManager = TranslationManager()
-    translationManager.create(dir, translations)
+    translationManager.create(System.getProperty("user.dir"), translations)
+}
+
+class ScpToolsBot(val config: Config, val translation: Translation) {
+    init {
+        println(translation.buttons.textRulesPaste)
+    }
 }

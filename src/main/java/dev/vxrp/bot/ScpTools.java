@@ -165,7 +165,7 @@ public class ScpTools {
     }
 
     private static void initializeConfigs() {
-        List<String> folders = Arrays.asList("configs", "translations", "sqlite");
+        List<String> folders = Arrays.asList("configs", "lang", "sqlite");
         for (String folder : folders) {
             String folderPath = Paths.get(folder).toString();
             new File(folderPath).mkdirs();

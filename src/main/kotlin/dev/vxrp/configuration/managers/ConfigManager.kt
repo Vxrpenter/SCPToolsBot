@@ -31,7 +31,7 @@ class ConfigManager {
         }
     }
 
-    fun query(dir: String, file: Path): Config {
+    fun query(dir: String, file: String): Config {
         val currentFile = Path("$dir$file").toFile();
         logger.debug("Query configuration file {}{}", dir, file)
         val result = Yaml.default.decodeFromString(Config.serializer(), currentFile.readText())
