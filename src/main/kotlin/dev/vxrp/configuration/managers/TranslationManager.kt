@@ -1,5 +1,7 @@
 package dev.vxrp.configuration.managers
 
+import com.charleskorn.kaml.Yaml
+import dev.vxrp.configuration.loaders.Translation
 import org.slf4j.LoggerFactory
 import java.nio.file.Files
 import java.nio.file.Path
@@ -9,7 +11,7 @@ class TranslationManager {
     private val logger = LoggerFactory.getLogger(TranslationManager::class.java)
 
     fun create(dir: String, files: List<Path>) {
-        Files.createDirectories(Path("$dir/translations/"))
+        Files.createDirectories(Path("$dir/lang/"))
 
         for (file in files) {
             val content = TranslationManager::class.java.getResourceAsStream(file.toString())
@@ -27,5 +29,13 @@ class TranslationManager {
                 }
             }
         }
+    }
+
+    fun query(dir: String, lang: String): Translation {
+        val currentFile = Path("$dir/lang/$lang.yml").toFile();
+        logger.debug("Query translation file {}{}", dir, currentFile)
+        val result = Yaml.default.decodeFromString(Translation.serializer(), currentFile.readText())
+        logger.debug("Query of translation file {}{} completed", dir, currentFile)
+        return result
     }
 }

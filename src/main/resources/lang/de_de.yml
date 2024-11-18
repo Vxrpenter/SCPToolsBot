@@ -11,12 +11,10 @@
 # Benutze &filler& um eine embed line zu füllen, benutze &filler<count>& um die Zeichenanzahl zu bestimmen
 #
 
-#
-# Support
-#
-support:
-  first_title: "Erstelle eine Support-Ticket"
-  first_body: "
+SUPPORT:
+
+  EMBED_TEMPLATE_SUPPORT_TITLE: "Erstelle eine Support-Ticket"
+  EMBED_TEMPLATE_SUPPORT_BODY: "
                         Wenn du ein Problem hast, das du nicht lösen kannst, dann frage unser Team\n
 
                         **Bearbeitungsdauer:**
@@ -28,8 +26,8 @@ support:
                         2. Gehe nicht in Streitigkeiten mit dem Support und bleibe beim Thema.\n
                         3. Der Support sollte nicht länger als 48 Stunden auf deine Antworten warten und kann anschließend dein Ticket schließen.
                         "
-  second_title: "Stelle einen Entbannungsantrag."
-  second_body: "
+  EMBED_TEMPLATE_UNBAN_TITLE: "Stelle einen Entbannungsantrag."
+  EMBED_TEMPLATE_UNBAN_BODY: "
                         Wenn du gesperrt wurdest, aber denkst, dass es nicht gerechtfertigt ist, reiche bitte einen Entbannungsantrag ein\n
                         
                         **Bearbeitungszeit:**
@@ -42,26 +40,26 @@ support:
                         - Grund, warum du gesperrt wurdest
                         - Grund, warum du entbannt werden möchtest
                         "
-  modal_support_title: "Support Ticket"
-  modal_support_first_title: "Frage"
-  modal_support_first_placeholder: "Was ist deine Frage?"
-  modal_support_second_title: "Erklärung"
-  modal_support_second_placeholder: "Erklär worum es dabei genau geht."
+  MODAL_SUPPORT_TITLE: "Support Ticket"
+  MODAL_SUPPORT_SUBJECT_TITLE: "Frage"
+  MODAL_SUPPORT_SUBJECT_PLACEHOLDER: "Was ist deine Frage?"
+  MODAL_SUPPORT_EXPLANATION_TITLE: "Erklärung"
+  MODAL_SUPPORT_EXPLANATION_PLACEHOLDER: "Erklär worum es dabei genau geht."
 
-  modal_unban_title: "Unban Ticket"
-  modal_unban_first_title: "SteamID"
-  modal_unban_first_placeholder: "Was ist deine steamID?"
-  modal_unban_second_title: "Grund"
-  modal_unban_second_placeholder: "Grund der in deiner ban message genannt wurde."
-  modal_unban_third_title: "Grund dich zu entbannen"
-  modal_unban_third_placeholder: "Wieso solltest du entbannt werden?"
+  MODAL_UNBAN_TITLE: "Unban Ticket"
+  MODAL_UNBAN_STEAMID_TITLE: "SteamID"
+  MODAL_UNBAN_STEAMID_PLACEHOLDER: "Was ist deine steamID?"
+  MODAL_UNBAN_REASON_TITLE: "Grund"
+  MODAL_UNBAN_REASON_PLACEHOLDER: "Grund der in deiner ban message genannt wurde."
+  MODAL_UNBAN_REASON_TO_UNBAN_TITLE: "Grund dich zu entbannen"
+  MODAL_UNBAN_REASON_TO_UNBAN_PLACEHOLDER: "Wieso solltest du entbannt werden?"
 
-  modal_reason_action_title: "Aktions Grund"
-  modal_reason_action_first_title: "Grund"
-  modal_reason_action_first_placeholder: "Wieso willst du diese Aktion durchführen?"
+  MODAL_REASON_ACTION_TITLE: "Aktions Grund"
+  MODAL_REASON_ACTION_REASON_TITLE: "Grund"
+  MODAL_REASON_ACTION_REASON_PLACEHOLDER: "Wieso willst du diese Aktion durchführen?"
 
-  ticket_support_title: "%name%"
-  ticket_support_body: "
+  EMBED_TICKET_SUPPORT_TITLE: "%name%"
+  EMBED_TICKET_SUPPORT_BODY: "
                         Support-Ticket wird überprüft. Eine Antwort von unserem Moderationsteam kann ein wenig Zeit in Anspruch nehmen\n
 
                         __**Ticket-Betreff:**__\n
@@ -70,11 +68,11 @@ support:
                         __**Inhalt des Tickets:**__\n
                         ```%body%```
                         "
-  ticket_support_footer: "Erstellt am %date% um %time% Uhr"
-  ticket_support_created: "Dein ticket wurde erstellt - %channel%"
+  EMBED_TICKET_SUPPORT_FOOTER: "Erstellt am %date% um %time% Uhr"
+  EMBED_TICKET_SUPPORT_CREATED: "Dein ticket wurde erstellt - %channel%"
 
-  ticket_unban_title: "%name%"
-  ticket_unban_body: "
+  EMBED_UNBAN_TITLE: "%name%"
+  EMBED_UNBAN_BODY: "
                         Entbannungsantrag wird bearbeited.\n
                         
                         __**Steam ID:**__\n
@@ -86,10 +84,10 @@ support:
                         __**Begründung für eine Entbannung:**__\n
                         ```%reasoning%```
                         "
-  ticket_unban_footer: "Erstellt am %date% um %time% Uhr"
-  ticket_unban_created: "Ihre Entbannungsanfrage wurde bearbeitet."
+  EMBED_UNBAN_FOOTER: "Erstellt am %date% um %time% Uhr"
+  EMBED_UNBAN_CREATED: "Ihre Entbannungsanfrage wurde bearbeitet."
 
-  ticket_unban_message_accepted: "
+  EMBED_UNBAN_MESSAGE_ACCEPTED: "
                         Dein Entsperrungsantrag unter der Steam ID (siehe unten) wurde akzeptiert. Du kannst jetzt den Server wieder betreten, ohne irgendwelche Strafen befürchten zu müssen.\n
                         Wir entschuldigen uns für die Unannehmlichkeiten und hoffen, dass du unseren Server wieder genießen wirst\n
 
@@ -99,7 +97,7 @@ support:
                         __**Akzeptierungsgrund:**__\n
                         ```%reason%```
                         "
-  ticket_unban_message_dismissed: "
+  EMBED_UNBAN_MESSAGE_DISMISSED: "
                         Dein Entbannungsantrag unter der Steam-ID (siehe unten) wurde abgelehnt. Du kannst dieses Verbot nicht erneut anfechten, es sei denn, die Serververwaltung gibt ihre Zustimmung
                         oder wenn dieser Fall gelöst ist und ein anderer auftritt\n
 
@@ -109,14 +107,12 @@ support:
                         __**Ablehnungsgrund:**__\n
                         ```%reason%```
                         "
-  ticket_unban_message_sent: "Die Antwort wurde gesendet und entsprechende Maßnahmen wurden ergriffen"
+  MESSAGE_UNBAN_SENT: "Die Antwort wurde gesendet und entsprechende Maßnahmen wurden ergriffen"
 
-#
-# Notice of Departure
-#
-notice_of_departure:
-  first_title: "Abmeldung für Discord und Secret Lab."
-  first_body: "
+NOTICE_OF_DEPARTURE:
+
+  EMBED_TEMPLATE_TITLE: "Abmeldung für Discord und Secret Lab."
+  EMBED_TEMPLATE_BODY: "
                         Wenn du weißt, dass Sie für eine bestimmte Zeit nicht online sein können, dann füll bitte dieses Formular aus\n
 
                         **Zu gebende Informationen:**\n
@@ -126,15 +122,16 @@ notice_of_departure:
                         Jeder Zeitraum über 1 Jahr wird nicht akzeptiert und du wirst gebeten, das Team zu verlassen
                         "
 
-  modal_title: "Abmeldung stellen"
-  modal_first_title: "Wie lange bist du weg?"
-  modal_first_placeholder: "wie lange, bitt im format [dd.MM.yyyy]"
-  modal_second_title: "Erklärung"
-  modal_second_placeholder: "Wieso wirst du weg sein? [keine details]"
+  MODAL_TITLE: "Abmeldung stellen"
+  MODAL_TIME_TITLE: "Wie lange bist du weg?"
+  MODAL_TIME_PLACEHOLDER: "wie lange, bitt im format [dd.MM.yyyy]"
+  MODAL_EXPLANATION_TITLE: "Erklärung"
+  MODAL_EXPLANATION_PLACEHOLDER: "Wieso wirst du weg sein? [keine details]"
 
-  ticket_title: "Abmeldung - #%number%"
-  # Wenn du dies: ```ansi ``` dann funktionert das color rendering nicht
-  ticket_body: " 
+  EMBED_DESCISION_TITLE: "Abmeldung - #%number%"
+
+  # Wenn du dies entfernst: ```ansi ``` dann funktionert das color rendering nicht
+  EMBED_DESCISION_BODY: " 
                         Wenn dieser Benutzer akzeptiert wird, wird der Benutzer und das Datum in die Datenbank aufgenommen und du wirst benachrichtigt, wenn es abläuft\n
 
                         __**Zeitspanne**__\n
@@ -145,10 +142,10 @@ notice_of_departure:
                         __**Grund:**__\n
                         ```%reason%```
                         "
-  ticket_footer: "Erstellt am %date% um %time% Uhr"
-  ticket_created: "Deine Abmeldung bald bearbeited"
+  EMBED_DESCISION_FOOTER: "Erstellt am %date% um %time% Uhr"
+  MESSAGE_DESCISION_CREATED: "Deine Abmeldung bald bearbeited"
 
-  ticket_accepted: "
+  EMBED_ACCEPTED: "
                         Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n
 
                         __**Akzeptanzzeitraum:**__\n
@@ -157,16 +154,16 @@ notice_of_departure:
                         __**Akzeptanzgrund:**__\n
                         ```%reason%```
                         "
-  ticket_dismissed: "
+  EMBED_DISMISSED: "
                          Deine Abmeldung wurde abgelehnt. Es ist dir nicht gestattet, freizunehmen. Falls du dennoch musst, sprech bitte mit einem höhergestellten Mitglied über das Verlassen des Teams\n
 
                         __**Abweisungsgrund:**__\n
                         ```%reason%```
                         "
-  ticket_message_sent: "Your answer was sent and actions corresponding to it have been taken"
+  MESSAGE_DESCISION_SENT: "Your answer was sent and actions corresponding to it have been taken"
 
-  notice_title: "Abmeldung - %user%"
-  notice_body: "
+  EMBED_NOTICE_TITLE: "Abmeldung - %user%"
+  EMBED_NOTICE_BODY: "
                         Diese Abmeldung kann jederzeit durch Drücken des Buttons unten widerrufen werden. Es wird auch regelmäßig überprüft, ob die Abmeldung noch gültig ist oder nicht\n
 
                         __**Akzeptiert von:**__\n
@@ -178,15 +175,15 @@ notice_of_departure:
                         __**Akzeptanzgrund:**__\n
                         ```%reason%```
                         "
-  notice_footer: "Erstellt am %date% um %time%Uhr"
+  EMBED_NOTICE_FOOTER: "Erstellt am %date% um %time%Uhr"
 
-  notice_ended: "
+  EMBED_ENDED: "
                         Deine Abmeldung ist hiermit vorbei\n
                         
                         __**Zeit:**__\n
                         ```%timeframe%```
                         "
-  notice_revoked: "
+  EMBED_REVOKED: "
                         Deine Abmeldung wurde zurückgezogen\n
                         
                         __**Zeit:**__\n
@@ -195,9 +192,9 @@ notice_of_departure:
                         __**Aktzeptanz Grund:**__\n
                         ```%reason%```
                         "
-  notice_revoked_message: "Die Abmeldung wurde erfolgreich zurückgezogen"
+  MESSAGE_REVOKED: "Die Abmeldung wurde erfolgreich zurückgezogen"
 
-  notice_ended_replace: "
+  EMBED_ENDED_REPLACE: "
                         ```ansi
                         
                         &reset&&teal&&bold&&underline&Original Data&reset&
@@ -215,17 +212,15 @@ notice_of_departure:
                         ```
                         "
 
-  notice_deleted_ended_replace_message: "Die Abmeldung wurde entfernt"
+  MESSAGE_DELETED_ENDED_REPLACE: "Die Abmeldung wurde entfernt"
 
-#
-# Regulars
-#
-regulars:
-  first_title: "Aktiviere Stammspieler Synchronisierung"
-  first_body: "
+REGULARS:
+
+  EMBED_TEMPLATE_TITLE: "Aktiviere Stammspieler Synchronisierung"
+  EMBED_TEMPLATE_BODY: "
                         Diese Funktion ermöglicht es dir, deine Server-Spielzeit mit dem Server zu synchronisieren und dir Rollen für bestimmte Zeitrahmen zu geben
                         "
-  group_template: "   
+  EMBED_TEMPLATE_GROUP: "   
                         # %group%\n
                         Beschreibung: %description%\n
                         
@@ -233,14 +228,14 @@ regulars:
                         &filler&
                         %roles%
                         "
-  role_template: "   
+  EMBED_TEMPLATE_ROLE: "   
                         Rolle: %role%\n
                         Beschreibung: %description%\n
                         Zeitrahmen: %timeframe%\n
                         
                         "
-  second_title: "Persönliche Stammspieler Einstellungen"
-  second_body: "   
+  EMBED_SETTINGS_TITLE: "Persönliche Stammspieler Einstellungen"
+  EMBED_SETTINGS_BODY: "   
                         Dies sind deine persönlichen Stammspieler Einstellungen. Nur du kannst diese Nachricht sehen und die Einstellungen ändern\n
 
                         Gruppe: **%group%**\n
@@ -250,22 +245,20 @@ regulars:
                         Zeit: **%time%h**\n
                         "
 
-  data_modal_title: "Gib deine SteamId und deinen Cedmod Username"
-  data_modal_first_title: "SteamId"
-  data_modal_first_placeholder: "Was ist deine steamId?"
+  MODAL_DATA_TITLE: "Gib deine SteamId und deinen Cedmod Username"
+  MODAL_DATA_STEAMID_TITLE: "SteamId"
+  MODAL_DATA_STEAMID_PLACEHOLDER: "Was ist deine steamId?"
 
-  sync_group_select_message: "Bitte wähle eine Gruppe aus, um fortzufahren."
-  sync_select_message: "Stammspieler rollen werden jetzt automatisch synchronisiert"
-  sync_deactivated: "Stammspieler-Synchronisierung deaktiviert"
-  sync_reactivated: "Stammspieler-Synchronisierung wieder aktiv"
-  sync_remove_confirm_message: "Möchtest du wirklich die Synchronisierung und alle damit verbundenen Daten entfernen?"
-  sync_removed_message: "Datenbankeintrag und alle weiteren dinge entfernt."
+  MESSAGE_SYNC_GROUP_SELECT: "Bitte wähle eine Gruppe aus, um fortzufahren."
+  MESSAGE_SYNC_SELECT: "Stammspieler rollen werden jetzt automatisch synchronisiert"
+  MESSAGE_SYNC_DEACTIVATED: "Stammspieler-Synchronisierung deaktiviert"
+  MESSAGE_SYNC_REACTIVATED: "Stammspieler-Synchronisierung wieder aktiv"
+  MESSAGE_SYNC_REMOVED_CONFIRM: "Möchtest du wirklich die Synchronisierung und alle damit verbundenen Daten entfernen?"
+  MESSAGE_SYNC_REMOVED_MESSAGE: "Datenbankeintrag und alle weiteren dinge entfernt."
 
-#
-# Logging
-#
-logging:
-  single_message_log_template: "
+LOGGING:
+
+  EMBED_TEMPLATE_SINGLE_MESSAGE_LOG: "
                         %action%\n
                         
                         **Message**\n
@@ -274,13 +267,13 @@ logging:
                         %message%
                         ```
                         "
-  create_log_template: "
+  EMBED_TEMPLATE_CREATE_LOG: "
                         %action%\n
                         "
-  close_log_template: "
+  EMBED_TEMPLATE_CLOSE_LOG: "
                         %action%\n
                         "
-  database_log_template: "
+  EMBED_TEMPLATE_DATABASE_LOG: "
                         **SQL Statement**\n
                         ```sql
                         
@@ -294,7 +287,7 @@ logging:
                         ```
                         "
 
-  support_message_logging_action: "
+  COMPONENT_ACTION_SUPPORT_MESSAGE: "
                         ✏️ Nachricht in Kanal %channel% von %user%\n
                         &filler&
                         Ticket Type - **%type%**\n
@@ -304,7 +297,7 @@ logging:
                         
                         *Ticket erstellt - **%date%***
                         "
-  support_ticket_create_logging_action: "
+  COMPONENT_ACTION_TICKET_CREATE: "
                         ✅ Ticket mit id: **%id%** erstellt %channel% von %user%\n
                         &filler&
                         Ticket Type - **%type%**\n
@@ -314,7 +307,7 @@ logging:
                         
                         *Ticket erstellt - **%date%***
                         "
-  support_ticket_close_logging_action: "
+  COMPONENT_ACTION_SUPPORT_TICKET_CLOSE: "
                         ❌ Ticket mit id: **%id%** geschlossen von %user%\n
                         &filler&
                         Ticket Type - **%type%**\n
@@ -326,7 +319,7 @@ logging:
                         
                         *Ticket erstellt - **%date%***
                         "
-  notice_of_departure_create_logging_action: "
+  COMPONENT_ACTION_NOTICE_OF_DEPARTURE_CREATE: "
                         ✅ Abmeldung mit id: **%id%** erstellt %message% von %user%\n
                         &filler&
                         Ticket Id - **%id%**\n
@@ -341,7 +334,7 @@ logging:
                         %reason%
                         ```
                         "
-  notice_of_departure_dismiss_logging_action: "
+  COMPONENT_ACTION_NOTICE_OF_DEPARTURE_DISMISS: "
                           ❌ Abmeldung mit id: **%id%** ignoriert von %user%\n
                           &filler&
                           Ticket Id - **%id%**\n
@@ -357,7 +350,7 @@ logging:
                           %reason%
                           ```
                           "
-  notice_of_departure_close_logging_action: "
+  COMPONENT_ACTION_NOTICE_OF_DEPARTURE_CLOSE: "
                         ❌ Abmeldung mit id: **%id%** zurückgezogen von %user%\n
                         &filler&
                         Ticket Id - **%id%**\n
@@ -374,68 +367,63 @@ logging:
                         ```
                         "
 
-#
-# Status Bars
-#
-status_bars:
-  ticket_status: "
+STATUS_BARS:
+
+  EMBED_TICKET_STATUS: "
                         ```ansi\n
                         &filler<37>& Ticket Status: %status%&filler<37>&
                         &filler<20>& Handler: %handler% | Creator: %creator%
                         ```
                         "
-  notice_of_departure_accepted: "
+  EMBED_NOTICE_OF_DEPARTURE_ACCEPTED: "
                         ```ansi\n
                         &filler<37>& Ticket Answer: &red&Dismissed&reset&&filler<29>&
                         &filler<25>& Creator: &gold&You&reset& | Handler: %handler%
                         ```
                         "
-  notice_of_departure_dismissed: "
+  EMBED_NOTICE_OF_DEPARTURE_DISMISSED: "
                           ```ansi\n
                           &filler<37>& Ticket Answer: &green&Accepted&reset&&filler<27>&
                           &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
                           ```
                           "
-  notice_of_departure_ended: "
+  EMBED_NOTICE_OF_DEPARTURE_ENDED: "
                               ```ansi\n
                               &filler<27>& Notice of Departure: &red&Ended&reset&&filler<29>&
                               &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
                               ```
                               "
-  notice_of_departure_revoked: "
+  EMBED_NOTICE_OF_DEPARTURE_REVOKED: "
                             ```ansi\n
                             &filler<27>& Notice of Departure: &red&Revoked&reset&&filler<27>&
                             &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
                             ```
                             "
 
-#
-# Buttons
-#
-
 # You can't use color codes for the following button translations
-buttons:
-  paste_rules: "Regeln pasten"
-  update_rules: "Regeln updaten"
+BUTTONS:
 
-  create_new_support_ticket: "Support-Ticket erstellen"
-  close_support_ticket: "Ticket schließen"
-  claim_support_ticket: "Ticket beanspruchen"
-  settings_support_ticket: "Einstellungen"
+  TEXT_RULES_PASTE: "Regeln pasten"
+  TEXT_RULES_UPDATE: "Regeln updaten"
 
-  create_new_unban_ticket: "Entbannungsantrag stellen"
-  accept_unban_ticket: "Ticket annehmen"
-  dismiss_unban_ticket: "Ticket ablehnen"
-  settings_unban_ticket: "Einstellungen"
+  TEXT_SUPPORT_CREATE_NEW_TICKET: "Support-Ticket erstellen"
+  TEXT_SUPPORT_CLOSE_TICKET: "Ticket schließen"
+  TEXT_SUPPORT_CLAIM_TICKET: "Ticket beanspruchen"
+  TEXT_SUPPORT_SETTINGS_TICKET: "Einstellungen"
 
-  file_notice_of_departure: "Abmeldung anfragen"
-  accept_notice_of_departure_ticket: "Ticket annehmen"
-  dismiss_notice_of_departure_ticket: "Ticket ablehnen"
-  revoke_notice_of_departure: "Abmeldung zurückziehen"
-  delete_notice_of_departure: "Komplett löschen"
+  TEXT_UNBAN_CREATE_NEW_TICKET: "Entbannungsantrag stellen"
+  TEXT_UNBAN_ACCEPT_TICKET: "Ticket annehmen"
+  TEXT_UNBAN_DISMISS_TICKET: "Ticket ablehnen"
+  TEXT_UNBAN_SETTINGS_TICKET: "Einstellungen"
 
-  open_regular_menu: "Einstellungen öffnen"
-  sync_regulars: "Stammspieler Synchronisieren"
-  deactivate_sync_regulars: "Synchronisierung deaktivieren"
-  reactivate_sync_regulars: "Synchronisierung aktivieren"
-  remove_sync_regulars: "Synchronisierung entfernen"
+  TEXT_NOTICE_OF_DEPARTURE_FILE: "Abmeldung anfragen"
+  TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Ticket annehmen"
+  TEXT_NOTICE_OF_DEPARTURE_DISMISSED: "Ticket ablehnen"
+  TEXT_NOTICE_OF_DEPARTURE_REVOKED: "Abmeldung zurückziehen"
+  TEXT_NOTICE_OF_DEPARTURE_DELETE: "Komplett löschen"
+
+  TEXT_REGULAR_OPEN_SETTINGS: "Einstellungen öffnen"
+  TEXT_REGULAR_SYNC: "Stammspieler Synchronisieren"
+  TEXT_REGULAR_SYNC_DEACTIVATE: "Synchronisierung deaktivieren"
+  TEXT_REGULAR_SYNC_REACTIVATE: "Synchronisierung aktivieren"
+  TEXT_REGULAR_SYNC_REMOVE: "Synchronisierung entfernen"

@@ -8,7 +8,7 @@ data class Config(val token: String,
                   @SerialName("guild_id")
                   val guildId: String,
                   @SerialName("load_translation")
-                  val loadTranslations: String,
+                  val loadTranslation: String,
                   val debug: Boolean,
                   @SerialName("advanced_debug")
                   val advancedDebug: Boolean,
@@ -17,28 +17,28 @@ data class Config(val token: String,
                   @SerialName("activity_content")
                   val activityContent: String,
                   //database
-                  val database: Database,
+                  val database: ConfigDatabase,
                   //rules
-                  val rules: Rules,
+                  val rules: ConfigRules,
                   //logging
-                  val logging: Logging,
+                  val logging: ConfigLogging,
                   @SerialName("commands")
                   val commands: List<String>,
                   //command-settings
                   @SerialName("command_settings")
-                  val commandSettings: CommandSettings,
+                  val commandSettings: ConfigCommandSettings,
                   //cedmod
-                  val cedmod: Cedmod,
+                  val cedmod: ConfigCedmod,
                   //support-settings
-                  val support: Support,
+                  val support: ConfigSupport,
                   //notice-of-departure
                   @SerialName("notice_of_departure")
-                  val noticeOfDeparture: NoticeOfDeparture,
+                  val noticeOfDeparture: ConfigNoticeOfDeparture,
                   //regulars
-                  val regulars: Regulars)
+                  val regulars: ConfigRegulars)
 
 @Serializable
-data class Database(
+data class ConfigDatabase(
     @SerialName("use_predefined_database_sets")
     val dataUsePredefined: String,
     @SerialName("custom_type")
@@ -51,14 +51,14 @@ data class Database(
     val customPassword: String)
 
 @Serializable
-data class Rules(
+data class ConfigRules(
     @SerialName("pastebin")
     val pastbin: String,
     @SerialName("embed_footer")
     val footer: String)
 
 @Serializable
-data class Logging(
+data class ConfigLogging(
     @SerialName("do_logging")
     val active: Boolean,
     @SerialName("ticket_logging_channel_id")
@@ -71,39 +71,39 @@ data class Logging(
     val databaseChannel: String)
 
 @Serializable
-data class CommandSettings(
-    val help: HelpCommand,
-    val template: TemplateCommand,
+data class ConfigCommandSettings(
+    val help: ConfigHelpCommand,
+    val template: ConfigTemplateCommand,
     @SerialName("notice_of_departure")
-    val noticeOfDeparture: NoticeOfDepartureCommand,
-    val regulars: RegularsCommand,)
+    val noticeOfDeparture: ConfigNoticeOfDepartureCommand,
+    val regulars: ConfigRegularsCommand,)
 
 @Serializable
-data class HelpCommand(
+data class ConfigHelpCommand(
     @SerialName("default_permissions")
     val defaultPermission: List<String>,
     val description: String)
 
 @Serializable
-data class TemplateCommand(
+data class ConfigTemplateCommand(
     @SerialName("default_permissions")
     val defaultPermission: List<String>,
     val description: String)
 
 @Serializable
-data class NoticeOfDepartureCommand(
+data class ConfigNoticeOfDepartureCommand(
     @SerialName("default_permissions")
     val defaultPermission: List<String>,
     val description: String)
 
 @Serializable
-data class RegularsCommand(
+data class ConfigRegularsCommand(
     @SerialName("default_permissions")
     val defaultPermission: List<String>,
     val description: String)
 
 @Serializable
-data class Cedmod(
+data class ConfigCedmod(
     @SerialName("active")
     val active: Boolean,
     @SerialName("instance_url")
@@ -114,7 +114,7 @@ data class Cedmod(
     val mastBanList: String, )
 
 @Serializable
-data class Support(
+data class ConfigSupport(
     @SerialName("roles_access_support_tickets")
     val rolesAccessSupport: List<String>,
     @SerialName("roles_access_unban_tickets")
@@ -123,7 +123,7 @@ data class Support(
     val unbanChannel: String, )
 
 @Serializable
-data class NoticeOfDeparture(
+data class ConfigNoticeOfDeparture(
     @SerialName("decision_channel_id")
     val descisionChannel: String,
     @SerialName("notice_channel_id")
@@ -136,7 +136,7 @@ data class NoticeOfDeparture(
     val checkRate: Int)
 
 @Serializable
-data class Regulars(
+data class ConfigRegulars(
     @SerialName("create_example_configuration")
     val createExample: Boolean,
     @SerialName("only_load_certain_folder")
