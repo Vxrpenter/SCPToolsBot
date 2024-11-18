@@ -2,7 +2,6 @@ package dev.vxrp.bot;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
-import dev.vxrp.bot.commands.CommandManager;
 import dev.vxrp.bot.config.managers.configuration.ColorConfigManager;
 import dev.vxrp.bot.config.managers.configuration.ConfigManager;
 import dev.vxrp.bot.config.managers.regulars.RegularsManager;
@@ -206,16 +205,6 @@ public class ScpTools {
 
     private static void initializeCommands(JDA api) {
         ConfigGroup config = (ConfigGroup) configurations.getConfig(LoadIndex.CONFIG_GROUP);
-
-        new CommandManager(api)
-                .addCommand("help", config.command_settings_template_descriptions(), new PermissionListConverter(config.command_setting_help_default_permissions()).convert(), null)
-                .addCommand("template", config.command_settings_template_descriptions(), new PermissionListConverter(config.command_settings_template_default_permissions()).convert(),
-                        new OptionData(OptionType.STRING, "template", "What template are you referring to", true)
-                                .addChoice("rules", "rules")
-                                .addChoice("support", "support")
-                                .addChoice("notice of departure", "notice_of_departure")
-                                .addChoice("regulars", "regulars"))
-                .build();
     }
 
     public static ConfigManager getConfigManager() {return configManager;}

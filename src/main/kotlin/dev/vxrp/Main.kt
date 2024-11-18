@@ -1,5 +1,6 @@
 package dev.vxrp
 
+import dev.vxrp.bot.BotManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.configuration.managers.ConfigManager
@@ -41,6 +42,6 @@ fun initializeTranslations(translationManager: TranslationManager) {
 
 class ScpToolsBot(val config: Config, val translation: Translation) {
     init {
-        println(translation.buttons.textRulesPaste)
+        BotManager(config)
     }
 }
