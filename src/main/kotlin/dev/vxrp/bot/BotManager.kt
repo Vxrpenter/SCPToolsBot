@@ -14,7 +14,7 @@ class BotManager(val config: Config) {
     }
 
     private fun initializeCommands(api: JDA) {
-        CommandManager(api)
+        CommandManager(api, config)
             .registerCommand(Commands.slash("test1", "test1"))
             .registerCommand(Commands.slash("test2", "test2"))
             .registerCommand(Commands.slash("test3", "test3"))
