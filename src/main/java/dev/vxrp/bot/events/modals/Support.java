@@ -6,7 +6,7 @@ import dev.vxrp.util.Enums.TicketIdentifier;
 import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.configuration.records.translation.ButtonGroup;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.builder.StatsBuilder;
 import dev.vxrp.util.configuration.records.translation.LoggingGroup;
 import dev.vxrp.util.configuration.records.translation.SupportGroup;
@@ -94,7 +94,7 @@ public class Support {
                         throw new RuntimeException(e);
                     }
                 });
-        logger.info("Created new support ticket by user {} - under name {}", ColorTool.apply(DCColor.GREEN, userName), ColorTool.apply(DCColor.RED, name));
+        logger.info("Created new support ticket by user {} - under name {}", ColorTool.apply(DCColor_DEPRECATED.GREEN, userName), ColorTool.apply(DCColor_DEPRECATED.RED, name));
     }
 
     private static EmbedBuilder builder(String title, String body, String footerText, String IconURL, User user) {

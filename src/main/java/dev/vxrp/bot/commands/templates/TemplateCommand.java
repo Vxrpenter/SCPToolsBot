@@ -4,9 +4,7 @@ import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.commands.templates.noticeOfDeparture.NoticeOfDeparture;
 import dev.vxrp.bot.commands.templates.regulars.Regulars;
 import dev.vxrp.bot.commands.templates.support.Support;
-import dev.vxrp.util.Enums.DCColor;
 import dev.vxrp.util.Enums.LoadIndex;
-import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.configuration.records.translation.ButtonGroup;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -16,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class TemplateCommand extends ListenerAdapter {
     private final static Logger logger = LoggerFactory.getLogger(TemplateCommand.class);

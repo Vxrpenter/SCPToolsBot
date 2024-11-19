@@ -2,7 +2,7 @@ package dev.vxrp.bot.commands;
 
 import dev.vxrp.bot.commands.help.HelpCommand;
 import dev.vxrp.bot.commands.templates.TemplateCommand;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.colors.ColorTool;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -37,6 +37,6 @@ public class CommandListener extends ListenerAdapter {
         if  (template.equals("regulars")) {
             TemplateCommand.templateRegulars(event);
         }
-        logger.info("User {} executed command {} with args '{}'", ColorTool.apply(DCColor.GREEN, event.getUser().getGlobalName()), event.getFullCommandName() , template);
+        logger.info("User {} executed command {} with args '{}'", ColorTool.apply(DCColor_DEPRECATED.GREEN, event.getUser().getGlobalName()), event.getFullCommandName() , template);
     }
 }

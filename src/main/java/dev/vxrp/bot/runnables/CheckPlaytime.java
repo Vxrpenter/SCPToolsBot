@@ -6,7 +6,7 @@ import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.config.managers.regulars.RegularsManager;
 import dev.vxrp.bot.database.queue.QueueManager;
 import dev.vxrp.bot.database.sqlite.RegularsTableManager;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.parser.ActionQueueParser;
 import dev.vxrp.util.records.actionQueue.ActionQueue;
@@ -94,9 +94,9 @@ public class CheckPlaytime {
                                         });
 
                                         logger.info("Applied role: {} to user: {} after reaching the timeframe of: {}h",
-                                                ColorTool.apply(DCColor.RED, role.getName()),
-                                                ColorTool.apply(DCColor.RED, member.getUser().getGlobalName()),
-                                                ColorTool.apply(DCColor.GREEN, String.valueOf(time)));
+                                                ColorTool.apply(DCColor_DEPRECATED.RED, role.getName()),
+                                                ColorTool.apply(DCColor_DEPRECATED.RED, member.getUser().getGlobalName()),
+                                                ColorTool.apply(DCColor_DEPRECATED.GREEN, String.valueOf(time)));
                                     } else {
                                         if (regularsTableManager.getRegularMember(element.id()).role() == null) {
                                             assert role != null;
@@ -106,8 +106,8 @@ public class CheckPlaytime {
                                 } catch (SQLException e) {
                                     assert role != null;
                                     logger.error("Could not correctly add roles to the regular database id: {}, role: {}",
-                                            ColorTool.apply(DCColor.RED, element.id()),
-                                            ColorTool.apply(DCColor.RED, role.getName()));
+                                            ColorTool.apply(DCColor_DEPRECATED.RED, element.id()),
+                                            ColorTool.apply(DCColor_DEPRECATED.RED, role.getName()));
                                 }
                             });
                         }
@@ -126,12 +126,12 @@ public class CheckPlaytime {
 
     private static void removeIfContainsAndNotCurrentIteratorRole(Member member, RoleHierarchy roleHierarchy, Role currentRole, int currentIndex) {
         logger.trace("---------------------------------------------------------------------------------------");
-        logger.trace("Fired for: {}", ColorTool.apply(DCColor.GREEN, roleHierarchy.role().getName()));
-        logger.trace("Hierarchy Index: {}", ColorTool.apply(DCColor.GOLD, String.valueOf(roleHierarchy.hierarchyPlace())));
-        logger.trace("Current Index: {}", ColorTool.apply(DCColor.GOLD, String.valueOf(currentIndex)));
-        logger.trace("Current Role: {}", ColorTool.apply(DCColor.GREEN, currentRole.getName()));
-        logger.trace("Is not currentRole: {}", ColorTool.apply(DCColor.GREEN, String.valueOf(roleHierarchy.role() != currentRole)));
-        logger.trace("Current index is higher than place: {}", ColorTool.apply(DCColor.GREEN, String.valueOf(currentIndex > roleHierarchy.hierarchyPlace())));
+        logger.trace("Fired for: {}", ColorTool.apply(DCColor_DEPRECATED.GREEN, roleHierarchy.role().getName()));
+        logger.trace("Hierarchy Index: {}", ColorTool.apply(DCColor_DEPRECATED.GOLD, String.valueOf(roleHierarchy.hierarchyPlace())));
+        logger.trace("Current Index: {}", ColorTool.apply(DCColor_DEPRECATED.GOLD, String.valueOf(currentIndex)));
+        logger.trace("Current Role: {}", ColorTool.apply(DCColor_DEPRECATED.GREEN, currentRole.getName()));
+        logger.trace("Is not currentRole: {}", ColorTool.apply(DCColor_DEPRECATED.GREEN, String.valueOf(roleHierarchy.role() != currentRole)));
+        logger.trace("Current index is higher than place: {}", ColorTool.apply(DCColor_DEPRECATED.GREEN, String.valueOf(currentIndex > roleHierarchy.hierarchyPlace())));
         logger.trace("---------------------------------------------------------------------------------------");
 
         if (roleHierarchy.role() != currentRole && currentIndex > roleHierarchy.hierarchyPlace()) {

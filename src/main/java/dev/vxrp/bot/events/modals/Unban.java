@@ -4,7 +4,7 @@ import dev.vxrp.bot.ScpTools;
 import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.configuration.records.translation.ButtonGroup;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.builder.StatsBuilder;
 import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.configuration.records.translation.SupportGroup;
@@ -76,7 +76,7 @@ public class Unban {
                         Button.secondary("settings_unban_ticket", buttons.settings_unban_ticket())
                 ).queue();
 
-        logger.info("Created new unban request by user {} - under name {}", ColorTool.apply(DCColor.GREEN, userName), ColorTool.apply(DCColor.RED, name));
+        logger.info("Created new unban request by user {} - under name {}", ColorTool.apply(DCColor_DEPRECATED.GREEN, userName), ColorTool.apply(DCColor_DEPRECATED.RED, name));
     }
 
     public static void acceptUnban(ModalInteractionEvent event) throws IOException {

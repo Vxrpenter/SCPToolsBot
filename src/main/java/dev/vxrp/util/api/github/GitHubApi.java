@@ -2,7 +2,7 @@ package dev.vxrp.util.api.github;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.colors.ColorTool;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
@@ -53,7 +53,7 @@ public class GitHubApi {
         }
 
         if (!Objects.equals(properties.getProperty("version"), tag)) {
-            logger.warn("A new version has been found, you can download it from {}", ColorTool.apply(DCColor.LIGHT_BLUE, "https://github.com/Vxrpenter/SCPToolsBot/releases/tag/v."+tag));
+            logger.warn("A new version has been found, you can download it from {}", ColorTool.apply(DCColor_DEPRECATED.LIGHT_BLUE, "https://github.com/Vxrpenter/SCPToolsBot/releases/tag/v."+tag));
         }
     }
 }

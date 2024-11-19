@@ -2,7 +2,7 @@ package dev.vxrp.bot.runnables;
 
 import dev.vxrp.bot.ScpTools;
 import dev.vxrp.bot.database.sqlite.SqliteManager;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.builder.StatsBuilder;
 import dev.vxrp.util.colors.ColorTool;
@@ -35,14 +35,14 @@ public class CheckNoticeOfDeparture  {
             SqliteManager sqliteManager = ScpTools.getSqliteManager();
             try {
                 for (NoticeOfDeparture notice : sqliteManager.getNoticeOfDepartureTableManager().getEveryNoticeOfDeparture()) {
-                    String status = ColorTool.apply(DCColor.GREEN, "CLEAN");
+                    String status = ColorTool.apply(DCColor_DEPRECATED.GREEN, "CLEAN");
                     String[] startTimes = notice.end_time().split("\\.");
 
                     LocalDate end_date = LocalDate.of(Integer.parseInt(startTimes[2]), Integer.parseInt(startTimes[1]), Integer.parseInt(startTimes[0]));
                     LocalDate now = LocalDate.now();
 
-                    if (now.isEqual(end_date) || now.isAfter(end_date)) {status = ColorTool.apply(DCColor.RED, "INVALID");}
-                    logger.info("Checking notice of departure with Id: {} Status: {}", ColorTool.apply(DCColor.GREEN, notice.id()), status);
+                    if (now.isEqual(end_date) || now.isAfter(end_date)) {status = ColorTool.apply(DCColor_DEPRECATED.RED, "INVALID");}
+                    logger.info("Checking notice of departure with Id: {} Status: {}", ColorTool.apply(DCColor_DEPRECATED.GREEN, notice.id()), status);
 
                     if (now.isEqual(end_date) || now.isAfter(end_date)) {
                         api.awaitReady().retrieveUserById(notice.id()).queue(user -> {
