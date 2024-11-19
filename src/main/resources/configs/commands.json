@@ -1,0 +1,57 @@
+{
+  "commands": [
+    {
+      "active": true,
+      "name": "help",
+      "description": "Command annotations and explanations",
+      "default_permissions": ["ADMINISTRATOR"],
+      "options": []
+    },
+    {
+      "active": true,
+      "name": "template",
+      "description": "Command for pasting certain templates",
+      "default_permissions": ["ADMINISTRATOR"],
+      "options": [
+        {
+          "type": "STRING",
+          "name": "rules",
+          "description": "What template are you referring to",
+          "isRequired": true,
+          "choices": [
+            {
+              "name": "rules",
+              "id": "rules"
+            },
+            {
+              "name": "support",
+              "id": "support"
+            },
+            {
+              "name": "notice of departure",
+              "id": "notice_of_departure"
+            },
+            {
+              "name": "regulars",
+              "id": "regulars"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "active": true,
+      "name": "notice_of_departure",
+      "description": "View information on notices and change data",
+      "default_permissions": ["ADMINISTRATOR"],
+      "options": []
+    },
+    {
+      "active": true,
+      "name": "regulars",
+      "description": "Use for configuring regulars and modifying saved information",
+      "default_permissions": ["ADMINISTRATOR"],
+      "options": []
+    }
+  ]
+}
