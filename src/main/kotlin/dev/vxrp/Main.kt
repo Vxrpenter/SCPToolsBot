@@ -27,7 +27,7 @@ fun main() {
 fun initializeConfiguration(configManager: ConfigManager, dir : String) {
     val configs = ArrayList<Path>()
     configs.add(Path("/configs/config.yml"))
-    configs.add(Path("/configs/color-config.yml"))
+    configs.add(Path("/configs/color-config.json"))
 
     configManager.create(dir, configs)
 }

@@ -65,7 +65,7 @@ public class CustomColorParser {
     }
 
     private static DCColor translator(SLColors colors) {
-        List objects = ScpTools.getColorConfigManager().getList("Scp_Colors_List");
+        List objects = Collections.emptyList();
         Map<String, String> objecting = new HashMap<>();
 
         for (Object object : objects) {
