@@ -2,7 +2,7 @@ package dev.vxrp.util.api.cedmod;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.colors.ColorTool;
 import okhttp3.*;
 
@@ -41,9 +41,9 @@ public class CedModApi {
 
         Response response = client.newCall(request).execute();
         if (response.code() == 204) {
-            logger.info("Unbanned ID {}", ColorTool.apply(DCColor.RED, banID));
+            logger.info("Unbanned ID {}", ColorTool.apply(DCColor_DEPRECATED.RED, banID));
         } else {
-            logger.error("Unbanning of {} ID failed, does it exist? ({})", ColorTool.apply(DCColor.RED, banID), response.code());
+            logger.error("Unbanning of {} ID failed, does it exist? ({})", ColorTool.apply(DCColor_DEPRECATED.RED, banID), response.code());
         }
     }
     public String getBanId(String banList, String userID) throws IOException {
@@ -61,7 +61,7 @@ public class CedModApi {
             JsonArray array = JsonParser.parseString(response.body().string()).getAsJsonObject().get("players").getAsJsonArray();
             int banID = array.get(0).getAsJsonObject().get("id").getAsInt();
 
-            logger.info("Succeeded HTTP request to cedmod servers, banID data of {} received ({})", ColorTool.apply(DCColor.RED, userID + "@steam"), ColorTool.apply(DCColor.RED, String.valueOf(banID)));
+            logger.info("Succeeded HTTP request to cedmod servers, banID data of {} received ({})", ColorTool.apply(DCColor_DEPRECATED.RED, userID + "@steam"), ColorTool.apply(DCColor_DEPRECATED.RED, String.valueOf(banID)));
 
             return String.valueOf(banID);
         } catch (IndexOutOfBoundsException e) {

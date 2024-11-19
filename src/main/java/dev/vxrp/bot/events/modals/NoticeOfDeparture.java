@@ -1,7 +1,7 @@
 package dev.vxrp.bot.events.modals;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.builder.StatsBuilder;
 import dev.vxrp.util.colors.ColorTool;
@@ -55,12 +55,12 @@ public class NoticeOfDeparture {
                         .setTitle(translations.ticket_title().replace("%number%", String.valueOf(ThreadLocalRandom.current().nextInt(1938, 9750))))
                         .setThumbnail(Objects.requireNonNull(event.getMember()).getUser().getAvatarUrl())
                         .setDescription(translations.ticket_body()
-                                .replace("%current_day%", ColorTool.apply(DCColor.BOLD, day))
-                                .replace("%current_month%", ColorTool.apply(DCColor.BOLD, month))
-                                .replace("%current_year%", ColorTool.apply(DCColor.BOLD, year))
-                                .replace("%day%", ColorTool.apply(DCColor.BOLD, givenDate[0]))
-                                .replace("%month%", ColorTool.apply(DCColor.BOLD, givenDate[1]))
-                                .replace("%year%", ColorTool.apply(DCColor.BOLD, givenDate[2]))
+                                .replace("%current_day%", ColorTool.apply(DCColor_DEPRECATED.BOLD, day))
+                                .replace("%current_month%", ColorTool.apply(DCColor_DEPRECATED.BOLD, month))
+                                .replace("%current_year%", ColorTool.apply(DCColor_DEPRECATED.BOLD, year))
+                                .replace("%day%", ColorTool.apply(DCColor_DEPRECATED.BOLD, givenDate[0]))
+                                .replace("%month%", ColorTool.apply(DCColor_DEPRECATED.BOLD, givenDate[1]))
+                                .replace("%year%", ColorTool.apply(DCColor_DEPRECATED.BOLD, givenDate[2]))
                                 .replace("%reason%", reason))
                         .setFooter(translations.ticket_footer()
                                 .replace("%date%", date)

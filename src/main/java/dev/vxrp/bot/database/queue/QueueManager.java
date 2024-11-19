@@ -1,7 +1,7 @@
 package dev.vxrp.bot.database.queue;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
@@ -33,11 +33,11 @@ public class QueueManager {
                             ");"
             );
             logger.debug("Set up table {} with rows: {}, {}, {}, {}",
-                    ColorTool.apply(DCColor.GOLD, "actionqueue"),
-                    ColorTool.apply(DCColor.RED, "id"),
-                    ColorTool.apply(DCColor.RED, "command"),
-                    ColorTool.apply(DCColor.GREEN, "time_added"),
-                    ColorTool.apply(DCColor.GREEN, "processed"));
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, "actionqueue"),
+                    ColorTool.apply(DCColor_DEPRECATED.RED, "id"),
+                    ColorTool.apply(DCColor_DEPRECATED.RED, "command"),
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, "time_added"),
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, "processed"));
             ScpTools.getLoggerManager().databaseLog(
                     "CREATE TABLE IF NOT EXISTS actionqueue(id TEXT PRIMARY KEY, command TEXT NOT NULL, time_added TEXT NOT NULL, processed BOOLEAN NOT NULL);",
                     "Created Table with all rows",
@@ -58,15 +58,15 @@ public class QueueManager {
             statement.setBoolean(4, false);
             statement.executeUpdate();
             logger.debug("Added action to queue - id: {}, command: {} , time_added: {}, processed {}",
-                    ColorTool.apply(DCColor.RED, id),
-                    ColorTool.apply(DCColor.GREEN, command),
-                    ColorTool.apply(DCColor.GREEN, timeAdded),
-                    ColorTool.apply(DCColor.GREEN, "false"));
+                    ColorTool.apply(DCColor_DEPRECATED.RED, id),
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, command),
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, timeAdded),
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, "false"));
             ScpTools.getLoggerManager().databaseLog(
                     "INSERT INTO actionqueue VALUES (?, ?, ?, ?)",
-                    "Created new action queue entry with value count: "+ColorTool.apply(DCColor.GREEN, id)+
-                            ", command: "+ColorTool.apply(DCColor.GREEN, command)+
-                            ", timeAdded: "+ColorTool.apply(DCColor.GOLD, timeAdded)+
+                    "Created new action queue entry with value count: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, id)+
+                            ", command: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, command)+
+                            ", timeAdded: "+ColorTool.apply(DCColor_DEPRECATED.GOLD, timeAdded)+
                             ", processed: false",
                     config.database_logging_channel_id(),
                     Color.ORANGE);
@@ -83,8 +83,8 @@ public class QueueManager {
             statement.executeUpdate();
             ScpTools.getLoggerManager().databaseLog(
                     "UPDATE actionqueue SET processed = ? WHERE id = ?",
-                    "Updated action queue with id: "+ColorTool.apply(DCColor.RED, id)+
-                    ", processed: "+ColorTool.apply(DCColor.GREEN, String.valueOf(processed)),
+                    "Updated action queue with id: "+ColorTool.apply(DCColor_DEPRECATED.RED, id)+
+                    ", processed: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, String.valueOf(processed)),
                     config.database_logging_channel_id(),
                     Color.ORANGE);
         }
@@ -118,8 +118,8 @@ public class QueueManager {
             try (ResultSet resultSet = statement.executeQuery()) {
                 ScpTools.getLoggerManager().databaseLog(
                         "SELECT processed FROM actionqueue WHERE id = ?",
-                        "Selected processed from id : "+ColorTool.apply(DCColor.RED, id)+
-                                ", processed: "+ColorTool.apply(DCColor.GREEN, String.valueOf(resultSet.getBoolean("processed"))),
+                        "Selected processed from id : "+ColorTool.apply(DCColor_DEPRECATED.RED, id)+
+                                ", processed: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, String.valueOf(resultSet.getBoolean("processed"))),
                                 config.database_logging_channel_id(),
                                 Color.ORANGE);
                 return resultSet.getBoolean("processed");
@@ -136,8 +136,8 @@ public class QueueManager {
             try (ResultSet resultSet = statement.executeQuery()) {
                 ScpTools.getLoggerManager().databaseLog(
                         "SELECT command FROM actionqueue WHERE id = ?",
-                        "Selected command from id : "+ColorTool.apply(DCColor.RED, id)+
-                                ", command: "+ColorTool.apply(DCColor.GREEN, resultSet.getString("command")),
+                        "Selected command from id : "+ColorTool.apply(DCColor_DEPRECATED.RED, id)+
+                                ", command: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, resultSet.getString("command")),
                         config.database_logging_channel_id(),
                         Color.ORANGE);
                 return resultSet.getString("command");

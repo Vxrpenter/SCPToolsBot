@@ -1,11 +1,8 @@
 package dev.vxrp.util.colors;
 
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,7 +30,7 @@ public class ColorTool {
 
 
     @NotNull
-    public static String apply(DCColor color, String text) {
+    public static String apply(DCColor_DEPRECATED color, String text) {
         switch (color) {
             case DARK_GRAY -> {
                 return "\u001B[2;30m"+text+"\u001B[0m";

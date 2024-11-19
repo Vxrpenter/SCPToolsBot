@@ -1,7 +1,7 @@
 package dev.vxrp.bot.database.sqlite;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.Enums.TicketIdentifier;
 import dev.vxrp.util.colors.ColorTool;
@@ -38,18 +38,18 @@ public class TicketsTableManager {
             statement.setString(5, handlerId);
             statement.executeUpdate();
             logger.debug("Added ticket - id: {}, identifier: {} , creation_date: {} , creatorId: {} , handlerId: {}",
-                    ColorTool.apply(DCColor.GREEN, id),
-                    ColorTool.apply(DCColor.GREEN, identifier.toString()),
-                    ColorTool.apply(DCColor.GOLD, creation_date),
-                    ColorTool.apply(DCColor.GOLD, creatorId),
-                    ColorTool.apply(DCColor.GOLD, handlerId));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id),
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, identifier.toString()),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, creation_date),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, creatorId),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, handlerId));
             ScpTools.getLoggerManager().databaseLog(
                     "INSERT INTO tickets VALUES (?, ?, ?, ?, ?)",
-                    "Created new ticket with value id: "+ColorTool.apply(DCColor.GREEN, id)+
-                    ", identifier: "+ColorTool.apply(DCColor.GREEN, identifier.toString())+
-                    ", creation_date: "+ColorTool.apply(DCColor.GOLD, creation_date)+
-                    ", creatorId: "+ColorTool.apply(DCColor.GOLD, creatorId)+
-                    ", handlerId: "+ColorTool.apply(DCColor.GOLD, handlerId),
+                    "Created new ticket with value id: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, id)+
+                    ", identifier: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, identifier.toString())+
+                    ", creation_date: "+ColorTool.apply(DCColor_DEPRECATED.GOLD, creation_date)+
+                    ", creatorId: "+ColorTool.apply(DCColor_DEPRECATED.GOLD, creatorId)+
+                    ", handlerId: "+ColorTool.apply(DCColor_DEPRECATED.GOLD, handlerId),
                     config.database_logging_channel_id(),
                     Color.ORANGE);
         }
@@ -58,7 +58,7 @@ public class TicketsTableManager {
     public Ticket getTicket(String id) throws SQLException, InterruptedException {
         if (!existsId(id)) {
             logger.error("Failed to get ticket with id: {}. Id does not exist",
-                    ColorTool.apply(DCColor.GREEN, id));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id));
             return null;
         }
 
@@ -69,7 +69,7 @@ public class TicketsTableManager {
             try (ResultSet resultSet = statement.executeQuery()) {
                 ScpTools.getLoggerManager().databaseLog(
                         "SELECT * FROM tickets WHERE id=?",
-                        "Selected ticket id: "+ColorTool.apply(DCColor.GREEN, id),
+                        "Selected ticket id: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, id),
                         config.database_logging_channel_id(),
                         Color.ORANGE);
 
@@ -86,7 +86,7 @@ public class TicketsTableManager {
     public void updateHandler(String id, String handlerId) throws SQLException, InterruptedException {
         if (!existsId(id)) {
             logger.error("Failed to update ticket with id: {}. Id does not exist",
-                    ColorTool.apply(DCColor.GREEN, id));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id));
             return;
         }
 
@@ -95,12 +95,12 @@ public class TicketsTableManager {
             statement.setString(2, id);
             statement.executeUpdate();
             logger.debug("Updated handler of ticket - id: {} , handlerId: {}",
-                    ColorTool.apply(DCColor.GREEN, id),
-                    ColorTool.apply(DCColor.GOLD, handlerId));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, handlerId));
             ScpTools.getLoggerManager().databaseLog(
                     "UPDATE tickets SET handlerId = ? WHERE id = ?",
-                    "Updated ticket handlerId with id: "+ColorTool.apply(DCColor.GREEN, id)+
-                    ", handlerId: "+ColorTool.apply(DCColor.GOLD, handlerId),
+                    "Updated ticket handlerId with id: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, id)+
+                    ", handlerId: "+ColorTool.apply(DCColor_DEPRECATED.GOLD, handlerId),
                     config.database_logging_channel_id(),
                     Color.ORANGE);
         }
@@ -109,7 +109,7 @@ public class TicketsTableManager {
     public void deleteTicket(String id) throws SQLException, InterruptedException {
         if  (!existsId(id)) {
             logger.error("Failed to delete ticket with id: {}. Id does not exist",
-                    ColorTool.apply(DCColor.GREEN, id));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id));
             return;
         }
 
@@ -117,10 +117,10 @@ public class TicketsTableManager {
             statement.setString(1, id);
             statement.execute();
             logger.debug("Deleted ticket - id: {}",
-                    ColorTool.apply(DCColor.RED, id));
+                    ColorTool.apply(DCColor_DEPRECATED.RED, id));
             ScpTools.getLoggerManager().databaseLog(
                     "DELETE FROM tickets WHERE id=?",
-                    "Deleted ticket with id:  "+ColorTool.apply(DCColor.GREEN, id),
+                    "Deleted ticket with id:  "+ColorTool.apply(DCColor_DEPRECATED.GREEN, id),
                     config.database_logging_channel_id(),
                     Color.ORANGE);
         }

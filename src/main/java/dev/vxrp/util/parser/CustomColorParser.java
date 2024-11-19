@@ -1,7 +1,6 @@
 package dev.vxrp.util.parser;
 
-import dev.vxrp.bot.ScpTools;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.Enums.SLColors;
 import dev.vxrp.util.colors.ColorTool;
 
@@ -64,7 +63,7 @@ public class CustomColorParser {
         return input.trim();
     }
 
-    private static DCColor translator(SLColors colors) {
+    private static DCColor_DEPRECATED translator(SLColors colors) {
         List objects = Collections.emptyList();
         Map<String, String> objecting = new HashMap<>();
 
@@ -74,7 +73,7 @@ public class CustomColorParser {
             objecting.put(object2.split("=")[0], object2.split("=")[1]);
         }
 
-        return DCColor.valueOf(objecting.get(colors.toString()));
+        return DCColor_DEPRECATED.valueOf(objecting.get(colors.toString()));
     }
 
     private static SLColors parseColorCodeToColor(String colorCode) {

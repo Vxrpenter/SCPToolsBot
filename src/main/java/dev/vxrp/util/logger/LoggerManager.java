@@ -1,7 +1,6 @@
 package dev.vxrp.util.logger;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.util.Enums.DCColor;
 import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
@@ -13,7 +12,6 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.event.Level;
 
 import java.awt.*;
 import java.text.SimpleDateFormat;

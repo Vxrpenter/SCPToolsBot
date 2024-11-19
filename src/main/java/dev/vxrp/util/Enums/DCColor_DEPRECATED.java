@@ -1,6 +1,6 @@
 package dev.vxrp.util.Enums;
 
-public enum DCColor {
+public enum DCColor_DEPRECATED {
     DARK_GRAY,
     RED,
     GREEN,

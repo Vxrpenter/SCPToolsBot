@@ -1,7 +1,7 @@
 package dev.vxrp.bot.database.sqlite;
 
 import dev.vxrp.bot.ScpTools;
-import dev.vxrp.util.Enums.DCColor;
+import dev.vxrp.util.Enums.DCColor_DEPRECATED;
 import dev.vxrp.util.Enums.LoadIndex;
 import dev.vxrp.util.colors.ColorTool;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
@@ -41,22 +41,22 @@ public class RegularsTableManager {
             statement.setBoolean(7, false);
             statement.executeUpdate();
             logger.debug("Added regular - id: {}, user_name {}, group_role: {} , role: {} , time: {}, time_last_checked: {}, deactivated: {}",
-                    ColorTool.apply(DCColor.GREEN, id),
-                    ColorTool.apply(DCColor.GREEN, user_name),
-                    ColorTool.apply(DCColor.GREEN, group_role),
-                    ColorTool.apply(DCColor.GOLD, role),
-                    ColorTool.apply(DCColor.GOLD, String.valueOf(time)),
-                    ColorTool.apply(DCColor.GOLD, time_last_checked),
-                    ColorTool.apply(DCColor.GOLD, String.valueOf(false)));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id),
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, user_name),
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, group_role),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, role),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, String.valueOf(time)),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, time_last_checked),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, String.valueOf(false)));
             ScpTools.getLoggerManager().databaseLog(
                     "INSERT INTO regular VALUES (?, ?, ?, ?, ?, ?, ?)",
-                    "Created new regular with value id: "+ColorTool.apply(DCColor.GREEN, id)+
-                            ", user_name: "+ColorTool.apply(DCColor.GREEN, user_name)+
-                            ", group_role: "+ColorTool.apply(DCColor.GREEN, group_role)+
-                            ", role: "+ColorTool.apply(DCColor.GOLD, role)+
-                            ", time: "+ColorTool.apply(DCColor.GOLD, time+
-                            ", time_last_checked: "+ColorTool.apply(DCColor.GOLD, time_last_checked))+
-                            ", deactivated: "+ColorTool.apply(DCColor.GOLD, String.valueOf(false)),
+                    "Created new regular with value id: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, id)+
+                            ", user_name: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, user_name)+
+                            ", group_role: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, group_role)+
+                            ", role: "+ColorTool.apply(DCColor_DEPRECATED.GOLD, role)+
+                            ", time: "+ColorTool.apply(DCColor_DEPRECATED.GOLD, time+
+                            ", time_last_checked: "+ColorTool.apply(DCColor_DEPRECATED.GOLD, time_last_checked))+
+                            ", deactivated: "+ColorTool.apply(DCColor_DEPRECATED.GOLD, String.valueOf(false)),
                     config.database_logging_channel_id(),
                     Color.ORANGE);
         }
@@ -65,7 +65,7 @@ public class RegularsTableManager {
     public void updateGroupRole(String id, String group_role) throws SQLException {
         if (!exists(id)) {
             logger.error("Failed to update regular group_role with id: {}. Id does not exist",
-                    ColorTool.apply(DCColor.GREEN, id));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id));
             return;
         }
         try (PreparedStatement statement = connection.prepareStatement("UPDATE regulars SET group_role=? WHERE id=?")) {
@@ -73,15 +73,15 @@ public class RegularsTableManager {
             statement.setString(2, id);
             statement.executeUpdate();
             logger.debug("Updated group_role - id: {} , group_role: {}",
-                    ColorTool.apply(DCColor.GREEN, id),
-                    ColorTool.apply(DCColor.GOLD, group_role));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, group_role));
         }
     }
 
     public void updateRole(String id, String role) throws SQLException {
         if (!exists(id)) {
             logger.error("Failed to update regular role with id: {}. Id does not exist",
-                    ColorTool.apply(DCColor.GREEN, id));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id));
             return;
         }
         try (PreparedStatement statement = connection.prepareStatement("UPDATE regulars SET role=? WHERE id=?")) {
@@ -89,15 +89,15 @@ public class RegularsTableManager {
             statement.setString(2, id);
             statement.executeUpdate();
             logger.debug("Updated role - id: {} , role: {}",
-                    ColorTool.apply(DCColor.GREEN, id),
-                    ColorTool.apply(DCColor.GOLD, role));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, role));
         }
     }
 
     public void updateTime(String id, double time) throws SQLException {
         if (!exists(id)) {
             logger.error("Failed to update regular time with id: {}. Id does not exist",
-                    ColorTool.apply(DCColor.GREEN, id));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id));
             return;
         }
         try (PreparedStatement statement = connection.prepareStatement("UPDATE regulars SET time=? WHERE id=?")) {
@@ -105,15 +105,15 @@ public class RegularsTableManager {
             statement.setString(2, id);
             statement.executeUpdate();
             logger.debug("Updated time - id: {} , time: {}",
-                    ColorTool.apply(DCColor.GREEN, id),
-                    ColorTool.apply(DCColor.GOLD, String.valueOf(time)));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, String.valueOf(time)));
         }
     }
 
     public void updateTimeLastChecked(String id, String time_last_checked) throws SQLException {
         if (!exists(id)) {
             logger.error("Failed to update regular time_last_checked with id: {}. Id does not exist",
-                    ColorTool.apply(DCColor.GREEN, id));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id));
             return;
         }
         try (PreparedStatement statement = connection.prepareStatement("UPDATE regulars SET time_last_checked=? WHERE id=?")) {
@@ -121,15 +121,15 @@ public class RegularsTableManager {
             statement.setString(2, id);
             statement.executeUpdate();
             logger.debug("Updated time_last_checked - id: {} , time: {}",
-                    ColorTool.apply(DCColor.GREEN, id),
-                    ColorTool.apply(DCColor.GOLD, time_last_checked));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, time_last_checked));
         }
     }
 
     public void updateDeactivated(String id, boolean deactivated) throws SQLException {
         if (!exists(id)) {
             logger.error("Failed to update regular deactivated with id: {}. Id does not exist",
-                    ColorTool.apply(DCColor.GREEN, id));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id));
             return;
         }
         try (PreparedStatement statement = connection.prepareStatement("UPDATE regulars SET deactivated=? WHERE id=?")) {
@@ -137,8 +137,8 @@ public class RegularsTableManager {
             statement.setString(2, id);
             statement.executeUpdate();
             logger.debug("Updated deactivated - id: {} , time: {}",
-                    ColorTool.apply(DCColor.GREEN, id),
-                    ColorTool.apply(DCColor.GOLD, String.valueOf(deactivated)));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id),
+                    ColorTool.apply(DCColor_DEPRECATED.GOLD, String.valueOf(deactivated)));
         }
     }
 
@@ -181,17 +181,17 @@ public class RegularsTableManager {
     public void deleteRegular(String id) throws SQLException, InterruptedException {
         if (!exists(id)) {
             logger.error("Failed to delete regular with id: {}. Id does not exist",
-                    ColorTool.apply(DCColor.GREEN, id));
+                    ColorTool.apply(DCColor_DEPRECATED.GREEN, id));
             return;
         }
         try (PreparedStatement statement = connection.prepareStatement("DELETE FROM regulars WHERE id=?")) {
             statement.setString(1, id);
             statement.executeUpdate();
             logger.debug("Deleted regular - id: {}",
-                    ColorTool.apply(DCColor.RED, id));
+                    ColorTool.apply(DCColor_DEPRECATED.RED, id));
             ScpTools.getLoggerManager().databaseLog(
                     "DELETE FROM regulars WHERE id=?",
-                    "Deleted regular id: "+ColorTool.apply(DCColor.GREEN, id),
+                    "Deleted regular id: "+ColorTool.apply(DCColor_DEPRECATED.GREEN, id),
                     config.database_logging_channel_id(),
                     Color.ORANGE);
         }
