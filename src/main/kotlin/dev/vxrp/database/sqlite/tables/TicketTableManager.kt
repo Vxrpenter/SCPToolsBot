@@ -1,6 +1,7 @@
 package dev.vxrp.database.sqlite.tables
 
-import dev.vxrp.util.Enums.DCColor_DEPRECATED
+import dev.vxrp.util.color.ColorTool
+import dev.vxrp.util.enums.DCColor
 import org.slf4j.LoggerFactory
 import java.sql.Connection
 
@@ -18,12 +19,12 @@ class TicketTableManager(connection: Connection) {
 
             logger.debug(
                 "Set up table {} with rows: {}, {}, {}, {}, {}",
-                dev.vxrp.util.colors.ColorTool.apply(DCColor_DEPRECATED.GOLD, "tickets"),
-                dev.vxrp.util.colors.ColorTool.apply(DCColor_DEPRECATED.RED, "id"),
-                dev.vxrp.util.colors.ColorTool.apply(DCColor_DEPRECATED.RED, "identifier"),
-                dev.vxrp.util.colors.ColorTool.apply(DCColor_DEPRECATED.GREEN, "creation_data"),
-                dev.vxrp.util.colors.ColorTool.apply(DCColor_DEPRECATED.GREEN, "creator"),
-                dev.vxrp.util.colors.ColorTool.apply(DCColor_DEPRECATED.GREEN, "handler")
+                ColorTool().apply(DCColor.GOLD, "tickets"),
+                ColorTool().apply(DCColor.RED, "id"),
+                ColorTool().apply(DCColor.RED, "identifier"),
+                ColorTool().apply(DCColor.GREEN, "creation_data"),
+                ColorTool().apply(DCColor.GREEN, "creator"),
+                ColorTool().apply(DCColor.GREEN, "handler")
             )
     }}
 }
