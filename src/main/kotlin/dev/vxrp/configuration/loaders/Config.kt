@@ -22,11 +22,6 @@ data class Config(val token: String,
                   val rules: ConfigRules,
                   //logging
                   val logging: ConfigLogging,
-                  @SerialName("commands")
-                  val commands: List<String>,
-                  //command-settings
-                  @SerialName("command_settings")
-                  val commandSettings: ConfigCommandSettings,
                   //cedmod
                   val cedmod: ConfigCedmod,
                   //support-settings
@@ -69,38 +64,6 @@ data class ConfigLogging(
     val databaseLog: Boolean,
     @SerialName("database_logging_channel_id")
     val databaseChannel: String)
-
-@Serializable
-data class ConfigCommandSettings(
-    val help: ConfigHelpCommand,
-    val template: ConfigTemplateCommand,
-    @SerialName("notice_of_departure")
-    val noticeOfDeparture: ConfigNoticeOfDepartureCommand,
-    val regulars: ConfigRegularsCommand,)
-
-@Serializable
-data class ConfigHelpCommand(
-    @SerialName("default_permissions")
-    val defaultPermission: List<String>,
-    val description: String)
-
-@Serializable
-data class ConfigTemplateCommand(
-    @SerialName("default_permissions")
-    val defaultPermission: List<String>,
-    val description: String)
-
-@Serializable
-data class ConfigNoticeOfDepartureCommand(
-    @SerialName("default_permissions")
-    val defaultPermission: List<String>,
-    val description: String)
-
-@Serializable
-data class ConfigRegularsCommand(
-    @SerialName("default_permissions")
-    val defaultPermission: List<String>,
-    val description: String)
 
 @Serializable
 data class ConfigCedmod(

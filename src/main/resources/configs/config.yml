@@ -46,24 +46,6 @@ logging:
   do_database_logging: true
   database_logging_channel_id: ""
 
-# Commands that are activated by default remove to deactivate, default ["help", "template"]
-commands: ["help", "template"]
-# Command settings
-# 'default_permissions' is pretty clear, find all permissions in this Javadoc https://docs.jda.wiki/net/dv8tion/jda/api/Permission.html.
-command_settings:
-  help:
-    default_permissions: ["ADMINISTRATOR"]
-    description: "Command annotations and explanations"
-  template:
-    default_permissions: ["ADMINISTRATOR"]
-    description: "Command for pasting certain templates"
-  notice_of_departure:
-    default_permissions: [ "ADMINISTRATOR" ]
-    description: "View information on notices and change data"
-  regulars:
-    default_permissions: [ "ADMINISTRATOR" ]
-    description: "Use for configuring regulars and modifying saved information"
-
 cedmod:
   # Should Cedmod integration features be established or deactivated?
   active: false
