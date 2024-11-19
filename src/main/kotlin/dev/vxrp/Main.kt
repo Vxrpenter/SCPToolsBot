@@ -1,10 +1,15 @@
 package dev.vxrp
 
+import ch.qos.logback.classic.Level
+import ch.qos.logback.classic.LoggerContext
 import dev.vxrp.bot.BotManager
+import dev.vxrp.bot.ScpTools
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.configuration.managers.ConfigManager
 import dev.vxrp.configuration.managers.TranslationManager
+import dev.vxrp.util.configuration.util.CONFIG
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
 import kotlin.io.path.Path
@@ -19,6 +24,7 @@ fun main() {
     initializeConfiguration(configManager, System.getProperty("user.dir"))
     initializeTranslations(translationManager)
     val config = configManager.query(System.getProperty("user.dir"), "/configs/config.yml")
+    setLoggingLevel(config)
     val translation = translationManager.query(System.getProperty("user.dir"), config.loadTranslation)
 
     ScpToolsBot(config, translation)
@@ -30,6 +36,20 @@ fun initializeConfiguration(configManager: ConfigManager, dir : String) {
     configs.add(Path("/configs/color-config.json"))
 
     configManager.create(dir, configs)
+}
+
+fun setLoggingLevel(config: Config) {
+    var level = Level.INFO
+    if (config.debug) {
+        level = Level.DEBUG
+    }
+    if (config.advancedDebug) {
+        level = Level.TRACE
+    }
+
+    val loggerContext = LoggerFactory.getILoggerFactory() as LoggerContext
+    val log = loggerContext.exists(Logger.ROOT_LOGGER_NAME)
+    log.level = level
 }
 
 fun initializeTranslations(translationManager: TranslationManager) {
