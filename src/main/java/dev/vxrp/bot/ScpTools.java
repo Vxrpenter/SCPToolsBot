@@ -2,7 +2,6 @@ package dev.vxrp.bot;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
-import dev.vxrp.bot.config.managers.configuration.ColorConfigManager;
 import dev.vxrp.bot.config.managers.configuration.ConfigManager;
 import dev.vxrp.bot.config.managers.regulars.RegularsManager;
 import dev.vxrp.bot.config.managers.translations.TranslationManager;
@@ -23,15 +22,12 @@ import dev.vxrp.util.configuration.configs.ConfigLoader;
 import dev.vxrp.util.configuration.records.configs.ConfigGroup;
 import dev.vxrp.util.configuration.translations.TranslationLoader;
 import dev.vxrp.util.configuration.util.CONFIG;
-import dev.vxrp.util.converter.PermissionListConverter;
 import dev.vxrp.util.general.RepeatTask;
 import dev.vxrp.util.logger.LoggerManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.slf4j.Logger;
@@ -51,7 +47,6 @@ public class ScpTools {
     private final static Logger logger = LoggerFactory.getLogger(ScpTools.class);
     static ConfigManager configManager;
     static TranslationManager translationManager;
-    static ColorConfigManager colorConfigManager;
     static SqliteManager sqliteManager;
     static LoggerManager loggerManager;
     static RegularsManager regularsManager;
@@ -183,12 +178,6 @@ public class ScpTools {
             logger.error("Could not load configs from translationManager : {}", e.getMessage());
             System.exit(1);
         }
-        try {
-            colorConfigManager = new ColorConfigManager();
-        } catch (Exception e) {
-            logger.error("Could not load configs from colorConfigManager : {}", e.getMessage());
-            System.exit(1);
-        }
     }
 
     private static void runCheckups(JDA api) {
@@ -209,7 +198,6 @@ public class ScpTools {
 
     public static ConfigManager getConfigManager() {return configManager;}
     public static TranslationManager getTranslationManager() {return translationManager;}
-    public static ColorConfigManager getColorConfigManager() {return colorConfigManager;}
     public static SqliteManager getSqliteManager() {return sqliteManager;}
     public static LoggerManager getLoggerManager() {return loggerManager;}
     public static RegularsManager getRegularsManager() {return regularsManager;}
