@@ -1,0 +1,12 @@
+{
+  "active": false,
+  "use_cedmod_instance": false,
+  "api": "",
+  "account_id": "",
+  "instances": [
+    {
+      "token": "",
+      "server_number": 0
+    }
+  ]
+}
