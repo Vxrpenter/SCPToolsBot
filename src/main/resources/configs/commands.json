@@ -2,6 +2,7 @@
   "commands": [
     {
       "active": true,
+      "inherit": "commands.help.default",
       "name": "help",
       "description": "Command annotations and explanations",
       "default_permissions": ["ADMINISTRATOR"],
@@ -9,6 +10,7 @@
     },
     {
       "active": true,
+      "inherit": "commands.template.default",
       "name": "template",
       "description": "Command for pasting certain templates",
       "default_permissions": ["ADMINISTRATOR"],
@@ -41,6 +43,7 @@
     },
     {
       "active": true,
+      "inherit": "commands.notice_of_departure.default",
       "name": "notice_of_departure",
       "description": "View information on notices and change data",
       "default_permissions": ["ADMINISTRATOR"],
@@ -48,6 +51,7 @@
     },
     {
       "active": true,
+      "inherit": "commands.regulars.default",
       "name": "regulars",
       "description": "Use for configuring regulars and modifying saved information",
       "default_permissions": ["ADMINISTRATOR"],

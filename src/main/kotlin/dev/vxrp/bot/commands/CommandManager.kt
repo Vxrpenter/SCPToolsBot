@@ -20,6 +20,7 @@ data class CommandList(val commands: List<CustomCommand>)
 
 @Serializable
 data class CustomCommand(val active: Boolean,
+                         val inherit: String,
                          val name: String,
                          val description: String,
                          @SerialName("default_permissions")
@@ -52,7 +53,7 @@ class CommandManager(val api: JDA, val config: Config, val file: String) {
     }
 
     fun registerCommands() {
-        val data = Json.decodeFromString<CommandList>(query())
+        val data = query()
 
         for (command in data.commands) {
             if (!command.active) continue
@@ -78,9 +79,13 @@ class CommandManager(val api: JDA, val config: Config, val file: String) {
         }
     }
 
-    private fun query() : String {
+    private fun queryFile() : String {
         val currentFile = File("$dir$file")
         return currentFile.readText()
+    }
+
+    fun query() : CommandList {
+        return Json.decodeFromString<CommandList>(queryFile())
     }
 }
 
