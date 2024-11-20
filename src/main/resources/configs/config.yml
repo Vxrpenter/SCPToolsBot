@@ -19,8 +19,8 @@ database:
   # Which predefined database set should be used, choose between [NONE, SQLITE]
   # ** WARNING ** if you set this to none, and no other database option is given, the process will crash on startup
   use_predefined_database_sets: "SQLITE"
-  # ** WARNING ** When using custom, you may experience issues. This is a work in progress feature, so it is unstable, please report problems on the GitHub page (currently not working)
-  # Which type of custom db should be used: [SQLITE, MySQL, Postgresql, MongoDB, MariaDB]
+  # ** WARNING ** When using custom, you may experience issues. This is a work in progress feature, so it is unstable, report problems on the GitHub page (currently not working)
+  # Which type of custom db should be used: [SQLITE, MYSQL, POSTGRESQL, MARIADB]
   custom_type: ""
   # Here you can input a custom database url to connect to. This will only work when the setting is predefined to NONE
   custom_url: ""
