@@ -1,6 +1,7 @@
 package dev.vxrp.database.sqlite
 
 import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.database.sqlite.tables.ActionQueue
 import dev.vxrp.database.sqlite.tables.NoticeOfDeparture
 import dev.vxrp.database.sqlite.tables.Regulars
 import dev.vxrp.database.sqlite.tables.Ticket
@@ -51,6 +52,7 @@ class SqliteManager(val config: Config, folder: String, val file: String) {
             SchemaUtils.create(Ticket.Tickets)
             SchemaUtils.create(NoticeOfDeparture.NoticeOfDepartures)
             SchemaUtils.create(Regulars.Regulars)
+            SchemaUtils.create(ActionQueue.ActionQueue)
         }
     }
 }
