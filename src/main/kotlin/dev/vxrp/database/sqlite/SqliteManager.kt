@@ -5,7 +5,7 @@ import dev.vxrp.database.sqlite.tables.ActionQueue
 import dev.vxrp.database.sqlite.tables.NoticeOfDeparture
 import dev.vxrp.database.sqlite.tables.Regulars
 import dev.vxrp.database.sqlite.tables.Ticket
-import dev.vxrp.util.enums.DATABASE
+import dev.vxrp.util.enums.Databasetype
 import org.jetbrains.exposed.sql.*
 
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -24,23 +24,23 @@ class SqliteManager(val config: Config, folder: String, val file: String) {
             createTables()
         }
         if (config.database.dataUsePredefined == "NONE") {
-            when(DATABASE.valueOf(config.database.customType)) {
-                DATABASE.SQlITE -> {
+            when(Databasetype.SQlITE.takeIf { !enumContains<Databasetype>(config.database.customType) } ?: Databasetype.valueOf(config.database.customType)) {
+                Databasetype.SQlITE -> {
                     val url = "jdbc:sqlite:${config.database.customUrl}"
 
                     Database.connect(url, driver = "org.sqlite.JDBC")
                     createTables()
                 }
 
-                DATABASE.MYSQL -> {
+                Databasetype.MYSQL -> {
                     // WIP
                 }
 
-                DATABASE.POSTGRESQL -> {
+                Databasetype.POSTGRESQL -> {
                     // WIP
                 }
 
-                DATABASE.MARiADB -> {
+                Databasetype.MARiADB -> {
                     // WIP
                 }
             }
@@ -54,5 +54,9 @@ class SqliteManager(val config: Config, folder: String, val file: String) {
             SchemaUtils.create(Regulars.Regulars)
             SchemaUtils.create(ActionQueue.ActionQueue)
         }
+    }
+
+    private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {
+        return enumValues<T>().any { it.name == name}
     }
 }
