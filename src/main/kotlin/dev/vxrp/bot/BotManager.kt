@@ -10,9 +10,7 @@ class BotManager(val config: Config) {
         val api = JDABuilder.createDefault(config.token).build()
 
         CommandManager(api, config, "/configs/commands.json").registerCommands()
-        val sqliteManager = SqliteManager("database", "data.db")
-
-        sqliteManager.initializeTickets()
+        SqliteManager(config,"database", "data.db")
     }
 
 
