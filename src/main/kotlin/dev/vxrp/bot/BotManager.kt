@@ -2,6 +2,7 @@ package dev.vxrp.bot
 
 import dev.minn.jda.ktx.jdabuilder.intents
 import dev.minn.jda.ktx.jdabuilder.light
+import dev.vxrp.bot.commands.CommandListener
 import dev.vxrp.bot.commands.CommandManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.database.sqlite.SqliteManager
@@ -21,10 +22,12 @@ class BotManager(val config: Config) {
                 config.activityContent))
             disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
         }
+        val guild = api.awaitReady().getGuildById(config.guildId)
+
+        api.addEventListener(CommandListener(api, config))
 
         CommandManager(api, config, "/configs/commands.json").registerCommands()
         SqliteManager(config,"database", "data.db")
-
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {
