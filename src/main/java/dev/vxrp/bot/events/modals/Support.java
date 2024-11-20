@@ -50,6 +50,7 @@ public class Support {
         guild.createTextChannel(name)
                 .addPermissionOverride(event.getMember(), EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND), null)
                 .addPermissionOverride(guild.getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
+                .addPermissionOverride(event.getGuild().getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
                 .setSlowmode(1)
                 .queue(textChannel -> {
                     event.reply(translations.ticket_support_created()
