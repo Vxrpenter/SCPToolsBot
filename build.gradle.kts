@@ -62,7 +62,7 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:$apacheCommonsVersion")
     implementation("com.google.code.gson:gson:$gsonVersion")
 
-    // OLD
+    // DEPRECATED
     implementation("org.bspfsystems:yamlconfiguration:2.0.2")
 }
 
