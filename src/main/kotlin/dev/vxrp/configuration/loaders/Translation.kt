@@ -4,7 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Translation(@SerialName("SUPPORT")
+data class Translation(@SerialName("HELP")
+                       val help: TranslationHelp,
+                       @SerialName("SUPPORT")
                        val support: TranslationSupport,
                        @SerialName("NOTICE_OF_DEPARTURE")
                        val noticeOfDeparture: TranslationNoticeOfDeparture,
@@ -16,6 +18,36 @@ data class Translation(@SerialName("SUPPORT")
                        val statusBars: TranslationStatusBars,
                        @SerialName("BUTTONS")
                        val buttons: TranslationButtons)
+
+@Serializable
+data class TranslationHelp(@SerialName("EMBED_PAGE_ONE_TITLE")
+                           val embedPageOneTitle: String,
+                           @SerialName("EMBED_PAGE_ONE_BODY")
+                           val embedPageOneBody: String,
+                           @SerialName("EMBED_PAGE_TWO_TITLE")
+                           val embedPageTwoTitle: String,
+                           @SerialName("EMBED_PAGE_TWO_BODY")
+                           val embedPageTwoBody: String,
+                           @SerialName("EMBED_PAGE_THREE_TITLE")
+                           val embedPageThreeTitle: String,
+                           @SerialName("EMBED_PAGE_THREE_BODY")
+                           val embedPageThreeBody: String,
+                           @SerialName("EMBED_PAGE_FOUR_TITLE")
+                           val embedPageFourTitle: String,
+                           @SerialName("EMBED_PAGE_FOUR_BODY")
+                           val embedPageFourBody: String,
+                           @SerialName("EMBED_PAGE_FIVE_TITLE")
+                           val embedPageFiveTitle: String,
+                           @SerialName("EMBED_PAGE_FIVE_BODY")
+                           val embedPageFiveBody: String,
+                           @SerialName("EMBED_PAGE_SIX_TITLE")
+                           val embedPageSixTitle: String,
+                           @SerialName("EMBED_PAGE_SIX_BODY")
+                           val embedPageSixBody: String,
+                           @SerialName("EMBED_FOOTER_TEXT")
+                           val embedFooterText: String,
+                           @SerialName("EMBED_FOOTER_IMG")
+                           val embedFooterImg: String)
 
 @Serializable
 data class TranslationSupport(@SerialName("EMBED_TEMPLATE_SUPPORT_TITLE")

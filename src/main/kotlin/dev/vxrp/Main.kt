@@ -3,12 +3,10 @@ package dev.vxrp
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.LoggerContext
 import dev.vxrp.bot.BotManager
-import dev.vxrp.bot.ScpTools
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.configuration.managers.ConfigManager
 import dev.vxrp.configuration.managers.TranslationManager
-import dev.vxrp.util.configuration.util.CONFIG
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
@@ -62,6 +60,6 @@ fun initializeTranslations(translationManager: TranslationManager) {
 
 class ScpToolsBot(val config: Config, val translation: Translation) {
     init {
-        BotManager(config)
+        BotManager(config, translation)
     }
 }
