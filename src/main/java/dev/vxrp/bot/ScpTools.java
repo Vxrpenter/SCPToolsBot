@@ -6,7 +6,6 @@ import dev.vxrp.bot.config.managers.configuration.ConfigManager;
 import dev.vxrp.bot.config.managers.regulars.RegularsManager;
 import dev.vxrp.bot.config.managers.translations.TranslationManager;
 import dev.vxrp.bot.database.sqlite.SqliteManager;
-import dev.vxrp.bot.events.ButtonListener;
 import dev.vxrp.bot.events.MessageListener;
 import dev.vxrp.bot.events.ModalListener;
 import dev.vxrp.bot.events.SelectMenuListener;
@@ -72,7 +71,6 @@ public class ScpTools {
                 .setActivity(Activity.of(activityType, activityContent))
                 .disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
                 .addEventListeners(
-                        new ButtonListener(),
                         new ModalListener(),
                         new MessageListener(),
                         new SelectMenuListener())

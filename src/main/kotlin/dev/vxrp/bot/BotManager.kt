@@ -4,14 +4,16 @@ import dev.minn.jda.ktx.jdabuilder.intents
 import dev.minn.jda.ktx.jdabuilder.light
 import dev.vxrp.bot.commands.CommandListener
 import dev.vxrp.bot.commands.CommandManager
+import dev.vxrp.bot.events.ButtonListener
 import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.sqlite.SqliteManager
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.Activity.ActivityType
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
 
-class BotManager(val config: Config) {
+class BotManager(val config: Config, val translation: Translation) {
     init {
         val definedIntents = listOf(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
 
@@ -24,7 +26,10 @@ class BotManager(val config: Config) {
         }
         val guild = api.awaitReady().getGuildById(config.guildId)
 
-        api.addEventListener(CommandListener(api, config))
+        api.addEventListener(
+            CommandListener(api, config, translation),
+            ButtonListener(api, config, translation),
+        )
 
         CommandManager(api, config, "/configs/commands.json").registerCommands()
         SqliteManager(config,"database", "data.db")

@@ -11,6 +11,71 @@
 # Benutze &filler& um eine embed line zu füllen, benutze &filler<count>& um die Zeichenanzahl zu bestimmen
 #
 
+HELP:
+
+  EMBED_PAGE_ONE_TITLE: "Scp Tools Help Page"
+  EMBED_PAGE_ONE_BODY: "
+                        > ScpTools. Ein Bot zur Verwaltung deines SCP Secret Laboratory Servers mit der Community und staff management, quality of life features und einem custom Support-System. Übersetze alles nach deinem Geschmack und wähle die Einstellungen, die am besten zu deinem Server passen.\n
+                        &filler&
+                        [⭐] Wenn du Hilfe bei der Einrichtung des Bots benötigen oder auf Probleme stoßen solltest, dann guck dir die dokumentation [hier](https://github.com/Vxrpenter/SCPToolsBot/wiki) an.\n
+                                
+                        [❌] Wird dein Problem hier nicht erklärt? Erstelle dann bitte ein Problem auf GitHub [hier](https://github.com/Vxrpenter/SCPToolsBot/issues)\n
+                                
+                        ### Kurze Liste der Befehle:\n
+                        `/help` - für Hilfe\n
+                        `/template` - zum Einfügen von Templates\n
+                        - `Regeln` - Regeln des Secret-Lab Servers\n
+                        - `Support` - Support-Ticketsystem + Entbannungstickets\n
+                        - `Abmeldungen` - Abmeldungs-Panel für Staff\n
+                        - `Stammspieler` - Stammspieler-Panel für die Spieler\n
+                        - `Bewerbungen` - Bewerbungs-Panel für Staff-suche 
+                        "
+  EMBED_PAGE_TWO_TITLE: "Scp Tools Help Page - Regeln"
+  EMBED_PAGE_TWO_BODY: "
+                        > ❌ Achtung\n
+                        > Dieses feature ist experimentell und aktuell nicht völlig funktionsfähig\n
+                        &filler&
+                        Benutze `/template rules` um das regel menu zu pasten.\n
+                        
+                        Du kannst zwischen dem updaten und pasten der Serverregeln. Die SCP SL regeln werden dann automatisch durch einen Color-Parser gejagt und dann in den Channel gesendet.\n
+                        > Du kannst die Farben des Color-Parsers in der `color-config.json` anpassen
+                        "
+  EMBED_PAGE_THREE_TITLE: "Scp Tools Help Page - Support und Unban"
+  EMBED_PAGE_THREE_BODY: "
+                        Benutze `/template support` command um das Support-Panel zu senden.\n
+                        &filler&
+                        **Options of the template:**\n
+                        - `Support ticket erstellen` - 
+                        - `Entbannungsantrag stellen` - Erstelle ein Support Ticket um Fragen und Probleme von Spielern zu klären\n Gibt den Spielern die Möglichkeit einen entbannungsantrag für den SCP:SL Server zu stellen. Wenn diese angenommen wird, wird der Spieler automatisch auf dem Server entbannt
+                        "
+  EMBED_PAGE_FOUR_TITLE: "Scp Tools Help Page - Abmeldungen"
+  EMBED_PAGE_FOUR_BODY: "
+                        Benutze `/template notice of departure` um das Abmeldungs-Panel zu senden\n
+                        &filler&
+                        Dieses Feature ermöglicht es Staff Mitgliedern eine Auszeit zu nehmen. Wenn diese Abläuft werden sie und die Teamleitung automatisch informiert.\n
+                        
+                        Wenn ein Nutzer eine Abmeldung sendet wird diese in einen Kanel zum bearbeiten gesendet. Wird sie angenommen, dann wird dies in der Datenbank gespeichert.\n
+                        > Der Nutzer wird beim Annehmen, Ablehnen, Zurückziehen und beim Ende der Abmeldung darüber per Privatnachricht informiert
+                        "
+  EMBED_PAGE_FIVE_TITLE: "Scp Tools Help Page - Stammspieler"
+  EMBED_PAGE_FIVE_BODY: "
+                        Benutze `/template regulars` um das Stammspieler-Panel zu senden.\n
+                        &filler&
+                        Biete deinen Spielern custom Spielzeit rollen an, die sich automatisch mit dem Server syncronisieren.\n
+                        
+                        Die Spieler können die Synchronisierung der Zeit aktivieren/deaktivieren oder so auch einfach löschen.
+                        "
+  EMBED_PAGE_SIX_TITLE: "Scp Tools Help Page - Applications"
+  EMBED_PAGE_SIX_BODY: "
+                        > ❌ WORK IN PROGRESS\n
+                        > Dieses Feature wurde noch nicht entwickelt\n
+                        &filler&
+                        Hier gibts noch nichts.
+                        "
+
+  EMBED_FOOTER_TEXT: "⭐ Mit viel Eifer, erstellt von Vxrpenter ⭐"
+  EMBED_FOOTER_IMG: "https://avatars.githubusercontent.com/u/110356385?v=4"
+
 SUPPORT:
 
   EMBED_TEMPLATE_SUPPORT_TITLE: "Erstelle eine Support-Ticket"

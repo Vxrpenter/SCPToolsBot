@@ -11,6 +11,71 @@
 # Use &filler& to fill one embed line, use &filler<count>& to specify character amount
 #
 
+HELP:
+
+  EMBED_PAGE_ONE_TITLE: "Scp Tools Help Page"
+  EMBED_PAGE_ONE_BODY: "
+                        > This is ScpTools. A bot for managing your SCP Secret Laboratory Server with community and staff management, quality of life improvements and a custom support system. Translate everything to your liking and choose the settings that fit your server the best to get going.\n
+                        &filler&
+                        [⭐] If you need help with bot setup or you are running into issues then please refer to the documentation [here](https://github.com/Vxrpenter/SCPToolsBot/wiki).\n
+                                
+                        [❌] Is your issue not explained here? Then please create an issue on github [here](https://github.com/Vxrpenter/SCPToolsBot/issues)\n
+                                
+                        ### Short list of commands:\n
+                        `/help` - for help\n
+                        `/template` - for pasting the templates\n
+                        - `rules` - secret lab rules\n
+                        - `support` - support ticket system + unban tickets\n
+                        - `notice of departure` - notice of departure panel for staff\n
+                        - `regulars` - regular panel for users\n
+                        - `applications` - application panel for staff recruitment 
+                        "
+  EMBED_PAGE_TWO_TITLE: "Scp Tools Help Page - Rules"
+  EMBED_PAGE_TWO_BODY: "
+                        > ❌ CAUTION\n
+                        > This feature is experimental and not that tested. Also the update feature is not working the moment\n
+                        &filler&
+                        Use `/template rules` to paste the rule menu.\n
+                        
+                        You can choose between updating the rules and pasting them. This then takes your Scp Secret Laboratory Server ruleset and translate it using a color parser automatically.\n
+                        > define these color translations in the `color-config.json`
+                        "
+  EMBED_PAGE_THREE_TITLE: "Scp Tools Help Page - Support and Unban"
+  EMBED_PAGE_THREE_BODY: "
+                        Use `/template support` command to paste the support template.\n
+                        &filler&
+                        **Options of the template:**\n
+                        - `Create Support Ticket` - Create a support ticket that the question or problem of the user can be processed in\n
+                        - `File Unban Request` - Let's a user file an unban request for your SCP:SL Server. when accepting these requests the user will be automatically be unbanned from the server given they put in the correct steamID
+                        "
+  EMBED_PAGE_FOUR_TITLE: "Scp Tools Help Page - Notice of Departure"
+  EMBED_PAGE_FOUR_BODY: "
+                        Use `/template notice of departure` to paste the notice of departure template\n
+                        &filler&
+                        This feature is to make users able to take time off without worrying about the date to much because the bot notifies them when they have to come on again\n
+                        
+                        When a user files a notice of departure it is send to a predefined channel for acceptance. When accepted is is then processed and added to the database.\n
+                        > if accepted, declined, revoked or it ending normally the user is notified
+                        "
+  EMBED_PAGE_FIVE_TITLE: "Scp Tools Help Page - Regulars"
+  EMBED_PAGE_FIVE_BODY: "
+                        Use `/template regulars` to paste the regular template.\n
+                        &filler&
+                        Offer your users a reward for playing a certain amount off time.\n
+                        
+                        Users can activate/deactivate the regular syncing which automatically caches their time from the server and gives them the roles they deserve for playing that amount of time
+                        "
+  EMBED_PAGE_SIX_TITLE: "Scp Tools Help Page - Applications"
+  EMBED_PAGE_SIX_BODY: "
+                        > ❌ WORK IN PROGRESS\n
+                        > This feature has not been developed yet\n
+                        &filler&
+                        Nothing here yet
+                        "
+
+  EMBED_FOOTER_TEXT: "⭐ Created with lots of passion by Vxrpenter ⭐"
+  EMBED_FOOTER_IMG: "https://avatars.githubusercontent.com/u/110356385?v=4"
+
 SUPPORT:
 
   EMBED_TEMPLATE_SUPPORT_TITLE: "Create a Support Ticket"

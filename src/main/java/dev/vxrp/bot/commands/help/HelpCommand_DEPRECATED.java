@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class HelpCommand extends ListenerAdapter {
+public class HelpCommand_DEPRECATED extends ListenerAdapter {
 
     public static void pasteHelp(SlashCommandInteractionEvent event) {
         event.replyEmbeds(pages().getFirst())
