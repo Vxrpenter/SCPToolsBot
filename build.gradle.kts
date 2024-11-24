@@ -9,7 +9,7 @@ plugins {
 
 application.mainClass = "dev.vxrp.MainKt"
 group = "dev.vxrp"
-version= "0.3.1"
+version= "0.2.9"
 
 
 repositories {
@@ -68,10 +68,9 @@ dependencies {
 
 val createVersionProperties by tasks.registering(WriteProperties::class) {
     val filePath = sourceSets.main.map {
-        it.output.resourcesDir!!.resolve("dev/vxrp/version.properties")
+        it.output.resourcesDir!!.resolve("/dev/vxrp/version.properties")
     }
     destinationFile = filePath
-
     property("version", project.version.toString())
 }
 
