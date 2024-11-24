@@ -2,6 +2,7 @@ package dev.vxrp
 
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.LoggerContext
+import dev.vxrp.api.github.Github
 import dev.vxrp.bot.BotManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
@@ -13,6 +14,8 @@ import java.nio.file.Path
 import kotlin.io.path.Path
 
 fun main() {
+    Github().checkForUpdatesByTag("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags")
+
     val logger = LoggerFactory.getLogger("dev.vxrp.Main")
     logger.info("Starting up...")
 
