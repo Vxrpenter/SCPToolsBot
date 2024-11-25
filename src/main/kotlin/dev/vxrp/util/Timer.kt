@@ -14,7 +14,7 @@ class Timer(private val period: Duration) {
             }
         }
 
-        startTimer(1.seconds, task = currentTask)
+        startTimer(task = currentTask)
         delay(1.seconds)
         assert(taskExecuted)
     }
