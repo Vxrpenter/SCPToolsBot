@@ -1,11 +1,11 @@
-package dev.vxrp.api.cedmod
+package dev.vxrp.cedmod
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import dev.vxrp.api.cedmod.enums.AppealStateType
-import dev.vxrp.api.cedmod.enums.HandleAppealType
-import dev.vxrp.api.cedmod.enums.MuteType
+import dev.vxrp.cedmod.enums.AppealStateType
+import dev.vxrp.cedmod.enums.HandleAppealType
+import dev.vxrp.cedmod.enums.MuteType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit
  * @author Vxrpenter
  * @since Cedmod Version: `3.4.18`so 
  */
-class Cedmod(private val instanceUrl: String, private val apiKey: String, private val readTimeout: Long, private val writeTimeout: Long) {
+class Cedmod(private val instanceUrl: String, private val apiKey: String, readTimeout: Long = 60, writeTimeout: Long = 60) {
     private val client: OkHttpClient = OkHttpClient.Builder()
         .readTimeout(readTimeout, TimeUnit.SECONDS)
         .writeTimeout(writeTimeout, TimeUnit.SECONDS)
@@ -388,7 +388,7 @@ class Cedmod(private val instanceUrl: String, private val apiKey: String, privat
     }
 
     /**
-     * Endpoint for adding banlogs
+     * Endpoint for adding ban-logs
      *
      * Endpoint: `/Api/BanLog/{banId}`
      *
