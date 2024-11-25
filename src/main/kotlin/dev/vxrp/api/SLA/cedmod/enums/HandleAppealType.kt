@@ -1,4 +1,4 @@
-package dev.vxrp.api.cedmod.enums
+package dev.vxrp.cedmod.enums
 
 enum class HandleAppealType {
     DENY,
