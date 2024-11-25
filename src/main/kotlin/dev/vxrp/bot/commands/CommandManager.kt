@@ -35,20 +35,14 @@ data class Choices(val name: String, val id: String)
 
 class CommandManager(val api: JDA, val config: Config, val file: String) {
     private val logger = LoggerFactory.getLogger(CommandManager::class.java)
-    private val dir = System.getProperty("user.dir")
+    private val currentFile = File("${System.getProperty("user.dir")}$file")
 
     init {
-        val content = ConfigManager::class.java.getResourceAsStream(file)
-
-        val currentFile = File("$dir$file")
         if (!currentFile.exists()) {
             currentFile.createNewFile()
-            logger.info("Created commands configuration file $dir$file")
 
-            if (content != null) {
-                currentFile.appendBytes(content.readBytes())
-                logger.info("Wrote contents to $dir$file")
-            }
+            val content = ConfigManager::class.java.getResourceAsStream(file)
+            if (content != null) currentFile.appendBytes(content.readBytes())
         }
     }
 
@@ -62,16 +56,8 @@ class CommandManager(val api: JDA, val config: Config, val file: String) {
             command.defaultPermissions.forEach { permission -> permissions.add(Permission.valueOf(permission)) }
 
             val currentCommand = Commands.slash(command.name, command.description).also { commandData ->
-                if (command.options.isNotEmpty()) {
-                    val optionData = mutableListOf<OptionData>()
-                    for (option in command.options) {
-                        val choices = mutableListOf<Command.Choice>()
+                if (command.options.isNotEmpty()) commandData.addOptions(addOptions(command))
 
-                        if (option.choices.isNotEmpty()) { repeat(option.choices.size) { choices.add(Command.Choice(option.name, option.description))} }
-                        optionData.add(OptionData(OptionType.valueOf(option.type), option.name, option.description, option.isRequired).also { if (choices.isNotEmpty()) { it.addChoices(choices) } })
-                    }
-                    commandData.addOptions(optionData)
-                }
             }.setDefaultPermissions(DefaultMemberPermissions.enabledFor(permissions))
 
             api.updateCommands().addCommands(currentCommand)
@@ -79,13 +65,20 @@ class CommandManager(val api: JDA, val config: Config, val file: String) {
         }
     }
 
-    private fun queryFile() : String {
-        val currentFile = File("$dir$file")
-        return currentFile.readText()
+    private fun addOptions(command: CustomCommand): List<OptionData> {
+        val optionData = mutableListOf<OptionData>()
+        for (option in command.options) {
+            val choices = mutableListOf<Command.Choice>()
+
+            if (option.choices.isNotEmpty()) { repeat(option.choices.size) { choices.add(Command.Choice(option.name, option.description))} }
+            optionData.add(OptionData(OptionType.valueOf(option.type), option.name, option.description, option.isRequired).also { if (choices.isNotEmpty()) { it.addChoices(choices) } })
+        }
+
+        return optionData
     }
 
-    fun query() : CommandList {
-        return Json.decodeFromString<CommandList>(queryFile())
+    fun query(): CommandList {
+        return Json.decodeFromString<CommandList>(currentFile.readText())
     }
 }
 

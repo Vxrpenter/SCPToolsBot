@@ -4,14 +4,19 @@ import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.LoggerContext
 import dev.vxrp.api.github.Github
 import dev.vxrp.bot.BotManager
+import dev.vxrp.bot.status.StatusManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.configuration.managers.ConfigManager
 import dev.vxrp.configuration.managers.TranslationManager
+import dev.vxrp.util.Timer
+import kotlinx.coroutines.*
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
 import kotlin.io.path.Path
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 fun main() {
     Github().checkForUpdatesByTag("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags")
