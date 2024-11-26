@@ -6,8 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Status(
     val active: Boolean,
-    @SerialName("use_cedmod_instance")
-    val useCedmodInstance: Boolean,
+    val cooldown: Int,
     val api: String,
     @SerialName("account_id")
     val accountId: String,

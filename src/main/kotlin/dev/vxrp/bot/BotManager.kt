@@ -31,8 +31,10 @@ class BotManager(val config: Config, val translation: Translation) {
 
         val guild = api.awaitReady().getGuildById(config.guildId)
         val commandManager = CommandManager(api, config, "/configs/commands.json").registerCommands()
-        val statusManager = StatusManager("/configs/status.json")
+        val statusManager = StatusManager(config, "/configs/status.json")
         val sqliteManager = SqliteManager(config,"database", "data.db")
+
+        statusManager.initialize()
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {

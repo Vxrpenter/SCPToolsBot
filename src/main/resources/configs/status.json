@@ -1,6 +1,6 @@
 {
   "active": false,
-  "use_cedmod_instance": false,
+  "cooldown": 13,
   "api": "",
   "account_id": "",
   "instances": [
