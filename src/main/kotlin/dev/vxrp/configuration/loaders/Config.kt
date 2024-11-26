@@ -24,6 +24,8 @@ data class Config(val token: String,
                   val logging: ConfigLogging,
                   //cedmod
                   val cedmod: ConfigCedmod,
+                  // Status
+                  val status: ConfigStatus,
                   //support-settings
                   val support: ConfigSupport,
                   //notice-of-departure
@@ -75,6 +77,14 @@ data class ConfigCedmod(
     val api: String,
     @SerialName("master_ban_list_id")
     val mastBanList: String, )
+
+@Serializable
+data class ConfigStatus(
+    @SerialName("post_server_status")
+    val postServerStatus: Boolean,
+    @SerialName("post_channel")
+    val postChannel: String,
+)
 
 @Serializable
 data class ConfigSupport(

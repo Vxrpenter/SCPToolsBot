@@ -46,6 +46,12 @@ logging:
   do_database_logging: true
   database_logging_channel_id: ""
 
+status:
+  # Should the server status be posted?
+  post_server_status: false
+  # Where should the server status be posted?
+  post_channel : ""
+
 cedmod:
   # Should Cedmod integration features be established or deactivated?
   active: false
