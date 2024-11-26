@@ -5,6 +5,7 @@ import dev.minn.jda.ktx.messages.Embed
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.main
 import dev.vxrp.secretlab.SecretLab
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
@@ -56,12 +57,18 @@ class StatusManager(val config: Config, val file: String) {
         status.instances.forEach { currentInstance -> ports.add(currentInstance.serverPort)}
 
         Timer(status.cooldown.seconds).runWithTimer {
-            val mappedPorts = mapPorts(status, ports)
+            var mappedPorts = mutableMapOf<Int, Server>()
+            try {
+                mappedPorts = mapPorts(status, ports)
+            } catch (e: NullPointerException) {
+                logger.warn("Couldn't access secretlab api, ${e.message}, retrying in ${status.cooldown} seconds")
+
+            }
             mappedPorts[instance.serverPort]?.let { spinUpChecker(newApi, it) }
         }
     }
 
-    private fun mapPorts(status: Status, ports: List<Int>): Map<Int, Server> {
+    private fun mapPorts(status: Status, ports: List<Int>): MutableMap<Int, Server> {
         val secretLab = SecretLab(status.api, status.accountId)
 
         val map  = mutableMapOf<Int, Server>()
@@ -82,14 +89,23 @@ class StatusManager(val config: Config, val file: String) {
         return null
     }
 
+     var maintenance = false
+
     private fun spinUpChecker(api: JDA, server: Server) {
         logger.debug("Updating status of bot for server - ${server.port}")
         if (server.online) {
-            if (server.players?.split("/".toRegex())?.dropLastWhile { it.isEmpty() }?.toTypedArray()?.get(0).equals("0")) api.presence.setStatus(OnlineStatus.IDLE)
-            else api.presence.setStatus(OnlineStatus.ONLINE)
 
-            if (server.players != null) {
+            if (server.players?.split("/".toRegex())?.dropLastWhile { it.isEmpty() }?.toTypedArray()?.get(0).equals("0")) api.presence.setStatus(OnlineStatus.IDLE)
+
+            else if (!maintenance) api.presence.setStatus(OnlineStatus.ONLINE)
+
+            if (maintenance) api.presence.setStatus(OnlineStatus.DO_NOT_DISTURB)
+
+
+            if (server.players != null && !maintenance) {
                 api.presence.activity = Activity.playing(server.players)
+            } else {
+                api.presence.activity = Activity.customStatus("Server is in maintenance...")
             }
         } else {
             api.presence.setStatus(OnlineStatus.DO_NOT_DISTURB)
@@ -101,14 +117,12 @@ class StatusManager(val config: Config, val file: String) {
 
     private val serverStatus = mutableMapOf<Server, Boolean>()
     private val reconnectAttempt = mutableMapOf<Server, Int>()
-    private val lostConnectionMessage = mutableMapOf<Server, Message>()
 
     private fun postStatusUpdate(server: Server, api: JDA) {
         if (serverStatus[server] == null) serverStatus[server] = server.online
         if (reconnectAttempt[server] == null) reconnectAttempt[server] = 0
 
         if (server.online) {
-            postConnectionLost(api)
             if (serverStatus[server] == true) return
 
             postConnectionEstablished(api)

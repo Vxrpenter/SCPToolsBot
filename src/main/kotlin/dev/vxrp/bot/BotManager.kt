@@ -29,11 +29,12 @@ class BotManager(val config: Config, val translation: Translation) {
             ButtonListener(api, config, translation),
         )
 
+
         val guild = api.awaitReady().getGuildById(config.guildId)
         val commandManager = CommandManager(api, config, "/configs/commands.json").registerCommands()
         val statusManager = StatusManager(config, "/configs/status.json")
         val sqliteManager = SqliteManager(config,"database", "data.db")
-
+        
         statusManager.initialize()
     }
 
