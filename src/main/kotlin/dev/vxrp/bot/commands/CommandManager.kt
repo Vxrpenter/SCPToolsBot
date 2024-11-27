@@ -2,8 +2,8 @@ package dev.vxrp.bot.commands
 
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.managers.ConfigManager
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import dev.vxrp.bot.commands.data.CommandList
+import dev.vxrp.bot.commands.data.CustomCommand
 import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.Permission
@@ -15,25 +15,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import org.slf4j.LoggerFactory
 import java.io.File
 
-@Serializable
-data class CommandList(val commands: List<CustomCommand>)
-
-@Serializable
-data class CustomCommand(val active: Boolean,
-                         val inherit: String,
-                         val name: String,
-                         val description: String,
-                         @SerialName("default_permissions")
-                         val defaultPermissions: List<String>,
-                         val options: List<Options>)
-
-@Serializable
-data class Options(val type: String, val name: String, val description: String, val isRequired: Boolean, val choices: List<Choices>)
-
-@Serializable
-data class Choices(val name: String, val id: String)
-
-class CommandManager(val api: JDA, val config: Config, val file: String) {
+class CommandManager(val config: Config, val file: String) {
     private val logger = LoggerFactory.getLogger(CommandManager::class.java)
     private val currentFile = File("${System.getProperty("user.dir")}$file")
 
@@ -46,10 +28,8 @@ class CommandManager(val api: JDA, val config: Config, val file: String) {
         }
     }
 
-    fun registerCommands() {
-        val data = query()
-
-        for (command in data.commands) {
+    fun registerSpecificCommands(commands: List<CustomCommand>, api: JDA) {
+        for (command in commands) {
             if (!command.active) continue
 
             val permissions = mutableListOf<Permission>()
@@ -60,8 +40,8 @@ class CommandManager(val api: JDA, val config: Config, val file: String) {
 
             }.setDefaultPermissions(DefaultMemberPermissions.enabledFor(permissions))
 
-            api.updateCommands().addCommands(currentCommand)
-            logger.info("Registering command ${command.name}")
+            api.updateCommands().addCommands(currentCommand).queue()
+            logger.info("Registering command ${command.name} for bot: ${api.selfUser.name} (${api.selfUser.id})")
         }
     }
 
