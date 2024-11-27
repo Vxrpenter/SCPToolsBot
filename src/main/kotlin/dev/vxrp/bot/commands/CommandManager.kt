@@ -1,5 +1,7 @@
 package dev.vxrp.bot.commands
 
+import dev.minn.jda.ktx.coroutines.await
+import dev.minn.jda.ktx.interactions.commands.updateCommands
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.managers.ConfigManager
 import dev.vxrp.bot.commands.data.CommandList
@@ -10,6 +12,7 @@ import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.interactions.commands.Command
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions
 import net.dv8tion.jda.api.interactions.commands.OptionType
+import net.dv8tion.jda.api.interactions.commands.build.CommandData
 import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import org.slf4j.LoggerFactory
@@ -29,6 +32,7 @@ class CommandManager(val config: Config, val file: String) {
     }
 
     fun registerSpecificCommands(commands: List<CustomCommand>, api: JDA) {
+        val commandList = mutableListOf<CommandData>()
         for (command in commands) {
             if (!command.active) continue
 
@@ -40,9 +44,14 @@ class CommandManager(val config: Config, val file: String) {
 
             }.setDefaultPermissions(DefaultMemberPermissions.enabledFor(permissions))
 
-            api.updateCommands().addCommands(currentCommand).queue()
+            commandList.add(currentCommand)
             logger.info("Registering command ${command.name} for bot: ${api.selfUser.name} (${api.selfUser.id})")
         }
+
+        api.updateCommands {
+            addCommands(commandList)
+        }.queue()
+
     }
 
     private fun addOptions(command: CustomCommand): List<OptionData> {

@@ -1,3 +1,5 @@
+@file:Suppress("OPT_IN_USAGE")
+
 package dev.vxrp.bot
 
 import dev.minn.jda.ktx.jdabuilder.intents
@@ -9,6 +11,7 @@ import dev.vxrp.bot.status.StatusManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.sqlite.SqliteManager
+import kotlinx.coroutines.*
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.Activity.ActivityType
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -35,7 +38,15 @@ class BotManager(val config: Config, val translation: Translation) {
         val sqliteManager = SqliteManager(config,"database", "data.db")
 
         commandManager.registerSpecificCommands(commandManager.query().commands, api)
-        statusManager.initialize(commandManager)
+
+        // This could cause memory leaks if the interaction is halted. But we can ignore it here because if status is active, this
+        // Has to be launched. However, we first check if the status is active, so we can avoid these memory leaks, otherwise this has to
+        // run all the time anyway
+        if (statusManager.query().active) {
+            GlobalScope.launch { statusManager.initialize(commandManager) }
+        }
+
+
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {

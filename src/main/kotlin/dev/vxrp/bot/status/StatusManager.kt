@@ -32,8 +32,7 @@ class StatusManager(val config: Config, val file: String) {
     }
 
     fun initialize(commandManager: CommandManager) {
-        val status = Json.decodeFromString<Status>(currentFile.readText())
-        if (!status.active) return
+        val status = query()
 
         initializeBots(status, commandManager)
     }
@@ -180,5 +179,9 @@ class StatusManager(val config: Config, val file: String) {
         if (config.status.postServerStatus) {
             api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
         }
+    }
+
+    fun query(): Status {
+        return Json.decodeFromString<Status>(currentFile.readText())
     }
 }
