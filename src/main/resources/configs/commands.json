@@ -56,10 +56,12 @@
       "description": "Use for configuring regulars and modifying saved information",
       "default_permissions": ["ADMINISTRATOR"],
       "options": []
-    },
+    }
+  ],
+  "status_commands": [
     {
       "active": true,
-      "inherit": "commands.status.default",
+      "inherit": "status_commands.status.default",
       "name": "status",
       "description": "Used for customizing status",
       "default_permissions": ["ADMINISTRATOR"],

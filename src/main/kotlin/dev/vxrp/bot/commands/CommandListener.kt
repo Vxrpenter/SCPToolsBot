@@ -1,6 +1,7 @@
 package dev.vxrp.bot.commands
 
 import dev.minn.jda.ktx.events.listener
+import dev.vxrp.bot.commands.data.CustomCommand
 import dev.vxrp.bot.commands.help.HelpCommand
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
@@ -11,7 +12,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
 class CommandListener(val api: JDA, val config: Config, val translation: Translation) : ListenerAdapter() {
     init {
         api.listener<SlashCommandInteractionEvent> { event ->
-            val commandList = CommandManager(api, config, "/configs/commands.json").query().commands
+            val commandManager = CommandManager(config, "/configs/commands.json")
+
+            val commandList = mutableListOf<CustomCommand>()
+
+            commandList.addAll(commandManager.query().commands)
+            commandList.addAll(commandManager.query().statusCommands)
 
             for (command in commandList) {
                 if (command.name != event.fullCommandName) continue
@@ -30,6 +36,8 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
             "commands.notice_of_departure.default" -> noticeOfDepartureCommand()
 
             "commands.regulars.default" -> regularsCommand()
+
+            "status_commands.status.default" -> statusCommand()
         }
     }
 
@@ -46,6 +54,10 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
     }
 
     private fun regularsCommand() {
+
+    }
+
+    private fun statusCommand() {
 
     }
 }

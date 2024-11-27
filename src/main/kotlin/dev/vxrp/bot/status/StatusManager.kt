@@ -2,10 +2,10 @@ package dev.vxrp.bot.status
 
 import dev.minn.jda.ktx.jdabuilder.light
 import dev.minn.jda.ktx.messages.Embed
+import dev.vxrp.bot.commands.CommandManager
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.main
 import dev.vxrp.secretlab.SecretLab
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
@@ -14,7 +14,6 @@ import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
-import net.dv8tion.jda.api.entities.Message
 import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
@@ -32,26 +31,32 @@ class StatusManager(val config: Config, val file: String) {
         }
     }
 
-    fun initialize() {
+    fun initialize(commandManager: CommandManager) {
         val status = Json.decodeFromString<Status>(currentFile.readText())
         if (!status.active) return
 
-        initializeBots(status)
+        initializeBots(status, commandManager)
     }
 
-    private fun initializeBots(status: Status) {
+    private fun initializeBots(status: Status, commandManager: CommandManager) {
         if (status.instances.isEmpty()) return
 
         for (instance in status.instances) {
-            cus(instance, status)
+            val newApi = light(instance.token, enableCoroutines = false) {
+                setActivity(Activity.playing("pending..."))
+            }
+
+            initializeCommands(commandManager, newApi)
+            updateStatus(instance, status, newApi)
         }
     }
 
-    private fun cus(instance: Instance, status: Status) {
-        val newApi = light(instance.token, enableCoroutines = false) {
-            setActivity(Activity.playing("pending..."))
-        }
-        newApi.presence.setStatus(OnlineStatus.IDLE)
+    private fun initializeCommands(commandManager: CommandManager, api: JDA) {
+        commandManager.registerSpecificCommands(commandManager.query().statusCommands, api)
+    }
+
+    private fun updateStatus(instance: Instance, status: Status, api: JDA) {
+        api.presence.setStatus(OnlineStatus.IDLE)
 
         val ports = mutableListOf<Int>()
         status.instances.forEach { currentInstance -> ports.add(currentInstance.serverPort)}
@@ -64,7 +69,7 @@ class StatusManager(val config: Config, val file: String) {
                 logger.warn("Couldn't access secretlab api, ${e.message}, retrying in ${status.cooldown} seconds")
 
             }
-            mappedPorts[instance.serverPort]?.let { spinUpChecker(newApi, it) }
+            mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it) }
         }
     }
 
@@ -89,10 +94,10 @@ class StatusManager(val config: Config, val file: String) {
         return null
     }
 
-     var maintenance = false
+    var maintenance = false
 
     private fun spinUpChecker(api: JDA, server: Server) {
-        logger.debug("Updating status of bot for server - ${server.port}")
+        logger.debug("Updating status of bot: ${api.selfUser.name} (${api.selfUser.id}) for server - ${server.port}")
         if (server.online) {
 
             if (server.players?.split("/".toRegex())?.dropLastWhile { it.isEmpty() }?.toTypedArray()?.get(0).equals("0")) api.presence.setStatus(OnlineStatus.IDLE)

@@ -29,13 +29,13 @@ class BotManager(val config: Config, val translation: Translation) {
             ButtonListener(api, config, translation),
         )
 
-
         val guild = api.awaitReady().getGuildById(config.guildId)
-        val commandManager = CommandManager(api, config, "/configs/commands.json").registerCommands()
+        val commandManager = CommandManager(config, "/configs/commands.json")
         val statusManager = StatusManager(config, "/configs/status.json")
         val sqliteManager = SqliteManager(config,"database", "data.db")
-        
-        statusManager.initialize()
+
+        commandManager.registerSpecificCommands(commandManager.query().commands, api)
+        statusManager.initialize(commandManager)
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {
