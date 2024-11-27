@@ -119,30 +119,34 @@ class StatusManager(val config: Config, val file: String) {
         postStatusUpdate(server, api)
     }
 
-    private val serverStatus = mutableMapOf<Server, Boolean>()
-    private val reconnectAttempt = mutableMapOf<Server, Int>()
+    private val serverStatus = hashMapOf<Int, Boolean>()
+    private val reconnectAttempt = hashMapOf<Int, Int>()
 
     private fun postStatusUpdate(server: Server, api: JDA) {
-        if (serverStatus[server] == null) serverStatus[server] = server.online
-        if (reconnectAttempt[server] == null) reconnectAttempt[server] = 0
+        serverStatus.putIfAbsent(server.port, server.online)
+        reconnectAttempt.putIfAbsent(server.port, 0)
 
         if (server.online) {
-            if (serverStatus[server] == true) return
+            if (serverStatus[server.port] == true) return
 
             postConnectionEstablished(api)
-            reconnectAttempt[server] = 0
+            reconnectAttempt[server.port] = 0
+            serverStatus[server.port] = true
             logger.info("Connection to server ${server.port} regained")
         } else {
-            if (serverStatus[server] == false) return
+            if (serverStatus[server.port] == false) return
 
-            if (reconnectAttempt[server]!! >= 4) {
-                logger.warn("Completely lost connection to server ${server.port} - ")
+            if (reconnectAttempt[server.port]!! == 5) return
+            if (reconnectAttempt[server.port]!! == 4) {
+                logger.warn("Completely lost connection to server ${server.port}")
 
                 postConnectionLost(api)
+                reconnectAttempt[server.port] = 5
+                serverStatus[server.port] = false
                 return
             }
-            logger.warn("Lost connection to server - ${server.port}, trying reconnect... iteration ${reconnectAttempt[server]}")
-            reconnectAttempt[server] = reconnectAttempt[server]!!+1
+            logger.warn("Lost connection to server - ${server.port}, trying reconnect... iteration ${reconnectAttempt[server.port]}")
+            reconnectAttempt[server.port] = reconnectAttempt[server.port]!!+1
         }
     }
 
