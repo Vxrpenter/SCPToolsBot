@@ -34,7 +34,7 @@ class BotManager(val config: Config, val translation: Translation) {
 
         val guild = api.awaitReady().getGuildById(config.guildId)
         val commandManager = CommandManager(config, "/configs/commands.json")
-        val statusManager = StatusManager(config, "/configs/status.json")
+        val statusManager = StatusManager(config, translation, "/configs/status.json")
         val sqliteManager = SqliteManager(config,"database", "data.db")
 
         commandManager.registerSpecificCommands(commandManager.query().commands, api)
@@ -42,6 +42,7 @@ class BotManager(val config: Config, val translation: Translation) {
         // This could cause memory leaks if the interaction is halted. But we can ignore it here because if status is active, this
         // Has to be launched. However, we first check if the status is active, so we can avoid these memory leaks, otherwise this has to
         // run all the time anyway
+
         if (statusManager.query().active) {
             GlobalScope.launch { statusManager.initialize(commandManager) }
         }

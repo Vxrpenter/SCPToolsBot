@@ -1,7 +1,7 @@
 package dev.vxrp.bot.events
 
 import dev.minn.jda.ktx.events.listener
-import dev.vxrp.bot.commands.help.HelpCommand
+import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.JDA

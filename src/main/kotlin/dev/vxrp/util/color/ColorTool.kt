@@ -90,7 +90,7 @@ class ColorTool {
         return text
             .replace("&dark_gray&", darkGray)
             .replace("&red&", red)
-            .replace("&green&", green
+            .replace("&green&", green)
             .replace("&gold&", gold)
             .replace("&light_blue&", lightBlue)
             .replace("&pink&", pink)
@@ -99,6 +99,6 @@ class ColorTool {
             .replace("&bold&", bold)
             .replace("&reset&", reset)
             .replace("&underline&", underline)
-            .replace("&filler&", filler))
+            .replace("&filler&", filler)
     }
 }

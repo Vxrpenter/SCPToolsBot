@@ -3,8 +3,8 @@ package dev.vxrp.bot.commands
 import dev.minn.jda.ktx.interactions.commands.updateCommands
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.managers.ConfigManager
-import dev.vxrp.bot.commands.data.CommandList
-import dev.vxrp.bot.commands.data.CustomCommand
+import dev.vxrp.bot.commands.listeners.CommandList
+import dev.vxrp.bot.commands.listeners.CustomCommand
 import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.Permission
