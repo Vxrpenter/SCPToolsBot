@@ -1,6 +1,5 @@
 package dev.vxrp.bot.commands
 
-import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.interactions.commands.updateCommands
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.managers.ConfigManager
