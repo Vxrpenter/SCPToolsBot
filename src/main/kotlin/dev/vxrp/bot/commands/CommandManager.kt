@@ -59,7 +59,7 @@ class CommandManager(val config: Config, val file: String) {
         for (option in command.options) {
             val choices = mutableListOf<Command.Choice>()
 
-            if (option.choices.isNotEmpty()) { repeat(option.choices.size) { choices.add(Command.Choice(option.name, option.description))} }
+            if (option.choices.isNotEmpty()) { repeat(option.choices.size) { choices.add(Command.Choice(option.choices[it].name, option.choices[it].id))} }
             optionData.add(OptionData(OptionType.valueOf(option.type), option.name, option.description, option.isRequired).also { if (choices.isNotEmpty()) { it.addChoices(choices) } })
         }
 
