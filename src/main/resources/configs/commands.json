@@ -16,7 +16,7 @@
       "options": [
         {
           "type": "STRING",
-          "name": "rules",
+          "name": "template",
           "description": "What template are you referring to",
           "isRequired": true,
           "choices": [
