@@ -3,9 +3,12 @@ package dev.vxrp.bot.status
 import dev.minn.jda.ktx.jdabuilder.light
 import dev.minn.jda.ktx.messages.Embed
 import dev.vxrp.bot.commands.CommandManager
+import dev.vxrp.bot.commands.data.StatusConst
+import dev.vxrp.bot.commands.listeners.StatusCommandListener
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.secretlab.SecretLab
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
@@ -18,9 +21,12 @@ import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
 
-class StatusManager(val config: Config, val file: String) {
+class StatusManager(val config: Config, val translation: Translation, val file: String) {
     private val logger = LoggerFactory.getLogger(StatusManager::class.java)
     private val currentFile = File("${System.getProperty("user.dir")}$file")
+
+    private val mappedBots = hashMapOf<String, Int>()
+    private val maintenance = hashMapOf<Int, Boolean>()
 
     init {
         if (!currentFile.exists()) {
@@ -37,13 +43,19 @@ class StatusManager(val config: Config, val file: String) {
         initializeBots(status, commandManager)
     }
 
+    private val mappedServers = hashMapOf<Int, Server>()
     private fun initializeBots(status: Status, commandManager: CommandManager) {
         if (status.instances.isEmpty()) return
 
         for (instance in status.instances) {
-            val newApi = light(instance.token, enableCoroutines = false) {
+            val newApi = light(instance.token, enableCoroutines = true) {
                 setActivity(Activity.playing("pending..."))
             }
+
+            mappedBots[newApi.selfUser.id] = instance.serverPort
+
+
+            newApi.addEventListener(StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance)))
 
             initializeCommands(commandManager, newApi)
             updateStatus(instance, status, newApi)
@@ -77,9 +89,13 @@ class StatusManager(val config: Config, val file: String) {
 
         val map  = mutableMapOf<Int, Server>()
         for (port in ports) {
-            val info = secretLab.serverInfo(lo = false, players = true)
+            val info = secretLab.serverInfo(lo = false, players = true, list = true)
 
             val server = serverByPort(port, info)
+
+            if (server != null) {
+                mappedServers[port] = server
+            }
 
             if (info != null && server != null) map[port] = server
         }
@@ -93,20 +109,19 @@ class StatusManager(val config: Config, val file: String) {
         return null
     }
 
-    var maintenance = false
-
     private fun spinUpChecker(api: JDA, server: Server, instance: Instance) {
         logger.debug("Updating status of bot: ${api.selfUser.name} (${api.selfUser.id}) for server - ${server.port}")
+        maintenance.putIfAbsent(server.port, false)
         if (server.online) {
 
             if (server.players?.split("/".toRegex())?.dropLastWhile { it.isEmpty() }?.toTypedArray()?.get(0).equals("0")) api.presence.setStatus(OnlineStatus.IDLE)
 
-            else if (!maintenance) api.presence.setStatus(OnlineStatus.ONLINE)
+            else if (maintenance[server.port] == false) api.presence.setStatus(OnlineStatus.ONLINE)
 
-            if (maintenance) api.presence.setStatus(OnlineStatus.DO_NOT_DISTURB)
+            if (maintenance[server.port] == true) api.presence.setStatus(OnlineStatus.DO_NOT_DISTURB)
 
 
-            if (server.players != null && !maintenance) {
+            if (server.players != null && maintenance[server.port] == false) {
                 api.presence.activity = Activity.playing(server.players)
             } else {
                 api.presence.activity = Activity.customStatus("Server is in maintenance...")
