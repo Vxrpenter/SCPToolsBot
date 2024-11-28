@@ -1,4 +1,4 @@
-package dev.vxrp.bot.commands.listeners
+package dev.vxrp.bot.commands.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

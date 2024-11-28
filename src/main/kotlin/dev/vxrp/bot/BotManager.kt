@@ -4,7 +4,7 @@ package dev.vxrp.bot
 
 import dev.minn.jda.ktx.jdabuilder.intents
 import dev.minn.jda.ktx.jdabuilder.light
-import dev.vxrp.bot.commands.CommandListener
+import dev.vxrp.bot.commands.listeners.CommandListener
 import dev.vxrp.bot.commands.CommandManager
 import dev.vxrp.bot.events.ButtonListener
 import dev.vxrp.bot.status.StatusManager
