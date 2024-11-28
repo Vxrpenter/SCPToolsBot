@@ -15,5 +15,7 @@ data class Status(
 @Serializable
 data class Instance(
     val token: String,
+    val name: String,
+    val retries: Int,
     @SerialName("server_port")
     val serverPort: Int)

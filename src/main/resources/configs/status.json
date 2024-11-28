@@ -6,6 +6,8 @@
   "instances": [
     {
       "token": "",
+      "name": "",
+      "retries": 4,
       "server_port": 0
     }
   ]

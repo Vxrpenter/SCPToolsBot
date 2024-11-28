@@ -68,7 +68,7 @@ class StatusManager(val config: Config, val file: String) {
                 logger.warn("Couldn't access secretlab api, ${e.message}, retrying in ${status.cooldown} seconds")
 
             }
-            mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it) }
+            mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it, instance) }
         }
     }
 
@@ -95,7 +95,7 @@ class StatusManager(val config: Config, val file: String) {
 
     var maintenance = false
 
-    private fun spinUpChecker(api: JDA, server: Server) {
+    private fun spinUpChecker(api: JDA, server: Server, instance: Instance) {
         logger.debug("Updating status of bot: ${api.selfUser.name} (${api.selfUser.id}) for server - ${server.port}")
         if (server.online) {
 
@@ -116,46 +116,46 @@ class StatusManager(val config: Config, val file: String) {
             api.presence.activity = Activity.customStatus("Server Offline...")
         }
 
-        postStatusUpdate(server, api)
+        postStatusUpdate(server, api, instance)
     }
 
     private val serverStatus = hashMapOf<Int, Boolean>()
     private val reconnectAttempt = hashMapOf<Int, Int>()
 
-    private fun postStatusUpdate(server: Server, api: JDA) {
+    private fun postStatusUpdate(server: Server, api: JDA, instance: Instance) {
         serverStatus.putIfAbsent(server.port, server.online)
-        reconnectAttempt.putIfAbsent(server.port, 0)
+        reconnectAttempt.putIfAbsent(server.port, 1)
 
         if (server.online) {
             if (serverStatus[server.port] == true) return
 
-            postConnectionEstablished(api)
-            reconnectAttempt[server.port] = 0
+            postConnectionEstablished(api, instance)
+            reconnectAttempt[server.port] = 1
             serverStatus[server.port] = true
-            logger.info("Connection to server ${server.port} regained")
+            logger.info("Connection to server ${instance.name} (${instance.serverPort}) regained")
         } else {
             if (serverStatus[server.port] == false) return
 
-            if (reconnectAttempt[server.port]!! == 5) return
-            if (reconnectAttempt[server.port]!! == 4) {
-                logger.warn("Completely lost connection to server ${server.port}")
+            if (reconnectAttempt[server.port]!! == instance.retries+1) return
+            if (reconnectAttempt[server.port]!! == instance.retries) {
+                logger.warn("Completely lost connection to server ${instance.name} (${instance.serverPort})")
 
-                postConnectionLost(api)
-                reconnectAttempt[server.port] = 5
+                postConnectionLost(api, instance)
+                reconnectAttempt[server.port] = instance.retries+1
                 serverStatus[server.port] = false
                 return
             }
-            logger.warn("Lost connection to server - ${server.port}, trying reconnect... iteration ${reconnectAttempt[server.port]}")
+            logger.warn("Lost connection to server - ${instance.name} (${instance.serverPort}), trying reconnect... iteration ${reconnectAttempt[server.port]}")
             reconnectAttempt[server.port] = reconnectAttempt[server.port]!!+1
         }
     }
 
-    private fun postConnectionEstablished(api: JDA) {
+    private fun postConnectionEstablished(api: JDA, instance: Instance) {
         val embed = Embed {
             color = 0x2ECC70
             url = "https://status.scpslgame.com/"
-            title = "Connection to server reestablished"
-            description = "The connection to this server has been reestablished. Lost connection could be the cause of network issues or an offline server"
+            title = "${instance.name} - connection reestablished"
+            description = "The connection to the server has been reestablished! Outages should not occur often when the server is running stable"
             field {
                 name = "Reason"
                 value = "Server is online and central servers are up"
@@ -167,13 +167,12 @@ class StatusManager(val config: Config, val file: String) {
         }
     }
 
-    private fun postConnectionLost(api: JDA) {
+    private fun postConnectionLost(api: JDA, instance: Instance) {
         val embed = Embed {
             color = 0xE74D3C
             url = "https://status.scpslgame.com/"
-            title = "Connection to server lost"
-            description = "The connection to this server has been lost. Lost connection could be the cause of network issues or an offline server. " +
-                    "Tell your system administrator so they can resolve these issues"
+            title = "${instance.name} - connection lost"
+            description = "The connection to this server has been lost after **${instance.retries}** consecutive failures. Server has been marked as offline"
             field {
                 name = "Reason"
                 value = "Server is down, central servers are down or the secret lab api is down"
