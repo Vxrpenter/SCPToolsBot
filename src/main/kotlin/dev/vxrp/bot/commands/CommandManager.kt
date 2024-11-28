@@ -37,11 +37,12 @@ class CommandManager(val config: Config, val file: String) {
             if (!command.active) continue
 
             val permissions = mutableListOf<Permission>()
-            command.defaultPermissions.forEach { permission -> permissions.add(Permission.valueOf(permission)) }
+            command.defaultPermissions?.forEach { permission -> permissions.add(Permission.valueOf(permission)) }
 
             val currentCommand = Commands.slash(command.name, command.description).also { commandData ->
-                if (command.options.isNotEmpty()) commandData.addOptions(addOptions(command))
-
+                if (command.options != null) {
+                    commandData.addOptions(addOptions(command))
+                }
             }.setDefaultPermissions(DefaultMemberPermissions.enabledFor(permissions))
 
             commandList.add(currentCommand)
@@ -56,11 +57,13 @@ class CommandManager(val config: Config, val file: String) {
 
     private fun addOptions(command: CustomCommand): List<OptionData> {
         val optionData = mutableListOf<OptionData>()
-        for (option in command.options) {
+        for (option in command.options!!) {
             val choices = mutableListOf<Command.Choice>()
 
-            if (option.choices.isNotEmpty()) { repeat(option.choices.size) { choices.add(Command.Choice(option.choices[it].name, option.choices[it].id))} }
-            optionData.add(OptionData(OptionType.valueOf(option.type), option.name, option.description, option.isRequired).also { if (choices.isNotEmpty()) { it.addChoices(choices) } })
+            if (option.choices != null) {
+                option.choices.size.let { repeat(it) { choices.add(Command.Choice(option.choices[it].name, option.choices[it].id))} }
+            }
+            optionData.add(OptionData(OptionType.valueOf(option.type), option.name, option.description, option.isRequired).also { if (choices.isNotEmpty()) { it.addChoices(choices) }})
         }
 
         return optionData

@@ -14,11 +14,16 @@ data class CustomCommand(val active: Boolean,
                          val name: String,
                          val description: String,
                          @SerialName("default_permissions")
-                         val defaultPermissions: List<String>,
-                         val options: List<Options>)
+                         val defaultPermissions: List<String>?,
+                         val options: List<Options>? = null)
 
 @Serializable
-data class Options(val type: String, val name: String, val description: String, val isRequired: Boolean, val choices: List<Choices>)
+data class Options(val type: String,
+                   val name: String,
+                   val description: String,
+                   val isRequired: Boolean,
+                   val choices: List<Choices>? = null)
 
 @Serializable
-data class Choices(val name: String, val id: String)
+data class Choices(val name: String,
+                   val id: String)
