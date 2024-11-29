@@ -11,27 +11,35 @@ import java.time.Instant
 class PlayerlistCommands(val config: Config, val translation: Translation, private val statusConst: StatusConst) {
 
     fun pastePlayerList(event: SlashCommandInteractionEvent) {
-        println(statusConst.instance)
         val builder = StringBuilder()
         val currentPort = statusConst.mappedBots[event.jda.selfUser.id]
         val list = statusConst.mappedServers[currentPort]?.playerList
 
         if (list != null) {
-            if (list.isEmpty()) builder.append("&red&The server is empty")
+            if (list.isEmpty()) builder.append(translation.status.embedPlayerlistEmpty)
             for (player in list) {
-                builder.append("&reset&&bold&${player.nickname} &reset&(&green&&bold&${player.id}&reset&)\n")
+
+                builder.append(ColorTool().useCustomColorCodes(translation.status.embedPlayerlistPlayer
+                    .replace("%nickname%", player.nickname.toString())
+                    .replace("%id%", player.id.toString())))
             }
         } else {
-            builder.append("&red&Could not correctly load playerlist")
+            builder.append(ColorTool().useCustomColorCodes(translation.status.embedPlayerlistCouldntFetch).trimIndent())
         }
 
         val embed = Embed {
-            title = "Current Player List (this is not live updating)"
-            description = ColorTool().useCustomColorCodes("""
-                ```ansi
-                $builder
-                ```
-            """.trimIndent())
+            title = ColorTool().useCustomColorCodes(translation.status.embedPlayerlistTitle).trimIndent()
+            description = ColorTool().useCustomColorCodes(translation.status.embedPlayerlistBody
+                .replace("%players%", builder.toString())
+                .replace("%version%", statusConst.mappedServers[currentPort]?.version ?: "&red&&bold&Not Fetched")
+                .replace("%player_number%", statusConst.mappedServers[currentPort]?.players?.split("/".toRegex())?.get(0) ?: 0.toString())
+                .replace("%ff%", statusConst.mappedServers[currentPort]?.ff?.toString() ?: "&red&&bold&Not Fetched")
+                .replace("%wl%", statusConst.mappedServers[currentPort]?.wl?.toString() ?: "&red&&bold&Not Fetched")
+                .replace("%modded%", statusConst.mappedServers[currentPort]?.modded?.toString() ?: "&red&&bold&Not Fetched")
+                .replace("%mods%", statusConst.mappedServers[currentPort]?.mods?.toString() ?: "&red&&bold&Not Fetched")
+                //Styling for true and false
+                .replace("true", "&green&&bold&true")
+                .replace("false", "&red&&bold&false"))
             timestamp = Instant.now()
         }
 

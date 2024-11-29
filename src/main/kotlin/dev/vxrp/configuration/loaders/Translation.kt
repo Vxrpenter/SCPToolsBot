@@ -4,7 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Translation(@SerialName("HELP")
+data class Translation(@SerialName("STATUS")
+                       val status: TranslationStatus,
+                       @SerialName("HELP")
                        val help: TranslationHelp,
                        @SerialName("SUPPORT")
                        val support: TranslationSupport,
@@ -48,6 +50,44 @@ data class TranslationHelp(@SerialName("EMBED_PAGE_ONE_TITLE")
                            val embedFooterText: String,
                            @SerialName("EMBED_FOOTER_IMG")
                            val embedFooterImg: String)
+
+@Serializable
+data class TranslationStatus(@SerialName("ACTIVITY_OFFLINE")
+                             val activityOffline: String,
+                             @SerialName("ACTIVITY_MAINTENANCE")
+                             val activityMaintenance: String,
+                             @SerialName("EMBED_ESTABLISHED_TITLE")
+                             val embedEstablishedTitle: String,
+                             @SerialName("EMBED_ESTABLISHED_BODY")
+                             val embedEstablishedBody: String,
+                             @SerialName("EMBED_ESTABLISHED_FIELD_NAME")
+                             val embedEstablishedFieldName: String,
+                             @SerialName("EMBED_ESTABLISHED_FIELD_VALUE")
+                             val embedEstablishedFieldValue: String,
+                             @SerialName("EMBED_LOST_TITLE")
+                             val embedLostTitle: String,
+                             @SerialName("EMBED_LOST_BODY")
+                             val embedLostBody: String,
+                             @SerialName("EMBED_LOST_FIELD_NAME")
+                             val embedLostFieldName: String,
+                             @SerialName("EMBED_LOST_FIELD_VALUE")
+                             val embedLostFieldValue: String,
+                             @SerialName("EMBED_PLAYERLIST_TITLE")
+                             val embedPlayerlistTitle: String,
+                             @SerialName("EMBED_PLAYERLIST_BODY")
+                             val embedPlayerlistBody: String,
+                             @SerialName("EMBED_PLAYERLIST_EMPTY")
+                             val embedPlayerlistEmpty: String,
+                             @SerialName("EMBED_PLAYERLIST_COULDNT_FETCH")
+                             val embedPlayerlistCouldntFetch: String,
+                             @SerialName("EMBED_PLAYERLIST_PLAYER")
+                             val embedPlayerlistPlayer: String,
+                             @SerialName("MESSAGE_STATUS_EMPTY")
+                             val messageStatusEmpty: String,
+                             @SerialName("MESSAGE_STATUS_DEACTIVATED")
+                             val messageStatusDeactivated: String,
+                             @SerialName("MESSAGE_STATUS_ACTIVATED")
+                             val messageStatusActivated: String)
 
 @Serializable
 data class TranslationSupport(@SerialName("EMBED_TEMPLATE_SUPPORT_TITLE")
