@@ -11,6 +11,7 @@ import java.time.Instant
 class PlayerlistCommands(val config: Config, val translation: Translation, private val statusConst: StatusConst) {
 
     fun pastePlayerList(event: SlashCommandInteractionEvent) {
+        println(statusConst.instance)
         val builder = StringBuilder()
         val currentPort = statusConst.mappedBots[event.jda.selfUser.id]
         val list = statusConst.mappedServers[currentPort]?.playerList

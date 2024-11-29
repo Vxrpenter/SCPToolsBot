@@ -47,6 +47,8 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
     private fun initializeBots(status: Status, commandManager: CommandManager) {
         if (status.instances.isEmpty()) return
 
+        val instanceApiMapping = mutableMapOf<Instance, JDA>()
+
         for (instance in status.instances) {
             val newApi = light(instance.token, enableCoroutines = true) {
                 setActivity(Activity.playing("pending..."))
@@ -55,20 +57,20 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
             mappedBots[newApi.selfUser.id] = instance.serverPort
 
 
-            newApi.addEventListener(StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance)))
+            newApi.addEventListener(StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance, instance)))
 
             initializeCommands(commandManager, newApi)
-            updateStatus(instance, status, newApi)
+            instanceApiMapping[instance] = newApi
         }
+
+        updateStatus(status, instanceApiMapping)
     }
 
     private fun initializeCommands(commandManager: CommandManager, api: JDA) {
         commandManager.registerSpecificCommands(commandManager.query().statusCommands, api)
     }
 
-    private fun updateStatus(instance: Instance, status: Status, api: JDA) {
-        api.presence.setStatus(OnlineStatus.IDLE)
-
+    private fun updateStatus(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
         val ports = mutableListOf<Int>()
         status.instances.forEach { currentInstance -> ports.add(currentInstance.serverPort)}
 
@@ -78,9 +80,15 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
                 mappedPorts = mapPorts(status, ports)
             } catch (e: NullPointerException) {
                 logger.warn("Couldn't access secretlab api, ${e.message}, retrying in ${status.cooldown} seconds")
-
             }
-            mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it, instance) }
+
+            for (instance in status.instances) {
+                val api = instanceApiMap[instance] ?: continue
+
+                api.presence.setStatus(OnlineStatus.IDLE)
+
+                mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it, instance) }
+            }
         }
     }
 
@@ -88,8 +96,9 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
         val secretLab = SecretLab(status.api, status.accountId)
 
         val map  = mutableMapOf<Int, Server>()
+        val info = secretLab.serverInfo(lo = false, players = true, list = true)
+
         for (port in ports) {
-            val info = secretLab.serverInfo(lo = false, players = true, list = true)
 
             val server = serverByPort(port, info)
 
