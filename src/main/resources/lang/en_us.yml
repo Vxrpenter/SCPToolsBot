@@ -76,6 +76,43 @@ HELP:
   EMBED_FOOTER_TEXT: "⭐ Created with lots of passion by Vxrpenter ⭐"
   EMBED_FOOTER_IMG: "https://avatars.githubusercontent.com/u/110356385?v=4"
 
+STATUS:
+  ACTIVITY_OFFLINE: "Server Offline..."
+  ACTIVITY_MAINTENANCE: "Server is in maintenance..."
+
+  EMBED_ESTABLISHED_TITLE: "%instance% - connection lost"
+  EMBED_ESTABLISHED_BODY: "The connection to the server has been reestablished! Outages should not occur often when the server is running stable"
+  EMBED_ESTABLISHED_FIELD_NAME: "Reason"
+  EMBED_ESTABLISHED_FIELD_VALUE: "Server is online and central servers are up"
+
+  EMBED_LOST_TITLE: "%instance% - connection reestablished"
+  EMBED_LOST_BODY: "The connection to this server has been lost after **%retries%** consecutive failures. Server has been marked as offline"
+  EMBED_LOST_FIELD_NAME: "Reason"
+  EMBED_LOST_FIELD_VALUE: "Server is down, central servers are down or the secret lab api is down"
+
+  EMBED_PLAYERLIST_TITLE: "Current Online Players"
+  EMBED_PLAYERLIST_BODY: "
+                        ```ansi\n
+                        Version: &green&&bold&%version%&reset&\n
+                        Online Players: &bold&%player_number%&reset&\n
+                        FriendlyFire: %ff%&reset&\n
+                        Whitelisted: %wl%&reset&\n
+                        Modded: %modded%&reset&\n
+                        Mods: &bold&%mods%&reset&
+                        ```
+                        &filler&
+                        ```ansi
+                        
+                        %players%
+                        ```"
+  EMBED_PLAYERLIST_EMPTY: "&red&The server is empty"
+  EMBED_PLAYERLIST_COULDNT_FETCH: "&red&Could not correctly load playerlist"
+  EMBED_PLAYERLIST_PLAYER: "\n&reset&&bold&%nickname% &reset&(&green&&bold&%id%&reset&)"
+
+  MESSAGE_STATUS_EMPTY: "There is no Statusbot running"
+  MESSAGE_STATUS_DEACTIVATED: "Deactivated maintenance mode for server"
+  MESSAGE_STATUS_ACTIVATED: "Switched server to maintenance mode"
+
 SUPPORT:
 
   EMBED_TEMPLATE_SUPPORT_TITLE: "Create a Support Ticket"

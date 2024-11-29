@@ -13,6 +13,7 @@ import dev.vxrp.secretlab.SecretLab
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
 import dev.vxrp.util.Timer
+import dev.vxrp.util.color.ColorTool
 import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.OnlineStatus
@@ -57,7 +58,7 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
             mappedBots[newApi.selfUser.id] = instance.serverPort
 
 
-            newApi.addEventListener(StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance, instance)))
+            newApi.addEventListener(StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance)))
 
             initializeCommands(commandManager, newApi)
             instanceApiMapping[instance] = newApi
@@ -133,11 +134,11 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
             if (server.players != null && maintenance[server.port] == false) {
                 api.presence.activity = Activity.playing(server.players)
             } else {
-                api.presence.activity = Activity.customStatus("Server is in maintenance...")
+                api.presence.activity = Activity.customStatus(translation.status.activityOffline)
             }
         } else {
             api.presence.setStatus(OnlineStatus.DO_NOT_DISTURB)
-            api.presence.activity = Activity.customStatus("Server Offline...")
+            api.presence.activity = Activity.customStatus(translation.status.activityMaintenance)
         }
 
         postStatusUpdate(server, api, instance)
@@ -178,11 +179,12 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
         val embed = Embed {
             color = 0x2ECC70
             url = "https://status.scpslgame.com/"
-            title = "${instance.name} - connection reestablished"
-            description = "The connection to the server has been reestablished! Outages should not occur often when the server is running stable"
+            title = ColorTool().useCustomColorCodes(translation.status.embedEstablishedTitle)
+                .replace("%instance%", instance.name).trimIndent()
+            description = ColorTool().useCustomColorCodes(translation.status.embedEstablishedBody).trimIndent()
             field {
-                name = "Reason"
-                value = "Server is online and central servers are up"
+                name = ColorTool().useCustomColorCodes(translation.status.embedEstablishedFieldName).trimIndent()
+                value = ColorTool().useCustomColorCodes(translation.status.embedEstablishedFieldValue).trimIndent()
             }
         }
 
@@ -195,11 +197,13 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
         val embed = Embed {
             color = 0xE74D3C
             url = "https://status.scpslgame.com/"
-            title = "${instance.name} - connection lost"
-            description = "The connection to this server has been lost after **${instance.retries}** consecutive failures. Server has been marked as offline"
+            title = ColorTool().useCustomColorCodes(translation.status.embedLostTitle)
+                .replace("%instance%", instance.name).trimIndent()
+            description = ColorTool().useCustomColorCodes(translation.status.embedLostBody
+                .replace("%retries%", instance.retries.toString())).trimIndent()
             field {
-                name = "Reason"
-                value = "Server is down, central servers are down or the secret lab api is down"
+                name = ColorTool().useCustomColorCodes(translation.status.embedLostFieldName).trimIndent()
+                value = ColorTool().useCustomColorCodes(translation.status.embedLostFieldValue).trimIndent()
             }
         }
 
