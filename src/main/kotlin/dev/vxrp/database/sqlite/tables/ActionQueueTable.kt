@@ -2,7 +2,7 @@ package dev.vxrp.database.sqlite.tables
 
 import org.jetbrains.exposed.sql.Table
 
-class ActionQueue {
+class ActionQueueTable {
     object ActionQueue: Table("action_queue") {
         val id = text("id")
         val command = text("command")

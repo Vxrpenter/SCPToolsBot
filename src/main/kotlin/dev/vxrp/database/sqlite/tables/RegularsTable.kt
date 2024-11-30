@@ -2,7 +2,7 @@ package dev.vxrp.database.sqlite.tables
 
 import org.jetbrains.exposed.sql.Table
 
-class Regulars {
+class RegularsTable {
     object Regulars : Table("regulars") {
         val id = text("id")
         val active = bool("active").default(true)

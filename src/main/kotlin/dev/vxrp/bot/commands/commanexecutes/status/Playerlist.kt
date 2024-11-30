@@ -2,32 +2,31 @@ package dev.vxrp.bot.commands.commanexecutes.status
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.vxrp.bot.commands.data.StatusConst
-import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.color.ColorTool
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
+import net.dv8tion.jda.api.entities.MessageEmbed
 import java.time.Instant
 
-class PlayerlistCommands(val config: Config, val translation: Translation, private val statusConst: StatusConst) {
-
-    fun pastePlayerList(event: SlashCommandInteractionEvent) {
+class Playerlist {
+    fun getEmbed(botId: String, translation: Translation, statusConst: StatusConst): MessageEmbed {
         val builder = StringBuilder()
-        val currentPort = statusConst.mappedBots[event.jda.selfUser.id]
+        val currentPort = statusConst.mappedBots[botId]
         val list = statusConst.mappedServers[currentPort]?.playerList
 
         if (list != null) {
             if (list.isEmpty()) builder.append(translation.status.embedPlayerlistEmpty)
             for (player in list) {
 
-                builder.append(ColorTool().useCustomColorCodes(translation.status.embedPlayerlistPlayer
-                    .replace("%nickname%", player.nickname.toString())
-                    .replace("%id%", player.id.toString())))
+                builder.append(
+                    ColorTool().useCustomColorCodes(translation.status.embedPlayerlistPlayer
+                        .replace("%nickname%", player.nickname.toString())
+                        .replace("%id%", player.id.toString())))
             }
         } else {
             builder.append(ColorTool().useCustomColorCodes(translation.status.embedPlayerlistCouldntFetch).trimIndent())
         }
 
-        val embed = Embed {
+        return Embed {
             title = ColorTool().useCustomColorCodes(translation.status.embedPlayerlistTitle).trimIndent()
             description = ColorTool().useCustomColorCodes(translation.status.embedPlayerlistBody
                 .replace("%players%", builder.toString())
@@ -42,7 +41,5 @@ class PlayerlistCommands(val config: Config, val translation: Translation, priva
                 .replace("false", "&red&&bold&false"))
             timestamp = Instant.now()
         }
-
-        event.replyEmbeds(embed).setEphemeral(true).queue()
     }
 }

@@ -1,14 +1,19 @@
 {
   "active": false,
-  "cooldown": 10,
+  "check_playerlist": true,
+  "initialize_commands": true,
+  "initialize_event_listener": true,
+  "check_rate": 10,
+  "idle_after": 60,
+  "idle_check_rate": 30,
   "api": "",
   "account_id": "",
   "instances": [
     {
       "token": "",
       "name": "",
-      "retries": 4,
-      "server_port": 0
+      "server_port": 0,
+      "retries": 4
     }
   ]
 }

@@ -19,7 +19,7 @@ import java.io.File
 
 class CommandManager(val config: Config, val file: String) {
     private val logger = LoggerFactory.getLogger(CommandManager::class.java)
-    private val currentFile = File("${System.getProperty("user.dir")}$file")
+    private val currentFile = File(System.getProperty("user.dir")).resolve(file)
 
     init {
         if (!currentFile.exists()) {
