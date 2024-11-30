@@ -83,6 +83,27 @@
       "name": "playerlist",
       "description": "Shows active player list of the selected server",
       "default_permissions": ["ADMINISTRATOR"]
+    },
+    {
+      "active": true,
+      "inherit": "status_commands.template.default",
+      "name": "template",
+      "description": "Command for pasting certain templates",
+      "default_permissions": ["ADMINISTRATOR"],
+      "options": [
+        {
+          "type": "STRING",
+          "name": "template",
+          "description": "What template are you referring to",
+          "isRequired": true,
+          "choices": [
+            {
+              "name": "staticPlayerlist",
+              "id": "playerlist"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

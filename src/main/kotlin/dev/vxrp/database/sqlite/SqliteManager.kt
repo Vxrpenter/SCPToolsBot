@@ -1,10 +1,7 @@
 package dev.vxrp.database.sqlite
 
 import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.database.sqlite.tables.ActionQueue
-import dev.vxrp.database.sqlite.tables.NoticeOfDeparture
-import dev.vxrp.database.sqlite.tables.Regulars
-import dev.vxrp.database.sqlite.tables.Ticket
+import dev.vxrp.database.sqlite.tables.*
 import dev.vxrp.util.enums.Databasetype
 import org.jetbrains.exposed.sql.*
 
@@ -49,10 +46,11 @@ class SqliteManager(val config: Config, folder: String, val file: String) {
 
     private fun createTables() {
         transaction {
-            SchemaUtils.create(Ticket.Tickets)
-            SchemaUtils.create(NoticeOfDeparture.NoticeOfDepartures)
-            SchemaUtils.create(Regulars.Regulars)
-            SchemaUtils.create(ActionQueue.ActionQueue)
+            SchemaUtils.create(TicketTable.Tickets)
+            SchemaUtils.create(NoticeOfDepartureTable.NoticeOfDepartures)
+            SchemaUtils.create(RegularsTable.Regulars)
+            SchemaUtils.create(ActionQueueTable.ActionQueue)
+            SchemaUtils.create(StatusTable.Status)
         }
     }
 

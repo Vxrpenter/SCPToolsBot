@@ -11,13 +11,20 @@ import dev.vxrp.bot.status.StatusManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.sqlite.SqliteManager
+import dev.vxrp.util.Timer
 import kotlinx.coroutines.*
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.Activity.ActivityType
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.slf4j.LoggerFactory
+import kotlin.time.Duration.Companion.seconds
 
 class BotManager(val config: Config, val translation: Translation) {
+    private val timer = Timer()
+
     init {
         val api = light(config.token, enableCoroutines=true) {
             intents += listOf(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
@@ -33,21 +40,19 @@ class BotManager(val config: Config, val translation: Translation) {
         )
 
         val guild = api.awaitReady().getGuildById(config.guildId)
-        val commandManager = CommandManager(config, "/configs/commands.json")
-        val statusManager = StatusManager(config, translation, "/configs/status.json")
+        val commandManager = CommandManager(config, "configs/commands.json")
+        val statusManager = StatusManager(config, translation, timer, "configs/status.json")
         val sqliteManager = SqliteManager(config,"database", "data.db")
 
         commandManager.registerSpecificCommands(commandManager.query().commands, api)
 
-        // This could cause memory leaks if the interaction is halted. But we can ignore it here because if status is active, this
-        // Has to be launched. However, we first check if the status is active, so we can avoid these memory leaks, otherwise this has to
-        // run all the time anyway
+        val statusScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
+            LoggerFactory.getLogger(javaClass).error("An error occurred in the timer status coroutine", exception)
+        }) + SupervisorJob()
 
         if (statusManager.query().active) {
-            GlobalScope.launch { statusManager.initialize(commandManager) }
+            statusScope.launch { statusManager.initialize(commandManager) }
         }
-
-
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {

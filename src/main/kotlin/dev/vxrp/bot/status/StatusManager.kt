@@ -2,32 +2,49 @@ package dev.vxrp.bot.status
 
 import dev.minn.jda.ktx.jdabuilder.light
 import dev.minn.jda.ktx.messages.Embed
+import dev.minn.jda.ktx.messages.editMessage
 import dev.vxrp.bot.commands.CommandManager
+import dev.vxrp.bot.commands.commanexecutes.status.Playerlist
 import dev.vxrp.bot.commands.data.StatusConst
 import dev.vxrp.bot.commands.listeners.StatusCommandListener
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.sqlite.tables.StatusTable
 import dev.vxrp.secretlab.SecretLab
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
 import dev.vxrp.util.Timer
 import dev.vxrp.util.color.ColorTool
+import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
+import net.dv8tion.jda.api.entities.MessageEmbed
+import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
 
-class StatusManager(val config: Config, val translation: Translation, val file: String) {
+class StatusManager(val config: Config, val translation: Translation, private val timer: Timer, val file: String) {
     private val logger = LoggerFactory.getLogger(StatusManager::class.java)
-    private val currentFile = File("${System.getProperty("user.dir")}$file")
+    private val currentFile = File(System.getProperty("user.dir")).resolve(file)
 
     private val mappedBots = hashMapOf<String, Int>()
     private val maintenance = hashMapOf<Int, Boolean>()
+
+    private val mappedStatusConst = mutableMapOf<Int, StatusConst>()
+    private val mappedServers = hashMapOf<Int, Server>()
+
+    private val serverStatus = hashMapOf<Int, Boolean>()
+    private val reconnectAttempt = hashMapOf<Int, Int>()
+
+    private var secondsWithoutNewData = 0
+    private var nonChangedData = false
+    private var mapped: MutableMap<Int, Server>? = null
+
 
     init {
         if (!currentFile.exists()) {
@@ -44,7 +61,6 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
         initializeBots(status, commandManager)
     }
 
-    private val mappedServers = hashMapOf<Int, Server>()
     private fun initializeBots(status: Status, commandManager: CommandManager) {
         if (status.instances.isEmpty()) return
 
@@ -56,11 +72,10 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
             }
 
             mappedBots[newApi.selfUser.id] = instance.serverPort
+            mappedStatusConst[instance.serverPort] = StatusConst(mappedBots, mappedServers, maintenance)
 
-
-            newApi.addEventListener(StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance)))
-
-            initializeCommands(commandManager, newApi)
+            if (status.initializeListeners) newApi.addEventListener(StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance)))
+            if (status.initializeCommands) initializeCommands(commandManager, newApi)
             instanceApiMapping[instance] = newApi
         }
 
@@ -72,24 +87,53 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
     }
 
     private fun updateStatus(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
+        timer.runWithTimer(1.seconds) {
+            if (nonChangedData && status.idleAfter != secondsWithoutNewData) secondsWithoutNewData += 1
+        }
+
+        timer.runLooped {
+            runTimer(status, instanceApiMap)
+        }
+    }
+
+    private suspend fun runTimer(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
+        if (secondsWithoutNewData == status.idleAfter) {
+            logger.debug("Data hasn't changed for the last ${status.idleAfter} seconds, using check rate of ${status.idleCheckRate} seconds")
+            task(status, instanceApiMap)
+            delay(status.idleCheckRate.seconds)
+        } else {
+            task(status, instanceApiMap)
+            delay(status.checkRate.seconds)
+        }
+    }
+
+    private fun task(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
         val ports = mutableListOf<Int>()
         status.instances.forEach { currentInstance -> ports.add(currentInstance.serverPort)}
 
-        Timer(status.cooldown.seconds).runWithTimer {
-            var mappedPorts = mutableMapOf<Int, Server>()
-            try {
-                mappedPorts = mapPorts(status, ports)
-            } catch (e: NullPointerException) {
-                logger.warn("Couldn't access secretlab api, ${e.message}, retrying in ${status.cooldown} seconds")
-            }
+        var mappedPorts = mutableMapOf<Int, Server>()
+        try {
+            mappedPorts = mapPorts(status, ports)
+        } catch (e: NullPointerException) {
+            logger.warn("Couldn't access secretlab api, ${e.message}, retrying in ${status.checkRate} seconds")
+        }
 
-            for (instance in status.instances) {
-                val api = instanceApiMap[instance] ?: continue
+        if (mapped == mappedPorts) {
+            nonChangedData = true
+        } else {
+            secondsWithoutNewData = 0
+            mapped = mappedPorts
+            nonChangedData = false
+        }
 
-                api.presence.setStatus(OnlineStatus.IDLE)
+        if (status.checkPlayerlist) updatePlayerLists(mappedPorts, status.instances, instanceApiMap)
 
-                mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it, instance) }
-            }
+        for (instance in status.instances) {
+            val api = instanceApiMap[instance] ?: continue
+
+            api.presence.setStatus(OnlineStatus.IDLE)
+
+            mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it, instance) }
         }
     }
 
@@ -144,9 +188,6 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
         postStatusUpdate(server, api, instance)
     }
 
-    private val serverStatus = hashMapOf<Int, Boolean>()
-    private val reconnectAttempt = hashMapOf<Int, Int>()
-
     private fun postStatusUpdate(server: Server, api: JDA, instance: Instance) {
         serverStatus.putIfAbsent(server.port, server.online)
         reconnectAttempt.putIfAbsent(server.port, 1)
@@ -172,6 +213,39 @@ class StatusManager(val config: Config, val translation: Translation, val file: 
             }
             logger.warn("Lost connection to server - ${instance.name} (${instance.serverPort}), trying reconnect... iteration ${reconnectAttempt[server.port]}")
             reconnectAttempt[server.port] = reconnectAttempt[server.port]!!+1
+        }
+    }
+
+    private fun updatePlayerLists(ports: MutableMap<Int, Server>, instances: List<Instance>, instanceApiMap: MutableMap<Instance, JDA>) {
+        for (port in ports) {
+            var api: JDA? = null
+
+            for (instance in instances) {
+                if (instance.serverPort == port.key) {
+                    api = instanceApiMap[instance]
+                    break
+                }
+            }
+
+            transaction {
+                StatusTable.Status.select(StatusTable.Status.channelId, StatusTable.Status.messageId)
+                    .where { StatusTable.Status.port.eq(port.key.toString()) }
+                    .forEach {
+                        if (api == null) return@transaction
+                        val embeds = mutableListOf<MessageEmbed>()
+                        mappedStatusConst[port.key]?.let { statusConst ->
+                            Playerlist().getEmbed(api.selfUser.id, translation, statusConst)
+                        }?.let { playerListEmbed ->
+                            embeds.add(playerListEmbed)
+                        }
+
+                        api.getTextChannelById(it[StatusTable.Status.channelId])
+                            ?.editMessage(it[StatusTable.Status.messageId], null, embeds)?.queue()
+
+                        logger.debug("Updated playerlist with message id: ${it[StatusTable.Status.messageId]} in channel ${it[StatusTable.Status.channelId]} part of server ${port.key}")
+                    }
+            }
+
         }
     }
 

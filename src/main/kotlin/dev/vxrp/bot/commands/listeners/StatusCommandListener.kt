@@ -2,8 +2,9 @@ package dev.vxrp.bot.commands.listeners
 
 import dev.minn.jda.ktx.events.listener
 import dev.vxrp.bot.commands.CommandManager
-import dev.vxrp.bot.commands.commanexecutes.status.PlayerlistCommands
+import dev.vxrp.bot.commands.commanexecutes.status.PlayerlistCommand
 import dev.vxrp.bot.commands.commanexecutes.status.StatusCommand
+import dev.vxrp.bot.commands.commanexecutes.status.TemplateCommand
 import dev.vxrp.bot.commands.data.StatusConst
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
@@ -26,11 +27,13 @@ class StatusCommandListener(val api: JDA, val config: Config, val translation: T
         }
     }
 
-    private fun checkInheritance(inherit: String, event: SlashCommandInteractionEvent) {
+    private suspend fun checkInheritance(inherit: String, event: SlashCommandInteractionEvent) {
         when (inherit) {
             "status_commands.status.default" -> statusCommand(event)
 
             "status_commands.playerlist.default" -> playerListCommand(event)
+
+            "status_commands.template.default" -> templateCommand(event)
         }
     }
 
@@ -39,6 +42,10 @@ class StatusCommandListener(val api: JDA, val config: Config, val translation: T
     }
 
     private fun playerListCommand(event: SlashCommandInteractionEvent) {
-        PlayerlistCommands(config, translation, statusConst).pastePlayerList(event)
+        PlayerlistCommand(config, translation, statusConst).pastePlayerList(event)
+    }
+
+    private suspend fun templateCommand(event: SlashCommandInteractionEvent) {
+        if (event.getOption("template")?.asString == "playerlist") TemplateCommand(config, translation, statusConst).pastePlayerList(event)
     }
 }
