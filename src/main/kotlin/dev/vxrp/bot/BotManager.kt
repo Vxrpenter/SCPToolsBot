@@ -1,5 +1,3 @@
-@file:Suppress("OPT_IN_USAGE")
-
 package dev.vxrp.bot
 
 import dev.minn.jda.ktx.jdabuilder.intents
@@ -17,10 +15,7 @@ import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.Activity.ActivityType
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
-import kotlin.time.Duration.Companion.seconds
 
 class BotManager(val config: Config, val translation: Translation) {
     private val timer = Timer()
