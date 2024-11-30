@@ -12,7 +12,6 @@ class StatusCommand(val config: Config, val translation: Translation, private va
         val currentPort = statusConst.mappedBots[event.jda.selfUser.id]
         val maintenance = statusConst.maintenance
 
-        println(maintenance)
         if (maintenance[currentPort] == null) {
             event.reply(ColorTool().useCustomColorCodes(translation.status.messageStatusEmpty).trimIndent()).setEphemeral(true).queue()
         }
