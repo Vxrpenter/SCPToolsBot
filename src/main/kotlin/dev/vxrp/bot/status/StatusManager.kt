@@ -12,6 +12,7 @@ import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.sqlite.tables.StatusTable
+import dev.vxrp.main
 import dev.vxrp.secretlab.SecretLab
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
@@ -50,12 +51,17 @@ class StatusManager(val config: Config, val translation: Translation, private va
         if (!currentFile.exists()) {
             currentFile.createNewFile()
 
-            val content = StatusManager::class.java.getResourceAsStream(file)
+            val content = StatusManager::class.java.getResourceAsStream("/$file")
             if (content != null) currentFile.appendBytes(content.readBytes())
         }
     }
 
     fun initialize(commandManager: CommandManager) {
+        maintenance.clear()
+        mappedBots.clear()
+        mappedStatusConst.clear()
+        mappedServers.clear()
+
         val status = query()
 
         initializeBots(status, commandManager)
@@ -174,15 +180,14 @@ class StatusManager(val config: Config, val translation: Translation, private va
 
             if (maintenance[server.port] == true) api.presence.setStatus(OnlineStatus.DO_NOT_DISTURB)
 
-
             if (server.players != null && maintenance[server.port] == false) {
                 api.presence.activity = Activity.playing(server.players)
             } else {
-                api.presence.activity = Activity.customStatus(translation.status.activityOffline)
+                api.presence.activity = Activity.customStatus(translation.status.activityMaintenance)
             }
         } else {
             api.presence.setStatus(OnlineStatus.DO_NOT_DISTURB)
-            api.presence.activity = Activity.customStatus(translation.status.activityMaintenance)
+            api.presence.activity = Activity.customStatus(translation.status.activityOffline)
         }
 
         postStatusUpdate(server, api, instance)

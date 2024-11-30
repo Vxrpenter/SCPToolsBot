@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
 class CommandListener(val api: JDA, val config: Config, val translation: Translation) : ListenerAdapter() {
     init {
         api.listener<SlashCommandInteractionEvent> { event ->
-            val commandManager = CommandManager(config, "/configs/commands.json")
+            val commandManager = CommandManager(config, "configs/commands.json")
 
             val commandList = commandManager.query().commands
 

@@ -25,7 +25,7 @@ class CommandManager(val config: Config, val file: String) {
         if (!currentFile.exists()) {
             currentFile.createNewFile()
 
-            val content = ConfigManager::class.java.getResourceAsStream(file)
+            val content = ConfigManager::class.java.getResourceAsStream("/$file")
             if (content != null) currentFile.appendBytes(content.readBytes())
         }
     }
