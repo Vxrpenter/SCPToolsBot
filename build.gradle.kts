@@ -62,6 +62,9 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:$apacheCommonsVersion")
     implementation("com.google.code.gson:gson:$gsonVersion")
 
+    // Ascii
+    implementation("com.jakewharton.picnic:picnic:0.7.0")
+
     // DEPRECATED
     implementation("org.bspfsystems:yamlconfiguration:2.0.2")
 }

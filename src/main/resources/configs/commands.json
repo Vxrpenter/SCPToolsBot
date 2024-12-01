@@ -88,6 +88,83 @@
           ]
         }
       ]
+    },
+    {
+      "active": true,
+      "inherit": "commands.database.default",
+      "name": "database",
+      "description": "Command for accessing the local database, querying, changing or deleting data",
+      "default_permissions": ["ADMINISTRATOR"],
+      "subcommands": [
+        {
+          "inherit": "commands.database.sub.query",
+          "name": "query",
+          "description": "Query a specific database entry by value",
+          "options": [
+            {
+              "type": "STRING",
+              "name": "table",
+              "description": "The table to query from",
+              "isRequired": true,
+              "choices": [
+                {
+                  "name": "notice_of_departures",
+                  "id": "notice_of_departures"
+                },
+                {
+                  "name": "playerlist",
+                  "id": "playerlist"
+                },
+                {
+                  "name": "regulars",
+                  "id": "regulars"
+                },
+                {
+                  "name": "tickets",
+                  "id": "tickets"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "name": "key",
+              "description": "The item to search for",
+              "isRequired": true
+            }
+          ]
+        },
+        {
+          "inherit": "commands.database.sub.table",
+          "name": "table",
+          "description": "Show full contents of table",
+          "options": [
+            {
+              "type": "STRING",
+              "name": "table",
+              "description": "The table to query from",
+              "isRequired": true,
+              "choices": [
+                {
+                  "name": "notice_of_departures",
+                  "id": "notice_of_departures"
+                },
+                {
+                  "name": "playerlist",
+                  "id": "playerlist"
+                },
+                {
+                  "name": "regulars",
+                  "id": "regulars"
+                },
+                {
+                  "name": "tickets",
+                  "id": "tickets"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "status_commands": [

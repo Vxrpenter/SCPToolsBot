@@ -1,19 +1,25 @@
 package dev.vxrp.bot.commands
 
+import dev.minn.jda.ktx.interactions.commands.option
 import dev.minn.jda.ktx.interactions.commands.updateCommands
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.managers.ConfigManager
 import dev.vxrp.bot.commands.data.CommandList
 import dev.vxrp.bot.commands.data.CustomCommand
+import dev.vxrp.bot.commands.data.Options
+import dev.vxrp.bot.commands.data.Subcommands
 import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.interactions.commands.Command
+import net.dv8tion.jda.api.interactions.commands.Command.Subcommand
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions
 import net.dv8tion.jda.api.interactions.commands.OptionType
 import net.dv8tion.jda.api.interactions.commands.build.CommandData
 import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
+import net.dv8tion.jda.api.interactions.commands.build.SubcommandData
+import okhttp3.internal.format
 import org.slf4j.LoggerFactory
 import java.io.File
 
@@ -40,7 +46,10 @@ class CommandManager(val config: Config, val file: String) {
 
             val currentCommand = Commands.slash(command.name, command.description).also { commandData ->
                 if (command.options != null) {
-                    commandData.addOptions(addOptions(command))
+                    commandData.addOptions(addOptions(command.options))
+                }
+                if (command.subcommands != null) {
+                    commandData.addSubcommands(addSubcommands(command.subcommands))
                 }
             }.setDefaultPermissions(DefaultMemberPermissions.enabledFor(permissions))
 
@@ -53,9 +62,9 @@ class CommandManager(val config: Config, val file: String) {
         }.queue()
     }
 
-    private fun addOptions(command: CustomCommand): List<OptionData> {
+    private fun addOptions(options: List<Options>?): List<OptionData> {
         val optionData = mutableListOf<OptionData>()
-        for (option in command.options!!) {
+        for (option in options!!) {
             val choices = mutableListOf<Command.Choice>()
 
             if (option.choices != null) {
@@ -65,6 +74,22 @@ class CommandManager(val config: Config, val file: String) {
         }
 
         return optionData
+    }
+
+    private fun addSubcommands(subcommands: List<Subcommands>?): List<SubcommandData> {
+        val subcommandData = mutableListOf<SubcommandData>()
+        for (subcommand in subcommands!!) {
+            val options = mutableListOf<OptionData>()
+
+            val currentSubCommand = SubcommandData(subcommand.name, subcommand.description).also { commandData ->
+                if (subcommand.options != null) {
+                    commandData.addOptions(addOptions(subcommand.options))
+                }
+            }
+
+            subcommandData.add(currentSubCommand)
+        }
+        return subcommandData
     }
 
     fun query(): CommandList {
