@@ -33,6 +33,8 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
             "commands.notice_of_departure.default" -> noticeOfDepartureCommand(event)
 
             "commands.regulars.default" -> regularsCommand(event)
+
+            "commands.player.default" -> playerCommand(event)
         }
     }
 
@@ -52,4 +54,7 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
     }
 
+    private fun playerCommand(event: SlashCommandInteractionEvent) {
+
+    }
 }

@@ -66,6 +66,41 @@
           "name": "user",
           "description": "The user to query from",
           "isRequired": true
+        },
+        {
+          "type": "STRING",
+          "name": "type",
+          "description": "Specify the info type",
+          "isRequired": false,
+          "choices": [
+            {
+              "name": "statistics",
+              "id": "stats"
+            },
+            {
+              "name": "moderation",
+              "id": "mod"
+            },
+            {
+              "name": "appeals",
+              "id": "appeals"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "active": true,
+      "inherit": "commands.kill.default",
+      "name":"kill",
+      "description": "Command for killing status bot processes",
+      "default_permissions": ["ADMINISTRATOR"],
+      "options": [
+        {
+          "type": "USER",
+          "name": "application",
+          "description": "The application to kill",
+          "isRequired": true
         }
       ]
     }

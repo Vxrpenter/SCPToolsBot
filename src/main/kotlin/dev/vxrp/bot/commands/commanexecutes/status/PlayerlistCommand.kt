@@ -9,6 +9,6 @@ class PlayerlistCommand(val config: Config, val translation: Translation, privat
 
     fun pastePlayerList(event: SlashCommandInteractionEvent) {
         val embed = Playerlist().getEmbed(event.jda.selfUser.id, translation, statusConst)
-        val message = event.replyEmbeds(embed).setEphemeral(true).queue()
+        event.replyEmbeds(embed).setEphemeral(true).queue()
     }
 }

@@ -51,7 +51,6 @@ class CommandManager(val config: Config, val file: String) {
         api.updateCommands {
             addCommands(commandList)
         }.queue()
-
     }
 
     private fun addOptions(command: CustomCommand): List<OptionData> {

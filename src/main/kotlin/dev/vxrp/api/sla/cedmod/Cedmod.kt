@@ -1,4 +1,4 @@
-package dev.vxrp.cedmod
+package dev.vxrp.api.sla.cedmod
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject

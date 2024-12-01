@@ -2,6 +2,7 @@ package dev.vxrp.bot.commands.commanexecutes.status
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.editMessage
+import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.commands.data.StatusConst
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
@@ -16,8 +17,10 @@ class TemplateCommand(val config: Config, val translation: Translation, private 
 
     suspend fun pastePlayerList(event: SlashCommandInteractionEvent) {
         val embed = Playerlist().getEmbed(event.jda.selfUser.id, translation, statusConst)
-        val message = event.replyEmbeds(embed).await()
-        val id = message.retrieveOriginal().await().id
+
+        val message = event.channel.send("", listOf(embed)).await()
+        event.reply("Pasted static playerlist").setEphemeral(true).queue()
+        val id = message.id
 
 
         val currentPort = statusConst.mappedBots[event.jda.selfUser.id]

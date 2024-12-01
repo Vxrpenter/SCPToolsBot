@@ -1,4 +1,4 @@
-package dev.vxrp.scplist
+package dev.vxrp.api.sla.scplist
 
 import dev.vxrp.scplist.data.ScpListServers
 import dev.vxrp.scplist.data.Server
