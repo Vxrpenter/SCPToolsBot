@@ -72,6 +72,22 @@ data class TranslationStatus(@SerialName("ACTIVITY_OFFLINE")
                              val embedLostFieldName: String,
                              @SerialName("EMBED_LOST_FIELD_VALUE")
                              val embedLostFieldValue: String,
+                             @SerialName("EMBED_MAINTENANCE_ON_TITLE")
+                             val embedMaintenanceOnTitle: String,
+                             @SerialName("EMBED_MAINTENANCE_ON_BODY")
+                             val embedMaintenanceOnBody: String,
+                             @SerialName("EMBED_MAINTENANCE_ON_FIELD_NAME")
+                             val embedMaintenanceOnFieldName: String,
+                             @SerialName("EMBED_MAINTENANCE_ON_FIELD_VALUE")
+                             val embedMaintenanceOnFieldValue: String,
+                             @SerialName("EMBED_MAINTENANCE_OFF_TITLE")
+                             val embedMaintenanceOffTitle: String,
+                             @SerialName("EMBED_MAINTENANCE_OFF_BODY")
+                             val embedMaintenanceOffBody: String,
+                             @SerialName("EMBED_MAINTENANCE_OFF_FIELD_NAME")
+                             val embedMaintenanceOffFieldName: String,
+                             @SerialName("EMBED_MAINTENANCE_OFF_FIELD_VALUE")
+                             val embedMaintenanceOffFieldValue: String,
                              @SerialName("EMBED_PLAYERLIST_TITLE")
                              val embedPlayerlistTitle: String,
                              @SerialName("EMBED_PLAYERLIST_BODY")

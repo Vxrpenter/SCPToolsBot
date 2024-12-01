@@ -51,6 +51,8 @@ status:
   post_server_status: false
   # Where should the server status be posted?
   post_channel : ""
+  # Status page url, change this if you have a custom server status page set up
+  page_url: "https://status.scpslgame.com/"
 
 cedmod:
   # Should Cedmod integration features be established or deactivated?
