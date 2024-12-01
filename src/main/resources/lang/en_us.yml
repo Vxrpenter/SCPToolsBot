@@ -80,12 +80,12 @@ STATUS:
   ACTIVITY_OFFLINE: "Server Offline..."
   ACTIVITY_MAINTENANCE: "Server is in maintenance..."
 
-  EMBED_ESTABLISHED_TITLE: "%instance% - connection lost"
+  EMBED_ESTABLISHED_TITLE: "%instance% - connection reestablished"
   EMBED_ESTABLISHED_BODY: "The connection to the server has been reestablished! Outages should not occur often when the server is running stable"
   EMBED_ESTABLISHED_FIELD_NAME: "Reason"
   EMBED_ESTABLISHED_FIELD_VALUE: "Server is online and central servers are up"
 
-  EMBED_LOST_TITLE: "%instance% - connection reestablished"
+  EMBED_LOST_TITLE: "%instance% - connection lost"
   EMBED_LOST_BODY: "The connection to this server has been lost after **%retries%** consecutive failures. Server has been marked as offline"
   EMBED_LOST_FIELD_NAME: "Reason"
   EMBED_LOST_FIELD_VALUE: "Server is down, central servers are down or the secret lab api is down"

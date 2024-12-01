@@ -37,13 +37,13 @@ rules:
 
 logging:
   # Should logging actions to channels be performed?
-  do_logging: true
+  do_logging: false
   # Channel id of the ticket logging channel
   ticket_logging_channel_id: ""
   # Channel id of notice of departure logging channel
   notice_of_departures_logging_channel_id: ""
   # Channel id of database logging channel. Will log all database activity to a discord channel
-  do_database_logging: true
+  do_database_logging: false
   database_logging_channel_id: ""
 
 status:

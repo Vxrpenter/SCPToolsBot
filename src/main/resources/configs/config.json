@@ -1,0 +1,55 @@
+{
+  "token": "",
+  "guild_id": "",
+  "load_translation": "en_us",
+  "debug": false,
+  "advances_debug": false,
+  "activity_type": "PLAYING",
+  "activity_content": "/help",
+  "database": {
+    "use_predefined_database_set": "SQLITE",
+    "custom_type": "",
+    "custom_url": "",
+    "custom_username": "",
+    "custom_password": ""
+  },
+  "rules": {
+    "pastebin": "",
+    "embed_footer": "Official Server Ruleset"
+  },
+  "logging": {
+    "do_logging": false,
+    "ticket_logging_channel_id": "",
+    "notice_of_departures_logging_channel_id": "",
+    "do_database_logging": false,
+    "database_logging_channel_id": ""
+  },
+  "status": {
+    "post_server_status": false,
+    "post_channel": "",
+    "page_url": "https://status.scpslgame.com/"
+  },
+  "cedmod":{
+    "active": false,
+    "instance_url": "",
+    "api_key": "",
+    "master_ban_list_id": ""
+  },
+  "support": {
+    "roles_access_support_tickets": [],
+    "roles_access_unban_tickets": [],
+    "unban_channel_id": ""
+  },
+  "notice_of_departure": {
+    "decision_channel_id": "",
+    "notice_channel_id": "",
+    "roles_access_notices": [],
+    "check_type": "HOURS",
+    "check_rate": 1
+  },
+  "regulars": {
+    "create_example_configuration": true,
+    "only_load_certain_folder": false,
+    "only_load_folders": []
+  }
+}

@@ -88,21 +88,6 @@
           ]
         }
       ]
-    },
-    {
-      "active": true,
-      "inherit": "commands.kill.default",
-      "name":"kill",
-      "description": "Command for killing status bot processes",
-      "default_permissions": ["ADMINISTRATOR"],
-      "options": [
-        {
-          "type": "USER",
-          "name": "application",
-          "description": "The application to kill",
-          "isRequired": true
-        }
-      ]
     }
   ],
   "status_commands": [
