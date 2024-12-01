@@ -1,5 +1,6 @@
 package dev.vxrp.bot.status
 
+import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.jdabuilder.light
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.editMessage
@@ -24,6 +25,12 @@ import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.MessageEmbed
+import net.dv8tion.jda.api.exceptions.ContextException
+import net.dv8tion.jda.api.exceptions.ErrorResponseException
+import org.jetbrains.exposed.sql.Op
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.deleteWhere
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 import java.io.File
@@ -244,8 +251,13 @@ class StatusManager(val config: Config, val translation: Translation, private va
                             embeds.add(playerListEmbed)
                         }
 
-                        api.getTextChannelById(it[StatusTable.Status.channelId])
-                            ?.editMessage(it[StatusTable.Status.messageId], null, embeds)?.queue()
+                        try {
+
+                            api.getTextChannelById(it[StatusTable.Status.channelId])
+                                ?.editMessage(it[StatusTable.Status.messageId], null, embeds)?.complete()
+                        } catch (e: ErrorResponseException) {
+                            StatusTable.Status.deleteWhere { StatusTable.Status.port.eq(port.key.toString()) }
+                        }
 
                         logger.debug("Updated playerlist with message id: ${it[StatusTable.Status.messageId]} in channel ${it[StatusTable.Status.channelId]} part of server ${port.key}")
                     }
