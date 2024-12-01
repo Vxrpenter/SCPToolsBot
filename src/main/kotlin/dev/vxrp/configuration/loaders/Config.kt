@@ -84,6 +84,8 @@ data class ConfigStatus(
     val postServerStatus: Boolean,
     @SerialName("post_channel")
     val postChannel: String,
+    @SerialName("page_url")
+    val pageUrl: String,
 )
 
 @Serializable

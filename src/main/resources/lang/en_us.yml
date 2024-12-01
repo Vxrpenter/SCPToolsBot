@@ -90,6 +90,16 @@ STATUS:
   EMBED_LOST_FIELD_NAME: "Reason"
   EMBED_LOST_FIELD_VALUE: "Server is down, central servers are down or the secret lab api is down"
 
+  EMBED_MAINTENANCE_ON_TITLE: "%instance% - maintenance engaged"
+  EMBED_MAINTENANCE_ON_BODY: "This server has been set to maintenance mode. Server data is not available and players will not be shown in the activity"
+  EMBED_MAINTENANCE_ON_FIELD_NAME: "Reason"
+  EMBED_MAINTENANCE_ON_FIELD_VALUE: "There is no reason given for this maintenance, please contact server staff for more info"
+
+  EMBED_MAINTENANCE_OFF_TITLE: "%instance% - maintenance deactivated"
+  EMBED_MAINTENANCE_OFF_BODY: "This server has been put out of maintenance mode. Server data is now available and players will be shown in activity"
+  EMBED_MAINTENANCE_OFF_FIELD_NAME: "Reason"
+  EMBED_MAINTENANCE_OFF_FIELD_VALUE: "There is no reason given for this maintenance, please contact server staff for more info"
+
   EMBED_PLAYERLIST_TITLE: "Current Online Players"
   EMBED_PLAYERLIST_BODY: "
                         ```ansi\n

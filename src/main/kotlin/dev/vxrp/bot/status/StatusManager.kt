@@ -85,9 +85,9 @@ class StatusManager(val config: Config, val translation: Translation, private va
             }
 
             mappedBots[newApi.selfUser.id] = instance.serverPort
-            mappedStatusConst[instance.serverPort] = StatusConst(mappedBots, mappedServers, maintenance)
+            mappedStatusConst[instance.serverPort] = StatusConst(mappedBots, mappedServers, maintenance, instance)
 
-            if (status.initializeListeners) newApi.addEventListener(StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance)))
+            if (status.initializeListeners) newApi.addEventListener(StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance, instance)))
             if (status.initializeCommands) initializeCommands(commandManager, newApi)
             instanceApiMapping[instance] = newApi
         }
@@ -269,7 +269,7 @@ class StatusManager(val config: Config, val translation: Translation, private va
     private fun postConnectionEstablished(api: JDA, instance: Instance) {
         val embed = Embed {
             color = 0x2ECC70
-            url = "https://status.scpslgame.com/"
+            url = config.status.pageUrl
             title = ColorTool().useCustomColorCodes(translation.status.embedEstablishedTitle)
                 .replace("%instance%", instance.name).trimIndent()
             description = ColorTool().useCustomColorCodes(translation.status.embedEstablishedBody).trimIndent()
@@ -287,7 +287,7 @@ class StatusManager(val config: Config, val translation: Translation, private va
     private fun postConnectionLost(api: JDA, instance: Instance) {
         val embed = Embed {
             color = 0xE74D3C
-            url = "https://status.scpslgame.com/"
+            url = config.status.pageUrl
             title = ColorTool().useCustomColorCodes(translation.status.embedLostTitle)
                 .replace("%instance%", instance.name).trimIndent()
             description = ColorTool().useCustomColorCodes(translation.status.embedLostBody
