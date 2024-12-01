@@ -2,7 +2,6 @@ package dev.vxrp.bot.commands.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 @Serializable
 data class CommandList(val commands: List<CustomCommand>,
                        @SerialName("status_commands")
@@ -15,7 +14,14 @@ data class CustomCommand(val active: Boolean,
                          val description: String,
                          @SerialName("default_permissions")
                          val defaultPermissions: List<String>?,
-                         val options: List<Options>? = null)
+                         val options: List<Options>? = null,
+                         val subcommands: List<Subcommands>? = null,)
+
+@Serializable
+data class Subcommands(val inherit: String,
+                       val name: String,
+                       val description: String,
+                       val options: List<Options>? = null,)
 
 @Serializable
 data class Options(val type: String,
