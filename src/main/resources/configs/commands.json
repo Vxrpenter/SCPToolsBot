@@ -53,6 +53,21 @@
       "name": "regulars",
       "description": "Use for configuring regulars and modifying saved information",
       "default_permissions": ["ADMINISTRATOR"]
+    },
+    {
+      "active": true,
+      "inherit": "commands.player.default",
+      "name": "player",
+      "description": "A command for querying data bout a user",
+      "default_permissions": ["ADMINISTRATOR"],
+      "options": [
+        {
+          "type": "USER",
+          "name": "user",
+          "description": "The user to query from",
+          "isRequired": true
+        }
+      ]
     }
   ],
   "status_commands": [
