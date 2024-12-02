@@ -20,10 +20,6 @@ import org.slf4j.LoggerFactory
 class BotManager(val config: Config, val translation: Translation) {
     private val timer = Timer()
 
-    private val statusScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
-        LoggerFactory.getLogger(javaClass).error("An error occurred in the timer status coroutine", exception)
-    }) + SupervisorJob()
-
     init {
         val api = light(config.token, enableCoroutines=true) {
             intents += listOf(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
@@ -45,11 +41,13 @@ class BotManager(val config: Config, val translation: Translation) {
 
         commandManager.registerSpecificCommands(commandManager.query().commands, api)
 
+        val statusScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
+            LoggerFactory.getLogger(javaClass).error("An error occurred in the timer status coroutine", exception)
+        }) + SupervisorJob()
+
         if (statusManager.query().active) {
             statusScope.launch { statusManager.initialize(commandManager) }
         }
-
-        timer.timerScope.cancel()
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {
