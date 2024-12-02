@@ -68,8 +68,8 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
     private fun checkSubInheritance(inherit: String, event: SlashCommandInteractionEvent): Boolean {
         when (inherit) {
-            "commands.database.sub.query" -> {
-                databaseSubQuery(event)
+            "placeholder" -> {
+                // do no, no
                 return true
             }
         }
@@ -82,7 +82,6 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
     }
 
     private fun templateCommand(event: SlashCommandInteractionEvent) {
-
     }
 
     private fun noticeOfDepartureCommand(event: SlashCommandInteractionEvent) {
@@ -101,9 +100,4 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
     }
 
-
-
-    private fun databaseSubQuery(event: SlashCommandInteractionEvent) {
-
-    }
 }

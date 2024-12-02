@@ -61,7 +61,9 @@ fun initializeTranslations(translationManager: TranslationManager) {
     translationManager.create(System.getProperty("user.dir"), translations)
 }
 
-class ScpToolsBot(val config: Config, val translation: Translation) {
+class ScpToolsBot(currentConfig: Config, currentTranslation: Translation) {
+    var config = currentConfig
+    var translation = currentTranslation
 
     init {
         BotManager(config, translation)

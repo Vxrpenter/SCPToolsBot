@@ -41,7 +41,7 @@ class Github {
                 properties.load(InputStreamReader(versionPropertiesStream, StandardCharsets.UTF_8))
             }
             logger.info("Checking for latest version...")
-            if (properties.getProperty("version") != tag) {
+            if (properties.getProperty("version") < tag) {
                 logger.warn(
                     "A new version has been found, you can download it from {}", dev.vxrp.util.color.ColorTool().apply(DCColor.LIGHT_BLUE,
                         "https://github.com/Vxrpenter/SCPToolsBot/releases/tag/v.$tag"
