@@ -165,6 +165,13 @@
           ]
         }
       ]
+    },
+    {
+      "active": true,
+      "inherit": "commands.settings.default",
+      "name": "settings",
+      "description": "Bot settings/configurations",
+      "default_permissions": ["ADMINISTRATOR"]
     }
   ],
   "status_commands": [

@@ -53,7 +53,7 @@ class Timer {
         }
     }
 
-    val timerScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
+    private val timerScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
         LoggerFactory.getLogger(javaClass).error("An error occurred in the timer coroutine", exception)
     }) + SupervisorJob()
 }

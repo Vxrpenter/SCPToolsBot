@@ -1,6 +1,5 @@
 package dev.vxrp.bot.commands
 
-import dev.minn.jda.ktx.interactions.commands.option
 import dev.minn.jda.ktx.interactions.commands.updateCommands
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.managers.ConfigManager
@@ -12,14 +11,12 @@ import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.interactions.commands.Command
-import net.dv8tion.jda.api.interactions.commands.Command.Subcommand
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions
 import net.dv8tion.jda.api.interactions.commands.OptionType
 import net.dv8tion.jda.api.interactions.commands.build.CommandData
 import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import net.dv8tion.jda.api.interactions.commands.build.SubcommandData
-import okhttp3.internal.format
 import org.slf4j.LoggerFactory
 import java.io.File
 
