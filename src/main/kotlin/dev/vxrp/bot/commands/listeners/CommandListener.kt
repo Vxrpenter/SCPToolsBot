@@ -2,7 +2,6 @@ package dev.vxrp.bot.commands.listeners
 
 import dev.minn.jda.ktx.events.listener
 import dev.vxrp.bot.commands.CommandManager
-import dev.vxrp.bot.commands.commanexecutes.database.TableSubCommand
 import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
@@ -73,11 +72,6 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                 databaseSubQuery(event)
                 return true
             }
-
-            "commands.database.sub.table" -> {
-                databaseSubTable(event)
-                return true
-            }
         }
 
         return false
@@ -111,9 +105,5 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
     private fun databaseSubQuery(event: SlashCommandInteractionEvent) {
 
-    }
-
-    private fun databaseSubTable(event: SlashCommandInteractionEvent) {
-        TableSubCommand().pasteTable(event)
     }
 }
