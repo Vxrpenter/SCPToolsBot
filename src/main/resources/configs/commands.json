@@ -132,37 +132,6 @@
               "isRequired": true
             }
           ]
-        },
-        {
-          "inherit": "commands.database.sub.table",
-          "name": "table",
-          "description": "Show full contents of table",
-          "options": [
-            {
-              "type": "STRING",
-              "name": "table",
-              "description": "The table to query from",
-              "isRequired": true,
-              "choices": [
-                {
-                  "name": "notice_of_departures",
-                  "id": "notice_of_departures"
-                },
-                {
-                  "name": "playerlist",
-                  "id": "playerlist"
-                },
-                {
-                  "name": "regulars",
-                  "id": "regulars"
-                },
-                {
-                  "name": "tickets",
-                  "id": "tickets"
-                }
-              ]
-            }
-          ]
         }
       ]
     },
@@ -201,7 +170,6 @@
       "inherit": "status_commands.playerlist.default",
       "name": "playerlist",
       "description": "Shows active player list of the selected server",
-      "default_permissions": ["ADMINISTRATOR"]
     },
     {
       "active": true,

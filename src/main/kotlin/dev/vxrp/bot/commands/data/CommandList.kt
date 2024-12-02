@@ -13,7 +13,7 @@ data class CustomCommand(val active: Boolean,
                          val name: String,
                          val description: String,
                          @SerialName("default_permissions")
-                         val defaultPermissions: List<String>?,
+                         val defaultPermissions: List<String>? = null,
                          val options: List<Options>? = null,
                          val subcommands: List<Subcommands>? = null,)
 

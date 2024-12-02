@@ -39,7 +39,9 @@ class CommandManager(val config: Config, val file: String) {
             if (!command.active) continue
 
             val permissions = mutableListOf<Permission>()
-            command.defaultPermissions?.forEach { permission -> permissions.add(Permission.valueOf(permission)) }
+            if (command.defaultPermissions != null) {
+                command.defaultPermissions.forEach { permission -> permissions.add(Permission.valueOf(permission)) }
+            }
 
             val currentCommand = Commands.slash(command.name, command.description).also { commandData ->
                 if (command.options != null) {
