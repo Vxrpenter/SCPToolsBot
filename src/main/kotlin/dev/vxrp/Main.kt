@@ -68,5 +68,4 @@ class ScpToolsBot(currentConfig: Config, currentTranslation: Translation) {
     init {
         BotManager(config, translation)
     }
-
 }

@@ -65,6 +65,9 @@ dependencies {
     // Ascii
     implementation("com.jakewharton.picnic:picnic:0.7.0")
 
+    // Test
+    testImplementation(kotlin("test"))
+
     // DEPRECATED
     implementation("org.bspfsystems:yamlconfiguration:2.0.2")
 }
@@ -80,5 +83,9 @@ val createVersionProperties by tasks.registering(WriteProperties::class) {
 
 tasks.classes {
     dependsOn(createVersionProperties)
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
