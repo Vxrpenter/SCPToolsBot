@@ -15,20 +15,20 @@ class Github {
     private val logger: Logger = LoggerFactory.getLogger(Github::class.java)
     private val client: OkHttpClient = OkHttpClient()
 
-    fun checkForUpdatesByTag(url: String) {
+    fun checkForUpdatesByTag(url: String, log: Boolean = true): String? {
         val request = Request.Builder()
             .url(url)
             .build()
 
         client.newCall(request).execute().use { response ->
-            if (!response.isSuccessful) return
+            if (!response.isSuccessful) return "null"
 
             var tagArray: JsonArray? = null
             try {
                 tagArray = JsonParser.parseString(response.body?.string()).asJsonArray
             } catch (e: IllegalStateException) {
                 logger.error("Not able to get latest version from github, probably exceeded rate limit... skipping")
-                return
+                return "null"
             }
 
             val tag = tagArray[tagArray.size() - 1].asJsonObject["ref"].asString
@@ -40,15 +40,17 @@ class Github {
                 checkNotNull(versionPropertiesStream) { "Version properties file does not exist" }
                 properties.load(InputStreamReader(versionPropertiesStream, StandardCharsets.UTF_8))
             }
-            logger.info("Checking for latest version...")
+            if (log) logger.info("Checking for latest version...")
             if (properties.getProperty("version") < tag) {
-                logger.warn(
+                if (log) logger.warn(
                     "A new version has been found, you can download it from {}", dev.vxrp.util.color.ColorTool().apply(DCColor.LIGHT_BLUE,
                         "https://github.com/Vxrpenter/SCPToolsBot/releases/tag/v.$tag"
                     )
                 )
+                return tag
             } else {
-                logger.info("Running latest build")
+                if (log) logger.info("Running latest build")
+                return tag
             }
         }
     }
