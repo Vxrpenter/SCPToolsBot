@@ -48,8 +48,8 @@ class SettingsCommand(val config: Config, val translation: Translation) {
 
             field {
                 inline = true
-                name = " \u200E  \u200E  \u200E  \u200E  \u200E \u200E   Guild Unavailable"
-                value = " \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E   `${event.guild?.idLong?.let { event.jda.isUnavailable(it) }}`"
+                name = " \u200E  \u200E  \u200E  \u200E  \u200E \u200E  \u200E  Guild Unavailable"
+                value = " \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  `${event.guild?.idLong?.let { event.jda.isUnavailable(it) }}`"
             }
 
             field {
@@ -66,8 +66,8 @@ class SettingsCommand(val config: Config, val translation: Translation) {
 
             field {
                 inline = true
-                name = " \u200E  \u200E  \u200E  \u200E  \u200E \u200E   Version"
-                value = " \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E   `${version()}`"
+                name = " \u200E  \u200E  \u200E  \u200E  \u200E \u200E  \u200E  Version"
+                value = " \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  `${version()}`"
             }
 
             field {
