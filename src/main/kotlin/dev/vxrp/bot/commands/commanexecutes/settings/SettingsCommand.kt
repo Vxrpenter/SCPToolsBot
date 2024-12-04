@@ -119,7 +119,7 @@ class SettingsCommand(val config: Config, val translation: Translation) {
     private fun version(): String {
         val properties = Properties()
 
-        Github::class.java.getResourceAsStream("/dev/vxrp/version.properties").use { versionPropertiesStream ->
+        SettingsCommand::class.java.getResourceAsStream("/dev/vxrp/version.properties").use { versionPropertiesStream ->
             checkNotNull(versionPropertiesStream) { "Version properties file does not exist" }
             properties.load(InputStreamReader(versionPropertiesStream, StandardCharsets.UTF_8))
         }
