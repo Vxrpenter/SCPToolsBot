@@ -116,6 +116,12 @@
               "id": "maintenance"
             }
           ]
+        },
+        {
+          "type": "STRING",
+          "name": "reason",
+          "description": "What is the reason for the maintenance",
+          "isRequired": false
         }
       ]
     },
