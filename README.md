@@ -60,7 +60,7 @@ If you can't fix the issue, create an issue here so we're able to review it and 
 Full releases are marked as such in the release.
 If a release contains the `pre-release` tag, it is experimental and features could be broken.
 
-Releases will be marked if stable is they're thought to run well after testing.
+Releases will be marked as stable if they're thought to run well after testing.
 If a release is marked as unstable, it might not run well or produce bugs, for example, memory leaks
 
 When a new build is released, it might take some time until the wiki is updated
