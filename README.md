@@ -6,65 +6,89 @@
   
   <a href="https://github.com/Vxrpenter/SCPToolsBot/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Vxrpenter/SCPToolsBot?style=for-the-badge&logo=amazoniam&logoColor=%2300DC82&label=Licenced%20Under&labelColor=333834&color=white"/></a>&nbsp;
   
-  | Languages                                                                                                                                                                                                                                                                                    | Dependencies                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Compatibility                                                                                                                   |
-  |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-  | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" title="Kotlin" alt="Kotlin" width="40" height="40"/><img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" title="Java" alt="Java" width="40" height="40"/>&nbsp;<img src="https://github.com/devicons/devicon/blob/master/icons/yaml/yaml-original.svg" title="yaml" alt="yaml" width="40" height="40"/>&nbsp; | <img src="https://raw.githubusercontent.com/discord-jda/JDA/refs/heads/assets/assets/readme/logo.png" title="jda" alt="jda" width="40" height="40"/>&nbsp;<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apache/apache-original.svg" title="apachecommons" alt="apachecommons" width="40" height="40"/>&nbsp;<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg" title="sqlite" alt="sqlite" width="50" height="50"/>&nbsp; | <a href="https://cedmod.nl/"><img src="https://avatars.githubusercontent.com/u/64701232?s=48&v=4" title="cedmod" alt="cedmod" width="50" height="50"/></a>&nbsp; |
-  
+  | Languages                                                                                                                                                                                                                                                                                                                                                                                                                                        | Main Dependencies                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Compatibility                                                                                                                                                    |
+  |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" title="Kotlin" alt="Kotlin" width="40" height="40"/><img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" title="Java" alt="Java" width="40" height="40"/>&nbsp;<img src="https://github.com/devicons/devicon/blob/master/icons/yaml/yaml-original.svg" title="yaml" alt="yaml" width="40" height="40"/>&nbsp; | <img src="https://raw.githubusercontent.com/discord-jda/JDA/refs/heads/assets/assets/readme/logo.png" title="jda" alt="jda" width="40" height="40"/>&nbsp;<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jetbrains/jetbrains-original.svg" alt="Jetbrains" title="Jetbrains" width="40" height="40"/><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg" title="sqlite" alt="sqlite" width="50" height="50"/>&nbsp; | <a href="https://cedmod.nl/"><img src="https://avatars.githubusercontent.com/u/64701232?s=48&v=4" title="cedmod" alt="cedmod" width="50" height="50"/></a>&nbsp; |
+  | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-plain.svg" title="Json" alt="Json" width="40" height="40"/>                                                                                                                                                                                                                                                                                                        | <img src="https://raw.githubusercontent.com/JetBrains/Exposed/refs/heads/main/docs/logo-dark.png" title="Exposed" alt="Exposed" width="100" height="40"/>&nbsp;                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                  |
 </div>
 
+---
+
 ## What is ScpToolsBot
-ScpToolsBot is a discord bot application written in Java for Scp Secret Laboratory discord servers. It includes support functions, cedmod api syncing including community and team management features
+ScpTools Bot is an application to enhance your Scp Secret Laboratory server by providing quality of life features in combination with moderation and team management tools. It also integrates with plugins like cedmod to build on already existing infrastructure and to utilize features they offer.
 
-If you need any more information check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki)
+For more information check out the  [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki)
 
-## Feature Overview
-Currently the bot comes with:
-- Support system with unban file
-- SL ruleparsing
-- Text translation for features
-- Configurable commands
-- Notice of Departure for staff
-- Automatic notice of departure runout detection
-- automatic applying of playtime roles with the regular feature
+## What Features are included
 
-More coming soon, look [here](https://github.com/Vxrpenter/SCPToolsBot/wiki/Feature-Overview) for more complete overview
+| Feature                        | What is this                                                                                                                                                                                           | Default State |
+|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| Fully customizable translation | All text can be changed to anything you can imagine, there are even color codes and other utility functions for even more customizability                                                              | `active`      |
+| Configuration options          | Many features can be changed to personal liking, e.g. disabling a certain part of it or enabling something else that is not active by default                                                          | `active`      |
+| Status bot cluster             | A cluster of bots that show the player count of your server. They also send connection messages to a channel that was configured by the sysadmin, that show if the server can currently not be reached | `deactivated` |
+| Custom Support System          | Support system that is fitted in with scp secret laboratory, add new pre configured category or let the user decide. Sync actions in tickets with actions on the server to make operations more smooth | `active`      |
+| Notice of Departures           | Staff can file a notice of departure that marks a timeframe they will not be available. These are also checked periodically to ensure that everyone gets notified if the notice runs out               | `active`      |
+| Fully configurable commands    | You can change command names, permissions, options, choices and subcommands without messing with the functionality.                                                                                    | `active`      |
+| Playtime role syncing          | Give your players a reward by allowing them to earn roles for certain playtime counts. They automatically get synced with their ingame time and updated when reaching a new milestone                  | `deactivated` |
+| Cedmod synchronization         | You can link your cedmod instance by utilizing cedmods api user feature. The bot will be able to interact with the panel and use it's features according to your desires                               | `deactivated` |
+
+For more indepth explanation see the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Feature-Overview)
 
 ## Installation
-This bot application should be installed on a alltime running server with good internet connection to handle requests fast and be online all the time
-
-1. Download the `.jar` file from the latest **STABLE** release
-2. Install `JDK-23` or higher on your machine
-3. Run the jar using `java -jar <filename>`
-4. The process will automatically crash and create two new folders called `configs` and `translations`. Go into the `configs` folder and edit the `config.yml` file
-5. After putting in required info start the bot again and it should be running
-
-Get a full guide [here](https://github.com/Vxrpenter/SCPToolsBot/wiki/Installation)
-## Handling Issues
-**Bot not starting, why?**
-- Outdated JDK, install higher version
-- Missing token or guild ID in config
-
----
-
-**Got error: _"Couldn't commence HTTP request to get banID, is the user banned?"_**
-
-This means that no banId could be found meaning that the user isn't banned
-
----
-
-**Got error: _"Unbanning of <ID> ID failed, does it exist?"_**
-
-This means that the unban process failed because the user is not banned/the ban id is invalid and does not exist
-
-Get a full guide [here](https://github.com/Vxrpenter/SCPToolsBot/wiki/Issue-Handling)
-
----
-
 > [!NOTE]
-> If you are getting an error, not stated in this documentation and are not able to fix it, please create an issue so the issue can be resolved
-                
-## Stars
+> Bots have to run all the time to be affective so make sure to run it one a machine that is on 24/7 or a long time
+
+Just download the `.jar` from the latest release. Copy it into a folder of your liking and run:
+```console
+> java -jar <file>
+```
+
+For a specific operating system installation guide check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Installation)
+
+## Handling Issues
+If you're running into any issues,
+please first check the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Issue-Handling) for help.
+If you can't fix the issue, create an issue here so we're able to review it and find possible bugs. If you have any questions about the working or plans of development contact `@vxrpenter` on discord
+
+---
+
+## Build information
+Full releases are marked as such in the release.
+If a release contains the `pre-release` tag, it is experimental and features could be broken.
+
+Releases will be marked if stable is they're thought to run well after testing.
+If a release is marked as unstable, it might not run well or produce bugs, for example, memory leaks
+
+When a new build is released, it might take some time until the wiki is updated
+
+Changelogs only contain the most important information,
+and small one-line changes will not be included if they don't have a major effect on stability and performance
+
+## Licencing
+This project, as stated above, is licenced under the MIT license.
+It can be modified and used commercially.
+You can distribute it as you like.
+I'm not liable for anything done with, and no warranty is given
+
+> [!IMPORTANT]
+> When using code from this repo, you have to add License and copyright notice.
+> If you don't know what that is, I would advise you to search for more information online
+
+## Special Thanks
+- Special thanks goes out to [ced777ric](https://github.com/ced777ric) that helped me a lot with the cedmod integration and for explaining me a lot of stuff when I was to dumb to see the obvious
+
+---
+
+## Start History
+Thank you a lot for starring in this repo. It is really helpful and makes me happy to work on this project. 
+
+If you like this project, you may consider sharing it with others Either way I thank you really much
 [![Stargazers over time](https://starchart.cc/Vxrpenter/SCPToolsBot.svg?variant=adaptive)](https://starchart.cc/Vxrpenter/SCPToolsBot)
 
-## Thank you's
-- Thank you to [ced777ric](https://github.com/ced777ric) for helping me with the cedmod api
+<div align="center">
+  First release <a href="https://github.com/Vxrpenter/SCPToolsBot/releases/tag/v.0.1.0">0.1.0</a> released on 15. Oct. 2024
+
+  Repo created in 2024 ‎ ‎ ‎ ‎ This is the kotlin refactored version
+
+  Licenced under MIT since made public
+</div>
