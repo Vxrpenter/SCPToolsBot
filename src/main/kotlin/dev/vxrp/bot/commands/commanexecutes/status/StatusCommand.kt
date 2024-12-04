@@ -40,7 +40,7 @@ class StatusCommand(val config: Config, val translation: Translation, private va
             event.reply(ColorTool().useCustomColorCodes(translation.status.messageStatusActivated).trimIndent()).setEphemeral(true).queue()
 
             val embed = Embed {
-                color = 0xE74D3C
+                color = 0xf1c40f
                 url = config.status.pageUrl
                 title = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOnTitle
                     .replace("%instance%", statusConst.instance.name)).trimIndent()
