@@ -15,9 +15,13 @@
 ---
 
 ## What is ScpToolsBot
-ScpTools Bot is an application to enhance your Scp Secret Laboratory server by providing quality of life features in combination with moderation and team management tools. It also integrates with plugins like cedmod to build on already existing infrastructure and to utilize features they offer.
+ScpTools Bot is an application
+to enhance your Scp Secret Laboratory server
+by providing quality-of-life features in combination with moderation and team management tools.
+It also integrates with plugins like cedmod
+to build on already existing infrastructure and to utilize features they offer.
 
-For more information check out the  [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki)
+For more information check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki)
 
 ## What Features are included
 
@@ -38,12 +42,12 @@ For more indepth explanation see the [wiki](https://github.com/Vxrpenter/SCPTool
 > [!NOTE]
 > Bots have to run all the time to be affective so make sure to run it one a machine that is on 24/7 or a long time
 
-Just download the `.jar` from the latest release. Copy it into a folder of your liking and run:
+Download the `.jar` from the latest release. Copy it into a folder of your liking and run:
 ```console
 > java -jar <file>
 ```
 
-For a specific operating system installation guide check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Installation)
+For a specific operating system installation guide, check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Installation)
 
 ## Handling Issues
 If you're running into any issues,
@@ -75,15 +79,17 @@ I'm not liable for anything done with, and no warranty is given
 > If you don't know what that is, I would advise you to search for more information online
 
 ## Special Thanks
-- Special thanks goes out to [ced777ric](https://github.com/ced777ric) that helped me a lot with the cedmod integration and for explaining me a lot of stuff when I was to dumb to see the obvious
+- Special thanks goes out to [ced777ric](https://github.com/ced777ric) that helped me a lot with the cedmod integration and for explaining me a lot of stuff when I was too stupid to see the obvious
 
 ---
 
 ## Start History
 Thank you a lot for starring in this repo. It is really helpful and makes me happy to work on this project. 
 
-If you like this project, you may consider sharing it with others Either way I thank you really much
+If you like this project, you may consider sharing it with others Either way, I thank you really much
 [![Stargazers over time](https://starchart.cc/Vxrpenter/SCPToolsBot.svg?variant=adaptive)](https://starchart.cc/Vxrpenter/SCPToolsBot)
+
+---
 
 <div align="center">
   First release <a href="https://github.com/Vxrpenter/SCPToolsBot/releases/tag/v.0.1.0">0.1.0</a> released on 15. Oct. 2024
