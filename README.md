@@ -40,7 +40,7 @@ For more indepth explanation see the [wiki](https://github.com/Vxrpenter/SCPTool
 
 ## Installation
 > [!NOTE]
-> Bots have to run all the time to be affective so make sure to run it one a machine that is on 24/7 or a long time
+> Bots have to run all the time to be effective so make sure to run it one a machine that is on 24/7 or a long time
 
 Download the `.jar` from the latest release. Copy it into a folder of your liking and run:
 ```console
