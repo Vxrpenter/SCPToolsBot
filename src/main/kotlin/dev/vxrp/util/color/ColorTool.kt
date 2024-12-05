@@ -13,6 +13,7 @@ class ColorTool {
                 "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
                 "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
                 "\u200E \u200E \u200E \u200E \u200E \u200E \u200E"
+    private val singleFiller: String = "\u200E "
 
     private val darkGray: String = "\u001B[2;30m"
     private val red: String = "\u001B[31m"
@@ -100,5 +101,6 @@ class ColorTool {
             .replace("&reset&", reset)
             .replace("&underline&", underline)
             .replace("&filler&", filler)
+            .replace("&singleFiller&", singleFiller)
     }
 }

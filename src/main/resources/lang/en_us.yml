@@ -11,6 +11,48 @@
 # Use &filler& to fill one embed line, use &filler<count>& to specify character amount
 #
 
+SETTINGS:
+
+  EMBED_SETTINGS_TITLE: "Settings"
+  EMBED_SETTINGS_BODY: "
+                        In this settings menu you will be able to:\n
+                        - change config settings\n
+                        - view current settings\n
+                        - view bot information\n
+                        &filler&
+                        Click on the buttons below to switch between pages. Information for the main page may take longer to load because a lot of information is queried at the same time\n
+                        &filler&"
+
+  EMBED_SETTINGS_FIELD_LANGUAGE_TITLE: "Language"
+  EMBED_SETTINGS_FIELD_LANGUAGE_VALUE: "`%language%`"
+
+  EMBED_SETTINGS_FIELD_GUILD_TITLE: "&filler<7>& Guild Unavailable"
+  EMBED_SETTINGS_FIELD_GUILD_VALUE: "&filler<10>& `%isAvailable%`"
+
+  EMBED_SETTINGS_FIELD_DATABASE_TITLE: "&filler<30>& Database"
+  EMBED_SETTINGS_FIELD_DATABASE_VALUE: "&filler<30>&%state%"
+
+  EMBED_SETTINGS_FIELD_CEDMOD_TITLE: "Cedmod"
+  EMBED_SETTINGS_FIELD_CEDMOD_VALUE: "%state%"
+
+  EMBED_SETTINGS_FIELD_VERSION_TITLE: "&filler<7>& Version"
+  EMBED_SETTINGS_FIELD_VERSION_VALUE: "&filler<10>&`%version%`"
+
+  EMBED_SETTINGS_FIELD_BUILD_TITLE: "&filler<30>& Latest Build"
+  EMBED_SETTINGS_FIELD_BUILD_VALUE: "&filler<30>& `%build%`"
+
+  EMBED_SETTINGS_FIELD_GATEWAY_TITLE: "&filler<1>&\n Gateway Response Time"
+  EMBED_SETTINGS_FIELD_GATEWAY_VALUE: "||Received in %time% ms||"
+
+  EMBED_SETTINGS_FIELD_REST_TITLE: "&filler<1>& \n REST Response Time"
+  EMBED_SETTINGS_FIELD_REST_VALUE: "&filler<1>& ||Received in %time% ms||"
+
+  TEXT_CEDMOD_ONLINE: ":green_circle: Online"
+  TEXT_CEDMOD_OFFLINE: ":red_circle: Offline"
+
+  TEXT_DATABASE_ONLINE: ":green_circle: Online"
+  TEXT_DATABASE_OFFLINE: ":red_circle: Offline"
+
 HELP:
 
   EMBED_PAGE_ONE_TITLE: "Scp Tools Help Page"
@@ -518,6 +560,11 @@ STATUS_BARS:
 
 # You can't use color codes for the following button translations
 BUTTONS:
+  TEXT_SETTINGS_START: "Start"
+  TEXT_SETTINGS_CONFIGURE: "Configure"
+  TEXT_SETTINGS_CURRENT: "Current Settings"
+  TEXT_SETTINGS_INFORMATION: "Information"
+  TEXT_SETTINGS_NEWS: "News"
 
   TEXT_RULES_PASTE: "Paste Rules"
   TEXT_RULES_UPDATE: "Update Rules"

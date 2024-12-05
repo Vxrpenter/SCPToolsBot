@@ -18,9 +18,9 @@ import java.util.*
 
 class SettingsCommand(val config: Config, val translation: Translation) {
     fun pasteSettingsMenu(event: SlashCommandInteractionEvent) {
-        var cedmod = ":red_circle: Offline"
+        var cedmod = translation.settings.textCedmodOffline
         val currentColor = 0x00DC82
-        if (checkCedmod()) cedmod = ":green_circle: Online"
+        if (checkCedmod()) cedmod = translation.settings.textCedmodOnline
 
         val embed = Embed {
             author {
@@ -28,58 +28,56 @@ class SettingsCommand(val config: Config, val translation: Translation) {
                 iconUrl = event.guild?.iconUrl
             }
             color = currentColor
-            title = "Settings"
+            title = ColorTool().useCustomColorCodes(translation.settings.embedSettingsTitle.trimIndent())
             timestamp = Instant.now()
-            description = ColorTool().useCustomColorCodes("""
-                In this settings menu you will be able to:
-                - change config settings
-                - view current settings
-                - view bot information
-                &filler&
-                Click on the buttons below to switch between pages. Information for the main page may take longer to load because a lot of information is queried at the same time
-                &filler&
-                """.trimIndent())
+            description = ColorTool().useCustomColorCodes(translation.settings.embedSettingsBody.trimIndent())
 
             field {
                 inline = true
-                name = "Language"
-                value = "`${config.loadTranslation}`"
+                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldLanguageTitle.trimIndent())
+                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldLanguageValue
+                    .replace("%language%", config.loadTranslation).trimIndent())
             }
 
             field {
                 inline = true
-                name = " \u200E  \u200E  \u200E  \u200E  \u200E \u200E  \u200E  Guild Unavailable"
-                value = " \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  `${event.guild?.idLong?.let { event.jda.isUnavailable(it) }}`"
+                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldGuildTitle.trimIndent())
+                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldGuildValue
+                    .replace("%isAvailable%", "${event.guild?.idLong?.let { event.jda.isUnavailable(it) }}").trimIndent())
             }
 
             field {
                 inline = true
-                name = " \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E Database"
-                value = " \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E :green_circle: Online"
+                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldDatabaseTitle.trimIndent())
+                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldDatabaseValue
+                    .replace("%state%", translation.settings.textDatabaseOnline).trimIndent())
             }
 
             field {
                 inline = true
-                name = "Cedmod"
+                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldCedmodTitle.trimIndent())
                 value = cedmod
             }
 
             field {
                 inline = true
-                name = " \u200E  \u200E  \u200E  \u200E  \u200E \u200E  \u200E  Version"
-                value = " \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  `${version()}`"
+                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldVersionTitle.trimIndent())
+                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldVersionValue
+                    .replace("%version%", version()).trimIndent())
             }
 
             field {
                 inline = true
-                name = " \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E Latest Build"
-                value = " \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E `${Github().checkForUpdatesByTag("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags", false).toString()}`"
+                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldBuildTitle.trimIndent())
+                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldBuildValue
+                    .replace("%build%", Github().checkForUpdatesByTag("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags", false).toString()).trimIndent())
             }
 
             field {
                 inline = true
-                name = "\u200E\nGateway Response Time"
-                value = "||Received in ${event.jda.gatewayPing} ms||"
+                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldGatewayTitle.trimIndent())
+                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldGatewayValue
+                    .replace("%time%", "${event.jda.gatewayPing}").trimIndent())
             }
 
             field {
@@ -90,17 +88,18 @@ class SettingsCommand(val config: Config, val translation: Translation) {
 
             field {
                 inline = true
-                name =  "\u200E \n \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  REST Response Time"
-                value = " \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E  \u200E \u200E \u200E \u200E  ||Received in ${event.jda.restPing.complete()} ms||"
+                name =  ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldRestTitle.trimIndent())
+                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldRestValue
+                    .replace("%time%", "${event.jda.restPing.complete()}").trimIndent())
             }
         }
 
         event.reply_("", listOf(embed)).setActionRow(
-            Button.secondary("start_page", "Start").asDisabled(),
-            Button.primary("configure_page", "Configure"),
-            Button.primary("current_settings", "Current Settings"),
-            Button.primary("bot_info", "Information"),
-            Button.link("https://github.com/Vxrpenter/SCPToolsBot", "News").withEmoji(Emoji.fromFormatted("🗞️"))
+            Button.secondary("start_page", ColorTool().useCustomColorCodes(translation.buttons.textSettingsStart)).asDisabled(),
+            Button.primary("configure_page", ColorTool().useCustomColorCodes(translation.buttons.textSettingsConfigure)),
+            Button.primary("current_settings", ColorTool().useCustomColorCodes(translation.buttons.textSettingsCurrent)),
+            Button.primary("bot_info", ColorTool().useCustomColorCodes(translation.buttons.textSettingsInformation)),
+            Button.link("https://github.com/Vxrpenter/SCPToolsBot", ColorTool().useCustomColorCodes(translation.buttons.textSettingsNews)).withEmoji(Emoji.fromFormatted("🗞️"))
         ).setEphemeral(true).queue()
     }
 
