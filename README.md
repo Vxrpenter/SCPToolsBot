@@ -72,10 +72,10 @@ and small one-line changes will not be included if they don't have a major effec
 This project, as stated above, is licenced under the MIT license.
 It can be modified and used commercially.
 You can distribute it as you like.
-I'm not liable for anything done with, and no warranty is given
+I'm not liable for anything done with it, and no warranty is given
 
 > [!IMPORTANT]
-> When using code from this repo, you have to add License and copyright notice.
+> When using code from this repo, you have to add a License and copyright notice.
 > If you don't know what that is, I would advise you to search for more information online
 
 ## Special Thanks
@@ -84,9 +84,9 @@ I'm not liable for anything done with, and no warranty is given
 ---
 
 ## Start History
-Thank you a lot for starring in this repo. It is really helpful and makes me happy to work on this project. 
+Thank you a lot for starring this repo. It is really helpful and makes me happy to work on this project. 
 
-If you like this project, you may consider sharing it with others Either way, I thank you really much
+If you like this project, you may consider sharing it with others Either way, thank you really much
 [![Stargazers over time](https://starchart.cc/Vxrpenter/SCPToolsBot.svg?variant=adaptive)](https://starchart.cc/Vxrpenter/SCPToolsBot)
 
 ---
