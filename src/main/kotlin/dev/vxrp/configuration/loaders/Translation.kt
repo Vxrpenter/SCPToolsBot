@@ -4,7 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Translation(@SerialName("STATUS")
+data class Translation(@SerialName("SETTINGS")
+                       val settings: TranslationSettings,
+                       @SerialName("STATUS")
                        val status: TranslationStatus,
                        @SerialName("HELP")
                        val help: TranslationHelp,
@@ -20,6 +22,52 @@ data class Translation(@SerialName("STATUS")
                        val statusBars: TranslationStatusBars,
                        @SerialName("BUTTONS")
                        val buttons: TranslationButtons)
+
+@Serializable
+data class TranslationSettings(@SerialName("EMBED_SETTINGS_TITLE")
+                               val embedSettingsTitle: String,
+                               @SerialName("EMBED_SETTINGS_BODY")
+                               val embedSettingsBody: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_LANGUAGE_TITLE")
+                               val embedSettingsFieldLanguageTitle: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_LANGUAGE_VALUE")
+                               val embedSettingsFieldLanguageValue: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_GUILD_TITLE")
+                               val embedSettingsFieldGuildTitle: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_GUILD_VALUE")
+                               val embedSettingsFieldGuildValue: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_DATABASE_TITLE")
+                               val embedSettingsFieldDatabaseTitle: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_DATABASE_VALUE")
+                               val embedSettingsFieldDatabaseValue: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_CEDMOD_TITLE")
+                               val embedSettingsFieldCedmodTitle: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_CEDMOD_VALUE")
+                               val embedSettingsFieldCedmodValue: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_VERSION_TITLE")
+                               val embedSettingsFieldVersionTitle: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_VERSION_VALUE")
+                               val embedSettingsFieldVersionValue: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_BUILD_TITLE")
+                               val embedSettingsFieldBuildTitle: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_BUILD_VALUE")
+                               val embedSettingsFieldBuildValue: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_GATEWAY_TITLE")
+                               val embedSettingsFieldGatewayTitle: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_GATEWAY_VALUE")
+                               val embedSettingsFieldGatewayValue: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_REST_TITLE")
+                               val embedSettingsFieldRestTitle: String,
+                               @SerialName("EMBED_SETTINGS_FIELD_REST_VALUE")
+                               val embedSettingsFieldRestValue: String,
+                               @SerialName("TEXT_CEDMOD_ONLINE")
+                               val textCedmodOnline: String,
+                               @SerialName("TEXT_CEDMOD_OFFLINE")
+                               val textCedmodOffline: String,
+                               @SerialName("TEXT_DATABASE_ONLINE")
+                               val textDatabaseOnline: String,
+                               @SerialName("TEXT_DATABASE_OFFLINE")
+                               val textDatabaseOffline: String)
 
 @Serializable
 data class TranslationHelp(@SerialName("EMBED_PAGE_ONE_TITLE")
@@ -280,7 +328,17 @@ data class TranslationStatusBars(@SerialName("EMBED_TICKET_STATUS")
                                  val embedNoticeOfDepartureRevoked: String)
 
 @Serializable
-data class TranslationButtons(@SerialName("TEXT_RULES_PASTE")
+data class TranslationButtons(@SerialName("TEXT_SETTINGS_START")
+                              val textSettingsStart: String,
+                              @SerialName("TEXT_SETTINGS_CONFIGURE")
+                              val textSettingsConfigure: String,
+                              @SerialName("TEXT_SETTINGS_CURRENT")
+                              val textSettingsCurrent: String,
+                              @SerialName("TEXT_SETTINGS_INFORMATION")
+                              val textSettingsInformation: String,
+                              @SerialName("TEXT_SETTINGS_NEWS")
+                              val textSettingsNews: String,
+                              @SerialName("TEXT_RULES_PASTE")
                               val textRulesPaste: String,
                               @SerialName("TEXT_RULES_UPDATE")
                               val textRulesUpdate: String,

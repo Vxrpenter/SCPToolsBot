@@ -2,7 +2,6 @@ package dev.vxrp.bot.commands.listeners
 
 import dev.minn.jda.ktx.events.listener
 import dev.vxrp.bot.commands.CommandManager
-import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
 import dev.vxrp.bot.commands.commanexecutes.settings.SettingsCommand
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
