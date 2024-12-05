@@ -2,8 +2,8 @@ package dev.vxrp.bot
 
 import dev.minn.jda.ktx.jdabuilder.intents
 import dev.minn.jda.ktx.jdabuilder.light
-import dev.vxrp.bot.commands.listeners.CommandListener
 import dev.vxrp.bot.commands.CommandManager
+import dev.vxrp.bot.commands.listeners.CommandListener
 import dev.vxrp.bot.events.ButtonListener
 import dev.vxrp.bot.status.StatusManager
 import dev.vxrp.configuration.loaders.Config
@@ -21,10 +21,11 @@ class BotManager(val config: Config, val translation: Translation) {
     private val timer = Timer()
 
     init {
-        val api = light(config.token, enableCoroutines=true) {
+        val api = light(config.token, enableCoroutines = true) {
             intents += listOf(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
             setActivity(Activity.of(
-                ActivityType.PLAYING.takeIf { !enumContains<ActivityType>(config.activityType) } ?: ActivityType.valueOf(config.activityType),
+                ActivityType.PLAYING.takeIf { !enumContains<ActivityType>(config.activityType) }
+                    ?: ActivityType.valueOf(config.activityType),
                 config.activityContent))
             disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
         }
@@ -37,7 +38,7 @@ class BotManager(val config: Config, val translation: Translation) {
         val guild = api.awaitReady().getGuildById(config.guildId)
         val commandManager = CommandManager(config, "configs/commands.json")
         val statusManager = StatusManager(config, translation, timer, "configs/status.json")
-        val sqliteManager = SqliteManager(config,"database", "data.db")
+        val sqliteManager = SqliteManager(config, "database", "data.db")
 
         commandManager.registerSpecificCommands(commandManager.query().commands, api)
 
@@ -51,6 +52,6 @@ class BotManager(val config: Config, val translation: Translation) {
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {
-        return enumValues<T>().any { it.name == name}
+        return enumValues<T>().any { it.name == name }
     }
 }

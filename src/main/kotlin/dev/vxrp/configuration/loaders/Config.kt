@@ -4,35 +4,37 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Config(val token: String,
-                  @SerialName("guild_id")
-                  val guildId: String,
-                  @SerialName("load_translation")
-                  val loadTranslation: String,
-                  val debug: Boolean,
-                  @SerialName("advanced_debug")
-                  val advancedDebug: Boolean,
-                  @SerialName("activity_type")
-                  val activityType: String,
-                  @SerialName("activity_content")
-                  val activityContent: String,
-                  //database
-                  val database: ConfigDatabase,
-                  //rules
-                  val rules: ConfigRules,
-                  //logging
-                  val logging: ConfigLogging,
-                  //cedmod
-                  val cedmod: ConfigCedmod,
-                  // Status
-                  val status: ConfigStatus,
-                  //support-settings
-                  val support: ConfigSupport,
-                  //notice-of-departure
-                  @SerialName("notice_of_departure")
-                  val noticeOfDeparture: ConfigNoticeOfDeparture,
-                  //regulars
-                  val regulars: ConfigRegulars)
+data class Config(
+    val token: String,
+    @SerialName("guild_id")
+    val guildId: String,
+    @SerialName("load_translation")
+    val loadTranslation: String,
+    val debug: Boolean,
+    @SerialName("advanced_debug")
+    val advancedDebug: Boolean,
+    @SerialName("activity_type")
+    val activityType: String,
+    @SerialName("activity_content")
+    val activityContent: String,
+    //database
+    val database: ConfigDatabase,
+    //rules
+    val rules: ConfigRules,
+    //logging
+    val logging: ConfigLogging,
+    //cedmod
+    val cedmod: ConfigCedmod,
+    // Status
+    val status: ConfigStatus,
+    //support-settings
+    val support: ConfigSupport,
+    //notice-of-departure
+    @SerialName("notice_of_departure")
+    val noticeOfDeparture: ConfigNoticeOfDeparture,
+    //regulars
+    val regulars: ConfigRegulars
+)
 
 @Serializable
 data class ConfigDatabase(
@@ -45,14 +47,16 @@ data class ConfigDatabase(
     @SerialName("custom_username")
     val customUsername: String,
     @SerialName("custom_password")
-    val customPassword: String)
+    val customPassword: String
+)
 
 @Serializable
 data class ConfigRules(
     @SerialName("pastebin")
     val pastbin: String,
     @SerialName("embed_footer")
-    val footer: String)
+    val footer: String
+)
 
 @Serializable
 data class ConfigLogging(
@@ -65,7 +69,8 @@ data class ConfigLogging(
     @SerialName("do_database_logging")
     val databaseLog: Boolean,
     @SerialName("database_logging_channel_id")
-    val databaseChannel: String)
+    val databaseChannel: String
+)
 
 @Serializable
 data class ConfigCedmod(
@@ -76,7 +81,8 @@ data class ConfigCedmod(
     @SerialName("api_key")
     val api: String,
     @SerialName("master_ban_list_id")
-    val mastBanList: String, )
+    val mastBanList: String,
+)
 
 @Serializable
 data class ConfigStatus(
@@ -93,9 +99,10 @@ data class ConfigSupport(
     @SerialName("roles_access_support_tickets")
     val rolesAccessSupport: List<String>,
     @SerialName("roles_access_unban_tickets")
-    val rolesAccessUnban : List<String>,
+    val rolesAccessUnban: List<String>,
     @SerialName("unban_channel_id")
-    val unbanChannel: String, )
+    val unbanChannel: String,
+)
 
 @Serializable
 data class ConfigNoticeOfDeparture(
@@ -108,7 +115,8 @@ data class ConfigNoticeOfDeparture(
     @SerialName("check_type")
     val checkUnit: String,
     @SerialName("check_rate")
-    val checkRate: Int)
+    val checkRate: Int
+)
 
 @Serializable
 data class ConfigRegulars(
@@ -117,4 +125,5 @@ data class ConfigRegulars(
     @SerialName("only_load_certain_folder")
     val onlyLoad: Boolean,
     @SerialName("only_load_folders")
-    val loadFolders: List<String>)
+    val loadFolders: List<String>
+)

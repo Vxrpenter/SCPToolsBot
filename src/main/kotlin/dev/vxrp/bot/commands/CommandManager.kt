@@ -1,12 +1,12 @@
 package dev.vxrp.bot.commands
 
 import dev.minn.jda.ktx.interactions.commands.updateCommands
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.managers.ConfigManager
 import dev.vxrp.bot.commands.data.CommandList
 import dev.vxrp.bot.commands.data.CustomCommand
 import dev.vxrp.bot.commands.data.Options
 import dev.vxrp.bot.commands.data.Subcommands
+import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.configuration.managers.ConfigManager
 import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.Permission
@@ -67,9 +67,28 @@ class CommandManager(val config: Config, val file: String) {
             val choices = mutableListOf<Command.Choice>()
 
             if (option.choices != null) {
-                option.choices.size.let { it -> repeat(it) { choices.add(Command.Choice(option.choices[it].name, option.choices[it].id))} }
+                option.choices.size.let { it ->
+                    repeat(it) {
+                        choices.add(
+                            Command.Choice(
+                                option.choices[it].name,
+                                option.choices[it].id
+                            )
+                        )
+                    }
+                }
             }
-            optionData.add(OptionData(OptionType.valueOf(option.type), option.name, option.description, option.isRequired).also { if (choices.isNotEmpty()) { it.addChoices(choices) }})
+            optionData.add(
+                OptionData(
+                    OptionType.valueOf(option.type),
+                    option.name,
+                    option.description,
+                    option.isRequired
+                ).also {
+                    if (choices.isNotEmpty()) {
+                        it.addChoices(choices)
+                    }
+                })
         }
 
         return optionData

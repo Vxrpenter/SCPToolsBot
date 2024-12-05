@@ -2,34 +2,45 @@ package dev.vxrp.bot.commands.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-@Serializable
-data class CommandList(val commands: List<CustomCommand>,
-                       @SerialName("status_commands")
-                       val statusCommands: List<CustomCommand>,)
 
 @Serializable
-data class CustomCommand(val active: Boolean,
-                         val inherit: String,
-                         val name: String,
-                         val description: String,
-                         @SerialName("default_permissions")
-                         val defaultPermissions: List<String>? = null,
-                         val options: List<Options>? = null,
-                         val subcommands: List<Subcommands>? = null,)
+data class CommandList(
+    val commands: List<CustomCommand>,
+    @SerialName("status_commands")
+    val statusCommands: List<CustomCommand>,
+)
 
 @Serializable
-data class Subcommands(val inherit: String,
-                       val name: String,
-                       val description: String,
-                       val options: List<Options>? = null,)
+data class CustomCommand(
+    val active: Boolean,
+    val inherit: String,
+    val name: String,
+    val description: String,
+    @SerialName("default_permissions")
+    val defaultPermissions: List<String>? = null,
+    val options: List<Options>? = null,
+    val subcommands: List<Subcommands>? = null,
+)
 
 @Serializable
-data class Options(val type: String,
-                   val name: String,
-                   val description: String,
-                   val isRequired: Boolean,
-                   val choices: List<Choices>? = null)
+data class Subcommands(
+    val inherit: String,
+    val name: String,
+    val description: String,
+    val options: List<Options>? = null,
+)
 
 @Serializable
-data class Choices(val name: String,
-                   val id: String)
+data class Options(
+    val type: String,
+    val name: String,
+    val description: String,
+    val isRequired: Boolean,
+    val choices: List<Choices>? = null
+)
+
+@Serializable
+data class Choices(
+    val name: String,
+    val id: String
+)

@@ -26,9 +26,14 @@ import java.util.concurrent.TimeUnit
  * You can also implement it yourself and then create a pull request if needed
  *
  * @author Vxrpenter
- * @since Cedmod Version: `3.4.18`so 
+ * @since Cedmod Version: `3.4.18`so
  */
-class Cedmod(private val instanceUrl: String, private val apiKey: String, readTimeout: Long = 60, writeTimeout: Long = 60) {
+class Cedmod(
+    private val instanceUrl: String,
+    private val apiKey: String,
+    readTimeout: Long = 60,
+    writeTimeout: Long = 60
+) {
     private val client: OkHttpClient = OkHttpClient.Builder()
         .readTimeout(readTimeout, TimeUnit.SECONDS)
         .writeTimeout(writeTimeout, TimeUnit.SECONDS)
@@ -304,9 +309,9 @@ class Cedmod(private val instanceUrl: String, private val apiKey: String, readTi
      *
      * @return the query as JsonObject
      */
-    fun banlistQuery(q: String, page: Int = 0, max: Int= 0): JsonObject? {
+    fun banlistQuery(q: String, page: Int = 0, max: Int = 0): JsonObject? {
         val url = "$instanceUrl/Api/Banlist/Query?q=$q&page=$page&max=$max".also {
-            if (page == 0 ) it.replace("&page=0", "")
+            if (page == 0) it.replace("&page=0", "")
             if (max == 0) it.replace("&max=0", "")
         }
 
@@ -340,7 +345,20 @@ class Cedmod(private val instanceUrl: String, private val apiKey: String, readTi
      *
      * @return the response code
      */
-    fun banlistPut(banlistId: String, queryServerId: String, serverWriteBans: String, serverReadBans: String, serverWriteMutes: String, serverReadMutes: String, serverWriteWarns: String, serverReadWarns: String, name: String, isMaster: Boolean = false, isDefaultPanel: Boolean = false, isDefaultViewPanel: Boolean = true): Int {
+    fun banlistPut(
+        banlistId: String,
+        queryServerId: String,
+        serverWriteBans: String,
+        serverReadBans: String,
+        serverWriteMutes: String,
+        serverReadMutes: String,
+        serverWriteWarns: String,
+        serverReadWarns: String,
+        name: String,
+        isMaster: Boolean = false,
+        isDefaultPanel: Boolean = false,
+        isDefaultViewPanel: Boolean = true
+    ): Int {
         val json = "{\n" +
                 "  \"id\": $queryServerId,\n" +
                 "  \"isMaster\": $isMaster,\n" +
@@ -605,7 +623,14 @@ class Cedmod(private val instanceUrl: String, private val apiKey: String, readTi
      *
      * @return the response body as a JsonObject
      * */
-    fun mutePostIssue(userId: String, reason: String, duration: Int, appealable: Boolean, banlists: List<Int>, muteType: MuteType): JsonObject? {
+    fun mutePostIssue(
+        userId: String,
+        reason: String,
+        duration: Int,
+        appealable: Boolean,
+        banlists: List<Int>,
+        muteType: MuteType
+    ): JsonObject? {
         val type = when (muteType) {
             MuteType.INTERCOM -> 0
             MuteType.GLOBAL -> 1

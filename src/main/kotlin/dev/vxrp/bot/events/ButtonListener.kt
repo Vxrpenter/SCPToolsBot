@@ -12,25 +12,35 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
     init {
         api.listener<ButtonInteractionEvent> { event ->
             if (event.button.id?.startsWith("help_first_page") == true) {
-                event.deferEdit().queue { event.channel.editMessageEmbedsById(event.messageId, HelpCommand(translation).pages().first())
-                    .setActionRow(HelpCommand(translation).actionRow(0)).queue() }
+                event.deferEdit().queue {
+                    event.channel.editMessageEmbedsById(event.messageId, HelpCommand(translation).pages().first())
+                        .setActionRow(HelpCommand(translation).actionRow(0)).queue()
+                }
             }
 
             if (event.button.id?.startsWith("help_last_page") == true) {
-                event.deferEdit().queue { event.channel.editMessageEmbedsById(event.messageId, HelpCommand(translation).pages().last())
-                    .setActionRow(HelpCommand(translation).actionRow(5)).queue() }
+                event.deferEdit().queue {
+                    event.channel.editMessageEmbedsById(event.messageId, HelpCommand(translation).pages().last())
+                        .setActionRow(HelpCommand(translation).actionRow(5)).queue()
+                }
             }
 
             if (event.button.id?.startsWith("help_go_back") == true) {
-                val page = event.componentId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1].toInt()-1
-                event.deferEdit().queue { event.channel.editMessageEmbedsById(event.messageId, HelpCommand(translation).pages()[page])
-                    .setActionRow(HelpCommand(translation).actionRow(page)).queue() }
+                val page =
+                    event.componentId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1].toInt() - 1
+                event.deferEdit().queue {
+                    event.channel.editMessageEmbedsById(event.messageId, HelpCommand(translation).pages()[page])
+                        .setActionRow(HelpCommand(translation).actionRow(page)).queue()
+                }
             }
 
             if (event.button.id?.startsWith("help_go_forward") == true) {
-                val page = event.componentId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1].toInt()+1
-                event.deferEdit().queue { event.channel.editMessageEmbedsById(event.messageId, HelpCommand(translation).pages()[page])
-                    .setActionRow(HelpCommand(translation).actionRow(page)).queue() }
+                val page =
+                    event.componentId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1].toInt() + 1
+                event.deferEdit().queue {
+                    event.channel.editMessageEmbedsById(event.messageId, HelpCommand(translation).pages()[page])
+                        .setActionRow(HelpCommand(translation).actionRow(page)).queue()
+                }
             }
         }
     }

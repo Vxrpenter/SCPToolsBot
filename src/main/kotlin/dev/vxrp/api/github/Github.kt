@@ -15,7 +15,7 @@ class Github {
     private val logger: Logger = LoggerFactory.getLogger(Github::class.java)
     private val client: OkHttpClient = OkHttpClient()
 
-    fun checkForUpdatesByTag(url: String, log: Boolean = true): String? {
+    fun checkForUpdatesByTag(url: String, log: Boolean = true): String {
         val request = Request.Builder()
             .url(url)
             .build()
@@ -43,7 +43,8 @@ class Github {
             if (log) logger.info("Checking for latest version...")
             if (properties.getProperty("version") < tag) {
                 if (log) logger.warn(
-                    "A new version has been found, you can download it from {}", dev.vxrp.util.color.ColorTool().apply(DCColor.LIGHT_BLUE,
+                    "A new version has been found, you can download it from {}", dev.vxrp.util.color.ColorTool().apply(
+                        DCColor.LIGHT_BLUE,
                         "https://github.com/Vxrpenter/SCPToolsBot/releases/tag/v.$tag"
                     )
                 )
