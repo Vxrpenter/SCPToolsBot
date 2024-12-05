@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm") version "2.0.20"
     kotlin("plugin.serialization") version "2.0.20"
     id("com.gradleup.shadow") version("8.3.3")
+    id("io.gitlab.arturbosch.detekt").version("1.23.7")
 }
 
 
@@ -19,6 +20,10 @@ repositories {
 java {
     sourceCompatibility = JavaVersion.VERSION_22
     targetCompatibility = JavaVersion.VERSION_22
+}
+
+kotlin {
+    jvmToolchain(22)
 }
 
 val kotlinxCoroutinesVersion = "1.9.0"
