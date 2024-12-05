@@ -21,7 +21,8 @@ data class Status(
     val api: String,
     @SerialName("account_id")
     val accountId: String,
-    val instances: List<Instance> )
+    val instances: List<Instance>
+)
 
 @Serializable
 data class Instance(
@@ -29,4 +30,5 @@ data class Instance(
     val name: String,
     @SerialName("server_port")
     val serverPort: Int,
-    val retries: Int)
+    val retries: Int
+)

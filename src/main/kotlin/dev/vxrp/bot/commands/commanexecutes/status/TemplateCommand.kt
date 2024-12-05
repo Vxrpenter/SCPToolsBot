@@ -1,14 +1,11 @@
 package dev.vxrp.bot.commands.commanexecutes.status
 
 import dev.minn.jda.ktx.coroutines.await
-import dev.minn.jda.ktx.messages.editMessage
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.commands.data.StatusConst
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.sqlite.tables.StatusTable
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction

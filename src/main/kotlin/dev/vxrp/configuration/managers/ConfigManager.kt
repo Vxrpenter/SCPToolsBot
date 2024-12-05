@@ -10,7 +10,7 @@ import kotlin.io.path.Path
 class ConfigManager {
     private val logger = LoggerFactory.getLogger(ConfigManager::class.java)
 
-    fun create(dir: String, files: List<Path>){
+    fun create(dir: String, files: List<Path>) {
         Files.createDirectories(Path("$dir/configs/"))
 
         for (file in files) {
@@ -32,7 +32,7 @@ class ConfigManager {
     }
 
     fun query(dir: String, file: String): Config {
-        val currentFile = Path("$dir$file").toFile();
+        val currentFile = Path("$dir$file").toFile()
         logger.debug("Query configuration file {}{}", dir, file)
         val result = Yaml.default.decodeFromString(Config.serializer(), currentFile.readText())
         logger.debug("Query of configuration file {}{} completed", dir, file)

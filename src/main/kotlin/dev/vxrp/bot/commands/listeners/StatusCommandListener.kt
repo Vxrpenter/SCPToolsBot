@@ -12,7 +12,12 @@ import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 
-class StatusCommandListener(val api: JDA, val config: Config, val translation: Translation, private val statusConst: StatusConst) : ListenerAdapter() {
+class StatusCommandListener(
+    val api: JDA,
+    val config: Config,
+    val translation: Translation,
+    private val statusConst: StatusConst
+) : ListenerAdapter() {
 
     init {
         api.listener<SlashCommandInteractionEvent> { event ->
@@ -38,7 +43,11 @@ class StatusCommandListener(val api: JDA, val config: Config, val translation: T
     }
 
     private fun statusCommand(event: SlashCommandInteractionEvent) {
-        if (event.getOption("setting")?.asString == "maintenance") StatusCommand(config, translation, statusConst).changeMaintenanceState(event)
+        if (event.getOption("setting")?.asString == "maintenance") StatusCommand(
+            config,
+            translation,
+            statusConst
+        ).changeMaintenanceState(event)
     }
 
     private fun playerListCommand(event: SlashCommandInteractionEvent) {
@@ -46,6 +55,10 @@ class StatusCommandListener(val api: JDA, val config: Config, val translation: T
     }
 
     private suspend fun templateCommand(event: SlashCommandInteractionEvent) {
-        if (event.getOption("template")?.asString == "playerlist") TemplateCommand(config, translation, statusConst).pastePlayerList(event)
+        if (event.getOption("template")?.asString == "playerlist") TemplateCommand(
+            config,
+            translation,
+            statusConst
+        ).pastePlayerList(event)
     }
 }

@@ -3,8 +3,8 @@ package dev.vxrp.database.sqlite
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.database.sqlite.tables.*
 import dev.vxrp.util.enums.Databasetype
-import org.jetbrains.exposed.sql.*
-
+import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.io.File
 
@@ -21,7 +21,8 @@ class SqliteManager(val config: Config, folder: String, val file: String) {
             createTables()
         }
         if (config.database.dataUsePredefined == "NONE") {
-            when(Databasetype.SQlITE.takeIf { !enumContains<Databasetype>(config.database.customType) } ?: Databasetype.valueOf(config.database.customType)) {
+            when (Databasetype.SQlITE.takeIf { !enumContains<Databasetype>(config.database.customType) }
+                ?: Databasetype.valueOf(config.database.customType)) {
                 Databasetype.SQlITE -> {
                     val url = "jdbc:sqlite:${config.database.customUrl}"
 
@@ -55,6 +56,6 @@ class SqliteManager(val config: Config, folder: String, val file: String) {
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {
-        return enumValues<T>().any { it.name == name}
+        return enumValues<T>().any { it.name == name }
     }
 }

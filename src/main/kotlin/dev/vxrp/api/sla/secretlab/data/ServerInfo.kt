@@ -1,7 +1,7 @@
 package dev.vxrp.secretlab.data
 
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class ServerInfo(

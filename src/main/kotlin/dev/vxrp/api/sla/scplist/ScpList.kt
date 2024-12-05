@@ -20,7 +20,8 @@ private data class Info(
     val friendlyName: Boolean,
     val whitelist: Boolean,
     val modded: Boolean,
-    val sort: String)
+    val sort: String
+)
 
 /**
  * ### ScpList Api Kotlin
@@ -52,7 +53,16 @@ class ScpList(readTimeout: Long = 60, writeTimeout: Long = 60) {
      *
      * @return the ScpListServers
      */
-    fun serverPost(search: String, countryFilter: List<String>, hideEmptyServer: Boolean = true, hideFullServer: Boolean = true, friendlyFire: Boolean = true, whitelist: Boolean = true, modded: Boolean = true, sort: String = "PLAYERS_DESC"): ScpListServers? {
+    fun serverPost(
+        search: String,
+        countryFilter: List<String>,
+        hideEmptyServer: Boolean = true,
+        hideFullServer: Boolean = true,
+        friendlyFire: Boolean = true,
+        whitelist: Boolean = true,
+        modded: Boolean = true,
+        sort: String = "PLAYERS_DESC"
+    ): ScpListServers? {
         val data = Info(search, countryFilter, hideEmptyServer, hideFullServer, friendlyFire, whitelist, modded, sort)
 
         val request = Request.Builder()

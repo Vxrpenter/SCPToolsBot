@@ -15,7 +15,7 @@ class HelpCommand(val translation: Translation) {
             .setActionRow(actionRow(0)).queue()
     }
 
-    fun pages() : List<MessageEmbed> {
+    fun pages(): List<MessageEmbed> {
         val pages = mutableListOf<MessageEmbed>()
 
         pages.add(Embed {

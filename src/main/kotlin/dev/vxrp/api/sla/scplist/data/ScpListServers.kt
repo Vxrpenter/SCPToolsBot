@@ -9,5 +9,6 @@ data class ScpListServers(
     val displayUserCount: Int,
     val displayServerCount: Int,
     val offlineServerCount: Int,
-    val servers: List<Server>? = null)
+    val servers: List<Server>? = null
+)
 

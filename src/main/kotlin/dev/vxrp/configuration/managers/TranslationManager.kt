@@ -32,7 +32,7 @@ class TranslationManager {
     }
 
     fun query(dir: String, lang: String): Translation {
-        val currentFile = Path("$dir/lang/$lang.yml").toFile();
+        val currentFile = Path("$dir/lang/$lang.yml").toFile()
         logger.debug("Query translation file {}{}", dir, currentFile)
         val result = Yaml.default.decodeFromString(Translation.serializer(), currentFile.readText())
         logger.debug("Query of translation file {}{} completed", dir, currentFile)

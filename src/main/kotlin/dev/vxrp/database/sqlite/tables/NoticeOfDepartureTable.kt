@@ -3,7 +3,7 @@ package dev.vxrp.database.sqlite.tables
 import org.jetbrains.exposed.sql.Table
 
 class NoticeOfDepartureTable {
-    object NoticeOfDepartures: Table("notice_of_departures") {
+    object NoticeOfDepartures : Table("notice_of_departures") {
         val id = text("id")
         val handler_id = text("handler_id")
         val channel_id = text("channel_id")

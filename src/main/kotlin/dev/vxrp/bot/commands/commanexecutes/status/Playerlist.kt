@@ -18,9 +18,12 @@ class Playerlist {
             for (player in list) {
 
                 builder.append(
-                    ColorTool().useCustomColorCodes(translation.status.embedPlayerlistPlayer
-                        .replace("%nickname%", player.nickname.toString())
-                        .replace("%id%", player.id.toString())))
+                    ColorTool().useCustomColorCodes(
+                        translation.status.embedPlayerlistPlayer
+                            .replace("%nickname%", player.nickname.toString())
+                            .replace("%id%", player.id.toString())
+                    )
+                )
             }
         } else {
             builder.append(ColorTool().useCustomColorCodes(translation.status.embedPlayerlistCouldntFetch).trimIndent())
@@ -28,17 +31,28 @@ class Playerlist {
 
         return Embed {
             title = ColorTool().useCustomColorCodes(translation.status.embedPlayerlistTitle).trimIndent()
-            description = ColorTool().useCustomColorCodes(translation.status.embedPlayerlistBody
-                .replace("%players%", builder.toString())
-                .replace("%version%", statusConst.mappedServers[currentPort]?.version ?: "&red&&bold&Not Fetched")
-                .replace("%player_number%", statusConst.mappedServers[currentPort]?.players?.split("/".toRegex())?.get(0) ?: 0.toString())
-                .replace("%ff%", statusConst.mappedServers[currentPort]?.ff?.toString() ?: "&red&&bold&Not Fetched")
-                .replace("%wl%", statusConst.mappedServers[currentPort]?.wl?.toString() ?: "&red&&bold&Not Fetched")
-                .replace("%modded%", statusConst.mappedServers[currentPort]?.modded?.toString() ?: "&red&&bold&Not Fetched")
-                .replace("%mods%", statusConst.mappedServers[currentPort]?.mods?.toString() ?: "&red&&bold&Not Fetched")
-                //Styling for true and false
-                .replace("true", "&green&&bold&true")
-                .replace("false", "&red&&bold&false"))
+            description = ColorTool().useCustomColorCodes(
+                translation.status.embedPlayerlistBody
+                    .replace("%players%", builder.toString())
+                    .replace("%version%", statusConst.mappedServers[currentPort]?.version ?: "&red&&bold&Not Fetched")
+                    .replace(
+                        "%player_number%",
+                        statusConst.mappedServers[currentPort]?.players?.split("/".toRegex())?.get(0) ?: 0.toString()
+                    )
+                    .replace("%ff%", statusConst.mappedServers[currentPort]?.ff?.toString() ?: "&red&&bold&Not Fetched")
+                    .replace("%wl%", statusConst.mappedServers[currentPort]?.wl?.toString() ?: "&red&&bold&Not Fetched")
+                    .replace(
+                        "%modded%",
+                        statusConst.mappedServers[currentPort]?.modded?.toString() ?: "&red&&bold&Not Fetched"
+                    )
+                    .replace(
+                        "%mods%",
+                        statusConst.mappedServers[currentPort]?.mods?.toString() ?: "&red&&bold&Not Fetched"
+                    )
+                    //Styling for true and false
+                    .replace("true", "&green&&bold&true")
+                    .replace("false", "&red&&bold&false")
+            )
             timestamp = Instant.now()
         }
     }

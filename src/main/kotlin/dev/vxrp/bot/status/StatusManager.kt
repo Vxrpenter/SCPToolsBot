@@ -82,7 +82,14 @@ class StatusManager(val config: Config, val translation: Translation, private va
             mappedBots[newApi.selfUser.id] = instance.serverPort
             mappedStatusConst[instance.serverPort] = StatusConst(mappedBots, mappedServers, maintenance, instance)
 
-            if (status.initializeListeners) newApi.addEventListener(StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance, instance)))
+            if (status.initializeListeners) newApi.addEventListener(
+                StatusCommandListener(
+                    newApi,
+                    config,
+                    translation,
+                    StatusConst(mappedBots, mappedServers, maintenance, instance)
+                )
+            )
             if (status.initializeCommands) initializeCommands(commandManager, newApi)
             instanceApiMapping[instance] = newApi
         }
@@ -117,7 +124,7 @@ class StatusManager(val config: Config, val translation: Translation, private va
 
     private fun task(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
         val ports = mutableListOf<Int>()
-        status.instances.forEach { currentInstance -> ports.add(currentInstance.serverPort)}
+        status.instances.forEach { currentInstance -> ports.add(currentInstance.serverPort) }
 
         var mappedPorts = mutableMapOf<Int, Server>()
         try {
@@ -148,7 +155,7 @@ class StatusManager(val config: Config, val translation: Translation, private va
     private fun mapPorts(status: Status, ports: List<Int>): MutableMap<Int, Server> {
         val secretLab = SecretLab(status.api, status.accountId)
 
-        val map  = mutableMapOf<Int, Server>()
+        val map = mutableMapOf<Int, Server>()
         val info = secretLab.serverInfo(lo = false, players = true, list = true)
 
         for (port in ports) {
@@ -176,8 +183,9 @@ class StatusManager(val config: Config, val translation: Translation, private va
         maintenance.putIfAbsent(server.port, false)
         if (server.online) {
 
-            if (server.players?.split("/".toRegex())?.dropLastWhile { it.isEmpty() }?.toTypedArray()?.get(0).equals("0")) api.presence.setStatus(OnlineStatus.IDLE)
-
+            if (server.players?.split("/".toRegex())?.dropLastWhile { it.isEmpty() }?.toTypedArray()?.get(0)
+                    .equals("0")
+            ) api.presence.setStatus(OnlineStatus.IDLE)
             else if (maintenance[server.port] == false) api.presence.setStatus(OnlineStatus.ONLINE)
 
             if (maintenance[server.port] == true) api.presence.setStatus(OnlineStatus.DO_NOT_DISTURB)
@@ -209,21 +217,25 @@ class StatusManager(val config: Config, val translation: Translation, private va
         } else {
             if (serverStatus[server.port] == false) return
 
-            if (reconnectAttempt[server.port]!! == instance.retries+1) return
+            if (reconnectAttempt[server.port]!! == instance.retries + 1) return
             if (reconnectAttempt[server.port]!! == instance.retries) {
                 logger.warn("Completely lost connection to server ${instance.name} (${instance.serverPort})")
 
                 postConnectionLost(api, instance)
-                reconnectAttempt[server.port] = instance.retries+1
+                reconnectAttempt[server.port] = instance.retries + 1
                 serverStatus[server.port] = false
                 return
             }
             logger.warn("Lost connection to server - ${instance.name} (${instance.serverPort}), trying reconnect... iteration ${reconnectAttempt[server.port]}")
-            reconnectAttempt[server.port] = reconnectAttempt[server.port]!!+1
+            reconnectAttempt[server.port] = reconnectAttempt[server.port]!! + 1
         }
     }
 
-    private fun updatePlayerLists(ports: MutableMap<Int, Server>, instances: List<Instance>, instanceApiMap: MutableMap<Instance, JDA>) {
+    private fun updatePlayerLists(
+        ports: MutableMap<Int, Server>,
+        instances: List<Instance>,
+        instanceApiMap: MutableMap<Instance, JDA>
+    ) {
         for (port in ports) {
             var api: JDA? = null
 
@@ -285,8 +297,10 @@ class StatusManager(val config: Config, val translation: Translation, private va
             url = config.status.pageUrl
             title = ColorTool().useCustomColorCodes(translation.status.embedLostTitle)
                 .replace("%instance%", instance.name).trimIndent()
-            description = ColorTool().useCustomColorCodes(translation.status.embedLostBody
-                .replace("%retries%", instance.retries.toString())).trimIndent()
+            description = ColorTool().useCustomColorCodes(
+                translation.status.embedLostBody
+                    .replace("%retries%", instance.retries.toString())
+            ).trimIndent()
             field {
                 name = ColorTool().useCustomColorCodes(translation.status.embedLostFieldName).trimIndent()
                 value = ColorTool().useCustomColorCodes(translation.status.embedLostFieldValue).trimIndent()

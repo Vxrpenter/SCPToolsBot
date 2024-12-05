@@ -34,23 +34,31 @@ class SettingsCommand(val config: Config, val translation: Translation) {
 
             field {
                 inline = true
-                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldLanguageTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldLanguageValue
-                    .replace("%language%", config.loadTranslation).trimIndent())
+                name =
+                    ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldLanguageTitle.trimIndent())
+                value = ColorTool().useCustomColorCodes(
+                    translation.settings.embedSettingsFieldLanguageValue
+                        .replace("%language%", config.loadTranslation).trimIndent()
+                )
             }
 
             field {
                 inline = true
                 name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldGuildTitle.trimIndent())
                 value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldGuildValue
-                    .replace("%isAvailable%", "${event.guild?.idLong?.let { event.jda.isUnavailable(it) }}").trimIndent())
+                    .replace("%isAvailable%", "${event.guild?.idLong?.let { event.jda.isUnavailable(it) }}")
+                    .trimIndent()
+                )
             }
 
             field {
                 inline = true
-                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldDatabaseTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldDatabaseValue
-                    .replace("%state%", translation.settings.textDatabaseOnline).trimIndent())
+                name =
+                    ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldDatabaseTitle.trimIndent())
+                value = ColorTool().useCustomColorCodes(
+                    translation.settings.embedSettingsFieldDatabaseValue
+                        .replace("%state%", translation.settings.textDatabaseOnline).trimIndent()
+                )
             }
 
             field {
@@ -62,22 +70,34 @@ class SettingsCommand(val config: Config, val translation: Translation) {
             field {
                 inline = true
                 name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldVersionTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldVersionValue
-                    .replace("%version%", version()).trimIndent())
+                value = ColorTool().useCustomColorCodes(
+                    translation.settings.embedSettingsFieldVersionValue
+                        .replace("%version%", version()).trimIndent()
+                )
             }
 
             field {
                 inline = true
                 name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldBuildTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldBuildValue
-                    .replace("%build%", Github().checkForUpdatesByTag("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags", false).toString()).trimIndent())
+                value = ColorTool().useCustomColorCodes(
+                    translation.settings.embedSettingsFieldBuildValue
+                        .replace(
+                            "%build%",
+                            Github().checkForUpdatesByTag(
+                                "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags",
+                                false
+                            ).toString()
+                        ).trimIndent()
+                )
             }
 
             field {
                 inline = true
                 name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldGatewayTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldGatewayValue
-                    .replace("%time%", "${event.jda.gatewayPing}").trimIndent())
+                value = ColorTool().useCustomColorCodes(
+                    translation.settings.embedSettingsFieldGatewayValue
+                        .replace("%time%", "${event.jda.gatewayPing}").trimIndent()
+                )
             }
 
             field {
@@ -88,18 +108,30 @@ class SettingsCommand(val config: Config, val translation: Translation) {
 
             field {
                 inline = true
-                name =  ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldRestTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldRestValue
-                    .replace("%time%", "${event.jda.restPing.complete()}").trimIndent())
+                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldRestTitle.trimIndent())
+                value = ColorTool().useCustomColorCodes(
+                    translation.settings.embedSettingsFieldRestValue
+                        .replace("%time%", "${event.jda.restPing.complete()}").trimIndent()
+                )
             }
         }
 
         event.reply_("", listOf(embed)).setActionRow(
-            Button.secondary("start_page", ColorTool().useCustomColorCodes(translation.buttons.textSettingsStart)).asDisabled(),
-            Button.primary("configure_page", ColorTool().useCustomColorCodes(translation.buttons.textSettingsConfigure)),
-            Button.primary("current_settings", ColorTool().useCustomColorCodes(translation.buttons.textSettingsCurrent)),
+            Button.secondary("start_page", ColorTool().useCustomColorCodes(translation.buttons.textSettingsStart))
+                .asDisabled(),
+            Button.primary(
+                "configure_page",
+                ColorTool().useCustomColorCodes(translation.buttons.textSettingsConfigure)
+            ),
+            Button.primary(
+                "current_settings",
+                ColorTool().useCustomColorCodes(translation.buttons.textSettingsCurrent)
+            ),
             Button.primary("bot_info", ColorTool().useCustomColorCodes(translation.buttons.textSettingsInformation)),
-            Button.link("https://github.com/Vxrpenter/SCPToolsBot", ColorTool().useCustomColorCodes(translation.buttons.textSettingsNews)).withEmoji(Emoji.fromFormatted("🗞️"))
+            Button.link(
+                "https://github.com/Vxrpenter/SCPToolsBot",
+                ColorTool().useCustomColorCodes(translation.buttons.textSettingsNews)
+            ).withEmoji(Emoji.fromFormatted("🗞️"))
         ).setEphemeral(true).queue()
     }
 
