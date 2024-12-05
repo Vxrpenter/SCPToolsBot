@@ -83,7 +83,7 @@ I'm not liable for anything done with it, and no warranty is given
 
 ---
 
-## Start History
+## Star History
 Thank you a lot for starring this repo. It is really helpful and makes me happy to work on this project. 
 
 If you like this project, you may consider sharing it with others Either way, thank you really much
