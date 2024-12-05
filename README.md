@@ -40,7 +40,7 @@ For more indepth explanation see the [wiki](https://github.com/Vxrpenter/SCPTool
 
 ## Installation
 > [!NOTE]
-> Bots have to run all the time to be effective so make sure to run it one a machine that is on 24/7 or a long time
+> Bots have to run all the time to be effective so make sure to run it on a machine that is online 24/7
 
 Download the `.jar` from the latest release. Copy it into a folder of your liking and run:
 ```console
@@ -58,7 +58,7 @@ If you can't fix the issue, create an issue here so we're able to review it and 
 
 ## Build information
 Full releases are marked as such in the release.
-If a release contains the `pre-release` tag, it is experimental and features could be broken.
+If a release contains the `pre-release` tag, it is experimental and features may be broken.
 
 Releases will be marked as stable if they're thought to run well after testing.
 If a release is marked as unstable, it might not run well or produce bugs, for example, memory leaks
@@ -66,7 +66,7 @@ If a release is marked as unstable, it might not run well or produce bugs, for e
 When a new build is released, it might take some time until the wiki is updated
 
 Changelogs only contain the most important information,
-and small one-line changes will not be included if they don't have a major effect on stability and performance
+and small one-line changes will not be included if they don't have a major effect on stability and/or performance
 
 ## Licencing
 This project, as stated above, is licenced under the MIT license.
@@ -76,10 +76,11 @@ I'm not liable for anything done with it, and no warranty is given
 
 > [!IMPORTANT]
 > When using code from this repo, you have to add a License and copyright notice.
-> If you don't know what that is, I would advise you to search for more information online
+
+This licence is not in place to annoy anyone but to protect the work, passion and time that has gone into this project
 
 ## Special Thanks
-- Special thanks goes out to [ced777ric](https://github.com/ced777ric) that helped me a lot with the cedmod integration and for explaining me a lot of stuff when I was too stupid to see the obvious
+- Special thanks goes to [ced777ric](https://github.com/ced777ric) who helped me a lot with the cedmod api integration especially when trying to find the specific endpoints usecase or usability
 
 ---
 
