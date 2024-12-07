@@ -52,6 +52,7 @@ class SqliteManager(val config: Config, folder: String, val file: String) {
             SchemaUtils.create(RegularsTable.Regulars)
             SchemaUtils.create(ActionQueueTable.ActionQueue)
             SchemaUtils.create(StatusTable.Status)
+            SchemaUtils.create(ConnectionLogsTable.ConnectionLogs)
         }
     }
 
