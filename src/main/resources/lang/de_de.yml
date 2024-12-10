@@ -1,163 +1,61 @@
-# In dieser Translation ist jede art von discord formattierung möglich
-#
-# \n führt einen Zeilenumbruch durch
-#
-# Werte die so umrandet sind: %value% werden mit anderen ersetzt
-#
-# Der bot lädt die Translations beim Start, um änderungen anzuwenden
-#
-# Colorcodes könnt ihr hier finden: https://github.com/Vxrpenter/SCPToolsBot/wiki/Configuring-Translations
-#
-# Benutze &filler& um eine embed line zu füllen, benutze &filler<count>& um die Zeichenanzahl zu bestimmen
-#
-
+#In dieser Translation ist jede art von discord formattierung möglich
+#\n führt einen Zeilenumbruch durch
+#Werte die so umrandet sind: %value% werden mit anderen ersetzt
+#Der bot lädt die Translations beim Start, um änderungen anzuwenden
+#Colorcodes könnt ihr hier finden: https://github.com/Vxrpenter/SCPToolsBot/wiki/Configuring-Translations
+#Benutze &filler& um eine embed line zu füllen, benutze &filler<count>& um die Zeichenanzahl zu bestimmen
 HELP:
-
   EMBED_PAGE_ONE_TITLE: "Scp Tools Help Page"
-  EMBED_PAGE_ONE_BODY: "
-                        > ScpTools. Ein Bot zur Verwaltung deines SCP Secret Laboratory Servers mit der Community und staff management, quality of life features und einem custom Support-System. Übersetze alles nach deinem Geschmack und wähle die Einstellungen, die am besten zu deinem Server passen.\n
-                        &filler&
-                        [⭐] Wenn du Hilfe bei der Einrichtung des Bots benötigen oder auf Probleme stoßen solltest, dann guck dir die dokumentation [hier](https://github.com/Vxrpenter/SCPToolsBot/wiki) an.\n
-                                
-                        [❌] Wird dein Problem hier nicht erklärt? Erstelle dann bitte ein Problem auf GitHub [hier](https://github.com/Vxrpenter/SCPToolsBot/issues)\n
-                                
-                        ### Kurze Liste der Befehle:\n
-                        `/help` - für Hilfe\n
-                        `/template` - zum Einfügen von Templates\n
-                        - `Regeln` - Regeln des Secret-Lab Servers\n
-                        - `Support` - Support-Ticketsystem + Entbannungstickets\n
-                        - `Abmeldungen` - Abmeldungs-Panel für Staff\n
-                        - `Stammspieler` - Stammspieler-Panel für die Spieler\n
-                        - `Bewerbungen` - Bewerbungs-Panel für Staff-suche 
-                        "
+  EMBED_PAGE_ONE_BODY: " > ScpTools. Ein Bot zur Verwaltung deines SCP Secret Laboratory Servers mit der Community und staff management, quality of life features und einem custom Support-System. Übersetze alles nach deinem Geschmack und wähle die Einstellungen, die am besten zu deinem Server passen.\n &filler& [⭐] Wenn du Hilfe bei der Einrichtung des Bots benötigen oder auf Probleme stoßen solltest, dann guck dir die dokumentation [hier](https://github.com/Vxrpenter/SCPToolsBot/wiki) an.\n [❌] Wird dein Problem hier nicht erklärt? Erstelle dann bitte ein Problem auf GitHub [hier](https://github.com/Vxrpenter/SCPToolsBot/issues)\n ### Kurze Liste der Befehle:\n `/help` - für Hilfe\n `/template` - zum Einfügen von Templates\n - `Regeln` - Regeln des Secret-Lab Servers\n - `Support` - Support-Ticketsystem + Entbannungstickets\n - `Abmeldungen` - Abmeldungs-Panel für Staff\n - `Stammspieler` - Stammspieler-Panel für die Spieler\n - `Bewerbungen` - Bewerbungs-Panel für Staff-suche "
   EMBED_PAGE_TWO_TITLE: "Scp Tools Help Page - Regeln"
-  EMBED_PAGE_TWO_BODY: "
-                        > ❌ Achtung\n
-                        > Dieses feature ist experimentell und aktuell nicht völlig funktionsfähig\n
-                        &filler&
-                        Benutze `/template rules` um das regel menu zu pasten.\n
-                        
-                        Du kannst zwischen dem updaten und pasten der Serverregeln. Die SCP SL regeln werden dann automatisch durch einen Color-Parser gejagt und dann in den Channel gesendet.\n
-                        > Du kannst die Farben des Color-Parsers in der `color-config.json` anpassen
-                        "
+  EMBED_PAGE_TWO_BODY: " > ❌ Achtung\n > Dieses feature ist experimentell und aktuell nicht völlig funktionsfähig\n &filler& Benutze `/template rules` um das regel menu zu pasten.\n Du kannst zwischen dem updaten und pasten der Serverregeln. Die SCP SL regeln werden dann automatisch durch einen Color-Parser gejagt und dann in den Channel gesendet.\n > Du kannst die Farben des Color-Parsers in der `color-config.json` anpassen "
   EMBED_PAGE_THREE_TITLE: "Scp Tools Help Page - Support und Unban"
-  EMBED_PAGE_THREE_BODY: "
-                        Benutze `/template support` command um das Support-Panel zu senden.\n
-                        &filler&
-                        **Options of the template:**\n
-                        - `Support ticket erstellen` - 
-                        - `Entbannungsantrag stellen` - Erstelle ein Support Ticket um Fragen und Probleme von Spielern zu klären\n Gibt den Spielern die Möglichkeit einen entbannungsantrag für den SCP:SL Server zu stellen. Wenn diese angenommen wird, wird der Spieler automatisch auf dem Server entbannt
-                        "
+  EMBED_PAGE_THREE_BODY: " Benutze `/template support` command um das Support-Panel zu senden.\n &filler& **Options of the template:**\n - `Support ticket erstellen` - - `Entbannungsantrag stellen` - Erstelle ein Support Ticket um Fragen und Probleme von Spielern zu klären\n Gibt den Spielern die Möglichkeit einen entbannungsantrag für den SCP:SL Server zu stellen. Wenn diese angenommen wird, wird der Spieler automatisch auf dem Server entbannt "
   EMBED_PAGE_FOUR_TITLE: "Scp Tools Help Page - Abmeldungen"
-  EMBED_PAGE_FOUR_BODY: "
-                        Benutze `/template notice of departure` um das Abmeldungs-Panel zu senden\n
-                        &filler&
-                        Dieses Feature ermöglicht es Staff Mitgliedern eine Auszeit zu nehmen. Wenn diese Abläuft werden sie und die Teamleitung automatisch informiert.\n
-                        
-                        Wenn ein Nutzer eine Abmeldung sendet wird diese in einen Kanel zum bearbeiten gesendet. Wird sie angenommen, dann wird dies in der Datenbank gespeichert.\n
-                        > Der Nutzer wird beim Annehmen, Ablehnen, Zurückziehen und beim Ende der Abmeldung darüber per Privatnachricht informiert
-                        "
+  EMBED_PAGE_FOUR_BODY: " Benutze `/template notice of departure` um das Abmeldungs-Panel zu senden\n &filler& Dieses Feature ermöglicht es Staff Mitgliedern eine Auszeit zu nehmen. Wenn diese Abläuft werden sie und die Teamleitung automatisch informiert.\n Wenn ein Nutzer eine Abmeldung sendet wird diese in einen Kanel zum bearbeiten gesendet. Wird sie angenommen, dann wird dies in der Datenbank gespeichert.\n > Der Nutzer wird beim Annehmen, Ablehnen, Zurückziehen und beim Ende der Abmeldung darüber per Privatnachricht informiert "
   EMBED_PAGE_FIVE_TITLE: "Scp Tools Help Page - Stammspieler"
-  EMBED_PAGE_FIVE_BODY: "
-                        Benutze `/template regulars` um das Stammspieler-Panel zu senden.\n
-                        &filler&
-                        Biete deinen Spielern custom Spielzeit rollen an, die sich automatisch mit dem Server syncronisieren.\n
-                        
-                        Die Spieler können die Synchronisierung der Zeit aktivieren/deaktivieren oder so auch einfach löschen.
-                        "
+  EMBED_PAGE_FIVE_BODY: " Benutze `/template regulars` um das Stammspieler-Panel zu senden.\n &filler& Biete deinen Spielern custom Spielzeit rollen an, die sich automatisch mit dem Server syncronisieren.\n Die Spieler können die Synchronisierung der Zeit aktivieren/deaktivieren oder so auch einfach löschen. "
   EMBED_PAGE_SIX_TITLE: "Scp Tools Help Page - Applications"
-  EMBED_PAGE_SIX_BODY: "
-                        > ❌ WORK IN PROGRESS\n
-                        > Dieses Feature wurde noch nicht entwickelt\n
-                        &filler&
-                        Hier gibts noch nichts.
-                        "
-
+  EMBED_PAGE_SIX_BODY: " > ❌ WORK IN PROGRESS\n > Dieses Feature wurde noch nicht entwickelt\n &filler& Hier gibts noch nichts. "
   EMBED_FOOTER_TEXT: "⭐ Mit viel Eifer, erstellt von Vxrpenter ⭐"
   EMBED_FOOTER_IMG: "https://avatars.githubusercontent.com/u/110356385?v=4"
-
 STATUS:
   ACTIVITY_OFFLINE: "Server Offline..."
   ACTIVITY_MAINTENANCE: "Server in Wartungarbeiten..."
-
   EMBED_ESTABLISHED_TITLE: "%instance% - verbindung wiederhergestellt"
   EMBED_ESTABLISHED_BODY: "Die Verbindung zum Server wurde wiederhergestellt! Ausfälle sollten nicht häufig auftreten, wenn der Server stabil läuft."
   EMBED_ESTABLISHED_FIELD_NAME: "Grund"
   EMBED_ESTABLISHED_FIELD_VALUE: "Server ist online und die central server sind online"
-
   EMBED_LOST_TITLE: "%instance% - verbindung verloren"
   EMBED_LOST_BODY: "Die Verbindung zu diesem Server wurde nach **%retries%** aufeinanderfolgenden Fehlern unterbrochen. Der Server wurde als offline markiert."
   EMBED_LOST_FIELD_NAME: "Grund"
   EMBED_LOST_FIELD_VALUE: "Der Server ist offline, die zentralen Server sind offline oder die secret lab api ist offline."
-
   EMBED_MAINTENANCE_ON_TITLE: "%instance% - Wartungsarbeiten aktiviert"
   EMBED_MAINTENANCE_ON_BODY: "Dieser Server wurde in den Wartungsmodus versetzt. Serverdaten sind nicht verfügbar und Spieler werden nicht in der Aktivität angezeigt."
   EMBED_MAINTENANCE_ON_FIELD_NAME: "Grund"
   EMBED_MAINTENANCE_ON_FIELD_VALUE: "Es wurde kein Grund für diese Wartungsarbeiten angegeben. Bitte wende dich sich für weitere Informationen an das Serverteam."
-
   EMBED_MAINTENANCE_OFF_TITLE: "%instance% - Wartungsarbeiten deaktiviert"
   EMBED_MAINTENANCE_OFF_BODY: "Dieser Server wurde aus der Wartung genommen. Serverdaten sind jetzt verfügbar und Spieler werden in der Aktivität angezeigt."
   EMBED_MAINTENANCE_OFF_FIELD_NAME: "Grund"
   EMBED_MAINTENANCE_OFF_FIELD_VALUE: "Es wurde kein Grund für diese Wartungsarbeiten angegeben. Bitte wende dich sich für weitere Informationen an das Serverteam."
-
   EMBED_PLAYERLIST_TITLE: "Aktuelle Spielerliste"
-  EMBED_PLAYERLIST_BODY: "
-                        ```ansi\n
-                        Version: &green&&bold&%version%&reset&\n
-                        Online Players: &bold&%player_number%&reset&\n
-                        FriendlyFire: %ff%&reset&\n
-                        Whitelisted: %wl%&reset&\n
-                        Modded: %modded%&reset&\n
-                        Mods: &bold&%mods%&reset&
-                        ```
-                        &filler&
-                        ```ansi
-                        
-                        %players%
-                        ```"
+  EMBED_PLAYERLIST_BODY: " ```ansi\n Version: &green&&bold&%version%&reset&\n Online Players: &bold&%player_number%&reset&\n FriendlyFire: %ff%&reset&\n Whitelisted: %wl%&reset&\n Modded: %modded%&reset&\n Mods: &bold&%mods%&reset& ``` &filler& ```ansi %players% ```"
   EMBED_PLAYERLIST_EMPTY: "&red&Der server ist leer"
   EMBED_PLAYERLIST_COULDNT_FETCH: "&red&Konnte die Spielerliste nicht korrekt laden"
   EMBED_PLAYERLIST_PLAYER: "\n&reset&&bold&%nickname% &reset&(&green&&bold&%id%&reset&)"
-
   MESSAGE_STATUS_EMPTY: "Es läuft kein Statusbot"
   MESSAGE_STATUS_DEACTIVATED: "Wartungsarbeiten für Server deaktiviert"
   MESSAGE_STATUS_ACTIVATED: "Wartungsarbeiten für Server aktiviert"
-
 SUPPORT:
-
   EMBED_TEMPLATE_SUPPORT_TITLE: "Erstelle eine Support-Ticket"
-  EMBED_TEMPLATE_SUPPORT_BODY: "
-                        Wenn du ein Problem hast, das du nicht lösen kannst, dann frage unser Team\n
-
-                        **Bearbeitungsdauer:**
-                        Die Bearbeitung deines Tickets kann bis zu 24 Stunden dauern.
-                        
-                        **Regeln für Ticketerstellung**\n
-                        `Hinweis: Alle Serverregeln gelten auch im Support.`\n
-                        1. Tickets dürfen nicht aus Spaß oder aus einem anderen lustigen Hintergrund erstellt werden.\n
-                        2. Gehe nicht in Streitigkeiten mit dem Support und bleibe beim Thema.\n
-                        3. Der Support sollte nicht länger als 48 Stunden auf deine Antworten warten und kann anschließend dein Ticket schließen.
-                        "
+  EMBED_TEMPLATE_SUPPORT_BODY: " Wenn du ein Problem hast, das du nicht lösen kannst, dann frage unser Team\n **Bearbeitungsdauer:** Die Bearbeitung deines Tickets kann bis zu 24 Stunden dauern. **Regeln für Ticketerstellung**\n `Hinweis: Alle Serverregeln gelten auch im Support.`\n 1. Tickets dürfen nicht aus Spaß oder aus einem anderen lustigen Hintergrund erstellt werden.\n 2. Gehe nicht in Streitigkeiten mit dem Support und bleibe beim Thema.\n 3. Der Support sollte nicht länger als 48 Stunden auf deine Antworten warten und kann anschließend dein Ticket schließen. "
   EMBED_TEMPLATE_UNBAN_TITLE: "Stelle einen Entbannungsantrag."
-  EMBED_TEMPLATE_UNBAN_BODY: "
-                        Wenn du gesperrt wurdest, aber denkst, dass es nicht gerechtfertigt ist, reiche bitte einen Entbannungsantrag ein\n
-                        
-                        **Bearbeitungszeit:**
-                        Die Bearbeitung des Antrags kann bis zu einer Woche dauern
-                        
-                        **Geteilte Informationen:**
-                        Wenn du einen Entbannungsantrag stellst, können wir folgende Informationen erhalten:
-                        - Deine Steam-ID
-                        - Deine Discord-Benutzer-ID
-                        - Grund, warum du gesperrt wurdest
-                        - Grund, warum du entbannt werden möchtest
-                        "
+  EMBED_TEMPLATE_UNBAN_BODY: " Wenn du gesperrt wurdest, aber denkst, dass es nicht gerechtfertigt ist, reiche bitte einen Entbannungsantrag ein\n **Bearbeitungszeit:** Die Bearbeitung des Antrags kann bis zu einer Woche dauern **Geteilte Informationen:** Wenn du einen Entbannungsantrag stellst, können wir folgende Informationen erhalten: - Deine Steam-ID - Deine Discord-Benutzer-ID - Grund, warum du gesperrt wurdest - Grund, warum du entbannt werden möchtest "
   MODAL_SUPPORT_TITLE: "Support Ticket"
   MODAL_SUPPORT_SUBJECT_TITLE: "Frage"
   MODAL_SUPPORT_SUBJECT_PLACEHOLDER: "Was ist deine Frage?"
   MODAL_SUPPORT_EXPLANATION_TITLE: "Erklärung"
   MODAL_SUPPORT_EXPLANATION_PLACEHOLDER: "Erklär worum es dabei genau geht."
-
   MODAL_UNBAN_TITLE: "Unban Ticket"
   MODAL_UNBAN_STEAMID_TITLE: "SteamID"
   MODAL_UNBAN_STEAMID_PLACEHOLDER: "Was ist deine steamID?"
@@ -165,375 +63,94 @@ SUPPORT:
   MODAL_UNBAN_REASON_PLACEHOLDER: "Grund der in deiner ban message genannt wurde."
   MODAL_UNBAN_REASON_TO_UNBAN_TITLE: "Grund dich zu entbannen"
   MODAL_UNBAN_REASON_TO_UNBAN_PLACEHOLDER: "Wieso solltest du entbannt werden?"
-
   MODAL_REASON_ACTION_TITLE: "Aktions Grund"
   MODAL_REASON_ACTION_REASON_TITLE: "Grund"
   MODAL_REASON_ACTION_REASON_PLACEHOLDER: "Wieso willst du diese Aktion durchführen?"
-
   EMBED_TICKET_SUPPORT_TITLE: "%name%"
-  EMBED_TICKET_SUPPORT_BODY: "
-                        Support-Ticket wird überprüft. Eine Antwort von unserem Moderationsteam kann ein wenig Zeit in Anspruch nehmen\n
-
-                        __**Ticket-Betreff:**__\n
-                        ```%subject%```
-                        
-                        __**Inhalt des Tickets:**__\n
-                        ```%body%```
-                        "
+  EMBED_TICKET_SUPPORT_BODY: " Support-Ticket wird überprüft. Eine Antwort von unserem Moderationsteam kann ein wenig Zeit in Anspruch nehmen\n __**Ticket-Betreff:**__\n ```%subject%``` __**Inhalt des Tickets:**__\n ```%body%``` "
   EMBED_TICKET_SUPPORT_FOOTER: "Erstellt am %date% um %time% Uhr"
   EMBED_TICKET_SUPPORT_CREATED: "Dein ticket wurde erstellt - %channel%"
-
   EMBED_UNBAN_TITLE: "%name%"
-  EMBED_UNBAN_BODY: "
-                        Entbannungsantrag wird bearbeited.\n
-                        
-                        __**Steam ID:**__\n
-                        ||%steamID%||\n
-                       
-                        __**Ban Grund:**__\n
-                        ```%reason%```
-                        
-                        __**Begründung für eine Entbannung:**__\n
-                        ```%reasoning%```
-                        "
+  EMBED_UNBAN_BODY: " Entbannungsantrag wird bearbeited.\n __**Steam ID:**__\n ||%steamID%||\n __**Ban Grund:**__\n ```%reason%``` __**Begründung für eine Entbannung:**__\n ```%reasoning%``` "
   EMBED_UNBAN_FOOTER: "Erstellt am %date% um %time% Uhr"
   EMBED_UNBAN_CREATED: "Ihre Entbannungsanfrage wurde bearbeitet."
-
-  EMBED_UNBAN_MESSAGE_ACCEPTED: "
-                        Dein Entsperrungsantrag unter der Steam ID (siehe unten) wurde akzeptiert. Du kannst jetzt den Server wieder betreten, ohne irgendwelche Strafen befürchten zu müssen.\n
-                        Wir entschuldigen uns für die Unannehmlichkeiten und hoffen, dass du unseren Server wieder genießen wirst\n
-
-                        __**Steam ID:**__\n
-                        ||%steamID%||\n
-                        
-                        __**Akzeptierungsgrund:**__\n
-                        ```%reason%```
-                        "
-  EMBED_UNBAN_MESSAGE_DISMISSED: "
-                        Dein Entbannungsantrag unter der Steam-ID (siehe unten) wurde abgelehnt. Du kannst dieses Verbot nicht erneut anfechten, es sei denn, die Serververwaltung gibt ihre Zustimmung
-                        oder wenn dieser Fall gelöst ist und ein anderer auftritt\n
-
-                        __**Steam-ID:**__\n
-                        ||%steamID%||
-                        
-                        __**Ablehnungsgrund:**__\n
-                        ```%reason%```
-                        "
+  EMBED_UNBAN_MESSAGE_ACCEPTED: " Dein Entsperrungsantrag unter der Steam ID (siehe unten) wurde akzeptiert. Du kannst jetzt den Server wieder betreten, ohne irgendwelche Strafen befürchten zu müssen.\n Wir entschuldigen uns für die Unannehmlichkeiten und hoffen, dass du unseren Server wieder genießen wirst\n __**Steam ID:**__\n ||%steamID%||\n __**Akzeptierungsgrund:**__\n ```%reason%``` "
+  EMBED_UNBAN_MESSAGE_DISMISSED: " Dein Entbannungsantrag unter der Steam-ID (siehe unten) wurde abgelehnt. Du kannst dieses Verbot nicht erneut anfechten, es sei denn, die Serververwaltung gibt ihre Zustimmung oder wenn dieser Fall gelöst ist und ein anderer auftritt\n __**Steam-ID:**__\n ||%steamID%|| __**Ablehnungsgrund:**__\n ```%reason%``` "
   MESSAGE_UNBAN_SENT: "Die Antwort wurde gesendet und entsprechende Maßnahmen wurden ergriffen"
-
 NOTICE_OF_DEPARTURE:
-
   EMBED_TEMPLATE_TITLE: "Abmeldung für Discord und Secret Lab."
-  EMBED_TEMPLATE_BODY: "
-                        Wenn du weißt, dass Sie für eine bestimmte Zeit nicht online sein können, dann füll bitte dieses Formular aus\n
-
-                        **Zu gebende Informationen:**\n
-                        - Wie lange wirst du abwesend sein, FORMAT: **[dd.MM.yyyy]**\n
-                        - gib  bitte eine kurze Erklärung ab, warum du abwesend sein werden, ohne Details
-                        
-                        Jeder Zeitraum über 1 Jahr wird nicht akzeptiert und du wirst gebeten, das Team zu verlassen
-                        "
-
+  EMBED_TEMPLATE_BODY: " Wenn du weißt, dass Sie für eine bestimmte Zeit nicht online sein können, dann füll bitte dieses Formular aus\n **Zu gebende Informationen:**\n - Wie lange wirst du abwesend sein, FORMAT: **[dd.MM.yyyy]**\n - gib  bitte eine kurze Erklärung ab, warum du abwesend sein werden, ohne Details Jeder Zeitraum über 1 Jahr wird nicht akzeptiert und du wirst gebeten, das Team zu verlassen "
   MODAL_TITLE: "Abmeldung stellen"
   MODAL_TIME_TITLE: "Wie lange bist du weg?"
   MODAL_TIME_PLACEHOLDER: "wie lange, bitt im format [dd.MM.yyyy]"
   MODAL_EXPLANATION_TITLE: "Erklärung"
   MODAL_EXPLANATION_PLACEHOLDER: "Wieso wirst du weg sein? [keine details]"
-
   EMBED_DESCISION_TITLE: "Abmeldung - #%number%"
-
-  # Wenn du dies entfernst: ```ansi ``` dann funktionert das color rendering nicht
-  EMBED_DESCISION_BODY: " 
-                        Wenn dieser Benutzer akzeptiert wird, wird der Benutzer und das Datum in die Datenbank aufgenommen und du wirst benachrichtigt, wenn es abläuft\n
-
-                        __**Zeitspanne**__\n
-                        ```ansi\n
-                        %current_day%.%current_month%.%current_year% bis %day%.%month%.%year%
-                        ```
-                        
-                        __**Grund:**__\n
-                        ```%reason%```
-                        "
+  #Wenn du dies entfernst: ```ansi ``` dann funktionert das color rendering nicht
+  EMBED_DESCISION_BODY: " Wenn dieser Benutzer akzeptiert wird, wird der Benutzer und das Datum in die Datenbank aufgenommen und du wirst benachrichtigt, wenn es abläuft\n __**Zeitspanne**__\n ```ansi\n %current_day%.%current_month%.%current_year% bis %day%.%month%.%year% ``` __**Grund:**__\n ```%reason%``` "
   EMBED_DESCISION_FOOTER: "Erstellt am %date% um %time% Uhr"
   MESSAGE_DESCISION_CREATED: "Deine Abmeldung bald bearbeited"
-
-  EMBED_ACCEPTED: "
-                        Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n
-
-                        __**Akzeptanzzeitraum:**__\n
-                        ```%timeframe%```
-                        
-                        __**Akzeptanzgrund:**__\n
-                        ```%reason%```
-                        "
-  EMBED_DISMISSED: "
-                         Deine Abmeldung wurde abgelehnt. Es ist dir nicht gestattet, freizunehmen. Falls du dennoch musst, sprech bitte mit einem höhergestellten Mitglied über das Verlassen des Teams\n
-
-                        __**Abweisungsgrund:**__\n
-                        ```%reason%```
-                        "
+  EMBED_ACCEPTED: " Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n __**Akzeptanzzeitraum:**__\n ```%timeframe%``` __**Akzeptanzgrund:**__\n ```%reason%``` "
+  EMBED_DISMISSED: " Deine Abmeldung wurde abgelehnt. Es ist dir nicht gestattet, freizunehmen. Falls du dennoch musst, sprech bitte mit einem höhergestellten Mitglied über das Verlassen des Teams\n __**Abweisungsgrund:**__\n ```%reason%``` "
   MESSAGE_DESCISION_SENT: "Your answer was sent and actions corresponding to it have been taken"
-
   EMBED_NOTICE_TITLE: "Abmeldung - %user%"
-  EMBED_NOTICE_BODY: "
-                        Diese Abmeldung kann jederzeit durch Drücken des Buttons unten widerrufen werden. Es wird auch regelmäßig überprüft, ob die Abmeldung noch gültig ist oder nicht\n
-
-                        __**Akzeptiert von:**__\n
-                        %user%
-                        
-                        __**Zeit:**__\n
-                        ```%timeframe%```
-                        
-                        __**Akzeptanzgrund:**__\n
-                        ```%reason%```
-                        "
+  EMBED_NOTICE_BODY: " Diese Abmeldung kann jederzeit durch Drücken des Buttons unten widerrufen werden. Es wird auch regelmäßig überprüft, ob die Abmeldung noch gültig ist oder nicht\n __**Akzeptiert von:**__\n %user% __**Zeit:**__\n ```%timeframe%``` __**Akzeptanzgrund:**__\n ```%reason%``` "
   EMBED_NOTICE_FOOTER: "Erstellt am %date% um %time%Uhr"
-
-  EMBED_ENDED: "
-                        Deine Abmeldung ist hiermit vorbei\n
-                        
-                        __**Zeit:**__\n
-                        ```%timeframe%```
-                        "
-  EMBED_REVOKED: "
-                        Deine Abmeldung wurde zurückgezogen\n
-                        
-                        __**Zeit:**__\n
-                        ```%timeframe%```
-                        
-                        __**Aktzeptanz Grund:**__\n
-                        ```%reason%```
-                        "
+  EMBED_ENDED: " Deine Abmeldung ist hiermit vorbei\n __**Zeit:**__\n ```%timeframe%``` "
+  EMBED_REVOKED: " Deine Abmeldung wurde zurückgezogen\n __**Zeit:**__\n ```%timeframe%``` __**Aktzeptanz Grund:**__\n ```%reason%``` "
   MESSAGE_REVOKED: "Die Abmeldung wurde erfolgreich zurückgezogen"
-
-  EMBED_ENDED_REPLACE: "
-                        ```ansi
-                        
-                        &reset&&teal&&bold&&underline&Original Data&reset&
-                        
-                        Originaler Antragsteller: &gold&&bold&%user%&reset&
-                        
-                        Originaler Nachrichtentyp: &gold&&bold&Abmeldung&reset&
-                        
-                        
-                        &teal&&bold&&underline&Change Data&reset&
-                        
-                        Bearbeited an: &gold&&bold&%date%&reset&
-                        
-                        Bearbeited von: &gold&&bold&%actionTaker%
-                        ```
-                        "
-
+  EMBED_ENDED_REPLACE: " ```ansi &reset&&teal&&bold&&underline&Original Data&reset& Originaler Antragsteller: &gold&&bold&%user%&reset& Originaler Nachrichtentyp: &gold&&bold&Abmeldung&reset& &teal&&bold&&underline&Change Data&reset& Bearbeited an: &gold&&bold&%date%&reset& Bearbeited von: &gold&&bold&%actionTaker% ``` "
   MESSAGE_DELETED_ENDED_REPLACE: "Die Abmeldung wurde entfernt"
-
 REGULARS:
-
   EMBED_TEMPLATE_TITLE: "Aktiviere Stammspieler Synchronisierung"
-  EMBED_TEMPLATE_BODY: "
-                        Diese Funktion ermöglicht es dir, deine Server-Spielzeit mit dem Server zu synchronisieren und dir Rollen für bestimmte Zeitrahmen zu geben
-                        "
-  EMBED_TEMPLATE_GROUP: "   
-                        # %group%\n
-                        Beschreibung: %description%\n
-                        
-                        Custom Rolle: %group_role%\n
-                        &filler&
-                        %roles%
-                        "
-  EMBED_TEMPLATE_ROLE: "   
-                        Rolle: %role%\n
-                        Beschreibung: %description%\n
-                        Zeitrahmen: %timeframe%\n
-                        
-                        "
+  EMBED_TEMPLATE_BODY: " Diese Funktion ermöglicht es dir, deine Server-Spielzeit mit dem Server zu synchronisieren und dir Rollen für bestimmte Zeitrahmen zu geben "
+  EMBED_TEMPLATE_GROUP: " # %group%\n Beschreibung: %description%\n Custom Rolle: %group_role%\n &filler& %roles% "
+  EMBED_TEMPLATE_ROLE: " Rolle: %role%\n Beschreibung: %description%\n Zeitrahmen: %timeframe%\n "
   EMBED_SETTINGS_TITLE: "Persönliche Stammspieler Einstellungen"
-  EMBED_SETTINGS_BODY: "   
-                        Dies sind deine persönlichen Stammspieler Einstellungen. Nur du kannst diese Nachricht sehen und die Einstellungen ändern\n
-
-                        Gruppe: **%group%**\n
-                        
-                        Rolle: **%role%**\n
-                        
-                        Zeit: **%time%h**\n
-                        "
-
+  EMBED_SETTINGS_BODY: " Dies sind deine persönlichen Stammspieler Einstellungen. Nur du kannst diese Nachricht sehen und die Einstellungen ändern\n Gruppe: **%group%**\n Rolle: **%role%**\n Zeit: **%time%h**\n "
   MODAL_DATA_TITLE: "Gib deine SteamId und deinen Cedmod Username"
   MODAL_DATA_STEAMID_TITLE: "SteamId"
   MODAL_DATA_STEAMID_PLACEHOLDER: "Was ist deine steamId?"
-
   MESSAGE_SYNC_GROUP_SELECT: "Bitte wähle eine Gruppe aus, um fortzufahren."
   MESSAGE_SYNC_SELECT: "Stammspieler rollen werden jetzt automatisch synchronisiert"
   MESSAGE_SYNC_DEACTIVATED: "Stammspieler-Synchronisierung deaktiviert"
   MESSAGE_SYNC_REACTIVATED: "Stammspieler-Synchronisierung wieder aktiv"
   MESSAGE_SYNC_REMOVED_CONFIRM: "Möchtest du wirklich die Synchronisierung und alle damit verbundenen Daten entfernen?"
   MESSAGE_SYNC_REMOVED_MESSAGE: "Datenbankeintrag und alle weiteren dinge entfernt."
-
 LOGGING:
-
-  EMBED_TEMPLATE_SINGLE_MESSAGE_LOG: "
-                        %action%\n
-                        
-                        **Message**\n
-                        ```ansi
-                        
-                        %message%
-                        ```
-                        "
-  EMBED_TEMPLATE_CREATE_LOG: "
-                        %action%\n
-                        "
-  EMBED_TEMPLATE_CLOSE_LOG: "
-                        %action%\n
-                        "
-  EMBED_TEMPLATE_DATABASE_LOG: "
-                        **SQL Statement**\n
-                        ```sql
-                        
-                        %statement%
-                        ```
-                        
-                        **Output data**\n
-                        ```ansi
-                        
-                        %output%
-                        ```
-                        "
-
-  COMPONENT_ACTION_SUPPORT_MESSAGE: "
-                        ✏️ Nachricht in Kanal %channel% von %user%\n
-                        &filler&
-                        Ticket Type - **%type%**\n
-                        Ticket Id - **%id%**\n
-                        Ersteller - **%creator%**\n
-                        Handler - **%handler%**\n
-                        
-                        *Ticket erstellt - **%date%***
-                        "
-  COMPONENT_ACTION_TICKET_CREATE: "
-                        ✅ Ticket mit id: **%id%** erstellt %channel% von %user%\n
-                        &filler&
-                        Ticket Type - **%type%**\n
-                        Ticket Id - **%id%**\n
-                        Ersteller - **%creator%**\n
-                        Handler - **%handler%**\n
-                        
-                        *Ticket erstellt - **%date%***
-                        "
-  COMPONENT_ACTION_SUPPORT_TICKET_CLOSE: "
-                        ❌ Ticket mit id: **%id%** geschlossen von %user%\n
-                        &filler&
-                        Ticket Type - **%type%**\n
-                        Ticket Id - **%id%**\n
-                        Ersteller - **%creator%**\n
-                        Handler - **%handler%**\n
-                        
-                        State before closed - **%state%**\n
-                        
-                        *Ticket erstellt - **%date%***
-                        "
-  COMPONENT_ACTION_NOTICE_OF_DEPARTURE_CREATE: "
-                        ✅ Abmeldung mit id: **%id%** erstellt %message% von %user%\n
-                        &filler&
-                        Ticket Id - **%id%**\n
-                        Ersteller - **%creator%**\n
-                        Bis - **%expiration%**\n
-
-                        *Ticket erstellt am - **%date%***\n
-                        
-                        **Grund**\n
-                        ```ansi
-                        
-                        %reason%
-                        ```
-                        "
-  COMPONENT_ACTION_NOTICE_OF_DEPARTURE_DISMISS: "
-                          ❌ Abmeldung mit id: **%id%** ignoriert von %user%\n
-                          &filler&
-                          Ticket Id - **%id%**\n
-                          Ersteller - **%creator%**\n
-                          Handler - **%handler%**\n
-                          Bis - **%expiration%**\n
-
-                          *Ticket erstellt am - **%date%***\n
-
-                          **Grund**\n
-                          ```ansi
-
-                          %reason%
-                          ```
-                          "
-  COMPONENT_ACTION_NOTICE_OF_DEPARTURE_CLOSE: "
-                        ❌ Abmeldung mit id: **%id%** zurückgezogen von %user%\n
-                        &filler&
-                        Ticket Id - **%id%**\n
-                        Ersteller - **%creator%**\n
-                        Handler - **%handler%**\n
-                        Bis - **%expiration%**\n
-                        
-                        *Ticket erstellt am - **%date%***\n
-                        
-                        **Grund**\n
-                        ```ansi
-                        
-                        %reason%
-                        ```
-                        "
-
+  EMBED_TEMPLATE_SINGLE_MESSAGE_LOG: " %action%\n **Message**\n ```ansi %message% ``` "
+  EMBED_TEMPLATE_CREATE_LOG: " %action%\n "
+  EMBED_TEMPLATE_CLOSE_LOG: " %action%\n "
+  EMBED_TEMPLATE_DATABASE_LOG: " **SQL Statement**\n ```sql %statement% ``` **Output data**\n ```ansi %output% ``` "
+  COMPONENT_ACTION_SUPPORT_MESSAGE: " ✏️ Nachricht in Kanal %channel% von %user%\n &filler& Ticket Type - **%type%**\n Ticket Id - **%id%**\n Ersteller - **%creator%**\n Handler - **%handler%**\n *Ticket erstellt - **%date%*** "
+  COMPONENT_ACTION_TICKET_CREATE: " ✅ Ticket mit id: **%id%** erstellt %channel% von %user%\n &filler& Ticket Type - **%type%**\n Ticket Id - **%id%**\n Ersteller - **%creator%**\n Handler - **%handler%**\n *Ticket erstellt - **%date%*** "
+  COMPONENT_ACTION_SUPPORT_TICKET_CLOSE: " ❌ Ticket mit id: **%id%** geschlossen von %user%\n &filler& Ticket Type - **%type%**\n Ticket Id - **%id%**\n Ersteller - **%creator%**\n Handler - **%handler%**\n State before closed - **%state%**\n *Ticket erstellt - **%date%*** "
+  COMPONENT_ACTION_NOTICE_OF_DEPARTURE_CREATE: " ✅ Abmeldung mit id: **%id%** erstellt %message% von %user%\n &filler& Ticket Id - **%id%**\n Ersteller - **%creator%**\n Bis - **%expiration%**\n *Ticket erstellt am - **%date%***\n **Grund**\n ```ansi %reason% ``` "
+  COMPONENT_ACTION_NOTICE_OF_DEPARTURE_DISMISS: " ❌ Abmeldung mit id: **%id%** ignoriert von %user%\n &filler& Ticket Id - **%id%**\n Ersteller - **%creator%**\n Handler - **%handler%**\n Bis - **%expiration%**\n *Ticket erstellt am - **%date%***\n **Grund**\n ```ansi %reason% ``` "
+  COMPONENT_ACTION_NOTICE_OF_DEPARTURE_CLOSE: " ❌ Abmeldung mit id: **%id%** zurückgezogen von %user%\n &filler& Ticket Id - **%id%**\n Ersteller - **%creator%**\n Handler - **%handler%**\n Bis - **%expiration%**\n *Ticket erstellt am - **%date%***\n **Grund**\n ```ansi %reason% ``` "
 STATUS_BARS:
-
-  EMBED_TICKET_STATUS: "
-                        ```ansi\n
-                        &filler<37>& Ticket Status: %status%&filler<37>&
-                        &filler<20>& Handler: %handler% | Creator: %creator%
-                        ```
-                        "
-  EMBED_NOTICE_OF_DEPARTURE_ACCEPTED: "
-                        ```ansi\n
-                        &filler<37>& Ticket Answer: &red&Dismissed&reset&&filler<29>&
-                        &filler<25>& Creator: &gold&You&reset& | Handler: %handler%
-                        ```
-                        "
-  EMBED_NOTICE_OF_DEPARTURE_DISMISSED: "
-                          ```ansi\n
-                          &filler<37>& Ticket Answer: &green&Accepted&reset&&filler<27>&
-                          &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
-                          ```
-                          "
-  EMBED_NOTICE_OF_DEPARTURE_ENDED: "
-                              ```ansi\n
-                              &filler<27>& Notice of Departure: &red&Ended&reset&&filler<29>&
-                              &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
-                              ```
-                              "
-  EMBED_NOTICE_OF_DEPARTURE_REVOKED: "
-                            ```ansi\n
-                            &filler<27>& Notice of Departure: &red&Revoked&reset&&filler<27>&
-                            &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
-                            ```
-                            "
-
-# You can't use color codes for the following button translations
+  EMBED_TICKET_STATUS: " ```ansi\n &filler<37>& Ticket Status: %status%&filler<37>& &filler<20>& Handler: %handler% | Creator: %creator% ``` "
+  EMBED_NOTICE_OF_DEPARTURE_ACCEPTED: " ```ansi\n &filler<37>& Ticket Answer: &red&Dismissed&reset&&filler<29>& &filler<25>& Creator: &gold&You&reset& | Handler: %handler% ``` "
+  EMBED_NOTICE_OF_DEPARTURE_DISMISSED: " ```ansi\n &filler<37>& Ticket Answer: &green&Accepted&reset&&filler<27>& &filler<27>& Creator: &gold&You&reset& | Handler: %handler% ``` "
+  EMBED_NOTICE_OF_DEPARTURE_ENDED: " ```ansi\n &filler<27>& Notice of Departure: &red&Ended&reset&&filler<29>& &filler<27>& Creator: &gold&You&reset& | Handler: %handler% ``` "
+  EMBED_NOTICE_OF_DEPARTURE_REVOKED: " ```ansi\n &filler<27>& Notice of Departure: &red&Revoked&reset&&filler<27>& &filler<27>& Creator: &gold&You&reset& | Handler: %handler% ``` "
+#You can't use color codes for the following button translations
 BUTTONS:
-
   TEXT_RULES_PASTE: "Regeln pasten"
   TEXT_RULES_UPDATE: "Regeln updaten"
-
   TEXT_SUPPORT_CREATE_NEW_TICKET: "Support-Ticket erstellen"
   TEXT_SUPPORT_CLOSE_TICKET: "Ticket schließen"
   TEXT_SUPPORT_CLAIM_TICKET: "Ticket beanspruchen"
   TEXT_SUPPORT_SETTINGS_TICKET: "Einstellungen"
-
   TEXT_UNBAN_CREATE_NEW_TICKET: "Entbannungsantrag stellen"
   TEXT_UNBAN_ACCEPT_TICKET: "Ticket annehmen"
   TEXT_UNBAN_DISMISS_TICKET: "Ticket ablehnen"
   TEXT_UNBAN_SETTINGS_TICKET: "Einstellungen"
-
   TEXT_NOTICE_OF_DEPARTURE_FILE: "Abmeldung anfragen"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Ticket annehmen"
   TEXT_NOTICE_OF_DEPARTURE_DISMISSED: "Ticket ablehnen"
   TEXT_NOTICE_OF_DEPARTURE_REVOKED: "Abmeldung zurückziehen"
   TEXT_NOTICE_OF_DEPARTURE_DELETE: "Komplett löschen"
-
   TEXT_REGULAR_OPEN_SETTINGS: "Einstellungen öffnen"
   TEXT_REGULAR_SYNC: "Stammspieler Synchronisieren"
   TEXT_REGULAR_SYNC_DEACTIVATE: "Synchronisierung deaktivieren"
