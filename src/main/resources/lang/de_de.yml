@@ -1,9 +1,32 @@
-#In dieser Translation ist jede art von discord formattierung möglich
-#\n führt einen Zeilenumbruch durch
-#Werte die so umrandet sind: %value% werden mit anderen ersetzt
-#Der bot lädt die Translations beim Start, um änderungen anzuwenden
-#Colorcodes könnt ihr hier finden: https://github.com/Vxrpenter/SCPToolsBot/wiki/Configuring-Translations
-#Benutze &filler& um eine embed line zu füllen, benutze &filler<count>& um die Zeichenanzahl zu bestimmen
+#You can use any form of discord formatting in these translations
+#\n will apply a linebreak
+#Everything surrounded like this: %value% will be replaced
+#The bot will load the translations in memory on startup. To apply changes, restart the bot
+#Find color codes and how to use them here https://github.com/Vxrpenter/SCPToolsBot/wiki/Configuring-Translations
+#Use &filler& to fill one embed line, use &filler<count>& to specify character amount
+SETTINGS:
+  EMBED_SETTINGS_TITLE: "Settings"
+  EMBED_SETTINGS_BODY: " In this settings menu you will be able to:\n - change config settings\n - view current settings\n - view bot information\n &filler& Click on the buttons below to switch between pages. Information for the main page may take longer to load because a lot of information is queried at the same time\n &filler&"
+  EMBED_SETTINGS_FIELD_LANGUAGE_TITLE: "Language"
+  EMBED_SETTINGS_FIELD_LANGUAGE_VALUE: "`%language%`"
+  EMBED_SETTINGS_FIELD_GUILD_TITLE: "&filler<7>& Guild Unavailable"
+  EMBED_SETTINGS_FIELD_GUILD_VALUE: "&filler<10>& `%isAvailable%`"
+  EMBED_SETTINGS_FIELD_DATABASE_TITLE: "&filler<30>& Database"
+  EMBED_SETTINGS_FIELD_DATABASE_VALUE: "&filler<30>&%state%"
+  EMBED_SETTINGS_FIELD_CEDMOD_TITLE: "Cedmod"
+  EMBED_SETTINGS_FIELD_CEDMOD_VALUE: "%state%"
+  EMBED_SETTINGS_FIELD_VERSION_TITLE: "&filler<7>& Version"
+  EMBED_SETTINGS_FIELD_VERSION_VALUE: "&filler<10>&`%version%`"
+  EMBED_SETTINGS_FIELD_BUILD_TITLE: "&filler<30>& Latest Build"
+  EMBED_SETTINGS_FIELD_BUILD_VALUE: "&filler<30>& `%build%`"
+  EMBED_SETTINGS_FIELD_GATEWAY_TITLE: "&filler<1>&\n Gateway Response Time"
+  EMBED_SETTINGS_FIELD_GATEWAY_VALUE: "||Received in %time% ms||"
+  EMBED_SETTINGS_FIELD_REST_TITLE: "&filler<1>& \n REST Response Time"
+  EMBED_SETTINGS_FIELD_REST_VALUE: "&filler<1>& ||Received in %time% ms||"
+  TEXT_CEDMOD_ONLINE: ":green_circle: Online"
+  TEXT_CEDMOD_OFFLINE: ":red_circle: Offline"
+  TEXT_DATABASE_ONLINE: ":green_circle: Online"
+  TEXT_DATABASE_OFFLINE: ":red_circle: Offline"
 HELP:
   EMBED_PAGE_ONE_TITLE: "Scp Tools Help Page"
   EMBED_PAGE_ONE_BODY: " > ScpTools. Ein Bot zur Verwaltung deines SCP Secret Laboratory Servers mit der Community und staff management, quality of life features und einem custom Support-System. Übersetze alles nach deinem Geschmack und wähle die Einstellungen, die am besten zu deinem Server passen.\n &filler& [⭐] Wenn du Hilfe bei der Einrichtung des Bots benötigen oder auf Probleme stoßen solltest, dann guck dir die dokumentation [hier](https://github.com/Vxrpenter/SCPToolsBot/wiki) an.\n [❌] Wird dein Problem hier nicht erklärt? Erstelle dann bitte ein Problem auf GitHub [hier](https://github.com/Vxrpenter/SCPToolsBot/issues)\n ### Kurze Liste der Befehle:\n `/help` - für Hilfe\n `/template` - zum Einfügen von Templates\n - `Regeln` - Regeln des Secret-Lab Servers\n - `Support` - Support-Ticketsystem + Entbannungstickets\n - `Abmeldungen` - Abmeldungs-Panel für Staff\n - `Stammspieler` - Stammspieler-Panel für die Spieler\n - `Bewerbungen` - Bewerbungs-Panel für Staff-suche "
@@ -86,7 +109,7 @@ NOTICE_OF_DEPARTURE:
   MODAL_EXPLANATION_TITLE: "Erklärung"
   MODAL_EXPLANATION_PLACEHOLDER: "Wieso wirst du weg sein? [keine details]"
   EMBED_DESCISION_TITLE: "Abmeldung - #%number%"
-  #Wenn du dies entfernst: ```ansi ``` dann funktionert das color rendering nicht
+  #If you remove the ```ansi ``` then the color rendering will be messed up, so be careful
   EMBED_DESCISION_BODY: " Wenn dieser Benutzer akzeptiert wird, wird der Benutzer und das Datum in die Datenbank aufgenommen und du wirst benachrichtigt, wenn es abläuft\n __**Zeitspanne**__\n ```ansi\n %current_day%.%current_month%.%current_year% bis %day%.%month%.%year% ``` __**Grund:**__\n ```%reason%``` "
   EMBED_DESCISION_FOOTER: "Erstellt am %date% um %time% Uhr"
   MESSAGE_DESCISION_CREATED: "Deine Abmeldung bald bearbeited"
@@ -136,6 +159,11 @@ STATUS_BARS:
   EMBED_NOTICE_OF_DEPARTURE_REVOKED: " ```ansi\n &filler<27>& Notice of Departure: &red&Revoked&reset&&filler<27>& &filler<27>& Creator: &gold&You&reset& | Handler: %handler% ``` "
 #You can't use color codes for the following button translations
 BUTTONS:
+  TEXT_SETTINGS_START: "Start"
+  TEXT_SETTINGS_CONFIGURE: "Configure"
+  TEXT_SETTINGS_CURRENT: "Current Settings"
+  TEXT_SETTINGS_INFORMATION: "Information"
+  TEXT_SETTINGS_NEWS: "News"
   TEXT_RULES_PASTE: "Regeln pasten"
   TEXT_RULES_UPDATE: "Regeln updaten"
   TEXT_SUPPORT_CREATE_NEW_TICKET: "Support-Ticket erstellen"
