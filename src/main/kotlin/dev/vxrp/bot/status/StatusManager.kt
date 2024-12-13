@@ -8,7 +8,7 @@ import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.secretlab.SecretLab
+import dev.vxrp.api.sla.secretlab.SecretLab
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
 import dev.vxrp.util.Timer
@@ -34,6 +34,7 @@ class StatusManager(val config: Config, val translation: Translation, private va
     private var secondsWithoutNewData = 0
     private var nonChangedData = false
     private var mapped: MutableMap<Int, Server>? = null
+    private var serverInfo: ServerInfo? = null
 
 
     init {
@@ -70,12 +71,7 @@ class StatusManager(val config: Config, val translation: Translation, private va
             mappedStatusConst[instance.serverPort] = StatusConst(mappedBots, mappedServers, maintenance, instance)
 
             if (status.initializeListeners) newApi.addEventListener(
-                StatusCommandListener(
-                    newApi,
-                    config,
-                    translation,
-                    StatusConst(mappedBots, mappedServers, maintenance, instance)
-                )
+                StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance, instance))
             )
             if (status.initializeCommands) initializeCommands(commandManager, newApi)
             instanceApiMapping[instance] = newApi
@@ -101,21 +97,23 @@ class StatusManager(val config: Config, val translation: Translation, private va
     private suspend fun runTimer(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
         if (secondsWithoutNewData == status.idleAfter) {
             logger.debug("Data hasn't changed for the last ${status.idleAfter} seconds, using check rate of ${status.idleCheckRate} seconds")
-            task(status, instanceApiMap)
+            runStatusChange(status, instanceApiMap)
             delay(status.idleCheckRate.seconds)
         } else {
-            task(status, instanceApiMap)
+            runStatusChange(status, instanceApiMap)
             delay(status.checkRate.seconds)
         }
     }
 
-    private fun task(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
+    private fun runStatusChange(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
         val ports = mutableListOf<Int>()
         status.instances.forEach { currentInstance -> ports.add(currentInstance.serverPort) }
 
         var mappedPorts = mutableMapOf<Int, Server>()
+        var content: Pair<ServerInfo?, MutableMap<Int, Server>>? = null
         try {
-            mappedPorts = mapPorts(status, ports)
+            content = mapPorts(status, ports)
+            mappedPorts = content.second
         } catch (e: NullPointerException) {
             logger.warn("Couldn't access secretlab api, ${e.message}, retrying in ${status.checkRate} seconds")
         }
@@ -135,15 +133,16 @@ class StatusManager(val config: Config, val translation: Translation, private va
 
             api.presence.setStatus(OnlineStatus.IDLE)
 
-            mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it, instance) }
+            mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it, instance, content?.first) }
         }
     }
 
-    private fun mapPorts(status: Status, ports: List<Int>): MutableMap<Int, Server> {
+    private fun mapPorts(status: Status, ports: List<Int>): Pair<ServerInfo?, MutableMap<Int, Server>> {
         val secretLab = SecretLab(status.api, status.accountId)
 
         val map = mutableMapOf<Int, Server>()
         val info = secretLab.serverInfo(lo = false, players = true, list = true)
+        serverInfo = info
 
         for (port in ports) {
 
@@ -155,7 +154,7 @@ class StatusManager(val config: Config, val translation: Translation, private va
 
             if (info != null && server != null) map[port] = server
         }
-        return map
+        return Pair(info, map)
     }
 
     private fun serverByPort(port: Int, info: ServerInfo?): Server? {
@@ -165,10 +164,10 @@ class StatusManager(val config: Config, val translation: Translation, private va
         return null
     }
 
-    private fun spinUpChecker(api: JDA, server: Server, instance: Instance) {
+    private fun spinUpChecker(api: JDA, server: Server, instance: Instance, info: ServerInfo?) {
         ActivityHandler(translation, config).updateStatus(api, server, instance, maintenance)
 
-        ConnectionHandler(translation, config).postStatusUpdate(server, api, instance)
+        ConnectionHandler(translation, config).postStatusUpdate(server, api, instance, info)
     }
 
     fun query(): Status {
