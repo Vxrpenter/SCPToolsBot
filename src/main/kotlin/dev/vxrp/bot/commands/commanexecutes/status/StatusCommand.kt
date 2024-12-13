@@ -5,11 +5,11 @@ import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.commands.data.StatusConst
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.secretlab.data.ServerInfo
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 
 class StatusCommand(val config: Config, val translation: Translation, private val statusConst: StatusConst) {
-
     fun changeMaintenanceState(event: SlashCommandInteractionEvent) {
         val currentPort = statusConst.mappedBots[event.jda.selfUser.id]
         val maintenance = statusConst.maintenance
@@ -20,6 +20,11 @@ class StatusCommand(val config: Config, val translation: Translation, private va
         }
 
         if (maintenance[currentPort] == true) {
+            var reason: String = translation.status.embedMaintenanceOffReasonFieldValue
+            if (event.getOption("reason")?.asString != null) {
+                reason = event.getOption("reason")?.asString!!
+            }
+
             maintenance[currentPort!!] = false
             event.reply(ColorTool().useCustomColorCodes(translation.status.messageStatusDeactivated).trimIndent())
                 .setEphemeral(true).queue()
@@ -33,14 +38,19 @@ class StatusCommand(val config: Config, val translation: Translation, private va
                 ).trimIndent()
                 description = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOffBody).trimIndent()
                 field {
-                    name = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOffFieldName).trimIndent()
+                    name = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOffReasonFieldName).trimIndent()
                     value =
-                        ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOffFieldValue).trimIndent()
+                        ColorTool().useCustomColorCodes(reason).trimIndent()
                 }
             }
 
             event.jda.getTextChannelById(config.status.postChannel)?.send("", listOf(embed))?.queue()
         } else if (maintenance[currentPort] == false) {
+            var reason: String = translation.status.embedMaintenanceOnReasonFieldValue
+            if (event.getOption("reason")?.asString != null) {
+                reason = event.getOption("reason")?.asString!!
+            }
+
             maintenance[currentPort!!] = true
             event.reply(ColorTool().useCustomColorCodes(translation.status.messageStatusActivated).trimIndent())
                 .setEphemeral(true).queue()
@@ -54,9 +64,9 @@ class StatusCommand(val config: Config, val translation: Translation, private va
                 ).trimIndent()
                 description = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOnBody).trimIndent()
                 field {
-                    name = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOnFieldName).trimIndent()
+                    name = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOnReasonFieldName).trimIndent()
                     value =
-                        ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOnFieldValue).trimIndent()
+                        ColorTool().useCustomColorCodes(reason).trimIndent()
                 }
             }
 

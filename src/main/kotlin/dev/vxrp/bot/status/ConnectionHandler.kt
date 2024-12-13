@@ -5,24 +5,26 @@ import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.secretlab.data.Server
+import dev.vxrp.secretlab.data.ServerInfo
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
 import org.slf4j.LoggerFactory
 import java.util.*
 
+private val serverStatus = hashMapOf<Int, Boolean>()
+private val reconnectAttempt = hashMapOf<Int, Int>()
+private val mappedUniqueIdsForPort = hashMapOf<Int, String>()
+
 class ConnectionHandler(val translation: Translation, val config: Config) {
     private val logger = LoggerFactory.getLogger(ConnectionHandler::class.java)
-    private val serverStatus = hashMapOf<Int, Boolean>()
-    private val reconnectAttempt = hashMapOf<Int, Int>()
-    private val mappedUniqueIdsForPort = hashMapOf<Int, String>()
 
-    fun postStatusUpdate(server: Server, api: JDA, instance: Instance) {
+    fun postStatusUpdate(server: Server, api: JDA, instance: Instance, info: ServerInfo?) {
         serverStatus.putIfAbsent(server.port, server.online)
         reconnectAttempt.putIfAbsent(server.port, 1)
 
         if (server.online) {
             if (serverStatus[server.port] == true) return
-            postConnectionEstablished(api, instance)
+            postConnectionEstablished(api, instance, info!!)
             reconnectAttempt[server.port] = 1
             serverStatus[server.port] = true
             logger.info("Connection to server ${instance.name} (${instance.serverPort}) regained")
@@ -34,7 +36,7 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
                 logger.warn("Completely lost connection to server ${instance.name} (${instance.serverPort})")
 
                 mappedUniqueIdsForPort[server.port] = UUID.randomUUID().toString()
-                postConnectionLost(api, instance)
+                postConnectionLost(api, instance, info!!)
                 reconnectAttempt[server.port] = instance.retries + 1
                 serverStatus[server.port] = false
                 return
@@ -44,7 +46,7 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
         }
     }
 
-    private fun postConnectionEstablished(api: JDA, instance: Instance) {
+    private fun postConnectionEstablished(api: JDA, instance: Instance, info: ServerInfo?) {
         val embed = Embed {
             color = 0x2ECC70
             url = config.status.pageUrl
@@ -52,8 +54,13 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
                 .replace("%instance%", instance.name).trimIndent()
             description = ColorTool().useCustomColorCodes(translation.status.embedEstablishedBody).trimIndent()
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedEstablishedFieldName).trimIndent()
-                value = ColorTool().useCustomColorCodes(translation.status.embedEstablishedFieldValue).trimIndent()
+                name = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldName).trimIndent()
+                value = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldValue
+                    .replace("%time%", "${info?.response}")).trimIndent()
+            }
+            field {
+                name = ColorTool().useCustomColorCodes(translation.status.embedEstablishedReasonFieldName).trimIndent()
+                value = ColorTool().useCustomColorCodes(translation.status.embedEstablishedReasonFieldValue).trimIndent()
             }
         }
 
@@ -62,7 +69,7 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
         }
     }
 
-    private fun postConnectionLost(api: JDA, instance: Instance) {
+    private fun postConnectionLost(api: JDA, instance: Instance, info: ServerInfo?) {
         val embed = Embed {
             color = 0xE74D3C
             url = config.status.pageUrl
@@ -73,8 +80,13 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
                     .replace("%retries%", instance.retries.toString())
             ).trimIndent()
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedLostFieldName).trimIndent()
-                value = ColorTool().useCustomColorCodes(translation.status.embedLostFieldValue).trimIndent()
+                name = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldName).trimIndent()
+                value = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldValue
+                    .replace("%time%", "${info?.response}")).trimIndent()
+            }
+            field {
+                name = ColorTool().useCustomColorCodes(translation.status.embedLostReasonFieldName).trimIndent()
+                value = ColorTool().useCustomColorCodes(translation.status.embedLostReasonFieldValue).trimIndent()
             }
         }
 
