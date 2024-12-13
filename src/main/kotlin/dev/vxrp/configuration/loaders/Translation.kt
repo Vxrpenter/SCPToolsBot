@@ -115,34 +115,50 @@ data class TranslationStatus(
     val embedEstablishedTitle: String,
     @SerialName("EMBED_ESTABLISHED_BODY")
     val embedEstablishedBody: String,
-    @SerialName("EMBED_ESTABLISHED_FIELD_NAME")
-    val embedEstablishedFieldName: String,
-    @SerialName("EMBED_ESTABLISHED_FIELD_VALUE")
-    val embedEstablishedFieldValue: String,
+    @SerialName("EMBED_ESTABLISHED_REASON_FIELD_NAME")
+    val embedEstablishedReasonFieldName: String,
+    @SerialName("EMBED_ESTABLISHED_REASON_FIELD_VALUE")
+    val embedEstablishedReasonFieldValue: String,
+    @SerialName("EMBED_ESTABLISHED_RESPONSE_FIELD_NAME")
+    val embedEstablishedResponseFieldName: String,
+    @SerialName("EMBED_ESTABLISHED_RESPONSE_FIELD_VALUE")
+    val embedEstablishedResponseFieldValue: String,
     @SerialName("EMBED_LOST_TITLE")
     val embedLostTitle: String,
     @SerialName("EMBED_LOST_BODY")
     val embedLostBody: String,
-    @SerialName("EMBED_LOST_FIELD_NAME")
-    val embedLostFieldName: String,
-    @SerialName("EMBED_LOST_FIELD_VALUE")
-    val embedLostFieldValue: String,
+    @SerialName("EMBED_LOST_REASON_FIELD_NAME")
+    val embedLostReasonFieldName: String,
+    @SerialName("EMBED_LOST_REASON_FIELD_VALUE")
+    val embedLostReasonFieldValue: String,
+    @SerialName("EMBED_LOST_RESPONSE_FIELD_NAME")
+    val embedLostResponseFieldName: String,
+    @SerialName("EMBED_LOST_RESPONSE_FIELD_VALUE")
+    val embedLostResponseFieldValue: String,
     @SerialName("EMBED_MAINTENANCE_ON_TITLE")
     val embedMaintenanceOnTitle: String,
     @SerialName("EMBED_MAINTENANCE_ON_BODY")
     val embedMaintenanceOnBody: String,
-    @SerialName("EMBED_MAINTENANCE_ON_FIELD_NAME")
-    val embedMaintenanceOnFieldName: String,
-    @SerialName("EMBED_MAINTENANCE_ON_FIELD_VALUE")
-    val embedMaintenanceOnFieldValue: String,
+    @SerialName("EMBED_MAINTENANCE_ON_REASON_FIELD_NAME")
+    val embedMaintenanceOnReasonFieldName: String,
+    @SerialName("EMBED_MAINTENANCE_ON_REASON_FIELD_VALUE")
+    val embedMaintenanceOnReasonFieldValue: String,
+    @SerialName("EMBED_MAINTENANCE_ON_RESPONSE_FIELD_NAME")
+    val embedMaintenanceOnResponseFieldName: String,
+    @SerialName("EMBED_MAINTENANCE_ON_RESPONSE_FIELD_VALUE")
+    val embedMaintenanceOnResponseFieldValue: String,
     @SerialName("EMBED_MAINTENANCE_OFF_TITLE")
     val embedMaintenanceOffTitle: String,
     @SerialName("EMBED_MAINTENANCE_OFF_BODY")
     val embedMaintenanceOffBody: String,
-    @SerialName("EMBED_MAINTENANCE_OFF_FIELD_NAME")
-    val embedMaintenanceOffFieldName: String,
-    @SerialName("EMBED_MAINTENANCE_OFF_FIELD_VALUE")
-    val embedMaintenanceOffFieldValue: String,
+    @SerialName("EMBED_MAINTENANCE_OFF_REASON_FIELD_NAME")
+    val embedMaintenanceOffReasonFieldName: String,
+    @SerialName("EMBED_MAINTENANCE_OFF_REASON_FIELD_VALUE")
+    val embedMaintenanceOffReasonFieldValue: String,
+    @SerialName("EMBED_MAINTENANCE_OFF_RESPONSE_FIELD_NAME")
+    val embedMaintenanceOffResponseFieldName: String,
+    @SerialName("EMBED_MAINTENANCE_OFF_RESPONSE_FIELD_VALUE")
+    val embedMaintenanceOffResponseFieldValue: String,
     @SerialName("EMBED_PLAYERLIST_TITLE")
     val embedPlayerlistTitle: String,
     @SerialName("EMBED_PLAYERLIST_BODY")
