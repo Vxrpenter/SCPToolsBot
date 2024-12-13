@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.io.path.Path
+import kotlin.system.exitProcess
 
 class TranslationManager {
     private val logger = LoggerFactory.getLogger(TranslationManager::class.java)
@@ -33,6 +34,12 @@ class TranslationManager {
 
     fun query(dir: String, lang: String): Translation {
         val currentFile = Path("$dir/lang/$lang.yml").toFile()
+
+        if (!currentFile.exists()) {
+            logger.error("Could not load configuration set with name: {}", lang)
+            exitProcess(2)
+        }
+
         logger.debug("Query translation file {}{}", dir, currentFile)
         val result = Yaml.default.decodeFromString(Translation.serializer(), currentFile.readText())
         logger.debug("Query of translation file {}{} completed", dir, currentFile)
