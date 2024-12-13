@@ -21,35 +21,37 @@ class ActivityHandler(val translation: Translation, val config: Config) {
     }
 
     private fun manageStatus(server: Server, maintenance: HashMap<Int, Boolean>, api: JDA) {
+        if (maintenance[server.port] == true) {
+            api.presence.setStatus(OnlineStatus.DO_NOT_DISTURB)
+            return
+        }
+
         if (!server.online) {
             api.presence.setStatus(OnlineStatus.DO_NOT_DISTURB)
             return
         }
 
-        if (maintenance[server.port] == true) {
-            api.presence.setStatus(OnlineStatus.DO_NOT_DISTURB)
-        } else {
-            if (server.players?.split("/".toRegex())?.dropLastWhile { it.isEmpty() }?.get(0).equals("0")) {
-                api.presence.setStatus(OnlineStatus.IDLE)
-                return
-            }
-
-            api.presence.setStatus(OnlineStatus.ONLINE)
+        if (server.players?.split("/".toRegex())?.dropLastWhile { it.isEmpty() }?.get(0).equals("0")) {
+            api.presence.setStatus(OnlineStatus.IDLE)
+            return
         }
+
+        api.presence.setStatus(OnlineStatus.ONLINE)
     }
 
     private fun manageActivity(server: Server, maintenance: HashMap<Int, Boolean>, api: JDA) {
+        if  (maintenance[server.port] == true) {
+            api.presence.activity = Activity.customStatus(translation.status.activityMaintenance)
+            return
+        }
+
         if (!server.online) {
             api.presence.activity = Activity.customStatus(translation.status.activityOffline)
             return
         }
 
-        if  (maintenance[server.port] == true) {
-            api.presence.activity = Activity.customStatus(translation.status.activityMaintenance)
-        } else {
-            if(server.players != null) {
-                api.presence.activity = Activity.playing(server.players)
-            }
+        if(server.players != null) {
+            api.presence.activity = Activity.playing(server.players)
         }
     }
 }
