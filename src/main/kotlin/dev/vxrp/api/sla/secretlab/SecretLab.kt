@@ -1,4 +1,4 @@
-package dev.vxrp.secretlab
+package dev.vxrp.api.sla.secretlab
 
 import dev.vxrp.secretlab.data.ServerInfo
 import kotlinx.serialization.json.Json
@@ -14,12 +14,7 @@ import java.util.concurrent.TimeUnit
  * @author Vxrpenter
  * @since SL Version 13.5.1
  */
-class SecretLab(
-    private val apiKey: String,
-    private val accountId: String,
-    readTimeout: Long = 60,
-    writeTimeout: Long = 60
-) {
+class SecretLab(private val apiKey: String, private val accountId: String, readTimeout: Long = 60, writeTimeout: Long = 60) {
     private val client: OkHttpClient = OkHttpClient.Builder()
         .readTimeout(readTimeout, TimeUnit.SECONDS)
         .writeTimeout(writeTimeout, TimeUnit.SECONDS)
@@ -40,17 +35,7 @@ class SecretLab(
      *
      * @return the Server info
      */
-    fun serverInfo(
-        lo: Boolean = true,
-        players: Boolean = true,
-        list: Boolean = true,
-        info: Boolean = true,
-        pastebin: Boolean = true,
-        version: Boolean = true,
-        flags: Boolean = true,
-        nicknames: Boolean = true,
-        online: Boolean = true
-    ): ServerInfo? {
+    fun serverInfo(lo: Boolean = true, players: Boolean = true, list: Boolean = true, info: Boolean = true, pastebin: Boolean = true, version: Boolean = true, flags: Boolean = true, nicknames: Boolean = true, online: Boolean = true): ServerInfo? {
         val request = Request.Builder()
             .url("https://api.scpslgame.com/serverinfo.php?id=$accountId&key=$apiKey&lo=$lo&players=$players&list=$list&info=$info&pastebin=$pastebin&version=$version&flags=$flags&nicknames=$nicknames&online=$online")
             .build()
@@ -59,6 +44,11 @@ class SecretLab(
             if (!response.isSuccessful) return null
 
             val obj = Json.decodeFromString<ServerInfo>(response.body!!.string())
+
+            val sent = response.sentRequestAtMillis
+            val received = response.receivedResponseAtMillis
+
+            obj.response = (received-sent)
             return obj
         }
     }
