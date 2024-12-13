@@ -3,7 +3,7 @@ token: ""
 guild_id: ""
 
 # Translations
-load_translation: "en_us"
+load_translation: "en_US"
 
 # Should debug mode be activated?
 debug: false
