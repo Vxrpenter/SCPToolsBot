@@ -55,8 +55,8 @@ fun setLoggingLevel(config: Config) {
 
 fun initializeTranslations(translationManager: TranslationManager) {
     val translations = ArrayList<Path>()
-    translations.add(Path("/lang/en_us.yml"))
-    translations.add(Path("/lang/de_de.yml"))
+    translations.add(Path("/lang/en_US.yml"))
+    translations.add(Path("/lang/de_DE.yml"))
 
     translationManager.create(System.getProperty("user.dir"), translations)
 }
