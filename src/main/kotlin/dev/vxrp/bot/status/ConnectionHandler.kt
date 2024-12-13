@@ -4,18 +4,14 @@ import dev.minn.jda.ktx.messages.Embed
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.sqlite.tables.ConnectionLogsTable
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.transactions.transaction
-import org.jetbrains.exposed.sql.update
 import org.slf4j.LoggerFactory
 import java.util.*
 
 class ConnectionHandler(val translation: Translation, val config: Config) {
-    private val logger = LoggerFactory.getLogger(ConnectionLogsTable::class.java)
+    private val logger = LoggerFactory.getLogger(ConnectionHandler::class.java)
     private val serverStatus = hashMapOf<Int, Boolean>()
     private val reconnectAttempt = hashMapOf<Int, Int>()
     private val mappedUniqueIdsForPort = hashMapOf<Int, String>()
@@ -49,15 +45,6 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
     }
 
     private fun postConnectionEstablished(api: JDA, instance: Instance) {
-        val uuidForPort = mappedUniqueIdsForPort[instance.serverPort]
-
-        transaction {
-            ConnectionLogsTable.ConnectionLogs.update ({ ConnectionLogsTable.ConnectionLogs.id.eq(uuidForPort!!)}) {
-                it[regainTime] = System.currentTimeMillis()
-                it[concluded] = true
-            }
-        }
-
         val embed = Embed {
             color = 0x2ECC70
             url = config.status.pageUrl
@@ -76,14 +63,6 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
     }
 
     private fun postConnectionLost(api: JDA, instance: Instance) {
-        transaction {
-            ConnectionLogsTable.ConnectionLogs.insert {
-                it[id] = mappedUniqueIdsForPort[instance.serverPort]!!
-                it[port] = instance.serverPort
-                it[lostTime] = System.currentTimeMillis()
-            }
-        }
-
         val embed = Embed {
             color = 0xE74D3C
             url = config.status.pageUrl
