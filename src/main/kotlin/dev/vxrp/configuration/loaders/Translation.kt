@@ -135,6 +135,32 @@ data class TranslationStatus(
     val embedLostResponseFieldName: String,
     @SerialName("EMBED_LOST_RESPONSE_FIELD_VALUE")
     val embedLostResponseFieldValue: String,
+
+    @SerialName("EMBED_ONLINE_TITLE")
+    val embedOnlineTitle: String,
+    @SerialName("EMBED_ONLINE_BODY")
+    val embedOnlineBody: String,
+    @SerialName("EMBED_ONLINE_REASON_FIELD_NAME")
+    val embedOnlineReasonFieldName: String,
+    @SerialName("EMBED_ONLINE_REASON_FIELD_VALUE")
+    val embedOnlineReasonFieldValue: String,
+    @SerialName("EMBED_ONLINE_RESPONSE_FIELD_NAME")
+    val embedOnlineResponseFieldName: String,
+    @SerialName("EMBED_ONLINE_RESPONSE_FIELD_VALUE")
+    val embedOnlineResponseFieldValue: String,
+    @SerialName("EMBED_OFFLINE_TITLE")
+    val embedOfflineTitle: String,
+    @SerialName("EMBED_OFFLINE_BODY")
+    val embedOfflineBody: String,
+    @SerialName("EMBED_OFFLINE_REASON_FIELD_NAME")
+    val embedOfflineReasonFieldName: String,
+    @SerialName("EMBED_OFFLINE_REASON_FIELD_VALUE")
+    val embedOfflineReasonFieldValue: String,
+    @SerialName("EMBED_OFFLINE_RESPONSE_FIELD_NAME")
+    val embedOfflineResponseFieldName: String,
+    @SerialName("EMBED_OFFLINE_RESPONSE_FIELD_VALUE")
+    val embedOfflineResponseFieldValue: String,
+
     @SerialName("EMBED_MAINTENANCE_ON_TITLE")
     val embedMaintenanceOnTitle: String,
     @SerialName("EMBED_MAINTENANCE_ON_BODY")
