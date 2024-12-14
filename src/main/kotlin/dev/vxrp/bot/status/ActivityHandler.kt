@@ -8,8 +8,6 @@ import dev.vxrp.secretlab.data.Server
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
-import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 
 class ActivityHandler(val translation: Translation, val config: Config) {
@@ -17,16 +15,7 @@ class ActivityHandler(val translation: Translation, val config: Config) {
 
     fun updateStatus(api: JDA, server: Server, instance: Instance) {
         logger.debug("Updating status of bot: ${api.selfUser.name} (${api.selfUser.id}) for server - ${server.port}")
-        var currentMaintenance = false
-
-        transaction {
-            ConnectionTable.Connections.selectAll()
-                .where { ConnectionTable.Connections.id eq instance.serverPort.toString()}
-                .forEach {
-                    currentMaintenance = it[ConnectionTable.Connections.maintenance] == true
-                }
-        }
-
+        val currentMaintenance = ConnectionTable().queryFromTable(instance.serverPort.toString()).maintenance == true
 
         manageStatus(server, currentMaintenance, api)
         manageActivity(server, currentMaintenance, api)
