@@ -26,7 +26,9 @@
 </div>
 
 > [!TIP]
-  > If you want to keep up with updates then you can look at [refactor branch](https://github.com/Vxrpenter/SCPToolsBot/tree/kotlin_refactor) where new commits and changes are pushed to. The master branch will remain as is for now and before merging there will be a branch created to keep as the old java version
+  > If you want to keep up with updates then you can look at [refactor branch](https://github.com/Vxrpenter/SCPToolsBot/tree/kotlin_refactor) where new commits and changes are pushed to.
+  >
+  > The old java version will be maintained on the [java branch](https://github.com/Vxrpenter/SCPToolsBot/tree/java-old) until the refactor is complete
 
 ---
 
