@@ -28,8 +28,6 @@ class StatusManager(val globalApi: JDA, val config: Config, val translation: Tra
     private val mappedBots = hashMapOf<String, Int>()
     private val maintenance = hashMapOf<Int, Boolean>()
 
-    private val retryFetchData = 0
-
     private val mappedStatusConstructor = mutableMapOf<Int, StatusConstructor>()
     private val mappedServers = hashMapOf<Int, Server>()
     
