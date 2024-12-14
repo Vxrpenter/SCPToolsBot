@@ -5,6 +5,7 @@ import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.sqlite.tables.ConnectionTable
 import dev.vxrp.database.sqlite.tables.ConnectionTable.Connections
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
@@ -24,7 +25,7 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
     private val logger = LoggerFactory.getLogger(ConnectionHandler::class.java)
 
     fun postApiConnectionUpdate(api: JDA, status: Status, content: Pair<ServerInfo?, MutableMap<Int, Server>>?) {
-        val apiStatus = queryFromDatabase("api")
+        val apiStatus = ConnectionTable().queryFromTable("api").status == true
 
         if (content != null) databaseNotExists("api", true)
         else databaseNotExists("api", false)
@@ -59,7 +60,7 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
         databaseNotExists(server.port.toString(), server.online)
         reconnectAttempt.putIfAbsent(server.port, 1)
 
-        val serverStatus = queryFromDatabase(server.port.toString())
+        val serverStatus = ConnectionTable().queryFromTable("api").status == true
 
         if (server.online) {
             if (serverStatus) return
@@ -203,17 +204,5 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
                 it[status] = serverStatus
             }
         }
-    }
-
-    private fun queryFromDatabase(key: String): Boolean {
-        var serverStatus = false
-        transaction {
-            Connections.selectAll()
-                .where {Connections.id eq key}
-                .forEach {
-                    serverStatus = it[Connections.status] == true
-                }
-        }
-        return serverStatus
     }
 }

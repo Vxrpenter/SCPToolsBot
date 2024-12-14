@@ -8,22 +8,13 @@ import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.sqlite.tables.ConnectionTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
-import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 
 class StatusCommand(val config: Config, val translation: Translation, private val statusConstructor: StatusConstructor) {
     fun changeMaintenanceState(event: SlashCommandInteractionEvent) {
         val currentPort = statusConstructor.mappedBots[event.jda.selfUser.id]
-        var currentMaintenance = false
-
-        transaction {
-            ConnectionTable.Connections.selectAll()
-                .where {ConnectionTable.Connections.id eq currentPort.toString()}
-                .forEach {
-                    currentMaintenance = it[ConnectionTable.Connections.maintenance] == true
-                }
-        }
+        val currentMaintenance = ConnectionTable().queryFromTable(currentPort.toString()).maintenance == true
 
         if (currentMaintenance) {
             var reason: String = translation.status.embedMaintenanceOffReasonFieldValue
