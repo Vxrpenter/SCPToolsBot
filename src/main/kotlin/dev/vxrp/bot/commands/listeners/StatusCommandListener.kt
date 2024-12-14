@@ -5,14 +5,14 @@ import dev.vxrp.bot.commands.CommandManager
 import dev.vxrp.bot.commands.commanexecutes.status.PlayerlistCommand
 import dev.vxrp.bot.commands.commanexecutes.status.StatusCommand
 import dev.vxrp.bot.commands.commanexecutes.status.TemplateCommand
-import dev.vxrp.bot.commands.data.StatusConst
+import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 
-class StatusCommandListener(val api: JDA, val config: Config, val translation: Translation, private val statusConst: StatusConst) : ListenerAdapter() {
+class StatusCommandListener(val api: JDA, val config: Config, val translation: Translation, private val statusConstructor: StatusConstructor) : ListenerAdapter() {
 
     init {
         api.listener<SlashCommandInteractionEvent> { event ->
@@ -39,15 +39,15 @@ class StatusCommandListener(val api: JDA, val config: Config, val translation: T
 
     private fun statusCommand(event: SlashCommandInteractionEvent) {
         if (event.getOption("setting")?.asString == "maintenance") {
-            StatusCommand(config, translation, statusConst).changeMaintenanceState(event)
+            StatusCommand(config, translation, statusConstructor).changeMaintenanceState(event)
         }
     }
 
     private fun playerListCommand(event: SlashCommandInteractionEvent) {
-        PlayerlistCommand(config, translation, statusConst).pastePlayerList(event)
+        PlayerlistCommand(config, translation, statusConstructor).pastePlayerList(event)
     }
 
     private suspend fun templateCommand(event: SlashCommandInteractionEvent) {
-        if (event.getOption("template")?.asString == "playerlist") TemplateCommand(config, translation, statusConst).pastePlayerList(event)
+        if (event.getOption("template")?.asString == "playerlist") TemplateCommand(config, translation, statusConstructor).pastePlayerList(event)
     }
 }

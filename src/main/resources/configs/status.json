@@ -4,6 +4,8 @@
   "initialize_commands": true,
   "initialize_event_listener": true,
   "check_rate": 10,
+  "retry_to_fetch_data": 5,
+  "suspect_rate_limit_until": 2,
   "idle_after": 60,
   "idle_check_rate": 30,
   "api": "",

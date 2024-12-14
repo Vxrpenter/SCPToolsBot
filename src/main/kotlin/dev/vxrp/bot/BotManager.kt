@@ -37,7 +37,7 @@ class BotManager(val config: Config, val translation: Translation) {
 
         val guild = api.awaitReady().getGuildById(config.guildId)
         val commandManager = CommandManager(config, "configs/commands.json")
-        val statusManager = StatusManager(config, translation, timer, "configs/status.json")
+        val statusManager = StatusManager(api, config, translation, timer, "configs/status.json")
         val sqliteManager = SqliteManager(config, "database", "data.db")
 
         commandManager.registerSpecificCommands(commandManager.query().commands, api)

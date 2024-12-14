@@ -1,17 +1,17 @@
 package dev.vxrp.bot.commands.commanexecutes.status
 
 import dev.minn.jda.ktx.messages.Embed
-import dev.vxrp.bot.commands.data.StatusConst
+import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.MessageEmbed
 import java.time.Instant
 
 class Playerlist {
-    fun getEmbed(botId: String, translation: Translation, statusConst: StatusConst): MessageEmbed {
+    fun getEmbed(botId: String, translation: Translation, statusConstructor: StatusConstructor): MessageEmbed {
         val builder = StringBuilder()
-        val currentPort = statusConst.mappedBots[botId]
-        val list = statusConst.mappedServers[currentPort]?.playerList
+        val currentPort = statusConstructor.mappedBots[botId]
+        val list = statusConstructor.mappedServers[currentPort]?.playerList
 
         if (list != null) {
             if (list.isEmpty()) builder.append(translation.status.embedPlayerlistEmpty)
@@ -34,20 +34,20 @@ class Playerlist {
             description = ColorTool().useCustomColorCodes(
                 translation.status.embedPlayerlistBody
                     .replace("%players%", builder.toString())
-                    .replace("%version%", statusConst.mappedServers[currentPort]?.version ?: "&red&&bold&Not Fetched")
+                    .replace("%version%", statusConstructor.mappedServers[currentPort]?.version ?: "&red&&bold&Not Fetched")
                     .replace(
                         "%player_number%",
-                        statusConst.mappedServers[currentPort]?.players?.split("/".toRegex())?.get(0) ?: 0.toString()
+                        statusConstructor.mappedServers[currentPort]?.players?.split("/".toRegex())?.get(0) ?: 0.toString()
                     )
-                    .replace("%ff%", statusConst.mappedServers[currentPort]?.ff?.toString() ?: "&red&&bold&Not Fetched")
-                    .replace("%wl%", statusConst.mappedServers[currentPort]?.wl?.toString() ?: "&red&&bold&Not Fetched")
+                    .replace("%ff%", statusConstructor.mappedServers[currentPort]?.ff?.toString() ?: "&red&&bold&Not Fetched")
+                    .replace("%wl%", statusConstructor.mappedServers[currentPort]?.wl?.toString() ?: "&red&&bold&Not Fetched")
                     .replace(
                         "%modded%",
-                        statusConst.mappedServers[currentPort]?.modded?.toString() ?: "&red&&bold&Not Fetched"
+                        statusConstructor.mappedServers[currentPort]?.modded?.toString() ?: "&red&&bold&Not Fetched"
                     )
                     .replace(
                         "%mods%",
-                        statusConst.mappedServers[currentPort]?.mods?.toString() ?: "&red&&bold&Not Fetched"
+                        statusConstructor.mappedServers[currentPort]?.mods?.toString() ?: "&red&&bold&Not Fetched"
                     )
                     //Styling for true and false
                     .replace("true", "&green&&bold&true")

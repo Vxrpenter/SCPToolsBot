@@ -2,7 +2,7 @@ package dev.vxrp.bot.status
 
 import dev.minn.jda.ktx.jdabuilder.light
 import dev.vxrp.bot.commands.CommandManager
-import dev.vxrp.bot.commands.data.StatusConst
+import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.commands.listeners.StatusCommandListener
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
@@ -21,20 +21,21 @@ import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
 
-class StatusManager(val config: Config, val translation: Translation, private val timer: Timer, val file: String) {
+class StatusManager(val globalApi: JDA, val config: Config, val translation: Translation, private val timer: Timer, val file: String) {
     private val logger = LoggerFactory.getLogger(StatusManager::class.java)
     private val currentFile = File(System.getProperty("user.dir")).resolve(file)
 
     private val mappedBots = hashMapOf<String, Int>()
     private val maintenance = hashMapOf<Int, Boolean>()
 
-    private val mappedStatusConst = mutableMapOf<Int, StatusConst>()
-    private val mappedServers = hashMapOf<Int, Server>()
+    private val retryFetchData = 0
 
+    private val mappedStatusConstructor = mutableMapOf<Int, StatusConstructor>()
+    private val mappedServers = hashMapOf<Int, Server>()
+    
     private var secondsWithoutNewData = 0
     private var nonChangedData = false
     private var mapped: MutableMap<Int, Server>? = null
-    private var serverInfo: ServerInfo? = null
 
 
     init {
@@ -49,7 +50,7 @@ class StatusManager(val config: Config, val translation: Translation, private va
     fun initialize(commandManager: CommandManager) {
         maintenance.clear()
         mappedBots.clear()
-        mappedStatusConst.clear()
+        mappedStatusConstructor.clear()
         mappedServers.clear()
 
         val status = query()
@@ -68,10 +69,10 @@ class StatusManager(val config: Config, val translation: Translation, private va
             }
 
             mappedBots[newApi.selfUser.id] = instance.serverPort
-            mappedStatusConst[instance.serverPort] = StatusConst(mappedBots, mappedServers, maintenance, instance)
+            mappedStatusConstructor[instance.serverPort] = StatusConstructor(mappedBots, mappedServers, maintenance, instance)
 
             if (status.initializeListeners) newApi.addEventListener(
-                StatusCommandListener(newApi, config, translation, StatusConst(mappedBots, mappedServers, maintenance, instance))
+                StatusCommandListener(newApi, config, translation, StatusConstructor(mappedBots, mappedServers, maintenance, instance))
             )
             if (status.initializeCommands) initializeCommands(commandManager, newApi)
             instanceApiMapping[instance] = newApi
@@ -110,13 +111,14 @@ class StatusManager(val config: Config, val translation: Translation, private va
         status.instances.forEach { currentInstance -> ports.add(currentInstance.serverPort) }
 
         var mappedPorts = mutableMapOf<Int, Server>()
-        var content: Pair<ServerInfo?, MutableMap<Int, Server>>? = null
-        try {
-            content = mapPorts(status, ports)
+
+        val content: Pair<ServerInfo?, MutableMap<Int, Server>>? = fetchData(status, ports)
+
+        // Check if data was received
+        if (content != null) {
             mappedPorts = content.second
-        } catch (e: NullPointerException) {
-            logger.warn("Couldn't access secretlab api, ${e.message}, retrying in ${status.checkRate} seconds")
         }
+        ConnectionHandler(translation, config).postApiConnectionUpdate(globalApi, status, content)
 
         if (mapped == mappedPorts) {
             nonChangedData = true
@@ -126,7 +128,7 @@ class StatusManager(val config: Config, val translation: Translation, private va
             nonChangedData = false
         }
 
-        if (status.checkPlayerlist) PlayerlistHandler(translation).updatePlayerLists(mappedPorts, status.instances, instanceApiMap, mappedStatusConst)
+        if (status.checkPlayerlist) PlayerlistHandler(translation).updatePlayerLists(mappedPorts, status.instances, instanceApiMap, mappedStatusConstructor)
 
         for (instance in status.instances) {
             val api = instanceApiMap[instance] ?: continue
@@ -137,22 +139,17 @@ class StatusManager(val config: Config, val translation: Translation, private va
         }
     }
 
-    private fun mapPorts(status: Status, ports: List<Int>): Pair<ServerInfo?, MutableMap<Int, Server>> {
+    private fun fetchData(status: Status, ports: List<Int>): Pair<ServerInfo?, MutableMap<Int, Server>>? {
         val secretLab = SecretLab(status.api, status.accountId)
 
         val map = mutableMapOf<Int, Server>()
-        val info = secretLab.serverInfo(lo = false, players = true, list = true)
-        serverInfo = info
+        val info = secretLab.serverInfo(lo = false, players = true, list = true) ?: return null
 
         for (port in ports) {
+            val server = serverByPort(port, info) ?: return null
 
-            val server = serverByPort(port, info)
-
-            if (server != null) {
-                mappedServers[port] = server
-            }
-
-            if (info != null && server != null) map[port] = server
+            mappedServers[port] = server
+            map[port] = server
         }
         return Pair(info, map)
     }

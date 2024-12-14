@@ -2,7 +2,7 @@ package dev.vxrp.bot.commands.commanexecutes.status
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.send
-import dev.vxrp.bot.commands.data.StatusConst
+import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.sqlite.tables.StatusTable
@@ -10,18 +10,18 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class TemplateCommand(val config: Config, val translation: Translation, private val statusConst: StatusConst) {
+class TemplateCommand(val config: Config, val translation: Translation, private val statusConstructor: StatusConstructor) {
 
     suspend fun pastePlayerList(event: SlashCommandInteractionEvent) {
-        val embed = Playerlist().getEmbed(event.jda.selfUser.id, translation, statusConst)
+        val embed = Playerlist().getEmbed(event.jda.selfUser.id, translation, statusConstructor)
 
         val message = event.channel.send("", listOf(embed)).await()
         event.reply("Pasted static playerlist").setEphemeral(true).queue()
         val id = message.id
 
 
-        val currentPort = statusConst.mappedBots[event.jda.selfUser.id]
-        val server = statusConst.mappedServers[currentPort]
+        val currentPort = statusConstructor.mappedBots[event.jda.selfUser.id]
+        val server = statusConstructor.mappedServers[currentPort]
 
         transaction {
             StatusTable.Status.insert {

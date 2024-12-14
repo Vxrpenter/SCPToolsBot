@@ -2,9 +2,8 @@ package dev.vxrp.bot.commands.data
 
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.secretlab.data.Server
-import dev.vxrp.secretlab.data.ServerInfo
 
-class StatusConst(
+class StatusConstructor(
     bots: HashMap<String, Int>, servers: HashMap<Int, Server>, currentMaintenance: HashMap<Int, Boolean>, var instance: Instance) {
     var mappedBots: HashMap<String, Int> = bots
 

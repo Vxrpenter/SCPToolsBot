@@ -2,17 +2,16 @@ package dev.vxrp.bot.commands.commanexecutes.status
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.send
-import dev.vxrp.bot.commands.data.StatusConst
+import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.secretlab.data.ServerInfo
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 
-class StatusCommand(val config: Config, val translation: Translation, private val statusConst: StatusConst) {
+class StatusCommand(val config: Config, val translation: Translation, private val statusConstructor: StatusConstructor) {
     fun changeMaintenanceState(event: SlashCommandInteractionEvent) {
-        val currentPort = statusConst.mappedBots[event.jda.selfUser.id]
-        val maintenance = statusConst.maintenance
+        val currentPort = statusConstructor.mappedBots[event.jda.selfUser.id]
+        val maintenance = statusConstructor.maintenance
 
         if (maintenance[currentPort] == null) {
             event.reply(ColorTool().useCustomColorCodes(translation.status.messageStatusEmpty).trimIndent())
@@ -34,7 +33,7 @@ class StatusCommand(val config: Config, val translation: Translation, private va
                 url = config.status.pageUrl
                 title = ColorTool().useCustomColorCodes(
                     translation.status.embedMaintenanceOffTitle
-                        .replace("%instance%", statusConst.instance.name)
+                        .replace("%instance%", statusConstructor.instance.name)
                 ).trimIndent()
                 description = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOffBody).trimIndent()
                 field {
@@ -60,7 +59,7 @@ class StatusCommand(val config: Config, val translation: Translation, private va
                 url = config.status.pageUrl
                 title = ColorTool().useCustomColorCodes(
                     translation.status.embedMaintenanceOnTitle
-                        .replace("%instance%", statusConst.instance.name)
+                        .replace("%instance%", statusConstructor.instance.name)
                 ).trimIndent()
                 description = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOnBody).trimIndent()
                 field {
