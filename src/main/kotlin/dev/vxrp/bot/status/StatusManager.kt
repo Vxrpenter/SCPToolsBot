@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
 
-class StatusManager(val globalApi: JDA, val config: Config, val translation: Translation, private val timer: Timer, val file: String) {
+class StatusManager(private val globalApi: JDA, val config: Config, val translation: Translation, private val timer: Timer, val file: String) {
     private val logger = LoggerFactory.getLogger(StatusManager::class.java)
     private val currentFile = File(System.getProperty("user.dir")).resolve(file)
 
