@@ -24,8 +24,7 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
 
     fun postApiConnectionUpdate(api: JDA, status: Status, content: Pair<ServerInfo?, MutableMap<Int, Server>>?) {
         if (apiStatus == null) {
-            if (content == null) apiStatus = true
-            if (content != null) apiStatus = false
+            apiStatus = content != null
         }
 
         if (content != null) {
@@ -36,11 +35,9 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
             logger.info("Regained connection to secretlab api")
         } else {
             if (apiStatus == false) return
-
             if (retryFetchData == status.retryToFetchData+1) return
             if (retryFetchData == status.retryToFetchData) {
                 logger.error("Completely lost connection to the secretlab api. This is not normal behavior and may be caused by an expired api key or wrong account number.")
-
                 postConnectionLost(api, status.retryToFetchData)
                 retryFetchData += 1
                 return
@@ -48,7 +45,6 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
             if (retryFetchData >= status.suspectRateLimitUntil && retryFetchData != status.retryToFetchData+1) {
                 logger.warn("Failed $retryFetchData consecutive times to connect to the api. Suspecting an api outage or invalid key. Retrying ${status.retryToFetchData- retryFetchData} more times")
             }
-
             if (retryFetchData < status.suspectRateLimitUntil) {
                 logger.warn("Failed to access the secretlab api, suspecting rate limiting, retrying in ${status.checkRate} seconds")
             }
@@ -71,7 +67,7 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
 
             if (reconnectAttempt[server.port]!! == instance.retries + 1) return
             if (reconnectAttempt[server.port]!! == instance.retries) {
-                logger.warn("Completely lost connection to server ${instance.name} (${instance.serverPort})")
+                logger.warn("Completely lost connection to server - ${instance.name}. Server is probably offline/unreachable")
 
                 mappedUniqueIdsForPort[server.port] = UUID.randomUUID().toString()
                 postConnectionOffline(api, instance, info!!)
@@ -79,7 +75,7 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
                 serverStatus[server.port] = false
                 return
             }
-            logger.warn("Lost connection to server - ${instance.name} (${instance.serverPort}), trying reconnect... iteration ${reconnectAttempt[server.port]}")
+            logger.warn("Failed to query data from \"${instance.name}\", trying to reconnect ${ instance.retries - reconnectAttempt[server.port]!!} more times")
             reconnectAttempt[server.port] = reconnectAttempt[server.port]!! + 1
         }
     }
@@ -137,17 +133,17 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
         val embed = Embed {
             color = 0x2ECC70
             url = config.status.pageUrl
-            title = ColorTool().useCustomColorCodes(translation.status.embedEstablishedTitle)
+            title = ColorTool().useCustomColorCodes(translation.status.embedOnlineTitle)
                 .replace("%instance%", instance.name).trimIndent()
-            description = ColorTool().useCustomColorCodes(translation.status.embedEstablishedBody).trimIndent()
+            description = ColorTool().useCustomColorCodes(translation.status.embedOnlineBody).trimIndent()
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldName).trimIndent()
-                value = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldValue
+                name = ColorTool().useCustomColorCodes(translation.status.embedOnlineResponseFieldName).trimIndent()
+                value = ColorTool().useCustomColorCodes(translation.status.embedOnlineResponseFieldValue
                     .replace("%time%", "${info?.response}")).trimIndent()
             }
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedEstablishedReasonFieldName).trimIndent()
-                value = ColorTool().useCustomColorCodes(translation.status.embedEstablishedReasonFieldValue).trimIndent()
+                name = ColorTool().useCustomColorCodes(translation.status.embedOnlineReasonFieldName).trimIndent()
+                value = ColorTool().useCustomColorCodes(translation.status.embedOnlineReasonFieldValue).trimIndent()
             }
         }
 
@@ -160,20 +156,20 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
         val embed = Embed {
             color = 0xE74D3C
             url = config.status.pageUrl
-            title = ColorTool().useCustomColorCodes(translation.status.embedLostTitle)
+            title = ColorTool().useCustomColorCodes(translation.status.embedOfflineTitle)
                 .replace("%instance%", instance.name).trimIndent()
             description = ColorTool().useCustomColorCodes(
-                translation.status.embedLostBody
+                translation.status.embedOfflineBody
                     .replace("%retries%", instance.retries.toString())
             ).trimIndent()
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldName).trimIndent()
-                value = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldValue
+                name = ColorTool().useCustomColorCodes(translation.status.embedOfflineResponseFieldName).trimIndent()
+                value = ColorTool().useCustomColorCodes(translation.status.embedOfflineResponseFieldValue
                     .replace("%time%", "${info?.response}")).trimIndent()
             }
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedLostReasonFieldName).trimIndent()
-                value = ColorTool().useCustomColorCodes(translation.status.embedLostReasonFieldValue).trimIndent()
+                name = ColorTool().useCustomColorCodes(translation.status.embedOfflineReasonFieldName).trimIndent()
+                value = ColorTool().useCustomColorCodes(translation.status.embedOfflineReasonFieldValue).trimIndent()
             }
         }
 
