@@ -211,7 +211,7 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
             Connections.selectAll()
                 .where {Connections.id eq key}
                 .forEach {
-                    serverStatus = it[Connections.status]
+                    serverStatus = it[Connections.status] == true
                 }
         }
         return serverStatus
