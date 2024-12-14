@@ -9,6 +9,8 @@ import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.api.sla.secretlab.SecretLab
+import dev.vxrp.database.sqlite.tables.ConnectionTable
+import dev.vxrp.database.sqlite.tables.ConnectionTable.Connections
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
 import dev.vxrp.util.Timer
@@ -17,6 +19,10 @@ import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
@@ -26,7 +32,6 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     private val currentFile = File(System.getProperty("user.dir")).resolve(file)
 
     private val mappedBots = hashMapOf<String, Int>()
-    private val maintenance = hashMapOf<Int, Boolean>()
 
     private val mappedStatusConstructor = mutableMapOf<Int, StatusConstructor>()
     private val mappedServers = hashMapOf<Int, Server>()
@@ -46,7 +51,6 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     }
 
     fun initialize(commandManager: CommandManager) {
-        maintenance.clear()
         mappedBots.clear()
         mappedStatusConstructor.clear()
         mappedServers.clear()
@@ -62,15 +66,17 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
         val instanceApiMapping = mutableMapOf<Instance, JDA>()
 
         for (instance in status.instances) {
+            ConnectionTable().insertIfNotExists(instance.serverPort.toString(), status = true, maintenance = false)
+
             val newApi = light(instance.token, enableCoroutines = true) {
                 setActivity(Activity.playing("pending..."))
             }
 
             mappedBots[newApi.selfUser.id] = instance.serverPort
-            mappedStatusConstructor[instance.serverPort] = StatusConstructor(mappedBots, mappedServers, maintenance, instance)
+            mappedStatusConstructor[instance.serverPort] = StatusConstructor(mappedBots, mappedServers, instance)
 
             if (status.initializeListeners) newApi.addEventListener(
-                StatusCommandListener(newApi, config, translation, StatusConstructor(mappedBots, mappedServers, maintenance, instance))
+                StatusCommandListener(newApi, config, translation, StatusConstructor(mappedBots, mappedServers, instance))
             )
             if (status.initializeCommands) initializeCommands(commandManager, newApi)
             instanceApiMapping[instance] = newApi
@@ -160,7 +166,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     }
 
     private fun spinUpChecker(api: JDA, server: Server, instance: Instance, info: ServerInfo?) {
-        ActivityHandler(translation, config).updateStatus(api, server, instance, maintenance)
+        ActivityHandler(translation, config).updateStatus(api, server, instance)
 
         ConnectionHandler(translation, config).postStatusUpdate(server, api, instance, info)
     }
