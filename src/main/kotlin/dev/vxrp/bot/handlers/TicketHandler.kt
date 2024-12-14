@@ -1,4 +1,4 @@
-package dev.vxrp.util.handlers
+package dev.vxrp.bot.handlers
 
 import dev.vxrp.configuration.loaders.Config
 import net.dv8tion.jda.api.JDA
