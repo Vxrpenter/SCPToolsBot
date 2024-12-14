@@ -1,3 +1,8 @@
+> [!CAUTION]
+> This version will only be maintained until the refactor to kotlin is complete. This is an old version that will never be finished completely. It will remain in alpha/beta and not be maintained after the set period.
+
+---
+
 <div align="center">
   <img src="https://github.com/user-attachments/assets/6529281b-d5ef-46ea-b0f2-7c63e1cdcdd5" height="240" width="200" alt="ScpToolsBot" title="ScpToolsBot"/>
 
@@ -9,24 +14,6 @@
   | <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" title="Java" alt="Java" width="40" height="40"/>&nbsp;<img src="https://github.com/devicons/devicon/blob/master/icons/yaml/yaml-original.svg" title="yaml" alt="yaml" width="40" height="40"/>&nbsp; | <img src="https://raw.githubusercontent.com/discord-jda/JDA/refs/heads/assets/assets/readme/logo.png" title="jda" alt="jda" width="40" height="40"/>&nbsp;<img src="https://www.apache.org/foundation/press/kit/feather.png" title="apachecommons" alt="apachecommons" width="40" height="40"/>&nbsp;<img src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3257055/file-type-sqlite-icon-md.png" title="sqlite" alt="sqlite" width="50" height="50"/>&nbsp; | <a href="https://cedmod.nl/"><img src="https://avatars.githubusercontent.com/u/64701232?s=48&v=4" title="cedmod" alt="cedmod" width="50" height="50"/></a>&nbsp; |
   
 </div>
-
-<div align="center">
-  <h1>Refactor Information</h1>
-
-  
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" width="100" height="100"/><img src="https://img.icons8.com/?size=100&id=11759&format=png&color=FFFFFF" width="100" height="100"/><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" width="100" height="100"/>
-
-  ## Progress - `5%`
-
-  ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/w/Vxrpenter/SCPToolsBot/kotlin_refactor?style=for-the-badge&color=%239141ac&link=https%3A%2F%2Fgithub.com%2FVxrpenter%2FSCPToolsBot%2Ftree%2Fkotlin_refactor&logo=kotlin)
-  ![GitHub branch status](https://img.shields.io/github/checks-status/Vxrpenter/SCPToolsBot/kotlin_refactor?style=for-the-badge&logo=kotlin&color=%239141ac)
-
-
-  <h4>SCPToolsBot is getting a full kotlin refactor. This means that there will be no more content updates until the refactor is done. All issues that are created will be fixed normally but there will be no new features.</h4>
-</div>
-
-> [!TIP]
-  > If you want to keep up with updates then you can look at [refactor branch](https://github.com/Vxrpenter/SCPToolsBot/tree/kotlin_refactor) where new commits and changes are pushed to. The master branch will remain as is for now and before merging there will be a branch created to keep as the old java version
 
 ---
 
