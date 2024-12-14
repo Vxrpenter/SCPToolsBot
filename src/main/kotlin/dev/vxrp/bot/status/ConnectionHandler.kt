@@ -183,7 +183,6 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
     }
 
     // Database handler functions for easier usage
-
     private fun databaseNotExists(key: String, serverStatus: Boolean) {
         transaction {
             val exists = Connections.selectAll()
