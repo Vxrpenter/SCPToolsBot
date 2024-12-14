@@ -5,41 +5,44 @@ import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.sqlite.tables.ConnectionTable.Connections
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 import org.slf4j.LoggerFactory
-import java.util.*
 
-private val serverStatus = hashMapOf<Int, Boolean>()
 private val reconnectAttempt = hashMapOf<Int, Int>()
-private val mappedUniqueIdsForPort = hashMapOf<Int, String>()
 
 private var retryFetchData = 0
-private var apiStatus: Boolean? = null
 
 class ConnectionHandler(val translation: Translation, val config: Config) {
     private val logger = LoggerFactory.getLogger(ConnectionHandler::class.java)
 
     fun postApiConnectionUpdate(api: JDA, status: Status, content: Pair<ServerInfo?, MutableMap<Int, Server>>?) {
-        if (apiStatus == null) {
-            apiStatus = content != null
-        }
+        val apiStatus = queryFromDatabase("api")
+
+        if (content != null) databaseNotExists("api", true)
+        else databaseNotExists("api", false)
 
         if (content != null) {
-            if (apiStatus == true) return
+            if (apiStatus) return
             content.first?.let { postConnectionEstablished(api, it) }
-            apiStatus = true
+            postConnectionToDatabase("api", true)
             retryFetchData = 0
             logger.info("Regained connection to secretlab api")
         } else {
-            if (apiStatus == false) return
+            if (!apiStatus) return
             if (retryFetchData == status.retryToFetchData+1) return
             if (retryFetchData == status.retryToFetchData) {
                 logger.error("Completely lost connection to the secretlab api. This is not normal behavior and may be caused by an expired api key or wrong account number.")
                 postConnectionLost(api, status.retryToFetchData)
                 retryFetchData += 1
+                postConnectionToDatabase("api", false)
                 return
             }
             if (retryFetchData >= status.suspectRateLimitUntil && retryFetchData != status.retryToFetchData+1) {
@@ -53,26 +56,27 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
     }
 
     fun postStatusUpdate(server: Server, api: JDA, instance: Instance, info: ServerInfo?) {
-        serverStatus.putIfAbsent(server.port, server.online)
+        databaseNotExists(server.port.toString(), server.online)
         reconnectAttempt.putIfAbsent(server.port, 1)
 
+        val serverStatus = queryFromDatabase(server.port.toString())
+
         if (server.online) {
-            if (serverStatus[server.port] == true) return
+            if (serverStatus) return
             postConnectionOnline(api, instance, info!!)
             reconnectAttempt[server.port] = 1
-            serverStatus[server.port] = true
+            postConnectionToDatabase(server.port.toString(), true)
             logger.info("Connection to server ${instance.name} (${instance.serverPort}) regained")
         } else {
-            if (serverStatus[server.port] == false) return
+            if (!serverStatus) return
 
             if (reconnectAttempt[server.port]!! == instance.retries + 1) return
             if (reconnectAttempt[server.port]!! == instance.retries) {
                 logger.warn("Completely lost connection to server - ${instance.name}. Server is probably offline/unreachable")
 
-                mappedUniqueIdsForPort[server.port] = UUID.randomUUID().toString()
                 postConnectionOffline(api, instance, info!!)
                 reconnectAttempt[server.port] = instance.retries + 1
-                serverStatus[server.port] = false
+                postConnectionToDatabase(server.port.toString(), false)
                 return
             }
             logger.warn("Failed to query data from \"${instance.name}\", trying to reconnect ${ instance.retries - reconnectAttempt[server.port]!!} more times")
@@ -176,5 +180,41 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
         if (config.status.postServerStatus) {
             api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
         }
+    }
+
+    // Database handler functions for easier usage
+
+    private fun databaseNotExists(key: String, serverStatus: Boolean) {
+        transaction {
+            val exists = Connections.selectAll()
+                .where { Connections.id.eq(key) }.empty()
+
+            if (exists) {
+                Connections.insert {
+                    it[id] = key
+                    it[status] = serverStatus
+                }
+            }
+        }
+    }
+
+    private fun postConnectionToDatabase(key: String, serverStatus: Boolean) {
+        transaction {
+            Connections.update({Connections.id eq key}) {
+                it[status] = serverStatus
+            }
+        }
+    }
+
+    private fun queryFromDatabase(key: String): Boolean {
+        var serverStatus = false
+        transaction {
+            Connections.selectAll()
+                .where {Connections.id eq key}
+                .forEach {
+                    serverStatus = it[Connections.status]
+                }
+        }
+        return serverStatus
     }
 }
