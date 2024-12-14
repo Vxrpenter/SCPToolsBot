@@ -14,6 +14,10 @@ data class Status(
     val initializeListeners: Boolean,
     @SerialName("check_rate")
     val checkRate: Int,
+    @SerialName("retry_to_fetch_data")
+    val retryToFetchData: Int,
+    @SerialName("suspect_rate_limit_until")
+    val suspectRateLimitUntil: Int,
     @SerialName("idle_after")
     val idleAfter: Int,
     @SerialName("idle_check_rate")

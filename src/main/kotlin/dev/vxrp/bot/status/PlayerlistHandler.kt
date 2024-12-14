@@ -2,7 +2,7 @@ package dev.vxrp.bot.status
 
 import dev.minn.jda.ktx.messages.editMessage
 import dev.vxrp.bot.commands.commanexecutes.status.Playerlist
-import dev.vxrp.bot.commands.data.StatusConst
+import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.sqlite.tables.StatusTable
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory
 class PlayerlistHandler(val translation: Translation) {
     private val logger = LoggerFactory.getLogger(PlayerlistHandler::class.java)
 
-    fun updatePlayerLists(ports: MutableMap<Int, Server>, instances: List<Instance>, instanceApiMap: MutableMap<Instance, JDA>, mappedStatusConst: MutableMap<Int, StatusConst>) {
+    fun updatePlayerLists(ports: MutableMap<Int, Server>, instances: List<Instance>, instanceApiMap: MutableMap<Instance, JDA>, mappedStatusConstructor: MutableMap<Int, StatusConstructor>) {
         for (port in ports) {
             var api: JDA? = null
 
@@ -35,7 +35,7 @@ class PlayerlistHandler(val translation: Translation) {
                     .forEach {
                         if (api == null) return@transaction
                         val embeds = mutableListOf<MessageEmbed>()
-                        mappedStatusConst[port.key]?.let { statusConst ->
+                        mappedStatusConstructor[port.key]?.let { statusConst ->
                             Playerlist().getEmbed(api.selfUser.id, translation, statusConst)
                         }?.let { playerListEmbed ->
                             embeds.add(playerListEmbed)
