@@ -10,7 +10,6 @@ import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.api.sla.secretlab.SecretLab
 import dev.vxrp.database.sqlite.tables.ConnectionTable
-import dev.vxrp.database.sqlite.tables.ConnectionTable.Connections
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
 import dev.vxrp.util.Timer
@@ -19,10 +18,6 @@ import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
