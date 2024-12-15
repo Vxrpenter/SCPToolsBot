@@ -102,26 +102,21 @@
       "name": "statusbots",
       "description": "Manage the statusbots directly",
       "default_permissions": ["ADMINISTRATOR"],
-      "options": [
+      "subcommands": [
         {
-          "type": "STRING",
-          "name": "option",
-          "description": "Specify action here",
-          "isRequired": true,
-          "choices": [
-            {
-              "name": "kill",
-              "id": "kill"
-            },
-            {
-              "name": "boot",
-              "id": "boot"
-            },
-            {
-              "name": "reboot",
-              "id": "reboot"
-            }
-          ]
+          "inherit": "commands.kill.sub",
+          "name": "kill",
+          "description": "Kill the status bots"
+        },
+        {
+          "inherit": "commands.boot.sub",
+          "name": "boot",
+          "description": "Boot all statusbots"
+        },
+        {
+          "inherit": "commands.reboot.sub",
+          "name": "reboot",
+          "description": "Reboot all statusbots"
         }
       ]
     }
