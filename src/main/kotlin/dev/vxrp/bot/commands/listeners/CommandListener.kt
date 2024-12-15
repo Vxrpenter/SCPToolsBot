@@ -3,6 +3,7 @@ package dev.vxrp.bot.commands.listeners
 import dev.minn.jda.ktx.events.listener
 import dev.vxrp.bot.commands.CommandManager
 import dev.vxrp.bot.commands.commanexecutes.settings.SettingsCommand
+import dev.vxrp.bot.commands.commanexecutes.statusbots.StatusbotCommand
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.JDA
@@ -68,8 +69,16 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
     private fun checkSubInheritance(inherit: String, event: SlashCommandInteractionEvent): Boolean {
         when (inherit) {
-            "placeholder" -> {
-                // do no, no
+            "commands.kill.sub" -> {
+                killSubCommand(event)
+                return true
+            }
+            "commands.boot.sub" -> {
+                bootSubCommand(event)
+                return true
+            }
+            "commands.reboot.sub" -> {
+                rebootSubCommand(event)
                 return true
             }
         }
@@ -100,4 +109,15 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
         SettingsCommand(config, translation).pasteSettingsMenu(event)
     }
 
+    private fun killSubCommand(event: SlashCommandInteractionEvent) {
+        StatusbotCommand(config, translation).killSubCommand(event)
+    }
+
+    private fun bootSubCommand(event: SlashCommandInteractionEvent) {
+        StatusbotCommand(config, translation).bootSubCommand(event)
+    }
+
+    private fun rebootSubCommand(event: SlashCommandInteractionEvent) {
+        StatusbotCommand(config, translation).rebootSubCommand(event)
+    }
 }
