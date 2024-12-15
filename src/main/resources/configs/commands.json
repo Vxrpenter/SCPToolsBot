@@ -95,30 +95,6 @@
       "name": "settings",
       "description": "Bot settings/configurations",
       "default_permissions": ["ADMINISTRATOR"]
-    },
-    {
-      "active": true,
-      "inherit": "commands.statusbots.default",
-      "name": "statusbots",
-      "description": "Manage the statusbots directly",
-      "default_permissions": ["ADMINISTRATOR"],
-      "subcommands": [
-        {
-          "inherit": "commands.kill.sub",
-          "name": "kill",
-          "description": "Kill the status bots"
-        },
-        {
-          "inherit": "commands.boot.sub",
-          "name": "boot",
-          "description": "Boot all statusbots"
-        },
-        {
-          "inherit": "commands.reboot.sub",
-          "name": "reboot",
-          "description": "Reboot all statusbots"
-        }
-      ]
     }
   ],
   "status_commands": [

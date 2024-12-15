@@ -10,16 +10,14 @@ import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.sqlite.SqliteManager
 import dev.vxrp.util.Timer
-import kotlinx.coroutines.*
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.Activity.ActivityType
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
-import org.slf4j.LoggerFactory
+
+val timer = Timer()
 
 class BotManager(val config: Config, val translation: Translation) {
-    private val timer = Timer()
-
     init {
         val api = light(config.token, enableCoroutines = true) {
             intents += listOf(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
@@ -42,13 +40,7 @@ class BotManager(val config: Config, val translation: Translation) {
 
         commandManager.registerSpecificCommands(commandManager.query().commands, api)
 
-        val statusScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
-            LoggerFactory.getLogger(javaClass).error("An error occurred in the timer status coroutine", exception)
-        }) + SupervisorJob()
-
-        if (statusManager.query().active) {
-            statusScope.launch { statusManager.initialize(commandManager) }
-        }
+        statusManager.initialize(commandManager)
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {

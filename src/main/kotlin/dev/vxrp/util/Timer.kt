@@ -1,11 +1,10 @@
 package dev.vxrp.util
 
 import kotlinx.coroutines.*
-import org.slf4j.LoggerFactory
 import kotlin.time.Duration
 
-class Timer {
-    fun runWithTimer(period: Duration, task: suspend () -> Unit) = runBlocking {
+class Timer{
+    fun runWithTimer(period: Duration, coroutineScope: CoroutineScope, task: suspend () -> Unit) = runBlocking {
         var taskExecuted = false
 
         val currentTask: suspend () -> Unit = {
@@ -15,11 +14,11 @@ class Timer {
         }
 
 
-        startTimer(task = currentTask, period = period)
+        startTimer(period, coroutineScope, currentTask)
         assert(taskExecuted)
     }
 
-    fun runLooped(task: suspend () -> Unit) = runBlocking {
+    fun runLooped(coroutineScope: CoroutineScope, task: suspend () -> Unit) = runBlocking {
         var taskExecuted = false
 
         val currentTask: suspend () -> Unit = {
@@ -28,12 +27,12 @@ class Timer {
             taskExecuted = true
         }
 
-        loop(task = currentTask)
+        loop(coroutineScope, task = currentTask)
         assert(taskExecuted)
     }
 
-    private fun loop(task: suspend () -> Unit) {
-        timerScope.launch {
+    private fun loop(coroutineScope: CoroutineScope, task: suspend () -> Unit) {
+        coroutineScope.launch {
             launch {
                 while (isActive) {
                     task()
@@ -42,8 +41,8 @@ class Timer {
         }
     }
 
-    private fun startTimer(period: Duration, task: suspend () -> Unit) {
-        timerScope.launch {
+    private fun startTimer(period: Duration, coroutineScope: CoroutineScope, task: suspend () -> Unit) {
+        coroutineScope.launch {
             launch {
                 while (isActive) {
                     task()
@@ -52,8 +51,4 @@ class Timer {
             }
         }
     }
-
-    private val timerScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
-        LoggerFactory.getLogger(javaClass).error("An error occurred in the timer coroutine", exception)
-    }) + SupervisorJob()
 }
