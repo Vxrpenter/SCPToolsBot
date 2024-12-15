@@ -81,7 +81,6 @@ class CommandManager(val config: Config, val file: String) {
     private fun addSubcommands(subcommands: List<Subcommands>?): List<SubcommandData> {
         val subcommandData = mutableListOf<SubcommandData>()
         for (subcommand in subcommands!!) {
-            val options = mutableListOf<OptionData>()
 
             val currentSubCommand = SubcommandData(subcommand.name, subcommand.description).also { commandData ->
                 if (subcommand.options != null) {
