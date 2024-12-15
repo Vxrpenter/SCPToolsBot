@@ -13,7 +13,10 @@ import dev.vxrp.database.sqlite.tables.ConnectionTable
 import dev.vxrp.secretlab.data.Server
 import dev.vxrp.secretlab.data.ServerInfo
 import dev.vxrp.util.Timer
+import dev.vxrp.util.defaultStatusScope
+import dev.vxrp.util.statusbotScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.OnlineStatus
@@ -21,6 +24,8 @@ import net.dv8tion.jda.api.entities.Activity
 import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
+
+val bots = mutableListOf<JDA>()
 
 class StatusManager(private val globalApi: JDA, val config: Config, val translation: Translation, private val timer: Timer, val file: String) {
     private val logger = LoggerFactory.getLogger(StatusManager::class.java)
@@ -46,13 +51,17 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     }
 
     fun initialize(commandManager: CommandManager) {
-        mappedBots.clear()
-        mappedStatusConstructor.clear()
-        mappedServers.clear()
+        if (query().active) {
+            defaultStatusScope.launch {
+                mappedBots.clear()
+                mappedStatusConstructor.clear()
+                mappedServers.clear()
 
-        val status = query()
+                val status = query()
 
-        initializeBots(status, commandManager)
+                initializeBots(status, commandManager)
+            }
+        }
     }
 
     private fun initializeBots(status: Status, commandManager: CommandManager) {
@@ -66,6 +75,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
             val newApi = light(instance.token, enableCoroutines = true) {
                 setActivity(Activity.playing("pending..."))
             }
+            bots.add(newApi)
 
             mappedBots[newApi.selfUser.id] = instance.serverPort
             mappedStatusConstructor[instance.serverPort] = StatusConstructor(mappedBots, mappedServers, instance)
@@ -85,11 +95,11 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     }
 
     private fun initializeTimers(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
-        timer.runWithTimer(1.seconds) {
+        timer.runWithTimer(1.seconds, statusbotScope) {
             if (nonChangedData && status.idleAfter != secondsWithoutNewData) secondsWithoutNewData += 1
         }
 
-        timer.runLooped {
+        timer.runLooped(statusbotScope) {
             runTimer(status, instanceApiMap)
         }
     }
