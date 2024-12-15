@@ -138,7 +138,7 @@ class SettingsCommand(val config: Config, val translation: Translation) {
     private fun checkCedmod(): Boolean {
         if (config.cedmod.active) {
             try {
-                val changelog = Cedmod(config.cedmod.instance, config.cedmod.api).changelogGet()
+                Cedmod(config.cedmod.instance, config.cedmod.api).changelogGet()
                 return true
             } catch (e: UnknownHostException) {
                 return false
