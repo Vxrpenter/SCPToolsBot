@@ -6,7 +6,7 @@ import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.sqlite.tables.StatusTable
-import dev.vxrp.secretlab.data.Server
+import dev.vxrp.api.sla.secretlab.data.Server
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.exceptions.ErrorResponseException

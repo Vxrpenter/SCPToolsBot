@@ -11,6 +11,8 @@ data class Translation(
     val status: TranslationStatus,
     @SerialName("HELP")
     val help: TranslationHelp,
+    @SerialName("PLAYER")
+    val player: TranslationPlayer,
     @SerialName("SUPPORT")
     val support: TranslationSupport,
     @SerialName("NOTICE_OF_DEPARTURE")
@@ -201,6 +203,44 @@ data class TranslationStatus(
     val messageStatusDeactivated: String,
     @SerialName("MESSAGE_STATUS_ACTIVATED")
     val messageStatusActivated: String
+)
+
+@Serializable
+data class TranslationPlayer(
+    @SerialName("EMBED_STATISTICS_BODY")
+    val embedStatisticsBody: String,
+    @SerialName("EMBED_STEAMID_FIELD_NAME")
+    val embedStatisticsSteamIdFieldName: String,
+    @SerialName("EMBED_STEAMID_FIELD_VALUE")
+    val embedStatisticsSteamIdFieldValue: String,
+    @SerialName("EMBED_PLAYTIME_FIELD_NAME")
+    val embedStatisticsPlaytimeFiledName: String,
+    @SerialName("EMBED_PLAYTIME_FIELD_VALUE")
+    val embedStatisticsPlaytimeFieldValue: String,
+    @SerialName("EMBED_BANNED_FIELD_NAME")
+    val embedStatisticsBannedFieldName: String,
+    @SerialName("EMBED_BANNED_FIELD_VALUE")
+    val embedStatisticsBannedFieldValue: String,
+    @SerialName("EMBED_FILLER_ONE_FIELD_NAME")
+    val embedStatisticsFillerOneFiledName: String,
+    @SerialName("EMBED_FILLER_ONE_FIELD_VALUE")
+    val embedStatisticsFillerOneFiledValue: String,
+    @SerialName("EMBED_WARNS_FIELD_NAME")
+    val embedStatisticsWarnsFieldName: String,
+    @SerialName("EMBED_WARNS_FIELD_VALUE")
+    val embedStatisticsWarnsFieldValue: String,
+    @SerialName("EMBED_MUTES_FIELD_NAME")
+    val embedStatisticsMutesFieldName: String,
+    @SerialName("EMBED_MUTES_FIELD_VALUE")
+    val embedStatisticsMutesFieldValue: String,
+    @SerialName("EMBED_WATCHLIST_FIELD_NAME")
+    val embedStatisticsWatchlistFieldName: String,
+    @SerialName("EMBED_WATCHLIST_FIELD_VALUE")
+    val embedStatisticsWatchlistFieldValue: String,
+    @SerialName("EMBED_FILLER_TWO_FIELD_NAME")
+    val embedStatisticsFillerTwoFiledName: String,
+    @SerialName("EMBED_FILLER_TWO_FIELD_VALUE")
+    val embedStatisticsFillerTwoFiledValue: String
 )
 
 @Serializable

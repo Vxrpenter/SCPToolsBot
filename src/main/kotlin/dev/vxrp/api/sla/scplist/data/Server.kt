@@ -1,4 +1,4 @@
-package dev.vxrp.scplist.data
+package dev.vxrp.api.sla.scplist.data
 
 import kotlinx.serialization.Serializable
 

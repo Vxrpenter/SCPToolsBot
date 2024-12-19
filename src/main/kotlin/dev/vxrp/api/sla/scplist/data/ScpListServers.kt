@@ -1,5 +1,6 @@
-package dev.vxrp.scplist.data
+package dev.vxrp.api.sla.scplist.data
 
+import dev.vxrp.api.sla.scplist.data.Server
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -9,6 +10,5 @@ data class ScpListServers(
     val displayUserCount: Int,
     val displayServerCount: Int,
     val offlineServerCount: Int,
-    val servers: List<Server>? = null
-)
+    val servers: List<Server>? = null)
 

@@ -59,12 +59,18 @@
       "inherit": "commands.player.default",
       "name": "player",
       "description": "A command for querying data bout a user",
-      "default_permissions": ["ADMINISTRATOR"],
+      "default_permissions": ["VIEW_AUDIT_LOGS"],
       "options": [
         {
           "type": "USER",
           "name": "user",
           "description": "The user to query from",
+          "isRequired": true
+        },
+        {
+          "type": "INTEGER",
+          "name": "timeframe",
+          "description": "Specify timeframe to search data in",
           "isRequired": true
         },
         {
