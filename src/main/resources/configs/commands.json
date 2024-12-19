@@ -59,7 +59,7 @@
       "inherit": "commands.player.default",
       "name": "player",
       "description": "A command for querying data bout a user",
-      "default_permissions": ["VIEW_AUDIT_LOGS"],
+      "default_permissions": ["VOICE_MOVE_OTHERS"],
       "options": [
         {
           "type": "USER",

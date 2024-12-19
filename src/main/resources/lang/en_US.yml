@@ -623,6 +623,12 @@ BUTTONS:
   TEXT_RULES_PASTE: "Paste Rules"
   TEXT_RULES_UPDATE: "Update Rules"
 
+  TEXT_PLAYER_STATS: "Statistics"
+  TEXT_PLAYER_MODERATION: "Moderation"
+  TEXT_PLAYER_APPEAL: "Appeals"
+  TEXT_PLAYER_TICKET: "Ticket"
+  TEXT_PLAYER_PANEL: "Open on Panel"
+
   TEXT_SUPPORT_CREATE_NEW_TICKET: "Create Support Ticket"
   TEXT_SUPPORT_CLOSE_TICKET: "Close Ticket"
   TEXT_SUPPORT_CLAIM_TICKET: "Claim Ticket"

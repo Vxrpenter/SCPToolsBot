@@ -1,15 +1,57 @@
-# In dieser Translation ist jede art von discord formattierung möglich
+# In dieser Translation ist jede Art von discord formatting möglich
 #
 # \n führt einen Zeilenumbruch durch
 #
-# Werte die so umrandet sind: %value% werden mit anderen ersetzt
+# Werte, die so umrandet sind: %value% werden mit anderen ersetzt.
 #
-# Der bot lädt die Translations beim Start, um änderungen anzuwenden
+# Der Bot lädt die Translations beim Start, um Änderungen anzuwenden.
 #
-# Colorcodes könnt ihr hier finden: https://github.com/Vxrpenter/SCPToolsBot/wiki/Configuring-Translations
+# Colorcodes könnt ihr hier finden: https://github.com/Vxrpenter/SCPToolsBot/wiki/Configuring-Translations,
 #
 # Benutze &filler& um eine embed line zu füllen, benutze &filler<count>& um die Zeichenanzahl zu bestimmen
 #
+
+SETTINGS:
+
+  EMBED_SETTINGS_TITLE: "Einstellungen"
+  EMBED_SETTINGS_BODY: "
+                        In diesem Einstellungsmenü kannst du:\n
+                        - Konfigurationseinstellungen ändern\n
+                        - aktuelle Einstellungen ansehen\n
+                        - Bot-Informationen ansehen\n
+                        &filler&\n
+                        Klicke auf die Schaltflächen unten, um zwischen den Seiten zu wechseln. Das Laden der Informationen für die Hauptseite kann länger dauern, da viele Daten gleichzeitig abgefragt werden\n
+                        &filler&"
+
+  EMBED_SETTINGS_FIELD_LANGUAGE_TITLE: "Sprache"
+  EMBED_SETTINGS_FIELD_LANGUAGE_VALUE: "`%language%`"
+
+  EMBED_SETTINGS_FIELD_GUILD_TITLE: "&filler<7>& Server Verfügbar"
+  EMBED_SETTINGS_FIELD_GUILD_VALUE: "&filler<10>& `%isAvailable%`"
+
+  EMBED_SETTINGS_FIELD_DATABASE_TITLE: "&filler<30>& Datenbank"
+  EMBED_SETTINGS_FIELD_DATABASE_VALUE: "&filler<30>&%state%"
+
+  EMBED_SETTINGS_FIELD_CEDMOD_TITLE: "Cedmod"
+  EMBED_SETTINGS_FIELD_CEDMOD_VALUE: "%state%"
+
+  EMBED_SETTINGS_FIELD_VERSION_TITLE: "&filler<7>& Version"
+  EMBED_SETTINGS_FIELD_VERSION_VALUE: "&filler<10>&`%version%`"
+
+  EMBED_SETTINGS_FIELD_BUILD_TITLE: "&filler<30>& Letzte Version"
+  EMBED_SETTINGS_FIELD_BUILD_VALUE: "&filler<30>& `%build%`"
+
+  EMBED_SETTINGS_FIELD_GATEWAY_TITLE: "&filler<1>&\n Gateway Antwort Zeit"
+  EMBED_SETTINGS_FIELD_GATEWAY_VALUE: "||Received in %time% ms||"
+
+  EMBED_SETTINGS_FIELD_REST_TITLE: "&filler<1>& \n REST Antwort Zeit"
+  EMBED_SETTINGS_FIELD_REST_VALUE: "&filler<1>& ||Received in %time% ms||"
+
+  TEXT_CEDMOD_ONLINE: ":green_circle: Online"
+  TEXT_CEDMOD_OFFLINE: ":red_circle: Offline"
+
+  TEXT_DATABASE_ONLINE: ":green_circle: Online"
+  TEXT_DATABASE_OFFLINE: ":red_circle: Offline"
 
 HELP:
 
@@ -26,9 +68,9 @@ HELP:
                         `/template` - zum Einfügen von Templates\n
                         - `Regeln` - Regeln des Secret-Lab Servers\n
                         - `Support` - Support-Ticketsystem + Entbannungstickets\n
-                        - `Abmeldungen` - Abmeldungs-Panel für Staff\n
+                        - `Abmeldungen` - Abmeldung-Panel für Staff\n
                         - `Stammspieler` - Stammspieler-Panel für die Spieler\n
-                        - `Bewerbungen` - Bewerbungs-Panel für Staff-suche 
+                        - `Bewerbungen` - Bewerbung-Panel für Staff-suche 
                         "
   EMBED_PAGE_TWO_TITLE: "Scp Tools Help Page - Regeln"
   EMBED_PAGE_TWO_BODY: "
@@ -50,18 +92,18 @@ HELP:
                         "
   EMBED_PAGE_FOUR_TITLE: "Scp Tools Help Page - Abmeldungen"
   EMBED_PAGE_FOUR_BODY: "
-                        Benutze `/template notice of departure` um das Abmeldungs-Panel zu senden\n
+                        Benutze `/template notice of departure` um das Abmeldung-Panel zu senden\n
                         &filler&
                         Dieses Feature ermöglicht es Staff Mitgliedern eine Auszeit zu nehmen. Wenn diese Abläuft werden sie und die Teamleitung automatisch informiert.\n
                         
-                        Wenn ein Nutzer eine Abmeldung sendet wird diese in einen Kanel zum bearbeiten gesendet. Wird sie angenommen, dann wird dies in der Datenbank gespeichert.\n
+                        Wenn ein Nutzer eine Abmeldung sendet wird diese in einen Kanal zum bearbeiten gesendet. Wird sie angenommen, dann wird dies in der Datenbank gespeichert.\n
                         > Der Nutzer wird beim Annehmen, Ablehnen, Zurückziehen und beim Ende der Abmeldung darüber per Privatnachricht informiert
                         "
   EMBED_PAGE_FIVE_TITLE: "Scp Tools Help Page - Stammspieler"
   EMBED_PAGE_FIVE_BODY: "
                         Benutze `/template regulars` um das Stammspieler-Panel zu senden.\n
                         &filler&
-                        Biete deinen Spielern custom Spielzeit rollen an, die sich automatisch mit dem Server syncronisieren.\n
+                        Biete deinen Spielern custom Spielzeit rollen an, die sich automatisch mit dem Server synchronisieren.\n
                         
                         Die Spieler können die Synchronisierung der Zeit aktivieren/deaktivieren oder so auch einfach löschen.
                         "
@@ -82,23 +124,45 @@ STATUS:
 
   EMBED_ESTABLISHED_TITLE: "%instance% - verbindung wiederhergestellt"
   EMBED_ESTABLISHED_BODY: "Die Verbindung zum Server wurde wiederhergestellt! Ausfälle sollten nicht häufig auftreten, wenn der Server stabil läuft."
-  EMBED_ESTABLISHED_FIELD_NAME: "Grund"
-  EMBED_ESTABLISHED_FIELD_VALUE: "Server ist online und die central server sind online"
+  EMBED_ESTABLISHED_REASON_FIELD_NAME: "Grund"
+  EMBED_ESTABLISHED_REASON_FIELD_VALUE: "Server ist online und die central server sind online"
+  EMBED_ESTABLISHED_RESPONSE_FIELD_NAME: "Antwortzeit"
+  EMBED_ESTABLISHED_RESPONSE_FIELD_VALUE: "%time% ms"
 
   EMBED_LOST_TITLE: "%instance% - verbindung verloren"
   EMBED_LOST_BODY: "Die Verbindung zu diesem Server wurde nach **%retries%** aufeinanderfolgenden Fehlern unterbrochen. Der Server wurde als offline markiert."
-  EMBED_LOST_FIELD_NAME: "Grund"
-  EMBED_LOST_FIELD_VALUE: "Der Server ist offline, die zentralen Server sind offline oder die secret lab api ist offline."
+  EMBED_LOST_REASON_FIELD_NAME: "Grund"
+  EMBED_LOST_REASON_FIELD_VALUE: "Der Server oder die Api sind offline"
+  EMBED_LOST_RESPONSE_FIELD_NAME: "Antwortzeit"
+  EMBED_LOST_RESPONSE_FIELD_VALUE: "Konnte keine Daten erfassen"
+
+  EMBED_ONLINE_TITLE: "%instance% - Server Online"
+  EMBED_ONLINE_BODY: "Die Verbindung zum Server wurde wiederhergestellt! Ausfälle sollten nicht häufig auftreten, wenn der Server stabil läuft."
+  EMBED_ONLINE_REASON_FIELD_NAME: "Grund"
+  EMBED_ONLINE_REASON_FIELD_VALUE: "Server und die zentralen Server sind online"
+  EMBED_ONLINE_RESPONSE_FIELD_NAME: "Antwortzeit"
+  EMBED_ONLINE_RESPONSE_FIELD_VALUE: "%time% ms"
+
+  EMBED_OFFLINE_TITLE: "%instance% - Server Offline"
+  EMBED_OFFLINE_BODY: "Die Verbindung zu diesem Server wurde nach **%retries%** aufeinanderfolgenden Fehlern getrennt. Der Server wurde als offline markiert."
+  EMBED_OFFLINE_REASON_FIELD_NAME: "Grund"
+  EMBED_OFFLINE_REASON_FIELD_VALUE: "Server ist offline (es können keine Daten empfangen werden)"
+  EMBED_OFFLINE_RESPONSE_FIELD_NAME: "Antwortzeit"
+  EMBED_OFFLINE_RESPONSE_FIELD_VALUE: "%time% ms"
 
   EMBED_MAINTENANCE_ON_TITLE: "%instance% - Wartungsarbeiten aktiviert"
   EMBED_MAINTENANCE_ON_BODY: "Dieser Server wurde in den Wartungsmodus versetzt. Serverdaten sind nicht verfügbar und Spieler werden nicht in der Aktivität angezeigt."
-  EMBED_MAINTENANCE_ON_FIELD_NAME: "Grund"
-  EMBED_MAINTENANCE_ON_FIELD_VALUE: "Es wurde kein Grund für diese Wartungsarbeiten angegeben. Bitte wende dich sich für weitere Informationen an das Serverteam."
+  EMBED_MAINTENANCE_ON_REASON_FIELD_NAME: "Grund"
+  EMBED_MAINTENANCE_ON_REASON_FIELD_VALUE: "Es wurde kein Grund für diese Wartungsarbeiten angegeben. Bitte wende dich sich für weitere Informationen an das Serverteam."
+  EMBED_MAINTENANCE_ON_RESPONSE_FIELD_NAME: "Antwortzeit"
+  EMBED_MAINTENANCE_ON_RESPONSE_FIELD_VALUE: "%time% ms"
 
   EMBED_MAINTENANCE_OFF_TITLE: "%instance% - Wartungsarbeiten deaktiviert"
   EMBED_MAINTENANCE_OFF_BODY: "Dieser Server wurde aus der Wartung genommen. Serverdaten sind jetzt verfügbar und Spieler werden in der Aktivität angezeigt."
-  EMBED_MAINTENANCE_OFF_FIELD_NAME: "Grund"
-  EMBED_MAINTENANCE_OFF_FIELD_VALUE: "Es wurde kein Grund für diese Wartungsarbeiten angegeben. Bitte wende dich sich für weitere Informationen an das Serverteam."
+  EMBED_MAINTENANCE_OFF_REASON_FIELD_NAME: "Grund"
+  EMBED_MAINTENANCE_OFF_REASON_FIELD_VALUE: "Es wurde kein Grund für diese Wartungsarbeiten angegeben. Bitte wende dich sich für weitere Informationen an das Serverteam."
+  EMBED_MAINTENANCE_OFF_RESPONSE_FIELD_NAME: "Antwortzeit"
+  EMBED_MAINTENANCE_OFF_RESPONSE_FIELD_VALUE: "%time% ms"
 
   EMBED_PLAYERLIST_TITLE: "Aktuelle Spielerliste"
   EMBED_PLAYERLIST_BODY: "
@@ -122,6 +186,39 @@ STATUS:
   MESSAGE_STATUS_EMPTY: "Es läuft kein Statusbot"
   MESSAGE_STATUS_DEACTIVATED: "Wartungsarbeiten für Server deaktiviert"
   MESSAGE_STATUS_ACTIVATED: "Wartungsarbeiten für Server aktiviert"
+
+PLAYER:
+  EMBED_STATISTICS_BODY: "
+                        **──────────────────────────────────────**\n
+                        ### `➥` Discord  ID: `%discordId%`\n
+                        ### `➥` Timeout?  ID: `%discordTimeout%`\n
+                        ### `➥` Stummgeschalted?  ID: `%discordMute%`\n
+                        **─────────────────────────────────────────────────────────────**"
+
+  EMBED_STEAMID_FIELD_NAME: "`🆔` SteamId"
+  EMBED_STEAMID_FIELD_VALUE: "➥ `%steamId%`"
+
+  EMBED_PLAYTIME_FIELD_NAME: "`⏰` Spielzeit"
+  EMBED_PLAYTIME_FIELD_VALUE: "➥ `%playtime%`"
+
+  EMBED_BANNED_FIELD_NAME: "`🔨` Aktuell Gebannt"
+  EMBED_BANNED_FIELD_VALUE: "➥ `%banState%`"
+
+  EMBED_FILLER_ONE_FIELD_NAME: "**─────────────────────────────────────────────────────────────**"
+  EMBED_FILLER_ONE_FIELD_VALUE: ""
+
+  EMBED_WARNS_FIELD_NAME: "`⚠` Warnungen"
+  EMBED_WARNS_FIELD_VALUE: "➥ `%warns%`"
+
+  EMBED_MUTES_FIELD_NAME: "`🔇` Stummschaltungen"
+  EMBED_MUTES_FIELD_VALUE: "➥ `%mutes%`"
+
+  EMBED_WATCHLIST_FIELD_NAME: "`👁️` Beobachtungsliste"
+  EMBED_WATCHLIST_FIELD_VALUE: "➥ `%watchlist%`"
+
+  EMBED_FILLER_TWO_FIELD_NAME: "**─────────────────────────────────────────────────────────────**"
+  EMBED_FILLER_TWO_FIELD_VALUE: "➥ Diese Informationen können sich ändern, wenn sich die Panel-Informationen ändern."
+
 
 SUPPORT:
 
@@ -185,7 +282,7 @@ SUPPORT:
 
   EMBED_UNBAN_TITLE: "%name%"
   EMBED_UNBAN_BODY: "
-                        Entbannungsantrag wird bearbeited.\n
+                        Entbannungsantrag wird bearbeitet.\n
                         
                         __**Steam ID:**__\n
                         ||%steamID%||\n
@@ -236,13 +333,13 @@ NOTICE_OF_DEPARTURE:
 
   MODAL_TITLE: "Abmeldung stellen"
   MODAL_TIME_TITLE: "Wie lange bist du weg?"
-  MODAL_TIME_PLACEHOLDER: "wie lange, bitt im format [dd.MM.yyyy]"
+  MODAL_TIME_PLACEHOLDER: "wie lange, immer im format [dd.MM.yyyy]"
   MODAL_EXPLANATION_TITLE: "Erklärung"
   MODAL_EXPLANATION_PLACEHOLDER: "Wieso wirst du weg sein? [keine details]"
 
   EMBED_DESCISION_TITLE: "Abmeldung - #%number%"
 
-  # Wenn du dies entfernst: ```ansi ``` dann funktionert das color rendering nicht
+  # Wenn du dies entfernst: ```ansi ``` dann funktioniert das color rendering nicht
   EMBED_DESCISION_BODY: " 
                         Wenn dieser Benutzer akzeptiert wird, wird der Benutzer und das Datum in die Datenbank aufgenommen und du wirst benachrichtigt, wenn es abläuft\n
 
@@ -255,7 +352,7 @@ NOTICE_OF_DEPARTURE:
                         ```%reason%```
                         "
   EMBED_DESCISION_FOOTER: "Erstellt am %date% um %time% Uhr"
-  MESSAGE_DESCISION_CREATED: "Deine Abmeldung bald bearbeited"
+  MESSAGE_DESCISION_CREATED: "Deine Abmeldung bald bearbeitet"
 
   EMBED_ACCEPTED: "
                         Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n
@@ -301,7 +398,7 @@ NOTICE_OF_DEPARTURE:
                         __**Zeit:**__\n
                         ```%timeframe%```
                         
-                        __**Aktzeptanz Grund:**__\n
+                        __**Akzeptanz Grund:**__\n
                         ```%reason%```
                         "
   MESSAGE_REVOKED: "Die Abmeldung wurde erfolgreich zurückgezogen"
@@ -318,9 +415,9 @@ NOTICE_OF_DEPARTURE:
                         
                         &teal&&bold&&underline&Change Data&reset&
                         
-                        Bearbeited an: &gold&&bold&%date%&reset&
+                        Bearbeitet an: &gold&&bold&%date%&reset&
                         
-                        Bearbeited von: &gold&&bold&%actionTaker%
+                        Bearbeitet von: &gold&&bold&%actionTaker%
                         ```
                         "
 
@@ -514,9 +611,20 @@ STATUS_BARS:
 
 # You can't use color codes for the following button translations
 BUTTONS:
+  TEXT_SETTINGS_START: "Start"
+  TEXT_SETTINGS_CONFIGURE: "Konfigurieren"
+  TEXT_SETTINGS_CURRENT: "Aktuelle Einstellungen"
+  TEXT_SETTINGS_INFORMATION: "Informationen"
+  TEXT_SETTINGS_NEWS: "Neuigkeiten"
 
   TEXT_RULES_PASTE: "Regeln pasten"
   TEXT_RULES_UPDATE: "Regeln updaten"
+
+  TEXT_PLAYER_STATS: "Statistiken"
+  TEXT_PLAYER_MODERATION: "Moderation"
+  TEXT_PLAYER_APPEAL: "Anträge"
+  TEXT_PLAYER_TICKET: "Ticket"
+  TEXT_PLAYER_PANEL: "Im Panel öffnen"
 
   TEXT_SUPPORT_CREATE_NEW_TICKET: "Support-Ticket erstellen"
   TEXT_SUPPORT_CLOSE_TICKET: "Ticket schließen"
