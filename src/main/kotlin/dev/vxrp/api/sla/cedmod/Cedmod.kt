@@ -3,13 +3,16 @@ package dev.vxrp.api.sla.cedmod
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import dev.vxrp.cedmod.enums.AppealStateType
-import dev.vxrp.cedmod.enums.HandleAppealType
-import dev.vxrp.cedmod.enums.MuteType
+import dev.vxrp.api.sla.cedmod.data.Player
+import dev.vxrp.api.sla.cedmod.enums.AppealStateType
+import dev.vxrp.api.sla.cedmod.enums.HandleAppealType
+import dev.vxrp.api.sla.cedmod.enums.MuteType
+import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
 import java.util.concurrent.TimeUnit
 
 /**
@@ -26,14 +29,11 @@ import java.util.concurrent.TimeUnit
  * You can also implement it yourself and then create a pull request if needed
  *
  * @author Vxrpenter
- * @since Cedmod Version: `3.4.18`so
+ * @since Cedmod Version: `3.4.18`so 
  */
-class Cedmod(
-    private val instanceUrl: String,
-    private val apiKey: String,
-    readTimeout: Long = 60,
-    writeTimeout: Long = 60
-) {
+
+
+class Cedmod(private val instanceUrl: String, private val apiKey: String, readTimeout: Long = 60, writeTimeout: Long = 60) {
     private val client: OkHttpClient = OkHttpClient.Builder()
         .readTimeout(readTimeout, TimeUnit.SECONDS)
         .writeTimeout(writeTimeout, TimeUnit.SECONDS)
@@ -309,9 +309,9 @@ class Cedmod(
      *
      * @return the query as JsonObject
      */
-    fun banlistQuery(q: String, page: Int = 0, max: Int = 0): JsonObject? {
+    fun banlistQuery(q: String, page: Int = 0, max: Int= 0): JsonObject? {
         val url = "$instanceUrl/Api/Banlist/Query?q=$q&page=$page&max=$max".also {
-            if (page == 0) it.replace("&page=0", "")
+            if (page == 0 ) it.replace("&page=0", "")
             if (max == 0) it.replace("&max=0", "")
         }
 
@@ -345,20 +345,7 @@ class Cedmod(
      *
      * @return the response code
      */
-    fun banlistPut(
-        banlistId: String,
-        queryServerId: String,
-        serverWriteBans: String,
-        serverReadBans: String,
-        serverWriteMutes: String,
-        serverReadMutes: String,
-        serverWriteWarns: String,
-        serverReadWarns: String,
-        name: String,
-        isMaster: Boolean = false,
-        isDefaultPanel: Boolean = false,
-        isDefaultViewPanel: Boolean = true
-    ): Int {
+    fun banlistPut(banlistId: String, queryServerId: String, serverWriteBans: String, serverReadBans: String, serverWriteMutes: String, serverReadMutes: String, serverWriteWarns: String, serverReadWarns: String, name: String, isMaster: Boolean = false, isDefaultPanel: Boolean = false, isDefaultViewPanel: Boolean = true): Int {
         val json = "{\n" +
                 "  \"id\": $queryServerId,\n" +
                 "  \"isMaster\": $isMaster,\n" +
@@ -623,14 +610,7 @@ class Cedmod(
      *
      * @return the response body as a JsonObject
      * */
-    fun mutePostIssue(
-        userId: String,
-        reason: String,
-        duration: Int,
-        appealable: Boolean,
-        banlists: List<Int>,
-        muteType: MuteType
-    ): JsonObject? {
+    fun mutePostIssue(userId: String, reason: String, duration: Int, appealable: Boolean, banlists: List<Int>, muteType: MuteType): JsonObject? {
         val type = when (muteType) {
             MuteType.INTERCOM -> 0
             MuteType.GLOBAL -> 1
@@ -730,5 +710,44 @@ class Cedmod(
         client.newCall(request).execute().use { response ->
             return JsonParser.parseString(response.body?.string()).asJsonObject
         }
+    }
+
+    /**
+     * Endpoint for querying player stats
+     *
+     * Endpoint: `/Api/Player/Query`
+     *
+     * @param q the query being a userId most of the time
+     * @param max maximum number of results to return
+     * @param page define the page
+     * @param staffOnly only return staff users
+     * @param create create player
+     * @param sortLabel label to sort to
+     * @param sortDirection direction of sort
+     * @param activityMin minimum activity to query from. If set to 10, it queries data from the last 10 days
+     * @param basicStats should base stats be returned?
+     * @param moderationData should moderation data be returned?
+     *
+     * @return a 'Player' object
+     */
+    fun playerQuery(q: String, max: Int = 10, page: Int = 0, staffOnly: Boolean = false, create: Boolean = false, sortLabel: String = "id_field", sortDirection: Int? = null, activityMin: Int = 14, basicStats: Boolean = true, moderationData: Boolean = false): Player {
+        val request = Request.Builder()
+            .url("$instanceUrl/Api/Player/Query?q=$q&max=$max&page=$page&staffOnly=$staffOnly&create=$create&sortLabel=$sortLabel&activityMin=$activityMin&basicStats=$basicStats&moderationData=$moderationData")
+            .header("Authorization", "Bearer $apiKey")
+            .build()
+
+        client.newCall(request).execute().use { response ->
+            val obj = Json.decodeFromString<Player>(response.body!!.string())
+
+            obj.response = getResponseTime(response)
+            return obj
+        }
+    }
+
+    private fun getResponseTime(response: Response): Long {
+        val sent = response.sentRequestAtMillis
+        val received = response.receivedResponseAtMillis
+
+        return (received-sent)
     }
 }

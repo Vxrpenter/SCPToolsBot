@@ -187,6 +187,38 @@ STATUS:
   MESSAGE_STATUS_DEACTIVATED: "Deactivated maintenance mode for server"
   MESSAGE_STATUS_ACTIVATED: "Switched server to maintenance mode"
 
+PLAYER:
+  EMBED_STATISTICS_BODY: "
+                        **──────────────────────────────────────**\n
+                        ### `➥` Discord  ID: `%discordId%`\n
+                        ### `➥` Timeouted?  ID: `%discordTimeout%`\n
+                        ### `➥` Muted?  ID: `%discordMute%`\n
+                        **─────────────────────────────────────────────────────────────**"
+
+  EMBED_STEAMID_FIELD_NAME: "`🆔` SteamId"
+  EMBED_STEAMID_FIELD_VALUE: "➥ `%steamId%`"
+
+  EMBED_PLAYTIME_FIELD_NAME: "`⏰` Playtime"
+  EMBED_PLAYTIME_FIELD_VALUE: "➥ `%playtime%`"
+
+  EMBED_BANNED_FIELD_NAME: "`🔨` Currently Banned"
+  EMBED_BANNED_FIELD_VALUE: "➥ `%banState%`"
+
+  EMBED_FILLER_ONE_FIELD_NAME: "**─────────────────────────────────────────────────────────────**"
+  EMBED_FILLER_ONE_FIELD_VALUE: ""
+
+  EMBED_WARNS_FIELD_NAME: "`⚠` Warns"
+  EMBED_WARNS_FIELD_VALUE: "➥ `%warns%`"
+
+  EMBED_MUTES_FIELD_NAME: "`🔇` Mutes"
+  EMBED_MUTES_FIELD_VALUE: "➥ `%mutes%`"
+
+  EMBED_WATCHLIST_FIELD_NAME: "`👁️` Watchlist"
+  EMBED_WATCHLIST_FIELD_VALUE: "➥ `%watchlist%`"
+
+  EMBED_FILLER_TWO_FIELD_NAME: "**─────────────────────────────────────────────────────────────**"
+  EMBED_FILLER_TWO_FIELD_VALUE: "➥ This Information is subject to change when panel information changes"
+
 SUPPORT:
 
   EMBED_TEMPLATE_SUPPORT_TITLE: "Create a Support Ticket"

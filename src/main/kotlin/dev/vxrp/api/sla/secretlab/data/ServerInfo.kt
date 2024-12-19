@@ -1,9 +1,8 @@
-package dev.vxrp.secretlab.data
+package dev.vxrp.api.sla.secretlab.data
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Transient
-import java.net.CacheResponse
 
 @Serializable
 data class ServerInfo(
@@ -14,7 +13,7 @@ data class ServerInfo(
     @SerialName("Cooldown")
     val cooldown: Int? = null,
     @SerialName("Servers")
-    val servers: List<Server>
+    val servers: List<Server>,
 )
 
 @Serializable

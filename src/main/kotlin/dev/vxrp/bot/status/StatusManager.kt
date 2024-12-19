@@ -10,8 +10,8 @@ import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.api.sla.secretlab.SecretLab
 import dev.vxrp.database.sqlite.tables.ConnectionTable
-import dev.vxrp.secretlab.data.Server
-import dev.vxrp.secretlab.data.ServerInfo
+import dev.vxrp.api.sla.secretlab.data.Server
+import dev.vxrp.api.sla.secretlab.data.ServerInfo
 import dev.vxrp.util.Timer
 import dev.vxrp.util.defaultStatusScope
 import dev.vxrp.util.statusbotScope
