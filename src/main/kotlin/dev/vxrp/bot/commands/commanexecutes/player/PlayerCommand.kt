@@ -84,11 +84,11 @@ class PlayerCommand(val config: Config, val translation: Translation) {
 
         event.hook.send("", listOf(embedSuccess)).setEphemeral(true)
             .addActionRow(
-                Button.primary("player::stats", "Statistics"),
-                Button.primary("player::moderation", "Moderation"),
-                Button.primary("player::appeal", "Appeals"),
-                Button.primary("player::ticket", "Ticket"),
-                Button.link("${config.cedmod.instance}/Moderation/PlayerManagement/${player.userId}", "Open on Panel")
+                Button.primary("player::stats", translation.buttons.textPlayerStats),
+                Button.primary("player::moderation", translation.buttons.textPlayerModeration),
+                Button.primary("player::appeal", translation.buttons.textPlayerAppeal),
+                Button.primary("player::ticket", translation.buttons.textPlayerTicket),
+                Button.link("${config.cedmod.instance}/Moderation/PlayerManagement/${player.userId}", translation.buttons.textPlayerPanel)
             ).queue()
     }
 

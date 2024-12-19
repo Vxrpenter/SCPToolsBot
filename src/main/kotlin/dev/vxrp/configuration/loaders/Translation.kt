@@ -439,10 +439,23 @@ data class TranslationButtons(
     val textSettingsInformation: String,
     @SerialName("TEXT_SETTINGS_NEWS")
     val textSettingsNews: String,
+
     @SerialName("TEXT_RULES_PASTE")
     val textRulesPaste: String,
     @SerialName("TEXT_RULES_UPDATE")
     val textRulesUpdate: String,
+
+    @SerialName("TEXT_PLAYER_STATS")
+    val textPlayerStats: String,
+    @SerialName("TEXT_PLAYER_MODERATION")
+    val textPlayerModeration: String,
+    @SerialName("TEXT_PLAYER_APPEAL")
+    val textPlayerAppeal: String,
+    @SerialName("TEXT_PLAYER_TICKET")
+    val textPlayerTicket: String,
+    @SerialName("TEXT_PLAYER_PANEL")
+    val textPlayerPanel: String,
+
     @SerialName("TEXT_SUPPORT_CREATE_NEW_TICKET")
     val textSupportCreateNewTicket: String,
     @SerialName("TEXT_SUPPORT_CLOSE_TICKET")
@@ -451,6 +464,7 @@ data class TranslationButtons(
     val textSupportClaimTicket: String,
     @SerialName("TEXT_SUPPORT_SETTINGS_TICKET")
     val textSupportSettingsTicket: String,
+
     @SerialName("TEXT_UNBAN_CREATE_NEW_TICKET")
     val textUnbanCreateNewTicket: String,
     @SerialName("TEXT_UNBAN_ACCEPT_TICKET")
@@ -459,6 +473,7 @@ data class TranslationButtons(
     val textUnbanDismissTicket: String,
     @SerialName("TEXT_UNBAN_SETTINGS_TICKET")
     val textUnbanSettingsTicket: String,
+
     @SerialName("TEXT_NOTICE_OF_DEPARTURE_FILE")
     val textNoticeOfDepartureFile: String,
     @SerialName("TEXT_NOTICE_OF_DEPARTURE_ACCEPT")
@@ -469,6 +484,7 @@ data class TranslationButtons(
     val textNoticeOfDepartureRevoked: String,
     @SerialName("TEXT_NOTICE_OF_DEPARTURE_DELETE")
     val textNoticeOfDepartureDelete: String,
+
     @SerialName("TEXT_REGULAR_OPEN_SETTINGS")
     val textRegularOpenSettings: String,
     @SerialName("TEXT_REGULAR_SYNC")
