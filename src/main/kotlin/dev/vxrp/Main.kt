@@ -24,9 +24,12 @@ fun main() {
 
     initializeConfiguration(configManager, System.getProperty("user.dir"))
     initializeTranslations(translationManager)
-    val config = configManager.query(System.getProperty("user.dir"), "/configs/config.yml")
+    val config = configManager.query(
+        Path("${System.getProperty("user.dir")}/configs/config.yml"),
+        Path("${System.getProperty("user.dir")}/configs/status-settings.json"),
+        Path("${System.getProperty("user.dir")}/configs/ticket-settings.json"))
     setLoggingLevel(config)
-    val translation = translationManager.query(System.getProperty("user.dir"), config.loadTranslation)
+    val translation = translationManager.query(System.getProperty("user.dir"), config.settings.loadTranslation)
 
     ScpToolsBot(config, translation)
 }
@@ -35,16 +38,18 @@ fun initializeConfiguration(configManager: ConfigManager, dir: String) {
     val configs = ArrayList<Path>()
     configs.add(Path("/configs/config.yml"))
     configs.add(Path("/configs/color-config.json"))
+    configs.add(Path("/configs/ticket-settings.json"))
+    configs.add(Path("/configs/status-settings.json"))
 
     configManager.create(dir, configs)
 }
 
 fun setLoggingLevel(config: Config) {
     var level = Level.INFO
-    if (config.debug) {
+    if (config.settings.debug) {
         level = Level.DEBUG
     }
-    if (config.advancedDebug) {
+    if (config.settings.advancedDebug) {
         level = Level.TRACE
     }
 

@@ -32,7 +32,7 @@ class StatusCommand(val config: Config, val translation: Translation, private va
 
             val embed = Embed {
                 color = 0x2ECC70
-                url = config.status.pageUrl
+                url = config.settings.status.pageUrl
                 title = ColorTool().useCustomColorCodes(
                     translation.status.embedMaintenanceOffTitle
                         .replace("%instance%", statusConstructor.instance.name)
@@ -45,7 +45,7 @@ class StatusCommand(val config: Config, val translation: Translation, private va
                 }
             }
 
-            event.jda.getTextChannelById(config.status.postChannel)?.send("", listOf(embed))?.queue()
+            event.jda.getTextChannelById(config.settings.status.postChannel)?.send("", listOf(embed))?.queue()
         } else {
             var reason: String = translation.status.embedMaintenanceOnReasonFieldValue
             if (event.getOption("reason")?.asString != null) {
@@ -62,7 +62,7 @@ class StatusCommand(val config: Config, val translation: Translation, private va
 
             val embed = Embed {
                 color = 0xf1c40f
-                url = config.status.pageUrl
+                url = config.settings.status.pageUrl
                 title = ColorTool().useCustomColorCodes(
                     translation.status.embedMaintenanceOnTitle
                         .replace("%instance%", statusConstructor.instance.name)
@@ -75,7 +75,7 @@ class StatusCommand(val config: Config, val translation: Translation, private va
                 }
             }
 
-            event.jda.getTextChannelById(config.status.postChannel)?.send("", listOf(embed))?.queue()
+            event.jda.getTextChannelById(config.settings.status.postChannel)?.send("", listOf(embed))?.queue()
         }
     }
 }

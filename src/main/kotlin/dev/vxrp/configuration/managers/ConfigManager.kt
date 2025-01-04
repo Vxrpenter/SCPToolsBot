@@ -1,7 +1,10 @@
 package dev.vxrp.configuration.managers
 
 import com.charleskorn.kaml.Yaml
+import dev.vxrp.bot.status.data.Status
+import dev.vxrp.bot.ticket.Ticket
 import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.configuration.loaders.Settings
 import org.slf4j.LoggerFactory
 import java.nio.file.Files
 import java.nio.file.Path
@@ -29,13 +32,20 @@ class ConfigManager {
                 }
             }
         }
+        query(Path("${System.getProperty("user.dir")}/configs/config.yml"),
+            Path("${System.getProperty("user.dir")}/configs/status-settings.json"),
+            Path("${System.getProperty("user.dir")}/configs/ticket-settings.json"))
     }
 
-    fun query(dir: String, file: String): Config {
-        val currentFile = Path("$dir$file").toFile()
-        logger.debug("Query configuration file {}{}", dir, file)
-        val result = Yaml.default.decodeFromString(Config.serializer(), currentFile.readText())
-        logger.debug("Query of configuration file {}{} completed", dir, file)
-        return result
+    fun query(configLocation: Path, statusLocation: Path, ticketLocation: Path): Config {
+        val configFile = configLocation.toFile()
+        val statusFile = statusLocation.toFile()
+        val ticketFile = ticketLocation.toFile()
+
+        val settings = Yaml.default.decodeFromString(Settings.serializer(), configFile.readText())
+        val status = Yaml.default.decodeFromString(Status.serializer(), statusFile.readText())
+        val ticket = Yaml.default.decodeFromString(Ticket.serializer(), ticketFile.readText())
+
+        return Config(settings, status, ticket)
     }
 }

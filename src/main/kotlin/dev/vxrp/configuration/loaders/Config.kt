@@ -1,10 +1,18 @@
 package dev.vxrp.configuration.loaders
 
+import dev.vxrp.bot.status.data.Status
+import dev.vxrp.bot.ticket.Ticket
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable
 data class Config(
+    val settings: Settings,
+    val status: Status,
+    val ticket: Ticket
+)
+
+@Serializable
+data class Settings(
     val token: String,
     @SerialName("guild_id")
     val guildId: String,
@@ -17,22 +25,14 @@ data class Config(
     val activityType: String,
     @SerialName("activity_content")
     val activityContent: String,
-    //database
     val database: ConfigDatabase,
-    //rules
     val rules: ConfigRules,
-    //logging
     val logging: ConfigLogging,
-    //cedmod
     val cedmod: ConfigCedmod,
-    // Status
     val status: ConfigStatus,
-    //support-settings
     val support: ConfigSupport,
-    //notice-of-departure
     @SerialName("notice_of_departure")
     val noticeOfDeparture: ConfigNoticeOfDeparture,
-    //regulars
     val regulars: ConfigRegulars
 )
 

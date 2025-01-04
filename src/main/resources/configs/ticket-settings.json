@@ -1,0 +1,84 @@
+{
+  "settings": [
+    {
+      "name": "General",
+      "type": "support::GENERAL",
+      "roles": [],
+      "parent_channel": "",
+      "child_rules": {
+        "parent_name": "ticket#%r%",
+        "allow_settings": true,
+        "use_status_bar": true,
+        "logging": {
+          "messages": true,
+          "files": true
+        },
+        "lock_on_default": false
+      }
+    },
+    {
+      "name": "Report",
+      "type": "support::REPORT",
+      "roles": [],
+      "parent_channel": "",
+      "child_rules": {
+        "parent_name": "ticket#%r%",
+        "allow_settings": true,
+        "use_status_bar": true,
+        "logging": {
+          "messages": true,
+          "files": true
+        },
+        "lock_on_default": false
+      }
+    },
+    {
+      "name": "Error",
+      "type": "support::ERROR",
+      "roles": [],
+      "parent_channel": "",
+      "child_rules": {
+        "parent_name": "ticket#%r%",
+        "allow_settings": true,
+        "use_status_bar": true,
+        "logging": {
+          "messages": true,
+          "files": true
+        },
+        "lock_on_default": false
+      }
+    },
+    {
+      "name": "Unban",
+      "type": "support::UNBAN",
+      "roles": [],
+      "parent_channel": "",
+      "child_rules": {
+        "parent_name": "ticket#%r%",
+        "allow_settings": true,
+        "use_status_bar": true,
+        "logging": {
+          "messages": true,
+          "files": true
+        },
+        "lock_on_default": false
+      }
+    },
+    {
+      "name": "Complaint",
+      "type": "support::COMPLAINT",
+      "roles": [],
+      "parent_channel": "",
+      "child_rules": {
+        "parent_name": "ticket#%r%",
+        "allow_settings": true,
+        "use_status_bar": true,
+        "logging": {
+          "messages": true,
+          "files": true
+        },
+        "lock_on_default": false
+      }
+    }
+  ]
+}
