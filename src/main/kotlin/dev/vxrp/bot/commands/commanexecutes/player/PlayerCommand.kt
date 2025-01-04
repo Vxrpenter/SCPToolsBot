@@ -20,7 +20,7 @@ class PlayerCommand(val config: Config, val translation: Translation) {
             return
         }
 
-        val player = Cedmod(config.cedmod.instance, config.cedmod.api).playerQuery("${user.id}@discord", moderationData = true, activityMin = event.getOption("timeframe")!!.asInt).players[0]
+        val player = Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api).playerQuery("${user.id}@discord", moderationData = true, activityMin = event.getOption("timeframe")!!.asInt).players[0]
 
         val steamId = "❌ Not Available"
         val playtime = "${player.activity}"
@@ -33,7 +33,7 @@ class PlayerCommand(val config: Config, val translation: Translation) {
             author {
                 name = user.globalName
                 iconUrl = user.avatarUrl
-                url = "${config.cedmod.instance}/Moderation/PlayerManagement/${player.userId}"
+                url = "${config.settings.cedmod.instance}/Moderation/PlayerManagement/${player.userId}"
             }
             color = 0x0
             timestamp = Instant.now()
@@ -88,7 +88,7 @@ class PlayerCommand(val config: Config, val translation: Translation) {
                 Button.primary("player::moderation", translation.buttons.textPlayerModeration),
                 Button.primary("player::appeal", translation.buttons.textPlayerAppeal),
                 Button.primary("player::ticket", translation.buttons.textPlayerTicket),
-                Button.link("${config.cedmod.instance}/Moderation/PlayerManagement/${player.userId}", translation.buttons.textPlayerPanel)
+                Button.link("${config.settings.cedmod.instance}/Moderation/PlayerManagement/${player.userId}", translation.buttons.textPlayerPanel)
             ).queue()
     }
 

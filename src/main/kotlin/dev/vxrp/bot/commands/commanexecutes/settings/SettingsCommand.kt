@@ -38,7 +38,7 @@ class SettingsCommand(val config: Config, val translation: Translation) {
                     ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldLanguageTitle.trimIndent())
                 value = ColorTool().useCustomColorCodes(
                     translation.settings.embedSettingsFieldLanguageValue
-                        .replace("%language%", config.loadTranslation).trimIndent()
+                        .replace("%language%", config.settings.loadTranslation).trimIndent()
                 )
             }
 
@@ -136,9 +136,9 @@ class SettingsCommand(val config: Config, val translation: Translation) {
     }
 
     private fun checkCedmod(): Boolean {
-        if (config.cedmod.active) {
+        if (config.settings.cedmod.active) {
             try {
-                Cedmod(config.cedmod.instance, config.cedmod.api).changelogGet()
+                Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api).changelogGet()
                 return true
             } catch (e: UnknownHostException) {
                 return false

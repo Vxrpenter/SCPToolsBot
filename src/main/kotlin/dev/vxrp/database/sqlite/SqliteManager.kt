@@ -16,15 +16,15 @@ class SqliteManager(val config: Config, folder: String, val file: String) {
 
         File("$dir/$folder/$file").also { if (!it.exists()) it.createNewFile() }
 
-        if (config.database.dataUsePredefined == "SQLITE") {
+        if (config.settings.database.dataUsePredefined == "SQLITE") {
             Database.connect("jdbc:sqlite:$dir/$folder/$file", driver = "org.sqlite.JDBC")
             createTables()
         }
-        if (config.database.dataUsePredefined == "NONE") {
-            when (Databasetype.SQlITE.takeIf { !enumContains<Databasetype>(config.database.customType) }
-                ?: Databasetype.valueOf(config.database.customType)) {
+        if (config.settings.database.dataUsePredefined == "NONE") {
+            when (Databasetype.SQlITE.takeIf { !enumContains<Databasetype>(config.settings.database.customType) }
+                ?: Databasetype.valueOf(config.settings.database.customType)) {
                 Databasetype.SQlITE -> {
-                    val url = "jdbc:sqlite:${config.database.customUrl}"
+                    val url = "jdbc:sqlite:${config.settings.database.customUrl}"
 
                     Database.connect(url, driver = "org.sqlite.JDBC")
                     createTables()

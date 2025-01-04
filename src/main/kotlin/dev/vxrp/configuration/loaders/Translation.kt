@@ -24,7 +24,9 @@ data class Translation(
     @SerialName("STATUS_BARS")
     val statusBars: TranslationStatusBars,
     @SerialName("BUTTONS")
-    val buttons: TranslationButtons
+    val buttons: TranslationButtons,
+    @SerialName("SELECT_MENUS")
+    val selectMenus: TranslationSelectMenus
 )
 
 @Serializable
@@ -249,20 +251,60 @@ data class TranslationSupport(
     val embedTemplateSupportTitle: String,
     @SerialName("EMBED_TEMPLATE_SUPPORT_BODY")
     val embedTemplateSupportBody: String,
+
     @SerialName("EMBED_TEMPLATE_UNBAN_TITLE")
     val embedTemplateUnbanTitle: String,
     @SerialName("EMBED_TEMPLATE_UNBAN_BODY")
     val embedTemplateUnbanBody: String,
-    @SerialName("MODAL_SUPPORT_TITLE")
-    val modalTitle: String,
-    @SerialName("MODAL_SUPPORT_SUBJECT_TITLE")
-    val modalSubjectTitle: String,
-    @SerialName("MODAL_SUPPORT_SUBJECT_PLACEHOLDER")
-    val modalSubjectPlaceholder: String,
-    @SerialName("MODAL_SUPPORT_EXPLANATION_TITLE")
-    val modalExplanationTitle: String,
-    @SerialName("MODAL_SUPPORT_EXPLANATION_PLACEHOLDER")
-    val modalExplanationPlaceholder: String,
+
+    @SerialName("MESSAGE_REPORT_USER")
+    val messageReportUser: String,
+    @SerialName("MESSAGE_COMPLAINT_ANONYMOUS")
+    val messageComplaintAnonymous: String,
+    @SerialName("MESSAGE_COMPLAINT_USER")
+    val messageComplaintUser: String,
+
+    @SerialName("MODAL_GENERAL_TITLE")
+    val modalGeneralTitle: String,
+    @SerialName("MODAL_GENERAL_SUBJECT_TITLE")
+    val modalGeneralSubjectTitle: String,
+    @SerialName("MODAL_GENERAL_SUBJECT_PLACEHOLDER")
+    val modalGeneralSubjectPlaceholder: String,
+    @SerialName("MODAL_GENERAL_EXPLANATION_TITLE")
+    val modalGeneralExplanationTitle: String,
+    @SerialName("MODAL_GENERAL_EXPLANATION_PLACEHOLDER")
+    val modalGeneralExplanationPlaceholder: String,
+
+    @SerialName("MODAL_REPORT_TITLE")
+    val modalReportTitle: String,
+    @SerialName("MODAL_REPORT_REASON_TITLE")
+    val modalReportReasonTitle: String,
+    @SerialName("MODAL_REPORT_REASON_PLACEHOLDER")
+    val modalReportReasonPlaceholder: String,
+    @SerialName("MODAL_REPORT_PROOF_TITLE")
+    val modalReportProofTitle: String,
+    @SerialName("MODAL_REPORT_PROOF_PLACEHOLDER")
+    val modalReportProofPlaceholder: String,
+
+    @SerialName("MODAL_ERROR_TITLE")
+    val modalErrorTitle: String,
+    @SerialName("MODAL_ERROR_PROBLEM_TITLE")
+    val modalSupportErrorProblemTitle: String,
+    @SerialName("MODAL_ERROR_PROBLEM_PLACEHOLDER")
+    val modalErrorProblemPlaceholder: String,
+    @SerialName("MODAL_ERROR_TIMES_TITLE")
+    val modalErrorTimesTitle: String,
+    @SerialName("MODAL_ERROR_TIMES_PLACEHOLDER")
+    val modalErrorTimesPlaceholder: String,
+    @SerialName("MODAL_ERROR_REPRODUCE_TITLE")
+    val modalErrorReproduceTitle: String,
+    @SerialName("MODAL_ERROR_REPRODUCE_PLACEHOLDER")
+    val modalErrorReproducePlaceholder: String,
+    @SerialName("MODAL_ERROR_ADDITIONAL_TITLE")
+    val modalErrorAdditionalTitle: String,
+    @SerialName("MODAL_ERROR_ADDITIONAL_PLACEHOLDER")
+    val modalErrorAdditionalPlaceholder: String,
+
     @SerialName("MODAL_UNBAN_TITLE")
     val modalUnbanTitle: String,
     @SerialName("MODAL_UNBAN_STEAMID_TITLE")
@@ -273,10 +315,18 @@ data class TranslationSupport(
     val modalUnbanReasonTitle: String,
     @SerialName("MODAL_UNBAN_REASON_PLACEHOLDER")
     val modalUnbanReasonPlaceholder: String,
-    @SerialName("MODAL_UNBAN_REASON_TO_UNBAN_TITLE")
-    val modalReasonToUnbanTitle: String,
-    @SerialName("MODAL_UNBAN_REASON_TO_UNBAN_PLACEHOLDER")
-    val modalReasonToUnbanPlaceholder: String,
+
+    @SerialName("MODAL_COMPLAINT_TITLE")
+    val modalComplaintTitle: String,
+    @SerialName("MODAL_COMPLAINT_SUBJECT_TITLE")
+    val modalComplaintSubjectTitle: String,
+    @SerialName("MODAL_COMPLAINT_SUBJECT_PLACEHOLDER")
+    val modalComplaintSubjectPlaceholder: String,
+    @SerialName("MODAL_COMPLAINT_EXPLANATION_TITLE")
+    val modalComplaintExplanationTitle: String,
+    @SerialName("MODAL_COMPLAINT_EXPLANATION_PLACEHOLDER")
+    val modalComplaintExplanationPlaceholder: String,
+
     @SerialName("MODAL_REASON_ACTION_TITLE")
     val modalReasonActionTitle: String,
     @SerialName("MODAL_REASON_ACTION_REASON_TITLE")
@@ -456,23 +506,16 @@ data class TranslationButtons(
     @SerialName("TEXT_PLAYER_PANEL")
     val textPlayerPanel: String,
 
-    @SerialName("TEXT_SUPPORT_CREATE_NEW_TICKET")
-    val textSupportCreateNewTicket: String,
-    @SerialName("TEXT_SUPPORT_CLOSE_TICKET")
-    val textSupportCloseTicket: String,
-    @SerialName("TEXT_SUPPORT_CLAIM_TICKET")
-    val textSupportClaimTicket: String,
-    @SerialName("TEXT_SUPPORT_SETTINGS_TICKET")
-    val textSupportSettingsTicket: String,
-
-    @SerialName("TEXT_UNBAN_CREATE_NEW_TICKET")
-    val textUnbanCreateNewTicket: String,
-    @SerialName("TEXT_UNBAN_ACCEPT_TICKET")
-    val textUnbanAcceptTicket: String,
-    @SerialName("TEXT_UNBAN_DISMISS_TICKET")
-    val textUnbanDismissTicket: String,
-    @SerialName("TEXT_UNBAN_SETTINGS_TICKET")
-    val textUnbanSettingsTicket: String,
+    @SerialName("TEXT_SUPPORT_ANONYMOUS_ACCEPT")
+    val textSupportAnonymousAccept: String,
+    @SerialName("TEXT_SUPPORT_ANONYMOUS_DENY")
+    val textSupportAnonymousDeny: String,
+    @SerialName("TEXT_SUPPORT_SETTINGS")
+    val textSupportSettings: String,
+    @SerialName("TEXT_SUPPORT_CLAIM")
+    val ticketSupportClaim: String,
+    @SerialName("TEXT_SUPPORT_CLOSE")
+    val ticketSupportClose: String,
 
     @SerialName("TEXT_NOTICE_OF_DEPARTURE_FILE")
     val textNoticeOfDepartureFile: String,
@@ -495,4 +538,32 @@ data class TranslationButtons(
     val textRegularSyncReactivate: String,
     @SerialName("TEXT_REGULAR_SYNC_REMOVE")
     val textRegularSyncRemove: String
+)
+
+@Serializable
+data class TranslationSelectMenus(
+    @SerialName("TEXT_SUPPORT_NAME_GENERAL")
+    val textSupportNameGeneral: String,
+    @SerialName("TEXT_SUPPORT_DESCRIPTION_GENERAL")
+    val textsupportDescriptionGeneral: String,
+
+    @SerialName("TEXT_SUPPORT_NAME_REPORT")
+    val textSupportNameReport: String,
+    @SerialName("TEXT_SUPPORT_DESCRIPTION_REPORT")
+    val textSupportDescriptionReport: String,
+
+    @SerialName("TEXT_SUPPORT_NAME_ERROR")
+    val textSupportNameError: String,
+    @SerialName("TEXT_SUPPORT_DESCRIPTION_ERROR")
+    val textSupportDescriptionError: String,
+
+    @SerialName("TEXT_SUPPORT_NAME_UNBAN")
+    val textSupportNameUnban: String,
+    @SerialName("TEXT_SUPPORT_DESCRIPTION_UNBAN")
+    val textSupportDescriptionUnban: String,
+
+    @SerialName("TEXT_SUPPORT_NAME_COMPLAINT")
+    val textSupportNameComplaint: String,
+    @SerialName("TEXT_SUPPORT_DESCRIPTION_COMPLAINT")
+    val textSupportDescriptionComplaint : String,
 )

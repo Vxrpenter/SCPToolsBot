@@ -59,7 +59,9 @@ dependencies {
     implementation("com.charleskorn.kaml:kaml:$kamlVersion")
 
     // Discord api implementation + Logback
-    implementation("net.dv8tion:JDA:$jdaVersion")
+    implementation("net.dv8tion:JDA:$jdaVersion") {
+        exclude(module = "opus-java")
+    }
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("club.minnced:jda-ktx:$jdaKtxVersion")
 

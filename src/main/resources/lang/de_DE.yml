@@ -249,19 +249,43 @@ SUPPORT:
                         - Grund, warum du gesperrt wurdest
                         - Grund, warum du entbannt werden möchtest
                         "
-  MODAL_SUPPORT_TITLE: "Support Ticket"
-  MODAL_SUPPORT_SUBJECT_TITLE: "Frage"
-  MODAL_SUPPORT_SUBJECT_PLACEHOLDER: "Was ist deine Frage?"
-  MODAL_SUPPORT_EXPLANATION_TITLE: "Erklärung"
-  MODAL_SUPPORT_EXPLANATION_PLACEHOLDER: "Erklär worum es dabei genau geht."
+  MESSAGE_REPORT_USER: "Wähle den Benutzer aus, den du melden möchtest (wenn er sich nicht auf dem discord befindet, melde ihn bitte im Spiel)."
+  MESSAGE_COMPLAINT_ANONYMOUS: "Möchtest du diese Beschwerde anonym einreichen?"
+  MESSAGE_COMPLAINT_USER: "Wähle eine Teammitglied aus…"
 
-  MODAL_UNBAN_TITLE: "Unban Ticket"
+  MODAL_GENERAL_TITLE: "Generelles Ticket"
+  MODAL_GENERAL_SUBJECT_TITLE: "Betreff"
+  MODAL_GENERAL_SUBJECT_PLACEHOLDER: "Worum geht es in diesem Ticket?"
+  MODAL_GENERAL_EXPLANATION_TITLE: "Erläuterung"
+  MODAL_GENERAL_EXPLANATION_PLACEHOLDER: "Erkläre was das genaue Problem ist..."
+
+  MODAL_REPORT_TITLE: "Report Ticket"
+  MODAL_REPORT_REASON_TITLE: "Grund"
+  MODAL_REPORT_REASON_PLACEHOLDER: "Was ist der Grund für den Report?"
+  MODAL_REPORT_PROOF_TITLE: "Beweise"
+  MODAL_REPORT_PROOF_PLACEHOLDER: "Wenn du einen Beweis hast, füge ihn hier ein."
+
+  MODAL_ERROR_TITLE: "Error Ticket"
+  MODAL_ERROR_PROBLEM_TITLE: "Problem"
+  MODAL_ERROR_PROBLEM_PLACEHOLDER: "Was ist dein Problem?"
+  MODAL_ERROR_TIMES_TITLE: "Häufigkeit"
+  MODAL_ERROR_TIMES_PLACEHOLDER: "Wie oft hast du dieses Problem erlebt?"
+  MODAL_ERROR_REPRODUCE_TITLE: "Reproduktion"
+  MODAL_ERROR_REPRODUCE_PLACEHOLDER: "Wie kann dieser Fehler reproduziert werden?"
+  MODAL_ERROR_ADDITIONAL_TITLE: "Zusätzliche Informationen"
+  MODAL_ERROR_ADDITIONAL_PLACEHOLDER: "Haben Sie zusätzliche Informationen zu diesem Problem?"
+
+  MODAL_UNBAN_TITLE: "Entbannungs Ticket"
   MODAL_UNBAN_STEAMID_TITLE: "SteamID"
-  MODAL_UNBAN_STEAMID_PLACEHOLDER: "Was ist deine steamID?"
-  MODAL_UNBAN_REASON_TITLE: "Grund"
-  MODAL_UNBAN_REASON_PLACEHOLDER: "Grund der in deiner ban message genannt wurde."
-  MODAL_UNBAN_REASON_TO_UNBAN_TITLE: "Grund dich zu entbannen"
-  MODAL_UNBAN_REASON_TO_UNBAN_PLACEHOLDER: "Wieso solltest du entbannt werden?"
+  MODAL_UNBAN_STEAMID_PLACEHOLDER: "Was ist deine SteamID?"
+  MODAL_UNBAN_REASON_TITLE: "Grund zur Entbannung"
+  MODAL_UNBAN_REASON_PLACEHOLDER: "Warum sollte dein Bann aufgehoben werden?"
+
+  MODAL_COMPLAINT_TITLE: "Beschwerde Ticket"
+  MODAL_COMPLAINT_SUBJECT_TITLE: "Grund"
+  MODAL_COMPLAINT_SUBJECT_PLACEHOLDER: "Warum hast du ein Problem mit diesem Teammitglied?"
+  MODAL_COMPLAINT_EXPLANATION_TITLE: "Beweise"
+  MODAL_COMPLAINT_EXPLANATION_PLACEHOLDER: "Wenn du einen Beweis hast, fuge ihn hier bei."
 
   MODAL_REASON_ACTION_TITLE: "Aktions Grund"
   MODAL_REASON_ACTION_REASON_TITLE: "Grund"
@@ -626,15 +650,11 @@ BUTTONS:
   TEXT_PLAYER_TICKET: "Ticket"
   TEXT_PLAYER_PANEL: "Im Panel öffnen"
 
-  TEXT_SUPPORT_CREATE_NEW_TICKET: "Support-Ticket erstellen"
-  TEXT_SUPPORT_CLOSE_TICKET: "Ticket schließen"
-  TEXT_SUPPORT_CLAIM_TICKET: "Ticket beanspruchen"
-  TEXT_SUPPORT_SETTINGS_TICKET: "Einstellungen"
-
-  TEXT_UNBAN_CREATE_NEW_TICKET: "Entbannungsantrag stellen"
-  TEXT_UNBAN_ACCEPT_TICKET: "Ticket annehmen"
-  TEXT_UNBAN_DISMISS_TICKET: "Ticket ablehnen"
-  TEXT_UNBAN_SETTINGS_TICKET: "Einstellungen"
+  TEXT_SUPPORT_ANONYMOUS_ACCEPT: "Anonym senden"
+  TEXT_SUPPORT_ANONYMOUS_DENY: "Mit Information senden"
+  TEXT_SUPPORT_SETTINGS: "Einstellungen"
+  TEXT_SUPPORT_CLAIM: "Beanspruchen"
+  TEXT_SUPPORT_CLOSE: "Schließen"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "Abmeldung anfragen"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Ticket annehmen"
@@ -647,3 +667,19 @@ BUTTONS:
   TEXT_REGULAR_SYNC_DEACTIVATE: "Synchronisierung deaktivieren"
   TEXT_REGULAR_SYNC_REACTIVATE: "Synchronisierung aktivieren"
   TEXT_REGULAR_SYNC_REMOVE: "Synchronisierung entfernen"
+
+SELECT_MENUS:
+  TEXT_SUPPORT_NAME_GENERAL: "Generelles Ticket"
+  TEXT_SUPPORT_DESCRIPTION_GENERAL: "Ticket für alles das unten nicht genannt wird"
+
+  TEXT_SUPPORT_NAME_REPORT: "Report Ticket"
+  TEXT_SUPPORT_DESCRIPTION_REPORT: "Ticket um einen Spieler zu melden"
+
+  TEXT_SUPPORT_NAME_ERROR: "Fehler Ticket"
+  TEXT_SUPPORT_DESCRIPTION_ERROR: "Ticket um einen Fahler zu melden"
+
+  TEXT_SUPPORT_NAME_UNBAN: "Entbannungs Ticket"
+  TEXT_SUPPORT_DESCRIPTION_UNBAN: "Ticket um einen Entbannungsantrag zu stellen"
+
+  TEXT_SUPPORT_NAME_COMPLAINT: "Beschwerde Ticket"
+  TEXT_SUPPORT_DESCRIPTION_COMPLAINT: "Beschwerdeformular gegen ein Mitglied des Serverpersonals"

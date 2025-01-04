@@ -17,7 +17,6 @@ import dev.vxrp.util.defaultStatusScope
 import dev.vxrp.util.statusbotScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
@@ -51,13 +50,13 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     }
 
     fun initialize(commandManager: CommandManager) {
-        if (query().active) {
+        if (config.status.active) {
             defaultStatusScope.launch {
                 mappedBots.clear()
                 mappedStatusConstructor.clear()
                 mappedServers.clear()
 
-                val status = query()
+                val status = config.status
 
                 initializeBots(status, commandManager)
             }
@@ -174,9 +173,5 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
         ActivityHandler(translation, config).updateStatus(api, server, instance)
 
         ConnectionHandler(translation, config).postStatusUpdate(server, api, instance, info)
-    }
-
-    fun query(): Status {
-        return Json.decodeFromString<Status>(currentFile.readText())
     }
 }
