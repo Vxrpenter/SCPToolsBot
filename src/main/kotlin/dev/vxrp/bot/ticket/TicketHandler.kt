@@ -13,7 +13,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 import java.time.LocalDate
 
-class TicketHandler(val api: JDA, val config: Config, private val ticketType: TicketType, private val ticketStatus: TicketStatus, private val ticketCreator: User, private val ticketHandler: User?) {
+class TicketHandler(val api: JDA, val config: Config, private val ticketType: TicketType, private val ticketStatus: TicketStatus, private val ticketCreator: String, private val ticketHandler: User?) {
     private val logger = LoggerFactory.getLogger(TicketHandler::class.java)
     val settings = querySettings()
 
@@ -30,7 +30,8 @@ class TicketHandler(val api: JDA, val config: Config, private val ticketType: Ti
         }
 
         val child = channel.createThreadChannel(settings.childRules.parentName.replace("%r%", retrieveSerial().toString()), true).await()
-
+        val creatorUser = api.retrieveUserById(ticketCreator).await()
+        child.sendMessage(creatorUser.asMention).await().delete().queue()
         for (roleId in settings.roles) {
             val role = api.getRoleById(roleId)
 
@@ -61,7 +62,7 @@ class TicketHandler(val api: JDA, val config: Config, private val ticketType: Ti
                 it[type] = ticketType.toString()
                 it[status] = ticketStatus.toString()
                 it[creation_date] = date.toString()
-                it[creator] = ticketCreator.id
+                it[creator] = ticketCreator
                 it[handler] = ticketHandler?.id
             }
         }
