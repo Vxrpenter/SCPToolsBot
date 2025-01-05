@@ -221,33 +221,26 @@ PLAYER:
 
 SUPPORT:
 
-  EMBED_TEMPLATE_SUPPORT_TITLE: "Create a Support Ticket"
+  EMBED_TEMPLATE_SUPPORT_TITLE: "Ticket Support"
   EMBED_TEMPLATE_SUPPORT_BODY: "
-                        If you are having a problem you cant solve yourself, feel free to reach out to our support team\n
-                         
-                        **Processing Time:**\n
-                        Processing your ticket may take up to `24h`\n
-                          
-                        **Rules for ticket creation**\n
-                        `Note: All Server rules still apply in support`\n
-                        1. Tickets mustn't be created out of fun or any other comical intent\n
-                        2. Dont get into arguments with support and stay on point\n
-                        3. Support shouldn't wait for your answers any longer than `48h` and may close your ticket afterwards
-                         "
-  EMBED_TEMPLATE_UNBAN_TITLE: "File an Unban Request"
-  EMBED_TEMPLATE_UNBAN_BODY: "
-                        If you got banned but think in is not legitimated than please file an unban request\n
+                        **Choose one of the following tickets to proceed**\n
 
-                        **Processing Time:**\n
-                        The processing of the request may take up to one week\n
-
-                        **Shared Information:**\n
-                        If you are filing an unban request we may receive following information:\n
-                        - Your Steam ID\n
-                        - Your Discord User ID\n
-                        - Reason you did get banned\n
-                        - Reason you want to be unbanned
-                        "
+                        > ⚙️ **General Ticket**\n
+                        >  Ticket about anything not listed below\n
+                        
+                        > ⚖️ **Report Ticket**\n
+                        > Ticket to report a player\n
+                        
+                        > ⛓️‍💥 **Error Ticket**\n
+                        > Ticket to report an error\n
+                        
+                        > 🚫 **Unban Ticket**\n
+                        > Ticket to request an unban\n
+                        
+                        > ⌛ **Complaint Ticket**\n
+                        > Ticket for complaining about a member of the server staff\n
+                        
+                        _When creating a ticket certain meta data will be saved. This consists of your userId, the date of creation, the tickets type, status and handler_"
 
   MESSAGE_REPORT_USER: "Select the user to report (if they are not on the dc then please report them ingame)"
   MESSAGE_COMPLAINT_ANONYMOUS: "Do you want to leave this complaint anonymous"

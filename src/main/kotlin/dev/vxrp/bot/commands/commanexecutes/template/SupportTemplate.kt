@@ -12,15 +12,12 @@ import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 class SupportTemplate(val config: Config, val translation: Translation) {
     fun pastePaste(event: SlashCommandInteractionEvent) {
         val support = Embed {
+            thumbnail = event.guild?.iconUrl
             title = ColorTool().useCustomColorCodes(translation.support.embedTemplateSupportTitle).trimIndent()
             description = ColorTool().useCustomColorCodes(translation.support.embedTemplateSupportBody).trimIndent()
         }
-        val unban = Embed {
-            title = ColorTool().useCustomColorCodes(translation.support.embedTemplateUnbanTitle).trimIndent()
-            description = ColorTool().useCustomColorCodes(translation.support.embedTemplateUnbanBody).trimIndent()
-        }
 
-        event.channel.send("", listOf(support, unban))
+        event.channel.send("", listOf(support))
             .setActionRow(
                 StringSelectMenu.create("ticket")
                     .addOption(translation.selectMenus.textSupportNameGeneral, "general", translation.selectMenus.textsupportDescriptionGeneral, Emoji.fromFormatted("⚙️"))
