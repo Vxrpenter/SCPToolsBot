@@ -252,11 +252,6 @@ data class TranslationSupport(
     @SerialName("EMBED_TEMPLATE_SUPPORT_BODY")
     val embedTemplateSupportBody: String,
 
-    @SerialName("EMBED_TEMPLATE_UNBAN_TITLE")
-    val embedTemplateUnbanTitle: String,
-    @SerialName("EMBED_TEMPLATE_UNBAN_BODY")
-    val embedTemplateUnbanBody: String,
-
     @SerialName("MESSAGE_REPORT_USER")
     val messageReportUser: String,
     @SerialName("MESSAGE_COMPLAINT_ANONYMOUS")

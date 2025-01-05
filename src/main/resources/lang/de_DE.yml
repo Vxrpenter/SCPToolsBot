@@ -222,33 +222,27 @@ PLAYER:
 
 SUPPORT:
 
-  EMBED_TEMPLATE_SUPPORT_TITLE: "Erstelle eine Support-Ticket"
+  EMBED_TEMPLATE_SUPPORT_TITLE: "Ticket Support"
   EMBED_TEMPLATE_SUPPORT_BODY: "
-                        Wenn du ein Problem hast, das du nicht lösen kannst, dann frage unser Team\n
+                        Wähle eines der folgenden Tickets, um fortzufahren\n
 
-                        **Bearbeitungsdauer:**
-                        Die Bearbeitung deines Tickets kann bis zu 24 Stunden dauern.
-                        
-                        **Regeln für Ticketerstellung**\n
-                        `Hinweis: Alle Serverregeln gelten auch im Support.`\n
-                        1. Tickets dürfen nicht aus Spaß oder aus einem anderen lustigen Hintergrund erstellt werden.\n
-                        2. Gehe nicht in Streitigkeiten mit dem Support und bleibe beim Thema.\n
-                        3. Der Support sollte nicht länger als 48 Stunden auf deine Antworten warten und kann anschließend dein Ticket schließen.
-                        "
-  EMBED_TEMPLATE_UNBAN_TITLE: "Stelle einen Entbannungsantrag."
-  EMBED_TEMPLATE_UNBAN_BODY: "
-                        Wenn du gesperrt wurdest, aber denkst, dass es nicht gerechtfertigt ist, reiche bitte einen Entbannungsantrag ein\n
-                        
-                        **Bearbeitungszeit:**
-                        Die Bearbeitung des Antrags kann bis zu einer Woche dauern
-                        
-                        **Geteilte Informationen:**
-                        Wenn du einen Entbannungsantrag stellst, können wir folgende Informationen erhalten:
-                        - Deine Steam-ID
-                        - Deine Discord-Benutzer-ID
-                        - Grund, warum du gesperrt wurdest
-                        - Grund, warum du entbannt werden möchtest
-                        "
+                        > ⚙️ **Generelles Ticket**\n
+                        > Ticket zu einem beliebigen Thema, das nicht unten aufgeführt ist\n
+
+                        > ⚖️ **Report Ticket**\n
+                        > Ticket zur Meldung eines Spielers\n
+
+                        > ⛓️‍💥 **Fehler Ticket**\n
+                        > Ticket zur Meldung eines Fehlers\n
+
+                        > 🚫 **Entbannungs Ticket**\n
+                        > Ticket zur Beantragung einer Entbannung\n
+
+                        > ⌛ **Beschwerde Ticket**\n
+                        > Ticket zur Beschwerde über ein Mitglied des Server-Teams\n
+
+                        _Bei der Erstellung eines Tickets werden bestimmte Metadaten gespeichert. Dazu gehören deine userId, das Erstellungsdatum, der Tickettyp, der Status und der Bearbeiter_"
+
   MESSAGE_REPORT_USER: "Wähle den Benutzer aus, den du melden möchtest (wenn er sich nicht auf dem discord befindet, melde ihn bitte im Spiel)."
   MESSAGE_COMPLAINT_ANONYMOUS: "Möchtest du diese Beschwerde anonym einreichen?"
   MESSAGE_COMPLAINT_USER: "Wähle eine Teammitglied aus…"
