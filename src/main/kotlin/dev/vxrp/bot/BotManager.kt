@@ -6,6 +6,7 @@ import dev.minn.jda.ktx.jdabuilder.light
 import dev.vxrp.bot.commands.CommandManager
 import dev.vxrp.bot.commands.listeners.CommandListener
 import dev.vxrp.bot.events.ButtonListener
+import dev.vxrp.bot.events.EntitySelectListener
 import dev.vxrp.bot.events.StringSelectListener
 import dev.vxrp.bot.status.StatusManager
 import dev.vxrp.configuration.loaders.Config
@@ -33,7 +34,8 @@ class BotManager(val config: Config, val translation: Translation) {
         api.addEventListener(
             CommandListener(api, config, translation),
             ButtonListener(api, config, translation),
-            StringSelectListener(api, config, translation)
+            StringSelectListener(api, config, translation),
+            EntitySelectListener(api, config, translation),
         )
 
         val guild = api.awaitReady().getGuildById(config.settings.guildId)
