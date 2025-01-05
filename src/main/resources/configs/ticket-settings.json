@@ -6,7 +6,7 @@
       "roles": [],
       "parent_channel": "",
       "child_rules": {
-        "parent_name": "ticket#%r%",
+        "parent_name": "Ticket #%r%",
         "allow_settings": true,
         "use_status_bar": true,
         "logging": {
@@ -22,7 +22,7 @@
       "roles": [],
       "parent_channel": "",
       "child_rules": {
-        "parent_name": "ticket#%r%",
+        "parent_name": "Ticket #%r%",
         "allow_settings": true,
         "use_status_bar": true,
         "logging": {
@@ -38,7 +38,7 @@
       "roles": [],
       "parent_channel": "",
       "child_rules": {
-        "parent_name": "ticket#%r%",
+        "parent_name": "Ticket #%r%",
         "allow_settings": true,
         "use_status_bar": true,
         "logging": {
@@ -54,7 +54,7 @@
       "roles": [],
       "parent_channel": "",
       "child_rules": {
-        "parent_name": "ticket#%r%",
+        "parent_name": "Ticket #%r%",
         "allow_settings": true,
         "use_status_bar": true,
         "logging": {
@@ -70,7 +70,7 @@
       "roles": [],
       "parent_channel": "",
       "child_rules": {
-        "parent_name": "ticket#%r%",
+        "parent_name": "Ticket #%r%",
         "allow_settings": true,
         "use_status_bar": true,
         "logging": {
