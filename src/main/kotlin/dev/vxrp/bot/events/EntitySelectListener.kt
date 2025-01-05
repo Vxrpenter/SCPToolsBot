@@ -17,12 +17,12 @@ class EntitySelectListener(val api: JDA, val config: Config, val translation: Tr
     init {
         api.listener<EntitySelectInteractionEvent> { event ->
             if (event.selectMenu.id?.startsWith("report") == true) {
-                val user = event.values[0]
+                val user = event.values[1]
                 event.replyModal(Support(translation).supportReportModal(user.id)).queue()
             }
 
             if (event.selectMenu.id?.startsWith("complaint") == true) {
-                val user = event.values[0]
+                val user = event.values[1]
                 val embed = Embed {
                     title = ColorTool().useCustomColorCodes(translation.support.embedComplaintAnonymousTitle)
                     description = ColorTool().useCustomColorCodes(translation.support.embedComplaintAnonymousBody)

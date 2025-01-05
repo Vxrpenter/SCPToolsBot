@@ -301,18 +301,85 @@ SUPPORT:
   MODAL_REASON_ACTION_REASON_TITLE: "Reason"
   MODAL_REASON_ACTION_REASON_PLACEHOLDER: "What is the reason for your action?"
 
-  EMBED_TICKET_SUPPORT_TITLE: "%name%"
-  EMBED_TICKET_SUPPORT_BODY: "
+  EMBED_TICKET_GENERAL_TITLE: "%name% - General"
+  EMBED_TICKET_GENERAL_BODY: "
+                          Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+
+                          **Type:** General\n
+                          **Issuer:**  %issuer%\n
+
+                          **Subject:**\n
+                          ```%subject%```\n
+
+                          **Explanation:**\n
+                          ```%explanation%```"
+
+  EMBED_TICKET_REPORT_TITLE: "%name% - Report"
+  EMBED_TICKET_REPORT_BODY: "
                         Support Ticket getting reviewed. A response from our moderation team may take a bit\n
-                       
-                        __**Ticket Subject:**__\n
-                        ```%subject%```
                         
-                        __**Content of ticket:**__\n
-                        ```%body%```
-                        "
-  EMBED_TICKET_SUPPORT_FOOTER: "Created on the %date% at %time%h"
-  EMBED_TICKET_SUPPORT_CREATED: "Your ticket has been created - %channel%"
+                        **Type:** Report\n
+                        **Issuer:**  %issuer%\n
+                        **Reported User:** %reported%\n
+                        
+                        **Reason:**\n
+                        ```%reason%```\n
+                        
+                        **Proof:**\n
+                        ```%proof%```"
+
+  EMBED_TICKET_ERROR_TITLE: "%name% - Error"
+  EMBED_TICKET_ERROR_BODY: "
+                        Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+
+                        **Type:** Error\n
+                        **Issuer:**  %issuer%\n
+
+                        **Problem:**\n
+                        ```%problem%```\n
+
+                        **Times:**\n
+                        ```%times%```\n
+                        
+                        **Reproduce:**\n
+                        ```%reproduce%```\n
+
+                        **Additional:**\n
+                        ```%additional%```"
+
+  EMBED_TICKET_UNBAN_TITLE: "%name% - Unban"
+  EMBED_TICKET_UNBAN_BODY: "
+                        Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+
+                        **Type:** Unban\n
+                        **Issuer:**  %issuer%\n
+
+                        **SteamID:**\n
+                        ||%steamId%||\n
+
+                        **Reason:**\n
+                        ```%reason%```\n"
+
+  EMBED_TICKET_COMPLAINT_TITLE: "%name% - Complaint"
+  EMBED_TICKET_COMPLAINT_BODY: "
+                        Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+
+                        **Type:** Complaint\n
+                        **Issuer:**  %issuer%\n
+                        **Complained about:** %staff%\n
+
+                        **Reason:**\n
+                        ```%reason%```\n
+
+                        **Proof:**\n
+                        ```%proof%```\n"
+
+  EMBED_TICKET_CREATED_TITLE: "Ticket Created"
+  EMBED_TICKET_CREATED_BODY: "
+                        Your ticket has been succesfully created. A staff member will come to your\n
+                        aid shortly. You can find the ticket here:\n
+                      
+                        %channel%"
 
   EMBED_UNBAN_TITLE: "%name%"
   EMBED_UNBAN_BODY: "
@@ -341,6 +408,7 @@ SUPPORT:
                         __**Acceptance Reason:**__\n
                         ```%reason%```
                         "
+
   EMBED_UNBAN_MESSAGE_DISMISSED: "
                         Your unban request under the steam ID (see down below) was dismissed, you may not appeal this
                         ban again until given permission by server administration or if this case resolves and another
@@ -352,6 +420,7 @@ SUPPORT:
                         __**Dismiss Reason:**__\n
                         ```%reason%```
                         "
+
   MESSAGE_UNBAN_SENT: "Your answer was sent and actions corresponding to it have been taken"
 
 NOTICE_OF_DEPARTURE:

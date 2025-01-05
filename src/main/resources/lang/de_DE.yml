@@ -302,18 +302,85 @@ SUPPORT:
   MODAL_REASON_ACTION_REASON_TITLE: "Grund"
   MODAL_REASON_ACTION_REASON_PLACEHOLDER: "Wieso willst du diese Aktion durchführen?"
 
-  EMBED_TICKET_SUPPORT_TITLE: "%name%"
-  EMBED_TICKET_SUPPORT_BODY: "
-                        Support-Ticket wird überprüft. Eine Antwort von unserem Moderationsteam kann ein wenig Zeit in Anspruch nehmen\n
+  EMBED_TICKET_GENERAL_TITLE: "%name% - Generell"
+  EMBED_TICKET_GENERAL_BODY: "
+                          Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
 
-                        __**Ticket-Betreff:**__\n
-                        ```%subject%```
-                        
-                        __**Inhalt des Tickets:**__\n
-                        ```%body%```
-                        "
-  EMBED_TICKET_SUPPORT_FOOTER: "Erstellt am %date% um %time% Uhr"
-  EMBED_TICKET_SUPPORT_CREATED: "Dein ticket wurde erstellt - %channel%"
+                          **Typ:** Generell\n
+                          **Ersteller:**  %issuer%\n
+
+                          **Betreff:**\n
+                          ```%subject%```\n
+
+                          **Erläuterung:**\n
+                          ```%explanation%```"
+
+  EMBED_TICKET_REPORT_TITLE: "%name% - Report"
+  EMBED_TICKET_REPORT_BODY: "
+                        Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
+
+                        **Typ:** Report\n
+                        **Ersteller:**  %issuer%\n
+                        **Gemeldeter Benutzer:** %reported%\n
+
+                        **Grund:**\n
+                        ```%reason%```\n
+
+                        **Beweise:**\n
+                        ```%proof%```"
+
+  EMBED_TICKET_ERROR_TITLE: "%name% - Error"
+  EMBED_TICKET_ERROR_BODY: "
+                        Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
+
+                        **Typ:** Error\n
+                        **Ersteller:**  %issuer%\n
+
+                        **Problem:**\n
+                        ```%problem%```\n
+
+                        **Häufigkeit:**\n
+                        ```%times%```
+
+                        **Reproduktion:**\n
+                        ```%reproduce%```\n
+
+                        **Zusätzliche Informationen:**\n
+                        ```%additional%```"
+
+  EMBED_TICKET_UNBAN_TITLE: "%name% - Entbannung"
+  EMBED_TICKET_UNBAN_BODY: "
+                        Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
+
+                        **Typ:** Entbannung\n
+                        **Ersteller:**  %issuer%\n
+
+                        **SteamID:**\n
+                        ||%steamId%||
+
+                        **Grund zur Entbannung:**\n
+                        ```%reason%```\n"
+
+  EMBED_TICKET_COMPLAINT_TITLE: "%name% - Complaint"
+  EMBED_TICKET_COMPLAINT_BODY: "
+                        Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
+
+                        **Type:** Complaint\n
+                        **Issuer:**  %issuer%\n
+                        **Beschwerde Über:** %staff%\n
+
+                        **Grund:**\n
+                        ```%reason%```
+
+                        **Beweise:**\n
+                        ```%proof%```\n"
+
+  EMBED_TICKET_CREATED_TITLE: "Ticket Created"
+  EMBED_TICKET_CREATED_BODY: "
+                        Dein Ticket wurde erfolgreich erstellt. Ein Teammitglied wird sich in kürze\n
+                        damit befassen. Du findest dein Ticket hier:\n
+
+                        %channel%"
 
   EMBED_UNBAN_TITLE: "%name%"
   EMBED_UNBAN_BODY: "

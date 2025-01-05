@@ -334,26 +334,53 @@ data class TranslationSupport(
     val modalReasonActionReasonTitle: String,
     @SerialName("MODAL_REASON_ACTION_REASON_PLACEHOLDER")
     val modalReasonActionPlaceholder: String,
-    @SerialName("EMBED_TICKET_SUPPORT_TITLE")
-    val embedTicketSupportTitle: String,
-    @SerialName("EMBED_TICKET_SUPPORT_BODY")
-    val embedTicketSupportBody: String,
-    @SerialName("EMBED_TICKET_SUPPORT_FOOTER")
-    val embedTicketSupportFooter: String,
-    @SerialName("EMBED_TICKET_SUPPORT_CREATED")
-    val embedTicketSupportCreated: String,
+
+    @SerialName("EMBED_TICKET_GENERAL_TITLE")
+    val embedTicketGeneralTitle: String,
+    @SerialName("EMBED_TICKET_GENERAL_BODY")
+    val embedTicketGeneralBody: String,
+
+    @SerialName("EMBED_TICKET_REPORT_TITLE")
+    val embedTicketReportTitle: String,
+    @SerialName("EMBED_TICKET_REPORT_BODY")
+    val embedTicketReportBody: String,
+
+    @SerialName("EMBED_TICKET_ERROR_TITLE")
+    val embedTicketErrorTitle: String,
+    @SerialName("EMBED_TICKET_ERROR_BODY")
+    val embedTicketErrorBody: String,
+
+    @SerialName("EMBED_TICKET_UNBAN_TITLE")
+    val embedTicketUnbanTitle: String,
+    @SerialName("EMBED_TICKET_UNBAN_BODY")
+    val embedTicketUnbanBody: String,
+
+    @SerialName("EMBED_TICKET_COMPLAINT_TITLE")
+    val embedTicketComplaintTitle: String,
+    @SerialName("EMBED_TICKET_COMPLAINT_BODY")
+    val embedTicketComplaintBody: String,
+
+    @SerialName("EMBED_TICKET_CREATED_TITLE")
+    val embedTicketCreatedTitle: String,
+    @SerialName("EMBED_TICKET_CREATED_BODY")
+    val embedTicketCreatedBody: String,
+
     @SerialName("EMBED_UNBAN_TITLE")
     val embedUnbanTitle: String,
     @SerialName("EMBED_UNBAN_BODY")
     val embedUnbanBody: String,
+
     @SerialName("EMBED_UNBAN_FOOTER")
     val embedUnbanFooter: String,
     @SerialName("EMBED_UNBAN_CREATED")
     val embedUnbanCreated: String,
+
     @SerialName("EMBED_UNBAN_MESSAGE_ACCEPTED")
     val embedUnbanMessageAccepted: String,
+
     @SerialName("EMBED_UNBAN_MESSAGE_DISMISSED")
     val embedUnbanMessageDismissed: String,
+
     @SerialName("MESSAGE_UNBAN_SENT")
     val messageUnbanSent: String
 )
