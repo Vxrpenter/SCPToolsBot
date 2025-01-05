@@ -45,13 +45,15 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
             }
 
             if (event.button.id?.startsWith("anonymous_accept") == true) {
-                event.replyModal(Support(translation).supportComplaintModal("anonymous")).queue()
+                val userId = event.button.id!!.split(":")[0]
+
+                event.replyModal(Support(translation).supportComplaintModal(userId, true)).queue()
             }
 
             if (event.button.id?.startsWith("anonymous_deny") == true) {
                 val userId = event.button.id!!.split(":")[0]
 
-                event.replyModal(Support(translation).supportComplaintModal(userId)).queue()
+                event.replyModal(Support(translation).supportComplaintModal(userId, false)).queue()
             }
         }
     }

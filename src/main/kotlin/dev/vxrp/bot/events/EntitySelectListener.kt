@@ -29,7 +29,7 @@ class EntitySelectListener(val api: JDA, val config: Config, val translation: Tr
                 }
 
                 event.reply_("", listOf(embed)).setActionRow(
-                    Button.success("anonymous_accept", translation.buttons.textSupportAnonymousAccept).withEmoji(Emoji.fromFormatted("🔒")),
+                    Button.success("anonymous_accept:${user.id}", translation.buttons.textSupportAnonymousAccept).withEmoji(Emoji.fromFormatted("🔒")),
                     Button.danger("anonymous_deny:${user.id}", translation.buttons.textSupportAnonymousDeny).withEmoji(Emoji.fromFormatted("🔓"))
                 ).setEphemeral(true).queue()
             }

@@ -2,7 +2,6 @@ package dev.vxrp.bot.modals
 
 import dev.minn.jda.ktx.interactions.components.TextInputBuilder
 import dev.vxrp.configuration.loaders.Translation
-import net.dv8tion.jda.api.entities.User
 import net.dv8tion.jda.api.interactions.components.ActionRow
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle
 import net.dv8tion.jda.api.interactions.modals.Modal
@@ -108,8 +107,8 @@ class Support(val translation: Translation) {
         ).build()
     }
 
-    fun supportComplaintModal(userId: String): Modal {
-        return Modal.create("support_complaint:$userId", translation.support.modalComplaintTitle).addComponents(
+    fun supportComplaintModal(userId: String, anonymous: Boolean): Modal {
+        return Modal.create("support_complaint:$userId:$anonymous", translation.support.modalComplaintTitle).addComponents(
             ActionRow.of(
                 TextInputBuilder(
                     id= "support_complaint_subject",
