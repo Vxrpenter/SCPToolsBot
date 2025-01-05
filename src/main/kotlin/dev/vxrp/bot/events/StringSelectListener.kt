@@ -3,6 +3,7 @@ package dev.vxrp.bot.events
 import dev.minn.jda.ktx.events.listener
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
+import dev.vxrp.bot.modals.Support
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.color.ColorTool
@@ -14,9 +15,11 @@ import net.dv8tion.jda.api.interactions.components.selections.EntitySelectMenu
 class StringSelectListener(val api: JDA, val config: Config, val translation: Translation) : ListenerAdapter() {
     init {
         api.listener<StringSelectInteractionEvent> { event ->
+            val support = Support(translation)
+
             if (event.selectMenu.id?.startsWith("ticket") == true) {
                 if (event.selectedOptions[0].value.startsWith("general")) {
-
+                    event.replyModal(support.supportGeneralModal()).queue()
                 }
 
                 if (event.selectedOptions[0].value.startsWith("report")) {
@@ -31,12 +34,11 @@ class StringSelectListener(val api: JDA, val config: Config, val translation: Tr
                 }
 
                 if (event.selectedOptions[0].value.startsWith("error")) {
-
+                    event.replyModal(support.supportErrorModal()).queue()
                 }
 
                 if (event.selectedOptions[0].value.startsWith("unban")) {
-
-
+                    event.replyModal(support.supportUnbanModal()).queue()
                 }
 
                 if (event.selectedOptions[0].value.startsWith("complaint")) {

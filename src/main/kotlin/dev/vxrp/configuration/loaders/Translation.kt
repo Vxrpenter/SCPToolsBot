@@ -290,7 +290,7 @@ data class TranslationSupport(
     @SerialName("MODAL_ERROR_TITLE")
     val modalErrorTitle: String,
     @SerialName("MODAL_ERROR_PROBLEM_TITLE")
-    val modalSupportErrorProblemTitle: String,
+    val modalErrorProblemTitle: String,
     @SerialName("MODAL_ERROR_PROBLEM_PLACEHOLDER")
     val modalErrorProblemPlaceholder: String,
     @SerialName("MODAL_ERROR_TIMES_TITLE")
