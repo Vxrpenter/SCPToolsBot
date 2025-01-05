@@ -87,7 +87,7 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                     title = ColorTool().useCustomColorCodes(translation.support.embedTicketReportTitle.replace("%name%", channel.name))
                     description = ColorTool().useCustomColorCodes(translation.support.embedTicketReportBody
                         .replace("%issuer%", "<@$userId>")
-                        .replace("%reported%", "<@${modalId.split(":")[0]}>")
+                        .replace("%reported%", "<@${modalId.split(":")[1]}>")
                         .replace("%reason%", modalValues[0].asString)
                         .replace("%proof%", modalValues[1].asString))
                     timestamp = Instant.now()
@@ -103,8 +103,8 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                         iconUrl = user.avatarUrl
                         name = user.name
                     }
-                    title = ColorTool().useCustomColorCodes(translation.support.embedTicketReportTitle.replace("%name%", channel.name))
-                    description = ColorTool().useCustomColorCodes(translation.support.embedTicketReportBody
+                    title = ColorTool().useCustomColorCodes(translation.support.embedTicketErrorTitle.replace("%name%", channel.name))
+                    description = ColorTool().useCustomColorCodes(translation.support.embedTicketErrorBody
                         .replace("%issuer%", "<@$userId>")
                         .replace("%problem%", modalValues[0].asString)
                         .replace("%times%", modalValues[1].asString)
@@ -123,8 +123,8 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                         iconUrl = user.avatarUrl
                         name = user.name
                     }
-                    title = ColorTool().useCustomColorCodes(translation.support.embedTicketReportTitle.replace("%name%", channel.name))
-                    description = ColorTool().useCustomColorCodes(translation.support.embedTicketReportBody
+                    title = ColorTool().useCustomColorCodes(translation.support.embedTicketUnbanTitle.replace("%name%", channel.name))
+                    description = ColorTool().useCustomColorCodes(translation.support.embedTicketUnbanBody
                         .replace("%issuer%", "<@$userId>")
                         .replace("%steamId%", modalValues[0].asString)
                         .replace("%reason%", modalValues[1].asString))
@@ -135,6 +135,11 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
             }
 
             TicketType.COMPLAINT -> {
+                var staff = "Anonymous"
+                if (modalId.split(":")[1] != "anonymous") {
+                    staff = "<@${modalId.split(":")[1]}>"
+                }
+
                 val embed = Embed {
                     author {
                         if (userId != "anonymous") {
@@ -146,12 +151,12 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                             name = "Anonymous"
                         }
                     }
-                    title = ColorTool().useCustomColorCodes(translation.support.embedTicketReportTitle.replace("%name%", channel.name))
-                    description = ColorTool().useCustomColorCodes(translation.support.embedTicketReportBody
+                    title = ColorTool().useCustomColorCodes(translation.support.embedTicketComplaintTitle.replace("%name%", channel.name))
+                    description = ColorTool().useCustomColorCodes(translation.support.embedTicketComplaintBody
                         .replace("%issuer%", "<@$userId>")
-                        .replace("%staff%", "<@${modalId.split(":")[0]}>")
-                        .replace("%proof%", modalValues[0].asString)
-                        .replace("%reason%", modalValues[1].asString))
+                        .replace("%staff%", staff)
+                        .replace("%reason%", modalValues[0].asString)
+                        .replace("%proof%", modalValues[1].asString))
                     timestamp = Instant.now()
                 }
 
