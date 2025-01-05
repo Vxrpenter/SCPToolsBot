@@ -49,6 +49,9 @@ Download the `.jar` from the latest release. Copy it into a folder of your likin
 
 For a specific operating system installation guide, check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Installation)
 
+## Manual
+Clone the repo and install a jdk 22 and gradle to compile. 
+
 ## Handling Issues
 If you're running into any issues,
 please first check the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Issue-Handling) for help.
