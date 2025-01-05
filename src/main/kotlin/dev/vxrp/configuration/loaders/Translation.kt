@@ -252,12 +252,18 @@ data class TranslationSupport(
     @SerialName("EMBED_TEMPLATE_SUPPORT_BODY")
     val embedTemplateSupportBody: String,
 
-    @SerialName("MESSAGE_REPORT_USER")
-    val messageReportUser: String,
-    @SerialName("MESSAGE_COMPLAINT_ANONYMOUS")
-    val messageComplaintAnonymous: String,
-    @SerialName("MESSAGE_COMPLAINT_USER")
-    val messageComplaintUser: String,
+    @SerialName("EMBED_REPORT_USER_TITLE")
+    val embedReportUserTitle: String,
+    @SerialName("EMBED_REPORT_USER_BODY")
+    val embedReportUserBody: String,
+    @SerialName("EMBED_COMPLAINT_ANONYMOUS_TITLE")
+    val embedComplaintAnonymousTitle: String,
+    @SerialName("EMBED_COMPLAINT_ANONYMOUS_BODY")
+    val embedComplaintAnonymousBody: String,
+    @SerialName("EMBED_COMPLAINT_USER_TITLE")
+    val embedComplaintUserTitle: String,
+    @SerialName("EMBED_COMPLAINT_USER_BODY")
+    val embedComplaintUserBody: String,
 
     @SerialName("MODAL_GENERAL_TITLE")
     val modalGeneralTitle: String,

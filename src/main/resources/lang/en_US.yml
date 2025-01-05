@@ -242,9 +242,26 @@ SUPPORT:
                         
                         _When creating a ticket certain meta data will be saved. This consists of your userId, the date of creation, the tickets type, status and handler_"
 
-  MESSAGE_REPORT_USER: "Select the user to report (if they are not on the dc then please report them ingame)"
-  MESSAGE_COMPLAINT_ANONYMOUS: "Do you want to leave this complaint anonymous"
-  MESSAGE_COMPLAINT_USER: "Select the staff member..."
+  EMBED_REPORT_USER_TITLE: "Choose User"
+  EMBED_REPORT_USER_BODY: "
+                        Choose which user you want to report. Please make sure to select the right person,\n
+                        because this can't be reverted once the ticket is sent.\n
+                      
+                        If you want to report a staff member then please use the complaint ticket type,\n
+                        as it is suited for that kind of operation. It's has an anonymous way for you to send your complaint about the staff member."
+
+  EMBED_COMPLAINT_ANONYMOUS_TITLE: "Send Anonymously?"
+  EMBED_COMPLAINT_ANONYMOUS_BODY: "
+                        If you want you can send this ticket anonymously, meaning that no metadata\n
+                        will be sent with it. This is optional but can prevent problems with staff members and make sure that the ticket issuer is safe."
+
+  EMBED_COMPLAINT_USER_TITLE: "Choose User"
+  EMBED_COMPLAINT_USER_BODY: "
+                        Choose which user you want to report. Please make sure to select the right person,\n
+                        because this can't be reverted once the ticket is sent.\n
+                      
+                        **Special Ticket**\n
+                        This is a special ticket meant for reporting staff members. After choosing a user you will be able to choose if you want to send it anonymously"
 
   MODAL_GENERAL_TITLE: "General Ticket"
   MODAL_GENERAL_SUBJECT_TITLE: "Subject"

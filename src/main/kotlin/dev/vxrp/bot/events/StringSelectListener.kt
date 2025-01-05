@@ -20,7 +20,12 @@ class StringSelectListener(val api: JDA, val config: Config, val translation: Tr
                 }
 
                 if (event.selectedOptions[0].value.startsWith("report")) {
-                    event.reply_("", listOf(Embed { description = ColorTool().useCustomColorCodes(translation.support.messageReportUser) })).addActionRow(
+                    val embed = Embed {
+                        title = ColorTool().useCustomColorCodes(translation.support.embedReportUserTitle)
+                        description = ColorTool().useCustomColorCodes(translation.support.embedReportUserBody)
+                    }
+
+                    event.reply_("", listOf(embed)).addActionRow(
                         EntitySelectMenu.create("report", EntitySelectMenu.SelectTarget.USER).build())
                         .setEphemeral(true).queue()
                 }
@@ -35,7 +40,12 @@ class StringSelectListener(val api: JDA, val config: Config, val translation: Tr
                 }
 
                 if (event.selectedOptions[0].value.startsWith("complaint")) {
-                    event.reply_("", listOf(Embed { description = ColorTool().useCustomColorCodes(translation.support.messageComplaintUser) })).addActionRow(
+                    val embed = Embed {
+                        title = ColorTool().useCustomColorCodes(translation.support.embedComplaintUserTitle)
+                        description = ColorTool().useCustomColorCodes(translation.support.embedComplaintUserBody)
+                    }
+
+                    event.reply_("", listOf(embed)).addActionRow(
                         EntitySelectMenu.create("complaint", EntitySelectMenu.SelectTarget.USER).build())
                         .setEphemeral(true).queue()
                 }

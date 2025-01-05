@@ -243,9 +243,26 @@ SUPPORT:
 
                         _Bei der Erstellung eines Tickets werden bestimmte Metadaten gespeichert. Dazu gehören deine userId, das Erstellungsdatum, der Tickettyp, der Status und der Bearbeiter_"
 
-  MESSAGE_REPORT_USER: "Wähle den Benutzer aus, den du melden möchtest (wenn er sich nicht auf dem discord befindet, melde ihn bitte im Spiel)."
-  MESSAGE_COMPLAINT_ANONYMOUS: "Möchtest du diese Beschwerde anonym einreichen?"
-  MESSAGE_COMPLAINT_USER: "Wähle eine Teammitglied aus…"
+  EMBED_REPORT_USER_TITLE: "Nutzer Wählen"
+  EMBED_REPORT_USER_BODY: "
+                        Wähle aus welchen Nutzer du melden willst. Bitte sei dir sicher das du die richtige\n
+                        Person auswählst da dies nicht mehr rückgängig gemacht werden kann.\n
+
+                        Wenn du ein Teammitglied melden willst, dann benutze bitte das beschwerde Ticket.\n
+                        Dieses ist speziell für solche Beschwerden gedacht und besitzt die Funktion dein Ticket zu Anonymisieren."
+
+  EMBED_COMPLAINT_ANONYMOUS_TITLE: "Anonym Senden?"
+  EMBED_COMPLAINT_ANONYMOUS_BODY: "
+                        Wenn du möchtest, kannst du dieses Ticket anonym senden, d. h.,\n
+                        es werden keine Metadaten mitgesendet. Dies ist optional, kann aber Probleme mit Teammitgliedern verhindern und sicherstellen, dass der Ticketersteller sicher ist."
+
+  EMBED_COMPLAINT_USER_TITLE: "Nutzer Wählen"
+  EMBED_COMPLAINT_USER_BODY: "
+                        Wähle aus welchen Nutzer du melden willst. Bitte sei dir sicher das du die richtige\n
+                        Person auswählst da dies nicht mehr rückgängig gemacht werden kann.\n
+
+                        **Spezielles Ticket**\n
+                        Dies ist ein spezielles Ticket zur Meldung von Teammitgliedern. Nachdem du einen Benutzer ausgewählt hast, kannst du auswählen, ob du es anonym senden möchtest."
 
   MODAL_GENERAL_TITLE: "Generelles Ticket"
   MODAL_GENERAL_SUBJECT_TITLE: "Betreff"
@@ -645,7 +662,7 @@ BUTTONS:
   TEXT_PLAYER_PANEL: "Im Panel öffnen"
 
   TEXT_SUPPORT_ANONYMOUS_ACCEPT: "Anonym senden"
-  TEXT_SUPPORT_ANONYMOUS_DENY: "Mit Information senden"
+  TEXT_SUPPORT_ANONYMOUS_DENY: "Mit Informationen senden"
   TEXT_SUPPORT_SETTINGS: "Einstellungen"
   TEXT_SUPPORT_CLAIM: "Beanspruchen"
   TEXT_SUPPORT_CLOSE: "Schließen"
