@@ -2,6 +2,7 @@ package dev.vxrp.bot.events
 
 import dev.minn.jda.ktx.events.listener
 import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
+import dev.vxrp.bot.modals.Support
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.JDA
@@ -41,6 +42,16 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
                     event.channel.editMessageEmbedsById(event.messageId, HelpCommand(translation).pages()[page])
                         .setActionRow(HelpCommand(translation).actionRow(page)).queue()
                 }
+            }
+
+            if (event.button.id?.startsWith("anonymous_accept") == true) {
+                event.replyModal(Support(translation).supportComplaintModal("anonymous")).queue()
+            }
+
+            if (event.button.id?.startsWith("anonymous_deny") == true) {
+                val userId = event.button.id!!.split(":")[0]
+
+                event.replyModal(Support(translation).supportComplaintModal(userId)).queue()
             }
         }
     }
