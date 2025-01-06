@@ -10,6 +10,7 @@ import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.User
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
+import net.dv8tion.jda.api.interactions.components.buttons.Button
 import net.dv8tion.jda.api.interactions.modals.ModalMapping
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
@@ -74,7 +75,11 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                     timestamp = Instant.now()
                 }
 
-                channel.send("", listOf(embed)).queue()
+                channel.send("", listOf(embed)).setActionRow(
+                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim),
+                    Button.danger("ticket_close", translation.buttons.ticketSupportClose),
+                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings)
+                ).queue()
             }
 
             TicketType.REPORT -> {
@@ -93,7 +98,11 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                     timestamp = Instant.now()
                 }
 
-                channel.send("", listOf(embed)).queue()
+                channel.send("", listOf(embed)).setActionRow(
+                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim),
+                    Button.danger("ticket_close", translation.buttons.ticketSupportClose),
+                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings)
+                ).queue()
             }
 
             TicketType.ERROR -> {
@@ -113,7 +122,11 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                     timestamp = Instant.now()
                 }
 
-                channel.send("", listOf(embed)).queue()
+                channel.send("", listOf(embed)).setActionRow(
+                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim),
+                    Button.danger("ticket_close", translation.buttons.ticketSupportClose),
+                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings)
+                ).queue()
             }
 
             TicketType.UNBAN -> {
@@ -131,7 +144,11 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                     timestamp = Instant.now()
                 }
 
-                channel.send("", listOf(embed)).queue()
+                channel.send("", listOf(embed)).setActionRow(
+                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim),
+                    Button.danger("ticket_close", translation.buttons.ticketSupportClose),
+                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings)
+                ).queue()
             }
 
             TicketType.COMPLAINT -> {
@@ -160,7 +177,11 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                     timestamp = Instant.now()
                 }
 
-                channel.send("", listOf(embed)).queue()
+                channel.send("", listOf(embed)).setActionRow(
+                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim),
+                    Button.danger("ticket_close", translation.buttons.ticketSupportClose),
+                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings)
+                ).queue()
             }
         }
     }
