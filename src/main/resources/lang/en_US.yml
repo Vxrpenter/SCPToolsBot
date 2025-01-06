@@ -381,47 +381,7 @@ SUPPORT:
                       
                         %channel%"
 
-  EMBED_UNBAN_TITLE: "%name%"
-  EMBED_UNBAN_BODY: "
-                        Unban Request is getting reviewed.\n
-                        
-                        __**Steam ID:**__\n
-                        ||%steamID%||\n
-                       
-                        __**Ban Reason:**__\n
-                        ```%reason%```
-                        
-                        __**Reasoning for unban:**__\n
-                        ```%reasoning%```
-                        "
-  EMBED_UNBAN_FOOTER: "Created on the %date% at %time%h"
-  EMBED_UNBAN_CREATED: "Your unban request has been issued"
 
-  EMBED_UNBAN_MESSAGE_ACCEPTED: "
-                        Your unban request under the steam ID (see down below) was accepted. You may now join the
-                        server again without any punishment. We are sorry for the inconvenience and hope that you
-                        will enjoy our Server again\n
-                        
-                        __**Steam ID:**__\n
-                        ||%steamID%||\n
-                        
-                        __**Acceptance Reason:**__\n
-                        ```%reason%```
-                        "
-
-  EMBED_UNBAN_MESSAGE_DISMISSED: "
-                        Your unban request under the steam ID (see down below) was dismissed, you may not appeal this
-                        ban again until given permission by server administration or if this case resolves and another
-                        one arises\n
-                        
-                        __**Steam ID:**__\n
-                        ||%steamID%||\n
-                        
-                        __**Dismiss Reason:**__\n
-                        ```%reason%```
-                        "
-
-  MESSAGE_UNBAN_SENT: "Your answer was sent and actions corresponding to it have been taken"
 
 NOTICE_OF_DEPARTURE:
 

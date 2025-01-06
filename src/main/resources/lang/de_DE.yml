@@ -382,44 +382,6 @@ SUPPORT:
 
                         %channel%"
 
-  EMBED_UNBAN_TITLE: "%name%"
-  EMBED_UNBAN_BODY: "
-                        Entbannungsantrag wird bearbeitet.\n
-                        
-                        __**Steam ID:**__\n
-                        ||%steamID%||\n
-                       
-                        __**Ban Grund:**__\n
-                        ```%reason%```
-                        
-                        __**Begründung für eine Entbannung:**__\n
-                        ```%reasoning%```
-                        "
-  EMBED_UNBAN_FOOTER: "Erstellt am %date% um %time% Uhr"
-  EMBED_UNBAN_CREATED: "Ihre Entbannungsanfrage wurde bearbeitet."
-
-  EMBED_UNBAN_MESSAGE_ACCEPTED: "
-                        Dein Entsperrungsantrag unter der Steam ID (siehe unten) wurde akzeptiert. Du kannst jetzt den Server wieder betreten, ohne irgendwelche Strafen befürchten zu müssen.\n
-                        Wir entschuldigen uns für die Unannehmlichkeiten und hoffen, dass du unseren Server wieder genießen wirst\n
-
-                        __**Steam ID:**__\n
-                        ||%steamID%||\n
-                        
-                        __**Akzeptierungsgrund:**__\n
-                        ```%reason%```
-                        "
-  EMBED_UNBAN_MESSAGE_DISMISSED: "
-                        Dein Entbannungsantrag unter der Steam-ID (siehe unten) wurde abgelehnt. Du kannst dieses Verbot nicht erneut anfechten, es sei denn, die Serververwaltung gibt ihre Zustimmung
-                        oder wenn dieser Fall gelöst ist und ein anderer auftritt\n
-
-                        __**Steam-ID:**__\n
-                        ||%steamID%||
-                        
-                        __**Ablehnungsgrund:**__\n
-                        ```%reason%```
-                        "
-  MESSAGE_UNBAN_SENT: "Die Antwort wurde gesendet und entsprechende Maßnahmen wurden ergriffen"
-
 NOTICE_OF_DEPARTURE:
 
   EMBED_TEMPLATE_TITLE: "Abmeldung für Discord und Secret Lab."

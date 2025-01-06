@@ -364,25 +364,6 @@ data class TranslationSupport(
     val embedTicketCreatedTitle: String,
     @SerialName("EMBED_TICKET_CREATED_BODY")
     val embedTicketCreatedBody: String,
-
-    @SerialName("EMBED_UNBAN_TITLE")
-    val embedUnbanTitle: String,
-    @SerialName("EMBED_UNBAN_BODY")
-    val embedUnbanBody: String,
-
-    @SerialName("EMBED_UNBAN_FOOTER")
-    val embedUnbanFooter: String,
-    @SerialName("EMBED_UNBAN_CREATED")
-    val embedUnbanCreated: String,
-
-    @SerialName("EMBED_UNBAN_MESSAGE_ACCEPTED")
-    val embedUnbanMessageAccepted: String,
-
-    @SerialName("EMBED_UNBAN_MESSAGE_DISMISSED")
-    val embedUnbanMessageDismissed: String,
-
-    @SerialName("MESSAGE_UNBAN_SENT")
-    val messageUnbanSent: String
 )
 
 @Serializable
