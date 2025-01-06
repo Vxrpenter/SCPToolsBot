@@ -21,34 +21,34 @@ class ModalListener(val api: JDA, val config: Config, val translation: Translati
     init {
         api.listener<ModalInteractionEvent> { event ->
             if (event.modalId.startsWith("support_general")) {
-                val handler = TicketHandler(api, config, translation, TicketType.GENERAL, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
-                val child = handler.createTicket()
+                val handler = TicketHandler(api, config, translation)
+                val child = handler.createTicket(TicketType.GENERAL, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
                 respond(child, event)
             }
 
             if (event.modalId.startsWith("support_report")) {
-                val handler = TicketHandler(api, config, translation, TicketType.REPORT, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
-                val child = handler.createTicket()
+                val handler = TicketHandler(api, config, translation)
+                val child = handler.createTicket(TicketType.REPORT, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
                 respond(child, event)
             }
 
             if (event.modalId.startsWith("support_error")) {
-                val handler = TicketHandler(api, config, translation, TicketType.ERROR, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
-                val child = handler.createTicket()
+                val handler = TicketHandler(api, config, translation)
+                val child = handler.createTicket(TicketType.ERROR, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
                 respond(child, event)
             }
 
             if (event.modalId.startsWith("support_unban")) {
-                val handler = TicketHandler(api, config, translation, TicketType.UNBAN, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
-                val child = handler.createTicket()
+                val handler = TicketHandler(api, config, translation)
+                val child = handler.createTicket(TicketType.UNBAN, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
                 respond(child, event)
             }
             if (event.modalId.startsWith("support_complaint")) {
                 var creator = "anonymous"
                 if (event.modalId.split(":")[2] == "false") creator = event.user.id
 
-                val handler = TicketHandler(api, config, translation, TicketType.COMPLAINT, TicketStatus.OPEN, creator, null, event.modalId, event.values)
-                val child = handler.createTicket()
+                val handler = TicketHandler(api, config, translation)
+                val child = handler.createTicket(TicketType.COMPLAINT, TicketStatus.OPEN, creator, null, event.modalId, event.values)
                 respond(child, event)
             }
 
