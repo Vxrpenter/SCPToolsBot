@@ -406,6 +406,36 @@ SUPPORT:
 
                         _This log message will be permanently deleted when the ticket is closed. Closed tickets can be found in the thread section of the main ticket channel._"
 
+  EMBED_TICKET_CLAIMED_TITLE: "Ticket Claimed by - %user%"
+  EMBED_TICKET_CLAIMED_BODY: ""
+
+  EMBED_TICKET_OPENED_TITLE: "Ticket Reopened by - %user%"
+  EMBED_TICKET_OPENED_BODY: ""
+
+  EMBED_TICKET_PAUSED_TITLE: "Ticket Paused by - %user%"
+  EMBED_TICKET_PAUSED_BODY: ""
+
+  EMBED_TICKET_SUSPENDED_TITLE: "Ticket Suspended by - %user%"
+  EMBED_TICKET_SUSPENDED_BODY: ""
+
+  EMBED_TICKET_CLOSED_TITLE: "Ticket Closed by - %user%"
+  EMBED_TICKET_CLOSED_BODY: ""
+
+  EMBED_LOG_CLAIMED_TITLE: "You Claimed Ticket - %name%"
+  EMBED_LOG_CLAIMED_BODY: ""
+
+  EMBED_LOG_OPENED_TITLE: "You Opened Ticket - %name%"
+  EMBED_LOG_OPENED_BODY: ""
+
+  EMBED_LOG_PAUSED_TITLE: "You Paused Ticket - %name%"
+  EMBED_LOG_PAUSED_BODY: ""
+
+  EMBED_LOG_SUSPENDED_TITLE: "You Suspended Ticket - %name%"
+  EMBED_LOG_SUSPENDED_BODY: ""
+
+  EMBED_LOG_CLOSED_TITLE: "You Closed Ticket - %name%"
+  EMBED_LOG_CLOSED_BODY: ""
+
 NOTICE_OF_DEPARTURE:
 
   EMBED_TEMPLATE_TITLE: "Notice of Departure for Discord and Secret Lab"
