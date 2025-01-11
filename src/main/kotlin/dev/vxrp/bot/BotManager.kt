@@ -1,6 +1,5 @@
 package dev.vxrp.bot
 
-import dev.minn.jda.ktx.interactions.components.StringSelectMenu
 import dev.minn.jda.ktx.jdabuilder.intents
 import dev.minn.jda.ktx.jdabuilder.light
 import dev.vxrp.bot.commands.CommandManager
@@ -12,7 +11,7 @@ import dev.vxrp.bot.events.StringSelectListener
 import dev.vxrp.bot.status.StatusManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.sqlite.SqliteManager
+import dev.vxrp.database.DatabaseManager
 import dev.vxrp.util.Timer
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.Activity.ActivityType
@@ -43,7 +42,7 @@ class BotManager(val config: Config, val translation: Translation) {
         val guild = api.awaitReady().getGuildById(config.settings.guildId)
         val commandManager = CommandManager(config, "configs/commands.json")
         val statusManager = StatusManager(api, config, translation, timer, "configs/status-settings.json")
-        val sqliteManager = SqliteManager(config, "database", "data.db")
+        val databaseManager = DatabaseManager(config, "database", "data.db")
 
         commandManager.registerSpecificCommands(commandManager.query().commands, api)
 

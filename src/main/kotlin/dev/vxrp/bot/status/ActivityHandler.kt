@@ -3,7 +3,7 @@ package dev.vxrp.bot.status
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.sqlite.tables.ConnectionTable
+import dev.vxrp.database.tables.ConnectionTable
 import dev.vxrp.api.sla.secretlab.data.Server
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.OnlineStatus

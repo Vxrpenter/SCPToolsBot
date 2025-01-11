@@ -5,13 +5,16 @@ import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.sqlite.tables.TicketTable
+import dev.vxrp.database.tables.TicketTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.User
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
+import net.dv8tion.jda.api.entities.emoji.Emoji
+import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
 import net.dv8tion.jda.api.interactions.modals.ModalMapping
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -57,16 +60,15 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
         return child
     }
 
-    fun archiveTicket(id: String) {
-        api.getThreadChannelById(id)!!.manager.setArchived(true).queue()
-        updateTicketStatus(id, TicketStatus.CLOSED)
-    }
-
     fun claimTicket(id: String, userId: String) {
         updateTicketHandler(id, userId)
     }
 
-    fun lockTicket(id: String) {
+    fun openTicket(id: String) {
+        updateTicketStatus(id, TicketStatus.OPEN)
+    }
+
+    fun pauseTicket(id: String) {
         api.getThreadChannelById(id)!!.manager.setLocked(true).queue()
         updateTicketStatus(id, TicketStatus.PAUSED)
     }
@@ -74,6 +76,11 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
     fun suspendTicket(id: String) {
         api.getThreadChannelById(id)!!.manager.setLocked(true).queue()
         updateTicketStatus(id, TicketStatus.SUSPENDED)
+    }
+
+    fun archiveTicket(id: String) {
+        api.getThreadChannelById(id)!!.manager.setArchived(true).queue()
+        updateTicketStatus(id, TicketStatus.CLOSED)
     }
 
     // Manager Functions
@@ -98,6 +105,19 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
         }
     }
 
+    fun getTicketStatus(ticketId: String): TicketStatus? {
+        var status: TicketStatus? = null
+        transaction {
+            TicketTable.Tickets.selectAll()
+                .where(TicketTable.Tickets.id.eq(ticketId))
+                .forEach {
+                    status = TicketStatus.valueOf(it[TicketTable.Tickets.status])
+                }
+        }
+
+        return status
+    }
+
     private fun updateTicketHandler(ticketId: String, userId: String) {
         transaction {
             TicketTable.Tickets.update({ TicketTable.Tickets.id.eq(ticketId) }) {
@@ -115,8 +135,8 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
         return count
     }
 
-    private fun querySettings(ticketType: TicketType): TicketSettings? {
-        for (option in config.ticket.settings) {
+    private fun querySettings(ticketType: TicketType): TicketTypes? {
+        for (option in config.ticket.types) {
             if (option.type.replace("support::", "") != ticketType.toString()) continue
             return option
         }
@@ -251,5 +271,28 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                 ).queue()
             }
         }
+    }
+
+    fun settingsActionRow(status: TicketStatus): Collection<ItemComponent> {
+        val rows: MutableCollection<ItemComponent> = ArrayList()
+
+        var open = Button.success("ticket_setting_open", translation.buttons.textSupportSettingsOpen).withEmoji(Emoji.fromFormatted("🚪"))
+        var pause = Button.primary("ticket_setting_pause", translation.buttons.textSupportSettingsPause).withEmoji(Emoji.fromFormatted("🌙"))
+        var suspend = Button.primary("ticket_setting_suspend", translation.buttons.textSupportSettingsSuspend).withEmoji(Emoji.fromFormatted("🔒"))
+        var close = Button.danger("ticket_setting_close", translation.buttons.textSupportSettingsClose).withEmoji(Emoji.fromFormatted("🪫"))
+
+        when(status) {
+            TicketStatus.OPEN ->open = open.asDisabled()
+            TicketStatus.PAUSED -> pause = pause.asDisabled()
+            TicketStatus.SUSPENDED -> suspend = suspend.asDisabled()
+            TicketStatus.CLOSED -> close = close.asDisabled()
+        }
+
+        rows.add(open)
+        rows.add(pause)
+        rows.add(suspend)
+        rows.add(close)
+
+        return rows
     }
 }

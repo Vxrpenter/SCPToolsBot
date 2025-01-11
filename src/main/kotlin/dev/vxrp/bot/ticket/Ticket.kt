@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Ticket(
     val settings: TicketSettings,
-    val type: List<TicketTypes>)
+    val types: List<TicketTypes>)
 
 @Serializable
 data class TicketSettings(
