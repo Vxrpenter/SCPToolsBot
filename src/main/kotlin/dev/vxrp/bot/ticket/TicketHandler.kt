@@ -55,7 +55,25 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
             child.sendMessage(role.asMention).await().delete().queue()
         }
 
-        addToDatabase(child.id, LocalDate.now(), ticketType, ticketStatus, ticketCreator, ticketHandler)
+        var thumbnailUrl = "https://www.pngarts.com/files/4/Anonymous-Mask-Transparent-Images.png"
+        var creatorUserMention = "anonymous"
+        var creatorUserName = "anonymous"
+        var handlerUserName = "none"
+
+        if (ticketCreator != "anonymous") {
+            val creatorUser = api.retrieveUserById(ticketCreator).await()
+            creatorUserName = creatorUser.globalName!!
+            thumbnailUrl = creatorUser.avatarUrl.toString()
+            creatorUserMention = api.retrieveUserById(ticketCreator).await().asMention
+        }
+        if (ticketHandler != null) handlerUserName = ticketHandler.asMention
+
+        val logMessage = logMessage(thumbnailUrl, child.name, creatorUserName, creatorUserMention, handlerUserName, child.id, ticketStatus) ?: run {
+            logger.error("Could not carry out log message correctly")
+            return null
+        }
+
+        addToDatabase(child.id, LocalDate.now(), ticketType, ticketStatus, ticketCreator, ticketHandler, logMessage)
         sendMessage(ticketType, child, ticketCreator, modalId, modalValue)
         return child
     }
@@ -83,8 +101,34 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
         updateTicketStatus(id, TicketStatus.CLOSED)
     }
 
+    private suspend fun logMessage(thumbnailUrl: String, channelName: String, creator: String, creatorMention: String, handler: String, ticketId: String, ticketStatus: TicketStatus): String? {
+        val logEmbed = Embed {
+            thumbnail = thumbnailUrl
+            title = ColorTool().useCustomColorCodes(translation.support.embedLogTitle
+                .replace("%name%", channelName)
+                .replace("%user%", creator))
+            description = ColorTool().useCustomColorCodes(translation.support.embedLogBody
+                .replace("%status%", ticketStatus.toString())
+                .replace("%id%", ticketId)
+                .replace("%creator%", creatorMention)
+                .replace("%handler%", handler))
+            timestamp = Instant.now()
+        }
+        val channel =  api.getTextChannelById(config.ticket.settings.ticketLogChannel) ?: run {
+            logger.error("Could not sent ticket log message for ticket '{}'", ticketId)
+            return null
+        }
+
+        var isHandled = false
+        if (handler != "none") isHandled = true
+
+        return channel.send("", listOf(logEmbed)).addActionRow(
+            logActionRow(ticketStatus, isHandled, ticketId)
+        ).await().id
+    }
+
     // Manager Functions
-    private fun addToDatabase(ticketId: String, date: LocalDate, ticketType: TicketType, ticketStatus: TicketStatus, ticketCreator: String, ticketHandler: User?) {
+    private fun addToDatabase(ticketId: String, date: LocalDate, ticketType: TicketType, ticketStatus: TicketStatus, ticketCreator: String, ticketHandler: User?, ticketLogMessage: String) {
         transaction {
             TicketTable.Tickets.insert {
                 it[id] = ticketId
@@ -93,6 +137,7 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                 it[creation_date] = date.toString()
                 it[creator] = ticketCreator
                 it[handler] = ticketHandler?.id
+                it[logMessage] = ticketLogMessage
             }
         }
     }
@@ -163,9 +208,9 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                 }
 
                 channel.send("", listOf(embed)).setActionRow(
-                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim),
-                    Button.danger("ticket_close:$type", translation.buttons.ticketSupportClose),
-                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings)
+                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim).withEmoji(Emoji.fromFormatted("🚪")),
+                    Button.danger("ticket_close:$type", translation.buttons.ticketSupportClose).withEmoji(Emoji.fromFormatted("🪫")),
+                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings).withEmoji(Emoji.fromFormatted("⚙️"))
                 ).queue()
             }
 
@@ -186,9 +231,9 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                 }
 
                 channel.send("", listOf(embed)).setActionRow(
-                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim),
-                    Button.danger("ticket_close:$type", translation.buttons.ticketSupportClose),
-                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings)
+                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim).withEmoji(Emoji.fromFormatted("🚪")),
+                    Button.danger("ticket_close:$type", translation.buttons.ticketSupportClose).withEmoji(Emoji.fromFormatted("🪫")),
+                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings).withEmoji(Emoji.fromFormatted("⚙️"))
                 ).queue()
             }
 
@@ -210,9 +255,9 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                 }
 
                 channel.send("", listOf(embed)).setActionRow(
-                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim),
-                    Button.danger("ticket_close:$type", translation.buttons.ticketSupportClose),
-                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings)
+                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim).withEmoji(Emoji.fromFormatted("🚪")),
+                    Button.danger("ticket_close:$type", translation.buttons.ticketSupportClose).withEmoji(Emoji.fromFormatted("🪫")),
+                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings).withEmoji(Emoji.fromFormatted("⚙️"))
                 ).queue()
             }
 
@@ -232,9 +277,9 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                 }
 
                 channel.send("", listOf(embed)).setActionRow(
-                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim),
-                    Button.danger("ticket_close:$type", translation.buttons.ticketSupportClose),
-                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings)
+                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim).withEmoji(Emoji.fromFormatted("🚪")),
+                    Button.danger("ticket_close:$type", translation.buttons.ticketSupportClose).withEmoji(Emoji.fromFormatted("🪫")),
+                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings).withEmoji(Emoji.fromFormatted("⚙️"))
                 ).queue()
             }
 
@@ -265,9 +310,9 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                 }
 
                 channel.send("", listOf(embed)).setActionRow(
-                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim),
-                    Button.danger("ticket_close:$type", translation.buttons.ticketSupportClose),
-                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings)
+                    Button.primary("ticket_claim", translation.buttons.ticketSupportClaim).withEmoji(Emoji.fromFormatted("🚪")),
+                    Button.danger("ticket_close:$type", translation.buttons.ticketSupportClose).withEmoji(Emoji.fromFormatted("🪫")),
+                    Button.secondary("ticket_settings", translation.buttons.textSupportSettings).withEmoji(Emoji.fromFormatted("⚙️"))
                 ).queue()
             }
         }
@@ -288,6 +333,32 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
             TicketStatus.CLOSED -> close = close.asDisabled()
         }
 
+        rows.add(open)
+        rows.add(pause)
+        rows.add(suspend)
+        rows.add(close)
+
+        return rows
+    }
+
+    private fun logActionRow(status: TicketStatus, handler: Boolean, ticketId: String): Collection<ItemComponent> {
+        val rows: MutableCollection<ItemComponent> = ArrayList()
+
+        var claim = Button.primary("ticket_log_claim:$ticketId", translation.buttons.textSupportLogClaim).withEmoji(Emoji.fromFormatted("📫"))
+        var open = Button.success("ticket_log_open:$ticketId", translation.buttons.textSupportLogOpen).withEmoji(Emoji.fromFormatted("🚪"))
+        var pause = Button.primary("ticket_log_pause:$ticketId", translation.buttons.textSupportLogPause).withEmoji(Emoji.fromFormatted("🌙"))
+        var suspend = Button.primary("ticket_log_suspend:$ticketId", translation.buttons.textSupportLogSuspend).withEmoji(Emoji.fromFormatted("🔒"))
+        var close = Button.danger("ticket_log_close:$ticketId", translation.buttons.textSupportLogClose).withEmoji(Emoji.fromFormatted("🪫"))
+
+        if (handler) claim = claim.asDisabled()
+        when(status) {
+            TicketStatus.OPEN ->open = open.asDisabled()
+            TicketStatus.PAUSED -> pause = pause.asDisabled()
+            TicketStatus.SUSPENDED -> suspend = suspend.asDisabled()
+            TicketStatus.CLOSED -> close = close.asDisabled()
+        }
+
+        rows.add(claim)
         rows.add(open)
         rows.add(pause)
         rows.add(suspend)

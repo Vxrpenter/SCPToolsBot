@@ -65,13 +65,11 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
             }
 
             if (event.button.id?.startsWith("ticket_claim") == true) {
-                TicketHandler(api, config, translation)
-                    .claimTicket(event.channelId!!, event.user.id)
+                TicketHandler(api, config, translation).claimTicket(event.channelId!!, event.user.id)
             }
 
             if (event.button.id?.startsWith("ticket_close") == true) {
-                TicketHandler(api, config, translation)
-                    .archiveTicket(event.channelId!!)
+                TicketHandler(api, config, translation).archiveTicket(event.channelId!!)
             }
 
             if (event.button.id?.startsWith("ticket_settings") == true) {
@@ -102,6 +100,31 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
 
             if (event.button.id?.startsWith("ticket_setting_close") == true) {
                 TicketHandler(api, config, translation).archiveTicket(event.channelId!!)
+            }
+
+            if (event.button.id?.startsWith("ticket_log_claim") == true) {
+                val channelId = event.button.id!!.split(":")[1]
+                TicketHandler(api, config, translation).claimTicket(channelId, event.user.id)
+            }
+
+            if (event.button.id?.startsWith("ticket_log_open") == true) {
+                val channelId = event.button.id!!.split(":")[1]
+                TicketHandler(api, config, translation).openTicket(channelId)
+            }
+
+            if (event.button.id?.startsWith("ticket_log_pause") == true) {
+                val channelId = event.button.id!!.split(":")[1]
+                TicketHandler(api, config, translation).pauseTicket(channelId)
+            }
+
+            if (event.button.id?.startsWith("ticket_log_suspend") == true) {
+                val channelId = event.button.id!!.split(":")[1]
+                TicketHandler(api, config, translation).suspendTicket(channelId)
+            }
+
+            if (event.button.id?.startsWith("ticket_log_close") == true) {
+                val channelId = event.button.id!!.split(":")[1]
+                TicketHandler(api, config, translation).archiveTicket(channelId)
             }
         }
     }
