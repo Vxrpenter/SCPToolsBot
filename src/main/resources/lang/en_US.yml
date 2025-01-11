@@ -381,7 +381,21 @@ SUPPORT:
                       
                         %channel%"
 
-
+  EMBED_SETTINGS_TITLE: "Ticket Settings"
+  EMBED_SETTINGS_BODY: "
+                        In this settings menu, you are able to change the tickets status.\n
+                        &filler&
+                        > 🚪 **Open**\n
+                        - Messages can be written and the ticket can be accessed by all participants\n
+                        
+                        > 🌙 **Paused**\n
+                        - Messages can't be written but ticket can be accessed by all participants\n
+                        
+                        > 🔒 **Suspended**\n
+                        - Messages can't be written and ticket can't be accessed by all participants. Ticket can later be opened by administrator\n
+                        
+                        > 🪫 **Closed**\n
+                        - Messages can't be written and ticket can't be accessed by all participants. Ticket can't be opened again!!!"
 
 NOTICE_OF_DEPARTURE:
 
@@ -698,6 +712,11 @@ BUTTONS:
   TEXT_SUPPORT_SETTINGS: "Settings"
   TEXT_SUPPORT_CLAIM: "Claim"
   TEXT_SUPPORT_CLOSE: "Close"
+
+  TEXT_SUPPORT_SETTINGS_OPEN: "Open Ticket"
+  TEXT_SUPPORT_SETTINGS_PAUSED: "Pause Ticket"
+  TEXT_SUPPORT_SETTINGS_SUSPENDED: "Suspend Ticket"
+  TEXT_SUPPORT_SETTINGS_CLOSE: "Close Ticket"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "File Notice of Departure"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Accept Ticket"
