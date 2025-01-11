@@ -12,8 +12,6 @@ import net.dv8tion.jda.api.entities.User
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
 import net.dv8tion.jda.api.interactions.components.buttons.Button
 import net.dv8tion.jda.api.interactions.modals.ModalMapping
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -57,6 +55,74 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
         addToDatabase(child.id, LocalDate.now(), ticketType, ticketStatus, ticketCreator, ticketHandler)
         sendMessage(ticketType, child, ticketCreator, modalId, modalValue)
         return child
+    }
+
+    fun archiveTicket(id: String) {
+        api.getThreadChannelById(id)!!.manager.setArchived(true).queue()
+        updateTicketStatus(id, TicketStatus.CLOSED)
+    }
+
+    fun claimTicket(id: String, userId: String) {
+        updateTicketHandler(id, userId)
+    }
+
+    fun lockTicket(id: String) {
+        api.getThreadChannelById(id)!!.manager.setLocked(true).queue()
+        updateTicketStatus(id, TicketStatus.PAUSED)
+    }
+
+    fun suspendTicket(id: String) {
+        api.getThreadChannelById(id)!!.manager.setLocked(true).queue()
+        updateTicketStatus(id, TicketStatus.SUSPENDED)
+    }
+
+    // Manager Functions
+    private fun addToDatabase(ticketId: String, date: LocalDate, ticketType: TicketType, ticketStatus: TicketStatus, ticketCreator: String, ticketHandler: User?) {
+        transaction {
+            TicketTable.Tickets.insert {
+                it[id] = ticketId
+                it[type] = ticketType.toString()
+                it[status] = ticketStatus.toString()
+                it[creation_date] = date.toString()
+                it[creator] = ticketCreator
+                it[handler] = ticketHandler?.id
+            }
+        }
+    }
+
+    private fun updateTicketStatus(ticketId: String, ticketStatus: TicketStatus) {
+        transaction {
+            TicketTable.Tickets.update({ TicketTable.Tickets.id.eq(ticketId) }) {
+                it[status] = ticketStatus.toString()
+            }
+        }
+    }
+
+    private fun updateTicketHandler(ticketId: String, userId: String) {
+        transaction {
+            TicketTable.Tickets.update({ TicketTable.Tickets.id.eq(ticketId) }) {
+                it[handler] = userId
+            }
+        }
+    }
+
+    private fun retrieveSerial(): Long {
+        var count: Long = 0
+        transaction {
+            count = TicketTable.Tickets.selectAll().count()
+        }
+
+        return count
+    }
+
+    private fun querySettings(ticketType: TicketType): TicketSettings? {
+        for (option in config.ticket.settings) {
+            if (option.type.replace("support::", "") != ticketType.toString()) continue
+            return option
+        }
+
+        logger.error("Could not correctly load ticket settings")
+        return null
     }
 
     private suspend fun sendMessage(type: TicketType, channel: ThreadChannel, userId: String, modalId: String, modalValues: MutableList<ModalMapping>) {
@@ -185,59 +251,5 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
                 ).queue()
             }
         }
-    }
-
-    private fun addToDatabase(ticketId: String, date: LocalDate, ticketType: TicketType, ticketStatus: TicketStatus, ticketCreator: String, ticketHandler: User?) {
-        transaction {
-            TicketTable.Tickets.insert {
-                it[id] = ticketId
-                it[type] = ticketType.toString()
-                it[status] = ticketStatus.toString()
-                it[creation_date] = date.toString()
-                it[creator] = ticketCreator
-                it[handler] = ticketHandler?.id
-            }
-        }
-    }
-
-    private fun updateTicketStatus(ticketId: String, ticketStatus: TicketStatus) {
-        transaction {
-            TicketTable.Tickets.update({ TicketTable.Tickets.id.eq(ticketId) }) {
-                it[status] = ticketStatus.toString()
-            }
-        }
-    }
-
-    private fun retrieveSerial(): Long {
-        var count: Long = 0
-        transaction {
-            count = TicketTable.Tickets.selectAll().count()
-        }
-
-        return count
-    }
-
-    private fun querySettings(ticketType: TicketType): TicketSettings? {
-        for (option in config.ticket.settings) {
-            if (option.type.replace("support::", "") != ticketType.toString()) continue
-            return option
-        }
-
-        logger.error("Could not correctly load ticket settings")
-        return null
-    }
-
-    fun deleteTicket(id: String, ticketType: TicketType) {
-        val settings = querySettings(ticketType)
-        if (settings == null) {
-            logger.error("Can't delete ticket, settings are not loaded")
-            return
-        }
-        api.getThreadChannelById(id)!!.manager.setArchived(true).queue()
-        updateTicketStatus(id, TicketStatus.CLOSED)
-    }
-
-    fun claimTicket(id: String) {
-
     }
 }

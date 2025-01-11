@@ -114,7 +114,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
         }
     }
 
-    private fun runStatusChange(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
+    private suspend fun runStatusChange(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
         val ports = mutableListOf<Int>()
         status.instances.forEach { currentInstance -> ports.add(currentInstance.serverPort) }
 
@@ -136,7 +136,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
             nonChangedData = false
         }
 
-        if (status.checkPlayerlist) PlayerlistHandler(translation).updatePlayerLists(mappedPorts, status.instances, instanceApiMap, mappedStatusConstructor)
+        if (status.checkPlayerlist) PlayerlistHandler(config, translation).updatePlayerLists(mappedPorts, status.instances, instanceApiMap, mappedStatusConstructor)
 
         for (instance in status.instances) {
             val api = instanceApiMap[instance] ?: continue

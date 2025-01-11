@@ -15,7 +15,11 @@
       "token": "",
       "name": "",
       "server_port": 0,
-      "retries": 4
+      "retries": 4,
+      "playerlist": {
+        "active": false,
+        "channel_ids": []
+      }
     }
   ]
 }
