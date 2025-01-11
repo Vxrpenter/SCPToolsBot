@@ -398,6 +398,15 @@ SUPPORT:
                         > 🪫 **Geschlossen**\n
                         - Nachrichten können nicht geschrieben werden und das Ticket ist nicht für alle Teilnehmer zugänglich. Das Ticket kann nicht wieder geöffnet werden!!!"
 
+  EMBED_LOG_TITLE: "%name% von %user%"
+  EMBED_LOG_BODY: "
+                        **Ticketstatus:** %status%\n
+                        **Ticket-ID:** %id%\n
+                        **Ticket erstellt von:** %creator%\n
+                        **Ticket bearbeitet von:** %handler%\n
+
+                        _Diese Log-Nachricht wird dauerhaft gelöscht, wenn das Ticket geschlossen wird. Geschlossene Tickets findest du im Thread-Bereich des Hauptticket-Kanals._"
+
 NOTICE_OF_DEPARTURE:
 
   EMBED_TEMPLATE_TITLE: "Abmeldung für Discord und Secret Lab."
@@ -713,9 +722,15 @@ BUTTONS:
   TEXT_SUPPORT_CLOSE: "Schließen"
 
   TEXT_SUPPORT_SETTINGS_OPEN: "Ticket Öffnen"
-  TEXT_SUPPORT_SETTINGS_PAUSED: "Ticket Pausieren"
-  TEXT_SUPPORT_SETTINGS_SUSPENDED: "Ticket Sperren"
+  TEXT_SUPPORT_SETTINGS_PAUSE: "Ticket Pausieren"
+  TEXT_SUPPORT_SETTINGS_SUSPEND: "Ticket Sperren"
   TEXT_SUPPORT_SETTINGS_CLOSE: "Ticket Schließen"
+
+  TEXT_SUPPORT_LOG_CLAIM: "Beanspruchen"
+  TEXT_SUPPORT_LOG_OPEN: "Öffnen"
+  TEXT_SUPPORT_LOG_PAUSE: "Pausieren"
+  TEXT_SUPPORT_LOG_SUSPEND: "Sperren"
+  TEXT_SUPPORT_LOG_CLOSE: "Schließen"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "Abmeldung anfragen"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Ticket annehmen"
