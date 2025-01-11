@@ -397,6 +397,15 @@ SUPPORT:
                         > 🪫 **Closed**\n
                         - Messages can't be written and ticket can't be accessed by all participants. Ticket can't be opened again!!!"
 
+  EMBED_LOG_TITLE: "%name% by %user%"
+  EMBED_LOG_BODY: "
+                        **Ticket Status:** %status%\n
+                        **Ticket Id:** %id%\n
+                        **Ticket Created by:** %creator%\n
+                        **Ticket Handled by:** %handler%\n
+
+                        _This log message will be permanently deleted when the ticket is closed. Closed tickets can be found in the thread section of the main ticket channel._"
+
 NOTICE_OF_DEPARTURE:
 
   EMBED_TEMPLATE_TITLE: "Notice of Departure for Discord and Secret Lab"
@@ -714,9 +723,15 @@ BUTTONS:
   TEXT_SUPPORT_CLOSE: "Close"
 
   TEXT_SUPPORT_SETTINGS_OPEN: "Open Ticket"
-  TEXT_SUPPORT_SETTINGS_PAUSED: "Pause Ticket"
-  TEXT_SUPPORT_SETTINGS_SUSPENDED: "Suspend Ticket"
+  TEXT_SUPPORT_SETTINGS_PAUSE: "Pause Ticket"
+  TEXT_SUPPORT_SETTINGS_SUSPEND: "Suspend Ticket"
   TEXT_SUPPORT_SETTINGS_CLOSE: "Close Ticket"
+
+  TEXT_SUPPORT_LOG_CLAIM: "Claim"
+  TEXT_SUPPORT_LOG_OPEN: "Open"
+  TEXT_SUPPORT_LOG_PAUSE: "Pause"
+  TEXT_SUPPORT_LOG_SUSPEND: "Suspend"
+  TEXT_SUPPORT_LOG_CLOSE: "Close"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "File Notice of Departure"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Accept Ticket"

@@ -369,6 +369,11 @@ data class TranslationSupport(
     val embedSettingsTitle: String,
     @SerialName("EMBED_SETTINGS_BODY")
     val embedSettingsBody: String,
+
+    @SerialName("EMBED_LOG_TITLE")
+    val embedLogTitle: String,
+    @SerialName("EMBED_LOG_BODY")
+    val embedLogBody: String,
 )
 
 @Serializable
@@ -533,9 +538,9 @@ data class TranslationButtons(
 
     @SerialName("TEXT_SUPPORT_SETTINGS_OPEN")
     val textSupportSettingsOpen: String,
-    @SerialName("TEXT_SUPPORT_SETTINGS_PAUSED")
+    @SerialName("TEXT_SUPPORT_SETTINGS_PAUSE")
     val textSupportSettingsPause: String,
-    @SerialName("TEXT_SUPPORT_SETTINGS_SUSPENDED")
+    @SerialName("TEXT_SUPPORT_SETTINGS_SUSPEND")
     val textSupportSettingsSuspend: String,
     @SerialName("TEXT_SUPPORT_SETTINGS_CLOSE")
     val textSupportSettingsClose: String,
@@ -550,6 +555,17 @@ data class TranslationButtons(
     val textNoticeOfDepartureRevoked: String,
     @SerialName("TEXT_NOTICE_OF_DEPARTURE_DELETE")
     val textNoticeOfDepartureDelete: String,
+
+    @SerialName("TEXT_SUPPORT_LOG_CLAIM")
+    val textSupportLogClaim: String,
+    @SerialName("TEXT_SUPPORT_LOG_OPEN")
+    val textSupportLogOpen: String,
+    @SerialName("TEXT_SUPPORT_LOG_PAUSE")
+    val textSupportLogPause: String,
+    @SerialName("TEXT_SUPPORT_LOG_SUSPEND")
+    val textSupportLogSuspend: String,
+    @SerialName("TEXT_SUPPORT_LOG_CLOSE")
+    val textSupportLogClose: String,
 
     @SerialName("TEXT_REGULAR_OPEN_SETTINGS")
     val textRegularOpenSettings: String,
