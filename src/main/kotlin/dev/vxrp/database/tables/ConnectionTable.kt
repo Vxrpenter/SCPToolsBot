@@ -1,4 +1,4 @@
-package dev.vxrp.database.sqlite.tables
+package dev.vxrp.database.tables
 
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.insert
@@ -40,7 +40,7 @@ class ConnectionTable {
         var status = ConnectionTableData(key, false, maintenance = false)
         transaction {
             Connections.selectAll()
-                .where {Connections.id eq key}
+                .where { Connections.id eq key}
                 .forEach {
                     status = ConnectionTableData(key, it[Connections.status] == true, it[Connections.maintenance] == true)
                 }

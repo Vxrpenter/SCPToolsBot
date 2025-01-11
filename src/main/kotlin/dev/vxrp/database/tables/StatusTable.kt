@@ -1,4 +1,4 @@
-package dev.vxrp.database.sqlite.tables
+package dev.vxrp.database.tables
 
 import org.jetbrains.exposed.sql.Table
 
