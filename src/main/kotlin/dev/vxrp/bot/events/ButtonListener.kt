@@ -4,7 +4,6 @@ import dev.minn.jda.ktx.events.listener
 import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
 import dev.vxrp.bot.modals.Support
 import dev.vxrp.bot.ticket.TicketHandler
-import dev.vxrp.bot.ticket.TicketType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.JDA
@@ -64,7 +63,7 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
 
             if (event.button.id?.startsWith("ticket_close") == true) {
                 TicketHandler(api, config, translation)
-                    .deleteTicket(event.channelId!!, TicketType.valueOf(event.button.id!!.split(":")[1]))
+                    .archiveTicket(event.channelId!!)
             }
 
             if (event.button.id?.startsWith("ticket_settings") == true) {

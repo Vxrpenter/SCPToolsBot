@@ -34,5 +34,13 @@ data class Instance(
     val name: String,
     @SerialName("server_port")
     val serverPort: Int,
-    val retries: Int
+    val retries: Int,
+    val playerlist: PlayerList
+)
+
+@Serializable
+data class PlayerList(
+    val active: Boolean,
+    @SerialName("channel_ids")
+    val channelId: List<String>
 )
