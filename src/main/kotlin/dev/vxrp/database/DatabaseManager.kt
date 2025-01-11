@@ -1,14 +1,15 @@
-package dev.vxrp.database.sqlite
+package dev.vxrp.database
 
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.database.sqlite.tables.*
+import dev.vxrp.database.tables.*
 import dev.vxrp.util.enums.Databasetype
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.io.File
 
-class SqliteManager(val config: Config, folder: String, val file: String) {
+class DatabaseManager(val config: Config, folder: String, val file: String) {
     private val dir = System.getProperty("user.dir")
 
     init {
