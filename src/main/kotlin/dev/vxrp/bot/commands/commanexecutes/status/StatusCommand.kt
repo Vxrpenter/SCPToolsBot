@@ -5,7 +5,7 @@ import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.sqlite.tables.ConnectionTable
+import dev.vxrp.database.tables.ConnectionTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -23,7 +23,7 @@ class StatusCommand(val config: Config, val translation: Translation, private va
             }
 
             transaction {
-                ConnectionTable.Connections.update( {ConnectionTable.Connections.id eq currentPort.toString()} ) {
+                ConnectionTable.Connections.update( { ConnectionTable.Connections.id eq currentPort.toString()} ) {
                     it[maintenance] = false
                 }
             }
@@ -53,7 +53,7 @@ class StatusCommand(val config: Config, val translation: Translation, private va
             }
 
             transaction {
-                ConnectionTable.Connections.update( {ConnectionTable.Connections.id eq currentPort.toString()} ) {
+                ConnectionTable.Connections.update( { ConnectionTable.Connections.id eq currentPort.toString()} ) {
                     it[maintenance] = true
                 }
             }
