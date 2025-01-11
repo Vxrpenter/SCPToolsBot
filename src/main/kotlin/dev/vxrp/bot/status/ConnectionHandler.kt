@@ -60,7 +60,7 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
         databaseNotExists(server.port.toString(), server.online)
         reconnectAttempt.putIfAbsent(server.port, 1)
 
-        val serverStatus = ConnectionTable().queryFromTable("api").status == true
+        val serverStatus = ConnectionTable().queryFromTable(server.port.toString()).status == true
 
         if (server.online) {
             if (serverStatus) return
