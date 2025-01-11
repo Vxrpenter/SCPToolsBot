@@ -364,6 +364,11 @@ data class TranslationSupport(
     val embedTicketCreatedTitle: String,
     @SerialName("EMBED_TICKET_CREATED_BODY")
     val embedTicketCreatedBody: String,
+
+    @SerialName("EMBED_SETTINGS_TITLE")
+    val embedSettingsTitle: String,
+    @SerialName("EMBED_SETTINGS_BODY")
+    val embedSettingsBody: String,
 )
 
 @Serializable
@@ -525,6 +530,15 @@ data class TranslationButtons(
     val ticketSupportClaim: String,
     @SerialName("TEXT_SUPPORT_CLOSE")
     val ticketSupportClose: String,
+
+    @SerialName("TEXT_SUPPORT_SETTINGS_OPEN")
+    val textSupportSettingsOpen: String,
+    @SerialName("TEXT_SUPPORT_SETTINGS_PAUSED")
+    val textSupportSettingsPause: String,
+    @SerialName("TEXT_SUPPORT_SETTINGS_SUSPENDED")
+    val textSupportSettingsSuspend: String,
+    @SerialName("TEXT_SUPPORT_SETTINGS_CLOSE")
+    val textSupportSettingsClose: String,
 
     @SerialName("TEXT_NOTICE_OF_DEPARTURE_FILE")
     val textNoticeOfDepartureFile: String,
