@@ -10,6 +10,7 @@ class TicketTable {
         val creation_date = text("creation_date")
         val creator = text("creator")
         val handler = text("handler").nullable()
+        val logMessage = text("log_message")
 
         override val primaryKey: PrimaryKey
             get() = PrimaryKey(id)
