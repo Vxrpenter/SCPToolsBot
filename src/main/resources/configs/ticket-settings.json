@@ -1,5 +1,8 @@
 {
-  "settings": [
+  "settings": {
+    "ticket_log_channel": ""
+  },
+  "types": [
     {
       "name": "General",
       "type": "support::GENERAL",
