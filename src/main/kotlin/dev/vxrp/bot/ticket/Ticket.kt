@@ -5,10 +5,17 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Ticket(
-    val settings: List<TicketSettings>)
+    val settings: TicketSettings,
+    val type: List<TicketTypes>)
 
 @Serializable
 data class TicketSettings(
+    @SerialName("ticket_log_channel")
+    val ticketLogChannel: String
+)
+
+@Serializable
+data class TicketTypes(
     val name: String,
     val type: String,
     val roles: List<String>,
