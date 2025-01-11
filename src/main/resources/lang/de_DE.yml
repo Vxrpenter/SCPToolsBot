@@ -382,6 +382,22 @@ SUPPORT:
 
                         %channel%"
 
+  EMBED_SETTINGS_TITLE: "Ticket Einstellungen"
+  EMBED_SETTINGS_BODY: "
+                        In diesen Einstellungen kannst du den Status der Tickets ändern.\n
+                        &filler&
+                        > 🚪 **Geöffnet**\n
+                        - Nachrichten können geschrieben werden und das Ticket ist für alle Teilnehmer zugänglich.\n
+                        
+                        > 🌙 **Pausiert**\n
+                        - Nachrichten können nicht geschrieben werden, aber das Ticket ist für alle Teilnehmer zugänglich.\n
+                        
+                        > 🔒 **Gesperrt**\n
+                        - Nachrichten können nicht geschrieben werden und das Ticket ist nicht für alle Teilnehmer zugänglich. Das Ticket kann später vom Administrator geöffnet werden.\n
+                        
+                        > 🪫 **Geschlossen**\n
+                        - Nachrichten können nicht geschrieben werden und das Ticket ist nicht für alle Teilnehmer zugänglich. Das Ticket kann nicht wieder geöffnet werden!!!"
+
 NOTICE_OF_DEPARTURE:
 
   EMBED_TEMPLATE_TITLE: "Abmeldung für Discord und Secret Lab."
@@ -695,6 +711,11 @@ BUTTONS:
   TEXT_SUPPORT_SETTINGS: "Einstellungen"
   TEXT_SUPPORT_CLAIM: "Beanspruchen"
   TEXT_SUPPORT_CLOSE: "Schließen"
+
+  TEXT_SUPPORT_SETTINGS_OPEN: "Ticket Öffnen"
+  TEXT_SUPPORT_SETTINGS_PAUSED: "Ticket Pausieren"
+  TEXT_SUPPORT_SETTINGS_SUSPENDED: "Ticket Sperren"
+  TEXT_SUPPORT_SETTINGS_CLOSE: "Ticket Schließen"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "Abmeldung anfragen"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Ticket annehmen"
