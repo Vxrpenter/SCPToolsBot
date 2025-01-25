@@ -84,7 +84,7 @@ This licence is not in place to annoy anyone but to protect the work, passion an
 
 ## Special Thanks
 - Special thanks goes to [ced777ric](https://github.com/ced777ric) who helped me a lot with the cedmod api integration especially when trying to find the specific endpoints usecase or usability
-
+- Also to [SeekEDstroy](https://github.com/SeekEDstroy) for help with user id linking and for pointing out some bugs
 ---
 
 ## Star History
