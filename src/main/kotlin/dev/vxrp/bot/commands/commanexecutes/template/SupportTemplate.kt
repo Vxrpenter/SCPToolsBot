@@ -24,7 +24,8 @@ class SupportTemplate(val config: Config, val translation: Translation) {
                     .addOption(translation.selectMenus.textSupportNameReport, "report", translation.selectMenus.textSupportDescriptionReport, Emoji.fromFormatted("⚖️"))
                     .addOption(translation.selectMenus.textSupportNameError, "error", translation.selectMenus.textSupportDescriptionError, Emoji.fromFormatted("⛓️‍💥"))
                     .addOption(translation.selectMenus.textSupportNameUnban, "unban", translation.selectMenus.textSupportDescriptionUnban, Emoji.fromFormatted("⌛"))
-                    .addOption(translation.selectMenus.textSupportNameComplaint, "complaint", translation.selectMenus.textSupportDescriptionComplaint, Emoji.fromFormatted("🚫")).build()
+                    .addOption(translation.selectMenus.textSupportNameComplaint, "complaint", translation.selectMenus.textSupportDescriptionComplaint, Emoji.fromFormatted("🚫"))
+                    .addOption(translation.selectMenus.textSupportNameApplication, "application", translation.selectMenus.textSupportDescriptionApplication, Emoji.fromFormatted("📩")).build()
             ).queue()
         event.reply("Created support template").setEphemeral(true).queue()
     }

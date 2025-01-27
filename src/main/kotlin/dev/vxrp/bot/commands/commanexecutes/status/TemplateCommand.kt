@@ -3,16 +3,14 @@ package dev.vxrp.bot.commands.commanexecutes.status
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.commands.data.StatusConstructor
-import dev.vxrp.bot.status.PlayerlistType
+import dev.vxrp.bot.status.enums.PlayerlistType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.StatusTable
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
-import java.time.Instant
 import java.time.LocalDate
-import kotlin.system.measureTimeMillis
 
 class TemplateCommand(val config: Config, val translation: Translation, private val statusConstructor: StatusConstructor) {
 

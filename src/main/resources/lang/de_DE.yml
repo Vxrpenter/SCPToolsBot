@@ -385,7 +385,7 @@ SUPPORT:
   EMBED_SETTINGS_TITLE: "Ticket Einstellungen"
   EMBED_SETTINGS_BODY: "
                         In diesen Einstellungen kannst du den Status der Tickets ändern.\n
-                        &filler&
+                        
                         > 🚪 **Geöffnet**\n
                         - Nachrichten können geschrieben werden und das Ticket ist für alle Teilnehmer zugänglich.\n
                         
@@ -406,6 +406,36 @@ SUPPORT:
                         **Ticket bearbeitet von:** %handler%\n
 
                         _Diese Log-Nachricht wird dauerhaft gelöscht, wenn das Ticket geschlossen wird. Geschlossene Tickets findest du im Thread-Bereich des Hauptticket-Kanals._"
+
+  EMBED_TICKET_CLAIMED_TITLE: "Ticket beansprucht von - %user%"
+  EMBED_TICKET_CLAIMED_BODY: "Dieses ticket wird jetzt von %user% bearbeitet."
+
+  EMBED_TICKET_OPENED_TITLE: "Ticket wieder geöffnet von - %user%"
+  EMBED_TICKET_OPENED_BODY: "Dieses Ticket wurde erneut geöffnet."
+
+  EMBED_TICKET_PAUSED_TITLE: "Ticket pausiert von - %user%"
+  EMBED_TICKET_PAUSED_BODY: "Dieses Ticket wurde pausiert. Aktuell sind keine Nachrichten erlaubt jedoch wird dieses Ticket bald erneut geöffnet"
+
+  EMBED_TICKET_SUSPENDED_TITLE: "Ticket gesperrt von - %user%"
+  EMBED_TICKET_SUSPENDED_BODY: "Dieses Ticket wurde gesperrt. Bitte kontaktiere das Team um mehr Informationen zu erhalten"
+
+  EMBED_TICKET_CLOSED_TITLE: "Ticket geschlossen von - %user%"
+  EMBED_TICKET_CLOSED_BODY: "Dieses Ticket wurde geschlossen. Es wird nicht erneut geöffnet werden"
+
+  EMBED_LOG_CLAIMED_TITLE: "Du hast das Ticket beansprucht - %name%"
+  EMBED_LOG_CLAIMED_BODY: "Dieses Ticket steht jetzt unter deiner Verantwortung."
+
+  EMBED_LOG_OPENED_TITLE: "Du hast das Ticket geöffnet - %name%"
+  EMBED_LOG_OPENED_BODY: "Du hast dieses Ticket erneut geöffnet."
+
+  EMBED_LOG_PAUSED_TITLE: "Du hast das Ticket pausiert - %name%"
+  EMBED_LOG_PAUSED_BODY: "Du hast dieses Ticket pausiert. Du kannst es, wenn nötig, später erneut öffnen."
+
+  EMBED_LOG_SUSPENDED_TITLE: "Du hast das Ticket gesperrt - %name%"
+  EMBED_LOG_SUSPENDED_BODY: "Du hast dieses Ticket gesperrt. Nutzer werden dich vielleicht wegen dem Schließungsgrund kontaktieren."
+
+  EMBED_LOG_CLOSED_TITLE: "Du hast das Ticket geschlossen - %name%"
+  EMBED_LOG_CLOSED_BODY: "Du hast dieses Ticket geschlossen und du kannst es nicht wieder erneut öffnen."
 
 NOTICE_OF_DEPARTURE:
 
@@ -759,3 +789,6 @@ SELECT_MENUS:
 
   TEXT_SUPPORT_NAME_COMPLAINT: "Beschwerde Ticket"
   TEXT_SUPPORT_DESCRIPTION_COMPLAINT: "Beschwerdeformular gegen ein Mitglied des Serverpersonals"
+
+  TEXT_SUPPORT_NAME_APPLICATION: "Bewerbungs Ticket"
+  TEXT_SUPPORT_DESCRIPTION_APPLICATION: "Ticket um sich als Teammitglied zu bewerben"

@@ -1,4 +1,4 @@
-package dev.vxrp.bot.ticket
+package dev.vxrp.bot.ticket.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Ticket(
     val settings: TicketSettings,
+    @SerialName("application_types")
+    val applicationTypes: List<ApplicationTypes>,
     val types: List<TicketTypes>)
 
 @Serializable
@@ -13,6 +15,16 @@ data class TicketSettings(
     @SerialName("ticket_log_channel")
     val ticketLogChannel: String
 )
+
+@Serializable
+data class ApplicationTypes(
+    val name: String,
+    val description: String,
+    val emoji: String,
+    @SerialName("role_id")
+    val roleID: String
+)
+
 
 @Serializable
 data class TicketTypes(
