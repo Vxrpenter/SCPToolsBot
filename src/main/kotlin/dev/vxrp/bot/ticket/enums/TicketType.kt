@@ -1,4 +1,4 @@
-package dev.vxrp.bot.ticket
+package dev.vxrp.bot.ticket.enums
 
 enum class TicketType {
     GENERAL,

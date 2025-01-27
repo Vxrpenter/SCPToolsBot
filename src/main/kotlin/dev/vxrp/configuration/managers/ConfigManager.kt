@@ -2,7 +2,7 @@ package dev.vxrp.configuration.managers
 
 import com.charleskorn.kaml.Yaml
 import dev.vxrp.bot.status.data.Status
-import dev.vxrp.bot.ticket.Ticket
+import dev.vxrp.bot.ticket.data.Ticket
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Settings
 import org.slf4j.LoggerFactory

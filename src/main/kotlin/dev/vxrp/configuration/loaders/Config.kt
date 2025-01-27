@@ -1,7 +1,7 @@
 package dev.vxrp.configuration.loaders
 
 import dev.vxrp.bot.status.data.Status
-import dev.vxrp.bot.ticket.Ticket
+import dev.vxrp.bot.ticket.data.Ticket
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

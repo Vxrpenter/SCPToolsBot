@@ -2,6 +2,26 @@
   "settings": {
     "ticket_log_channel": ""
   },
+  "application_types": [
+    {
+      "name": "Supporter",
+      "description": "Helps users ingame and handles reports",
+      "emoji": "",
+      "role_id": ""
+    },
+    {
+      "name": "Discord Supporter",
+      "description": "Helps users on the discord handling discord tickets",
+      "emoji": "",
+      "role_id": ""
+    },
+    {
+      "name": "Developer",
+      "description": "Develops plugins or helps with server maintenance",
+      "emoji": "",
+      "role_id": ""
+    }
+  ],
   "types": [
     {
       "name": "General",

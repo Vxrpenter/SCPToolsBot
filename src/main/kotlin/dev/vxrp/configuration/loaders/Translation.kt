@@ -374,6 +374,58 @@ data class TranslationSupport(
     val embedLogTitle: String,
     @SerialName("EMBED_LOG_BODY")
     val embedLogBody: String,
+    //
+    //
+    //
+    @SerialName("EMBED_TICKET_CLAIMED_TITLE")
+    val embedTicketClaimedTitle: String,
+    @SerialName("EMBED_TICKET_CLAIMED_BODY")
+    val embedTicketClaimedBody: String,
+
+    @SerialName("EMBED_TICKET_OPENED_TITLE")
+    val embedTicketOpenedTitle: String,
+    @SerialName("EMBED_TICKET_OPENED_BODY")
+    val embedTicketOpenedBody: String,
+
+    @SerialName("EMBED_TICKET_PAUSED_TITLE")
+    val embedTicketPausedTitle: String,
+    @SerialName("EMBED_TICKET_PAUSED_BODY")
+    val embedTicketPausedBody: String,
+
+    @SerialName("EMBED_TICKET_SUSPENDED_TITLE")
+    val embedTicketSuspendedTitle: String,
+    @SerialName("EMBED_TICKET_SUSPENDED_BODY")
+    val embedTicketSuspendedBody: String,
+
+    @SerialName("EMBED_TICKET_CLOSED_TITLE")
+    val embedTicketClosedTitle: String,
+    @SerialName("EMBED_TICKET_CLOSED_BODY")
+    val embedTicketClosedBody: String,
+
+    @SerialName("EMBED_LOG_CLAIMED_TITLE")
+    val embedLogClaimedTitle: String,
+    @SerialName("EMBED_LOG_CLAIMED_BODY")
+    val embedLogClaimedBody: String,
+
+    @SerialName("EMBED_LOG_OPENED_TITLE")
+    val embedLogOpenedTitle: String,
+    @SerialName("EMBED_LOG_OPENED_BODY")
+    val embedLogOpenedBody: String,
+
+    @SerialName("EMBED_LOG_PAUSED_TITLE")
+    val embedLogPausedTitle: String,
+    @SerialName("EMBED_LOG_PAUSED_BODY")
+    val embedLogPausedBody: String,
+
+    @SerialName("EMBED_LOG_SUSPENDED_TITLE")
+    val embedLogSuspendedTitle: String,
+    @SerialName("EMBED_LOG_SUSPENDED_BODY")
+    val embedLogSuspendedBody: String,
+
+    @SerialName("EMBED_LOG_CLOSED_TITLE")
+    val embedLogClosedTitle: String,
+    @SerialName("EMBED_LOG_CLOSED_BODY")
+    val embedLogClosedBody: String,
 )
 
 @Serializable
@@ -605,4 +657,9 @@ data class TranslationSelectMenus(
     val textSupportNameComplaint: String,
     @SerialName("TEXT_SUPPORT_DESCRIPTION_COMPLAINT")
     val textSupportDescriptionComplaint : String,
+
+    @SerialName("TEXT_SUPPORT_NAME_APPLICATION")
+    val textSupportNameApplication: String,
+    @SerialName("TEXT_SUPPORT_DESCRIPTION_APPLICATION")
+    val textSupportDescriptionApplication : String,
 )
