@@ -53,6 +53,8 @@ class DatabaseManager(val config: Config, folder: String, val file: String) {
             SchemaUtils.create(ActionQueueTable.ActionQueue)
             SchemaUtils.create(StatusTable.Status)
             SchemaUtils.create(ConnectionTable.Connections)
+            SchemaUtils.create(ApplicationTypeTable.ApplicationTypes)
+            SchemaUtils.create(ApplicationTable.Applications)
         }
     }
 

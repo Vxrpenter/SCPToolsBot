@@ -6,8 +6,10 @@ import dev.vxrp.bot.modals.Support
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.color.ColorTool
+import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent
 import net.dv8tion.jda.api.interactions.components.selections.EntitySelectMenu
+import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 
 class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val config: Config, val translation: Translation) {
     init {
@@ -47,6 +49,25 @@ class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val confi
                     EntitySelectMenu.create("complaint", EntitySelectMenu.SelectTarget.USER).build())
                     .setEphemeral(true).queue()
             }
+
+            if (event.selectedOptions[0].value.startsWith("application")) {
+                val embed = Embed {
+                    title = ColorTool().useCustomColorCodes(translation.support.embedApplicationPositionTitle)
+                    description = ColorTool().useCustomColorCodes(translation.support.embedApplicationPositionBody)
+                }
+
+                event.reply_("", listOf(embed)).addActionRow(
+                    StringSelectMenu.create("application_position").also {
+                        for(type in config.ticket.applicationTypes) {
+                            it.addOption(type.name, type.roleID, type.description, Emoji.fromFormatted(type.emoji))
+                        }
+                    }.build()
+                ).setEphemeral(true).queue()
+            }
+        }
+
+        if (event.selectMenu.id?.startsWith("application_position") == true) {
+            event.replyModal(Support(translation).supportApplicationModal()).queue()
         }
     }
 }

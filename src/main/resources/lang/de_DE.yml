@@ -240,6 +240,9 @@ SUPPORT:
 
                         > ⌛ **Beschwerde Ticket**\n
                         > Ticket zur Beschwerde über ein Mitglied des Server-Teams\n
+                        
+                        > 📩 **Application**\n
+                        > Ticket for applying for staff positions, only works when applications are active\n
 
                         _Bei der Erstellung eines Tickets werden bestimmte Metadaten gespeichert. Dazu gehören deine userId, das Erstellungsdatum, der Tickettyp, der Status und der Bearbeiter_"
 
@@ -263,6 +266,12 @@ SUPPORT:
 
                         **Spezielles Ticket**\n
                         Dies ist ein spezielles Ticket zur Meldung von Teammitgliedern. Nachdem du einen Benutzer ausgewählt hast, kannst du auswählen, ob du es anonym senden möchtest."
+
+  EMBED_APPLICATION_POSITION_TITLE: "Wähle deine Position"
+  EMBED_APPLICATION_POSITION_BODY: "
+                        Wähle für welche Position du dich bewerben möchtest.\n
+
+                        Du kannst nur eine Aktivierte Position wählen. Diese müssen von einem Administrator aktiviert werden."
 
   MODAL_GENERAL_TITLE: "Generelles Ticket"
   MODAL_GENERAL_SUBJECT_TITLE: "Betreff"
@@ -297,6 +306,18 @@ SUPPORT:
   MODAL_COMPLAINT_SUBJECT_PLACEHOLDER: "Warum hast du ein Problem mit diesem Teammitglied?"
   MODAL_COMPLAINT_EXPLANATION_TITLE: "Beweise"
   MODAL_COMPLAINT_EXPLANATION_PLACEHOLDER: "Wenn du einen Beweis hast, fuge ihn hier bei."
+
+  MODAL_APPLICATION_TITLE: "Bewerbung"
+  MODAL_APPLICATION_NAME_TITLE: "Name"
+  MODAL_APPLICATION_PLACEHOLDER_TITLE: "Wie möchtest du genannt werden?"
+  MODAL_APPLICATION_AGE_TITLE: "Alter"
+  MODAL_APPLICATION_AGE_PLACEHOLDER: "Wie alt bist du?"
+  MODAL_APPLICATION_PLAYTIME_TITLE: "Spielzeit"
+  MODAL_APPLICATION_PLAYTIME_PLACEHOLDER: "Wie lang spielst du SCP:SL?"
+  MODAL_APPLICATION_REASON_OF_APPLICATION_TITLE: "Grund der Bewerbung"
+  MODAL_APPLICATION_REASON_OF_APPLICATION_PLACEHOLDER: "Wieso hast du dich für diese Position beworben?"
+  MODAL_APPLICATION_SKILLS_TITLE: "Skills"
+  MODAL_APPLICATION_SKILLS_PLACEHOLDER: "In was bist du gut, hast du jemals auf einem anderen Server gearbeitet?"
 
   MODAL_REASON_ACTION_TITLE: "Aktions Grund"
   MODAL_REASON_ACTION_REASON_TITLE: "Grund"

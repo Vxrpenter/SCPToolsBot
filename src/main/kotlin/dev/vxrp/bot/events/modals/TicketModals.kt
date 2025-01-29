@@ -52,7 +52,7 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
     private fun respond(child: ThreadChannel?, event: ModalInteractionEvent) {
         if (child == null) {
             logger.error("Modal Interaction Suspended, error suspected. Child channel could not correctly be returned")
-            event.reply_("Modal Interaction suspended, error in interaction supsected").queue()
+            event.reply_("Modal Interaction suspended, error in interaction suspected").queue()
             return
         }
 

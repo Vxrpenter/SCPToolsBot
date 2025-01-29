@@ -105,6 +105,27 @@
       "name": "settings",
       "description": "Bot settings/configurations",
       "default_permissions": ["ADMINISTRATOR"]
+    },
+    {
+      "active": true,
+      "inherit": "commands.application.default",
+      "name": "application",
+      "description": "Command for managing applications",
+      "default_permissions": ["VIEW_AUDIT_LOGS"],
+      "options": [
+        {
+          "type": "STRING",
+          "name": "state",
+          "description": "Set the application state",
+          "isRequired": true,
+          "choices": [
+            {
+              "name": "active",
+              "id": "maintenance"
+            }
+          ]
+        }
+      ]
     }
   ],
   "status_commands": [
