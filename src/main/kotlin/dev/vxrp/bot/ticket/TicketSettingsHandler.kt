@@ -1,11 +1,18 @@
 package dev.vxrp.bot.ticket
 
 import dev.minn.jda.ktx.coroutines.await
+import dev.minn.jda.ktx.messages.Embed
+import dev.minn.jda.ktx.messages.reply_
+import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.ticket.enums.TicketStatus
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.TicketTable
+import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
+import net.dv8tion.jda.api.entities.User
+import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
@@ -15,31 +22,63 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 
 class TicketSettingsHandler(val api: JDA, val config: Config, val translation: Translation) {
-    suspend fun claimTicket(id: String, userId: String) {
+    suspend fun claimTicket(user: User, ticketChannel: ThreadChannel, id: String, userId: String) {
         TicketLogHandler(api, config, translation).editMessage(id, handler = api.retrieveUserById(userId).await())
         updateTicketHandler(id, userId)
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketClaimedTitle
+                .replace("%user%", user.globalName!!))
+            description = ColorTool().useCustomColorCodes(translation.support.embedTicketClaimedBody
+                .replace("%user%", user.asMention))
+        }
+
+        ticketChannel.send("", listOf(embed)).queue()
     }
 
-    suspend fun openTicket(id: String) {
+    suspend fun openTicket(user: User, ticketChannel: ThreadChannel, id: String) {
         TicketLogHandler(api, config, translation).editMessage(id, ticketStatus = TicketStatus.OPEN)
         updateTicketStatus(id, TicketStatus.OPEN)
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketOpenedTitle
+                .replace("%user%", user.globalName!!))
+            description = ColorTool().useCustomColorCodes(translation.support.embedTicketOpenedBody)
+        }
+        ticketChannel.send("", listOf(embed)).queue()
     }
 
-    suspend fun pauseTicket(id: String) {
+    suspend fun pauseTicket(user: User, ticketChannel: ThreadChannel, id: String) {
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketPausedTitle
+                .replace("%user%", user.globalName!!))
+            description = ColorTool().useCustomColorCodes(translation.support.embedTicketPausedBody)
+        }
+        ticketChannel.send("", listOf(embed)).queue()
         val child = api.getThreadChannelById(id)!!
         child.manager.setLocked(true).queue()
         TicketLogHandler(api, config, translation).editMessage(id, ticketStatus = TicketStatus.PAUSED)
         updateTicketStatus(id, TicketStatus.PAUSED)
     }
 
-    suspend fun suspendTicket(id: String) {
+    suspend fun suspendTicket(user: User, ticketChannel: ThreadChannel, id: String) {
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketSuspendedTitle
+                .replace("%user%", user.globalName!!))
+            description = ColorTool().useCustomColorCodes(translation.support.embedTicketSuspendedBody)
+        }
+        ticketChannel.send("", listOf(embed)).queue()
         val child = api.getThreadChannelById(id)!!
         child.manager.setLocked(true).queue()
         TicketLogHandler(api, config, translation).editMessage(id, ticketStatus = TicketStatus.SUSPENDED)
         updateTicketStatus(id, TicketStatus.SUSPENDED)
     }
 
-    fun archiveTicket(id: String) {
+    fun archiveTicket(user: User, ticketChannel: ThreadChannel, id: String) {
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedTitle
+                .replace("%user%", user.globalName!!))
+            description = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedBody)
+        }
+        ticketChannel.send("", listOf(embed)).queue()
         val child = api.getThreadChannelById(id)!!
         child.manager.setArchived(true).queue()
         TicketLogHandler(api, config, translation).deleteMesssage(id)

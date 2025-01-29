@@ -256,14 +256,21 @@ data class TranslationSupport(
     val embedReportUserTitle: String,
     @SerialName("EMBED_REPORT_USER_BODY")
     val embedReportUserBody: String,
+
     @SerialName("EMBED_COMPLAINT_ANONYMOUS_TITLE")
     val embedComplaintAnonymousTitle: String,
     @SerialName("EMBED_COMPLAINT_ANONYMOUS_BODY")
     val embedComplaintAnonymousBody: String,
+
     @SerialName("EMBED_COMPLAINT_USER_TITLE")
     val embedComplaintUserTitle: String,
     @SerialName("EMBED_COMPLAINT_USER_BODY")
     val embedComplaintUserBody: String,
+
+    @SerialName("EMBED_APPLICATION_POSITION_TITLE")
+    val embedApplicationPositionTitle: String,
+    @SerialName("EMBED_APPLICATION_POSITION_BODY")
+    val embedApplicationPositionBody: String,
 
     @SerialName("MODAL_GENERAL_TITLE")
     val modalGeneralTitle: String,
@@ -328,6 +335,29 @@ data class TranslationSupport(
     @SerialName("MODAL_COMPLAINT_EXPLANATION_PLACEHOLDER")
     val modalComplaintExplanationPlaceholder: String,
 
+    @SerialName("MODAL_APPLICATION_TITLE")
+    val modalApplicationTitle: String,
+    @SerialName("MODAL_APPLICATION_NAME_TITLE")
+    val modalApplicationNameTitle: String,
+    @SerialName("MODAL_APPLICATION_PLACEHOLDER_TITLE")
+    val modalApplicationNamePlaceholder: String,
+    @SerialName("MODAL_APPLICATION_AGE_TITLE")
+    val modalApplicationAgeTitle: String,
+    @SerialName("MODAL_APPLICATION_AGE_PLACEHOLDER")
+    val modalApplicationAgePlaceholder: String,
+    @SerialName("MODAL_APPLICATION_PLAYTIME_TITLE")
+    val modalApplicationPlaytimeTitle: String,
+    @SerialName("MODAL_APPLICATION_PLAYTIME_PLACEHOLDER")
+    val modalApplicationPlaytimePlaceholder: String,
+    @SerialName("MODAL_APPLICATION_REASON_OF_APPLICATION_TITLE")
+    val modalApplicationReasonsOfApplicationTitle: String,
+    @SerialName("MODAL_APPLICATION_REASON_OF_APPLICATION_PLACEHOLDER")
+    val modalApplicationReasonsOfApplicationPlaceholder: String,
+    @SerialName("MODAL_APPLICATION_SKILLS_TITLE")
+    val modalApplicationSkillsTitle: String,
+    @SerialName("MODAL_APPLICATION_SKILLS_PLACEHOLDER")
+    val modalApplicationSkillsPlaceholder: String,
+
     @SerialName("MODAL_REASON_ACTION_TITLE")
     val modalReasonActionTitle: String,
     @SerialName("MODAL_REASON_ACTION_REASON_TITLE")
@@ -374,9 +404,7 @@ data class TranslationSupport(
     val embedLogTitle: String,
     @SerialName("EMBED_LOG_BODY")
     val embedLogBody: String,
-    //
-    //
-    //
+
     @SerialName("EMBED_TICKET_CLAIMED_TITLE")
     val embedTicketClaimedTitle: String,
     @SerialName("EMBED_TICKET_CLAIMED_BODY")

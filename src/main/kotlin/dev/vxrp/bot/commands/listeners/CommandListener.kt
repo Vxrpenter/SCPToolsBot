@@ -64,6 +64,11 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                 settingsCommand(event)
                 return true
             }
+
+            "commands.application.default" -> {
+                applicationCommand(event)
+                return true
+            }
         }
 
         return false
@@ -72,7 +77,7 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
     private fun checkSubInheritance(inherit: String, event: SlashCommandInteractionEvent): Boolean {
         when (inherit) {
             "commands.kill.sub" -> {
-                // Test Tes Te
+                // Test Tes Test
                 return true
             }
         }
@@ -114,5 +119,9 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
     private fun settingsCommand(event: SlashCommandInteractionEvent) {
         SettingsCommand(config, translation).pasteSettingsMenu(event)
+    }
+
+    private fun applicationCommand(event: SlashCommandInteractionEvent) {
+
     }
 }

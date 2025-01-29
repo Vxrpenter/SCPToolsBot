@@ -240,6 +240,9 @@ SUPPORT:
                         > ⌛ **Complaint Ticket**\n
                         > Ticket for complaining about a member of the server staff\n
                         
+                        > 📩 **Application**\n
+                        > Ticket for applying for staff positions, only works when applications are active\n
+                        
                         _When creating a ticket certain meta data will be saved. This consists of your userId, the date of creation, the tickets type, status and handler_"
 
   EMBED_REPORT_USER_TITLE: "Choose User"
@@ -262,6 +265,12 @@ SUPPORT:
                       
                         **Special Ticket**\n
                         This is a special ticket meant for reporting staff members. After choosing a user you will be able to choose if you want to send it anonymously"
+
+  EMBED_APPLICATION_POSITION_TITLE: "Choose Position"
+  EMBED_APPLICATION_POSITION_BODY: "
+                        Choose which position you want to apply for.\n
+                        
+                        You are only able to choose activated positions. They have to be activated by a server administrator."
 
   MODAL_GENERAL_TITLE: "General Ticket"
   MODAL_GENERAL_SUBJECT_TITLE: "Subject"
@@ -296,6 +305,18 @@ SUPPORT:
   MODAL_COMPLAINT_SUBJECT_PLACEHOLDER: "Why do you have a problem with this staff member?"
   MODAL_COMPLAINT_EXPLANATION_TITLE: "Proof"
   MODAL_COMPLAINT_EXPLANATION_PLACEHOLDER: "If you have proof then put it in here."
+
+  MODAL_APPLICATION_TITLE: "Application"
+  MODAL_APPLICATION_NAME_TITLE: "Name"
+  MODAL_APPLICATION_PLACEHOLDER_TITLE: "How would you like to be called?"
+  MODAL_APPLICATION_AGE_TITLE: "Age"
+  MODAL_APPLICATION_AGE_PLACEHOLDER: "How old are you?"
+  MODAL_APPLICATION_PLAYTIME_TITLE: "Playtime"
+  MODAL_APPLICATION_PLAYTIME_PLACEHOLDER: "How long have you been playing SCP:SL?"
+  MODAL_APPLICATION_REASON_OF_APPLICATION_TITLE: "Reason of Application"
+  MODAL_APPLICATION_REASON_OF_APPLICATION_PLACEHOLDER: "Why did you apply for this position?"
+  MODAL_APPLICATION_SKILLS_TITLE: "Skills"
+  MODAL_APPLICATION_SKILLS_PLACEHOLDER: "What are you skilled at, have you ever done this task on another server?"
 
   MODAL_REASON_ACTION_TITLE: "Action Reasoning"
   MODAL_REASON_ACTION_REASON_TITLE: "Reason"
@@ -435,6 +456,9 @@ SUPPORT:
 
   EMBED_LOG_CLOSED_TITLE: "You Closed Ticket - %name%"
   EMBED_LOG_CLOSED_BODY: "This ticket has been closed by you. You cannot reopen it and all business with it has been ended."
+
+APPLICATION:
+
 
 NOTICE_OF_DEPARTURE:
 

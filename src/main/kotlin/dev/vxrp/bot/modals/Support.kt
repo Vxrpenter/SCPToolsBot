@@ -1,5 +1,6 @@
 package dev.vxrp.bot.modals
 
+import dev.minn.jda.ktx.interactions.components.Modal
 import dev.minn.jda.ktx.interactions.components.TextInputBuilder
 import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.interactions.components.ActionRow
@@ -125,6 +126,51 @@ class Support(val translation: Translation) {
                     required = true,
                     placeholder = translation.support.modalComplaintExplanationPlaceholder).build()
             )
+        ).build()
+    }
+
+    fun supportApplicationModal(): Modal {
+        return Modal.create("support_application", translation.support.modalApplicationTitle).addComponents(
+            ActionRow.of(
+                TextInputBuilder(
+                    id= "support_application_name",
+                    label = translation.support.modalApplicationNameTitle,
+                    style = TextInputStyle.SHORT,
+                    required = true,
+                    placeholder = translation.support.modalApplicationNamePlaceholder).build()
+            ),
+            ActionRow.of(
+                TextInputBuilder(
+                    id= "support_application_age",
+                    label = translation.support.modalApplicationAgeTitle,
+                    style = TextInputStyle.SHORT,
+                    required = true,
+                    placeholder = translation.support.modalApplicationAgePlaceholder).build()
+            ),
+            ActionRow.of(
+                TextInputBuilder(
+                    id= "support_application_playtime",
+                    label = translation.support.modalApplicationPlaytimeTitle,
+                    style = TextInputStyle.SHORT,
+                    required = true,
+                    placeholder = translation.support.modalApplicationPlaytimePlaceholder).build()
+            ),
+            ActionRow.of(
+                TextInputBuilder(
+                    id= "support_application_reason_of_application",
+                    label = translation.support.modalApplicationReasonsOfApplicationTitle,
+                    style = TextInputStyle.PARAGRAPH,
+                    required = true,
+                    placeholder = translation.support.modalApplicationReasonsOfApplicationPlaceholder).build()
+            ),
+            ActionRow.of(
+                TextInputBuilder(
+                    id= "support_application_skills",
+                    label = translation.support.modalApplicationSkillsTitle,
+                    style = TextInputStyle.PARAGRAPH,
+                    required = true,
+                    placeholder = translation.support.modalApplicationSkillsPlaceholder).build()
+            ),
         ).build()
     }
 }
