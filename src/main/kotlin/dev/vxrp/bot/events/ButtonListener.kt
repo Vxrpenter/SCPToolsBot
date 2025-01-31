@@ -1,6 +1,7 @@
 package dev.vxrp.bot.events
 
 import dev.minn.jda.ktx.events.listener
+import dev.vxrp.bot.events.buttons.ApplicationButtons
 import dev.vxrp.bot.events.buttons.HelpButtons
 import dev.vxrp.bot.events.buttons.TicketButtons
 import dev.vxrp.configuration.loaders.Config
@@ -16,6 +17,8 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
             HelpButtons(event, config, translation)
 
             TicketButtons(event, config, translation).init()
+
+            ApplicationButtons(event, config, translation)
         }
     }
 }

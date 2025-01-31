@@ -13,10 +13,9 @@ import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
 
+val applicationTypeMap: HashMap<String, MutableList<ApplicationType>> = hashMapOf()
 
 class ApplicationManager(val config: Config, val translation: Translation) {
-    private val applicationTypeMap: HashMap<String, MutableList<ApplicationType>> = hashMapOf()
-
     fun sendActivationMenu(userId: String, channel: TextChannel) {
         val embed = createMessage(userId, true)
 

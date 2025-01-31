@@ -2,7 +2,7 @@ package dev.vxrp.bot.events.stringSelectMenus
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.bot.modals.Support
+import dev.vxrp.bot.modals.SupportModals
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.color.ColorTool
@@ -13,11 +13,11 @@ import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 
 class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val config: Config, val translation: Translation) {
     init {
-        val support = Support(translation)
+        val supportModals = SupportModals(translation)
 
         if (event.selectMenu.id?.startsWith("ticket") == true) {
             if (event.selectedOptions[0].value.startsWith("general")) {
-                event.replyModal(support.supportGeneralModal()).queue()
+                event.replyModal(supportModals.supportGeneralModal()).queue()
             }
 
             if (event.selectedOptions[0].value.startsWith("report")) {
@@ -32,11 +32,11 @@ class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val confi
             }
 
             if (event.selectedOptions[0].value.startsWith("error")) {
-                event.replyModal(support.supportErrorModal()).queue()
+                event.replyModal(supportModals.supportErrorModal()).queue()
             }
 
             if (event.selectedOptions[0].value.startsWith("unban")) {
-                event.replyModal(support.supportUnbanModal()).queue()
+                event.replyModal(supportModals.supportUnbanModal()).queue()
             }
 
             if (event.selectedOptions[0].value.startsWith("complaint")) {
@@ -67,7 +67,7 @@ class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val confi
         }
 
         if (event.selectMenu.id?.startsWith("application_position") == true) {
-            event.replyModal(Support(translation).supportApplicationModal()).queue()
+            event.replyModal(SupportModals(translation).supportApplicationModal()).queue()
         }
     }
 }

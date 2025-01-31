@@ -1,13 +1,12 @@
 package dev.vxrp.bot.modals
 
-import dev.minn.jda.ktx.interactions.components.Modal
 import dev.minn.jda.ktx.interactions.components.TextInputBuilder
 import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.interactions.components.ActionRow
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle
 import net.dv8tion.jda.api.interactions.modals.Modal
 
-class Support(val translation: Translation) {
+class SupportModals(val translation: Translation) {
     fun supportGeneralModal(): Modal {
         return Modal.create("support_general", translation.support.modalGeneralTitle).addComponents(
             ActionRow.of(
