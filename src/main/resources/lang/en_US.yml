@@ -458,7 +458,34 @@ SUPPORT:
   EMBED_LOG_CLOSED_BODY: "This ticket has been closed by you. You cannot reopen it and all business with it has been ended."
 
 APPLICATION:
+  EMBED_ACTIVATION_MENU_TITLE: "Active Application Settings"
+  EMBED_ACTIVATION_MENU_BODY: "
+                        Current Status: %status%\n
+                        Active Roles:\n
+                        ```ansi\n%active_roles%```\n
+                        
+                        _This message will be updated when adding positions for application status_\n
+                        
+                        _When you are done with setup, click the complete setup button down below to proceed with activation._
+                        "
 
+  EMBED_DEACTIVATION_MENU_TITLE: "Deactivate Applications?"
+  EMBED_DEACTIVATION_MENU_BODY: "
+                        Do you want to deactivate the application process.\n
+                        All running applications will be terminated and their tickets will be closed. The current settings will also be wiped\n
+                        and cannot be retrieved.
+                        "
+
+  TEXT_ROLE_STATUS_TEMPLATE: "&bold&&white&&teal&%emoji% | %role_name% &white&| %status% &white&| %max_candidates%\n&reset&"
+  TEXT_STATUS_ACTIVE: "&green&Active"
+  TEXT_STATUS_DEACTIVATED: "&red&Deactivated"
+
+  EMBED_CHOOSE_POSITION_TITLE: "Choose Position"
+  EMBED_CHOOSE_POSITION_BODY: "Choose which position you want to activate"
+
+  MODAL_CHOOSE_COUNT_TITLE: "Candidate Count"
+  MODAL_CHOOSE_COUNT_NUMBER_TITLE: "Number"
+  MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER: "How many members should the candidates have?"
 
 NOTICE_OF_DEPARTURE:
 
@@ -786,6 +813,10 @@ BUTTONS:
   TEXT_SUPPORT_LOG_PAUSE: "Pause"
   TEXT_SUPPORT_LOG_SUSPEND: "Suspend"
   TEXT_SUPPORT_LOG_CLOSE: "Close"
+
+  TEXT_APPLICATION_ACTIVATION_ADD: "Add"
+  TEXT_APPLICATION_ACTIVATION_REMOVE: "Remove"
+  TEXT_APPLICATION_ACTIVATION_COMPLETE_SETUP: "Complete Setup"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "File Notice of Departure"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Accept Ticket"
