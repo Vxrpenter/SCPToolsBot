@@ -19,7 +19,7 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
             }
 
             event.reply_("", listOf(embed)).addActionRow(
-                StringSelectMenu.create("application_activation_add:${event.user.id}").also {
+                StringSelectMenu.create("application_activation_add:${event.user.id}:${event.message.id}").also {
                     for (application in applicationTypeMap[event.user.id]!!) {
                         it.addOption(application.name, application.roleId, application.description, Emoji.fromFormatted(application.emoji))
                     }

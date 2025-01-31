@@ -24,7 +24,7 @@ class ApplicationManager(val config: Config, val translation: Translation) {
         ).queue()
     }
 
-    private fun editActivationMessage(userId: String, roleId: String, channel: TextChannel, messageId: String, name: String? = null, description: String? = null, emoji: String? = null, state: Boolean? = null, initializer: String? = null, member: Int? = null) {
+    fun editActivationMessage(userId: String, roleId: String, channel: TextChannel, messageId: String, name: String? = null, description: String? = null, emoji: String? = null, state: Boolean? = null, initializer: String? = null, member: Int? = null) {
         changeApplicationType(userId, roleId, name, description, emoji, state, initializer, member)
 
         channel.editMessage(messageId, "", listOf(createMessage(userId, false))).setActionRow(
@@ -59,7 +59,7 @@ class ApplicationManager(val config: Config, val translation: Translation) {
     }
 
     private fun createMessage(userId: String, useBaseValue: Boolean): MessageEmbed {
-        val roleStringPair = createRoleString(useBaseValue)
+        val roleStringPair = createRoleString(userId, useBaseValue)
 
         applicationTypeMap[userId] = roleStringPair.second
 
@@ -71,19 +71,18 @@ class ApplicationManager(val config: Config, val translation: Translation) {
         }
     }
 
-    private fun createRoleString(useBaseValue: Boolean): Pair<StringBuilder, MutableList<ApplicationType>> {
-        val stringBuilder: StringBuilder = StringBuilder()
+    private fun createRoleString(userId: String, useBaseValue: Boolean): Pair<StringBuilder, MutableList<ApplicationType>> {
         val applicationTypeList: MutableList<ApplicationType> = mutableListOf()
 
-        var pairValue: Pair<StringBuilder, MutableList<ApplicationType>> = createStringValue(stringBuilder, applicationTypeList)
-        if (useBaseValue) pairValue = createStringBaseValue(stringBuilder, applicationTypeList)
+        var pairValue: Pair<StringBuilder, MutableList<ApplicationType>> = createStringBaseValue(applicationTypeList)
+        if (!useBaseValue) pairValue = createStringValue(applicationTypeMap[userId]!!)
 
         return pairValue
     }
 
-    private fun createStringBaseValue(stringBuilder: StringBuilder, applicationTypeList: MutableList<ApplicationType>): Pair<StringBuilder, MutableList<ApplicationType>> {
+    private fun createStringBaseValue(applicationTypeList: MutableList<ApplicationType>): Pair<StringBuilder, MutableList<ApplicationType>> {
+        val stringBuilder: StringBuilder = StringBuilder()
         val deactivated = ColorTool().useCustomColorCodes(translation.application.textStatusDeactivated)
-
         var count: Int = -1
         for (type in config.ticket.applicationTypes) {
             count += 1
@@ -101,7 +100,8 @@ class ApplicationManager(val config: Config, val translation: Translation) {
         return Pair(stringBuilder, applicationTypeList)
     }
 
-    private fun createStringValue(stringBuilder: StringBuilder, applicationTypeList: MutableList<ApplicationType>): Pair<StringBuilder, MutableList<ApplicationType>> {
+    private fun createStringValue(applicationTypeList: MutableList<ApplicationType>): Pair<StringBuilder, MutableList<ApplicationType>> {
+        val stringBuilder: StringBuilder = StringBuilder()
         val activated = ColorTool().useCustomColorCodes(translation.application.textStatusActive)
         val deactivated = ColorTool().useCustomColorCodes(translation.application.textStatusDeactivated)
 

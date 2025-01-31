@@ -3,6 +3,7 @@ package dev.vxrp.bot.events
 import dev.minn.jda.ktx.events.listener
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
+import dev.vxrp.bot.events.modals.ApplicationModals
 import dev.vxrp.bot.events.modals.TicketModals
 import dev.vxrp.bot.ticket.TicketHandler
 import dev.vxrp.bot.ticket.enums.TicketStatus
@@ -22,6 +23,8 @@ class ModalListener(val api: JDA, val config: Config, val translation: Translati
     init {
         api.listener<ModalInteractionEvent> { event ->
             TicketModals(logger, event, config, translation).init()
+
+            ApplicationModals(event, config, translation)
         }
     }
 }
