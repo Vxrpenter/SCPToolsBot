@@ -2,6 +2,7 @@ package dev.vxrp.bot.commands.listeners
 
 import dev.minn.jda.ktx.events.listener
 import dev.vxrp.bot.commands.CommandManager
+import dev.vxrp.bot.commands.commanexecutes.application.ApplicationCommand
 import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
 import dev.vxrp.bot.commands.commanexecutes.player.PlayerCommand
 import dev.vxrp.bot.commands.commanexecutes.settings.SettingsCommand
@@ -122,6 +123,6 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
     }
 
     private fun applicationCommand(event: SlashCommandInteractionEvent) {
-
+        ApplicationCommand(config, translation).sendMessage(event)
     }
 }

@@ -15,6 +15,8 @@ data class Translation(
     val player: TranslationPlayer,
     @SerialName("SUPPORT")
     val support: TranslationSupport,
+    @SerialName("APPLICATION")
+    val application: TranslationApplication,
     @SerialName("NOTICE_OF_DEPARTURE")
     val noticeOfDeparture: TranslationNoticeOfDeparture,
     @SerialName("REGULARS")
@@ -457,6 +459,38 @@ data class TranslationSupport(
 )
 
 @Serializable
+data class TranslationApplication(
+    @SerialName("EMBED_ACTIVATION_MENU_TITLE")
+    val embedActivationMenuTitle: String,
+    @SerialName("EMBED_ACTIVATION_MENU_BODY")
+    val embedActivationMenuBody: String,
+
+    @SerialName("EMBED_DEACTIVATION_MENU_TITLE")
+    val embedDeactivationMenuTitle: String,
+    @SerialName("EMBED_DEACTIVATION_MENU_BODY")
+    val embedDeactivationMenuBody: String,
+
+    @SerialName("TEXT_ROLE_STATUS_TEMPLATE")
+    val textRoleStatusTemplate: String,
+    @SerialName("TEXT_STATUS_ACTIVE")
+    val textStatusActive: String,
+    @SerialName("TEXT_STATUS_DEACTIVATED")
+    val textStatusDeactivated: String,
+
+    @SerialName("EMBED_CHOOSE_POSITION_TITLE")
+    val embedChoosePositionTitle: String,
+    @SerialName("EMBED_CHOOSE_POSITION_BODY")
+    val embedChoosePositionBody: String,
+
+    @SerialName("MODAL_CHOOSE_COUNT_TITLE")
+    val modalChooseCountTitle: String,
+    @SerialName("MODAL_CHOOSE_COUNT_NUMBER_TITLE")
+    val modalChooseCountNumberTitle: String,
+    @SerialName("MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER")
+    val modalChooseCountNumberPlaceholder: String
+)
+
+@Serializable
 data class TranslationNoticeOfDeparture(
     @SerialName("EMBED_TEMPLATE_TITLE")
     val embedTemplateTitle: String,
@@ -625,17 +659,6 @@ data class TranslationButtons(
     @SerialName("TEXT_SUPPORT_SETTINGS_CLOSE")
     val textSupportSettingsClose: String,
 
-    @SerialName("TEXT_NOTICE_OF_DEPARTURE_FILE")
-    val textNoticeOfDepartureFile: String,
-    @SerialName("TEXT_NOTICE_OF_DEPARTURE_ACCEPT")
-    val textNoticeOfDepartureAccept: String,
-    @SerialName("TEXT_NOTICE_OF_DEPARTURE_DISMISSED")
-    val textNoticeOfDepartureDismissed: String,
-    @SerialName("TEXT_NOTICE_OF_DEPARTURE_REVOKED")
-    val textNoticeOfDepartureRevoked: String,
-    @SerialName("TEXT_NOTICE_OF_DEPARTURE_DELETE")
-    val textNoticeOfDepartureDelete: String,
-
     @SerialName("TEXT_SUPPORT_LOG_CLAIM")
     val textSupportLogClaim: String,
     @SerialName("TEXT_SUPPORT_LOG_OPEN")
@@ -646,6 +669,24 @@ data class TranslationButtons(
     val textSupportLogSuspend: String,
     @SerialName("TEXT_SUPPORT_LOG_CLOSE")
     val textSupportLogClose: String,
+
+    @SerialName("TEXT_APPLICATION_ACTIVATION_ADD")
+    val textApplicationActivationAdd: String,
+    @SerialName("TEXT_APPLICATION_ACTIVATION_REMOVE")
+    val textApplicationActivationRemove: String,
+    @SerialName("TEXT_APPLICATION_ACTIVATION_COMPLETE_SETUP")
+    val textApplicationActivationCompleteSetup: String,
+
+    @SerialName("TEXT_NOTICE_OF_DEPARTURE_FILE")
+    val textNoticeOfDepartureFile: String,
+    @SerialName("TEXT_NOTICE_OF_DEPARTURE_ACCEPT")
+    val textNoticeOfDepartureAccept: String,
+    @SerialName("TEXT_NOTICE_OF_DEPARTURE_DISMISSED")
+    val textNoticeOfDepartureDismissed: String,
+    @SerialName("TEXT_NOTICE_OF_DEPARTURE_REVOKED")
+    val textNoticeOfDepartureRevoked: String,
+    @SerialName("TEXT_NOTICE_OF_DEPARTURE_DELETE")
+    val textNoticeOfDepartureDelete: String,
 
     @SerialName("TEXT_REGULAR_OPEN_SETTINGS")
     val textRegularOpenSettings: String,

@@ -458,6 +458,36 @@ SUPPORT:
   EMBED_LOG_CLOSED_TITLE: "Du hast das Ticket geschlossen - %name%"
   EMBED_LOG_CLOSED_BODY: "Du hast dieses Ticket geschlossen und du kannst es nicht wieder erneut öffnen."
 
+APPLICATION:
+  EMBED_ACTIVATION_MENU_TITLE: "Aktive Bewerbungseinstellungen"
+  EMBED_ACTIVATION_MENU_BODY: "
+                        Aktueller Status: %status%\n
+                        Aktive Rollen:\n
+                        ```ansi\n%active_roles%```\n
+                        
+                        _Diese Nachricht wird aktualisiert, wenn Positionen für den Bewerbungsstatus hinzugefügt werden_\n
+                        
+                        _Wenn du mit der Einrichtung fertig bist, klicke unten auf die Schaltfläche „Einrichtung abschließen“, um mit der Aktivierung fortzufahren._
+                        "
+
+  EMBED_DEACTIVATION_MENU_TITLE: "Deaktiviere Bewerbung?"
+  EMBED_DEACTIVATION_MENU_BODY: "
+                        Möchten Sie den Anwendungsprozess deaktivieren?\n
+                        
+                        Alle laufenden Anwendungen werden beendet und alle Tickets geschlossen. Die aktuellen Einstellungen werden ebenfalls gelöscht und können nicht wiederhergestellt werden.
+                        "
+
+  TEXT_ROLE_STATUS_TEMPLATE: "&bold&&white&&teal&%emoji% | %role_name% &white&| %status% &white&| &bold&%max_candidates%\n&reset&"
+  TEXT_STATUS_ACTIVE: "&green&Aktiv"
+  TEXT_STATUS_DEACTIVATED: "&red&Deaktiviert"
+
+  EMBED_CHOOSE_POSITION_TITLE: "Position Wählen"
+  EMBED_CHOOSE_POSITION_BODY: "Wähle welche Position du aktivieren willst"
+
+  MODAL_CHOOSE_COUNT_TITLE: "Kandidaten Anzahl"
+  MODAL_CHOOSE_COUNT_NUMBER_TITLE: "Nummer"
+  MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER: "Wie viele Plätze sollten die Kandidaten haben?"
+
 NOTICE_OF_DEPARTURE:
 
   EMBED_TEMPLATE_TITLE: "Abmeldung für Discord und Secret Lab."
@@ -782,6 +812,10 @@ BUTTONS:
   TEXT_SUPPORT_LOG_PAUSE: "Pausieren"
   TEXT_SUPPORT_LOG_SUSPEND: "Sperren"
   TEXT_SUPPORT_LOG_CLOSE: "Schließen"
+
+  TEXT_APPLICATION_ACTIVATION_ADD: "Hinzufügen"
+  TEXT_APPLICATION_ACTIVATION_REMOVE: "Entfernen"
+  TEXT_APPLICATION_ACTIVATION_COMPLETE_SETUP: "Einrichtung abschließen"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "Abmeldung anfragen"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Ticket annehmen"
