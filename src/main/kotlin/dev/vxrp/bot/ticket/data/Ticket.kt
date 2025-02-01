@@ -13,7 +13,9 @@ data class Ticket(
 @Serializable
 data class TicketSettings(
     @SerialName("ticket_log_channel")
-    val ticketLogChannel: String
+    val ticketLogChannel: String,
+    @SerialName("application_message_channel")
+    val applicationMessageChannel: String
 )
 
 @Serializable
