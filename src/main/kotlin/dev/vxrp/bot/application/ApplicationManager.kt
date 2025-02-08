@@ -49,7 +49,9 @@ class ApplicationManager(val config: Config, val translation: Translation) {
                 .replace("%active_roles%", roleStringPair.first.toString()))
         }
 
-        channel.send("", listOf(embed)).queue()
+        channel.send("", listOf(embed)).addActionRow(
+            Button.success("application_open", "Open Application").withEmoji(Emoji.fromFormatted("📩"))
+        ).queue()
     }
 
     private fun changeApplicationType(userID: String, roleID: String, name: String? = null, description: String? = null, emoji: String? = null, state: Boolean? = null, initializer: String? = null, member: Int? = null) {
@@ -86,7 +88,7 @@ class ApplicationManager(val config: Config, val translation: Translation) {
         return Embed {
             title = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuTitle)
             description = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuBody
-                .replace("%status%", "**Deactivated**")
+                .replace("%status%", translation.application.textStatusDeactivated)
                 .replace("%active_roles%", roleStringPair.first.toString()))
         }
     }
@@ -111,8 +113,7 @@ class ApplicationManager(val config: Config, val translation: Translation) {
 
             stringBuilder.append(
                 ColorTool().useCustomColorCodes(translation.application.textRoleStatusTemplate
-                    .replace("%emoji%", type.emoji)
-                    .replace("%role_name%", type.name)
+                    .replace("%roleId%", type.roleID)
                     .replace("%status%", deactivated)
                     .replace("%max_candidates%", "0")))
         }
@@ -132,8 +133,7 @@ class ApplicationManager(val config: Config, val translation: Translation) {
 
             stringBuilder.append(
                 ColorTool().useCustomColorCodes(translation.application.textRoleStatusTemplate
-                    .replace("%emoji%", type.emoji)
-                    .replace("%role_name%", type.name)
+                    .replace("%roleId%", type.roleId)
                     .replace("%status%", status!!)
                     .replace("%max_candidates%", type.member.toString())))
         }
