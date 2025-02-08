@@ -476,9 +476,16 @@ APPLICATION:
                         and cannot be retrieved.
                         "
 
+  EMBED_APPLICATION_MESSAGE_TITLE: "Active Applicationphase"
+  EMBED_APPLICATION_MESSAGE_BODY: "
+                        Current Status: %status%\n
+                        Active Roles:\n
+                        ```ansi\n%active_roles%```\n
+                        "
+
   TEXT_ROLE_STATUS_TEMPLATE: "&bold&&white&&teal&%emoji% | %role_name% &white&| %status% &white&| %max_candidates%\n&reset&"
-  TEXT_STATUS_ACTIVE: "&green&Active"
-  TEXT_STATUS_DEACTIVATED: "&red&Deactivated"
+  TEXT_STATUS_ACTIVE: "🟢 &green&Active"
+  TEXT_STATUS_DEACTIVATED: "🔴 &red&Deactivated"
 
   EMBED_CHOOSE_POSITION_TITLE: "Choose Position"
   EMBED_CHOOSE_POSITION_BODY: "Choose which position you want to activate"

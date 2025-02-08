@@ -470,6 +470,11 @@ data class TranslationApplication(
     @SerialName("EMBED_DEACTIVATION_MENU_BODY")
     val embedDeactivationMenuBody: String,
 
+    @SerialName("EMBED_APPLICATION_MESSAGE_TITLE")
+    val embedApplicationMessageTitle: String,
+    @SerialName("EMBED_APPLICATION_MESSAGE_BODY")
+    val embedApplicationMessageBody: String,
+
     @SerialName("TEXT_ROLE_STATUS_TEMPLATE")
     val textRoleStatusTemplate: String,
     @SerialName("TEXT_STATUS_ACTIVE")

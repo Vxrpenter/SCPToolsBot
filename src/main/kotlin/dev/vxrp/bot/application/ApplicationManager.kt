@@ -24,12 +24,32 @@ class ApplicationManager(val config: Config, val translation: Translation) {
         ).queue()
     }
 
+    fun sendDeactivationMenu() {
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.application.embedDeactivationMenuTitle)
+            description = ColorTool().useCustomColorCodes(translation.application.embedDeactivationMenuBody)
+        }
+    }
+
     fun editActivationMessage(userId: String, roleId: String, channel: TextChannel, messageId: String, name: String? = null, description: String? = null, emoji: String? = null, state: Boolean? = null, initializer: String? = null, member: Int? = null) {
         changeApplicationType(userId, roleId, name, description, emoji, state, initializer, member)
 
         channel.editMessage(messageId, "", listOf(createMessage(userId, false))).setActionRow(
             applicationActionRow(userId, applicationTypeMap[userId])
         ).queue()
+    }
+
+    fun sendApplicationMessage(userId: String, channel: TextChannel) {
+        val roleStringPair = createRoleString(userId, false)
+
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageTitle)
+            description = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageBody
+                .replace("%status%", translation.application.textStatusActive)
+                .replace("%active_roles%", roleStringPair.first.toString()))
+        }
+
+        channel.send("", listOf(embed)).queue()
     }
 
     private fun changeApplicationType(userID: String, roleID: String, name: String? = null, description: String? = null, emoji: String? = null, state: Boolean? = null, initializer: String? = null, member: Int? = null) {
@@ -119,13 +139,6 @@ class ApplicationManager(val config: Config, val translation: Translation) {
         }
 
         return Pair(stringBuilder, applicationTypeList)
-    }
-
-    fun sendDeactivationMenu() {
-        val embed = Embed {
-            title = ColorTool().useCustomColorCodes(translation.application.embedDeactivationMenuTitle)
-            description = ColorTool().useCustomColorCodes(translation.application.embedDeactivationMenuBody)
-        }
     }
 
     private fun applicationActionRow(userId: String, types: List<ApplicationType>?): Collection<ItemComponent> {
