@@ -2,6 +2,7 @@ package dev.vxrp.bot.events.buttons
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
+import dev.vxrp.bot.application.ApplicationManager
 import dev.vxrp.bot.application.applicationTypeMap
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
@@ -9,8 +10,11 @@ import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
+import org.slf4j.LoggerFactory
 
 class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {
+    private val logger = LoggerFactory.getLogger(ApplicationButtons::class.java)
+
     init {
         if (event.button.id?.startsWith("application_activation_add") == true && !nullCheck()) {
             val embed = Embed {
@@ -40,6 +44,14 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
                     }
                 }.build()
             ).setEphemeral(true).queue()
+        }
+
+        if (event.button.id?.startsWith("application_activation_complete_setup") == true && !nullCheck()) {
+            if (config.ticket.settings.applicationMessageChannel != "") {
+                ApplicationManager(config, translation).sendApplicationMessage(event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!)
+            } else {
+                logger.warn("Could not complete application setup, add channel id in the config to fix")
+            }
         }
     }
 
