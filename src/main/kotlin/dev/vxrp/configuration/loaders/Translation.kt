@@ -682,6 +682,9 @@ data class TranslationButtons(
     @SerialName("TEXT_APPLICATION_ACTIVATION_COMPLETE_SETUP")
     val textApplicationActivationCompleteSetup: String,
 
+    @SerialName("TEXT_APPLICATION_OPEN_TICKET")
+    val textApplicationOpenTickets: String,
+
     @SerialName("TEXT_NOTICE_OF_DEPARTURE_FILE")
     val textNoticeOfDepartureFile: String,
     @SerialName("TEXT_NOTICE_OF_DEPARTURE_ACCEPT")

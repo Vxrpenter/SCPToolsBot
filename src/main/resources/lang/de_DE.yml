@@ -463,8 +463,7 @@ APPLICATION:
   EMBED_ACTIVATION_MENU_BODY: "
                         Aktueller Status: %status%\n
                         Aktive Rollen:\n
-                        ```ansi\n%active_roles%```\n
-                        
+                        %active_roles%
                         _Diese Nachricht wird aktualisiert, wenn Positionen für den Bewerbungsstatus hinzugefügt werden_\n
                         
                         _Wenn du mit der Einrichtung fertig bist, klicke unten auf die Schaltfläche „Einrichtung abschließen“, um mit der Aktivierung fortzufahren._
@@ -481,12 +480,16 @@ APPLICATION:
   EMBED_APPLICATION_MESSAGE_BODY: "
                         Aktueller Status: %status%\n
                         Aktive Rollen:\n
-                        ```ansi\n%active_roles%```\n
+                        %active_roles%
                         "
 
-  TEXT_ROLE_STATUS_TEMPLATE: "&bold&&white&&teal&%emoji% | %role_name% &white&| %status% &white&| &bold&%max_candidates%\n&reset&"
-  TEXT_STATUS_ACTIVE: "🟢 &green&Aktiv"
-  TEXT_STATUS_DEACTIVATED: "🔴 &red&Deaktiviert"
+  TEXT_ROLE_STATUS_TEMPLATE: "
+                        > <@&%roleId%>\n
+                        - Status: **%status%**\n 
+                        - Mitglieder: **%max_candidates%**\n\n"
+
+  TEXT_STATUS_ACTIVE: "🟢 Aktiv"
+  TEXT_STATUS_DEACTIVATED: "🔴 Deaktiviert"
 
   EMBED_CHOOSE_POSITION_TITLE: "Position Wählen"
   EMBED_CHOOSE_POSITION_BODY: "Wähle welche Position du aktivieren willst"
@@ -823,6 +826,8 @@ BUTTONS:
   TEXT_APPLICATION_ACTIVATION_ADD: "Hinzufügen"
   TEXT_APPLICATION_ACTIVATION_REMOVE: "Entfernen"
   TEXT_APPLICATION_ACTIVATION_COMPLETE_SETUP: "Einrichtung abschließen"
+
+  TEXT_APPLICATION_OPEN_TICKET: "Ticket Öffnen"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "Abmeldung anfragen"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Ticket annehmen"

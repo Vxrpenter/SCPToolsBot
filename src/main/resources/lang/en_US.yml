@@ -462,8 +462,7 @@ APPLICATION:
   EMBED_ACTIVATION_MENU_BODY: "
                         Current Status: %status%\n
                         Active Roles:\n
-                        ```ansi\n%active_roles%```\n
-                        
+                        %active_roles%
                         _This message will be updated when adding positions for application status_\n
                         
                         _When you are done with setup, click the complete setup button down below to proceed with activation._
@@ -480,10 +479,14 @@ APPLICATION:
   EMBED_APPLICATION_MESSAGE_BODY: "
                         Current Status: %status%\n
                         Active Roles:\n
-                        ```ansi\n%active_roles%```\n
+                        %active_roles%
                         "
 
-  TEXT_ROLE_STATUS_TEMPLATE: "&bold&&white&&teal&%emoji% | %role_name% &white&| %status% &white&| %max_candidates%\n&reset&"
+  TEXT_ROLE_STATUS_TEMPLATE: "
+                          > <@&%roleId%>\n
+                          - Status: **%status%**\n 
+                          - Members: **%max_candidates%**\n\n"
+
   TEXT_STATUS_ACTIVE: "🟢 &green&Active"
   TEXT_STATUS_DEACTIVATED: "🔴 &red&Deactivated"
 
@@ -824,6 +827,8 @@ BUTTONS:
   TEXT_APPLICATION_ACTIVATION_ADD: "Add"
   TEXT_APPLICATION_ACTIVATION_REMOVE: "Remove"
   TEXT_APPLICATION_ACTIVATION_COMPLETE_SETUP: "Complete Setup"
+
+  TEXT_APPLICATION_OPEN_TICKET: "Open Ticket"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "File Notice of Departure"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Accept Ticket"
