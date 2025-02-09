@@ -1,6 +1,6 @@
 package dev.vxrp.util.enums
 
-enum class Databasetype {
+enum class DatabaseType {
     SQlITE,
     MYSQL,
     POSTGRESQL,

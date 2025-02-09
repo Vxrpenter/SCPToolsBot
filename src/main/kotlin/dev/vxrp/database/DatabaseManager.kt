@@ -2,7 +2,7 @@ package dev.vxrp.database
 
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.database.tables.*
-import dev.vxrp.util.enums.Databasetype
+import dev.vxrp.util.enums.DatabaseType
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -21,24 +21,24 @@ class DatabaseManager(val config: Config, folder: String, val file: String) {
             createTables()
         }
         if (config.settings.database.dataUsePredefined == "NONE") {
-            when (Databasetype.SQlITE.takeIf { !enumContains<Databasetype>(config.settings.database.customType) }
-                ?: Databasetype.valueOf(config.settings.database.customType)) {
-                Databasetype.SQlITE -> {
+            when (DatabaseType.SQlITE.takeIf { !enumContains<DatabaseType>(config.settings.database.customType) }
+                ?: DatabaseType.valueOf(config.settings.database.customType)) {
+                DatabaseType.SQlITE -> {
                     val url = "jdbc:sqlite:${config.settings.database.customUrl}"
 
                     Database.connect(url, driver = "org.sqlite.JDBC")
                     createTables()
                 }
 
-                Databasetype.MYSQL -> {
+                DatabaseType.MYSQL -> {
                     // WIP
                 }
 
-                Databasetype.POSTGRESQL -> {
+                DatabaseType.POSTGRESQL -> {
                     // WIP
                 }
 
-                Databasetype.MARiADB -> {
+                DatabaseType.MARiADB -> {
                     // WIP
                 }
             }
@@ -55,6 +55,7 @@ class DatabaseManager(val config: Config, folder: String, val file: String) {
             SchemaUtils.create(ConnectionTable.Connections)
             SchemaUtils.create(ApplicationTypeTable.ApplicationTypes)
             SchemaUtils.create(ApplicationTable.Applications)
+            SchemaUtils.create(MessageTable.Messages)
         }
     }
 
