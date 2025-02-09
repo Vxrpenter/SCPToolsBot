@@ -481,6 +481,8 @@ APPLICATION:
                         Aktueller Status: %status%\n
                         Aktive Rollen:\n
                         %active_roles%
+                        &filler&
+                        _Tickets können mit dem unteren Button oder mit dem Ticketsupport erstellt werden_
                         "
 
   TEXT_ROLE_STATUS_TEMPLATE: "
