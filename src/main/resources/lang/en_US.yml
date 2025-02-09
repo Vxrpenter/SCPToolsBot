@@ -480,6 +480,8 @@ APPLICATION:
                         Current Status: %status%\n
                         Active Roles:\n
                         %active_roles%
+                        &filler&
+                        _Creation of tickets can be done from the button below or the ticket support_
                         "
 
   TEXT_ROLE_STATUS_TEMPLATE: "
@@ -487,8 +489,8 @@ APPLICATION:
                           - Status: **%status%**\n 
                           - Members: **%max_candidates%**\n\n"
 
-  TEXT_STATUS_ACTIVE: "🟢 &green&Active"
-  TEXT_STATUS_DEACTIVATED: "🔴 &red&Deactivated"
+  TEXT_STATUS_ACTIVE: "🟢 Active"
+  TEXT_STATUS_DEACTIVATED: "🔴 Deactivated"
 
   EMBED_CHOOSE_POSITION_TITLE: "Choose Position"
   EMBED_CHOOSE_POSITION_BODY: "Choose which position you want to activate"
