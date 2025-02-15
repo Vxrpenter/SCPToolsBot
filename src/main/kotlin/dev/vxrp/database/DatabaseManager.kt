@@ -26,12 +26,15 @@ class DatabaseManager(val config: Config, folder: String, val file: String) {
                 DatabaseType.SQlITE -> {
                     val url = "jdbc:sqlite:${config.settings.database.customUrl}"
 
-                    Database.connect(url, driver = "org.sqlite.JDBC")
+                    Database.connect(url, driver = "com.mysql.cj.jdbc.Driver", config.settings.database.customUsername, config.settings.database.customUsername)
                     createTables()
                 }
 
                 DatabaseType.MYSQL -> {
-                    // WIP
+                    val url = "jdbc:mysql:${config.settings.database.customUrl}"
+
+                    Database.connect(url, driver = "")
+                    createTables()
                 }
 
                 DatabaseType.POSTGRESQL -> {
@@ -39,7 +42,10 @@ class DatabaseManager(val config: Config, folder: String, val file: String) {
                 }
 
                 DatabaseType.MARiADB -> {
-                    // WIP
+                    val url = "jdbc:mariadb:${config.settings.database.customUrl}"
+
+                    Database.connect(url, driver = "org.mariadb.jdbc.Driver", config.settings.database.customUsername, config.settings.database.customUsername)
+                    createTables()
                 }
             }
         }
