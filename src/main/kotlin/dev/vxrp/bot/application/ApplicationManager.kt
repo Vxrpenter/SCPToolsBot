@@ -1,21 +1,29 @@
 package dev.vxrp.bot.application
 
+import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.editMessage
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.tables.MessageTable
 import dev.vxrp.util.color.ColorTool
+import dev.vxrp.util.enums.MessageType
+import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.emoji.Emoji
+import net.dv8tion.jda.api.exceptions.ErrorResponseException
 import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
+import org.slf4j.LoggerFactory
 
 val applicationTypeMap: HashMap<String, MutableList<ApplicationType>> = hashMapOf()
 
 class ApplicationManager(val config: Config, val translation: Translation) {
+    val logger = LoggerFactory.getLogger(ApplicationManager::class.java)
+
     fun sendActivationMenu(userId: String, channel: TextChannel) {
         val embed = createMessage(userId, true)
 
@@ -39,7 +47,7 @@ class ApplicationManager(val config: Config, val translation: Translation) {
         ).queue()
     }
 
-    fun sendApplicationMessage(userId: String, channel: TextChannel) {
+    suspend fun sendApplicationMessage(api: JDA, userId: String, channel: TextChannel) {
         val roleStringPair = createRoleString(userId, false)
 
         val embed = Embed {
@@ -49,9 +57,25 @@ class ApplicationManager(val config: Config, val translation: Translation) {
                 .replace("%active_roles%", roleStringPair.first.toString()))
         }
 
-        channel.send("", listOf(embed)).addActionRow(
+        val applicationMessage = MessageTable().queryFromTable(MessageType.APPLICATION)
+
+        if (applicationMessage != null) {
+            val ttt = api.getTextChannelById(applicationMessage.id)?.editMessage(applicationMessage.id, "", listOf(embed))?.await()
+
+            if (ttt?.id == null) {
+                val message = channel.send("", listOf(embed)).addActionRow(
+                    Button.success("application_open", "Open Application").withEmoji(Emoji.fromFormatted("📩"))
+                ).await()
+                MessageTable().delete(applicationMessage.id)
+                MessageTable().insertIfNotExists(message.id, MessageType.APPLICATION, message.channelId)
+            }
+            return
+        }
+        val message = channel.send("", listOf(embed)).addActionRow(
             Button.success("application_open", "Open Application").withEmoji(Emoji.fromFormatted("📩"))
-        ).queue()
+        ).await()
+
+        MessageTable().insertIfNotExists(message.id, MessageType.APPLICATION, message.channelId)
     }
 
     private fun changeApplicationType(userID: String, roleID: String, name: String? = null, description: String? = null, emoji: String? = null, state: Boolean? = null, initializer: String? = null, member: Int? = null) {
