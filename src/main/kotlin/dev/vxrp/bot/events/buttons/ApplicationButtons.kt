@@ -6,6 +6,7 @@ import dev.vxrp.bot.application.ApplicationManager
 import dev.vxrp.bot.application.applicationTypeMap
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.tables.MessageTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory
 class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {
     private val logger = LoggerFactory.getLogger(ApplicationButtons::class.java)
 
-    init {
+    suspend fun init() {
         if (event.button.id?.startsWith("application_activation_add") == true && !nullCheck()) {
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.application.embedChoosePositionTitle)
@@ -48,10 +49,27 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
 
         if (event.button.id?.startsWith("application_activation_complete_setup") == true && !nullCheck()) {
             if (config.ticket.settings.applicationMessageChannel != "") {
-                ApplicationManager(config, translation).sendApplicationMessage(event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!)
+                event.message.delete().queue()
+                ApplicationManager(config, translation).sendApplicationMessage(event.jda, event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!)
+                event.reply_("Application successfully activated").setEphemeral(true).queue()
             } else {
                 logger.warn("Could not complete application setup, add channel id in the config to fix")
             }
+        }
+
+        if (event.button.id?.startsWith("application_open") == true) {
+            val embed = Embed {
+                title = ColorTool().useCustomColorCodes(translation.support.embedApplicationPositionTitle)
+                description = ColorTool().useCustomColorCodes(translation.support.embedApplicationPositionBody)
+            }
+
+            event.reply_("", listOf(embed)).addActionRow(
+                StringSelectMenu.create("application_position").also {
+                    for(type in config.ticket.applicationTypes) {
+                        it.addOption(type.name, type.roleID, type.description, Emoji.fromFormatted(type.emoji))
+                    }
+                }.build()
+            ).setEphemeral(true).queue()
         }
     }
 

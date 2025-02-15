@@ -18,7 +18,7 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
 
             TicketButtons(event, config, translation).init()
 
-            ApplicationButtons(event, config, translation)
+            ApplicationButtons(event, config, translation).init()
         }
     }
 }
