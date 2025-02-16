@@ -427,19 +427,19 @@ SUPPORT:
 
                         _This log message will be permanently deleted when the ticket is closed. Closed tickets can be found in the thread section of the main ticket channel._"
 
-  EMBED_TICKET_CLAIMED_TITLE: "Ticket Claimed by - %user%"
+  EMBED_TICKET_CLAIMED_TITLE: "Ticket Claimed"
   EMBED_TICKET_CLAIMED_BODY: "This ticket is now being managed by %user%."
 
-  EMBED_TICKET_OPENED_TITLE: "Ticket Reopened by - %user%"
+  EMBED_TICKET_OPENED_TITLE: "Ticket Reopened"
   EMBED_TICKET_OPENED_BODY: "This ticket has been reopened."
 
-  EMBED_TICKET_PAUSED_TITLE: "Ticket Paused by - %user%"
+  EMBED_TICKET_PAUSED_TITLE: "Ticket Paused"
   EMBED_TICKET_PAUSED_BODY: "This ticket has been paused. No messages are allowed but the ticket will be opened shortly in the future"
 
-  EMBED_TICKET_SUSPENDED_TITLE: "Ticket Suspended by - %user%"
+  EMBED_TICKET_SUSPENDED_TITLE: "Ticket Suspended"
   EMBED_TICKET_SUSPENDED_BODY: "This ticket has been suspended. Please contact staff on why and how it was suspended"
 
-  EMBED_TICKET_CLOSED_TITLE: "Ticket Closed by - %user%"
+  EMBED_TICKET_CLOSED_TITLE: "Ticket Closed"
   EMBED_TICKET_CLOSED_BODY: "This ticket has been closed. It will not be reopened"
 
   EMBED_LOG_CLAIMED_TITLE: "You Claimed Ticket - %name%"

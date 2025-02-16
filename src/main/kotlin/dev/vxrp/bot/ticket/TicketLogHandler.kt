@@ -82,7 +82,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         ).queue()
     }
 
-    fun deleteMesssage(ticketId: String) {
+    suspend fun deleteMesssage(ticketId: String) {
         var logMessage: String? = null
 
         transaction {
@@ -98,7 +98,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
             return
         }
 
-        channel.deleteMessageById(logMessage!!).queue()
+        channel.deleteMessageById(logMessage!!).await()
     }
 
     private suspend fun createMessage(ticketCreator: String, ticketHandler: User?, ticketStatus: TicketStatus, childChannel: ThreadChannel): MessageEmbed {

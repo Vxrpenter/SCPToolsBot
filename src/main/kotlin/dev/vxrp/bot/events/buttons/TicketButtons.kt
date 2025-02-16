@@ -27,10 +27,22 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
         }
 
         if (event.button.id?.startsWith("ticket_claim") == true) {
+            val embed = Embed {
+                title = ColorTool().useCustomColorCodes(translation.support.embedLogClaimedTitle
+                    .replace("%name%", event.channelId.toString()))
+                description = ColorTool().useCustomColorCodes(translation.support.embedLogClaimedBody)
+            }
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
             TicketSettingsHandler(api, config, translation).claimTicket(event.user, event.channel.asThreadChannel() ,event.channelId!!, event.user.id)
         }
 
         if (event.button.id?.startsWith("ticket_close") == true) {
+            val embed = Embed {
+                title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
+                    .replace("%name%", event.channelId.toString()))
+                description = ColorTool().useCustomColorCodes(translation.support.embedLogClosedBody)
+            }
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
             TicketSettingsHandler(api, config, translation).archiveTicket(event.user, event.channel.asThreadChannel(), event.channelId!!)
         }
 
@@ -50,18 +62,46 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
         }
 
         if (event.button.id?.startsWith("ticket_setting_open") == true) {
+            val embed = Embed {
+                title = ColorTool().useCustomColorCodes(translation.support.embedLogOpenedTitle
+                    .replace("%name%", event.channelId.toString()))
+                description = ColorTool().useCustomColorCodes(translation.support.embedLogOpenedBody)
+            }
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.message.delete().queue()
             TicketSettingsHandler(api, config, translation).openTicket(event.user, event.channel.asThreadChannel(), event.channelId!!)
         }
 
         if (event.button.id?.startsWith("ticket_setting_pause") == true) {
+            val embed = Embed {
+                title = ColorTool().useCustomColorCodes(translation.support.embedLogPausedTitle
+                    .replace("%name%", event.channelId.toString()))
+                description = ColorTool().useCustomColorCodes(translation.support.embedLogPausedBody)
+            }
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.message.delete().queue()
             TicketSettingsHandler(api, config, translation).pauseTicket(event.user, event.channel.asThreadChannel(), event.channelId!!)
         }
 
         if (event.button.id?.startsWith("ticket_setting_suspend") == true) {
+            val embed = Embed {
+                title = ColorTool().useCustomColorCodes(translation.support.embedLogSuspendedTitle
+                    .replace("%name%", event.channelId.toString()))
+                description = ColorTool().useCustomColorCodes(translation.support.embedLogSuspendedBody)
+            }
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.message.delete().queue()
             TicketSettingsHandler(api, config, translation).suspendTicket(event.user, event.channel.asThreadChannel(), event.channelId!!)
         }
 
         if (event.button.id?.startsWith("ticket_setting_close") == true) {
+            val embed = Embed {
+                title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
+                    .replace("%name%", event.channelId.toString()))
+                description = ColorTool().useCustomColorCodes(translation.support.embedLogClosedBody)
+            }
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.message.delete().queue()
             TicketSettingsHandler(api, config, translation).archiveTicket(event.user, event.channel.asThreadChannel(), event.channelId!!)
         }
 

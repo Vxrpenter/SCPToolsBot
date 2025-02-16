@@ -11,6 +11,8 @@ class TicketTable {
         val creator = text("creator")
         val handler = text("handler").nullable()
         val logMessage = text("log_message")
+        val statusMessage = text("status_message")
+        val message = text("message")
 
         override val primaryKey: PrimaryKey
             get() = PrimaryKey(id)
