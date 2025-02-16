@@ -5,6 +5,8 @@ import dev.vxrp.bot.status.data.Status
 import dev.vxrp.bot.ticket.data.Ticket
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Settings
+import dev.vxrp.database.tables.ApplicationTypeTable
+import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 import java.nio.file.Files
 import java.nio.file.Path
@@ -32,9 +34,6 @@ class ConfigManager {
                 }
             }
         }
-        query(Path("${System.getProperty("user.dir")}/configs/config.yml"),
-            Path("${System.getProperty("user.dir")}/configs/status-settings.json"),
-            Path("${System.getProperty("user.dir")}/configs/ticket-settings.json"))
     }
 
     fun query(configLocation: Path, statusLocation: Path, ticketLocation: Path): Config {
@@ -47,5 +46,21 @@ class ConfigManager {
         val ticket = Yaml.default.decodeFromString(Ticket.serializer(), ticketFile.readText())
 
         return Config(settings, status, ticket)
+    }
+
+    fun databaseManagement(configLocation: Path, statusLocation: Path, ticketLocation: Path) {
+        val configs = query(configLocation, statusLocation, ticketLocation)
+
+        val idList = mutableListOf<String>()
+
+        for (type in configs.ticket.applicationTypes) {
+            if (ApplicationTypeTable().exists(type.roleID)) {
+                ApplicationTypeTable().addToDatabase(type.roleID, false, null)
+            }
+
+            idList.add(type.roleID)
+        }
+
+        ApplicationTypeTable().deleteRedundantValues(idList)
     }
 }
