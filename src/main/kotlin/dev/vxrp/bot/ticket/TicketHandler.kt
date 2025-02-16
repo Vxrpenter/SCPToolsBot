@@ -54,24 +54,8 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
             return null
         }
         val message = TicketMessageHandler(api, config, translation).sendMessage(ticketType, child, ticketCreator, modalId, modalValue)
-        addToDatabase(child.id, LocalDate.now(), ticketType, ticketStatus, ticketCreator, ticketHandler, logMessage, message.id, "CURRENTLY NOT IMPLEMENTED")
+        TicketTable().addToDatabase(child.id, LocalDate.now(), ticketType, ticketStatus, ticketCreator, ticketHandler, logMessage, message.id, "CURRENTLY NOT IMPLEMENTED")
         return child
-    }
-
-    private fun addToDatabase(ticketId: String, date: LocalDate, ticketType: TicketType, ticketStatus: TicketStatus, ticketCreator: String, ticketHandler: User?, ticketLogMessage: String, ticketMessage: String, ticketStatusMessage: String) {
-        transaction {
-            TicketTable.Tickets.insert {
-                it[id] = ticketId
-                it[type] = ticketType.toString()
-                it[status] = ticketStatus.toString()
-                it[creation_date] = date.toString()
-                it[creator] = ticketCreator
-                it[handler] = ticketHandler?.id
-                it[logMessage] = ticketLogMessage
-                it[message] = ticketMessage
-                it[statusMessage] = ticketStatusMessage
-            }
-        }
     }
 
     private fun retrieveSerial(): Long {

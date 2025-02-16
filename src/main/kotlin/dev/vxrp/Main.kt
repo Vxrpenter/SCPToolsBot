@@ -8,6 +8,7 @@ import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.configuration.managers.ConfigManager
 import dev.vxrp.configuration.managers.TranslationManager
+import dev.vxrp.database.DatabaseManager
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
@@ -31,6 +32,11 @@ fun main() {
     setLoggingLevel(config)
     val translation = translationManager.query(System.getProperty("user.dir"), config.settings.loadTranslation)
 
+    val databaseManager = DatabaseManager(config, "database", "data.db")
+
+    configManager.databaseManagement(Path("${System.getProperty("user.dir")}/configs/config.yml"),
+        Path("${System.getProperty("user.dir")}/configs/status-settings.json"),
+        Path("${System.getProperty("user.dir")}/configs/ticket-settings.json"))
     ScpToolsBot(config, translation)
 }
 
