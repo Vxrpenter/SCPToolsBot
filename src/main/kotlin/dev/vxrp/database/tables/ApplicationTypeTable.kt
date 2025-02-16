@@ -1,10 +1,7 @@
 package dev.vxrp.database.tables
 
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 
@@ -48,6 +45,15 @@ class ApplicationTypeTable {
         transaction {
             ApplicationTypes.insert {
                 it[ApplicationTypes.roleId] = roleId
+                it[ApplicationTypes.active] = active
+                it[ApplicationTypes.initializer] = initializer
+            }
+        }
+    }
+
+    fun changeType(roleId: String, active: Boolean, initializer: String?) {
+        transaction {
+            ApplicationTypes.update({ ApplicationTypes.roleId eq roleId }) {
                 it[ApplicationTypes.active] = active
                 it[ApplicationTypes.initializer] = initializer
             }
