@@ -481,7 +481,7 @@ APPLICATION:
                         Aktueller Status: %status%\n
                         Aktive Rollen:\n
                         %active_roles%
-                        _Tickets können mit dem unteren Button oder mit dem Ticketsupport erstellt werden_
+                        _Um ein Ticket zu öffnen nutze den unten angezeigten Knopf oder den Ticket-Support_
                         "
 
   TEXT_ROLE_STATUS_TEMPLATE: "
@@ -828,7 +828,7 @@ BUTTONS:
   TEXT_APPLICATION_ACTIVATION_REMOVE: "Entfernen"
   TEXT_APPLICATION_ACTIVATION_COMPLETE_SETUP: "Einrichtung abschließen"
 
-  TEXT_APPLICATION_OPEN_TICKET: "Ticket Öffnen"
+  TEXT_APPLICATION_OPEN_TICKET: "Bewerbung Öffnen"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "Abmeldung anfragen"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Ticket annehmen"

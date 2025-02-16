@@ -15,6 +15,7 @@ import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.emoji.Emoji
+import net.dv8tion.jda.api.exceptions.ErrorResponseException
 import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
 import org.slf4j.LoggerFactory
@@ -58,10 +59,11 @@ class ApplicationManager(val config: Config, val translation: Translation) {
         val applicationMessage = MessageTable().queryFromTable(MessageType.APPLICATION)
 
         if (applicationMessage != null) {
-            val editedMessage = api.getTextChannelById(applicationMessage.channelId)?.editMessage(applicationMessage.id, "", listOf(embed))?.await()
-            if (editedMessage?.id == null) {
+            try {
+                api.getTextChannelById(applicationMessage.channelId)?.editMessage(applicationMessage.id, "", listOf(embed))?.await()
+            } catch (e: ErrorResponseException) {
                 val message = channel.send("", listOf(embed)).addActionRow(
-                    Button.success("application_open", "Open Application").withEmoji(Emoji.fromFormatted("📩"))
+                    Button.success("application_open", translation.buttons.textApplicationOpenTickets).withEmoji(Emoji.fromFormatted("📩"))
                 ).await()
                 MessageTable().delete(applicationMessage.id)
                 MessageTable().insertIfNotExists(message.id, MessageType.APPLICATION, message.channelId)
@@ -69,7 +71,7 @@ class ApplicationManager(val config: Config, val translation: Translation) {
             return
         }
         val message = channel.send("", listOf(embed)).addActionRow(
-            Button.success("application_open", "Open Application").withEmoji(Emoji.fromFormatted("📩"))
+            Button.success("application_open", translation.buttons.textApplicationOpenTickets).withEmoji(Emoji.fromFormatted("📩"))
         ).await()
 
         for (type in applicationTypeMap[userId]!!) {
