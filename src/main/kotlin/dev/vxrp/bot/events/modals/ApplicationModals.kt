@@ -13,7 +13,7 @@ class ApplicationModals(val event: ModalInteractionEvent, val config: Config, va
             val members = event.values[0].asString.toIntOrNull()
 
             event.deferEdit().queue()
-            ApplicationManager(config, translation).editActivationMessage(event.user.id, roleId, event.channel.asTextChannel(), messageId, member = members, state = true)
+            ApplicationManager(config, translation).editActivationMessage(event.user.id, roleId, event.channel.asTextChannel(), messageId, member = members, state = true, initializer = event.user.id)
         }
     }
 }

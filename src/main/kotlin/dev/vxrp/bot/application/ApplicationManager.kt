@@ -7,6 +7,7 @@ import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.tables.ApplicationTypeTable
 import dev.vxrp.database.tables.MessageTable
 import dev.vxrp.util.color.ColorTool
 import dev.vxrp.util.enums.MessageType
@@ -14,7 +15,6 @@ import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.emoji.Emoji
-import net.dv8tion.jda.api.exceptions.ErrorResponseException
 import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
 import org.slf4j.LoggerFactory
@@ -24,12 +24,10 @@ val applicationTypeMap: HashMap<String, MutableList<ApplicationType>> = hashMapO
 class ApplicationManager(val config: Config, val translation: Translation) {
     val logger = LoggerFactory.getLogger(ApplicationManager::class.java)
 
-    fun sendActivationMenu(userId: String, channel: TextChannel) {
+    fun sendActivationMenu(userId: String, channel: TextChannel): Pair<MessageEmbed, Collection<ItemComponent>> {
         val embed = createMessage(userId, true)
 
-        channel.send("", listOf(embed)).addActionRow(
-            applicationActionRow(userId, null)
-        ).queue()
+        return Pair(embed, applicationActionRow(userId, null))
     }
 
     fun sendDeactivationMenu() {
@@ -60,9 +58,8 @@ class ApplicationManager(val config: Config, val translation: Translation) {
         val applicationMessage = MessageTable().queryFromTable(MessageType.APPLICATION)
 
         if (applicationMessage != null) {
-            val ttt = api.getTextChannelById(applicationMessage.id)?.editMessage(applicationMessage.id, "", listOf(embed))?.await()
-
-            if (ttt?.id == null) {
+            val editedMessage = api.getTextChannelById(applicationMessage.channelId)?.editMessage(applicationMessage.id, "", listOf(embed))?.await()
+            if (editedMessage?.id == null) {
                 val message = channel.send("", listOf(embed)).addActionRow(
                     Button.success("application_open", "Open Application").withEmoji(Emoji.fromFormatted("📩"))
                 ).await()
@@ -75,6 +72,9 @@ class ApplicationManager(val config: Config, val translation: Translation) {
             Button.success("application_open", "Open Application").withEmoji(Emoji.fromFormatted("📩"))
         ).await()
 
+        for (type in applicationTypeMap[userId]!!) {
+            ApplicationTypeTable().changeType(type.roleId, type.state, type.initializer)
+        }
         MessageTable().insertIfNotExists(message.id, MessageType.APPLICATION, message.channelId)
     }
 
