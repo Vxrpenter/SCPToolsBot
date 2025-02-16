@@ -51,6 +51,20 @@ class ApplicationTypeTable {
         }
     }
 
+    fun query(roleId: String): ApplicationType? {
+        var applicationType: ApplicationType? = null
+
+        transaction {
+            ApplicationTypes.selectAll()
+                .where {ApplicationTypes.roleId eq roleId}
+                .forEach {
+                    applicationType = ApplicationType(it[ApplicationTypes.roleId], it[ApplicationTypes.active], it[ApplicationTypes.initializer])
+                }
+        }
+
+        return applicationType
+    }
+
     fun changeType(roleId: String, active: Boolean, initializer: String?) {
         transaction {
             ApplicationTypes.update({ ApplicationTypes.roleId eq roleId }) {
@@ -59,4 +73,8 @@ class ApplicationTypeTable {
             }
         }
     }
+
+    data class ApplicationType(val roleId: String,
+        val active: Boolean,
+        val initializer: String?)
 }

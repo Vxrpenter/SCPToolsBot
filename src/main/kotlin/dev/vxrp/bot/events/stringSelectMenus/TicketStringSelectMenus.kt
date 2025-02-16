@@ -5,6 +5,7 @@ import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.modals.SupportModals
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.tables.ApplicationTypeTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent
@@ -67,7 +68,11 @@ class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val confi
         }
 
         if (event.selectMenu.id?.startsWith("application_position") == true) {
-            event.replyModal(SupportModals(translation).supportApplicationModal()).queue()
+            if (!ApplicationTypeTable().query(event.selectedOptions[0].value)!!.active) {
+                event.reply_("Position currently not active").setEphemeral(true).queue()
+            } else {
+                event.replyModal(SupportModals(translation).supportApplicationModal(event.selectedOptions[0].value)).queue()
+            }
         }
     }
 }
