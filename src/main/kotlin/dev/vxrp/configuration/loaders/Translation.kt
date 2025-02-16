@@ -392,6 +392,11 @@ data class TranslationSupport(
     @SerialName("EMBED_TICKET_COMPLAINT_BODY")
     val embedTicketComplaintBody: String,
 
+    @SerialName("EMBED_TICKET_APPLICATION_TITLE")
+    val embedTicketApplicationTitle: String,
+    @SerialName("EMBED_TICKET_APPLICATION_BODY")
+    val embedTicketApplicationBody: String,
+
     @SerialName("EMBED_TICKET_CREATED_TITLE")
     val embedTicketCreatedTitle: String,
     @SerialName("EMBED_TICKET_CREATED_BODY")

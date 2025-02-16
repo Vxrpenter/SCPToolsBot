@@ -328,10 +328,10 @@ SUPPORT:
                           Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
 
                           **Typ:** Generell\n
-                          **Ersteller:**  %issuer%\n
+                          **Ersteller:** <@%issuerId%>\n
 
                           **Betreff:**\n
-                          ```%subject%```\n
+                          ```%subject%```
 
                           **Erläuterung:**\n
                           ```%explanation%```"
@@ -341,11 +341,11 @@ SUPPORT:
                         Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
 
                         **Typ:** Report\n
-                        **Ersteller:**  %issuer%\n
+                        **Ersteller:** <@%issuerId%>\n
                         **Gemeldeter Benutzer:** %reported%\n
 
                         **Grund:**\n
-                        ```%reason%```\n
+                        ```%reason%```
 
                         **Beweise:**\n
                         ```%proof%```"
@@ -355,16 +355,16 @@ SUPPORT:
                         Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
 
                         **Typ:** Error\n
-                        **Ersteller:**  %issuer%\n
+                        **Ersteller:** <@%issuerId%>\n
 
                         **Problem:**\n
-                        ```%problem%```\n
+                        ```%problem%```
 
                         **Häufigkeit:**\n
                         ```%times%```
 
                         **Reproduktion:**\n
-                        ```%reproduce%```\n
+                        ```%reproduce%```
 
                         **Zusätzliche Informationen:**\n
                         ```%additional%```"
@@ -374,27 +374,51 @@ SUPPORT:
                         Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
 
                         **Typ:** Entbannung\n
-                        **Ersteller:**  %issuer%\n
+                        **Ersteller:** <@%issuerId%>\n
 
                         **SteamID:**\n
                         ||%steamId%||
 
                         **Grund zur Entbannung:**\n
-                        ```%reason%```\n"
+                        ```%reason%```"
 
   EMBED_TICKET_COMPLAINT_TITLE: "%name% - Complaint"
   EMBED_TICKET_COMPLAINT_BODY: "
                         Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
 
                         **Type:** Complaint\n
-                        **Issuer:**  %issuer%\n
+                        **Ersteller:** <@%issuerId%>\n
                         **Beschwerde Über:** %staff%\n
 
                         **Grund:**\n
                         ```%reason%```
 
                         **Beweise:**\n
-                        ```%proof%```\n"
+                        ```%proof%```"
+
+  EMBED_TICKET_APPLICATION_TITLE: "%name% - Bewerbung"
+  EMBED_TICKET_APPLICATION_BODY: "
+                        Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
+
+                        **Type:** Application\n
+                        **Ersteller:** <@%issuerId%>
+                        
+                        ## Rolle: <@&%roleId%>\n
+
+                        **Name:**\n
+                        ```%name%```
+                        
+                        **Alter:**\n
+                        ```%age%```
+                        
+                        **Spielzeit:**\n
+                        ```%playtime%```
+
+                        **Grund der Bewerbung:**\n
+                        ```%reason%```
+
+                        **Skills:**\n
+                        ```%skills%```"
 
   EMBED_TICKET_CREATED_TITLE: "Ticket Created"
   EMBED_TICKET_CREATED_BODY: "

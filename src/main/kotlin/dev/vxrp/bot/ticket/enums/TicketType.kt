@@ -5,5 +5,6 @@ enum class TicketType {
     REPORT,
     ERROR,
     UNBAN,
-    COMPLAINT
+    COMPLAINT,
+    APPLICATION
 }
