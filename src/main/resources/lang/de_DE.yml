@@ -428,19 +428,19 @@ SUPPORT:
 
                         _Diese Log-Nachricht wird dauerhaft gelöscht, wenn das Ticket geschlossen wird. Geschlossene Tickets findest du im Thread-Bereich des Hauptticket-Kanals._"
 
-  EMBED_TICKET_CLAIMED_TITLE: "Ticket beansprucht von - %user%"
+  EMBED_TICKET_CLAIMED_TITLE: "Ticket Beansprucht"
   EMBED_TICKET_CLAIMED_BODY: "Dieses ticket wird jetzt von %user% bearbeitet."
 
-  EMBED_TICKET_OPENED_TITLE: "Ticket wieder geöffnet von - %user%"
+  EMBED_TICKET_OPENED_TITLE: "Ticket wieder Geöffnet"
   EMBED_TICKET_OPENED_BODY: "Dieses Ticket wurde erneut geöffnet."
 
-  EMBED_TICKET_PAUSED_TITLE: "Ticket pausiert von - %user%"
+  EMBED_TICKET_PAUSED_TITLE: "Ticket Pausiert"
   EMBED_TICKET_PAUSED_BODY: "Dieses Ticket wurde pausiert. Aktuell sind keine Nachrichten erlaubt jedoch wird dieses Ticket bald erneut geöffnet"
 
-  EMBED_TICKET_SUSPENDED_TITLE: "Ticket gesperrt von - %user%"
+  EMBED_TICKET_SUSPENDED_TITLE: "Ticket Gesperrt"
   EMBED_TICKET_SUSPENDED_BODY: "Dieses Ticket wurde gesperrt. Bitte kontaktiere das Team um mehr Informationen zu erhalten"
 
-  EMBED_TICKET_CLOSED_TITLE: "Ticket geschlossen von - %user%"
+  EMBED_TICKET_CLOSED_TITLE: "Ticket Geschlossen"
   EMBED_TICKET_CLOSED_BODY: "Dieses Ticket wurde geschlossen. Es wird nicht erneut geöffnet werden"
 
   EMBED_LOG_CLAIMED_TITLE: "Du hast das Ticket beansprucht - %name%"
