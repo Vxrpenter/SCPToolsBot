@@ -103,6 +103,22 @@
         },
         "lock_on_default": false
       }
+    },
+    {
+      "name": "Application",
+      "type": "support::APPLICATION",
+      "roles": [],
+      "parent_channel": "",
+      "child_rules": {
+        "parent_name": "Ticket #%r%",
+        "allow_settings": true,
+        "use_status_bar": true,
+        "logging": {
+          "messages": true,
+          "files": true
+        },
+        "lock_on_default": false
+      }
     }
   ]
 }

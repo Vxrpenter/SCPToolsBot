@@ -60,6 +60,12 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
                     messageActionRow(TicketStatus.OPEN, TicketType.COMPLAINT, false)
                 ).await()
             }
+
+            TicketType.APPLICATION -> {
+                return channel.send("", listOf(applicationMessage(channel, userId, modalId, modalValues))).setActionRow(
+                    messageActionRow(TicketStatus.OPEN, TicketType.APPLICATION, false)
+                ).await()
+            }
         }
     }
     fun editMessage(ticketId: String, ticketChannel: ThreadChannel, ticketStatus: TicketStatus? = null) {
@@ -98,7 +104,7 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
             }
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketGeneralTitle.replace("%name%", channel.name))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketGeneralBody
-                .replace("%issuer%", "<@$userId>")
+                .replace("%issuerId%", userId)
                 .replace("%subject%", modalValues[0].asString)
                 .replace("%explanation%", modalValues[1].asString))
             timestamp = Instant.now()
@@ -114,7 +120,7 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
             }
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketReportTitle.replace("%name%", channel.name))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketReportBody
-                .replace("%issuer%", "<@$userId>")
+                .replace("%issuerId%", userId)
                 .replace("%reported%", "<@${modalId.split(":")[1]}>")
                 .replace("%reason%", modalValues[0].asString)
                 .replace("%proof%", modalValues[1].asString))
@@ -131,7 +137,7 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
             }
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketErrorTitle.replace("%name%", channel.name))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketErrorBody
-                .replace("%issuer%", "<@$userId>")
+                .replace("%issuerId%", userId)
                 .replace("%problem%", modalValues[0].asString)
                 .replace("%times%", modalValues[1].asString)
                 .replace("%reproduce%", modalValues[2].asString)
@@ -149,7 +155,7 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
             }
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketUnbanTitle.replace("%name%", channel.name))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketUnbanBody
-                .replace("%issuer%", "<@$userId>")
+                .replace("%issuerId%", userId)
                 .replace("%steamId%", modalValues[0].asString)
                 .replace("%reason%", modalValues[1].asString))
             timestamp = Instant.now()
@@ -175,10 +181,30 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
             }
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketComplaintTitle.replace("%name%", channel.name))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketComplaintBody
-                .replace("%issuer%", "<@$userId>".replace("<@anonymous>", "**Anonymous**"))
+                .replace("%issuerId%", userId.replace("<@anonymous>", "**Anonymous**"))
                 .replace("%staff%", staff)
                 .replace("%reason%", modalValues[0].asString)
                 .replace("%proof%", modalValues[1].asString))
+            timestamp = Instant.now()
+        }
+    }
+
+    private suspend fun applicationMessage(channel: ThreadChannel, userId: String, modalId: String, modalValues: MutableList<ModalMapping>): MessageEmbed {
+        return Embed {
+            author {
+                val user = api.retrieveUserById(userId).await()
+                iconUrl = user.avatarUrl
+                name = user.name
+            }
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketApplicationTitle.replace("%name%", channel.name))
+            description = ColorTool().useCustomColorCodes(translation.support.embedTicketApplicationBody
+                .replace("%issuerId%", userId)
+                .replace("%roleId%", modalId.split(":")[1])
+                .replace("%name%", modalValues[0].asString))
+                .replace("%age%", modalValues[1].asString)
+                .replace("%playtime%", modalValues[2].asString)
+                .replace("%reason%", modalValues[3].asString)
+                .replace("%skills%", modalValues[4].asString)
             timestamp = Instant.now()
         }
     }

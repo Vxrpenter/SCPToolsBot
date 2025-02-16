@@ -327,10 +327,10 @@ SUPPORT:
                           Support Ticket getting reviewed. A response from our moderation team may take a bit\n
 
                           **Type:** General\n
-                          **Issuer:**  %issuer%\n
+                          **Issuer:** <@%issuerId%>\n
 
                           **Subject:**\n
-                          ```%subject%```\n
+                          ```%subject%```
 
                           **Explanation:**\n
                           ```%explanation%```"
@@ -340,11 +340,11 @@ SUPPORT:
                         Support Ticket getting reviewed. A response from our moderation team may take a bit\n
                         
                         **Type:** Report\n
-                        **Issuer:**  %issuer%\n
+                        **Issuer:** <@%issuerId%>\n
                         **Reported User:** %reported%\n
                         
                         **Reason:**\n
-                        ```%reason%```\n
+                        ```%reason%```
                         
                         **Proof:**\n
                         ```%proof%```"
@@ -354,16 +354,16 @@ SUPPORT:
                         Support Ticket getting reviewed. A response from our moderation team may take a bit\n
 
                         **Type:** Error\n
-                        **Issuer:**  %issuer%\n
+                        **Issuer:** <@%issuerId%>\n
 
                         **Problem:**\n
-                        ```%problem%```\n
+                        ```%problem%```
 
                         **Times:**\n
-                        ```%times%```\n
+                        ```%times%```
                         
                         **Reproduce:**\n
-                        ```%reproduce%```\n
+                        ```%reproduce%```
 
                         **Additional:**\n
                         ```%additional%```"
@@ -373,27 +373,51 @@ SUPPORT:
                         Support Ticket getting reviewed. A response from our moderation team may take a bit\n
 
                         **Type:** Unban\n
-                        **Issuer:**  %issuer%\n
+                        **Issuer:** <@%issuerId%>\n
 
                         **SteamID:**\n
-                        ||%steamId%||\n
+                        ||%steamId%||
 
                         **Reason:**\n
-                        ```%reason%```\n"
+                        ```%reason%```"
 
   EMBED_TICKET_COMPLAINT_TITLE: "%name% - Complaint"
   EMBED_TICKET_COMPLAINT_BODY: "
                         Support Ticket getting reviewed. A response from our moderation team may take a bit\n
 
                         **Type:** Complaint\n
-                        **Issuer:**  %issuer%\n
+                        **Issuer:** <@%issuerId%>\n
                         **Complained about:** %staff%\n
 
                         **Reason:**\n
-                        ```%reason%```\n
+                        ```%reason%```
 
                         **Proof:**\n
-                        ```%proof%```\n"
+                        ```%proof%```"
+
+  EMBED_TICKET_APPLICATION_TITLE: "%name% - Application"
+  EMBED_TICKET_APPLICATION_BODY: "
+                        Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+
+                        **Type:** Application\n
+                        **Issuer:** <@%issuerId%>
+                        
+                        ## Role: <@&%roleId%>\n
+                        
+                        **Name:**\n
+                        ```%name%```
+                        
+                        **Age:**\n
+                        ```%age%```
+                        
+                        **Playtime:**\n
+                        ```%playtime%```
+                        
+                        **Reason of Application:**\n
+                        ```%reason%```
+                        
+                        **Skills:**\n
+                        ```%skills%```"
 
   EMBED_TICKET_CREATED_TITLE: "Ticket Created"
   EMBED_TICKET_CREATED_BODY: "

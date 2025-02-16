@@ -39,12 +39,19 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
             val child = handler.createTicket(TicketType.UNBAN, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             respond(child, event)
         }
+
         if (event.modalId.startsWith("support_complaint")) {
             var creator = "anonymous"
             if (event.modalId.split(":")[2] == "false") creator = event.user.id
 
             val handler = TicketHandler(api, config, translation)
             val child = handler.createTicket(TicketType.COMPLAINT, TicketStatus.OPEN, creator, null, event.modalId, event.values)
+            respond(child, event)
+        }
+
+        if (event.modalId.startsWith("support_application")) {
+            val handler = TicketHandler(api, config, translation)
+            val child = handler.createTicket(TicketType.APPLICATION, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             respond(child, event)
         }
     }
