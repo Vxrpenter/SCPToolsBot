@@ -128,8 +128,8 @@ class SupportModals(val translation: Translation) {
         ).build()
     }
 
-    fun supportApplicationModal(): Modal {
-        return Modal.create("support_application", translation.support.modalApplicationTitle).addComponents(
+    fun supportApplicationModal(roleId: String): Modal {
+        return Modal.create("support_application$roleId", translation.support.modalApplicationTitle).addComponents(
             ActionRow.of(
                 TextInputBuilder(
                     id= "support_application_name",
