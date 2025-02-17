@@ -5,6 +5,7 @@ import dev.vxrp.bot.permissions.enums.PermissionType
 import dev.vxrp.bot.ticket.enums.TicketType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.User
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -13,28 +14,28 @@ class PermissionManager(val config: Config, val translation: Translation) {
     private val logger: Logger = LoggerFactory.getLogger(PermissionManager::class.java)
     private val insufficientValuesMessage = "Please supply the needed values for permission check"
 
-    suspend fun determinePermissions(user: User, permissionType: PermissionType, ticketType: TicketType? = null): Boolean {
+    suspend fun determinePermissions(user: User, permissionType: PermissionType, ticketType: TicketType? = null): Pair<Boolean, MessageEmbed?> {
         val rolePair: Pair<List<String>, List<String>>? = roleValidation(user, permissionType, ticketType)
+
         if (rolePair == null) {
             logger.warn("Permission denied due to failures in permission chain")
         }
 
         if (permissionType == PermissionType.TICKET && ticketType == null || permissionType == PermissionType.TICKET_LOGS && ticketType == null) {
             logger.error(this.insufficientValuesMessage)
-            return false
+            return Pair(false, null)
         }
 
         for (role in rolePair!!.first) {
             if (rolePair.second.contains(role)) {
-                PermissionMessageHandler(config, translation).sendSpecifiedMessage(permissionType, true)
                 logger.debug("Permission action for user: {}, for permission type: {}, permitted", user.id, permissionType)
-                return true
+                return Pair(true, null)
             }
         }
 
-        PermissionMessageHandler(config, translation).sendSpecifiedMessage(permissionType, false)
+        val message = PermissionMessageHandler(config, translation).getSpecificMessage(permissionType)
         logger.debug("Permission action for user: {}, for permission type: {}, denied", user.id, permissionType)
-        return false
+        return Pair(false, message)
     }
 
     private suspend fun queryUserRoles(user: User): MutableList<String>? {
