@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Translation(
+    @SerialName("PERMISSIONS")
+    val permissions: TranslationPermissions,
     @SerialName("SETTINGS")
     val settings: TranslationSettings,
     @SerialName("STATUS")
@@ -29,6 +31,18 @@ data class Translation(
     val buttons: TranslationButtons,
     @SerialName("SELECT_MENUS")
     val selectMenus: TranslationSelectMenus
+)
+
+@Serializable
+data class TranslationPermissions(
+    @SerialName("EMBED_TICKET_DENIED_TITLE")
+    val embedTicketDeniedTitle: String,
+    @SerialName("EMBED_TICKET_DENIED_BODY")
+    val embedTicketDeniedBody: String,
+    @SerialName("TEXT_INSUFFICIENT_PERMISSION")
+    val textInsufficientPermission: String,
+    @SerialName("TEXT_INTERACTION_DISABLED")
+    val textInteractionDisabled: String
 )
 
 @Serializable
