@@ -2,17 +2,17 @@ package dev.vxrp.bot.ticket
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.Embed
-import dev.minn.jda.ktx.messages.reply_
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.ticket.enums.TicketStatus
+import dev.vxrp.bot.ticket.enums.TicketType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.tables.ApplicationTable
 import dev.vxrp.database.tables.TicketTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.User
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
@@ -37,9 +37,13 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
 
         val handlerUser = api.retrieveUserById(userId).await()
 
-        updateTicketHandler(id, userId)
+        TicketTable().updateTicketHandler(id, userId)
         TicketMessageHandler(api, config, translation).editMessage(id, ticketChannel)
         TicketLogHandler(api, config, translation).editMessage(id, handler = handlerUser)
+
+        if (TicketTable().getTicketType(id) == TicketType.APPLICATION) {
+            ApplicationTable().updateTicketHandler(id, handlerUser.id)
+        }
     }
 
     suspend fun openTicket(user: User, ticketChannel: ThreadChannel, id: String) {
@@ -55,7 +59,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         ticketChannel.send("", listOf(embed)).queue()
         TicketMessageHandler(api, config, translation).editMessage(id, ticketChannel, ticketStatus = TicketStatus.OPEN)
         TicketLogHandler(api, config, translation).editMessage(id, ticketStatus = TicketStatus.OPEN)
-        updateTicketStatus(id, TicketStatus.OPEN)
+        TicketTable().updateTicketStatus(id, TicketStatus.OPEN)
         val child = api.getThreadChannelById(id)!!
         child.manager.setLocked(false).queue()
     }
@@ -73,7 +77,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         ticketChannel.send("", listOf(embed)).queue()
         TicketMessageHandler(api, config, translation).editMessage(id, ticketChannel, ticketStatus = TicketStatus.PAUSED)
         TicketLogHandler(api, config, translation).editMessage(id, ticketStatus = TicketStatus.PAUSED)
-        updateTicketStatus(id, TicketStatus.PAUSED)
+        TicketTable().updateTicketStatus(id, TicketStatus.PAUSED)
         val child = api.getThreadChannelById(id)!!
         child.manager.setLocked(true).queue()
     }
@@ -91,7 +95,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         ticketChannel.send("", listOf(embed)).queue()
         TicketMessageHandler(api, config, translation).editMessage(id, ticketChannel, ticketStatus = TicketStatus.SUSPENDED)
         TicketLogHandler(api, config, translation).editMessage(id, ticketStatus = TicketStatus.SUSPENDED)
-        updateTicketStatus(id, TicketStatus.SUSPENDED)
+        TicketTable().updateTicketStatus(id, TicketStatus.SUSPENDED)
         val child = api.getThreadChannelById(id)!!
         child.manager.setLocked(true).queue()
     }
@@ -108,9 +112,13 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         }
         ticketChannel.send("", listOf(embed)).queue()
         TicketLogHandler(api, config, translation).deleteMesssage(id)
-        updateTicketStatus(id, TicketStatus.CLOSED)
+        TicketTable().updateTicketStatus(id, TicketStatus.CLOSED)
         val child = api.getThreadChannelById(id)!!
         child.manager.setArchived(true).queue()
+
+        if (TicketTable().getTicketType(id) == TicketType.APPLICATION) {
+            ApplicationTable().delete(id)
+        }
     }
 
     fun settingsActionRow(status: TicketStatus): Collection<ItemComponent> {
@@ -135,34 +143,5 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         rows.add(close)
 
         return rows
-    }
-
-    private fun updateTicketStatus(ticketId: String, ticketStatus: TicketStatus) {
-        transaction {
-            TicketTable.Tickets.update({ TicketTable.Tickets.id.eq(ticketId) }) {
-                it[status] = ticketStatus.toString()
-            }
-        }
-    }
-
-    fun getTicketStatus(ticketId: String): TicketStatus? {
-        var status: TicketStatus? = null
-        transaction {
-            TicketTable.Tickets.selectAll()
-                .where(TicketTable.Tickets.id.eq(ticketId))
-                .forEach {
-                    status = TicketStatus.valueOf(it[TicketTable.Tickets.status])
-                }
-        }
-
-        return status
-    }
-
-    private fun updateTicketHandler(ticketId: String, userId: String) {
-        transaction {
-            TicketTable.Tickets.update({ TicketTable.Tickets.id.eq(ticketId) }) {
-                it[handler] = userId
-            }
-        }
     }
 }

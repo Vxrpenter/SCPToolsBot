@@ -1,8 +1,7 @@
 package dev.vxrp.database.tables
 
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class ApplicationTable {
@@ -28,6 +27,20 @@ class ApplicationTable {
                 it[Applications.issuer] = issuer
                 it[Applications.handler] = handler
             }
+        }
+    }
+
+    fun updateTicketHandler(id: String, handler: String) {
+        transaction {
+            Applications.update({Applications.id eq id}) {
+                it[Applications.handler] = handler
+            }
+        }
+    }
+
+    fun delete(id: String) {
+        transaction {
+            Applications.deleteWhere { Applications.id eq id }
         }
     }
 
