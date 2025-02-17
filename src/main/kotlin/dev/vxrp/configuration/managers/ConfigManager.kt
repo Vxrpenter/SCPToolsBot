@@ -55,7 +55,7 @@ class ConfigManager {
 
         for (type in configs.ticket.applicationTypes) {
             if (ApplicationTypeTable().exists(type.roleID)) {
-                ApplicationTypeTable().addToDatabase(type.roleID, false, null)
+                ApplicationTypeTable().addToDatabase(type.roleID, false, null,null)
             }
 
             idList.add(type.roleID)
