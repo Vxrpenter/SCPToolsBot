@@ -20,8 +20,12 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class TicketSettingsHandler(val api: JDA, val config: Config, val translation: Translation) {
+    val logger: Logger = LoggerFactory.getLogger(TicketSettingsHandler::class.java)
+
     suspend fun claimTicket(user: User, ticketChannel: ThreadChannel, id: String, userId: String) {
         val embed = Embed {
             author {
@@ -44,6 +48,8 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         if (TicketTable().getTicketType(id) == TicketType.APPLICATION) {
             ApplicationTable().updateTicketHandler(id, handlerUser.id)
         }
+
+        logger.info("Ticket {} claimed by user: {}", id, user.id)
     }
 
     suspend fun openTicket(user: User, ticketChannel: ThreadChannel, id: String) {
@@ -62,6 +68,8 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         TicketTable().updateTicketStatus(id, TicketStatus.OPEN)
         val child = api.getThreadChannelById(id)!!
         child.manager.setLocked(false).queue()
+
+        logger.info("Ticket {} opened by user: {}", id, user.id)
     }
 
     suspend fun pauseTicket(user: User, ticketChannel: ThreadChannel, id: String) {
@@ -80,6 +88,8 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         TicketTable().updateTicketStatus(id, TicketStatus.PAUSED)
         val child = api.getThreadChannelById(id)!!
         child.manager.setLocked(true).queue()
+
+        logger.info("Ticket {} paused by user: {}", id, user.id)
     }
 
     suspend fun suspendTicket(user: User, ticketChannel: ThreadChannel, id: String) {
@@ -98,6 +108,8 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         TicketTable().updateTicketStatus(id, TicketStatus.SUSPENDED)
         val child = api.getThreadChannelById(id)!!
         child.manager.setLocked(true).queue()
+
+        logger.info("Ticket {} suspended by user: {}", id, user.id)
     }
 
     suspend fun archiveTicket(user: User, ticketChannel: ThreadChannel, id: String) {
@@ -119,6 +131,8 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         if (TicketTable().getTicketType(id) == TicketType.APPLICATION) {
             ApplicationTable().delete(id)
         }
+
+        logger.info("Ticket {} archived by user: {}", id, user.id)
     }
 
     fun settingsActionRow(status: TicketStatus): Collection<ItemComponent> {
