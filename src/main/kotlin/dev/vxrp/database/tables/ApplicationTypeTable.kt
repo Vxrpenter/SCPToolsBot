@@ -11,6 +11,7 @@ class ApplicationTypeTable {
     object ApplicationTypes : Table("application_types") {
         val roleId= text("roleId")
         val active = bool("active").default(false)
+        val members = integer("members").nullable()
         val initializer = text("initializer").nullable()
 
         override val primaryKey: PrimaryKey
@@ -41,11 +42,12 @@ class ApplicationTypeTable {
         }
     }
 
-    fun addToDatabase(roleId: String, active: Boolean, initializer: String?) {
+    fun addToDatabase(roleId: String, active: Boolean, members: Int?, initializer: String?) {
         transaction {
             ApplicationTypes.insert {
                 it[ApplicationTypes.roleId] = roleId
                 it[ApplicationTypes.active] = active
+                it[ApplicationTypes.members] = members
                 it[ApplicationTypes.initializer] = initializer
             }
         }
@@ -58,17 +60,18 @@ class ApplicationTypeTable {
             ApplicationTypes.selectAll()
                 .where {ApplicationTypes.roleId eq roleId}
                 .forEach {
-                    applicationType = ApplicationType(it[ApplicationTypes.roleId], it[ApplicationTypes.active], it[ApplicationTypes.initializer])
+                    applicationType = ApplicationType(it[ApplicationTypes.roleId], it[ApplicationTypes.active], it[ApplicationTypes.members], it[ApplicationTypes.initializer])
                 }
         }
 
         return applicationType
     }
 
-    fun changeType(roleId: String, active: Boolean, initializer: String?) {
+    fun changeType(roleId: String, active: Boolean, members: Int, initializer: String?) {
         transaction {
             ApplicationTypes.update({ ApplicationTypes.roleId eq roleId }) {
                 it[ApplicationTypes.active] = active
+                it[ApplicationTypes.members] = members
                 it[ApplicationTypes.initializer] = initializer
             }
         }
@@ -76,5 +79,6 @@ class ApplicationTypeTable {
 
     data class ApplicationType(val roleId: String,
         val active: Boolean,
+        val members: Int?,
         val initializer: String?)
 }

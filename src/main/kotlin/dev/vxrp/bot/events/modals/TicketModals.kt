@@ -7,6 +7,8 @@ import dev.vxrp.bot.ticket.enums.TicketStatus
 import dev.vxrp.bot.ticket.enums.TicketType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.tables.ApplicationTable
+import dev.vxrp.database.tables.ApplicationTypeTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent
@@ -52,6 +54,14 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
         if (event.modalId.startsWith("support_application")) {
             val handler = TicketHandler(api, config, translation)
             val child = handler.createTicket(TicketType.APPLICATION, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
+
+
+            if (ApplicationTable().retrieveSerial() >= ApplicationTypeTable().query(event.modalId.split(":")[1])!!.members!!) {
+                event.reply_("No more applications can't be opened until another is closed").queue()
+                return
+            }
+
+            ApplicationTable().addToDatabase(child?.id.toString(), false, event.user.id, null)
             respond(child, event)
         }
     }
