@@ -15,7 +15,7 @@ PERMISSIONS:
 
   EMBED_TICKET_DENIED_TITLE: "Interaktion Verweigert"
   EMBED_TICKET_DENIED_BODY: "
-                        Diese Interaction wurde verweigert, der exakte Grund kann unten gefunden werden.
+                        Diese Interaktion wurde verweigert, der exakte Grund kann unten gefunden werden.
                         Solltest du einige Fragen haben, stelle die an Staff Mitglieder:\n
                         &filler&
                         ```ansi
