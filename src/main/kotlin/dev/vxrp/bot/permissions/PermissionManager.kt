@@ -26,11 +26,13 @@ class PermissionManager(val config: Config, val translation: Translation) {
 
         for (role in rolePair!!.first) {
             if (rolePair.second.contains(role)) {
+                PermissionMessageHandler(config, translation).sendSpecifiedMessage(permissionType, true)
                 logger.debug("Permission action for user: {}, for permission type: {}, permitted", user.id, permissionType)
                 return true
             }
         }
 
+        PermissionMessageHandler(config, translation).sendSpecifiedMessage(permissionType, false)
         logger.debug("Permission action for user: {}, for permission type: {}, denied", user.id, permissionType)
         return false
     }
