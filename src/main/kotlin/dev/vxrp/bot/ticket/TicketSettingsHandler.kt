@@ -10,12 +10,14 @@ import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.ApplicationTable
 import dev.vxrp.database.tables.TicketTable
 import dev.vxrp.util.color.ColorTool
+import kotlinx.coroutines.delay
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.User
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
+import okhttp3.internal.wait
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -126,6 +128,11 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         TicketLogHandler(api, config, translation).deleteMesssage(id)
         TicketTable().updateTicketStatus(id, TicketStatus.CLOSED)
         val child = api.getThreadChannelById(id)!!
+
+        for (member in child.threadMembers) {
+            child.removeThreadMember(member.user).queue()
+            delay(500)
+        }
         child.manager.setArchived(true).queue()
 
         if (TicketTable().getTicketType(id) == TicketType.APPLICATION) {
