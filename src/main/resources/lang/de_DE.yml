@@ -15,16 +15,16 @@ PERMISSIONS:
 
   EMBED_TICKET_DENIED_TITLE: "Interaktion Verweigert"
   EMBED_TICKET_DENIED_BODY: "
-                       Diese Interaction wurde verweigert:\n
-                        
+                        Diese Interaction wurde verweigert, der exakte Grund kann unten gefunden werden.
+                        Solltest du einige Fragen haben, stelle die an Staff Mitglieder:\n
                         &filler&
                         ```ansi
                         
                         %permission_message%
                         ```"
 
-  TEXT_INSUFFICIENT_PERMISSION: "&red&Unzureichende Berechtigungen, wende dich für weitere Informationen an Staff&reset&"
-  TEXT_INTERACTION_DISABLED: "&red&Interaktion Deaktiviert, wende dich für weitere Informationen an Staff&reset&"
+  TEXT_INSUFFICIENT_PERMISSION: "&red&&bold&Unzureichende Berechtigungen, wende dich für weitere Informationen an Staff&reset&"
+  TEXT_INTERACTION_DISABLED: "&red&&bold&Interaktion Deaktiviert, wende dich für weitere Informationen an Staff&reset&"
 
 SETTINGS:
 
