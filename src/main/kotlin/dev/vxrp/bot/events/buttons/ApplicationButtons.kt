@@ -2,11 +2,10 @@ package dev.vxrp.bot.events.buttons
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.bot.application.ApplicationManager
+import dev.vxrp.bot.application.ApplicationMessageHandler
 import dev.vxrp.bot.application.applicationTypeMap
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.MessageTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
@@ -50,7 +49,7 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
         if (event.button.id?.startsWith("application_activation_complete_setup") == true && !nullCheck()) {
             if (config.ticket.settings.applicationMessageChannel != "") {
                 event.message.delete().queue()
-                ApplicationManager(config, translation).sendApplicationMessage(event.jda, event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!)
+                ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!)
                 event.reply_("Application successfully activated").setEphemeral(true).queue()
             } else {
                 logger.warn("Could not complete application setup, add channel id in the config to fix")

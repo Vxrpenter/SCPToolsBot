@@ -1,6 +1,6 @@
 package dev.vxrp.bot.events.stringSelectMenus
 
-import dev.vxrp.bot.application.ApplicationManager
+import dev.vxrp.bot.application.ApplicationMessageHandler
 import dev.vxrp.bot.modals.ApplicationModalSave
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
@@ -17,7 +17,7 @@ class ApplicationStringSelectMenus(val event: StringSelectInteractionEvent, val 
             val messageId = event.selectMenu.id!!.split(":")[2]
 
             event.deferEdit().queue()
-            ApplicationManager(config, translation).editActivationMessage(event.user.id, roleId, event.channel.asTextChannel(), messageId, state = false, member = 0)
+            ApplicationMessageHandler(config, translation).editActivationMessage(event.user.id, roleId, event.channel.asTextChannel(), messageId, state = false, member = 0)
         }
     }
 }
