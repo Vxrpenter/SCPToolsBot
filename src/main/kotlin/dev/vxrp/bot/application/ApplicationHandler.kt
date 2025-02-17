@@ -1,26 +1,8 @@
 package dev.vxrp.bot.application
 
-import dev.minn.jda.ktx.coroutines.await
-import dev.minn.jda.ktx.messages.Embed
-import dev.minn.jda.ktx.messages.editMessage
-import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.ApplicationTypeTable
-import dev.vxrp.database.tables.MessageTable
-import dev.vxrp.util.color.ColorTool
-import dev.vxrp.util.enums.MessageType
-import net.dv8tion.jda.api.JDA
-import net.dv8tion.jda.api.entities.Message
-import net.dv8tion.jda.api.entities.MessageEmbed
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
-import net.dv8tion.jda.api.entities.emoji.Emoji
-import net.dv8tion.jda.api.exceptions.ErrorResponseException
-import net.dv8tion.jda.api.interactions.components.ItemComponent
-import net.dv8tion.jda.api.interactions.components.buttons.Button
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 val applicationTypeMap: HashMap<String, MutableList<ApplicationType>> = hashMapOf()
 
