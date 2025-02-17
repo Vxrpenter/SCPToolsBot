@@ -12,6 +12,7 @@ import dev.vxrp.database.tables.MessageTable
 import dev.vxrp.util.color.ColorTool
 import dev.vxrp.util.enums.MessageType
 import net.dv8tion.jda.api.JDA
+import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.emoji.Emoji
@@ -58,25 +59,32 @@ class ApplicationManager(val config: Config, val translation: Translation) {
 
         val applicationMessage = MessageTable().queryFromTable(MessageType.APPLICATION)
 
+        var message: Message?= null
+
         if (applicationMessage != null) {
             try {
-                api.getTextChannelById(applicationMessage.channelId)?.editMessage(applicationMessage.id, "", listOf(embed))?.await()
+                message = api.getTextChannelById(applicationMessage.channelId)?.editMessage(applicationMessage.id, "", listOf(embed))?.await()
             } catch (e: ErrorResponseException) {
-                val message = channel.send("", listOf(embed)).addActionRow(
+                message = channel.send("", listOf(embed)).addActionRow(
                     Button.success("application_open", translation.buttons.textApplicationOpenTickets).withEmoji(Emoji.fromFormatted("📩"))
                 ).await()
                 MessageTable().delete(applicationMessage.id)
                 MessageTable().insertIfNotExists(message.id, MessageType.APPLICATION, message.channelId)
             }
-            return
+        } else {
+            message = channel.send("", listOf(embed)).addActionRow(
+                Button.success("application_open", translation.buttons.textApplicationOpenTickets).withEmoji(Emoji.fromFormatted("📩"))
+            ).await()
         }
-        val message = channel.send("", listOf(embed)).addActionRow(
-            Button.success("application_open", translation.buttons.textApplicationOpenTickets).withEmoji(Emoji.fromFormatted("📩"))
-        ).await()
 
         for (type in applicationTypeMap[userId]!!) {
-            ApplicationTypeTable().changeType(type.roleId, type.state, type.initializer)
+            ApplicationTypeTable().changeType(type.roleId, type.state, type.member,type.initializer)
         }
+        if (message == null) {
+            logger.error("Could not mirror applied application settings to database")
+            return
+        }
+
         MessageTable().insertIfNotExists(message.id, MessageType.APPLICATION, message.channelId)
     }
 
