@@ -54,14 +54,14 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
         if (event.modalId.startsWith("support_application")) {
             val handler = TicketHandler(api, config, translation)
             val child = handler.createTicket(TicketType.APPLICATION, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
+            val roleId = event.modalId.split(":")[1]
 
-
-            if (ApplicationTable().retrieveSerial() >= ApplicationTypeTable().query(event.modalId.split(":")[1])!!.members!!) {
-                event.reply_("No more applications can't be opened until another is closed").queue()
+            if (ApplicationTable().retrieveSerial(roleId) >= ApplicationTypeTable().query(roleId)!!.members!!) {
+                event.reply_("No more applications can't be opened until another is closed").setEphemeral(true).queue()
                 return
             }
 
-            ApplicationTable().addToDatabase(child?.id.toString(), false, event.user.id, null)
+            ApplicationTable().addToDatabase(child?.id.toString(), roleId, false, false, event.user.id, null)
             respond(child, event)
         }
     }
