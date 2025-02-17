@@ -22,8 +22,7 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag
 val timer = Timer()
 
 class BotManager(val config: Config, val translation: Translation) {
-    var guild: Guild? = null
-    init {
+    fun init() {
         val api = light(config.settings.token, enableCoroutines = true) {
             intents += listOf(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
             setActivity(Activity.of(
@@ -41,7 +40,6 @@ class BotManager(val config: Config, val translation: Translation) {
             ModalListener(api, config, translation)
         )
 
-        guild = api.awaitReady().getGuildById(config.settings.guildId)
         val commandManager = CommandManager(config, "configs/commands.json")
         val statusManager = StatusManager(api, config, translation, timer, "configs/status-settings.json")
 

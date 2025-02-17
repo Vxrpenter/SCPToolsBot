@@ -5,6 +5,7 @@ import dev.vxrp.bot.ticket.enums.TicketType
 import net.dv8tion.jda.api.entities.User
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 
@@ -38,5 +39,19 @@ class TicketTable {
                 it[statusMessage] = ticketStatusMessage
             }
         }
+    }
+
+    fun determineTicketType(ticketId: String): TicketType {
+        var type: TicketType? = null
+
+        transaction {
+            Tickets.selectAll()
+                .where {Tickets.id eq ticketId}
+                .forEach {
+                    type = TicketType.valueOf(it[Tickets.type])
+                }
+        }
+
+        return type!!
     }
 }
