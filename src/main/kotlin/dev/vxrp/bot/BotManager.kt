@@ -15,12 +15,14 @@ import dev.vxrp.database.DatabaseManager
 import dev.vxrp.util.Timer
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.Activity.ActivityType
+import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
 
 val timer = Timer()
 
 class BotManager(val config: Config, val translation: Translation) {
+    var guild: Guild? = null
     init {
         val api = light(config.settings.token, enableCoroutines = true) {
             intents += listOf(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
@@ -39,7 +41,7 @@ class BotManager(val config: Config, val translation: Translation) {
             ModalListener(api, config, translation)
         )
 
-        val guild = api.awaitReady().getGuildById(config.settings.guildId)
+        guild = api.awaitReady().getGuildById(config.settings.guildId)
         val commandManager = CommandManager(config, "configs/commands.json")
         val statusManager = StatusManager(api, config, translation, timer, "configs/status-settings.json")
 
