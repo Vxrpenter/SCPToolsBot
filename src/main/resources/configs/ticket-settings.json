@@ -1,8 +1,7 @@
 {
   "settings": {
     "ticket_log_channel": "",
-    "application_message_channel": "",
-    "log_permissions_roles": []
+    "application_message_channel": ""
   },
   "application_types": [
     {
@@ -29,6 +28,7 @@
       "name": "General",
       "type": "support::GENERAL",
       "roles": [],
+      "log_permissions_roles": [],
       "parent_channel": "",
       "child_rules": {
         "parent_name": "Ticket #%r%",
@@ -45,6 +45,7 @@
       "name": "Report",
       "type": "support::REPORT",
       "roles": [],
+      "log_permissions_roles": [],
       "parent_channel": "",
       "child_rules": {
         "parent_name": "Ticket #%r%",
@@ -61,6 +62,7 @@
       "name": "Error",
       "type": "support::ERROR",
       "roles": [],
+      "log_permissions_roles": [],
       "parent_channel": "",
       "child_rules": {
         "parent_name": "Ticket #%r%",
@@ -77,6 +79,7 @@
       "name": "Unban",
       "type": "support::UNBAN",
       "roles": [],
+      "log_permissions_roles": [],
       "parent_channel": "",
       "child_rules": {
         "parent_name": "Ticket #%r%",
@@ -93,6 +96,7 @@
       "name": "Complaint",
       "type": "support::COMPLAINT",
       "roles": [],
+      "log_permissions_roles": [],
       "parent_channel": "",
       "child_rules": {
         "parent_name": "Ticket #%r%",
@@ -109,6 +113,7 @@
       "name": "Application",
       "type": "support::APPLICATION",
       "roles": [],
+      "log_permissions_roles": [],
       "parent_channel": "",
       "child_rules": {
         "parent_name": "Ticket #%r%",
