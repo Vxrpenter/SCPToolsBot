@@ -121,7 +121,11 @@
           "choices": [
             {
               "name": "active",
-              "id": "maintenance"
+              "id": "active"
+            },
+            {
+              "name": "deactivated",
+              "id": "deactivated"
             }
           ]
         }

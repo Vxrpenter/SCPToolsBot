@@ -25,17 +25,22 @@ import org.slf4j.LoggerFactory
 class ApplicationMessageHandler(val config: Config, val translation: Translation) {
     private val logger: Logger = LoggerFactory.getLogger(ApplicationManager::class.java)
 
-    fun sendActivationMenu(userId: String, channel: TextChannel): Pair<MessageEmbed, Collection<ItemComponent>> {
+    fun getActivationMenu(userId: String, channel: TextChannel): Pair<MessageEmbed, Collection<ItemComponent>> {
         val embed = createMessage(userId, true)
 
         return Pair(embed, applicationActionRow(userId, null))
     }
 
-    fun sendDeactivationMenu() {
+    fun getDeactivationMenu(): Pair<MessageEmbed, Collection<ItemComponent>> {
         val embed = Embed {
             title = ColorTool().useCustomColorCodes(translation.application.embedDeactivationMenuTitle)
             description = ColorTool().useCustomColorCodes(translation.application.embedDeactivationMenuBody)
         }
+
+        val actionRow: MutableCollection<ItemComponent> = ArrayList()
+        actionRow.add(Button.danger("application_deactivate", translation.buttons.textApplicationDeactivate).withEmoji(Emoji.fromFormatted("🪫")))
+
+        return Pair(embed, actionRow)
     }
 
     fun editActivationMessage(userId: String, roleId: String, channel: TextChannel, messageId: String, name: String? = null, description: String? = null, emoji: String? = null, state: Boolean? = null, initializer: String? = null, member: Int? = null) {
@@ -46,19 +51,22 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         ).queue()
     }
 
-    suspend fun sendApplicationMessage(api: JDA, userId: String, channel: TextChannel) {
+    suspend fun sendApplicationMessage(api: JDA, userId: String, channel: TextChannel, state: Boolean) {
         val roleStringPair = createRoleString(userId, false)
+
+        var status = translation.application.textStatusActive
+        if (!state) status = translation.application.textStatusDeactivated
 
         val embed = Embed {
             title = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageTitle)
             description = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageBody
-                .replace("%status%", translation.application.textStatusActive)
+                .replace("%status%", status)
                 .replace("%active_roles%", roleStringPair.first.toString()))
         }
 
         val applicationMessage = MessageTable().queryFromTable(MessageType.APPLICATION)
 
-        var message: Message?= null
+        var message: Message?
 
         if (applicationMessage != null) {
             try {
@@ -87,7 +95,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         MessageTable().insertIfNotExists(message.id, MessageType.APPLICATION, message.channelId)
     }
 
-    fun createMessage(userId: String, useBaseValue: Boolean): MessageEmbed {
+    private fun createMessage(userId: String, useBaseValue: Boolean): MessageEmbed {
         val roleStringPair = createRoleString(userId, useBaseValue)
 
         applicationTypeMap[userId] = roleStringPair.second
@@ -100,7 +108,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         }
     }
 
-    fun createRoleString(userId: String, useBaseValue: Boolean): Pair<StringBuilder, MutableList<ApplicationType>> {
+    private fun createRoleString(userId: String, useBaseValue: Boolean): Pair<StringBuilder, MutableList<ApplicationType>> {
         val applicationTypeList: MutableList<ApplicationType> = mutableListOf()
 
         var pairValue: Pair<StringBuilder, MutableList<ApplicationType>> = createStringBaseValue(applicationTypeList)
@@ -109,7 +117,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         return pairValue
     }
 
-    fun createStringBaseValue(applicationTypeList: MutableList<ApplicationType>): Pair<StringBuilder, MutableList<ApplicationType>> {
+    private fun createStringBaseValue(applicationTypeList: MutableList<ApplicationType>): Pair<StringBuilder, MutableList<ApplicationType>> {
         val stringBuilder: StringBuilder = StringBuilder()
         val deactivated = ColorTool().useCustomColorCodes(translation.application.textStatusDeactivated)
         var count: Int = -1
@@ -128,7 +136,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         return Pair(stringBuilder, applicationTypeList)
     }
 
-    fun createStringValue(applicationTypeList: MutableList<ApplicationType>): Pair<StringBuilder, MutableList<ApplicationType>> {
+    private fun createStringValue(applicationTypeList: MutableList<ApplicationType>): Pair<StringBuilder, MutableList<ApplicationType>> {
         val stringBuilder: StringBuilder = StringBuilder()
         val activated = ColorTool().useCustomColorCodes(translation.application.textStatusActive)
         val deactivated = ColorTool().useCustomColorCodes(translation.application.textStatusDeactivated)
@@ -148,7 +156,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         return Pair(stringBuilder, applicationTypeList)
     }
 
-    fun applicationActionRow(userId: String, types: List<ApplicationType>?): Collection<ItemComponent> {
+    private fun applicationActionRow(userId: String, types: List<ApplicationType>?): Collection<ItemComponent> {
         val rows: MutableCollection<ItemComponent> = ArrayList()
 
         val add = Button.success("application_activation_add:$userId", translation.buttons.textApplicationActivationAdd).withEmoji(Emoji.fromFormatted("➕"))

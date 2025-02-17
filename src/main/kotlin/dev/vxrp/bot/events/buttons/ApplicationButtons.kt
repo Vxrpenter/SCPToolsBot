@@ -2,8 +2,10 @@ package dev.vxrp.bot.events.buttons
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
+import dev.vxrp.bot.application.ApplicationManager
 import dev.vxrp.bot.application.ApplicationMessageHandler
 import dev.vxrp.bot.application.applicationTypeMap
+import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.color.ColorTool
@@ -49,10 +51,34 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
         if (event.button.id?.startsWith("application_activation_complete_setup") == true && !nullCheck()) {
             if (config.ticket.settings.applicationMessageChannel != "") {
                 event.message.delete().queue()
-                ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!)
+                ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!, true)
                 event.reply_("Application successfully activated").setEphemeral(true).queue()
             } else {
                 logger.warn("Could not complete application setup, add channel id in the config to fix")
+            }
+        }
+
+        if (event.button.id?.startsWith("application_deactivate") == true) {
+            if (config.ticket.settings.applicationMessageChannel != "") {
+                event.message.delete().queue()
+
+                val listOfTypes = mutableListOf<ApplicationType>()
+                var position = -1
+                for (type in config.ticket.applicationTypes) {
+                    position += 1
+                    listOfTypes.add(ApplicationType(position, type.roleID, "/", "/", "/", false, event.user.id, 0))
+                }
+
+                applicationTypeMap[event.user.id] = listOfTypes
+
+                for (type in config.ticket.applicationTypes) {
+                    ApplicationManager(config, translation).changeApplicationType(event.user.id, type.roleID, initializer = event.user.id, state = false, member = 0)
+                }
+
+                ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!, false)
+                event.reply_("Application successfully deactivated").setEphemeral(true).queue()
+            } else {
+                logger.warn("Could not deactivate application phase, add channel id in the config to fix")
             }
         }
 
