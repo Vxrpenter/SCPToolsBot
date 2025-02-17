@@ -52,7 +52,7 @@ class PermissionManager(val config: Config, val translation: Translation) {
         return roleIdList
     }
 
-    private suspend fun permissionRoles(permissionType: PermissionType, ticketType: TicketType? = null): List<String>?{
+    private fun permissionRoles(permissionType: PermissionType, ticketType: TicketType? = null): List<String>?{
         when (permissionType) {
             PermissionType.TICKET -> {
                 for (type in config.ticket.types) {
