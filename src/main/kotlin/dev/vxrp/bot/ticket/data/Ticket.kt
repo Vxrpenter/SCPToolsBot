@@ -16,8 +16,6 @@ data class TicketSettings(
     val ticketLogChannel: String,
     @SerialName("application_message_channel")
     val applicationMessageChannel: String,
-    @SerialName("log_permissions_roles")
-    val logPermissionRoles: String
 )
 
 @Serializable
@@ -35,6 +33,8 @@ data class TicketTypes(
     val name: String,
     val type: String,
     val roles: List<String>,
+    @SerialName("log_permissions_roles")
+    val logPermissionRoles: List<String>,
     @SerialName("parent_channel")
     val parentChannel: String,
     @SerialName("child_rules")
