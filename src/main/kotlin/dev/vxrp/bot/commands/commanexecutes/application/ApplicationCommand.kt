@@ -7,8 +7,15 @@ import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 
 class ApplicationCommand(val config: Config, val translation: Translation) {
-    fun sendMessage(event: SlashCommandInteractionEvent) {
-        val valuePair = ApplicationMessageHandler(config, translation).sendActivationMenu(event.user.id, event.channel.asTextChannel())
+    fun sendActivationMessage(event: SlashCommandInteractionEvent) {
+        val valuePair = ApplicationMessageHandler(config, translation).getActivationMenu(event.user.id, event.channel.asTextChannel())
+        event.reply_("", listOf(valuePair.first)).addActionRow(
+            valuePair.second
+        ).queue()
+    }
+
+    fun sendDeactivationMessage(event: SlashCommandInteractionEvent) {
+        val valuePair = ApplicationMessageHandler(config, translation).getDeactivationMenu()
         event.reply_("", listOf(valuePair.first)).addActionRow(
             valuePair.second
         ).queue()

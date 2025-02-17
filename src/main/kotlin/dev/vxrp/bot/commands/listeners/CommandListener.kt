@@ -123,6 +123,12 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
     }
 
     private fun applicationCommand(event: SlashCommandInteractionEvent) {
-        ApplicationCommand(config, translation).sendMessage(event)
+        val option = event.getOption("state")?.asString
+        val applicationCommand = ApplicationCommand(config, translation)
+
+        when (option) {
+            "active" -> applicationCommand.sendActivationMessage(event)
+            "deactivated" -> applicationCommand.sendDeactivationMessage(event)
+        }
     }
 }

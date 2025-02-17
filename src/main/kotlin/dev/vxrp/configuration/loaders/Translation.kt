@@ -700,7 +700,8 @@ data class TranslationButtons(
     val textApplicationActivationRemove: String,
     @SerialName("TEXT_APPLICATION_ACTIVATION_COMPLETE_SETUP")
     val textApplicationActivationCompleteSetup: String,
-
+    @SerialName("TEXT_APPLICATION_DEACTIVATE")
+    val textApplicationDeactivate: String,
     @SerialName("TEXT_APPLICATION_OPEN_TICKET")
     val textApplicationOpenTickets: String,
 
