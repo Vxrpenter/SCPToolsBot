@@ -1,7 +1,8 @@
 {
   "settings": {
     "ticket_log_channel": "",
-    "application_message_channel": ""
+    "application_message_channel": "",
+    "log_permissions_roles": []
   },
   "application_types": [
     {
