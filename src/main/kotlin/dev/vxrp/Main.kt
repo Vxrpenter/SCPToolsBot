@@ -77,6 +77,6 @@ class ScpToolsBot(currentConfig: Config, currentTranslation: Translation) {
     var translation = currentTranslation
 
     init {
-        BotManager(config, translation)
+        BotManager(config, translation).init()
     }
 }

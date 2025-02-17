@@ -1,6 +1,6 @@
 package dev.vxrp.bot.permissions
 
-import dev.vxrp.bot.BotManager
+import dev.minn.jda.ktx.coroutines.await
 import dev.vxrp.bot.permissions.enums.PermissionType
 import dev.vxrp.bot.ticket.enums.TicketType
 import dev.vxrp.configuration.loaders.Config
@@ -10,10 +10,10 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 class PermissionManager(val config: Config, val translation: Translation) {
-    val logger: Logger = LoggerFactory.getLogger(PermissionManager::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(PermissionManager::class.java)
     private val insufficientValuesMessage = "Please supply the needed values for permission check"
 
-    fun determinePermissions(user: User, permissionType: PermissionType, ticketType: TicketType? = null): Boolean {
+    suspend fun determinePermissions(user: User, permissionType: PermissionType, ticketType: TicketType? = null): Boolean {
         val rolePair: Pair<List<String>, List<String>>? = roleValidation(user, permissionType, ticketType)
         if (rolePair == null) {
             logger.warn("Permission denied due to failures in permission chain")
@@ -31,12 +31,14 @@ class PermissionManager(val config: Config, val translation: Translation) {
             }
         }
 
-        return true
+        logger.debug("Permission action for user: {}, for permission type: {}, denied", user.id, permissionType)
+        return false
     }
 
-    private fun queryUserRoles(user: User): MutableList<String>? {
+    private suspend fun queryUserRoles(user: User): MutableList<String>? {
         val roleIdList = mutableListOf<String>()
-        val currentRoles = BotManager(config, translation).guild!!.getMemberById(user.id)?.roles ?: run {
+        println()
+        val currentRoles = user.jda.getGuildById(config.settings.guildId)!!.retrieveMemberById(user.id).await()?.roles ?: run {
             logger.error("Could not find any roles to determine permissions for User: {}", user.id)
             return null
         }
@@ -48,7 +50,7 @@ class PermissionManager(val config: Config, val translation: Translation) {
         return roleIdList
     }
 
-    private fun permissionRoles(permissionType: PermissionType, ticketType: TicketType? = null): List<String>?{
+    private suspend fun permissionRoles(permissionType: PermissionType, ticketType: TicketType? = null): List<String>?{
         when (permissionType) {
             PermissionType.TICKET -> {
                 for (type in config.ticket.types) {
@@ -90,7 +92,7 @@ class PermissionManager(val config: Config, val translation: Translation) {
         return null
     }
 
-    private fun roleValidation(user: User, permissionType: PermissionType, ticketType: TicketType? = null): Pair<List<String>, List<String>>? {
+    private suspend fun roleValidation(user: User, permissionType: PermissionType, ticketType: TicketType? = null): Pair<List<String>, List<String>>? {
         val userRoles = queryUserRoles(user) ?: run {
             logger.error("Could not validate user roles")
             return null

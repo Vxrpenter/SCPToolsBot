@@ -3,9 +3,12 @@ package dev.vxrp.bot.events.buttons
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.modals.SupportModals
+import dev.vxrp.bot.permissions.PermissionManager
+import dev.vxrp.bot.permissions.enums.PermissionType
 import dev.vxrp.bot.ticket.TicketSettingsHandler
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.tables.TicketTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 import java.time.Instant
@@ -27,6 +30,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
         }
 
         if (event.button.id?.startsWith("ticket_claim") == true) {
+            PermissionManager(config, translation).determinePermissions(event.user, PermissionType.TICKET, TicketTable().determineTicketType(event.channelId!!))
+
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogClaimedTitle
                     .replace("%name%", event.channelId.toString()))
