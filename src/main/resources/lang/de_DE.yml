@@ -11,6 +11,21 @@
 # Benutze &filler& um eine embed line zu füllen, benutze &filler<count>& um die Zeichenanzahl zu bestimmen
 #
 
+PERMISSIONS:
+
+  EMBED_TICKET_DENIED_TITLE: "Interaktion Verweigert"
+  EMBED_TICKET_DENIED_BODY: "
+                       Diese Interaction wurde verweigert:\n
+                        
+                        &filler&
+                        ```ansi
+                        
+                        %permission_message%
+                        ```"
+
+  TEXT_INSUFFICIENT_PERMISSION: "&red&Unzureichende Berechtigungen, wende dich für weitere Informationen an Staff&reset&"
+  TEXT_INTERACTION_DISABLED: "&red&Interaktion Deaktiviert, wende dich für weitere Informationen an Staff&reset&"
+
 SETTINGS:
 
   EMBED_SETTINGS_TITLE: "Einstellungen"

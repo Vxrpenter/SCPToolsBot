@@ -11,6 +11,21 @@
 # Use &filler& to fill one embed line, use &filler<count>& to specify character amount
 #
 
+PERMISSIONS:
+
+  EMBED_TICKET_DENIED_TITLE: "Interaction Denied"
+  EMBED_TICKET_DENIED_BODY: "
+                        This Interaction has been denied:\n
+                        
+                        &filler&
+                        ```ansi
+                        
+                        %permission_message%
+                        ```"
+
+  TEXT_INSUFFICIENT_PERMISSION: "&red&Insufficient Permissions, contact staff for more information&reset&"
+  TEXT_INTERACTION_DISABLED: "&red&Interaction Disabled, contact staff for more information&reset&"
+
 SETTINGS:
 
   EMBED_SETTINGS_TITLE: "Settings"
