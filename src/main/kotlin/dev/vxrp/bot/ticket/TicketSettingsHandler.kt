@@ -129,10 +129,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         TicketTable().updateTicketStatus(id, TicketStatus.CLOSED)
         val child = api.getThreadChannelById(id)!!
 
-        for (member in child.threadMembers) {
-            child.removeThreadMember(member.user).queue()
-            delay(500)
-        }
+        child.manager.setLocked(true).queue()
         child.manager.setArchived(true).queue()
 
         if (TicketTable().getTicketType(id) == TicketType.APPLICATION) {
