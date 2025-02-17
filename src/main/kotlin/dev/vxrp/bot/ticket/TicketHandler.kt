@@ -54,6 +54,7 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
         }
         val message = TicketMessageHandler(api, config, translation).sendMessage(ticketType, child, ticketCreator, modalId, modalValue)
         TicketTable().addToDatabase(child.id, LocalDate.now(), ticketType, ticketStatus, ticketCreator, ticketHandler, logMessage, message.id, "CURRENTLY NOT IMPLEMENTED")
+        logger.info("Created ticket: {} of type: {} by user: {} with current status {}", child.id, ticketType, ticketCreator, ticketStatus)
         return child
     }
 
