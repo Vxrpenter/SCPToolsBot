@@ -67,7 +67,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             }
 
             event.reply_("", listOf(settings)).addActionRow(
-                ticketHandler.settingsActionRow(ticketHandler.getTicketStatus(event.channelId!!)!!)
+                ticketHandler.settingsActionRow(TicketTable().getTicketStatus(event.channelId!!)!!)
             ).setEphemeral(true).queue()
         }
 
