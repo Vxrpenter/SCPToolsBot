@@ -4,6 +4,7 @@ import com.charleskorn.kaml.Yaml
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.bot.ticket.data.Ticket
 import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.configuration.loaders.LaunchConfiguration
 import dev.vxrp.configuration.loaders.Settings
 import dev.vxrp.database.tables.ApplicationTypeTable
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -36,20 +37,22 @@ class ConfigManager {
         }
     }
 
-    fun query(configLocation: Path, statusLocation: Path, ticketLocation: Path): Config {
+    fun query(launchConfigurationLocation: Path, configLocation: Path, statusLocation: Path, ticketLocation: Path): Config {
+        val launchConfigurationFile = launchConfigurationLocation.toFile()
         val configFile = configLocation.toFile()
         val statusFile = statusLocation.toFile()
         val ticketFile = ticketLocation.toFile()
 
+        val launchConfiguration = Yaml.default.decodeFromString(LaunchConfiguration.serializer(), launchConfigurationFile.readText())
         val settings = Yaml.default.decodeFromString(Settings.serializer(), configFile.readText())
         val status = Yaml.default.decodeFromString(Status.serializer(), statusFile.readText())
         val ticket = Yaml.default.decodeFromString(Ticket.serializer(), ticketFile.readText())
 
-        return Config(settings, status, ticket)
+        return Config(launchConfiguration, settings, status, ticket)
     }
 
-    fun databaseManagement(configLocation: Path, statusLocation: Path, ticketLocation: Path) {
-        val configs = query(configLocation, statusLocation, ticketLocation)
+    fun databaseManagement(launchConfiguration: Path, configLocation: Path, statusLocation: Path, ticketLocation: Path) {
+        val configs = query(launchConfiguration, configLocation, statusLocation, ticketLocation)
 
         val idList = mutableListOf<String>()
 

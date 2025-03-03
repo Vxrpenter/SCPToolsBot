@@ -1,0 +1,22 @@
+{
+  "launch_options": {
+    "follow_priority": true,
+    "ignore_broken_entries": true,
+    "warn_misconfiguration_error": true
+  },
+
+  "launch_order": [
+    {
+      "id": "main:bot",
+      "priority": 1,
+      "engage": true,
+      "separate_thread": true
+    },
+    {
+      "id": "main:statusbot-cluster",
+      "priority": 2,
+      "engage": true,
+      "separate_thread": true
+    }
+  ]
+}

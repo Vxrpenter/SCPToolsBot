@@ -6,9 +6,38 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 data class Config(
+    val launchConfiguration: LaunchConfiguration,
     val settings: Settings,
     val status: Status,
     val ticket: Ticket
+)
+
+@Serializable
+data class LaunchConfiguration(
+    val options: LaunchConfigurationOptions,
+    val order: List<LaunchConfigurationOrder>,
+)
+
+@Serializable
+data class LaunchConfigurationOptions(
+    @SerialName("follow_priority")
+    val followPriority: Boolean,
+    @SerialName("ignore_broken_entries")
+    val ignoreBrokenEntries: Boolean,
+    @SerialName("warn_misconfiguration_error")
+    val warnMisconfigurationError: Boolean
+)
+
+@Serializable
+data class LaunchConfigurationOrder(
+    @SerialName("id")
+    val id: String,
+    @SerialName("priority")
+    val priority: Int,
+    @SerialName("engage")
+    val engage: Boolean,
+    @SerialName("separate_thread")
+    val separateThread: Boolean
 )
 
 @Serializable

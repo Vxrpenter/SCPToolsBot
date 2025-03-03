@@ -130,6 +130,13 @@
           ]
         }
       ]
+    },
+    {
+      "active": true,
+      "inherit": "commands.verify.default",
+      "name": "verify",
+      "description": "Command used for member verification",
+      "default_permissions": []
     }
   ],
   "status_commands": [
