@@ -14,7 +14,9 @@ data class Config(
 
 @Serializable
 data class LaunchConfiguration(
+    @SerialName("launch_options")
     val options: LaunchConfigurationOptions,
+    @SerialName("launch_order")
     val order: List<LaunchConfigurationOrder>,
 )
 

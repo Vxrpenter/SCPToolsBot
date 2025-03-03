@@ -21,7 +21,7 @@ class ConfigurationManager {
 
     fun initializeConfigs(): Config  {
         createConfigurations(configManager, System.getProperty("user.dir"))
-        return  configManager.query(
+        return configManager.query(
             Path("${System.getProperty("user.dir")}/configs/launch-configuration.json"),
             Path("${System.getProperty("user.dir")}/configs/config.yml"),
             Path("${System.getProperty("user.dir")}/configs/status-settings.json"),
@@ -62,6 +62,7 @@ class ConfigurationManager {
 
     private fun createConfigurations(configManager: ConfigManager, dir: String) {
         val configs = ArrayList<Path>()
+        configs.add((Path("/configs/launch-configuration.json")))
         configs.add(Path("/configs/config.yml"))
         configs.add(Path("/configs/color-config.json"))
         configs.add(Path("/configs/ticket-settings.json"))
