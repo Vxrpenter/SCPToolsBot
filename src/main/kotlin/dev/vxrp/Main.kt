@@ -10,6 +10,7 @@ import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.configuration.managers.ConfigManager
 import dev.vxrp.configuration.managers.TranslationManager
 import dev.vxrp.database.DatabaseManager
+import dev.vxrp.util.launch.LaunchOptionManager
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
@@ -36,6 +37,6 @@ class ScpToolsBot(currentConfig: Config, currentTranslation: Translation) {
     var translation = currentTranslation
 
     init {
-        BotManager(config, translation).init()
+        LaunchOptionManager(config, translation).startupBots()
     }
 }

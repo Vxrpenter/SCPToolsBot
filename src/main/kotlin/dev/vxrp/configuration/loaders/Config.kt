@@ -22,20 +22,14 @@ data class LaunchConfiguration(
 
 @Serializable
 data class LaunchConfigurationOptions(
-    @SerialName("follow_priority")
-    val followPriority: Boolean,
     @SerialName("ignore_broken_entries")
-    val ignoreBrokenEntries: Boolean,
-    @SerialName("warn_misconfiguration_error")
-    val warnMisconfigurationError: Boolean
+    val ignoreBrokenEntries: Boolean
 )
 
 @Serializable
 data class LaunchConfigurationOrder(
     @SerialName("id")
     val id: String,
-    @SerialName("priority")
-    val priority: Int,
     @SerialName("engage")
     val engage: Boolean,
     @SerialName("separate_thread")
