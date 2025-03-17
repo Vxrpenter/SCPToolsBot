@@ -8,20 +8,21 @@ import dev.vxrp.bot.events.ButtonListener
 import dev.vxrp.bot.events.EntitySelectListener
 import dev.vxrp.bot.events.ModalListener
 import dev.vxrp.bot.events.StringSelectListener
-import dev.vxrp.bot.status.StatusManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.DatabaseManager
 import dev.vxrp.util.Timer
+import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.Activity.ActivityType
-import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
 
 val timer = Timer()
 
 class BotManager(val config: Config, val translation: Translation) {
+    var mainApi: JDA? = null
+    var mainCommandManager: CommandManager? = null
+
     fun init() {
         val api = light(config.settings.token, enableCoroutines = true) {
             intents += listOf(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
@@ -40,11 +41,11 @@ class BotManager(val config: Config, val translation: Translation) {
         )
 
         val commandManager = CommandManager(config, "configs/commands.json")
-        val statusManager = StatusManager(api, config, translation, timer, "configs/status-settings.json")
 
         commandManager.registerSpecificCommands(commandManager.query().commands, api)
 
-        statusManager.initialize(commandManager)
+        mainApi = api
+        mainCommandManager = commandManager
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {
