@@ -2,7 +2,7 @@ package dev.vxrp.database
 
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.database.tables.*
-import dev.vxrp.util.enums.DatabaseType
+import dev.vxrp.database.enums.DatabaseType
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction

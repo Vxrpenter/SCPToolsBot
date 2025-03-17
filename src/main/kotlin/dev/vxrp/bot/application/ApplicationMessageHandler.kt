@@ -10,7 +10,7 @@ import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.ApplicationTypeTable
 import dev.vxrp.database.tables.MessageTable
 import dev.vxrp.util.color.ColorTool
-import dev.vxrp.util.enums.MessageType
+import dev.vxrp.bot.application.enums.MessageType
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.MessageEmbed

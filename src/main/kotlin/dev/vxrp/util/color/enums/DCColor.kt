@@ -1,4 +1,4 @@
-package dev.vxrp.util.enums
+package dev.vxrp.util.color.enums
 
 enum class DCColor {
     DARK_GRAY,

@@ -1,4 +1,4 @@
-package dev.vxrp.util.enums
+package dev.vxrp.database.enums
 
 enum class DatabaseType {
     SQlITE,
