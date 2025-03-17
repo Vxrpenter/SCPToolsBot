@@ -28,9 +28,11 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
 
         if (botOptions.engage) {
             botManager.init()
+        } else {
+            logger.warn("Because main bot is disabled, any other launches will be canceled")
         }
 
-        if (clusterOptions.engage) {
+        if (clusterOptions.engage && botOptions.engage) {
             val statusManager = StatusManager(botManager.mainApi!!, config, translation, timer, "configs/status-settings.json")
             statusManager.initialize(botManager.mainCommandManager!!)
         }
