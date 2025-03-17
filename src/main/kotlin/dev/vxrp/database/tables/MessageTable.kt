@@ -1,6 +1,6 @@
 package dev.vxrp.database.tables
 
-import dev.vxrp.util.enums.MessageType
+import dev.vxrp.bot.application.enums.MessageType
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.deleteWhere

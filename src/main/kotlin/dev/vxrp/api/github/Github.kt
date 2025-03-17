@@ -2,7 +2,7 @@ package dev.vxrp.api.github
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonParser
-import dev.vxrp.util.enums.DCColor
+import dev.vxrp.util.color.enums.DCColor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.slf4j.Logger

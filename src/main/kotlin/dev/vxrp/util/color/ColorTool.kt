@@ -1,7 +1,7 @@
 package dev.vxrp.util.color
 
-import dev.vxrp.util.enums.DCColor
-import dev.vxrp.util.enums.DCColor.*
+import dev.vxrp.util.color.enums.DCColor
+import dev.vxrp.util.color.enums.DCColor.*
 import java.util.regex.Pattern
 import kotlin.math.max
 

@@ -25,11 +25,10 @@ class BotManager(val config: Config, val translation: Translation) {
     fun init() {
         val api = light(config.settings.token, enableCoroutines = true) {
             intents += listOf(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
-            setActivity(Activity.of(
-                ActivityType.PLAYING.takeIf { !enumContains<ActivityType>(config.settings.activityType) }
-                    ?: ActivityType.valueOf(config.settings.activityType),
-                config.settings.activityContent))
             disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
+            setActivity(Activity.of(ActivityType.PLAYING.takeIf {
+                !enumContains<ActivityType>(config.settings.activityType)
+            } ?: ActivityType.valueOf(config.settings.activityType), config.settings.activityContent))
         }
 
         api.addEventListener(
