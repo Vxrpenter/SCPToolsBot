@@ -8,6 +8,9 @@ import dev.vxrp.bot.commands.commanexecutes.status.TemplateCommand
 import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.util.launch.LaunchOptionManager
+import dev.vxrp.util.launch.enums.LaunchOptionSectionType
+import dev.vxrp.util.launch.enums.LaunchOptionType
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
@@ -28,12 +31,20 @@ class StatusCommandListener(val api: JDA, val config: Config, val translation: T
     }
 
     private suspend fun checkInheritance(inherit: String, event: SlashCommandInteractionEvent) {
+        val launchOptionManager = LaunchOptionManager(config, translation)
+
         when (inherit) {
-            "status_commands.status.default" -> statusCommand(event)
+            "status_commands.status.default" -> {
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.STATUS_COMMAND_LISTENER, LaunchOptionSectionType.STATUS_COMMAND).engage) statusCommand(event)
+            }
 
-            "status_commands.playerlist.default" -> playerListCommand(event)
+            "status_commands.playerlist.default" -> {
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.STATUS_COMMAND_LISTENER, LaunchOptionSectionType.STATUS_PLAYERLIST_COMMAND).engage) playerListCommand(event)
+            }
 
-            "status_commands.template.default" -> templateCommand(event)
+            "status_commands.template.default" -> {
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.STATUS_COMMAND_LISTENER, LaunchOptionSectionType.STATUS_TEMPLATE_COMMAND).engage) templateCommand(event)
+            }
         }
     }
 

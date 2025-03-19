@@ -2,6 +2,7 @@ package dev.vxrp.configuration.loaders
 
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.bot.ticket.data.Ticket
+import dev.vxrp.util.launch.data.LaunchConfiguration
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,30 +11,6 @@ data class Config(
     val settings: Settings,
     val status: Status,
     val ticket: Ticket
-)
-
-@Serializable
-data class LaunchConfiguration(
-    @SerialName("launch_options")
-    val options: LaunchConfigurationOptions,
-    @SerialName("launch_order")
-    val order: List<LaunchConfigurationOrder>,
-)
-
-@Serializable
-data class LaunchConfigurationOptions(
-    @SerialName("ignore_broken_entries")
-    val ignoreBrokenEntries: Boolean
-)
-
-@Serializable
-data class LaunchConfigurationOrder(
-    @SerialName("id")
-    val id: String,
-    @SerialName("engage")
-    val engage: Boolean,
-    @SerialName("separate_thread")
-    val separateThread: Boolean
 )
 
 @Serializable

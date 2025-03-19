@@ -8,8 +8,18 @@ data class Status(
     val active: Boolean,
     @SerialName("check_playerlist")
     val checkPlayerlist: Boolean,
+    /**
+     * # DEPRECATION NOTICE
+     *
+     * WARNING this is a deprecated option that is scheduled for removal
+     */
     @SerialName("initialize_commands")
     val initializeCommands: Boolean,
+    /**
+     * # DEPRECATION NOTICE
+     *
+     * WARNING this is a deprecated option that is scheduled for removal
+     */
     @SerialName("initialize_event_listener")
     val initializeListeners: Boolean,
     @SerialName("check_rate")

@@ -12,8 +12,11 @@ import dev.vxrp.api.sla.secretlab.SecretLab
 import dev.vxrp.database.tables.ConnectionTable
 import dev.vxrp.api.sla.secretlab.data.Server
 import dev.vxrp.api.sla.secretlab.data.ServerInfo
+import dev.vxrp.bot.commands.listeners.CommandListener
 import dev.vxrp.util.Timer
 import dev.vxrp.util.defaultStatusScope
+import dev.vxrp.util.launch.LaunchOptionManager
+import dev.vxrp.util.launch.enums.LaunchOptionType
 import dev.vxrp.util.statusbotScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -79,10 +82,10 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
             mappedBots[newApi.selfUser.id] = instance.serverPort
             mappedStatusConstructor[instance.serverPort] = StatusConstructor(mappedBots, mappedServers, instance)
 
-            if (status.initializeListeners) newApi.addEventListener(
-                StatusCommandListener(newApi, config, translation, StatusConstructor(mappedBots, mappedServers, instance))
-            )
-            if (status.initializeCommands) initializeCommands(commandManager, newApi)
+            val launchOptionManager = LaunchOptionManager(config, translation)
+            if (launchOptionManager.checkLaunchOption(LaunchOptionType.STATUS_COMMAND_LISTENER).engage) StatusCommandListener(newApi, config, translation, StatusConstructor(mappedBots, mappedServers, instance))
+
+            if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_MANAGER).engage) initializeCommands(commandManager, newApi)
             instanceApiMapping[instance] = newApi
         }
 

@@ -11,6 +11,9 @@ import dev.vxrp.bot.events.StringSelectListener
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.Timer
+import dev.vxrp.util.launch.LaunchOptionManager
+import dev.vxrp.util.launch.enums.LaunchOptionSectionType
+import dev.vxrp.util.launch.enums.LaunchOptionType
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.Activity.ActivityType
@@ -32,20 +35,22 @@ class BotManager(val config: Config, val translation: Translation) {
             } ?: ActivityType.valueOf(config.settings.activityType), config.settings.activityContent))
         }
 
-        api.addEventListener(
-            CommandListener(api, config, translation),
-            ButtonListener(api, config, translation),
-            StringSelectListener(api, config, translation),
-            EntitySelectListener(api, config, translation),
-            ModalListener(api, config, translation)
-        )
+        val launchOptionManager = LaunchOptionManager(config, translation)
 
-        val commandManager = CommandManager(config, "configs/commands.json")
+        if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_LISTENER).engage) api.addEventListener(CommandListener(api, config, translation))
+        if (launchOptionManager.checkLaunchOption(LaunchOptionType.BUTTON_LISTENER).engage) api.addEventListener(ButtonListener(api, config, translation))
+        if (launchOptionManager.checkLaunchOption(LaunchOptionType.STRING_SELECT_LISTENER).engage) api.addEventListener(StringSelectListener(api, config, translation))
+        if (launchOptionManager.checkLaunchOption(LaunchOptionType.ENTITY_SELECT_LISTENER).engage) api.addEventListener(EntitySelectListener(api, config, translation))
+        if (launchOptionManager.checkLaunchOption(LaunchOptionType.MODAL_LISTENER).engage) api.addEventListener(ModalListener(api, config, translation))
 
-        commandManager.registerSpecificCommands(commandManager.query().commands, api)
+        if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_MANAGER).engage) {
+            val commandManager = CommandManager(config, "configs/commands.json")
+
+            commandManager.registerSpecificCommands(commandManager.query().commands, api)
+            mainCommandManager = commandManager
+        }
 
         mainApi = api
-        mainCommandManager = commandManager
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {
