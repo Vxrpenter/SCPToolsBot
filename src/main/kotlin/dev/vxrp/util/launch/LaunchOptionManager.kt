@@ -31,7 +31,7 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
         if (botOptions.engage) {
             botManager.init()
         } else {
-            logger.warn("Because main bot is disabled, any other launches will be canceled")
+            logger.error("Because main bot is disabled, any other launches will be canceled")
         }
 
         if (botManager.mainCommandManager == null) {
