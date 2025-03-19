@@ -9,6 +9,9 @@ import dev.vxrp.bot.commands.commanexecutes.settings.SettingsCommand
 import dev.vxrp.bot.commands.commanexecutes.template.TemplateCommand
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.util.launch.LaunchOptionManager
+import dev.vxrp.util.launch.enums.LaunchOptionSectionType
+import dev.vxrp.util.launch.enums.LaunchOptionType
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
@@ -35,39 +38,41 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
     }
 
     private fun checkInheritance(inherit: String, event: SlashCommandInteractionEvent): Boolean {
+        val launchOptionManager = LaunchOptionManager(config, translation)
+
         when (inherit) {
             "commands.help.default" -> {
-                helpCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.HELP_COMMAND).engage) helpCommand(event)
                 return true
             }
 
             "commands.template.default" -> {
-                templateCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.TEMPLATE_COMMAND).engage) templateCommand(event)
                 return true
             }
 
             "commands.notice_of_departure.default" -> {
-                noticeOfDepartureCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.NOTICE_OF_DEPARTURE_COMMAND).engage) noticeOfDepartureCommand(event)
                 return true
             }
 
             "commands.regulars.default" -> {
-                regularsCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.REGULARS_COMMAND).engage) regularsCommand(event)
                 return true
             }
 
             "commands.player.default" -> {
-                playerCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.PLAYER_COMMAND).engage) playerCommand(event)
                 return true
             }
 
             "commands.settings.default" -> {
-                settingsCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.SETTINGS_COMMAND).engage) settingsCommand(event)
                 return true
             }
 
             "commands.application.default" -> {
-                applicationCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.APPLICATION_COMMAND).engage) applicationCommand(event)
                 return true
             }
         }

@@ -1,20 +1,11 @@
 package dev.vxrp
 
-import ch.qos.logback.classic.Level
-import ch.qos.logback.classic.LoggerContext
 import dev.vxrp.api.github.Github
-import dev.vxrp.bot.BotManager
 import dev.vxrp.configuration.ConfigurationManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.configuration.managers.ConfigManager
-import dev.vxrp.configuration.managers.TranslationManager
-import dev.vxrp.database.DatabaseManager
 import dev.vxrp.util.launch.LaunchOptionManager
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.nio.file.Path
-import kotlin.io.path.Path
 
 val logger = LoggerFactory.getLogger("dev.vxrp.Main")
 
