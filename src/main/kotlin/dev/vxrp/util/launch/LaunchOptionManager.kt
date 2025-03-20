@@ -54,9 +54,9 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
             if (launchOption.id.split(":")[1] == type.toString()) currentLaunchOption = launchOption
         }
 
-        for (sectionOption in currentLaunchOption!!.section!!) {
+        for (sectionOption in currentLaunchOption!!.sections!!) {
             if (sectionOption.id.split(":")[1] == sectionType.toString()) {
-                if (sectionOption.logAction) logger.info("Launching section $sectionType of $type successfully, proceeding...")
+                if (sectionOption.logAction) logger.debug("Launching section {} of {}", sectionType, type)
                 return LaunchArguments(broken = false, engage = true, separateThread = false)
             }
         }
