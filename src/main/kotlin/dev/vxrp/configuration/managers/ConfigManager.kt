@@ -4,10 +4,9 @@ import com.charleskorn.kaml.Yaml
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.bot.ticket.data.Ticket
 import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.LaunchConfiguration
+import dev.vxrp.util.launch.data.LaunchConfiguration
 import dev.vxrp.configuration.loaders.Settings
 import dev.vxrp.database.tables.ApplicationTypeTable
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 import java.nio.file.Files
 import java.nio.file.Path

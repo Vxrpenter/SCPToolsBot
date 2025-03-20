@@ -23,7 +23,7 @@ data class LaunchConfigurationOrder(
     val engage: Boolean,
     @SerialName("separate_thread")
     val separateThread: Boolean,
-    val section: List<LaunchConfigurationSection>? = null
+    val sections: List<LaunchConfigurationSection>? = null
 )
 
 @Serializable
