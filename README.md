@@ -25,16 +25,16 @@ For more information check out the [wiki](https://github.com/Vxrpenter/SCPToolsB
 
 ## What Features are included
 
-| Feature                        | What is this                                                                                                                                                                                           | Default State |
-|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| Fully customizable translation | All text can be changed to anything you can imagine, there are even color codes and other utility functions for even more customizability                                                              | `active`      |
-| Configuration options          | Many features can be changed to personal liking, e.g. disabling a certain part of it or enabling something else that is not active by default                                                          | `active`      |
-| Status bot cluster             | A cluster of bots that show the player count of your server. They also send connection messages to a channel that was configured by the sysadmin, that show if the server can currently not be reached | `deactivated` |
-| Custom Support System          | Support system that is fitted in with scp secret laboratory, add new pre configured category or let the user decide. Sync actions in tickets with actions on the server to make operations more smooth | `active`      |
-| Notice of Departures           | Staff can file a notice of departure that marks a timeframe they will not be available. These are also checked periodically to ensure that everyone gets notified if the notice runs out               | `active`      |
-| Fully configurable commands    | You can change command names, permissions, options, choices and subcommands without messing with the functionality.                                                                                    | `active`      |
-| Playtime role syncing          | Give your players a reward by allowing them to earn roles for certain playtime counts. They automatically get synced with their ingame time and updated when reaching a new milestone                  | `deactivated` |
-| Cedmod synchronization         | You can link your cedmod instance by utilizing cedmods api user feature. The bot will be able to interact with the panel and use it's features according to your desires                               | `deactivated` |
+| Feature                        | What is this                                                                                                                                                                                           |
+|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Fully customizable translation | All text can be changed to anything you can imagine, there are even color codes and other utility functions for even more customizability                                                              |
+| Configuration options          | Many features can be changed to personal liking, e.g. disabling a certain part of it or enabling something else that is not active by default                                                          |
+| Status bot cluster             | A cluster of bots that show the player count of your server. They also send connection messages to a channel that was configured by the sysadmin, that show if the server can currently not be reached |
+| Custom Support System          | Support system that is fitted in with scp secret laboratory, add new pre configured category or let the user decide. Sync actions in tickets with actions on the server to make operations more smooth |
+| Notice of Departures           | Staff can file a notice of departure that marks a timeframe they will not be available. These are also checked periodically to ensure that everyone gets notified if the notice runs out               |
+| Fully configurable commands    | You can change command names, permissions, options, choices and subcommands without messing with the functionality.                                                                                    |
+| Playtime role syncing          | Give your players a reward by allowing them to earn roles for certain playtime counts. They automatically get synced with their ingame time and updated when reaching a new milestone                  |
+| Cedmod synchronization         | You can link your cedmod instance by utilizing cedmods api user feature. The bot will be able to interact with the panel and use it's features according to your desires                               |
 
 For more indepth explanation see the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Feature-Overview)
 
