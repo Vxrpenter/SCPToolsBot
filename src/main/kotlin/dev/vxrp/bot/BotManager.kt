@@ -12,7 +12,6 @@ import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.Timer
 import dev.vxrp.util.launch.LaunchOptionManager
-import dev.vxrp.util.launch.enums.LaunchOptionSectionType
 import dev.vxrp.util.launch.enums.LaunchOptionType
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.Activity
