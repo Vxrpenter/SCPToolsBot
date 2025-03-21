@@ -88,6 +88,7 @@ I'm not liable for anything done with it, and no warranty is given
 > When using code from this repo, you have to add a License and copyright notice.
 
 This licence is not in place to annoy anyone but to protect the work, passion and time that has gone into this project
+> This is no legal advice
 
 ## Special Thanks
 - Special thanks goes to [ced777ric](https://github.com/ced777ric) who helped me a lot with the cedmod api integration especially when trying to find the specific endpoints usecase or usability
