@@ -2,7 +2,6 @@ package dev.vxrp.configuration
 
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.LoggerContext
-import dev.vxrp.ScpToolsBot
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.configuration.managers.ConfigManager
@@ -22,10 +21,10 @@ class ConfigurationManager {
     fun initializeConfigs(): Config  {
         createConfigurations(configManager, System.getProperty("user.dir"))
         return configManager.query(
-            Path("${System.getProperty("user.dir")}/configs/launch-configuration.json"),
-            Path("${System.getProperty("user.dir")}/configs/config.yml"),
-            Path("${System.getProperty("user.dir")}/configs/status-settings.json"),
-            Path("${System.getProperty("user.dir")}/configs/ticket-settings.json")
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/launch-configuration.json"),
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/config.yml"),
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/status-settings.json"),
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/ticket-settings.json")
         )
     }
 
@@ -36,13 +35,13 @@ class ConfigurationManager {
     }
 
     fun initializeDatabase(config: Config) {
-        val databaseManager = DatabaseManager(config, "database", "data.db")
+        val databaseManager = DatabaseManager(config, "/SCPToolsBot/database", "data.db")
 
         configManager.databaseManagement(
-            Path("${System.getProperty("user.dir")}/configs/launch-configuration.json"),
-            Path("${System.getProperty("user.dir")}/configs/config.yml"),
-            Path("${System.getProperty("user.dir")}/configs/status-settings.json"),
-            Path("${System.getProperty("user.dir")}/configs/ticket-settings.json")
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/launch-configuration.json"),
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/config.yml"),
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/status-settings.json"),
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/ticket-settings.json")
         )
     }
 
@@ -62,19 +61,19 @@ class ConfigurationManager {
 
     private fun createConfigurations(configManager: ConfigManager, dir: String) {
         val configs = ArrayList<Path>()
-        configs.add((Path("/configs/launch-configuration.json")))
-        configs.add(Path("/configs/config.yml"))
-        configs.add(Path("/configs/color-config.json"))
-        configs.add(Path("/configs/ticket-settings.json"))
-        configs.add(Path("/configs/status-settings.json"))
+        configs.add((Path("/SCPToolsBot/configs/launch-configuration.json")))
+        configs.add(Path("/SCPToolsBot/configs/config.yml"))
+        configs.add(Path("/SCPToolsBot/configs/color-config.json"))
+        configs.add(Path("/SCPToolsBot/configs/ticket-settings.json"))
+        configs.add(Path("/SCPToolsBot/configs/status-settings.json"))
 
         configManager.create(dir, configs)
     }
 
     private fun createTranslations(translationManager: TranslationManager) {
         val translations = ArrayList<Path>()
-        translations.add(Path("/lang/en_US.yml"))
-        translations.add(Path("/lang/de_DE.yml"))
+        translations.add(Path("/SCPToolsBot/lang/en_US.yml"))
+        translations.add(Path("/SCPToolsBot/lang/de_DE.yml"))
 
         translationManager.create(System.getProperty("user.dir"), translations)
     }

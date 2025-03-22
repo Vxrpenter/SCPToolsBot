@@ -19,7 +19,7 @@ class StatusCommandListener(val api: JDA, val config: Config, val translation: T
 
     init {
         api.listener<SlashCommandInteractionEvent> { event ->
-            val commandManager = CommandManager(config, "configs/commands.json")
+            val commandManager = CommandManager(config, "SCPToolsBot/configs/commands.json")
             val commandList = commandManager.query().statusCommands
 
             for (command in commandList) {

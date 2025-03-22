@@ -12,7 +12,7 @@ class TranslationManager {
     private val logger = LoggerFactory.getLogger(TranslationManager::class.java)
 
     fun create(dir: String, files: List<Path>) {
-        Files.createDirectories(Path("$dir/lang/"))
+        Files.createDirectories(Path("$dir/SCPToolsBot/lang/"))
 
         for (file in files) {
             val content = TranslationManager::class.java.getResourceAsStream(file.toString())
@@ -33,7 +33,7 @@ class TranslationManager {
     }
 
     fun query(dir: String, lang: String): Translation {
-        val currentFile = Path("$dir/lang/$lang.yml").toFile()
+        val currentFile = Path("$dir/SCPToolsBot/lang/$lang.yml").toFile()
 
         if (!currentFile.exists()) {
             logger.error("Could not load configuration set with name: {}", lang)

@@ -28,11 +28,8 @@ data class Settings(
     @SerialName("activity_content")
     val activityContent: String,
     val database: ConfigDatabase,
-    val rules: ConfigRules,
-    val logging: ConfigLogging,
     val cedmod: ConfigCedmod,
     val status: ConfigStatus,
-    val support: ConfigSupport,
     @SerialName("notice_of_departure")
     val noticeOfDeparture: ConfigNoticeOfDeparture,
     val regulars: ConfigRegulars
@@ -53,28 +50,6 @@ data class ConfigDatabase(
 )
 
 @Serializable
-data class ConfigRules(
-    @SerialName("pastebin")
-    val pastbin: String,
-    @SerialName("embed_footer")
-    val footer: String
-)
-
-@Serializable
-data class ConfigLogging(
-    @SerialName("do_logging")
-    val active: Boolean,
-    @SerialName("ticket_logging_channel_id")
-    val ticketChannel: String,
-    @SerialName("notice_of_departures_logging_channel_id")
-    val noticeOfDepartureChannel: String,
-    @SerialName("do_database_logging")
-    val databaseLog: Boolean,
-    @SerialName("database_logging_channel_id")
-    val databaseChannel: String
-)
-
-@Serializable
 data class ConfigCedmod(
     @SerialName("active")
     val active: Boolean,
@@ -82,8 +57,6 @@ data class ConfigCedmod(
     val instance: String,
     @SerialName("api_key")
     val api: String,
-    @SerialName("master_ban_list_id")
-    val mastBanList: String,
 )
 
 @Serializable
@@ -94,16 +67,6 @@ data class ConfigStatus(
     val postChannel: String,
     @SerialName("page_url")
     val pageUrl: String,
-)
-
-@Serializable
-data class ConfigSupport(
-    @SerialName("roles_access_support_tickets")
-    val rolesAccessSupport: List<String>,
-    @SerialName("roles_access_unban_tickets")
-    val rolesAccessUnban: List<String>,
-    @SerialName("unban_channel_id")
-    val unbanChannel: String,
 )
 
 @Serializable

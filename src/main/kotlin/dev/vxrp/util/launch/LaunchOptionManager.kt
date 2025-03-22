@@ -39,7 +39,7 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
             return
         }
         if (clusterOptions.engage && botOptions.engage) {
-            val statusManager = StatusManager(botManager.mainApi!!, config, translation, timer, "configs/status-settings.json")
+            val statusManager = StatusManager(botManager.mainApi!!, config, translation, timer, "SCPToolsBot/configs/status-settings.json")
             statusManager.initialize(botManager.mainCommandManager!!)
         }
     }

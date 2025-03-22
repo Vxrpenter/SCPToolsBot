@@ -16,7 +16,7 @@
         <file>logs/latest.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>logs/${time}-%i.log.gz</fileNamePattern>
+            <fileNamePattern>SCPToolsBot/logs/${time}-%i.log.gz</fileNamePattern>
             <minIndex>1</minIndex>
             <maxIndex>21</maxIndex>
         </rollingPolicy>
