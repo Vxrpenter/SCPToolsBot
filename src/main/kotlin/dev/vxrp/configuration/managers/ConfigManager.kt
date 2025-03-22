@@ -16,12 +16,14 @@ class ConfigManager {
     private val logger = LoggerFactory.getLogger(ConfigManager::class.java)
 
     fun create(dir: String, files: List<Path>) {
-        Files.createDirectories(Path("$dir/configs/"))
+        Files.createDirectories(Path("$dir/SCPToolsBot/configs/"))
+
 
         for (file in files) {
             val content = ConfigManager::class.java.getResourceAsStream(file.toString())
 
             val path = Path("$dir$file")
+
 
             val currentFile = path.toFile()
             if (!currentFile.exists()) {

@@ -1,0 +1,85 @@
+#                                                           ______     ______     ______      ______   ______     ______     __         ______
+#                                                          /\  ___\   /\  ___\   /\  == \    /\__  _\ /\  __ \   /\  __ \   /\ \       /\  ___\
+#                                                          \ \___  \  \ \ \____  \ \  _-/    \/_/\ \/ \ \ \/\ \  \ \ \/\ \  \ \ \____  \ \___  \
+#                                                           \/\_____\  \ \_____\  \ \_\         \ \_\  \ \_____\  \ \_____\  \ \_____\  \/\_____\
+#                                                            \/_____/   \/_____/   \/_/          \/_/   \/_____/   \/_____/   \/_____/   \/_____/
+#Copyright (c) 2024 Vxrpenter
+
+
+
+# The token of your bot application, create one here https://discord.com/developers/
+token: ""
+# Your server ID, you can get it by activating discord developer mode and right-clicking your server
+guild_id: ""
+
+# Which language should the bot use?
+#Choose from these supported languages or duplicate one of the translation files and change it yourself
+# available translations: ["en_US", "de_DE"]
+load_translation: "en_US"
+
+# Activates debug logging, which gives you much more information on what the bot is doing.
+debug: false
+# ** Warning ** This feature is not recommended
+#Displays all available information
+advanced_debug: false
+
+# The activity type of the bot, choose from the available list: [COMPETING, CUSTOM_STATUS, LISTENING, PLAYING, WATCHING]
+activity_type: "PLAYING"
+# The text that is being displayed in the activity
+activity_content: "/help"
+
+database:
+  # Defines which datatype should be used, choose between [NONE, SQLITE]
+  # ** WARNING ** if you set this to none, and no other database option is given, the process will crash on startup
+  use_predefined_database_sets: "SQLITE"
+  # ** WARNING ** When using custom, you may experience issues. This is a work in progress feature, so it is unstable, report problems on the GitHub page
+  # Which type of custom db should be used: [SQLITE, MYSQL, POSTGRESQL, MARIADB]
+  custom_type: ""
+  # Here you can input a custom database url to connect to. This will only work when the setting is predefined to NONE
+  custom_url: ""
+  # Here you've input the custom db password
+  custom_username: ""
+  # Here you have to enter the password of your db session
+  custom_password: ""
+
+#
+# Deprecation Notice
+#
+# This feature will be moved to a separate configuration file in the future
+#
+status:
+  # Should the server status be posted?
+  post_server_status: false
+  # Where should the server status be posted?
+  post_channel : ""
+  # Status page url, change this if you have a custom server status page set up
+  page_url: "https://status.scpslgame.com/"
+
+cedmod:
+  # This activates the CedMod Api integration. This feature is only used for the following functions, only activate if you have these features in use: Regulars
+  # CedMod Api is only available to users who request access from the CedMod team, ask on their discord for more information - https://discord.gg/p69SGfwxxm
+  active: false
+  # Include https://
+  instance_url: ""
+  # Put the plain API key here
+  api_key: ""
+
+notice_of_departure:
+  # Which channel should the form be sent to be accepted by moderators?
+  decision_channel_id: ""
+  # Which channel should the departure timekeeping messages be sent to?
+  notice_channel_id: ""
+  # List of role's that are able to accept/dismiss/revoke notices (INPUT ID'S ONLY)
+  roles_access_notices: []
+  # Put the following in the type: [NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS]
+  check_type: "HOURS"
+  # The rate at that the notices are checked.
+  check_rate: 1
+
+regulars:
+  # Should example configuration be created (deactivate if you want to delete the example config)
+  create_example_configuration: true
+  # Should the bot only load from specified folder within the /regulars/ folder?
+  only_load_certain_folder: false
+  # Specify which folders should be specified if the option above is active
+  only_load_folders: []
