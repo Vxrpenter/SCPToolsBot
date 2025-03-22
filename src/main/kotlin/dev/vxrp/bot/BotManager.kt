@@ -43,7 +43,7 @@ class BotManager(val config: Config, val translation: Translation) {
         if (launchOptionManager.checkLaunchOption(LaunchOptionType.MODAL_LISTENER).engage) api.addEventListener(ModalListener(api, config, translation))
 
         if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_MANAGER).engage) {
-            val commandManager = CommandManager(config, "SCPToolsBot/configs/commands.json")
+            val commandManager = CommandManager(config, "SCPToolsBot/configs/extra/commands.json")
 
             commandManager.registerSpecificCommands(commandManager.query().commands, api)
             mainCommandManager = commandManager

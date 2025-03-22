@@ -21,7 +21,7 @@ class ConfigurationManager {
     fun initializeConfigs(): Config  {
         createConfigurations(configManager, System.getProperty("user.dir"))
         return configManager.query(
-            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/launch-configuration.json"),
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/extra/launch-configuration.json"),
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/config.yml"),
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/status-settings.json"),
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/ticket-settings.json")
@@ -38,7 +38,7 @@ class ConfigurationManager {
         val databaseManager = DatabaseManager(config, "/SCPToolsBot/database", "data.db")
 
         configManager.databaseManagement(
-            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/launch-configuration.json"),
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/extra/launch-configuration.json"),
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/config.yml"),
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/status-settings.json"),
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/ticket-settings.json")
@@ -61,9 +61,9 @@ class ConfigurationManager {
 
     private fun createConfigurations(configManager: ConfigManager, dir: String) {
         val configs = ArrayList<Path>()
-        configs.add((Path("/SCPToolsBot/configs/launch-configuration.json")))
+        configs.add((Path("/SCPToolsBot/configs/extra/launch-configuration.json")))
         configs.add(Path("/SCPToolsBot/configs/config.yml"))
-        configs.add(Path("/SCPToolsBot/configs/color-config.json"))
+        configs.add(Path("/SCPToolsBot/configs/extra/color-config.json"))
         configs.add(Path("/SCPToolsBot/configs/ticket-settings.json"))
         configs.add(Path("/SCPToolsBot/configs/status-settings.json"))
 
