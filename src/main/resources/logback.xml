@@ -13,7 +13,7 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} – %msg%n</pattern>
         </encoder>
 
-        <file>logs/latest.log</file>
+        <file>SCPToolsBot/logs/latest.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <fileNamePattern>SCPToolsBot/logs/${time}-%i.log.gz</fileNamePattern>
