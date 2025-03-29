@@ -4,6 +4,7 @@ import dev.minn.jda.ktx.events.listener
 import dev.vxrp.bot.commands.listeners.CommandListener
 import dev.vxrp.bot.events.buttons.ApplicationButtons
 import dev.vxrp.bot.events.buttons.HelpButtons
+import dev.vxrp.bot.events.buttons.NoticeOfDepartureButtons
 import dev.vxrp.bot.events.buttons.TicketButtons
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
@@ -24,6 +25,8 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
             if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.TICKET_BUTTONS).engage) TicketButtons(event, config, translation).init()
 
             if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.APPLICATION_BUTTONS).engage) ApplicationButtons(event, config, translation).init()
+
+            if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.NOTICE_OF_DEPARTURE_BUTTONS).engage) NoticeOfDepartureButtons(event, config, translation)
         }
     }
 }
