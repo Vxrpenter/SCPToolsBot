@@ -333,6 +333,7 @@ SUPPORT:
   MODAL_APPLICATION_SKILLS_TITLE: "Skills"
   MODAL_APPLICATION_SKILLS_PLACEHOLDER: "What are you skilled at, have you ever done this task on another server?"
 
+  # This section also gets used in the notice of departure procedure
   MODAL_REASON_ACTION_TITLE: "Action Reasoning"
   MODAL_REASON_ACTION_REASON_TITLE: "Reason"
   MODAL_REASON_ACTION_REASON_PLACEHOLDER: "What is the reason for your action?"
