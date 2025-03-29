@@ -540,15 +540,17 @@ APPLICATION:
 
 NOTICE_OF_DEPARTURE:
 
-  EMBED_TEMPLATE_TITLE: "Abmeldung für Discord und Secret Lab."
+  EMBED_TEMPLATE_TITLE: "Abmeldungsformular"
   EMBED_TEMPLATE_BODY: "
-                        Wenn du weißt, dass Sie für eine bestimmte Zeit nicht online sein können, dann füll bitte dieses Formular aus\n
+                        Solltest du für einige Zeit nicht verfügbar sein, kannst du hier einen Abmeldungsantrag stellen. Weitere Informationen findest du unten.
 
-                        **Zu gebende Informationen:**\n
-                        - Wie lange wirst du abwesend sein, FORMAT: **[dd.MM.yyyy]**\n
-                        - gib  bitte eine kurze Erklärung ab, warum du abwesend sein werden, ohne Details
+                        **Benötigte Informationen**
+                        Diese Informationen werden für deine Abmeldung benötigt.
+                        - Das Datum deiner Rückkehr. Bitte verwende dieses Format, andernfalls wird die Abmeldung nicht akzeptiert: **dd.MM.yyyy**
                         
-                        Jeder Zeitraum über 1 Jahr wird nicht akzeptiert und du wirst gebeten, das Team zu verlassen
+                        - Eine kurze Erklärung, warum du eine Auszeit benötigen. Gehe nicht zu sehr ins Detail, nur so viel, dass es Sinn ergibt.
+                        
+                        _Alle Anträge können von höhergestellten Teammitglied abgelehnt und widerrufen werden. Dieses Formular ist keine rechtsverbindliche Regelung der Arbeitszeit, sondern lediglich eine Vereinbarung zwischen Teammitgliedern._
                         "
 
   MODAL_TITLE: "Abmeldung stellen"
