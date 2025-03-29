@@ -12,7 +12,7 @@ application_types: [
     name: "Supporter",
     # The role description, meaning their supposed work in the team
     description: "Helps users ingame and handles reports",
-    # The roles emoji, that will be shown in the list of applicable roles
+    # The roles emoji that will be shown in the list of applicable roles
     emoji: "",
     #  The roles id, meaning the discord role itself
     role_id: ""
@@ -22,7 +22,7 @@ application_types: [
     name: "Discord Supporter",
     # The role description, meaning their supposed work in the team
     description: "Helps users on the discord handling discord tickets",
-    # The roles emoji, that will be shown in the list of applicable roles
+    # The roles emoji that will be shown in the list of applicable roles
     emoji: "",
     #  The roles id, meaning the discord role itself
     role_id: ""
@@ -32,7 +32,7 @@ application_types: [
     name: "Developer",
     # The role description, meaning their supposed work in the team
     description: "Develops plugins or helps with server maintenance",
-    # The roles emoji, that will be shown in the list of applicable roles
+    # The roles emoji that will be shown in the list of applicable roles
     emoji: "",
     #  The roles id, meaning the discord role itself
     role_id: ""
@@ -45,8 +45,8 @@ types: [
   {
     # The name of the ticket type
     name: "General",
-    # ** WARNING ** Do not change this as it will change how the bot defines
-    # the type defines the ticket in the code
+    # ** WARNING ** Don't change this as it will change how the bot defines
+    # the type defining the ticket in the code
     type: "support::GENERAL",
     # The roles that will be added to the ticket once it is created
     roles: [ ],
@@ -69,8 +69,8 @@ types: [
   {
     # The name of the ticket type
     name: "Report",
-    # ** WARNING ** Do not change this as it will change how the bot defines
-    # the type defines the ticket in the code
+    # ** WARNING ** Don't change this as it will change how the bot defines
+    # the type defining the ticket in the code
     type: "support::REPORT",
     # The roles that will be added to the ticket once it is created
     roles: [ ],
@@ -93,8 +93,8 @@ types: [
   {
     # The name of the ticket type
     name: "Error",
-    # ** WARNING ** Do not change this as it will change how the bot defines
-    # the type defines the ticket in the code
+    # ** WARNING ** Don't change this as it will change how the bot defines
+    # the type defining the ticket in the code
     type: "support::ERROR",
     # The roles that will be added to the ticket once it is created
     roles: [ ],
@@ -117,8 +117,8 @@ types: [
   {
     # The name of the ticket type
     name: "Unban",
-    # ** WARNING ** Do not change this as it will change how the bot defines
-    # the type defines the ticket in the code
+    # ** WARNING ** Don't change this as it will change how the bot defines
+    # the type defining the ticket in the code
     type: "support::UNBAN",
     # The roles that will be added to the ticket once it is created
     roles: [ ],
@@ -141,8 +141,8 @@ types: [
   {
     # The name of the ticket type
     name: "Complaint",
-    # ** WARNING ** Do not change this as it will change how the bot defines
-    # the type defines the ticket in the code
+    # ** WARNING ** Don't change this as it will change how the bot defines
+    # the type defining the ticket in the code
     type: "support::COMPLAINT",
     # The roles that will be added to the ticket once it is created
     roles: [ ],
@@ -165,8 +165,8 @@ types: [
   {
     # The name of the ticket type
     name: "Application",
-    # ** WARNING ** Do not change this as it will change how the bot defines
-    # the type defines the ticket in the code
+    # ** WARNING ** Don't change this as it will change how the bot defines
+    # the type defining the ticket in the code
     type: "support::APPLICATION",
     # The roles that will be added to the ticket once it is created
     roles: [ ],
