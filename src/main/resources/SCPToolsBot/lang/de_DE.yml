@@ -542,13 +542,13 @@ NOTICE_OF_DEPARTURE:
 
   EMBED_TEMPLATE_TITLE: "Abmeldungsformular"
   EMBED_TEMPLATE_BODY: "
-                        Solltest du für einige Zeit nicht verfügbar sein, kannst du hier einen Abmeldungsantrag stellen. Weitere Informationen findest du unten.
+                        Solltest du für einige Zeit nicht verfügbar sein, kannst du hier einen Abmeldungsantrag stellen. Weitere Informationen findest du unten.\n
 
-                        **Benötigte Informationen**
-                        Diese Informationen werden für deine Abmeldung benötigt.
-                        - Das Datum deiner Rückkehr. Bitte verwende dieses Format, andernfalls wird die Abmeldung nicht akzeptiert: **dd.MM.yyyy**
+                        **Benötigte Informationen**\n
+                        Diese Informationen werden für deine Abmeldung benötigt.\n
+                        - Das Datum deiner Rückkehr. Bitte verwende dieses Format, andernfalls wird die Abmeldung nicht akzeptiert: **dd.MM.yyyy**\n
                         
-                        - Eine kurze Erklärung, warum du eine Auszeit benötigen. Gehe nicht zu sehr ins Detail, nur so viel, dass es Sinn ergibt.
+                        - Eine kurze Erklärung, warum du eine Auszeit benötigen. Gehe nicht zu sehr ins Detail, nur so viel, dass es Sinn ergibt.\n
                         
                         _Alle Anträge können von höhergestellten Teammitglied abgelehnt und widerrufen werden. Dieses Formular ist keine rechtsverbindliche Regelung der Arbeitszeit, sondern lediglich eine Vereinbarung zwischen Teammitgliedern._
                         "
