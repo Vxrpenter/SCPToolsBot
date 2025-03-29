@@ -14,11 +14,11 @@ class TemplateCommand(val config: Config, val translations:Translation) {
             }
 
             "support" -> {
-                SupportTemplate(config, translations).pastePaste(event)
+                SupportTemplate(config, translations).pasteTemplate(event)
             }
 
             "notice_of_departure" -> {
-                NoticeOfDepartureTemplate()
+                NoticeOfDepartureTemplate(config, translations).pasteTemplate(event)
             }
 
             "SCPToolsBot/regulars" -> {

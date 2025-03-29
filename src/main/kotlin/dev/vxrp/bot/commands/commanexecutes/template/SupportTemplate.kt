@@ -10,14 +10,14 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 
 class SupportTemplate(val config: Config, val translation: Translation) {
-    fun pastePaste(event: SlashCommandInteractionEvent) {
-        val support = Embed {
+    fun pasteTemplate(event: SlashCommandInteractionEvent) {
+        val embed = Embed {
             thumbnail = event.guild?.iconUrl
             title = ColorTool().useCustomColorCodes(translation.support.embedTemplateSupportTitle).trimIndent()
             description = ColorTool().useCustomColorCodes(translation.support.embedTemplateSupportBody).trimIndent()
         }
 
-        event.channel.send("", listOf(support))
+        event.channel.send("", listOf(embed))
             .setActionRow(
                 StringSelectMenu.create("ticket")
                     .addOption(translation.selectMenus.textSupportNameGeneral, "general", translation.selectMenus.textsupportDescriptionGeneral, Emoji.fromFormatted("⚙️"))
