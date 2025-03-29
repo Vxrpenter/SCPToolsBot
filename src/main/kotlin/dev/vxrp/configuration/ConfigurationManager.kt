@@ -24,7 +24,7 @@ class ConfigurationManager {
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/extra/launch-configuration.json"),
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/config.yml"),
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/status-settings.yml"),
-            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/ticket-settings.json")
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/ticket-settings.yml")
         )
     }
 
@@ -41,7 +41,7 @@ class ConfigurationManager {
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/extra/launch-configuration.json"),
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/config.yml"),
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/status-settings.yml"),
-            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/ticket-settings.json")
+            Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/ticket-settings.yml")
         )
     }
 
@@ -64,7 +64,7 @@ class ConfigurationManager {
         configs.add((Path("/SCPToolsBot/configs/extra/launch-configuration.json")))
         configs.add(Path("/SCPToolsBot/configs/config.yml"))
         configs.add(Path("/SCPToolsBot/configs/extra/color-config.json"))
-        configs.add(Path("/SCPToolsBot/configs/ticket-settings.json"))
+        configs.add(Path("/SCPToolsBot/configs/ticket-settings.yml"))
         configs.add(Path("/SCPToolsBot/configs/status-settings.yml"))
 
         configManager.create(dir, configs)
