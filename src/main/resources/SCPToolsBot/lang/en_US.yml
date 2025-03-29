@@ -539,15 +539,17 @@ APPLICATION:
 
 NOTICE_OF_DEPARTURE:
 
-  EMBED_TEMPLATE_TITLE: "Notice of Departure for Discord and Secret Lab"
+  EMBED_TEMPLATE_TITLE: "Notice of Departure Form"
   EMBED_TEMPLATE_BODY: "
-                        If you know that you are not going to be able to come online for a specified time, please fill out this form\n
+                        If you are not avaidible for some time, you can apply for time of here. More information can be found below.
+
+                        **Needed Information**
+                        This information will be needed for your notice of departure.
+                        - The date you wish to come back. Please follow this format when entering or it will not be accepted: **dd.MM.yyyy**
                         
-                        __**Information to give:**__\n
-                        - How to long will you be away, FORMAT: **[dd.MM.yyyy]**\n
-                        - Please provide a short explanation on why you will be away without any details\n
+                        - A short explanation on why you need some time off. Don't go into too much detail, just enough for it to make sense.
                         
-                        Every timespan over 1 year will not be accepted and will be asked to leave the team
+                        _All requests can be denied and revoked by higher staff. This form is not legally binding off time but just an agreement between team members._
                         "
 
   MODAL_TITLE: "File Notice of Departure"
