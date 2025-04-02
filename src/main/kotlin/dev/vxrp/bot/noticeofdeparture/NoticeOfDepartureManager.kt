@@ -8,7 +8,6 @@ import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.NoticeOfDepartureTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
-import net.dv8tion.jda.api.entities.User
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.interactions.components.buttons.Button
