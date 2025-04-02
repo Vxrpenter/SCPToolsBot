@@ -578,7 +578,7 @@ NOTICE_OF_DEPARTURE:
                         Your notice of departure was accepted. You may now take your time off without any consequences. \n
                         
                         __**Acceptance Timeframe:**__\n
-                        ```%timeframe%```
+                        ```%current_date% till %end_date%```
                         
                         __**Acceptance Reason:**__\n
                         ```%reason%```
