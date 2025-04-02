@@ -105,6 +105,17 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
         val currentDate = LocalDate.now().format(formatter)
         val endDate = LocalDate.parse(date, formatter).format(formatter)
 
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokedTitle)
+            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokedBody
+                .replace("%current_date%", currentDate)
+                .replace("%end_date", endDate)
+                .replace("%reason%", reason))
+        }
 
+        val privateChannel = api.retrieveUserById(userId).await().openPrivateChannel().await()
+        privateChannel.send("", listOf(embed)).queue()
+
+        NoticeOfDepartureTable().deleteEntry(userId)
     }
 }
