@@ -8,6 +8,7 @@ import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.NoticeOfDepartureTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
+import net.dv8tion.jda.api.entities.User
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.interactions.components.buttons.Button
@@ -26,7 +27,7 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
 
         val embed = Embed {
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionTitle
-                .replace("%number%", NoticeOfDepartureTable().retrieveSerial().toString()))
+                .replace("%number%", (NoticeOfDepartureTable().retrieveSerial()+1).toString()))
             description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionBody
                 .replace("%current_date%", currentDate.toString())
                 .replace("%end_date%", endDate.toString())
@@ -72,7 +73,7 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
         privateChannel.send("", listOf(embed)).queue()
     }
 
-    suspend fun sendNoticeMessage(reason: String, userId: String, date: String) {
+    suspend fun sendNoticeMessage(reason: String, handler: String, userId: String, date: String) {
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
         val currentDate = LocalDate.now().format(formatter)
         val endDate = LocalDate.parse(date, formatter).format(formatter)
@@ -81,7 +82,7 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
 
         val embed = Embed {
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeTitle
-                .replace("%number%", NoticeOfDepartureTable().retrieveSerial().toString()))
+                .replace("%number%", (NoticeOfDepartureTable().retrieveSerial()+1).toString()))
             description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeBody
                 .replace("%user%", user.asMention)
                 .replace("%current_date%", currentDate)
@@ -90,12 +91,14 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
         }
 
         val channel = api.getTextChannelById(config.settings.noticeOfDeparture.noticeChannel)
-        channel?.send("", listOf(embed))?.addActionRow(
+        val message = channel?.send("", listOf(embed))?.addActionRow(
             Button.danger("notice_of_departure_revoke", translation.buttons.textNoticeOfDepartureRevoked)
-        )?.queue() ?: run {
+        )?.await() ?: run {
             logger.error("Could not correctly retrieve notice of departure notice channel, does it exist?")
             return
         }
+
+        NoticeOfDepartureTable().addToDatabase(userId, true, handler, channel.id, message.id, currentDate, endDate)
     }
 
     suspend fun sendRevokedMessage(reason: String, userId: String) {
