@@ -135,7 +135,7 @@ HELP:
 
 STATUS:
   ACTIVITY_OFFLINE: "Server Offline..."
-  ACTIVITY_MAINTENANCE: "Server in Wartungarbeiten..."
+  ACTIVITY_MAINTENANCE: "Server in Wartungsarbeiten..."
 
   EMBED_ESTABLISHED_TITLE: "%instance% - verbindung wiederhergestellt"
   EMBED_ESTABLISHED_BODY: "Die Verbindung zum Server wurde wiederhergestellt! Ausfälle sollten nicht häufig auftreten, wenn der Server stabil läuft."
@@ -207,7 +207,7 @@ PLAYER:
                         **──────────────────────────────────────**\n
                         ### `➥` Discord  ID: `%discordId%`\n
                         ### `➥` Timeout?  ID: `%discordTimeout%`\n
-                        ### `➥` Stummgeschalted?  ID: `%discordMute%`\n
+                        ### `➥` Stummgeschaltet?  ID: `%discordMute%`\n
                         **─────────────────────────────────────────────────────────────**"
 
   EMBED_STEAMID_FIELD_NAME: "`🆔` SteamId"
