@@ -603,7 +603,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_DISMISSING_SENT_TITLE: "Dismissing Send"
   EMBED_DISMISSING_SENT_BODY: "The dismissed notice will now be processed and the user will be notified of you dismissing the notice as well as the reason for dismissing it"
 
-  EMBED_NOTICE_TITLE: "Notice of Departure - %user%"
+  EMBED_NOTICE_TITLE: "Notice of Departure - #%number%"
   EMBED_NOTICE_BODY: "
                         This Notice of Departure can always be revoked by pressing the button down below.
                         This will also be periodically checked if still valid or not\n
@@ -612,7 +612,7 @@ NOTICE_OF_DEPARTURE:
                         %user%\n
                         
                         __**Acceptance Reason:**__\n
-                        ```%timeframe%```
+                        ```%current_date% till %end_date%```
                         
                         __**Acceptance Reason:**__\n
                         ```%reason%```
@@ -623,7 +623,7 @@ NOTICE_OF_DEPARTURE:
                         Your Notice of Departure has ended and all your benefits going with it have been revoked \n
                         
                         __**Timeframe:**__\n
-                        ```%timeframe%```
+                        ```%current_date% till %end_date%```
                         "
 
   EMBED_REVOKED_TITLE: "Notice of Departure has been Revoked"
@@ -631,7 +631,7 @@ NOTICE_OF_DEPARTURE:
                         Your Notice of Departure has been revoked and all benefits going with that do not apply anymore \n
                         
                         __**Timeframe:**__\n
-                        ```%timeframe%```
+                        ```%current_date% till %end_date%```
                         
                         __**Acceptance Reason:**__\n
                         ```%reason%```
