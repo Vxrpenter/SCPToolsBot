@@ -91,7 +91,7 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
 
         val channel = api.getTextChannelById(config.settings.noticeOfDeparture.noticeChannel)
         val message = channel?.send("", listOf(embed))?.addActionRow(
-            Button.danger("notice_of_departure_revoke", translation.buttons.textNoticeOfDepartureRevoked)
+            Button.danger("notice_of_departure_revoke:$userId:$date", translation.buttons.textNoticeOfDepartureRevoked)
         )?.await() ?: run {
             logger.error("Could not correctly retrieve notice of departure notice channel, does it exist?")
             return
@@ -100,7 +100,11 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
         NoticeOfDepartureTable().addToDatabase(userId, true, handler, channel.id, message.id, currentDate, endDate)
     }
 
-    suspend fun sendRevokedMessage(reason: String, userId: String) {
+    suspend fun sendRevokedMessage(reason: String, userId: String, date: String) {
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val currentDate = LocalDate.now().format(formatter)
+        val endDate = LocalDate.parse(date, formatter).format(formatter)
+
 
     }
 }
