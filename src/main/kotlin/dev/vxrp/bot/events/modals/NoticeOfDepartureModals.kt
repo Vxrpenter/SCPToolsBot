@@ -3,11 +3,11 @@ package dev.vxrp.bot.events.modals
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureManager
+import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureMessageHandler
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent
-import org.jetbrains.exposed.sql.transactions.transactionScope
 
 class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Config, val translation: Translation) {
     suspend fun init() {
@@ -15,7 +15,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             val date = event.values[0].asString
             val reason = event.values[1].asString
 
-            NoticeOfDepartureManager(event.jda, config, translation).sendDecisionMessage(event.user.id, date, reason)
+            NoticeOfDepartureMessageHandler(event.jda, config, translation).sendDecisionMessage(event.user.id, date, reason)
 
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionSentTitle)
@@ -32,8 +32,8 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             val userId = splittetId[1]
             val date = splittetId[2]
 
-            NoticeOfDepartureManager(event.jda, config, translation).sendAcceptedMessage(reason, userId, date)
-            NoticeOfDepartureManager(event.jda, config, translation).sendNoticeMessage(reason, event.user.id, userId, date)
+            NoticeOfDepartureMessageHandler(event.jda, config, translation).sendAcceptedMessage(reason, userId, date)
+            NoticeOfDepartureManager(event.jda, config, translation).createNotice(reason, event.user.id, userId, date)
 
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptationSentTitle)
@@ -49,7 +49,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             val reason = event.values[0].asString
             val userId = splittetId[1]
 
-            NoticeOfDepartureManager(event.jda, config, translation).sendDismissedMessage(reason, userId)
+            NoticeOfDepartureMessageHandler(event.jda, config, translation).sendDismissedMessage(reason, userId)
 
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissingSentTitle)
@@ -66,7 +66,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             val userId = splittetId[1]
             val date = splittetId[2]
 
-            NoticeOfDepartureManager(event.jda, config, translation).sendRevokedMessage(reason, userId, date)
+            NoticeOfDepartureManager(event.jda, config, translation).revokeNotice(reason, userId, date)
 
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokationSentTitle)
