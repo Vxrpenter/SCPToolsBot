@@ -471,6 +471,9 @@ SUPPORT:
   EMBED_TICKET_CLAIMED_TITLE: "Ticket Beansprucht"
   EMBED_TICKET_CLAIMED_BODY: "Dieses ticket wird jetzt von %user% bearbeitet."
 
+  EMBED_TICKET_NO_HANDLER_TITLE: "Kein Bearbeiter"
+  EMBED_TICKET_NO_HANDLER_BODY: "Das Ticket muss beansprucht werden, bevor Interaktionen durchgeführt werden können. Die Ticket-Beanspruchung entfernt keine anderen Benutzer aus dem Kanal und blockiert deren Interaktionen nicht!"
+
   EMBED_TICKET_OPENED_TITLE: "Ticket wieder Geöffnet"
   EMBED_TICKET_OPENED_BODY: "Dieses Ticket wurde erneut geöffnet."
 
