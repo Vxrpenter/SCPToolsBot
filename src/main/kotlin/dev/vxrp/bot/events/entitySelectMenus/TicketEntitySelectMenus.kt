@@ -2,7 +2,7 @@ package dev.vxrp.bot.events.entitySelectMenus
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.bot.modals.SupportModals
+import dev.vxrp.bot.modals.SupportTemplateModals
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.color.ColorTool
@@ -14,7 +14,7 @@ class TicketEntitySelectMenus(val event: EntitySelectInteractionEvent, val confi
     init {
         if (event.selectMenu.id?.startsWith("report") == true) {
             val user = event.values[0]
-            event.replyModal(SupportModals(translation).supportReportModal(user.id)).queue()
+            event.replyModal(SupportTemplateModals(translation).supportReportModal(user.id)).queue()
         }
 
         if (event.selectMenu.id?.startsWith("complaint") == true) {

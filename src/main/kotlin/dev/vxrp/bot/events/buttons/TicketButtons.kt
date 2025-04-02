@@ -2,7 +2,7 @@ package dev.vxrp.bot.events.buttons
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.bot.modals.SupportModals
+import dev.vxrp.bot.modals.SupportTemplateModals
 import dev.vxrp.bot.permissions.PermissionManager
 import dev.vxrp.bot.permissions.enums.PermissionType
 import dev.vxrp.bot.ticket.TicketSettingsHandler
@@ -21,13 +21,13 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
         if (event.button.id?.startsWith("anonymous_accept") == true) {
             val userId = event.button.id!!.split(":")[1]
 
-            event.replyModal(SupportModals(translation).supportComplaintModal(userId, true)).queue()
+            event.replyModal(SupportTemplateModals(translation).supportComplaintModal(userId, true)).queue()
         }
 
         if (event.button.id?.startsWith("anonymous_deny") == true) {
             val userId = event.button.id!!.split(":")[1]
 
-            event.replyModal(SupportModals(translation).supportComplaintModal(userId, false)).queue()
+            event.replyModal(SupportTemplateModals(translation).supportComplaintModal(userId, false)).queue()
         }
 
         if (event.button.id?.startsWith("ticket_claim") == true) {

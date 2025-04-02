@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.interactions.components.ActionRow
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle
 import net.dv8tion.jda.api.interactions.modals.Modal
 
-class SupportModals(val translation: Translation) {
+class SupportTemplateModals(val translation: Translation) {
     fun supportGeneralModal(): Modal {
         return Modal.create("support_general", translation.support.modalGeneralTitle).addComponents(
             ActionRow.of(
