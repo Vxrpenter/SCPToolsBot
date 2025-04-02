@@ -572,7 +572,6 @@ NOTICE_OF_DEPARTURE:
                         __**Reason:**__\n
                         ```%reason%```
                         "
-  EMBED_DESCISION_FOOTER: "Created on the %date% at %time%h"
   MESSAGE_DESCISION_CREATED: "Your notice will be reviewed real soon"
 
   EMBED_ACCEPTED: "
