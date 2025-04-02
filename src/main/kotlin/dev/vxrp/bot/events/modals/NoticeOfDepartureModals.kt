@@ -6,7 +6,7 @@ import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent
 
 class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Config, val translation: Translation) {
-    fun init() {
+    init {
         if (event.modalId.startsWith("notice_of_departure_general")) {
             val date = event.values[0].asString
             val reason = event.values[1].asString

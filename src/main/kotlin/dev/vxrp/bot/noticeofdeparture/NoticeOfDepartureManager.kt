@@ -8,6 +8,8 @@ import dev.vxrp.database.tables.NoticeOfDepartureTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
+import net.dv8tion.jda.api.entities.emoji.Emoji
+import net.dv8tion.jda.api.interactions.components.buttons.Button
 import org.slf4j.LoggerFactory
 import java.time.Instant
 import java.time.LocalDate
@@ -19,7 +21,7 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
     fun sendDecisionMessage(userId: String, date: String, reason: String) {
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
         val currentDate = LocalDate.now().format(formatter)
-        val endDate = LocalDate.parse(date, formatter)
+        val endDate = LocalDate.parse(date, formatter).format(formatter)
 
         val embed = Embed {
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDescisionTitle
@@ -32,7 +34,10 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
         }
 
         val channel: TextChannel? = api.getTextChannelById(config.settings.noticeOfDeparture.decisionChannel)
-        channel?.send("", listOf(embed))?.queue() ?: run{
+        channel?.send("", listOf(embed))?.addActionRow(
+            Button.success("notice_of_departure_decision_accept", translation.buttons.textNoticeOfDepartureAccept).withEmoji(Emoji.fromFormatted("📩")),
+            Button.danger("notice_of_departure_decision_dismiss", translation.buttons.textNoticeOfDepartureDismissed).withEmoji(Emoji.fromFormatted("🫷"))
+        )?.queue() ?: run{
             logger.error("Could not correctly retrieve notice of departure decision channel")
             return
         }
