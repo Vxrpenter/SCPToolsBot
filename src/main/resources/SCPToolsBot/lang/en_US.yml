@@ -571,8 +571,8 @@ NOTICE_OF_DEPARTURE:
                         ```%reason%```
                         "
 
-  EMBED_DECISION_CREATED_TITLE: "Notice of Departure sent for Review"
-  EMBED_DECISION_CREATED_BODY: "Your notice of departure has been sent for review. After a decision has been made you will receive a message with it and the decisions reasoning"
+  EMBED_DECISION_SENT_TITLE: "Notice of Departure sent for Review"
+  EMBED_DECISION_SENT_BODY: "Your notice of departure has been sent for review. After a decision has been made you will receive a message with it and the decisions reasoning"
 
   EMBED_ACCEPTED: "
                         Your notice of departure was accepted. You may now take your time off without any consequences. \n

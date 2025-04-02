@@ -542,10 +542,10 @@ data class TranslationNoticeOfDeparture(
     @SerialName("EMBED_DECISION_BODY")
     var embedDecisionBody: String,
 
-    @SerialName("EMBED_DECISION_CREATED_TITLE")
-    val embedDecisionCreatedTitle: String,
-    @SerialName("EMBED_DECISION_CREATED_BODY")
-    val embedDecisionCreatedBody: String,
+    @SerialName("EMBED_DECISION_SENT_TITLE")
+    val embedDecisionSentTitle: String,
+    @SerialName("EMBED_DECISION_SENT_BODY")
+    val embedDecisionSentBody: String,
 
     @SerialName("EMBED_ACCEPTED")
     val embedAccepted: String,

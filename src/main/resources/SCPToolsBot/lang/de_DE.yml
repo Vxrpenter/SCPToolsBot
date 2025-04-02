@@ -574,8 +574,8 @@ NOTICE_OF_DEPARTURE:
                         __**Grund:**__\n
                         ```%reason%```
                         "
-  EMBED_DECISION_CREATED_TITLE: "Abmeldung wird Bearbeitet"
-  EMBED_DECISION_CREATED_BODY: "Deine Abmeldung wurde zur bearbeitung versendet. Sobald eine Entscheidung getroffen wurde erhältst du eine Nachricht, die ebenfalls den Grund der Entscheidung enthält"
+  EMBED_DECISION_SENT_TITLE: "Abmeldung wird Bearbeitet"
+  EMBED_DECISION_SENT_BODY: "Deine Abmeldung wurde zur bearbeitung versendet. Sobald eine Entscheidung getroffen wurde erhältst du eine Nachricht, die ebenfalls den Grund der Entscheidung enthält"
 
   EMBED_ACCEPTED: "
                         Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n
