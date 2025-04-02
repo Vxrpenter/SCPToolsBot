@@ -59,7 +59,7 @@ class TicketTable {
 
     fun updateTicketStatus(ticketId: String, ticketStatus: TicketStatus) {
         transaction {
-            TicketTable.Tickets.update({ TicketTable.Tickets.id.eq(ticketId) }) {
+            Tickets.update({ Tickets.id.eq(ticketId) }) {
                 it[status] = ticketStatus.toString()
             }
         }
@@ -68,10 +68,10 @@ class TicketTable {
     fun getTicketStatus(ticketId: String): TicketStatus? {
         var status: TicketStatus? = null
         transaction {
-            TicketTable.Tickets.selectAll()
-                .where(TicketTable.Tickets.id.eq(ticketId))
+            Tickets.selectAll()
+                .where(Tickets.id.eq(ticketId))
                 .forEach {
-                    status = TicketStatus.valueOf(it[TicketTable.Tickets.status])
+                    status = TicketStatus.valueOf(it[Tickets.status])
                 }
         }
 
@@ -81,10 +81,10 @@ class TicketTable {
     fun getTicketType(ticketId: String): TicketType? {
         var type: TicketType? = null
         transaction {
-            TicketTable.Tickets.selectAll()
-                .where(TicketTable.Tickets.id.eq(ticketId))
+            Tickets.selectAll()
+                .where(Tickets.id.eq(ticketId))
                 .forEach {
-                    type = TicketType.valueOf(it[TicketTable.Tickets.type])
+                    type = TicketType.valueOf(it[Tickets.type])
                 }
         }
 
@@ -93,7 +93,7 @@ class TicketTable {
 
     fun updateTicketHandler(ticketId: String, userId: String) {
         transaction {
-            TicketTable.Tickets.update({ TicketTable.Tickets.id.eq(ticketId) }) {
+            Tickets.update({ Tickets.id.eq(ticketId) }) {
                 it[handler] = userId
             }
         }
@@ -102,7 +102,7 @@ class TicketTable {
     fun retrieveSerial(): Long {
         var count: Long = 0
         transaction {
-            count = TicketTable.Tickets.selectAll().count()
+            count = Tickets.selectAll().count()
         }
 
         return count
@@ -112,10 +112,10 @@ class TicketTable {
         var bool = false
 
         transaction {
-            TicketTable.Tickets.selectAll()
-                .where(TicketTable.Tickets.id.eq(ticketId))
+            Tickets.selectAll()
+                .where(Tickets.id.eq(ticketId))
                 .forEach {
-                    if (it[TicketTable.Tickets.handler] == null) bool = true
+                    if (it[Tickets.handler] == null) bool = true
                 }
         }
 

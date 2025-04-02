@@ -1,7 +1,6 @@
 package dev.vxrp.bot.events
 
 import dev.minn.jda.ktx.events.listener
-import dev.vxrp.bot.commands.listeners.CommandListener
 import dev.vxrp.bot.events.buttons.ApplicationButtons
 import dev.vxrp.bot.events.buttons.HelpButtons
 import dev.vxrp.bot.events.buttons.NoticeOfDepartureButtons

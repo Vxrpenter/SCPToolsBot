@@ -10,18 +10,12 @@ import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.ApplicationTable
 import dev.vxrp.database.tables.TicketTable
 import dev.vxrp.util.color.ColorTool
-import kotlinx.coroutines.delay
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.User
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
-import okhttp3.internal.wait
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.transactions.transaction
-import org.jetbrains.exposed.sql.update
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
