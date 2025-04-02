@@ -160,6 +160,11 @@
           "log_action": true
         }
       ]
+    },
+    {
+      "id": "main:NOTICE_OF_DEPARTURE_CHECKER",
+      "engage": true,
+      "separate_thread": true
     }
   ]
 }

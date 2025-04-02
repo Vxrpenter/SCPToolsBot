@@ -8,6 +8,7 @@ import dev.vxrp.bot.events.ButtonListener
 import dev.vxrp.bot.events.EntitySelectListener
 import dev.vxrp.bot.events.ModalListener
 import dev.vxrp.bot.events.StringSelectListener
+import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.Timer
@@ -41,6 +42,7 @@ class BotManager(val config: Config, val translation: Translation) {
         if (launchOptionManager.checkLaunchOption(LaunchOptionType.STRING_SELECT_LISTENER).engage) api.addEventListener(StringSelectListener(api, config, translation))
         if (launchOptionManager.checkLaunchOption(LaunchOptionType.ENTITY_SELECT_LISTENER).engage) api.addEventListener(EntitySelectListener(api, config, translation))
         if (launchOptionManager.checkLaunchOption(LaunchOptionType.MODAL_LISTENER).engage) api.addEventListener(ModalListener(api, config, translation))
+        if (launchOptionManager.checkLaunchOption(LaunchOptionType.NOTICE_OF_DEPARTURE_CHECKER).engage) NoticeOfDepartureManager(api, config, translation).spinUpChecker()
 
         if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_MANAGER).engage) {
             val commandManager = CommandManager(config, "SCPToolsBot/configs/extra/commands.json")

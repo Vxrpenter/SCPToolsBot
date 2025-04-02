@@ -13,7 +13,6 @@ class Timer{
             taskExecuted = true
         }
 
-
         startTimer(period, coroutineScope, currentTask)
         assert(taskExecuted)
     }
