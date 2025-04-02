@@ -29,7 +29,6 @@ data class Settings(
     val activityContent: String,
     val database: ConfigDatabase,
     val cedmod: ConfigCedmod,
-    val status: ConfigStatus,
     @SerialName("notice_of_departure")
     val noticeOfDeparture: ConfigNoticeOfDeparture,
     val regulars: ConfigRegulars
@@ -57,16 +56,6 @@ data class ConfigCedmod(
     val instance: String,
     @SerialName("api_key")
     val api: String,
-)
-
-@Serializable
-data class ConfigStatus(
-    @SerialName("post_server_status")
-    val postServerStatus: Boolean,
-    @SerialName("post_channel")
-    val postChannel: String,
-    @SerialName("page_url")
-    val pageUrl: String,
 )
 
 @Serializable

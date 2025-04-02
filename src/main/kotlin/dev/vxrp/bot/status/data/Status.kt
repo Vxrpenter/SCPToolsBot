@@ -6,8 +6,21 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Status(
     val active: Boolean,
+
+    val api: String,
+    @SerialName("account_id")
+    val accountId: String,
+
+    @SerialName("post_server_status")
+    val postServerStatus: Boolean,
+    @SerialName("post_channel")
+    val postChannel: String,
+    @SerialName("page_url")
+    val pageUrl: String,
+
     @SerialName("check_playerlist")
     val checkPlayerlist: Boolean,
+
     @SerialName("check_rate")
     val checkRate: Int,
     @SerialName("retry_to_fetch_data")
@@ -18,9 +31,7 @@ data class Status(
     val idleAfter: Int,
     @SerialName("idle_check_rate")
     val idleCheckRate: Int,
-    val api: String,
-    @SerialName("account_id")
-    val accountId: String,
+
     val instances: List<Instance>
 )
 
