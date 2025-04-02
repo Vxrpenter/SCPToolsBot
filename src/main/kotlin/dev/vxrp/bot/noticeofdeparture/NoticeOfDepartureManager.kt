@@ -39,7 +39,7 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
             Button.success("notice_of_departure_decision_accept:$userId$endDate", translation.buttons.textNoticeOfDepartureAccept).withEmoji(Emoji.fromFormatted("📩")),
             Button.danger("notice_of_departure_decision_dismiss$userId$endDate", translation.buttons.textNoticeOfDepartureDismissed).withEmoji(Emoji.fromFormatted("🫷"))
         )?.queue() ?: run{
-            logger.error("Could not correctly retrieve notice of departure decision channel")
+            logger.error("Could not correctly retrieve notice of departure decision channel, does it exist?")
             return
         }
     }
@@ -72,8 +72,30 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
         privateChannel.send("", listOf(embed)).queue()
     }
 
-    suspend fun sendNoticeMessage() {
+    suspend fun sendNoticeMessage(reason: String, userId: String, date: String) {
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val currentDate = LocalDate.now().format(formatter)
+        val endDate = LocalDate.parse(date, formatter).format(formatter)
 
+        val user = api.retrieveUserById(userId).await()
+
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeTitle
+                .replace("%number%", NoticeOfDepartureTable().retrieveSerial().toString()))
+            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeBody
+                .replace("%user%", user.asMention)
+                .replace("%current_date%", currentDate)
+                .replace("%end_date", endDate)
+                .replace("%reason%", reason))
+        }
+
+        val channel = api.getTextChannelById(config.settings.noticeOfDeparture.noticeChannel)
+        channel?.send("", listOf(embed))?.addActionRow(
+            Button.danger("notice_of_departure_revoke", translation.buttons.textNoticeOfDepartureRevoked)
+        )?.queue() ?: run {
+            logger.error("Could not correctly retrieve notice of departure notice channel, does it exist?")
+            return
+        }
     }
 
     suspend fun sendRevokedMessage(reason: String, userId: String) {
