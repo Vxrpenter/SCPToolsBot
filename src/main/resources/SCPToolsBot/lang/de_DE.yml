@@ -334,7 +334,6 @@ SUPPORT:
   MODAL_APPLICATION_SKILLS_TITLE: "Skills"
   MODAL_APPLICATION_SKILLS_PLACEHOLDER: "In was bist du gut, hast du jemals auf einem anderen Server gearbeitet?"
 
-  # Dieser Abschnitt wird auch im Verfahren der Abmeldung verwendet.
   MODAL_REASON_ACTION_TITLE: "Aktions Grund"
   MODAL_REASON_ACTION_REASON_TITLE: "Grund"
   MODAL_REASON_ACTION_REASON_PLACEHOLDER: "Wieso willst du diese Aktion durchführen?"
@@ -574,9 +573,11 @@ NOTICE_OF_DEPARTURE:
                         __**Grund:**__\n
                         ```%reason%```
                         "
+
   EMBED_DECISION_SENT_TITLE: "Abmeldung wird Bearbeitet"
   EMBED_DECISION_SENT_BODY: "Deine Abmeldung wurde zur bearbeitung versendet. Sobald eine Entscheidung getroffen wurde erhältst du eine Nachricht, die ebenfalls den Grund der Entscheidung enthält"
 
+  EMBED_ACCEPTED_TITLE: "Abmeldung Angenommen"
   EMBED_ACCEPTED: "
                         Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n
 
@@ -586,12 +587,19 @@ NOTICE_OF_DEPARTURE:
                         __**Akzeptanzgrund:**__\n
                         ```%reason%```
                         "
+
+  EMBED_DISMISSED_TITLE: "Abmeldung Abgewiesen"
   EMBED_DISMISSED: "
-                         Deine Abmeldung wurde abgelehnt. Es ist dir nicht gestattet, freizunehmen. Falls du dennoch musst, sprech bitte mit einem höhergestellten Mitglied über das Verlassen des Teams\n
+                         Deine Abmeldung wurde abgewiesen. Es ist dir nicht gestattet, freizunehmen. Falls du dennoch musst, sprech bitte mit einem höhergestellten Mitglied über das Verlassen des Teams\n
 
                         __**Abweisungsgrund:**__\n
                         ```%reason%```
                         "
+
+  MODAL_REASON_ACTION_TITLE: "Aktions Grund"
+  MODAL_REASON_ACTION_REASON_TITLE: "Grund"
+  MODAL_REASON_ACTION_REASON_PLACEHOLDER: "Wieso willst du diese Aktion durchführen?"
+
   EMBED_ACCEPTATION_SENT_TITLE: "Akzeptierung Gesendet"
   EMBED_ACCEPTATION_SENT_BODY: "Die aktzeitwerte Abmeldung wird nun bearbeitet. Der Nutzer wird über deine Akzeptierung, sowie dessen Grund, nun informiert"
 

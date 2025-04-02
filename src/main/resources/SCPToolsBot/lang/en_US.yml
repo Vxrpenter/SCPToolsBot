@@ -333,7 +333,6 @@ SUPPORT:
   MODAL_APPLICATION_SKILLS_TITLE: "Skills"
   MODAL_APPLICATION_SKILLS_PLACEHOLDER: "What are you skilled at, have you ever done this task on another server?"
 
-  # This section also gets used in the notice of departure procedure
   MODAL_REASON_ACTION_TITLE: "Action Reasoning"
   MODAL_REASON_ACTION_REASON_TITLE: "Reason"
   MODAL_REASON_ACTION_REASON_PLACEHOLDER: "What is the reason for your action?"
@@ -574,7 +573,8 @@ NOTICE_OF_DEPARTURE:
   EMBED_DECISION_SENT_TITLE: "Notice of Departure sent for Review"
   EMBED_DECISION_SENT_BODY: "Your notice of departure has been sent for review. After a decision has been made you will receive a message with it and the decisions reasoning"
 
-  EMBED_ACCEPTED: "
+  EMBED_ACCEPTED_TITLE: "Notice of Departure Accepted"
+  EMBED_ACCEPTED_BODY: "
                         Your notice of departure was accepted. You may now take your time off without any consequences. \n
                         
                         __**Acceptance Timeframe:**__\n
@@ -583,13 +583,20 @@ NOTICE_OF_DEPARTURE:
                         __**Acceptance Reason:**__\n
                         ```%reason%```
                         "
-  EMBED_DISMISSED: "
+
+  EMBED_DISMISSED_TITLE: "Notice of Departure Dismissed"
+  EMBED_DISMISSED_BODY: "
                          Your notice of departure was dismissed. You are not allowed to take time off.
                          If you still need to, please talk with a higher staff member about leaving the team\n
                         
                         __**Dismiss Reason:**__\n
                         ```%reason%```
                         "
+
+  MODAL_REASON_ACTION_TITLE: "Action Reasoning"
+  MODAL_REASON_ACTION_REASON_TITLE: "Reason"
+  MODAL_REASON_ACTION_REASON_PLACEHOLDER: "What is the reason for your action?"
+
   EMBED_ACCEPTATION_SENT_TITLE: "Acceptance Send"
   EMBED_ACCEPTATION_SENT_BODY: "The accepted notice will now be processed and the user will be notified of you accepting the notice as well as the reason for accepting it"
 
