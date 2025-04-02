@@ -524,23 +524,23 @@ data class TranslationNoticeOfDeparture(
     @SerialName("EMBED_TEMPLATE_TITLE")
     val embedTemplateTitle: String,
     @SerialName("EMBED_TEMPLATE_BODY")
-    var embedTemplateBody: String,
+    val embedTemplateBody: String,
 
     @SerialName("MODAL_TITLE")
-    var modalTitle: String,
+    val modalTitle: String,
     @SerialName("MODAL_TIME_TITLE")
-    var modalTimeTitle: String,
+    val modalTimeTitle: String,
     @SerialName("MODAL_TIME_PLACEHOLDER")
-    var modalTimePlaceHolder: String,
+    val modalTimePlaceHolder: String,
     @SerialName("MODAL_EXPLANATION_TITLE")
-    var modalExplanationTitle: String,
+    val modalExplanationTitle: String,
     @SerialName("MODAL_EXPLANATION_PLACEHOLDER")
-    var modalExplanationPlaceHolder: String,
+    val modalExplanationPlaceHolder: String,
 
     @SerialName("EMBED_DECISION_TITLE")
-    var embedDecisionTitle: String,
+    val embedDecisionTitle: String,
     @SerialName("EMBED_DECISION_BODY")
-    var embedDecisionBody: String,
+    val embedDecisionBody: String,
 
     @SerialName("EMBED_DECISION_SENT_TITLE")
     val embedDecisionSentTitle: String,
