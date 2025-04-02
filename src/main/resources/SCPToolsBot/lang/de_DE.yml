@@ -563,21 +563,19 @@ NOTICE_OF_DEPARTURE:
   MODAL_EXPLANATION_TITLE: "Erklärung"
   MODAL_EXPLANATION_PLACEHOLDER: "Wieso wirst du weg sein? [keine details]"
 
-  EMBED_DESCISION_TITLE: "Abmeldung - #%number%"
+  EMBED_DECISION_TITLE: "Abmeldung - #%number%"
 
-  # Wenn du dies entfernst: ```ansi ``` dann funktioniert das color rendering nicht
-  EMBED_DESCISION_BODY: " 
+  EMBED_DECISION_BODY: " 
                         Wenn dieser Benutzer akzeptiert wird, wird der Benutzer und das Datum in die Datenbank aufgenommen und du wirst benachrichtigt, wenn es abläuft\n
 
                         __**Zeitspanne**__\n
-                        ```ansi\n
-                        %current_date% till %end_date%
-                        ```
+                        ```\n%current_date% till %end_date%```
                         
                         __**Grund:**__\n
                         ```%reason%```
                         "
-  MESSAGE_DESCISION_CREATED: "Deine Abmeldung bald bearbeitet"
+  EMBED_DECISION_CREATED_TITLE: "Abmeldung wird Bearbeitet"
+  EMBED_DECISION_CREATED_BODY: "Deine Abmeldung wurde zur bearbeitung versendet. Sobald eine Entscheidung getroffen wurde erhältst du eine Nachricht, die ebenfalls den Grund der Entscheidung enthält"
 
   EMBED_ACCEPTED: "
                         Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n
@@ -594,7 +592,11 @@ NOTICE_OF_DEPARTURE:
                         __**Abweisungsgrund:**__\n
                         ```%reason%```
                         "
-  MESSAGE_DESCISION_SENT: "Your answer was sent and actions corresponding to it have been taken"
+  EMBED_ACCEPTATION_SENT_TITLE: "Akzeptierung Gesendet"
+  EMBED_ACCEPTATION_SENT_BODY: "Die aktzeitwerte Abmeldung wird nun bearbeitet. Der Nutzer wird über deine Akzeptierung, sowie dessen Grund, nun informiert"
+
+  EMBED_DISMISSING_SENT_TITLE: "Abweisung Gesendet"
+  EMBED_DISMISSING_SENT_BODY: "Die abgewiesene Abmeldung wird nun bearbeitet. Der Nutzer wird über deine Abweisung, sowie dessen Grund, nun informiert"
 
   EMBED_NOTICE_TITLE: "Abmeldung - %user%"
   EMBED_NOTICE_BODY: "
@@ -609,14 +611,16 @@ NOTICE_OF_DEPARTURE:
                         __**Akzeptanzgrund:**__\n
                         ```%reason%```
                         "
-  EMBED_NOTICE_FOOTER: "Erstellt am %date% um %time%Uhr"
 
+  EMBED_ENDED_TITLE: "Abmeldung ist Geendet"
   EMBED_ENDED: "
                         Deine Abmeldung ist hiermit vorbei\n
                         
                         __**Zeit:**__\n
                         ```%timeframe%```
                         "
+
+  EMBED_REVOKED_TITLE: "Abmeldung wurde Zurückgezogen"
   EMBED_REVOKED: "
                         Deine Abmeldung wurde zurückgezogen\n
                         
@@ -626,27 +630,8 @@ NOTICE_OF_DEPARTURE:
                         __**Akzeptanz Grund:**__\n
                         ```%reason%```
                         "
-  MESSAGE_REVOKED: "Die Abmeldung wurde erfolgreich zurückgezogen"
-
-  EMBED_ENDED_REPLACE: "
-                        ```ansi
-                        
-                        &reset&&teal&&bold&&underline&Original Data&reset&
-                        
-                        Originaler Antragsteller: &gold&&bold&%user%&reset&
-                        
-                        Originaler Nachrichtentyp: &gold&&bold&Abmeldung&reset&
-                        
-                        
-                        &teal&&bold&&underline&Change Data&reset&
-                        
-                        Bearbeitet an: &gold&&bold&%date%&reset&
-                        
-                        Bearbeitet von: &gold&&bold&%actionTaker%
-                        ```
-                        "
-
-  MESSAGE_DELETED_ENDED_REPLACE: "Die Abmeldung wurde entfernt"
+  EMBED_REVOKATION_TITLE: "Abmeldung Zurückgezogen"
+  EMBED_REVOKATION_BODY: "Die Abmeldung wird nun zurückgezogen. Der Nutzer wird in kürze darüber benachrichtigt wieso die Abmeldung zurückgezogen wurde"
 
 REGULARS:
 

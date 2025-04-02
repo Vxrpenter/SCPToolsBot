@@ -542,7 +542,6 @@ APPLICATION:
   MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER: "How many members should the candidates have?"
 
 NOTICE_OF_DEPARTURE:
-
   EMBED_TEMPLATE_TITLE: "Notice of Departure Form"
   EMBED_TEMPLATE_BODY: "
                         If you are not avaidible for some time, you can apply for time of here. More information can be found below.\n
@@ -562,20 +561,18 @@ NOTICE_OF_DEPARTURE:
   MODAL_EXPLANATION_TITLE: "Explanation"
   MODAL_EXPLANATION_PLACEHOLDER: "Why are you going to be away [exclude details]"
 
-  EMBED_DESCISION_TITLE: "Notice of departure - #%number%"
-
-  # If you remove the ```ansi ``` then the color rendering will be messed up, so be careful
-  EMBED_DESCISION_BODY: " 
+  EMBED_DECISION_TITLE: "Notice of departure - #%number%"
+  EMBED_DECISION_BODY: " 
                         ```If accepted this user and the date will be added to the database and you will be notified when it runs out```\n
                         __**Timespan**__\n
-                        ```ansi\n
-                        %current_date% till %end_date%
-                        ```
+                        ```%current_date% till %end_date%```
                         
                         __**Reason:**__\n
                         ```%reason%```
                         "
-  MESSAGE_DESCISION_CREATED: "Your notice will be reviewed real soon"
+
+  EMBED_DECISION_CREATED_TITLE: "Notice of Departure sent for Review"
+  EMBED_DECISION_CREATED_BODY: "Your notice of departure has been sent for review. After a decision has been made you will receive a message with it and the decisions reasoning"
 
   EMBED_ACCEPTED: "
                         Your notice of departure was accepted. You may now take your time off without any consequences. \n
@@ -593,7 +590,11 @@ NOTICE_OF_DEPARTURE:
                         __**Dismiss Reason:**__\n
                         ```%reason%```
                         "
-  MESSAGE_DESCISION_SENT: "Your answer was sent and actions corresponding to it have been taken"
+  EMBED_ACCEPTATION_SENT_TITLE: "Acceptance Send"
+  EMBED_ACCEPTATION_SENT_BODY: "The accepted notice will now be processed and the user will be notified of you accepting the notice as well as the reason for accepting it"
+
+  EMBED_DISMISSING_SENT_TITLE: "Dismissing Send"
+  EMBED_DISMISSING_SENT_BODY: "The dismissed notice will now be processed and the user will be notified of you dismissing the notice as well as the reason for dismissing it"
 
   EMBED_NOTICE_TITLE: "Notice of Departure - %user%"
   EMBED_NOTICE_BODY: "
@@ -609,15 +610,17 @@ NOTICE_OF_DEPARTURE:
                         __**Acceptance Reason:**__\n
                         ```%reason%```
                         "
-  EMBED_NOTICE_FOOTER: "Created on the %date% at %time%h"
 
-  EMBED_ENDED: "
+  EMBED_ENDED_TITLE: "Notice of Departure has Ended"
+  EMBED_ENDED_BODY: "
                         Your Notice of Departure has ended and all your benefits going with it have been revoked \n
                         
                         __**Timeframe:**__\n
                         ```%timeframe%```
                         "
-  EMBED_REVOKED: "
+
+  EMBED_REVOKED_TITLE: "Notice of Departure has been Revoked"
+  EMBED_REVOKED_BODY: "
                         Your Notice of Departure has been revoked and all benefits going with that do not apply anymore \n
                         
                         __**Timeframe:**__\n
@@ -626,27 +629,9 @@ NOTICE_OF_DEPARTURE:
                         __**Acceptance Reason:**__\n
                         ```%reason%```
                         "
-  MESSAGE_REVOKED: "The notice was correctly revoked"
 
-  EMBED_ENDED_REPLACE: "
-                        ```ansi
-                        
-                        &reset&&teal&&bold&&underline&Original Data&reset&
-                        
-                        Original issuer: &gold&&bold&%user%&reset&
-                        
-                        Original Message Type: &gold&&bold&Notice of Departure&reset&
-                        
-                        
-                        &teal&&bold&&underline&Change Data&reset&
-                        
-                        Dealt with on: &gold&&bold&%date%&reset&
-                        
-                        Dealt with by: &gold&&bold&%actionTaker%
-                        ```
-                        "
-
-  MESSAGE_DELETED_ENDED_REPLACE: "The notice was deleted"
+  EMBED_REVOKATION_SENT_TITLE: "Notice of Departure Revoked"
+  EMBED_REVOKATION_SENT_BODY: "Notice of Departure is now getting revoked. The user will be notified shortly, providing him with the reason you entered"
 
 REGULARS:
 

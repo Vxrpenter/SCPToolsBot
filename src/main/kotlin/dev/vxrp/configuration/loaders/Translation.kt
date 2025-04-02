@@ -525,6 +525,7 @@ data class TranslationNoticeOfDeparture(
     val embedTemplateTitle: String,
     @SerialName("EMBED_TEMPLATE_BODY")
     var embedTemplateBody: String,
+
     @SerialName("MODAL_TITLE")
     var modalTitle: String,
     @SerialName("MODAL_TIME_TITLE")
@@ -535,34 +536,51 @@ data class TranslationNoticeOfDeparture(
     var modalExplanationTitle: String,
     @SerialName("MODAL_EXPLANATION_PLACEHOLDER")
     var modalExplanationPlaceHolder: String,
-    @SerialName("EMBED_DESCISION_TITLE")
-    var embedDescisionTitle: String,
-    @SerialName("EMBED_DESCISION_BODY")
-    var embedDescisionBody: String,
-    @SerialName("MESSAGE_DESCISION_CREATED")
-    val messageDescisionCreated: String,
+
+    @SerialName("EMBED_DECISION_TITLE")
+    var embedDecisionTitle: String,
+    @SerialName("EMBED_DECISION_BODY")
+    var embedDecisionBody: String,
+
+    @SerialName("EMBED_DECISION_CREATED_TITLE")
+    val embedDecisionCreatedTitle: String,
+    @SerialName("EMBED_DECISION_CREATED_BODY")
+    val embedDecisionCreatedBody: String,
+
     @SerialName("EMBED_ACCEPTED")
     val embedAccepted: String,
     @SerialName("EMBED_DISMISSED")
     val embedDismissed: String,
-    @SerialName("MESSAGE_DESCISION_SENT")
-    val messageDescisionSent: String,
+
+    @SerialName("EMBED_ACCEPTATION_SENT_TITLE")
+    val embedAcceptationSentTitle: String,
+    @SerialName("EMBED_ACCEPTATION_SENT_BODY")
+    val embedAcceptationSentBody: String,
+
+    @SerialName("EMBED_DISMISSING_SENT_TITLE")
+    val embedDismissingSentTitle: String,
+    @SerialName("EMBED_DISMISSING_SENT_BODY")
+    val embedDismissingSentBody: String,
+
     @SerialName("EMBED_NOTICE_TITLE")
     val embedNoticeTitle: String,
     @SerialName("EMBED_NOTICE_BODY")
     val embedNoticeBody: String,
-    @SerialName("EMBED_NOTICE_FOOTER")
-    val embedNoticeFooter: String,
-    @SerialName("EMBED_ENDED")
-    val embedEnded: String,
-    @SerialName("EMBED_REVOKED")
-    val embedRevoked: String,
-    @SerialName("MESSAGE_REVOKED")
-    val messageRevoked: String,
-    @SerialName("EMBED_ENDED_REPLACE")
-    val embedEndedReplace: String,
-    @SerialName("MESSAGE_DELETED_ENDED_REPLACE")
-    val messageDeletedEndedReplace: String
+
+    @SerialName("EMBED_ENDED_TITLE")
+    val embedEndedTitle: String,
+    @SerialName("EMBED_ENDED_BODY")
+    val embedEndedBody: String,
+
+    @SerialName("EMBED_REVOKED_TITLE")
+    val embedRevokedTitle: String,
+    @SerialName("EMBED_REVOKED_BODY")
+    val embedRevokedBody: String,
+
+    @SerialName("EMBED_REVOKATION_SENT_TITLE")
+    val embedRevokationSentTitle: String,
+    @SerialName("EMBED_REVOKATION_SENT_BODY")
+    val embedRevokationSentBody: String,
 )
 
 @Serializable
