@@ -88,7 +88,7 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
     private fun postConnectionEstablished(api: JDA, info: ServerInfo) {
         val embed = Embed {
             color = 0x2ECC70
-            url = config.settings.status.pageUrl
+            url = config.status.pageUrl
             title = ColorTool().useCustomColorCodes(translation.status.embedEstablishedTitle)
                 .replace("%instance%", "Status Server System").trimIndent()
             description = ColorTool().useCustomColorCodes(translation.status.embedEstablishedBody).trimIndent()
@@ -103,15 +103,15 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
             }
         }
 
-        if (config.settings.status.postServerStatus) {
-            api.getTextChannelById(config.settings.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
+        if (config.status.postServerStatus) {
+            api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
         }
     }
 
     private fun postConnectionLost(api: JDA, retry: Int) {
         val embed = Embed {
             color = 0xE74D3C
-            url = config.settings.status.pageUrl
+            url = config.status.pageUrl
             title = ColorTool().useCustomColorCodes(translation.status.embedLostTitle)
                 .replace("%instance%", "Status Server System").trimIndent()
             description = ColorTool().useCustomColorCodes(
@@ -129,15 +129,15 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
             }
         }
 
-        if (config.settings.status.postServerStatus) {
-            api.getTextChannelById(config.settings.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
+        if (config.status.postServerStatus) {
+            api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
         }
     }
 
     private fun postConnectionOnline(api: JDA, instance: Instance, info: ServerInfo?) {
         val embed = Embed {
             color = 0x2ECC70
-            url = config.settings.status.pageUrl
+            url = config.status.pageUrl
             title = ColorTool().useCustomColorCodes(translation.status.embedOnlineTitle)
                 .replace("%instance%", instance.name).trimIndent()
             description = ColorTool().useCustomColorCodes(translation.status.embedOnlineBody).trimIndent()
@@ -152,15 +152,15 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
             }
         }
 
-        if (config.settings.status.postServerStatus) {
-            api.getTextChannelById(config.settings.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
+        if (config.status.postServerStatus) {
+            api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
         }
     }
 
     private fun postConnectionOffline(api: JDA, instance: Instance, info: ServerInfo?) {
         val embed = Embed {
             color = 0xE74D3C
-            url = config.settings.status.pageUrl
+            url = config.status.pageUrl
             title = ColorTool().useCustomColorCodes(translation.status.embedOfflineTitle)
                 .replace("%instance%", instance.name).trimIndent()
             description = ColorTool().useCustomColorCodes(
@@ -178,8 +178,8 @@ class ConnectionHandler(val translation: Translation, val config: Config) {
             }
         }
 
-        if (config.settings.status.postServerStatus) {
-            api.getTextChannelById(config.settings.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
+        if (config.status.postServerStatus) {
+            api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
         }
     }
 
