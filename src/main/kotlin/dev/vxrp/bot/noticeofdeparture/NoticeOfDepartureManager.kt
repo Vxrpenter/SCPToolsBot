@@ -3,6 +3,10 @@ package dev.vxrp.bot.noticeofdeparture
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.NoticeOfDepartureTable
+import dev.vxrp.util.Timer
+import dev.vxrp.util.duration.DurationParser
+import dev.vxrp.util.duration.enums.DurationType
+import dev.vxrp.util.noticeOfDepartureScope
 import net.dv8tion.jda.api.JDA
 import org.slf4j.LoggerFactory
 
@@ -17,5 +21,17 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
         NoticeOfDepartureMessageHandler(api, config, translation).sendRevokedMessage(reason, userId, date)
 
         NoticeOfDepartureTable().deleteEntry(userId)
+    }
+
+    fun spinUpChecker() {
+        Timer().runWithTimer(DurationParser().parse(
+            config.settings.noticeOfDeparture.checkRate,
+            DurationType.valueOf(config.settings.noticeOfDeparture.checkUnit)),
+            noticeOfDepartureScope
+        ) { checkerTask() }
+    }
+
+    suspend fun checkerTask() {
+
     }
 }
