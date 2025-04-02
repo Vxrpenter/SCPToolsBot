@@ -1,14 +1,14 @@
 package dev.vxrp.bot.status
 
 import dev.minn.jda.ktx.messages.Embed
+import dev.vxrp.api.sla.secretlab.data.Server
+import dev.vxrp.api.sla.secretlab.data.ServerInfo
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.ConnectionTable
 import dev.vxrp.database.tables.ConnectionTable.Connections
-import dev.vxrp.api.sla.secretlab.data.Server
-import dev.vxrp.api.sla.secretlab.data.ServerInfo
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
 import org.jetbrains.exposed.sql.insert

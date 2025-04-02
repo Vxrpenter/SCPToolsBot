@@ -1,6 +1,5 @@
 package dev.vxrp.bot.commands
 
-import dev.minn.jda.ktx.interactions.commands.choice
 import dev.minn.jda.ktx.interactions.commands.updateCommands
 import dev.vxrp.bot.commands.data.CommandList
 import dev.vxrp.bot.commands.data.CustomCommand

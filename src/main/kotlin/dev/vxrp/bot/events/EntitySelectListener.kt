@@ -1,7 +1,6 @@
 package dev.vxrp.bot.events
 
 import dev.minn.jda.ktx.events.listener
-import dev.vxrp.bot.events.buttons.HelpButtons
 import dev.vxrp.bot.events.entitySelectMenus.TicketEntitySelectMenus
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation

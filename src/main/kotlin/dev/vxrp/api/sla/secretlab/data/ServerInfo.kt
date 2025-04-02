@@ -1,7 +1,7 @@
 package dev.vxrp.api.sla.secretlab.data
 
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 @Serializable

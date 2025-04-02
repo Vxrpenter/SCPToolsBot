@@ -2,7 +2,8 @@ package dev.vxrp.util
 
 import dev.vxrp.bot.BotManager
 import dev.vxrp.bot.status.StatusManager
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
 import org.slf4j.LoggerFactory
 
 val statusbotScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
