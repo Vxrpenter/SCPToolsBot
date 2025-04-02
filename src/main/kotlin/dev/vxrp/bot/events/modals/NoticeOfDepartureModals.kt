@@ -32,7 +32,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             val date = splittetId[2]
 
             NoticeOfDepartureManager(event.jda, config, translation).sendAcceptedMessage(reason, userId, date)
-            NoticeOfDepartureManager(event.jda, config, translation).sendNoticeMessage(reason, userId, date)
+            NoticeOfDepartureManager(event.jda, config, translation).sendNoticeMessage(reason, event.user.id, userId, date)
 
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptationSentTitle)
