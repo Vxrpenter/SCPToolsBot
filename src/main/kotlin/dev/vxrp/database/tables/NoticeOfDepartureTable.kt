@@ -1,6 +1,8 @@
 package dev.vxrp.database.tables
 
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -30,6 +32,12 @@ class NoticeOfDepartureTable {
                 it[beginDate] = exactBeginDate
                 it[endDate] = exactEndDate
             }
+        }
+    }
+
+    fun deleteEntry(noticeId: String) {
+        transaction {
+            NoticeOfDepartures.deleteWhere { NoticeOfDepartures.id eq noticeId }
         }
     }
 
