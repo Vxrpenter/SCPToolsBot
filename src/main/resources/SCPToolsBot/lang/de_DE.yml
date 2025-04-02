@@ -568,7 +568,7 @@ NOTICE_OF_DEPARTURE:
 
                         __**Zeitspanne**__\n
                         ```ansi\n
-                        %current_day%.%current_month%.%current_year% bis %day%.%month%.%year%
+                        %current_date% till %end_date%
                         ```
                         
                         __**Grund:**__\n
