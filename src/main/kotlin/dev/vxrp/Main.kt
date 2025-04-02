@@ -7,7 +7,7 @@ import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.launch.LaunchOptionManager
 import org.slf4j.LoggerFactory
 
-val logger = LoggerFactory.getLogger("dev.vxrp.Main")
+private val logger = LoggerFactory.getLogger("Main")
 
 fun main() {
     Github().checkForUpdatesByTag("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags")
