@@ -98,4 +98,13 @@ class TicketTable {
             }
         }
     }
+
+    fun retrieveSerial(): Long {
+        var count: Long = 0
+        transaction {
+            count = TicketTable.Tickets.selectAll().count()
+        }
+
+        return count
+    }
 }
