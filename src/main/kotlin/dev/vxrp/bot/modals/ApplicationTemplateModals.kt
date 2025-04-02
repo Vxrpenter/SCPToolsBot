@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.interactions.components.ActionRow
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle
 import net.dv8tion.jda.api.interactions.modals.Modal
 
-class ApplicationModals(val translation: Translation) {
+class ApplicationTemplateModals(val translation: Translation) {
     fun chooseCountModal(roleId: String, modalId: String): Modal {
         return Modal.create("application_choose_count:$roleId:$modalId", translation.application.modalChooseCountTitle).addComponents(
             ActionRow.of(

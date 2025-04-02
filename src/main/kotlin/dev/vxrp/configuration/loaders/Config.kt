@@ -72,7 +72,7 @@ data class ConfigStatus(
 @Serializable
 data class ConfigNoticeOfDeparture(
     @SerialName("decision_channel_id")
-    val descisionChannel: String,
+    val decisionChannel: String,
     @SerialName("notice_channel_id")
     val noticeChannel: String,
     @SerialName("roles_access_notices")
