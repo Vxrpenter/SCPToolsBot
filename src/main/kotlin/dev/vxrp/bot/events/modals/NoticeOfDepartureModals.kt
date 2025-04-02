@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events.modals
 
+import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureManager
 import dev.vxrp.configuration.loaders.Config
@@ -14,7 +15,13 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             val reason = event.values[1].asString
 
             NoticeOfDepartureManager(event.jda, config, translation).sendDecisionMessage(event.user.id, date, reason)
-            event.reply_(ColorTool().useCustomColorCodes(translation.noticeOfDeparture.messageDescisionSent)).queue()
+
+            val embed = Embed {
+                title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionSentTitle)
+                description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionSentBody)
+            }
+
+            event.reply_("", listOf(embed)).queue()
         }
     }
 }

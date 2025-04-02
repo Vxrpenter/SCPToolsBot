@@ -24,9 +24,9 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
         val endDate = LocalDate.parse(date, formatter).format(formatter)
 
         val embed = Embed {
-            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDescisionTitle
+            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionTitle
                 .replace("%number%", NoticeOfDepartureTable().retrieveSerial().toString()))
-            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDescisionBody
+            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionBody
                 .replace("%current_date%", currentDate.toString())
                 .replace("%end_date%", endDate.toString())
                 .replace("%reason%", reason))
