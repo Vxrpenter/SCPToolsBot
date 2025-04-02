@@ -8,6 +8,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 class NoticeOfDepartureTable {
     object NoticeOfDepartures : Table("notice_of_departures") {
         val id = text("id")
+        val active = bool("active")
         val handlerId = text("handler_id")
         val channelId = text("channel_id")
         val messageId = text("message_id")
@@ -18,10 +19,11 @@ class NoticeOfDepartureTable {
             get() = PrimaryKey(id)
     }
 
-    fun addToDatabase(noticeId: String, handler: String, channel: String, message: String, exactBeginDate: String, exactEndDate: String) {
+    fun addToDatabase(noticeId: String, activeNotice: Boolean, handler: String, channel: String, message: String, exactBeginDate: String, exactEndDate: String) {
         transaction {
             NoticeOfDepartures.insert {
                 it[id] = noticeId
+                it[active] = activeNotice
                 it[handlerId] = handler
                 it[channelId] = channel
                 it[messageId] = message
