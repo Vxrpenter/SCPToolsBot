@@ -606,7 +606,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_DISMISSING_SENT_TITLE: "Abweisung Gesendet"
   EMBED_DISMISSING_SENT_BODY: "Die abgewiesene Abmeldung wird nun bearbeitet. Der Nutzer wird über deine Abweisung, sowie dessen Grund, nun informiert"
 
-  EMBED_NOTICE_TITLE: "Abmeldung - %user%"
+  EMBED_NOTICE_TITLE: "Abmeldung - #%number%"
   EMBED_NOTICE_BODY: "
                         Diese Abmeldung kann jederzeit durch Drücken des Buttons unten widerrufen werden. Es wird auch regelmäßig überprüft, ob die Abmeldung noch gültig ist oder nicht\n
 
@@ -614,7 +614,7 @@ NOTICE_OF_DEPARTURE:
                         %user%
                         
                         __**Zeit:**__\n
-                        ```%timeframe%```
+                        ```%current_date% bis %end_date%```
                         
                         __**Akzeptanzgrund:**__\n
                         ```%reason%```
@@ -625,7 +625,7 @@ NOTICE_OF_DEPARTURE:
                         Deine Abmeldung ist hiermit vorbei\n
                         
                         __**Zeit:**__\n
-                        ```%timeframe%```
+                        ```%current_date% bis %end_date%```
                         "
 
   EMBED_REVOKED_TITLE: "Abmeldung wurde Zurückgezogen"
@@ -633,7 +633,7 @@ NOTICE_OF_DEPARTURE:
                         Deine Abmeldung wurde zurückgezogen\n
                         
                         __**Zeit:**__\n
-                        ```%timeframe%```
+                        ```%current_date% bis %end_date%```
                         
                         __**Akzeptanz Grund:**__\n
                         ```%reason%```
