@@ -547,10 +547,22 @@ data class TranslationNoticeOfDeparture(
     @SerialName("EMBED_DECISION_SENT_BODY")
     val embedDecisionSentBody: String,
 
-    @SerialName("EMBED_ACCEPTED")
-    val embedAccepted: String,
-    @SerialName("EMBED_DISMISSED")
-    val embedDismissed: String,
+    @SerialName("EMBED_ACCEPTED_TITLE")
+    val embedAcceptedTitle: String,
+    @SerialName("EMBED_ACCEPTED_BODY")
+    val embedAcceptedBody: String,
+
+    @SerialName("EMBED_DISMISSED_TITLE")
+    val embedDismissedTitle: String,
+    @SerialName("EMBED_DISMISSED_BODY")
+    val embedDismissedBody: String,
+
+    @SerialName("MODAL_REASON_ACTION_TITLE")
+    val modalReasonActionTitle: String,
+    @SerialName("MODAL_REASON_ACTION_REASON_TITLE")
+    val modalReasonActionReasonTitle: String,
+    @SerialName("MODAL_REASON_ACTION_REASON_PLACEHOLDER")
+    val modalReasonActionPlaceholder: String,
 
     @SerialName("EMBED_ACCEPTATION_SENT_TITLE")
     val embedAcceptationSentTitle: String,
