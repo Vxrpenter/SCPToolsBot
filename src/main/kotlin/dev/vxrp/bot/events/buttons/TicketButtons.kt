@@ -44,6 +44,10 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
         if (event.button.id?.startsWith("ticket_close") == true) {
             if(permissionCheck(PermissionType.TICKET, TicketTable().determineTicketType(event.channelId!!))) return
+            if (TicketTable().determineHandler(event.channelId!!)) {
+                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
+                return
+            }
 
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
@@ -56,6 +60,10 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
         if (event.button.id?.startsWith("ticket_settings") == true) {
             if(permissionCheck(PermissionType.TICKET, TicketTable().determineTicketType(event.channelId!!))) return
+            if (TicketTable().determineHandler(event.channelId!!)) {
+                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
+                return
+            }
 
             val ticketHandler = TicketSettingsHandler(api, config, translation)
 
@@ -73,6 +81,10 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
         if (event.button.id?.startsWith("ticket_setting_open") == true) {
             if(permissionCheck(PermissionType.TICKET, TicketTable().determineTicketType(event.channelId!!))) return
+            if (TicketTable().determineHandler(event.channelId!!)) {
+                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
+                return
+            }
 
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogOpenedTitle
@@ -86,6 +98,10 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
         if (event.button.id?.startsWith("ticket_setting_pause") == true) {
             if(permissionCheck(PermissionType.TICKET, TicketTable().determineTicketType(event.channelId!!))) return
+            if (TicketTable().determineHandler(event.channelId!!)) {
+                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
+                return
+            }
 
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogPausedTitle
@@ -99,6 +115,10 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
         if (event.button.id?.startsWith("ticket_setting_suspend") == true) {
             if(permissionCheck(PermissionType.TICKET, TicketTable().determineTicketType(event.channelId!!))) return
+            if (TicketTable().determineHandler(event.channelId!!)) {
+                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
+                return
+            }
 
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogSuspendedTitle
@@ -112,6 +132,10 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
         if (event.button.id?.startsWith("ticket_setting_close") == true) {
             if(permissionCheck(PermissionType.TICKET, TicketTable().determineTicketType(event.channelId!!))) return
+            if (TicketTable().determineHandler(event.channelId!!)) {
+                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
+                return
+            }
 
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
@@ -140,6 +164,10 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
         if (event.button.id?.startsWith("ticket_log_open") == true) {
             val channelId = event.button.id!!.split(":")[1]
             if(permissionCheck(PermissionType.TICKET_LOGS, TicketTable().determineTicketType(event.button.id!!.split(":")[1]))) return
+            if (TicketTable().determineHandler(channelId)) {
+                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
+                return
+            }
 
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
@@ -154,6 +182,10 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
         if (event.button.id?.startsWith("ticket_log_pause") == true) {
             val channelId = event.button.id!!.split(":")[1]
             if(permissionCheck(PermissionType.TICKET_LOGS, TicketTable().determineTicketType(event.button.id!!.split(":")[1]))) return
+            if (TicketTable().determineHandler(channelId)) {
+                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
+                return
+            }
 
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
@@ -168,6 +200,10 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
         if (event.button.id?.startsWith("ticket_log_suspend") == true) {
             val channelId = event.button.id!!.split(":")[1]
             if(permissionCheck(PermissionType.TICKET_LOGS, TicketTable().determineTicketType(event.button.id!!.split(":")[1]))) return
+            if (TicketTable().determineHandler(channelId)) {
+                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
+                return
+            }
 
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
@@ -182,6 +218,10 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
         if (event.button.id?.startsWith("ticket_log_close") == true) {
             val channelId = event.button.id!!.split(":")[1]
             if(permissionCheck(PermissionType.TICKET_LOGS, TicketTable().determineTicketType(event.button.id!!.split(":")[1]))) return
+            if (TicketTable().determineHandler(channelId)) {
+                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
+                return
+            }
 
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
@@ -201,5 +241,10 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
         }
         if (!permissionPair.first) return true
         return false
+    }
+
+    private val noHandlerEmbed = Embed {
+        title = ColorTool().useCustomColorCodes(translation.support.embedTicketNoHandlerTitle)
+        description = ColorTool().useCustomColorCodes(translation.support.embedTicketNoHandlerBody)
     }
 }

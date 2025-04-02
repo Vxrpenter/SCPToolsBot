@@ -107,4 +107,18 @@ class TicketTable {
 
         return count
     }
+
+    fun determineHandler(ticketId: String): Boolean {
+        var bool = false
+
+        transaction {
+            TicketTable.Tickets.selectAll()
+                .where(TicketTable.Tickets.id.eq(ticketId))
+                .forEach {
+                    if (it[TicketTable.Tickets.handler] == null) bool = true
+                }
+        }
+
+        return bool
+    }
 }

@@ -470,6 +470,9 @@ SUPPORT:
   EMBED_TICKET_CLAIMED_TITLE: "Ticket Claimed"
   EMBED_TICKET_CLAIMED_BODY: "This ticket is now being managed by %user%."
 
+  EMBED_TICKET_NO_HANDLER_TITLE: "No Handler"
+  EMBED_TICKET_NO_HANDLER_BODY: "The ticket has to be claimed before any interactions can be performed. Ticket claim will not remove any other users from the channel or block their interactions!"
+
   EMBED_TICKET_OPENED_TITLE: "Ticket Reopened"
   EMBED_TICKET_OPENED_BODY: "This ticket has been reopened."
 

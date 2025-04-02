@@ -431,6 +431,11 @@ data class TranslationSupport(
     @SerialName("EMBED_TICKET_CLAIMED_BODY")
     val embedTicketClaimedBody: String,
 
+    @SerialName("EMBED_TICKET_NO_HANDLER_TITLE")
+    val embedTicketNoHandlerTitle: String,
+    @SerialName("EMBED_TICKET_NO_HANDLER_BODY")
+    val embedTicketNoHandlerBody: String,
+
     @SerialName("EMBED_TICKET_OPENED_TITLE")
     val embedTicketOpenedTitle: String,
     @SerialName("EMBED_TICKET_OPENED_BODY")
