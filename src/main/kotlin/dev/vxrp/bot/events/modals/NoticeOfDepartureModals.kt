@@ -9,7 +9,7 @@ import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent
 
 class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Config, val translation: Translation) {
-    init {
+    suspend fun init() {
         if (event.modalId.startsWith("notice_of_departure_general")) {
             val date = event.values[0].asString
             val reason = event.values[1].asString
@@ -25,9 +25,13 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
         }
 
         if (event.modalId.startsWith("notice_of_departure_reason_action_ACCEPTING")) {
-            val reason = event.values[0].asString
+            val splittetId = event.modalId.split(":")
 
-            NoticeOfDepartureManager(event.jda, config, translation).sendAcceptedMessage(reason)
+            val reason = event.values[0].asString
+            val userId = splittetId[1]
+            val date = splittetId[2]
+
+            NoticeOfDepartureManager(event.jda, config, translation).sendAcceptedMessage(reason, userId, date)
             NoticeOfDepartureManager(event.jda, config, translation).sendNoticeMessage()
 
             val embed = Embed {
@@ -39,9 +43,12 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
         }
 
         if (event.modalId.startsWith("notice_of_departure_reason_action_DISMISSING")) {
-            val reason = event.values[0].asString
+            val splittetId = event.modalId.split(":")
 
-            NoticeOfDepartureManager(event.jda, config, translation).sendDismissedMessage(reason)
+            val reason = event.values[0].asString
+            val userId = splittetId[1]
+
+            NoticeOfDepartureManager(event.jda, config, translation).sendDismissedMessage(reason, userId)
 
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissingSentTitle)
@@ -52,8 +59,11 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
         }
 
         if (event.modalId.startsWith("notice_of_departure_reason_action_REVOKING")) {
-            val reason = event.values[0].asString
+            val splittetId = event.modalId.split(":")
 
+            val reason = event.values[0].asString
+            val userId = splittetId[1]
+            val date = splittetId[2]
 
         }
     }

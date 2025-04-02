@@ -1,5 +1,6 @@
 package dev.vxrp.bot.noticeofdeparture
 
+import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.configuration.loaders.Config
@@ -43,19 +44,39 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
         }
     }
 
-    fun sendAcceptedMessage(reason: String) {
+    suspend fun sendAcceptedMessage(reason: String, userId: String, date: String) {
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val currentDate = LocalDate.now().format(formatter)
+        val endDate = LocalDate.parse(date, formatter).format(formatter)
+
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptedTitle)
+            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptedBody
+                .replace("%current_date%", currentDate)
+                .replace("%end_date", endDate)
+                .replace("%reason%", reason))
+        }
+
+        val privateChannel = api.retrieveUserById(userId).await().openPrivateChannel().await()
+        privateChannel.send("", listOf(embed)).queue()
+    }
+
+    suspend fun sendDismissedMessage(reason: String, userId: String) {
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissedTitle)
+            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissedBody
+                .replace("%reason%", reason))
+        }
+
+        val privateChannel = api.retrieveUserById(userId).await().openPrivateChannel().await()
+        privateChannel.send("", listOf(embed)).queue()
+    }
+
+    suspend fun sendNoticeMessage() {
 
     }
 
-    fun sendDismissedMessage(reason: String) {
-
-    }
-
-    fun sendNoticeMessage() {
-
-    }
-
-    fun sendRevokedMessage(reason: String) {
+    suspend fun sendRevokedMessage(reason: String, userId: String) {
 
     }
 }
