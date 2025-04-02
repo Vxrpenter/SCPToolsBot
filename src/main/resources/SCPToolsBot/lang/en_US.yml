@@ -437,7 +437,7 @@ SUPPORT:
 
   EMBED_TICKET_CREATED_TITLE: "Ticket Created"
   EMBED_TICKET_CREATED_BODY: "
-                        Your ticket has been succesfully created. A staff member will come to your\n
+                        Your ticket has been successfully created. A staff member will come to your\n
                         aid shortly. You can find the ticket here:\n
                       
                         %channel%"
@@ -544,7 +544,7 @@ APPLICATION:
 NOTICE_OF_DEPARTURE:
   EMBED_TEMPLATE_TITLE: "Notice of Departure Form"
   EMBED_TEMPLATE_BODY: "
-                        If you are not avaidible for some time, you can apply for time of here. More information can be found below.\n
+                        If you are not available for some time, you can apply for time of here. More information can be found below.\n
 
                         **Needed Information**\n
                         This information will be needed for your notice of departure.\n
