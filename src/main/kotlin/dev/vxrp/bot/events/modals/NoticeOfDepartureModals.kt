@@ -23,5 +23,38 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
 
             event.reply_("", listOf(embed)).queue()
         }
+
+        if (event.modalId.startsWith("notice_of_departure_reason_action_ACCEPTING")) {
+            val reason = event.values[0].asString
+
+            NoticeOfDepartureManager(event.jda, config, translation).sendAcceptedMessage(reason)
+            NoticeOfDepartureManager(event.jda, config, translation).sendNoticeMessage()
+
+            val embed = Embed {
+                title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptationSentTitle)
+                description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptationSentBody)
+            }
+
+            event.reply_("", listOf(embed)).queue()
+        }
+
+        if (event.modalId.startsWith("notice_of_departure_reason_action_DISMISSING")) {
+            val reason = event.values[0].asString
+
+            NoticeOfDepartureManager(event.jda, config, translation).sendDismissedMessage(reason)
+
+            val embed = Embed {
+                title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissingSentTitle)
+                description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissingSentBody)
+            }
+
+            event.reply_("", listOf(embed)).queue()
+        }
+
+        if (event.modalId.startsWith("notice_of_departure_reason_action_REVOKING")) {
+            val reason = event.values[0].asString
+
+
+        }
     }
 }
