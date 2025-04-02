@@ -568,7 +568,7 @@ NOTICE_OF_DEPARTURE:
                         Wenn dieser Benutzer akzeptiert wird, wird der Benutzer und das Datum in die Datenbank aufgenommen und du wirst benachrichtigt, wenn es abläuft\n
 
                         __**Zeitspanne**__\n
-                        ```\n%current_date% till %end_date%```
+                        ```\n%current_date% bis %end_date%```
                         
                         __**Grund:**__\n
                         ```%reason%```
@@ -582,7 +582,7 @@ NOTICE_OF_DEPARTURE:
                         Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n
 
                         __**Akzeptanzzeitraum:**__\n
-                        ```%timeframe%```
+                        ```%current_date% bis %end_date%```
                         
                         __**Akzeptanzgrund:**__\n
                         ```%reason%```
