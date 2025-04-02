@@ -46,4 +46,16 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
     fun sendAcceptedMessage() {
 
     }
+
+    fun sendDismissedMessage() {
+
+    }
+
+    fun sendNoticeMessage() {
+
+    }
+
+    fun sendRevokedMessage() {
+
+    }
 }
