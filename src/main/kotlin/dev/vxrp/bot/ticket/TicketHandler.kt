@@ -32,7 +32,7 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
             return null
         }
 
-        val child = channel.createThreadChannel(settings.childRules.parentName.replace("%r%", retrieveSerial().toString()), true).await()
+        val child = channel.createThreadChannel(settings.childRules.parentName.replace("%r%", TicketTable().retrieveSerial().toString()), true).await()
         if (ticketCreator != "anonymous") {
             val creatorUser = api.retrieveUserById(ticketCreator).await()
             child.sendMessage(creatorUser.asMention).await().delete().queue()
@@ -56,15 +56,6 @@ class TicketHandler(val api: JDA, val config: Config, val translation: Translati
         TicketTable().addToDatabase(child.id, LocalDate.now(), ticketType, ticketStatus, ticketCreator, ticketHandler, logMessage, message.id, "CURRENTLY NOT IMPLEMENTED")
         logger.info("Created ticket: {} of type: {} by user: {} with current status {}", child.id, ticketType, ticketCreator, ticketStatus)
         return child
-    }
-
-    private fun retrieveSerial(): Long {
-        var count: Long = 0
-        transaction {
-            count = TicketTable.Tickets.selectAll().count()
-        }
-
-        return count
     }
 
     private fun querySettings(ticketType: TicketType): TicketTypes? {
