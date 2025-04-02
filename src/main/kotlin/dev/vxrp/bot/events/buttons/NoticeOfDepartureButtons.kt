@@ -29,5 +29,14 @@ class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Co
 
             event.replyModal(NoticeOfDepartureTemplateModals(translation).reasonActionModal(ActionId.DISMISSING, userId, endTime))
         }
+
+        if (event.button.id?.startsWith("notice_of_departure_revoke") == true) {
+            val splittetId = event.button.id!!.split(":")
+
+            val userId = splittetId[1]
+            val endTime = splittetId[2]
+
+            event.replyModal(NoticeOfDepartureTemplateModals(translation).reasonActionModal(ActionId.REVOKING, userId, endTime))
+        }
     }
 }

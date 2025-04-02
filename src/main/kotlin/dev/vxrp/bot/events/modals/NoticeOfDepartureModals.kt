@@ -7,6 +7,7 @@ import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent
+import org.jetbrains.exposed.sql.transactions.transactionScope
 
 class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Config, val translation: Translation) {
     suspend fun init() {
@@ -65,6 +66,14 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             val userId = splittetId[1]
             val date = splittetId[2]
 
+            NoticeOfDepartureManager(event.jda, config, translation).sendRevokedMessage(reason, userId, date)
+
+            val embed = Embed {
+                title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokationSentTitle)
+                description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokationSentBody)
+            }
+
+            event.reply_("", listOf(embed)).queue()
         }
     }
 }
