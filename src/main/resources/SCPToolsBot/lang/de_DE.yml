@@ -578,7 +578,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_DECISION_SENT_BODY: "Deine Abmeldung wurde zur bearbeitung versendet. Sobald eine Entscheidung getroffen wurde erhältst du eine Nachricht, die ebenfalls den Grund der Entscheidung enthält"
 
   EMBED_ACCEPTED_TITLE: "Abmeldung Angenommen"
-  EMBED_ACCEPTED: "
+  EMBED_ACCEPTED_BODY: "
                         Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n
 
                         __**Akzeptanzzeitraum:**__\n
@@ -589,7 +589,7 @@ NOTICE_OF_DEPARTURE:
                         "
 
   EMBED_DISMISSED_TITLE: "Abmeldung Abgewiesen"
-  EMBED_DISMISSED: "
+  EMBED_DISMISSED_BODY: "
                          Deine Abmeldung wurde abgewiesen. Es ist dir nicht gestattet, freizunehmen. Falls du dennoch musst, sprech bitte mit einem höhergestellten Mitglied über das Verlassen des Teams\n
 
                         __**Abweisungsgrund:**__\n
@@ -621,7 +621,7 @@ NOTICE_OF_DEPARTURE:
                         "
 
   EMBED_ENDED_TITLE: "Abmeldung ist Geendet"
-  EMBED_ENDED: "
+  EMBED_ENDED_BODY: "
                         Deine Abmeldung ist hiermit vorbei\n
                         
                         __**Zeit:**__\n
@@ -629,7 +629,7 @@ NOTICE_OF_DEPARTURE:
                         "
 
   EMBED_REVOKED_TITLE: "Abmeldung wurde Zurückgezogen"
-  EMBED_REVOKED: "
+  EMBED_REVOKED_BODY: "
                         Deine Abmeldung wurde zurückgezogen\n
                         
                         __**Zeit:**__\n
@@ -638,8 +638,8 @@ NOTICE_OF_DEPARTURE:
                         __**Akzeptanz Grund:**__\n
                         ```%reason%```
                         "
-  EMBED_REVOKATION_TITLE: "Abmeldung Zurückgezogen"
-  EMBED_REVOKATION_BODY: "Die Abmeldung wird nun zurückgezogen. Der Nutzer wird in kürze darüber benachrichtigt wieso die Abmeldung zurückgezogen wurde"
+  EMBED_REVOKATION_SENT_TITLE: "Abmeldung Zurückgezogen"
+  EMBED_REVOKATION_SENT_BODY: "Die Abmeldung wird nun zurückgezogen. Der Nutzer wird in kürze darüber benachrichtigt wieso die Abmeldung zurückgezogen wurde"
 
 REGULARS:
 
