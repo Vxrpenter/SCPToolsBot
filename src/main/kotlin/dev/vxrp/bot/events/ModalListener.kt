@@ -5,6 +5,7 @@ import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.events.entitySelectMenus.TicketEntitySelectMenus
 import dev.vxrp.bot.events.modals.ApplicationModals
+import dev.vxrp.bot.events.modals.NoticeOfDepartureModals
 import dev.vxrp.bot.events.modals.TicketModals
 import dev.vxrp.bot.ticket.TicketHandler
 import dev.vxrp.bot.ticket.enums.TicketStatus
@@ -31,6 +32,8 @@ class ModalListener(val api: JDA, val config: Config, val translation: Translati
             if (launchOptionManager.checkSectionOption(LaunchOptionType.MODAL_LISTENER, LaunchOptionSectionType.TICKET_MODALS).engage) TicketModals(logger, event, config, translation).init()
 
             if (launchOptionManager.checkSectionOption(LaunchOptionType.MODAL_LISTENER, LaunchOptionSectionType.APPLICATION_MODALS).engage) ApplicationModals(event, config, translation)
+
+            if (launchOptionManager.checkSectionOption(LaunchOptionType.MODAL_LISTENER, LaunchOptionSectionType.NOTICE_OF_DEPARTURE_MODALS).engage) NoticeOfDepartureModals(event, config, translation)
         }
     }
 }

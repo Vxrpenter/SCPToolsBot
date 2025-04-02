@@ -1,6 +1,8 @@
 package dev.vxrp.database.tables
 
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.transactions.transaction
 
 class NoticeOfDepartureTable {
     object NoticeOfDepartures : Table("notice_of_departures") {
@@ -13,5 +15,14 @@ class NoticeOfDepartureTable {
 
         override val primaryKey: PrimaryKey
             get() = PrimaryKey(id)
+    }
+
+    fun retrieveSerial(): Long {
+        var count: Long = 0
+        transaction {
+            count = NoticeOfDepartures.selectAll().count()
+        }
+
+        return count
     }
 }

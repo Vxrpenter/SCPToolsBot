@@ -136,6 +136,11 @@
           "id": "section:APPLICATION_MODALS",
           "engage": true,
           "log_action": true
+        },
+        {
+          "id": "section:NOTICE_OF_DEPARTURE_MODALS",
+          "engage": true,
+          "log_action": true
         }
       ]
     },
