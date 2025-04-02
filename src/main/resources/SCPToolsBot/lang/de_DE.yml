@@ -574,7 +574,6 @@ NOTICE_OF_DEPARTURE:
                         __**Grund:**__\n
                         ```%reason%```
                         "
-  EMBED_DESCISION_FOOTER: "Erstellt am %date% um %time% Uhr"
   MESSAGE_DESCISION_CREATED: "Deine Abmeldung bald bearbeitet"
 
   EMBED_ACCEPTED: "
