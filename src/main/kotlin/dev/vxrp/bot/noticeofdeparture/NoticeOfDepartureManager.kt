@@ -35,19 +35,19 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
 
         val channel: TextChannel? = api.getTextChannelById(config.settings.noticeOfDeparture.decisionChannel)
         channel?.send("", listOf(embed))?.addActionRow(
-            Button.success("notice_of_departure_decision_accept", translation.buttons.textNoticeOfDepartureAccept).withEmoji(Emoji.fromFormatted("📩")),
-            Button.danger("notice_of_departure_decision_dismiss", translation.buttons.textNoticeOfDepartureDismissed).withEmoji(Emoji.fromFormatted("🫷"))
+            Button.success("notice_of_departure_decision_accept:$userId$endDate", translation.buttons.textNoticeOfDepartureAccept).withEmoji(Emoji.fromFormatted("📩")),
+            Button.danger("notice_of_departure_decision_dismiss$userId$endDate", translation.buttons.textNoticeOfDepartureDismissed).withEmoji(Emoji.fromFormatted("🫷"))
         )?.queue() ?: run{
             logger.error("Could not correctly retrieve notice of departure decision channel")
             return
         }
     }
 
-    fun sendAcceptedMessage() {
+    fun sendAcceptedMessage(reason: String) {
 
     }
 
-    fun sendDismissedMessage() {
+    fun sendDismissedMessage(reason: String) {
 
     }
 
@@ -55,7 +55,7 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
 
     }
 
-    fun sendRevokedMessage() {
+    fun sendRevokedMessage(reason: String) {
 
     }
 }
