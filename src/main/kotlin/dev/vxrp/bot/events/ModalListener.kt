@@ -25,7 +25,7 @@ class ModalListener(val api: JDA, val config: Config, val translation: Translati
 
             if (launchOptionManager.checkSectionOption(LaunchOptionType.MODAL_LISTENER, LaunchOptionSectionType.APPLICATION_MODALS).engage) ApplicationModals(event, config, translation)
 
-            if (launchOptionManager.checkSectionOption(LaunchOptionType.MODAL_LISTENER, LaunchOptionSectionType.NOTICE_OF_DEPARTURE_MODALS).engage) NoticeOfDepartureModals(event, config, translation)
+            if (launchOptionManager.checkSectionOption(LaunchOptionType.MODAL_LISTENER, LaunchOptionSectionType.NOTICE_OF_DEPARTURE_MODALS).engage) NoticeOfDepartureModals(event, config, translation).init()
         }
     }
 }
