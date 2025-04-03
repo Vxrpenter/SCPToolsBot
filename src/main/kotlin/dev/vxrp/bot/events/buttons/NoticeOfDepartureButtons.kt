@@ -5,10 +5,8 @@ import dev.vxrp.bot.modals.NoticeOfDepartureTemplateModals
 import dev.vxrp.bot.noticeofdeparture.enums.ActionId
 import dev.vxrp.bot.permissions.PermissionManager
 import dev.vxrp.bot.permissions.enums.PermissionType
-import dev.vxrp.bot.ticket.enums.TicketType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.TicketTable
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 
 class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {

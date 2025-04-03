@@ -1,7 +1,6 @@
 package dev.vxrp.bot.noticeofdeparture
 
 import dev.minn.jda.ktx.coroutines.await
-import dev.minn.jda.ktx.generics.getChannel
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.configuration.loaders.Config
