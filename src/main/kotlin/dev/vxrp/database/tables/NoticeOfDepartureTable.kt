@@ -37,7 +37,7 @@ class NoticeOfDepartureTable {
 
     fun deleteEntry(noticeId: String) {
         transaction {
-            NoticeOfDepartures.deleteWhere { NoticeOfDepartures.id eq noticeId }
+            NoticeOfDepartures.deleteWhere { id eq noticeId }
         }
     }
 
