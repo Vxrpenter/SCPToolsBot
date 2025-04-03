@@ -27,6 +27,10 @@ class PermissionMessageHandler(val config: Config, val translation: Translation)
 
             }
 
+            PermissionType.NOTICE_OF_DEPARTURES -> {
+                return noticeOfDepartureMessage(PermissionMessageType.INSUFFICIENT_PERMISSION)
+            }
+
             PermissionType.APPLICATION -> {
 
             }
@@ -41,7 +45,15 @@ class PermissionMessageHandler(val config: Config, val translation: Translation)
             description = ColorTool().useCustomColorCodes(translation.permissions.embedTicketDeniedBody
                 .replace("%permission_message%", choosePermissionMessage(permissionMessageType).trimIndent()))
         }
+        return embed
+    }
 
+    private fun noticeOfDepartureMessage(permissionMessageType: PermissionMessageType): MessageEmbed {
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.permissions.embedNoticeOfDepartureDeniedTitle)
+            description = ColorTool().useCustomColorCodes(translation.permissions.embedNoticeOfDepartureDeniedBody
+                .replace("%permission_message%", choosePermissionMessage(permissionMessageType).trimIndent()))
+        }
         return embed
     }
 
