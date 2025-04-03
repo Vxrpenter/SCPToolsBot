@@ -22,7 +22,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionSentBody)
             }
 
-            event.reply_("", listOf(embed)).queue()
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
         }
 
         if (event.modalId.startsWith("notice_of_departure_reason_action_ACCEPTING")) {
@@ -40,7 +40,8 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptationSentBody)
             }
 
-            event.reply_("", listOf(embed)).queue()
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.message?.delete()?.queue()
         }
 
         if (event.modalId.startsWith("notice_of_departure_reason_action_DISMISSING")) {
@@ -56,7 +57,8 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissingSentBody)
             }
 
-            event.reply_("", listOf(embed)).queue()
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.message?.delete()?.queue()
         }
 
         if (event.modalId.startsWith("notice_of_departure_reason_action_REVOKING")) {
@@ -73,7 +75,8 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokationSentBody)
             }
 
-            event.reply_("", listOf(embed)).queue()
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.message?.delete()?.queue()
         }
     }
 }

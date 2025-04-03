@@ -1,6 +1,7 @@
 package dev.vxrp.bot.noticeofdeparture
 
 import dev.minn.jda.ktx.coroutines.await
+import dev.minn.jda.ktx.generics.getChannel
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.configuration.loaders.Config
@@ -36,9 +37,9 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
 
         val channel: TextChannel? = api.getTextChannelById(config.settings.noticeOfDeparture.decisionChannel)
         channel?.send("", listOf(embed))?.addActionRow(
-            Button.success("notice_of_departure_decision_accept:$userId$endDate", translation.buttons.textNoticeOfDepartureAccept).withEmoji(
+            Button.success("notice_of_departure_decision_accept:$userId:$endDate", translation.buttons.textNoticeOfDepartureAccept).withEmoji(
                 Emoji.fromFormatted("📩")),
-            Button.danger("notice_of_departure_decision_dismiss$userId$endDate", translation.buttons.textNoticeOfDepartureDismissed).withEmoji(
+            Button.danger("notice_of_departure_decision_dismiss:$userId:$endDate", translation.buttons.textNoticeOfDepartureDismissed).withEmoji(
                 Emoji.fromFormatted("🫷"))
         )?.queue() ?: run{
             logger.error("Could not correctly retrieve notice of departure decision channel, does it exist?")
@@ -118,17 +119,15 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
     suspend fun sendEndedMessage(userId: String, beginDate: String, endDate: String) {
         val embed = Embed {
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEndedTitle)
-            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEndedTitle
+            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEndedBody
                 .replace("%current_date%", beginDate)
                 .replace("%end_date", endDate))
         }
 
-        val privateChannel = api.retrieveUserById(userId).await().openPrivateChannel().await()
+        val privateChannel = api.awaitReady().retrieveUserById(userId).await().openPrivateChannel().await()
         privateChannel.send("", listOf(embed)).queue()
 
-        val channel = api.getTextChannelById(NoticeOfDepartureTable().retrieveChannel(userId)!!)
-        channel?.history?.getMessageById(NoticeOfDepartureTable().retrieveMessage(userId)!!)?.delete()?.await() ?: run {
-            logger.error("Could not correctly retrieve notice of departure message in notice channel, does it exist?")
-        }
+        val channel = api.awaitReady().getTextChannelById(NoticeOfDepartureTable().retrieveChannel(userId)!!)
+        channel?.retrieveMessageById(NoticeOfDepartureTable().retrieveMessage(userId)!!)?.await()?.delete()?.await()
     }
 }

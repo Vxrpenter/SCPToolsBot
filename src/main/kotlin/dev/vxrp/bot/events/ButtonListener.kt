@@ -25,7 +25,7 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
 
             if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.APPLICATION_BUTTONS).engage) ApplicationButtons(event, config, translation).init()
 
-            if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.NOTICE_OF_DEPARTURE_BUTTONS).engage) NoticeOfDepartureButtons(event, config, translation)
+            if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.NOTICE_OF_DEPARTURE_BUTTONS).engage) NoticeOfDepartureButtons(event, config, translation).init()
         }
     }
 }
