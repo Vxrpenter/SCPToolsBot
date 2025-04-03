@@ -26,6 +26,7 @@ kotlin {
     jvmToolchain(22)
 }
 
+val ktorVersion = "3.1.2"
 val kotlinxCoroutinesVersion = "1.9.0"
 
 val exposedVersion = "0.56.0"
@@ -44,6 +45,7 @@ val gsonVersion = "2.11.0"
 
 dependencies {
     // Default
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion")
 
     // Database tools and drivers
