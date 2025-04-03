@@ -554,7 +554,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_TEMPLATE_TITLE: "Notice of Departure Form"
   EMBED_TEMPLATE_BODY: "
                         If you are not available for some time, you can apply for time of here. More information can be found below.\n
-
+                        &filler&
                         **Needed Information**\n
                         This information will be needed for your notice of departure.\n
                         - The date you wish to come back. Please follow this format when entering or it will not be accepted: **dd.MM.yyyy**\n
@@ -573,6 +573,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_DECISION_TITLE: "Notice of departure - #%number%"
   EMBED_DECISION_BODY: " 
                         ```If accepted this user and the date will be added to the database and you will be notified when it runs out```\n
+                        &filler&
                         __**Timespan**__\n
                         ```%current_date% till %end_date%```
                         
@@ -586,7 +587,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_ACCEPTED_TITLE: "Notice of Departure Accepted"
   EMBED_ACCEPTED_BODY: "
                         Your notice of departure was accepted. You may now take your time off without any consequences. \n
-                        
+                        &filler&
                         __**Acceptance Timeframe:**__\n
                         ```%current_date% till %end_date%```
                         
@@ -596,9 +597,8 @@ NOTICE_OF_DEPARTURE:
 
   EMBED_DISMISSED_TITLE: "Notice of Departure Dismissed"
   EMBED_DISMISSED_BODY: "
-                         Your notice of departure was dismissed. You are not allowed to take time off.
-                         If you still need to, please talk with a higher staff member about leaving the team\n
-                        
+                        Your notice of departure was dismissed. You are not allowed to take time off. If you still need to, please talk with a higher staff member about leaving the team\n
+                        &filler&
                         __**Dismiss Reason:**__\n
                         ```%reason%```
                         "
@@ -617,7 +617,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_NOTICE_BODY: "
                         This Notice of Departure can always be revoked by pressing the button down below.
                         This will also be periodically checked if still valid or not\n
-                        
+                        &filler&
                         __**Accepted by:**__\n
                         %user%\n
                         
@@ -631,7 +631,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_ENDED_TITLE: "Notice of Departure has Ended"
   EMBED_ENDED_BODY: "
                         Your Notice of Departure has ended and all your benefits going with it have been revoked \n
-                        
+                        &filler&
                         __**Timeframe:**__\n
                         ```%current_date% till %end_date%```
                         "
@@ -639,7 +639,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_REVOKED_TITLE: "Notice of Departure has been Revoked"
   EMBED_REVOKED_BODY: "
                         Your Notice of Departure has been revoked and all benefits going with that do not apply anymore \n
-                        
+                        &filler&
                         __**Timeframe:**__\n
                         ```%current_date% till %end_date%```
                         
