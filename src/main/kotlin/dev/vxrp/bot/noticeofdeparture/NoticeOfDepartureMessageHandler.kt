@@ -102,22 +102,33 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         NoticeOfDepartureTable().addToDatabase(userId, true, handler, channel.id, message.id, currentDate, endDate)
     }
 
-    suspend fun sendRevokedMessage(reason: String, userId: String, date: String) {
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-        val currentDate = LocalDate.now().format(formatter)
-        val endDate = LocalDate.parse(date, formatter).format(formatter)
-
+    suspend fun sendRevokedMessage(reason: String, userId: String, beginDate: String, endDate: String) {
         val embed = Embed {
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokedTitle)
             description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokedBody
-                .replace("%current_date%", currentDate)
+                .replace("%current_date%", beginDate)
                 .replace("%end_date", endDate)
                 .replace("%reason%", reason))
         }
 
         val privateChannel = api.retrieveUserById(userId).await().openPrivateChannel().await()
         privateChannel.send("", listOf(embed)).queue()
+    }
 
+    suspend fun sendEndedMessage(userId: String, beginDate: String, endDate: String) {
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEndedTitle)
+            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEndedTitle
+                .replace("%current_date%", beginDate)
+                .replace("%end_date", endDate))
+        }
 
+        val privateChannel = api.retrieveUserById(userId).await().openPrivateChannel().await()
+        privateChannel.send("", listOf(embed)).queue()
+
+        val channel = api.getTextChannelById(NoticeOfDepartureTable().retrieveChannel(userId)!!)
+        channel?.history?.getMessageById(NoticeOfDepartureTable().retrieveMessage(userId)!!)?.delete()?.await() ?: run {
+            logger.error("Could not correctly retrieve notice of departure message in notice channel, does it exist?")
+        }
     }
 }
