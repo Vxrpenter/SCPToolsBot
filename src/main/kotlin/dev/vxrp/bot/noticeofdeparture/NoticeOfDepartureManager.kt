@@ -48,10 +48,10 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
             if (daysUntil == 0 || daysUntil < 0) {
                 redundantNotices += 1
                 logger.info("Found redundant notice of departure, ending notice and processing database data")
-
                 val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
                 NoticeOfDepartureMessageHandler(api, config, translation).sendEndedMessage(id, beginDate.format(formatter), endDate.format(formatter))
                 NoticeOfDepartureTable().deleteEntry(id)
+                logger.info("Deleted notice of departure - $id successfully")
             }
         }
 
