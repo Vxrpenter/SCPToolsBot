@@ -9,6 +9,8 @@
 
 # The token of your bot application, create one here https://discord.com/developers/
 token: ""
+# The client secret of your bot, get it from here https://discord.com/developers/ under OAuth section
+client_secret: ""
 # Your server ID, you can get it by activating discord developer mode and right-clicking your server
 guild_id: ""
 

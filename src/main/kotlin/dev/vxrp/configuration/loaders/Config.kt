@@ -16,6 +16,8 @@ data class Config(
 @Serializable
 data class Settings(
     val token: String,
+    @SerialName("client_secret")
+    val clientSecret: String,
     @SerialName("guild_id")
     val guildId: String,
     @SerialName("load_translation")
