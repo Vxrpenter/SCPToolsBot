@@ -1,10 +1,7 @@
 package dev.vxrp.database.tables
 
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class NoticeOfDepartureTable {
@@ -39,6 +36,47 @@ class NoticeOfDepartureTable {
         transaction {
             NoticeOfDepartures.deleteWhere { NoticeOfDepartures.id eq noticeId }
         }
+    }
+
+    fun retrieveAllIds(): List<String> {
+        val list = mutableListOf<String>()
+
+        transaction {
+            NoticeOfDepartures.selectAll()
+                .forEach {
+                    list.add(it[NoticeOfDepartures.id])
+                }
+        }
+
+        return list
+    }
+
+    fun retrieveBeginDate(noticeId: String): String? {
+        var date: String? = null
+
+        transaction {
+            NoticeOfDepartures.selectAll()
+                .where { NoticeOfDepartures.id eq noticeId }
+                .forEach {
+                    date = it[NoticeOfDepartures.beginDate]
+                }
+        }
+
+        return date
+    }
+
+    fun retrieveEndDate(noticeId: String): String? {
+        var date: String? = null
+
+        transaction {
+            NoticeOfDepartures.selectAll()
+                .where { NoticeOfDepartures.id eq noticeId }
+                .forEach {
+                    date = it[NoticeOfDepartures.endDate]
+                }
+        }
+
+        return date
     }
 
     fun retrieveSerial(): Long {
