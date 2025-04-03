@@ -23,6 +23,16 @@ PERMISSIONS:
                         %permission_message%
                         ```"
 
+  EMBED_NOTICE_OF_DEPARTURE_DENIED_TITLE: "Interaction Denied"
+  EMBED_NOTICE_OF_DEPARTURE_DENIED_BODY: "
+                        This Interaction has been denied, the exact reason for it's denial can be viewed underneath this text.
+                        If you have any questions about the reason, contact staff:\n
+                        &filler&
+                        ```ansi
+                        
+                        %permission_message%
+                        ```"
+
   TEXT_INSUFFICIENT_PERMISSION: "&red&&bold&Insufficient Permissions, contact staff for more information&reset&"
   TEXT_INTERACTION_DISABLED: "&red&&bold&Interaction Disabled, contact staff for more information&reset&"
 

@@ -39,6 +39,12 @@ data class TranslationPermissions(
     val embedTicketDeniedTitle: String,
     @SerialName("EMBED_TICKET_DENIED_BODY")
     val embedTicketDeniedBody: String,
+
+    @SerialName("EMBED_NOTICE_OF_DEPARTURE_DENIED_TITLE")
+    val embedNoticeOfDepartureDeniedTitle: String,
+    @SerialName("EMBED_NOTICE_OF_DEPARTURE_DENIED_BODY")
+    val embedNoticeOfDepartureDeniedBody: String,
+
     @SerialName("TEXT_INSUFFICIENT_PERMISSION")
     val textInsufficientPermission: String,
     @SerialName("TEXT_INTERACTION_DISABLED")
