@@ -79,6 +79,34 @@ class NoticeOfDepartureTable {
         return date
     }
 
+    fun retrieveChannel(noticeId: String): String? {
+        var channel: String? = null
+
+        transaction {
+            NoticeOfDepartures.selectAll()
+                .where {NoticeOfDepartures.id eq noticeId}
+                .forEach {
+                    channel = it[NoticeOfDepartures.channelId]
+                }
+        }
+
+        return channel
+    }
+
+    fun retrieveMessage(noticeId: String): String? {
+        var message: String? = null
+
+        transaction {
+            NoticeOfDepartures.selectAll()
+                .where {NoticeOfDepartures.id eq noticeId}
+                .forEach {
+                    message = it[NoticeOfDepartures.messageId]
+                }
+        }
+
+        return message
+    }
+
     fun retrieveSerial(): Long {
         var count: Long = 0
         transaction {
