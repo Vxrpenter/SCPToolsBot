@@ -556,7 +556,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_TEMPLATE_TITLE: "Abmeldungsformular"
   EMBED_TEMPLATE_BODY: "
                         Solltest du für einige Zeit nicht verfügbar sein, kannst du hier einen Abmeldungsantrag stellen. Weitere Informationen findest du unten.\n
-
+                        &filler&
                         **Benötigte Informationen**\n
                         Diese Informationen werden für deine Abmeldung benötigt.\n
                         - Das Datum deiner Rückkehr. Bitte verwende dieses Format, andernfalls wird die Abmeldung nicht akzeptiert: **dd.MM.yyyy**\n
@@ -576,9 +576,9 @@ NOTICE_OF_DEPARTURE:
 
   EMBED_DECISION_BODY: " 
                         Wenn dieser Benutzer akzeptiert wird, wird der Benutzer und das Datum in die Datenbank aufgenommen und du wirst benachrichtigt, wenn es abläuft\n
-
+                        &filler&
                         __**Zeitspanne**__\n
-                        ```\n%current_date% bis %end_date%```
+                        ```\n%current_date% bis %end_date%```\n
                         
                         __**Grund:**__\n
                         ```%reason%```
@@ -590,7 +590,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_ACCEPTED_TITLE: "Abmeldung Angenommen"
   EMBED_ACCEPTED_BODY: "
                         Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n
-
+                        &filler&
                         __**Akzeptanzzeitraum:**__\n
                         ```%current_date% bis %end_date%```
                         
@@ -601,7 +601,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_DISMISSED_TITLE: "Abmeldung Abgewiesen"
   EMBED_DISMISSED_BODY: "
                          Deine Abmeldung wurde abgewiesen. Es ist dir nicht gestattet, freizunehmen. Falls du dennoch musst, sprech bitte mit einem höhergestellten Mitglied über das Verlassen des Teams\n
-
+                         &filler&
                         __**Abweisungsgrund:**__\n
                         ```%reason%```
                         "
@@ -619,9 +619,9 @@ NOTICE_OF_DEPARTURE:
   EMBED_NOTICE_TITLE: "Abmeldung - #%number%"
   EMBED_NOTICE_BODY: "
                         Diese Abmeldung kann jederzeit durch Drücken des Buttons unten widerrufen werden. Es wird auch regelmäßig überprüft, ob die Abmeldung noch gültig ist oder nicht\n
-
+                        &filler&
                         __**Akzeptiert von:**__\n
-                        %user%
+                        %user%\n
                         
                         __**Zeit:**__\n
                         ```%current_date% bis %end_date%```
@@ -633,7 +633,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_ENDED_TITLE: "Abmeldung ist Geendet"
   EMBED_ENDED_BODY: "
                         Deine Abmeldung ist hiermit vorbei\n
-                        
+                        &filler&
                         __**Zeit:**__\n
                         ```%current_date% bis %end_date%```
                         "
@@ -641,7 +641,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_REVOKED_TITLE: "Abmeldung wurde Zurückgezogen"
   EMBED_REVOKED_BODY: "
                         Deine Abmeldung wurde zurückgezogen\n
-                        
+                        &filler&
                         __**Zeit:**__\n
                         ```%current_date% bis %end_date%```
                         
