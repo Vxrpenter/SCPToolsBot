@@ -87,6 +87,14 @@ class PermissionManager(val config: Config, val translation: Translation) {
 
             }
 
+            PermissionType.NOTICE_OF_DEPARTURES -> {
+                if (config.settings.noticeOfDeparture.rolesAccess.isEmpty()) {
+                    logger.error("Could not find any roles to determine permissions for notice of departures")
+                    return null
+                }
+                return config.settings.noticeOfDeparture.rolesAccess
+            }
+
             PermissionType.APPLICATION -> {
 
             }

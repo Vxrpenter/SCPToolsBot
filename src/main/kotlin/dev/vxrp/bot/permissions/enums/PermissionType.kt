@@ -5,5 +5,6 @@ enum class PermissionType {
     TICKET_LOGS,
     APPLICATION,
     STATUS_BOT,
+    NOTICE_OF_DEPARTURES,
     REGULARS
 }
