@@ -23,6 +23,16 @@ PERMISSIONS:
                         %permission_message%
                         ```"
 
+  EMBED_NOTICE_OF_DEPARTURE_DENIED_TITLE: "Interaktion Verweigert"
+  EMBED_NOTICE_OF_DEPARTURE_DENIED_BODY: "
+                        Diese Interaktion wurde verweigert, der exakte Grund kann unten gefunden werden.
+                        Solltest du einige Fragen haben, stelle die an Staff Mitglieder:\n
+                        &filler&
+                        ```ansi
+
+                        %permission_message%
+                        ```"
+
   TEXT_INSUFFICIENT_PERMISSION: "&red&&bold&Unzureichende Berechtigungen, wende dich für weitere Informationen an Staff&reset&"
   TEXT_INTERACTION_DISABLED: "&red&&bold&Interaktion Deaktiviert, wende dich für weitere Informationen an Staff&reset&"
 
