@@ -19,7 +19,7 @@ class UserTable {
     }
 
     fun addToDatabase(userId: String, verifyTimestamp: String, userSteamId: String, discordRefreshToken: String) {
-        if (exists(userId)) return
+        if (!exists(userId)) return
 
         transaction {
             Users.insert {
@@ -60,7 +60,7 @@ class UserTable {
     }
 
     fun delete(userId: String) {
-        if (exists(userId)) return
+        if (!exists(userId)) return
 
         transaction {
             Users.deleteWhere { id eq userId }
@@ -70,7 +70,7 @@ class UserTable {
     fun exists(id: String): Boolean {
         var exists = false
         transaction {
-            exists = Users.selectAll()
+            exists = !Users.selectAll()
                 .where { Users.id eq id }.empty()
         }
 

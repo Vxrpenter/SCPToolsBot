@@ -9,13 +9,24 @@ import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 
 class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {
-    init {
+    fun init() {
+        val noDataEmbed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.verify.embedNoDataTitle)
+            description = ColorTool().useCustomColorCodes(translation.verify.embedNoDataBody)
+        }
+
         if (event.button.id?.startsWith("verify_show_data") == true) {
+            if (!UserTable().exists(event.user.id)) {
+                event.reply_("", listOf(noDataEmbed)).setEphemeral(true).queue()
+                return
+            }
+
             val verified = UserTable().exists(event.user.id)
             val steamId = UserTable().getSteamId(event.user.id)
             val timestamp = UserTable().getVerifyTime(event.user.id)
 
             val embed = Embed {
+                thumbnail = event.user.avatarUrl
                 title = ColorTool().useCustomColorCodes(translation.verify.embedDataTitle)
                 description = ColorTool().useCustomColorCodes(translation.verify.embedDataBody
                     .replace("%verified%", verified.toString())
@@ -27,6 +38,11 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
         }
 
         if (event.button.id?.startsWith("verify_delete") == true) {
+            if (!UserTable().exists(event.user.id)) {
+                event.reply_("", listOf(noDataEmbed)).setEphemeral(true).queue()
+                return
+            }
+
             UserTable().delete(event.user.id)
 
             val embed = Embed {
