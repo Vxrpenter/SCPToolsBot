@@ -559,6 +559,18 @@ VERIFY:
                       
                         **WE DO NOT** receive any information such as: **E-Mails**, **Passwords**, **Authentication Codes** etc. We do not distribute your information nor use it to monetize or advertise to you."
 
+  EMBED_DATA_TITLE: "User Data"
+  EMBED_DATA_BODY: "
+                        This is all data we currently have on you. Do note that the refresh token that we received from discord will not be displayed here.\n
+                      
+                        **Currently Verified?:** %verified%\n
+                        
+                        **Linked Steam Account**: %steamId%\n
+                        
+                        **Verification Timestamp:** %timestamp%\n
+                        
+                        _You can delete this data whenever you want to. Just go to the verification panel and click on the 'Delete Data' button._"
+
   EMBED_LOG_VERIFIED_TITLE: "User Verified - %name%"
   EMBED_LOG_VERIFIED_BODY: "This user has been verified successfully. Their data has been retrieved from the OAuth Api and written to the database."
 

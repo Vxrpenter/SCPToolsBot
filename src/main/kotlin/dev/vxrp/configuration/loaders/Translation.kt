@@ -534,6 +534,11 @@ data class TranslationVerify(
     @SerialName("EMBED_TEMPLATE_BODY")
     val embedTemplateBody: String,
 
+    @SerialName("EMBED_DATA_TITLE")
+    val embedDataTitle: String,
+    @SerialName("EMBED_DATA_BODY")
+    val embedDataBody: String,
+
     @SerialName("EMBED_LOG_VERIFIED_TITLE")
     val embedLogVerifiedTitle: String,
     @SerialName("EMBED_LOG_VERIFIED_BODY")
