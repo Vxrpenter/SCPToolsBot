@@ -30,6 +30,7 @@ data class Settings(
     @SerialName("activity_content")
     val activityContent: String,
     val database: ConfigDatabase,
+    val webserver: ConfigWebserver,
     val cedmod: ConfigCedmod,
     @SerialName("notice_of_departure")
     val noticeOfDeparture: ConfigNoticeOfDeparture,
@@ -48,6 +49,15 @@ data class ConfigDatabase(
     val customUsername: String,
     @SerialName("custom_password")
     val customPassword: String
+)
+
+@Serializable
+data class ConfigWebserver(
+    val active: Boolean,
+    val port: Int,
+    @SerialName("redirect_uri")
+    val redirectUri: String,
+    val uri: String
 )
 
 @Serializable
