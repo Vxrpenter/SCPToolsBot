@@ -42,6 +42,13 @@
     },
     {
       "active": true,
+      "inherit": "commands.verify.default",
+      "name": "verify",
+      "description": "Command used for member verification",
+      "default_permissions": []
+    },
+    {
+      "active": true,
       "inherit": "commands.notice_of_departure.default",
       "name": "notice_of_departure",
       "description": "View information on notices and change data",
@@ -130,13 +137,6 @@
           ]
         }
       ]
-    },
-    {
-      "active": true,
-      "inherit": "commands.verify.default",
-      "name": "verify",
-      "description": "Command used for member verification",
-      "default_permissions": []
     }
   ],
   "status_commands": [
