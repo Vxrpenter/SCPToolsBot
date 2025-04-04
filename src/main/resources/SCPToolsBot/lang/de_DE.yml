@@ -560,6 +560,18 @@ VERIFY:
 
                         **WIR ERHALTEN KEINE** Informationen wie: **E-Mails**, **Passwörter**, **Authentifizierungscodes** etc. Wir geben deine Daten nicht weiter und verwenden sie auch nicht für Monetarisierung oder Werbung."
 
+  EMBED_DATA_TITLE: "Nutzer Daten"
+  EMBED_DATA_BODY: "
+                        Dies sind alle Daten, die wir derzeit über dich haben. Beachte, dass der von Discord erhaltene Refresh Token hier nicht angezeigt wird.
+
+                        **Aktuell verifiziert?:** %verified%
+                        
+                        **Verlinkter Steam-Account**: %steamId%
+                        
+                        **Verifizierungszeitpunkt:** %timestamp%
+                        
+                        _Du kannst diese Daten jederzeit löschen. Gehe einfach zum Verifizierungspanel und klicke auf die Schaltfläche 'Daten Löschen'._"
+
   EMBED_LOG_VERIFIED_TITLE: "Nutzer Verifiziert - %name%"
   EMBED_LOG_VERIFIED_BODY: "Dieser Benutzer wurde erfolgreich verifiziert. Seine Daten wurden von der OAuth Api abgerufen und in die Datenbank geschrieben."
 
