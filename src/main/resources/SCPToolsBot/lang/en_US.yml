@@ -550,6 +550,15 @@ APPLICATION:
   MODAL_CHOOSE_COUNT_NUMBER_TITLE: "Number"
   MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER: "How many members should the candidates have?"
 
+VERIFY:
+  EMBED_TEMPLATE_TITLE: "Verify - Steam and Discord Linking"
+  EMBED_TEMPLATE_BODY: "
+                        To use certain features of this bot you need to verify. This means giving us the following information to work with:\n
+                        - Identification\n
+                        - Account connections\n
+                      
+                        **WE DO NOT** receive any information such as: **E-Mails**, **Passwords**, **Authentication Codes** etc. We do not distribute your information nor use it to monetize or advertise to you."
+
 NOTICE_OF_DEPARTURE:
   EMBED_TEMPLATE_TITLE: "Notice of Departure Form"
   EMBED_TEMPLATE_BODY: "
@@ -876,6 +885,10 @@ BUTTONS:
   TEXT_APPLICATION_ACTIVATION_COMPLETE_SETUP: "Complete Setup"
   TEXT_APPLICATION_DEACTIVATE: "Deactivate Applications"
   TEXT_APPLICATION_OPEN_TICKET: "Open Application"
+
+  TEXT_VERIFY_VERIFY: "Verify"
+  TEXT_VERIFY_SHOW_DATA: "Show Data"
+  TEXT_VERIFY_DELETE: "Delete Data"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "File Notice of Departure"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Accept Ticket"

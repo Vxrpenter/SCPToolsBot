@@ -19,6 +19,8 @@ data class Translation(
     val support: TranslationSupport,
     @SerialName("APPLICATION")
     val application: TranslationApplication,
+    @SerialName("VERIFY")
+    val verify: TranslationVerify,
     @SerialName("NOTICE_OF_DEPARTURE")
     val noticeOfDeparture: TranslationNoticeOfDeparture,
     @SerialName("REGULARS")
@@ -526,6 +528,14 @@ data class TranslationApplication(
 )
 
 @Serializable
+data class TranslationVerify(
+    @SerialName("EMBED_TEMPLATE_TITLE")
+    val embedTemplateTitle: String,
+    @SerialName("EMBED_TEMPLATE_BODY")
+    val embedTemplateBody: String
+)
+
+@Serializable
 data class TranslationNoticeOfDeparture(
     @SerialName("EMBED_TEMPLATE_TITLE")
     val embedTemplateTitle: String,
@@ -743,6 +753,13 @@ data class TranslationButtons(
     val textApplicationDeactivate: String,
     @SerialName("TEXT_APPLICATION_OPEN_TICKET")
     val textApplicationOpenTickets: String,
+
+    @SerialName("TEXT_VERIFY_VERIFY")
+    val textVerifyVerify: String,
+    @SerialName("TEXT_VERIFY_SHOW_DATA")
+    val textVerifyShowData: String,
+    @SerialName("TEXT_VERIFY_DELETE")
+    val textVerifyDelete: String,
 
     @SerialName("TEXT_NOTICE_OF_DEPARTURE_FILE")
     val textNoticeOfDepartureFile: String,
