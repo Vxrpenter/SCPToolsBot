@@ -35,6 +35,11 @@
           "log_action": true
         },
         {
+          "id": "section:VERIFY_COMMAND",
+          "engage": true,
+          "log_action": true
+        },
+        {
           "id": "section:NOTICE_OF_DEPARTURE_COMMAND",
           "engage": true,
           "log_action": true

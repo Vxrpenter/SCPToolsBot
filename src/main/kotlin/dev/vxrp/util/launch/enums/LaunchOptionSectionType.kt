@@ -3,6 +3,7 @@ package dev.vxrp.util.launch.enums
 enum class LaunchOptionSectionType {
     HELP_COMMAND,
     TEMPLATE_COMMAND,
+    VERIFY_COMMAND,
     NOTICE_OF_DEPARTURE_COMMAND,
     REGULARS_COMMAND,
     PLAYER_COMMAND,
