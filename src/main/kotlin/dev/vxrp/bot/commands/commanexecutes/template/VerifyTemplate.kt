@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button
 class VerifyTemplate(val config: Config, val translation: Translation) {
     fun pasteTemplate(event: SlashCommandInteractionEvent) {
         val embed = Embed {
+            thumbnail = event.guild?.iconUrl
             title = ColorTool().useCustomColorCodes(translation.verify.embedTemplateTitle)
             description = ColorTool().useCustomColorCodes(translation.verify.embedTemplateBody)
         }
