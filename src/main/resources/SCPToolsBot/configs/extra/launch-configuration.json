@@ -109,6 +109,11 @@
           "log_action": true
         },
         {
+          "id": "section:VERIFY_BUTTONS",
+          "engage": true,
+          "log_action": true
+        },
+        {
           "id": "section:NOTICE_OF_DEPARTURE_BUTTONS",
           "engage": true,
           "log_action": true
