@@ -13,6 +13,7 @@ class VerifyMessageHandler(val api: JDA, val config: Config, val translation: Tr
 
     fun sendVerificationMessage(username: String) {
         val embed = Embed {
+            color = 0x2ECC70
             title = ColorTool().useCustomColorCodes(translation.verify.embedLogVerifiedTitle
                 .replace("%name%", username))
             description = ColorTool().useCustomColorCodes(translation.verify.embedLogVerifiedBody)
@@ -27,6 +28,7 @@ class VerifyMessageHandler(val api: JDA, val config: Config, val translation: Tr
 
     fun sendDeletionMessage(username: String) {
         val embed = Embed {
+            color = 0xE74D3C
             title = ColorTool().useCustomColorCodes(translation.verify.embedLogDeletedTitle
                 .replace("%name%", username))
             description = ColorTool().useCustomColorCodes(translation.verify.embedLogDeletedBody)
