@@ -9,6 +9,7 @@ import dev.vxrp.util.launch.data.LaunchArguments
 import dev.vxrp.util.launch.data.LaunchConfigurationOrder
 import dev.vxrp.util.launch.enums.LaunchOptionSectionType
 import dev.vxrp.util.launch.enums.LaunchOptionType
+import dev.vxrp.web.WebServerManager
 import org.slf4j.LoggerFactory
 
 class LaunchOptionManager(val config: Config, val translation: Translation) {
@@ -42,6 +43,8 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
             val statusManager = StatusManager(botManager.mainApi!!, config, translation, timer, "SCPToolsBot/configs/status-settings.yml")
             statusManager.initialize(botManager.mainCommandManager!!)
         }
+
+        if (config.settings.webserver.active) WebServerManager(botManager.mainApi!!, config, translation)
     }
 
     fun checkSectionOption(type: LaunchOptionType, sectionType: LaunchOptionSectionType): LaunchArguments {
