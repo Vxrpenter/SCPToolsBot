@@ -571,6 +571,9 @@ VERIFY:
                         
                         _You can delete this data whenever you want to. Just go to the verification panel and click on the 'Delete Data' button._"
 
+  EMBED_NO_DATA_TITLE: "No Data"
+  EMBED_NO_DATA_BODY: "Could not find any verification data associated with your profile. Please verify before requesting your data."
+
   EMBED_LOG_VERIFIED_TITLE: "User Verified - %name%"
   EMBED_LOG_VERIFIED_BODY: "This user has been verified successfully. Their data has been retrieved from the OAuth Api and written to the database."
 
