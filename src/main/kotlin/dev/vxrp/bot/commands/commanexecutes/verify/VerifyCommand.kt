@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button
 class VerifyCommand(val config: Config, val translation: Translation) {
     fun pasteVerifyMenu(event: SlashCommandInteractionEvent) {
         val embed = Embed {
+            thumbnail = event.guild?.iconUrl
             title = ColorTool().useCustomColorCodes(translation.verify.embedTemplateTitle)
             description = ColorTool().useCustomColorCodes(translation.verify.embedTemplateBody)
         }
@@ -19,6 +20,6 @@ class VerifyCommand(val config: Config, val translation: Translation) {
             Button.link(config.settings.verify.oauthLink, translation.buttons.textVerifyVerify),
             Button.secondary("verify_show_data", translation.buttons.textVerifyShowData),
             Button.danger("verify_delete", translation.buttons.textVerifyDelete)
-        ).queue()
+        ).setEphemeral(true).queue()
     }
 }
