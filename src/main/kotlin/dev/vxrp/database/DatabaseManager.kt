@@ -62,6 +62,7 @@ class DatabaseManager(val config: Config, folder: String, val file: String) {
             SchemaUtils.create(ApplicationTypeTable.ApplicationTypes)
             SchemaUtils.create(ApplicationTable.Applications)
             SchemaUtils.create(MessageTable.Messages)
+            SchemaUtils.create(UserTable.Users)
         }
     }
 
