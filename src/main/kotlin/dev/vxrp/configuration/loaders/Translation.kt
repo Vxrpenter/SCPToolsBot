@@ -532,7 +532,22 @@ data class TranslationVerify(
     @SerialName("EMBED_TEMPLATE_TITLE")
     val embedTemplateTitle: String,
     @SerialName("EMBED_TEMPLATE_BODY")
-    val embedTemplateBody: String
+    val embedTemplateBody: String,
+
+    @SerialName("EMBED_LOG_VERIFIED_TITLE")
+    val embedLogVerifiedTitle: String,
+    @SerialName("EMBED_LOG_VERIFIED_BODY")
+    val embedLogVerifiedBody: String,
+
+    @SerialName("EMBED_LOG_DELETED_TITLE")
+    val embedLogDeletedTitle: String,
+    @SerialName("EMBED_LOG_DELETED_BODY")
+    val embedLogDeletedBody: String,
+
+    @SerialName("EMBED_DELETION_SENT_TITLE")
+    val embedDeletionSentTitle: String,
+    @SerialName("EMBED_DELETION_SENT_BODY")
+    val embedDeletionSentBody: String,
 )
 
 @Serializable

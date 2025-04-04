@@ -560,6 +560,15 @@ VERIFY:
 
                         **WIR ERHALTEN KEINE** Informationen wie: **E-Mails**, **Passwörter**, **Authentifizierungscodes** etc. Wir geben deine Daten nicht weiter und verwenden sie auch nicht für Monetarisierung oder Werbung."
 
+  EMBED_LOG_VERIFIED_TITLE: "Nutzer Verifiziert - %name%"
+  EMBED_LOG_VERIFIED_BODY: "Dieser Benutzer wurde erfolgreich verifiziert. Seine Daten wurden von der OAuth Api abgerufen und in die Datenbank geschrieben."
+
+  EMBED_LOG_DELETED_TITLE: "Nutzer Gelöscht - %name%"
+  EMBED_LOG_DELETED_BODY: "Die Daten dieses Benutzers wurden nach der Anforderung ihrer Löschung über das Verifizierungspanel erfolgreich aus der Datenbank gelöscht."
+
+  EMBED_DELETION_SENT_TITLE: "Löschen Gesendet"
+  EMBED_DELETION_SENT_BODY: "Deine Löschungsanfrage wurde erhalten und wird in wenigen Sekunden bearbeitet. Du kannst jederzeit erneut verifizieren, wenn du die damit verbundenen Funktionen wieder nutzen möchten."
+
 NOTICE_OF_DEPARTURE:
 
   EMBED_TEMPLATE_TITLE: "Abmeldungsformular"
