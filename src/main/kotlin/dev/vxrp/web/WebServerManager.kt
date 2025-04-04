@@ -33,11 +33,15 @@ class WebServerManager(val api: JDA, val config: Config, val translation: Transl
         embeddedServer(Netty, config.settings.webserver.port) {
             routing {
                 get(config.settings.webserver.redirectUri) {
-                    call.respondText("Waiting for redirect...")
+                    call.respondText("You were verified successfully, you can close this webpage now.")
                     val authorizationCode = call.request.queryParameters["code"]
 
                     if (authorizationCode != null) {
-                        val tokenResponse = Discord().getAccessToken(clientId = api.selfUser.id, clientSecret = config.settings.clientSecret, authorizationCode, "${config.settings.webserver.uri}:${config.settings.webserver.port}${config.settings.webserver.redirectUri}")
+                        val tokenResponse = Discord().getAccessToken(
+                            clientId = api.selfUser.id,
+                            clientSecret = config.settings.clientSecret,
+                            authorizationCode =  authorizationCode,
+                            uri = "${config.settings.webserver.uri}:${config.settings.webserver.port}${config.settings.webserver.redirectUri}")
                         val user = Discord().getUser(tokenResponse)
                         val connections = Discord().getConnections(tokenResponse)
 
