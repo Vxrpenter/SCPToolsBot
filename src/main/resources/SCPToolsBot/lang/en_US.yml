@@ -559,6 +559,15 @@ VERIFY:
                       
                         **WE DO NOT** receive any information such as: **E-Mails**, **Passwords**, **Authentication Codes** etc. We do not distribute your information nor use it to monetize or advertise to you."
 
+  EMBED_LOG_VERIFIED_TITLE: "User Verified - %name%"
+  EMBED_LOG_VERIFIED_BODY: "This user has been verified successfully. Their data has been retrieved from the OAuth Api and written to the database."
+
+  EMBED_LOG_DELETED_TITLE: "User Deleted - %name%"
+  EMBED_LOG_DELETED_BODY: "The data of this user has been deleted from the database successfully after requesting it's deletion through the verify panel."
+
+  EMBED_DELETION_SENT_TITLE: "Deletion Sent"
+  EMBED_DELETION_SENT_BODY: "Your deletion request has been received and will be processed in a few seconds. You can re-verify any time you want if you want to use the features working with it again."
+
 NOTICE_OF_DEPARTURE:
   EMBED_TEMPLATE_TITLE: "Notice of Departure Form"
   EMBED_TEMPLATE_BODY: "
@@ -616,10 +625,10 @@ NOTICE_OF_DEPARTURE:
   MODAL_REASON_ACTION_REASON_TITLE: "Reason"
   MODAL_REASON_ACTION_REASON_PLACEHOLDER: "What is the reason for your action?"
 
-  EMBED_ACCEPTATION_SENT_TITLE: "Acceptance Send"
+  EMBED_ACCEPTATION_SENT_TITLE: "Acceptance Sent"
   EMBED_ACCEPTATION_SENT_BODY: "The accepted notice will now be processed and the user will be notified of you accepting the notice as well as the reason for accepting it"
 
-  EMBED_DISMISSING_SENT_TITLE: "Dismissing Send"
+  EMBED_DISMISSING_SENT_TITLE: "Dismissing Sent"
   EMBED_DISMISSING_SENT_BODY: "The dismissed notice will now be processed and the user will be notified of you dismissing the notice as well as the reason for dismissing it"
 
   EMBED_NOTICE_TITLE: "Notice of Departure - #%number%"
