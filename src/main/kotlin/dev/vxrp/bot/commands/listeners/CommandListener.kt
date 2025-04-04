@@ -7,6 +7,7 @@ import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
 import dev.vxrp.bot.commands.commanexecutes.player.PlayerCommand
 import dev.vxrp.bot.commands.commanexecutes.settings.SettingsCommand
 import dev.vxrp.bot.commands.commanexecutes.template.TemplateCommand
+import dev.vxrp.bot.commands.commanexecutes.verify.VerifyCommand
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.launch.LaunchOptionManager
@@ -48,6 +49,11 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
             "commands.template.default" -> {
                 if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.TEMPLATE_COMMAND).engage) templateCommand(event)
+                return true
+            }
+
+            "commands.verify.default" -> {
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.VERIFY_COMMAND).engage) verifyCommand(event)
                 return true
             }
 
@@ -97,6 +103,10 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
     private fun templateCommand(event: SlashCommandInteractionEvent) {
         TemplateCommand(config, translation).findOption(event)
+    }
+
+    private fun verifyCommand(event: SlashCommandInteractionEvent) {
+        VerifyCommand(config, translation).pasteVerifyMenu(event)
     }
 
     private fun noticeOfDepartureCommand(event: SlashCommandInteractionEvent) {
