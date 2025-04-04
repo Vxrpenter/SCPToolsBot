@@ -562,13 +562,13 @@ VERIFY:
 
   EMBED_DATA_TITLE: "Nutzer Daten"
   EMBED_DATA_BODY: "
-                        Dies sind alle Daten, die wir derzeit über dich haben. Beachte, dass der von Discord erhaltene Refresh Token hier nicht angezeigt wird.
+                        Dies sind alle Daten, die wir derzeit über dich haben. Beachte, dass der von Discord erhaltene Refresh Token hier nicht angezeigt wird.\n
 
-                        **Aktuell verifiziert?:** %verified%
+                        **Aktuell verifiziert?:** %verified%\n
                         
-                        **Verlinkter Steam-Account**: %steamId%
+                        **Verlinkter Steam-Account**: %steamId%\n
                         
-                        **Verifizierungszeitpunkt:** %timestamp%
+                        **Verifizierungszeitpunkt:** %timestamp%\n
                         
                         _Du kannst diese Daten jederzeit löschen. Gehe einfach zum Verifizierungspanel und klicke auf die Schaltfläche 'Daten Löschen'._"
 
