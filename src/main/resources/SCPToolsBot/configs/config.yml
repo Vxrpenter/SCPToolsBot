@@ -44,6 +44,16 @@ database:
   # Here you have to enter the password of your db session
   custom_password: ""
 
+webserver:
+  # Should the webserver be launched? This feature is only used for regulars
+  active: false
+  # The port under which the webserver will be launched
+  port: 80
+  # What uri to start the webserver under
+  redirect_uri: "/auth/discord/redirect"
+  # Where should the redirect be, include full url!
+  uri: ""
+
 cedmod:
   # This activates the CedMod Api integration. This feature is only used for the following functions, only activate if you have these features in use: Regulars
   # CedMod Api is only available to users who request access from the CedMod team, ask on their discord for more information - https://discord.gg/p69SGfwxxm
