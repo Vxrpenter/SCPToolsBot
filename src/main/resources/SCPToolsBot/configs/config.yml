@@ -64,9 +64,15 @@ cedmod:
   api_key: ""
 
 # ** WARNING ** For this setting to work, you need to activate the webserver.
-#The webserver is generally just a redirect to receive data from the discord OAuth Api so it
+#The webserver is generally just a redirect to receive data from the discord OAuth Api, so it
 # should not interrupt any other web stuff running on your server.
 verify:
+  # This link can be obtained from the oauth section on the discord developer portal. First, enter the redirect you entered in the webserver section exactly
+  # as described here: <uri>:<port><redirect_uri>, e.g. http://localhost:80/auth/discord/redirect. After entering the redirect, click on save to proceed with the
+  # setup. You now have to scroll down to the 'OAuth2 URL Generator' where you need to click on 2 options, 'identify' and 'connections', after that scroll down
+  # and select your redirect for the redirect url. Now you can copy the generated url into your clipboard. Paste it in here.
+  oauth_link: ""
+  # Which channel should verify logs be sent to?
   verify_log_channel: ""
 
 notice_of_departure:

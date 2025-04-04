@@ -73,6 +73,8 @@ data class ConfigCedmod(
 
 @Serializable
 data class ConfigVerify(
+    @SerialName("oauth_link")
+    val oauthLink: String,
     @SerialName("verify_log_channel")
     val verifyLogChannel: String
 )
