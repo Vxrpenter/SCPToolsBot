@@ -9,12 +9,12 @@ class TemplateCommand(val config: Config, val translations:Translation) {
         val option = event.getOption("template")?.asString
 
         when (option) {
-            "rules" -> {
-                RulesTemplate()
-            }
-
             "support" -> {
                 SupportTemplate(config, translations).pasteTemplate(event)
+            }
+
+            "verify" -> {
+                VerifyTemplate(config, translations).pasteTemplate(event)
             }
 
             "notice_of_departure" -> {
