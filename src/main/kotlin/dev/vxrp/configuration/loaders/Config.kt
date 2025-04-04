@@ -32,6 +32,7 @@ data class Settings(
     val database: ConfigDatabase,
     val webserver: ConfigWebserver,
     val cedmod: ConfigCedmod,
+    val verify: ConfigVerify,
     @SerialName("notice_of_departure")
     val noticeOfDeparture: ConfigNoticeOfDeparture,
     val regulars: ConfigRegulars
@@ -68,6 +69,12 @@ data class ConfigCedmod(
     val instance: String,
     @SerialName("api_key")
     val api: String,
+)
+
+@Serializable
+data class ConfigVerify(
+    @SerialName("verify_log_channel")
+    val verifyLogChannel: String
 )
 
 @Serializable

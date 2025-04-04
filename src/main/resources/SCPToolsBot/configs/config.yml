@@ -63,6 +63,12 @@ cedmod:
   # Put the plain API key here
   api_key: ""
 
+# ** WARNING ** For this setting to work, you need to activate the webserver.
+#The webserver is generally just a redirect to receive data from the discord OAuth Api so it
+# should not interrupt any other web stuff running on your server.
+verify:
+  verify_log_channel: ""
+
 notice_of_departure:
   # Which channel should the form be sent to, to be accepted by moderators?
   decision_channel_id: ""
