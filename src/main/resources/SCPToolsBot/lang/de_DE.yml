@@ -551,6 +551,15 @@ APPLICATION:
   MODAL_CHOOSE_COUNT_NUMBER_TITLE: "Nummer"
   MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER: "Wie viele Plätze sollten die Kandidaten haben?"
 
+VERIFY:
+  EMBED_TEMPLATE_TITLE: "Verifizierung - Steam und Discord Link"
+  EMBED_TEMPLATE_BODY: "
+                        Um bestimmte Funktionen dieses Bots nutzen zu können, musst du dich verifizieren. Das bedeutet, dass du uns die folgenden Informationen zur Verfügung stellen musst:\n
+                        - Identification\n
+                        - Account connections\n
+
+                        **WIR ERHALTEN KEINE** Informationen wie: **E-Mails**, **Passwörter**, **Authentifizierungscodes** etc. Wir geben deine Daten nicht weiter und verwenden sie auch nicht für Monetarisierung oder Werbung."
+
 NOTICE_OF_DEPARTURE:
 
   EMBED_TEMPLATE_TITLE: "Abmeldungsformular"
@@ -876,6 +885,10 @@ BUTTONS:
   TEXT_APPLICATION_ACTIVATION_COMPLETE_SETUP: "Einrichtung abschließen"
   TEXT_APPLICATION_DEACTIVATE: "Deactivate Applications"
   TEXT_APPLICATION_OPEN_TICKET: "Bewerbung Öffnen"
+
+  TEXT_VERIFY_VERIFY: "Verifizieren"
+  TEXT_VERIFY_SHOW_DATA: "Daten Anzeigen"
+  TEXT_VERIFY_DELETE: "Daten Löschen"
 
   TEXT_NOTICE_OF_DEPARTURE_FILE: "Abmeldung anfragen"
   TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Ticket annehmen"
