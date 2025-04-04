@@ -572,6 +572,9 @@ VERIFY:
                         
                         _Du kannst diese Daten jederzeit löschen. Gehe einfach zum Verifizierungspanel und klicke auf die Schaltfläche 'Daten Löschen'._"
 
+  EMBED_NO_DATA_TITLE: "Keine Daten"
+  EMBED_NO_DATA_BODY: "Es wurden keine Verifizierungsdaten zu deine, Profil gefunden. Bitte verifiziere dein Profil, bevor du deine Daten anforderst."
+
   EMBED_LOG_VERIFIED_TITLE: "Nutzer Verifiziert - %name%"
   EMBED_LOG_VERIFIED_BODY: "Dieser Benutzer wurde erfolgreich verifiziert. Seine Daten wurden von der OAuth Api abgerufen und in die Datenbank geschrieben."
 
