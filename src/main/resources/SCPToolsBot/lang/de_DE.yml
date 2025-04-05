@@ -690,7 +690,8 @@ REGULARS:
   EMBED_TEMPLATE_BODY: "
                         Diese Funktion ermöglicht es dir, deine Server-Spielzeit mit dem Server zu synchronisieren und dir Rollen für bestimmte Zeitrahmen zu geben
                         "
-  EMBED_TEMPLATE_GROUP: "   
+
+  EMBED_TEMPLATE_GROUP_BODY: "   
                         # %group%\n
                         Beschreibung: %description%\n
                         
@@ -698,12 +699,14 @@ REGULARS:
                         &filler&
                         %roles%
                         "
-  EMBED_TEMPLATE_ROLE: "   
+
+  EMBED_TEMPLATE_ROLE_BODY: "   
                         Rolle: %role%\n
                         Beschreibung: %description%\n
                         Zeitrahmen: %timeframe%\n
                         
                         "
+
   EMBED_SETTINGS_TITLE: "Persönliche Stammspieler Einstellungen"
   EMBED_SETTINGS_BODY: "   
                         Dies sind deine persönlichen Stammspieler Einstellungen. Nur du kannst diese Nachricht sehen und die Einstellungen ändern\n

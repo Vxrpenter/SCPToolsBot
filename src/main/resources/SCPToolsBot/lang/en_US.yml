@@ -689,7 +689,8 @@ REGULARS:
   EMBED_TEMPLATE_BODY: "
                         This feature allows you to sync your server playtime with the server and to give you roles for reaching certain timeframes
                         "
-  EMBED_TEMPLATE_GROUP: "   
+
+  EMBED_TEMPLATE_GROUP_BODY: "   
                         # %group%\n
                         Description: %description%\n
                         
@@ -697,12 +698,14 @@ REGULARS:
                         &filler&
                         %roles%
                         "
-  EMBED_TEMPLATE_ROLE: "   
+
+  EMBED_TEMPLATE_ROLE_BODY: "   
                         Role: %role%\n
                         Description: %description%\n
                         TimeFrame: %timeframe%\n
                         
                         "
+
   EMBED_SETTINGS_TITLE: "Personal Regular Settings"
   EMBED_SETTINGS_BODY: "   
                         These are your personal regular settings. Only you are able to see this message and to change the settings\n
