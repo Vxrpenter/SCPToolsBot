@@ -2,6 +2,7 @@ package dev.vxrp.util
 
 import dev.vxrp.bot.BotManager
 import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureManager
+import dev.vxrp.bot.regulars.RegularsManager
 import dev.vxrp.bot.status.StatusManager
 import dev.vxrp.web.WebServerManager
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -15,6 +16,11 @@ val statusbotScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
 val noticeOfDepartureScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
     LoggerFactory.getLogger(NoticeOfDepartureManager::class.java)
         .error("An error occurred in the notice of departure coroutine", exception)
+})
+
+val regularsScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
+    LoggerFactory.getLogger(RegularsManager::class.java)
+        .error("An error occurred in the regulars coroutine", exception)
 })
 
 val webServerScope = CoroutineScope(CoroutineExceptionHandler {_, exception ->
