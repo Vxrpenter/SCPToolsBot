@@ -9,6 +9,7 @@ import dev.vxrp.bot.events.EntitySelectListener
 import dev.vxrp.bot.events.ModalListener
 import dev.vxrp.bot.events.StringSelectListener
 import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureManager
+import dev.vxrp.bot.regulars.RegularsManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.util.Timer
@@ -35,7 +36,9 @@ class BotManager(val config: Config, val translation: Translation) {
             } ?: ActivityType.valueOf(config.settings.activityType), config.settings.activityContent))
         }
 
+
         val launchOptionManager = LaunchOptionManager(config, translation)
+        val regularsManager = RegularsManager(config, translation)
 
         if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_LISTENER).engage) api.addEventListener(CommandListener(api, config, translation))
         if (launchOptionManager.checkLaunchOption(LaunchOptionType.BUTTON_LISTENER).engage) api.addEventListener(ButtonListener(api, config, translation))
