@@ -691,30 +691,6 @@ data class TranslationRegulars(
 )
 
 @Serializable
-data class TranslationLogging(
-    @SerialName("EMBED_TEMPLATE_SINGLE_MESSAGE_LOG")
-    val embedTemplateSingleMessageLog: String,
-    @SerialName("EMBED_TEMPLATE_CREATE_LOG")
-    val embedTemplateCreateLog: String,
-    @SerialName("EMBED_TEMPLATE_CLOSE_LOG")
-    val embedTemplateCloseLog: String,
-    @SerialName("EMBED_TEMPLATE_DATABASE_LOG")
-    val embedTemplateDatabaseLog: String,
-    @SerialName("COMPONENT_ACTION_SUPPORT_MESSAGE")
-    val componentActionSupportMessage: String,
-    @SerialName("COMPONENT_ACTION_TICKET_CREATE")
-    val componentActionTicketCreate: String,
-    @SerialName("COMPONENT_ACTION_SUPPORT_TICKET_CLOSE")
-    val componentActionSupportTicketClose: String,
-    @SerialName("COMPONENT_ACTION_NOTICE_OF_DEPARTURE_CREATE")
-    val componentActionNoticeOfDepartureCreate: String,
-    @SerialName("COMPONENT_ACTION_NOTICE_OF_DEPARTURE_DISMISS")
-    val componentActionNoticeOfDepartureDismiss: String,
-    @SerialName("COMPONENT_ACTION_NOTICE_OF_DEPARTURE_CLOSE")
-    val componentActionNoticeOfDepartureClose: String
-)
-
-@Serializable
 data class TranslationStatusBars(
     @SerialName("EMBED_TICKET_STATUS")
     val embedTicketStatus: String,
