@@ -3,7 +3,6 @@ package dev.vxrp.api.sla.scplist
 import dev.vxrp.api.sla.scplist.data.ScpListServers
 import dev.vxrp.api.sla.scplist.data.Server
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
