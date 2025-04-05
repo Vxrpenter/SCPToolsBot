@@ -28,14 +28,14 @@ class RegularsFileHandler(config: Config, translation: Translation) {
         if (!configFile.exists()) {
             configFile.createNewFile()
 
-            val content = RegularsManager::class.java.getResourceAsStream("/SCPToolsBot/regulars/example/config.json")
+            val content = RegularsFileHandler::class.java.getResourceAsStream("/SCPToolsBot/regulars/example/config.json")
             configFile.appendBytes(content!!.readBytes())
         }
 
         if (!manifestFile.exists()) {
             manifestFile.createNewFile()
 
-            val content = RegularsManager::class.java.getResourceAsStream("/SCPToolsBot/regulars/example/manifest.json")
+            val content = RegularsFileHandler::class.java.getResourceAsStream("/SCPToolsBot/regulars/example/manifest.json")
             manifestFile.appendBytes(content!!.readBytes())
         }
     }
