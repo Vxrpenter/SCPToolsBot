@@ -9,7 +9,8 @@ class RegularsTable {
     object Regulars : Table("regulars") {
         val id = text("id")
         val active = bool("active").default(true)
-        val groupRoleId = text("group_id")
+        val group = text("group")
+        val groupRoleId = text("group_id").nullable()
         val roleId = text("role_id")
         val playtime = double("playtime")
         val lastCheckedDate = text("last_checked_date")
@@ -18,7 +19,7 @@ class RegularsTable {
             get() = PrimaryKey(id)
     }
 
-    fun addToDatabase(userId: String, activeRegular: Boolean, groupRoleIdentification: String, roleIdentification: String, time: Double, lastChecked: String) {
+    fun addToDatabase(userId: String, activeRegular: Boolean, groupRoleIdentification: String?, roleIdentification: String, time: Double, lastChecked: String) {
         if (!exists(userId)) return
 
         transaction {
@@ -54,11 +55,25 @@ class RegularsTable {
             Regulars.selectAll()
                 .where { Regulars.id eq userId }
                 .forEach {
-                    group = it[Regulars.groupRoleId]
+                    group = it[Regulars.group]
                 }
         }
 
         return group!!
+    }
+
+    fun getGroupRole(userId: String): String {
+        var groupRole: String? = null
+
+        transaction {
+            Regulars.selectAll()
+                .where { Regulars.id eq userId }
+                .forEach {
+                    groupRole = it[Regulars.groupRoleId]
+                }
+        }
+
+        return groupRole!!
     }
 
     fun getRole(userId: String): String {
