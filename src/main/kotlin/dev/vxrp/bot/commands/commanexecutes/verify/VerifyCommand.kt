@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button
 
 class VerifyCommand(val config: Config, val translation: Translation) {
     fun pasteVerifyMenu(event: SlashCommandInteractionEvent) {
-        if (!config.settings.cedmod.active || !config.settings.webserver.active) {
+        if (!config.settings.webserver.active) {
             val embed = Embed {
                 color = 0xE74D3C
                 title = "Could not send Panel"
