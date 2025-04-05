@@ -56,7 +56,6 @@ class DatabaseManager(val config: Config, folder: String, val file: String) {
             SchemaUtils.create(TicketTable.Tickets)
             SchemaUtils.create(NoticeOfDepartureTable.NoticeOfDepartures)
             SchemaUtils.create(RegularsTable.Regulars)
-            SchemaUtils.create(ActionQueueTable.ActionQueue)
             SchemaUtils.create(StatusTable.Status)
             SchemaUtils.create(ConnectionTable.Connections)
             SchemaUtils.create(ApplicationTypeTable.ApplicationTypes)
