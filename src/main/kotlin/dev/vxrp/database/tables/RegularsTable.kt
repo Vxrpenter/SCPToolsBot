@@ -19,13 +19,14 @@ class RegularsTable {
             get() = PrimaryKey(id)
     }
 
-    fun addToDatabase(userId: String, activeRegular: Boolean, groupRoleIdentification: String?, roleIdentification: String, time: Double, lastChecked: String) {
+    fun addToDatabase(userId: String, activeRegular: Boolean, roleGroup: String, groupRoleIdentification: String?, roleIdentification: String, time: Double, lastChecked: String) {
         if (!exists(userId)) return
 
         transaction {
             Regulars.insert {
                 it[id] = userId
                 it[active] = activeRegular
+                it[group] = roleGroup
                 it[groupRoleId] = groupRoleIdentification
                 it[roleId] = roleIdentification
                 it[lastCheckedDate] = lastChecked
