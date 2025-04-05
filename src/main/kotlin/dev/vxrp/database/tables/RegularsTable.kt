@@ -99,20 +99,6 @@ class RegularsTable {
         return active!!
     }
 
-    fun getGroup(userId: String): String {
-        var group: String? = null
-
-        transaction {
-            Regulars.selectAll()
-                .where { Regulars.id eq userId }
-                .forEach {
-                    group = it[Regulars.group]
-                }
-        }
-
-        return group!!
-    }
-
     fun getGroupRole(userId: String): String {
         var groupRole: String? = null
 

@@ -10,6 +10,17 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button
 
 class VerifyCommand(val config: Config, val translation: Translation) {
     fun pasteVerifyMenu(event: SlashCommandInteractionEvent) {
+        if (!config.settings.cedmod.active || !config.settings.webserver.active) {
+            val embed = Embed {
+                color = 0xE74D3C
+                title = "Could not send Panel"
+                description = "This panel is deactivated as long as the bot hoster has deactivated certain configurations. Ask them to activate them to use this command."
+            }
+
+            event.reply_("", listOf(embed)).queue()
+            return
+        }
+
         val embed = Embed {
             thumbnail = event.guild?.iconUrl
             title = ColorTool().useCustomColorCodes(translation.verify.embedTemplateTitle)
