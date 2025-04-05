@@ -9,19 +9,19 @@ class RegularsManager(val config: Config, val translation: Translation) {
         RegularsFileHandler(config, translation)
     }
 
-    fun syncRegulars() {
+    fun syncRegulars(userId: String) {
 
     }
 
-    fun reactivateSync() {
+    fun reactivateSync(userId: String) {
 
     }
 
-    fun deactivateSync() {
+    fun deactivateSync(userId: String) {
 
     }
 
-    fun removeSync() {
+    fun removeSync(userId: String) {
 
     }
 }
