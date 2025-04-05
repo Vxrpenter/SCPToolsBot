@@ -41,7 +41,7 @@ class RegularsTable {
         }
     }
 
-    fun getAllEntry(): List<RegularDatabaseEntry> {
+    fun getAllEntrys(): List<RegularDatabaseEntry> {
         val list = mutableListOf<RegularDatabaseEntry>()
 
         transaction {
