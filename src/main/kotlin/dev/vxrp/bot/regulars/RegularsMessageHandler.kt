@@ -22,7 +22,7 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
         }
         embeds.add(embed)
 
-        val regulars = RegularsManager(config, translation).query()
+        val regulars = RegularsFileHandler(config, translation).query()
         for (regular in regulars) {
             val stringBuilder: StringBuilder = StringBuilder()
 
