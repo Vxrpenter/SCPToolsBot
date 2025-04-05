@@ -13,8 +13,13 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
     fun sendRegulars(channel: TextChannel) {
         val embeds = mutableListOf<MessageEmbed>()
 
-        val regulars = RegularsManager(config, translation).query()
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.regulars.embedTemplateTitle)
+            description = ColorTool().useCustomColorCodes(translation.regulars.embedTemplateBody)
+        }
+        embeds.add(embed)
 
+        val regulars = RegularsManager(config, translation).query()
         for (regular in regulars) {
             val stringBuilder: StringBuilder = StringBuilder()
 
@@ -27,6 +32,7 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
 
             val groupEmbed = Embed {
                 description = ColorTool().useCustomColorCodes(translation.regulars.embedTemplateGroupBody
+                    .replace("%group%", regular.manifest.name)
                     .replace("%description%", regular.manifest.description)
                     .replace("%group_role%", "<@&${regular.manifest.customRole.id}>")
                     .replace("%roles%", stringBuilder.toString()))
