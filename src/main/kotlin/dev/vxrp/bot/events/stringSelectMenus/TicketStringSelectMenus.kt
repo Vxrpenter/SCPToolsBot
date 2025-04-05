@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.interactions.components.selections.EntitySelectMenu
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 
 class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val config: Config, val translation: Translation) {
-    init {
+    fun init() {
         val supportTemplateModals = SupportTemplateModals(translation)
 
         if (event.selectMenu.id?.startsWith("ticket") == true) {
