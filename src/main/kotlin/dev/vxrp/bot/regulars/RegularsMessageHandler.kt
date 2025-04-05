@@ -55,7 +55,7 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
         var playtime = "0"
 
         if (RegularsTable().exists(user.id)) {
-            groupRole = "<@&${RegularsTable().getGroup(user.id).replace("null", "None")}>"
+            groupRole = "<@&${RegularsTable().getGroupRole(user.id).replace("null", "None")}>"
             role = "<@&${RegularsTable().getRole(user.id).replace("null", "None")}>"
             playtime = "<@&${RegularsTable().getPlaytime(user.id).roundToInt()}>"
         }
