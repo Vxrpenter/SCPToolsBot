@@ -6,6 +6,8 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 
 class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {
     fun init() {
+        if (event.button.id?.startsWith("regulars_open_settings") == true) {
 
+        }
     }
 }
