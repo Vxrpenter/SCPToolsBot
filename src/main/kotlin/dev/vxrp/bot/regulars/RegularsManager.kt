@@ -79,7 +79,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
             val steamId = UserTable().getSteamId(regular.id)
 
             if (regular.playtime == 0.0) {
-                val player = cedmod.playerQuery(q = steamId, activityMin = 365, basicStats = true)
+                val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = 365, basicStats = true)
 
                 RegularsTable().setPlaytime(regular.id, player.players[0].activity)
                 RegularsTable().setLastCheckedDate(regular.id, currentDate.toString())
@@ -92,7 +92,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
             val activityMin = lastCheckedDate.until(currentDate).days
             if (activityMin == 0) return
 
-            val player = cedmod.playerQuery(q = steamId, activityMin = activityMin, basicStats = true)
+            val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = activityMin, basicStats = true)
             val currentPlaytime = RegularsTable().getPlaytime(regular.id)
 
             val newPlaytime = currentPlaytime+player.players[0].activity
