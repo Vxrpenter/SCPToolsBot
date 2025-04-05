@@ -642,20 +642,25 @@ data class TranslationRegulars(
     val embedTemplateTitle: String,
     @SerialName("EMBED_TEMPLATE_BODY")
     val embedTemplateBody: String,
-    @SerialName("EMBED_TEMPLATE_GROUP")
+
+    @SerialName("EMBED_TEMPLATE_GROUP_BODY")
     val embedTemplateGroup: String,
-    @SerialName("EMBED_TEMPLATE_ROLE")
+
+    @SerialName("EMBED_TEMPLATE_ROLE_BODY")
     val embedTemplateRole: String,
+
     @SerialName("EMBED_SETTINGS_TITLE")
     val embedSettingsTitle: String,
     @SerialName("EMBED_SETTINGS_BODY")
     val embedSettingsBody: String,
+
     @SerialName("MODAL_DATA_TITLE")
     val modalDataTitle: String,
     @SerialName("MODAL_DATA_STEAMID_TITLE")
     val modalDataSteamIdTitle: String,
     @SerialName("MODAL_DATA_STEAMID_PLACEHOLDER")
     val modalDataSteamIdPlaceholder: String,
+
     @SerialName("MESSAGE_SYNC_GROUP_SELECT")
     val messageSyncGroupSelect: String,
     @SerialName("MESSAGE_SYNC_SELECT")
