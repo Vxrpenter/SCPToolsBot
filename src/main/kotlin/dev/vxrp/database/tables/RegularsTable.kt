@@ -19,7 +19,7 @@ class RegularsTable {
     }
 
     fun addToDatabase(userId: String, activeRegular: Boolean, roleGroup: String, groupRoleIdentification: String?, roleIdentification: String, time: Double, lastChecked: String) {
-        if (!exists(userId)) return
+        if (exists(userId)) return
 
         transaction {
             Regulars.insert {
