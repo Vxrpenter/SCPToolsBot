@@ -1,7 +1,5 @@
 package dev.vxrp.bot.events.buttons
 
-import dev.minn.jda.ktx.interactions.components.SelectOption
-import dev.minn.jda.ktx.interactions.components.StringSelectMenu
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.regulars.RegularsFileHandler
