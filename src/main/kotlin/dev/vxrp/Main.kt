@@ -1,6 +1,7 @@
 package dev.vxrp
 
 import dev.vxrp.api.github.Github
+import dev.vxrp.bot.regulars.RegularsManager
 import dev.vxrp.configuration.ConfigurationManager
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
