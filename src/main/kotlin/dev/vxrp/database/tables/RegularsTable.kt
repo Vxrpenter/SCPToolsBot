@@ -1,8 +1,7 @@
 package dev.vxrp.database.tables
 
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class RegularsTable {
@@ -31,6 +30,14 @@ class RegularsTable {
                 it[roleId] = roleIdentification
                 it[lastCheckedDate] = lastChecked
                 it[playtime] = time
+            }
+        }
+    }
+
+    fun setActive(userId: String, value: Boolean) {
+        transaction {
+            Regulars.update({ Regulars.id eq userId }) {
+                it[active] = value
             }
         }
     }
@@ -103,6 +110,12 @@ class RegularsTable {
         }
 
         return playtime!!
+    }
+
+    fun delete(userId: String) {
+        transaction {
+            Regulars.deleteWhere { id eq userId }
+        }
     }
 
     fun exists(id: String): Boolean {
