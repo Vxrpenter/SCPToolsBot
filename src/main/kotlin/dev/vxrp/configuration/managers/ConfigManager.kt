@@ -7,6 +7,7 @@ import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Settings
 import dev.vxrp.database.tables.ApplicationTypeTable
 import dev.vxrp.util.launch.data.LaunchConfiguration
+import kotlinx.serialization.json.Json
 import org.slf4j.LoggerFactory
 import java.nio.file.Files
 import java.nio.file.Path
@@ -43,7 +44,7 @@ class ConfigManager {
         val statusFile = statusLocation.toFile()
         val ticketFile = ticketLocation.toFile()
 
-        val launchConfiguration = Yaml.default.decodeFromString(LaunchConfiguration.serializer(), launchConfigurationFile.readText())
+        val launchConfiguration = Json.decodeFromString(LaunchConfiguration.serializer(), launchConfigurationFile.readText())
         val settings = Yaml.default.decodeFromString(Settings.serializer(), configFile.readText())
         val status = Yaml.default.decodeFromString(Status.serializer(), statusFile.readText())
         val ticket = Yaml.default.decodeFromString(Ticket.serializer(), ticketFile.readText())
