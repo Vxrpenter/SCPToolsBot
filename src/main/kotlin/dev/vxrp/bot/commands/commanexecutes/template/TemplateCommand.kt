@@ -21,8 +21,8 @@ class TemplateCommand(val config: Config, val translations:Translation) {
                 NoticeOfDepartureTemplate(config, translations).pasteTemplate(event)
             }
 
-            "SCPToolsBot/regulars" -> {
-                RegularsTemplate()
+            "regulars" -> {
+                RegularsTemplate(config, translations).pasteTemplate()
             }
         }
     }
