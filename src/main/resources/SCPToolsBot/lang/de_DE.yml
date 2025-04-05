@@ -718,6 +718,14 @@ REGULARS:
                         Zeit: **%time%h**\n
                         "
 
+  EMBED_NOT_VERIFIED_TITLE: "Nicht Verifiziert"
+  EMBED_NOT_VERIFIED_BODY: "
+                        Du bist noch nicht verifiziert. Wenn du deine Stammspieler Rollen synchronisieren möchten, musst du dich verifizieren. So kannst du sich verifizieren:\n
+
+                        **1.** Falls es einen Verifizierungskanal gibt, gehe dorthin und verifizieren dich.\n
+                        
+                        **2.** Verwende den Befehl `/verify`, um das Verifizierungspanel aufzurufen, und folge dann den dort beschriebenen Schritten."
+
   EMBED_SYNC_GROUP_SELECT_TITLE: "Gruppe Auswählen"
   EMBED_SYNC_GROUP_SELECT_BODY: "Wähle eine gruppe um mit dem Stammspieler Prozess fortzufahren. Diese Stammspieler Rolle wird unter der Gruppenrolle basiert."
 

@@ -718,6 +718,14 @@ REGULARS:
                         Time: **%time%h**
                         "
 
+  EMBED_NOT_VERIFIED_TITLE: "Not Verified"
+  EMBED_NOT_VERIFIED_BODY: "
+                        You have be not verified. If you want to sync up your playtime roles you are required to verify. This is how you can verify:\n
+
+                        **1.** If there is a verification channel, head there and verify yourself\n
+
+                        **2.** Use the `/verify` command to prompt the verify panel, then follow the steps described there"
+
   EMBED_SYNC_GROUP_SELECT_TITLE: "Choose Group"
   EMBED_SYNC_GROUP_SELECT_BODY: "Choose a group to continue with the regular process. This is the group your role will be based under."
 

@@ -659,6 +659,11 @@ data class TranslationRegulars(
     @SerialName("EMBED_SYNC_GROUP_SELECT_BODY")
     val embedSyncGroupSelectBody: String,
 
+    @SerialName("EMBED_NOT_VERIFIED_TITLE")
+    val embedNotVerifiedTitle: String,
+    @SerialName("EMBED_NOT_VERIFIED_BODY")
+    val embedNotVerifiedBody: String,
+
     @SerialName("EMBED_SYNC_SENT_TITLE")
     val embedSyncSentTitle: String,
     @SerialName("EMBED_SYNC_SENT_BODY")
