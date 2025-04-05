@@ -33,7 +33,7 @@ class RegularsTable {
         }
     }
 
-    fun getActive(userId: String): Boolean? {
+    fun getActive(userId: String): Boolean {
         var active: Boolean? = null
 
         transaction {
@@ -44,10 +44,10 @@ class RegularsTable {
                 }
         }
 
-        return active
+        return active!!
     }
 
-    fun getGroup(userId: String): String? {
+    fun getGroup(userId: String): String {
         var group: String? = null
 
         transaction {
@@ -58,10 +58,10 @@ class RegularsTable {
                 }
         }
 
-        return group
+        return group!!
     }
 
-    fun getRole(userId: String): String? {
+    fun getRole(userId: String): String {
         var role: String? = null
 
         transaction {
@@ -72,10 +72,10 @@ class RegularsTable {
                 }
         }
 
-        return role
+        return role!!
     }
 
-    fun getPlaytime(userId: String): Double? {
+    fun getPlaytime(userId: String): Double {
         var playtime: Double? = null
 
         transaction {
@@ -86,7 +86,7 @@ class RegularsTable {
                 }
         }
 
-        return playtime
+        return playtime!!
     }
 
     fun exists(id: String): Boolean {
