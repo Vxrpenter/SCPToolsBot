@@ -25,8 +25,6 @@ data class Translation(
     val noticeOfDeparture: TranslationNoticeOfDeparture,
     @SerialName("REGULARS")
     val regulars: TranslationRegulars,
-    @SerialName("LOGGING")
-    val logging: TranslationLogging,
     @SerialName("STATUS_BARS")
     val statusBars: TranslationStatusBars,
     @SerialName("BUTTONS")
