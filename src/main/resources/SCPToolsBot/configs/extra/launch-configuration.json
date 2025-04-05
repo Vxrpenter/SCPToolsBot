@@ -173,6 +173,11 @@
           "id": "section:APPLICATION_STRING_SELECT_MENUS",
           "engage": true,
           "log_action": true
+        },
+        {
+          "id": "section:REGULARS_STRING_SELECT_MENUS",
+          "engage": true,
+          "log_action": true
         }
       ]
     },

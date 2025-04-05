@@ -7,7 +7,7 @@ import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent
 
 class ApplicationStringSelectMenus(val event: StringSelectInteractionEvent, val config: Config, val translation: Translation) {
-    init {
+    fun init() {
         if (event.selectMenu.id?.startsWith("application_activation_add") == true) {
             event.replyModal(ApplicationTemplateModals(translation).chooseCountModal(event.selectedOptions[0].value, event.selectMenu.id?.split(":")?.get(2)!!)).queue()
         }
