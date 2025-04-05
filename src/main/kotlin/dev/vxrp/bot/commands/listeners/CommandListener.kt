@@ -4,7 +4,6 @@ import dev.minn.jda.ktx.events.listener
 import dev.vxrp.bot.commands.CommandManager
 import dev.vxrp.bot.commands.commanexecutes.application.ApplicationCommand
 import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
-import dev.vxrp.bot.commands.commanexecutes.player.PlayerCommand
 import dev.vxrp.bot.commands.commanexecutes.settings.SettingsCommand
 import dev.vxrp.bot.commands.commanexecutes.template.TemplateCommand
 import dev.vxrp.bot.commands.commanexecutes.verify.VerifyCommand
@@ -67,11 +66,6 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                 return true
             }
 
-            "commands.player.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.PLAYER_COMMAND).engage) playerCommand(event)
-                return true
-            }
-
             "commands.settings.default" -> {
                 if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.SETTINGS_COMMAND).engage) settingsCommand(event)
                 return true
@@ -115,22 +109,6 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
     private fun regularsCommand(event: SlashCommandInteractionEvent) {
 
-    }
-
-    private fun playerCommand(event: SlashCommandInteractionEvent) {
-        val playerCommand = PlayerCommand(config, translation)
-
-        when (event.getOption("type")?.asString) {
-            "statistics"  -> playerCommand.pastePlayerInformation(event)
-
-            "moderation" -> playerCommand.pasteModerationMenu(event)
-
-            "appeals" -> playerCommand.pasteAppealsMenu(event)
-
-            "ticket" -> playerCommand.pasteTicketManagementMenu(event)
-
-            null -> playerCommand.pastePlayerInformation(event)
-        }
     }
 
     private fun settingsCommand(event: SlashCommandInteractionEvent) {

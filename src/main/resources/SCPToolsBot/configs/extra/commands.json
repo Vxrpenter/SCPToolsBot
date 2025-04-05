@@ -63,51 +63,6 @@
     },
     {
       "active": true,
-      "inherit": "commands.player.default",
-      "name": "player",
-      "description": "A command for querying data bout a user",
-      "default_permissions": ["VOICE_MOVE_OTHERS"],
-      "options": [
-        {
-          "type": "USER",
-          "name": "user",
-          "description": "The user to query from",
-          "isRequired": true
-        },
-        {
-          "type": "INTEGER",
-          "name": "timeframe",
-          "description": "Specify timeframe to search data in",
-          "isRequired": true
-        },
-        {
-          "type": "STRING",
-          "name": "type",
-          "description": "Specify the info type",
-          "isRequired": false,
-          "choices": [
-            {
-              "name": "statistics",
-              "id": "stats"
-            },
-            {
-              "name": "moderation",
-              "id": "mod"
-            },
-            {
-              "name": "appeals",
-              "id": "appeals"
-            },
-            {
-              "name": "ticket",
-              "id": "ticket"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "active": true,
       "inherit": "commands.settings.default",
       "name": "settings",
       "description": "Bot settings/configurations",
