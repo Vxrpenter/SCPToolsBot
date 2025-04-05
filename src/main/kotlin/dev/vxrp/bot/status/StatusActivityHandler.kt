@@ -10,8 +10,8 @@ import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
 import org.slf4j.LoggerFactory
 
-class ActivityHandler(val translation: Translation, val config: Config) {
-    private val logger = LoggerFactory.getLogger(ActivityHandler::class.java)
+class StatusActivityHandler(val translation: Translation, val config: Config) {
+    private val logger = LoggerFactory.getLogger(StatusActivityHandler::class.java)
 
     fun updateStatus(api: JDA, server: Server, instance: Instance) {
         logger.debug("Updating status of bot: ${api.selfUser.name} (${api.selfUser.id}) for server - ${server.port}")
