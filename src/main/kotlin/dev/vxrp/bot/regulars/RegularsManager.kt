@@ -9,7 +9,7 @@ class RegularsManager(val config: Config, val translation: Translation) {
         RegularsFileHandler(config, translation)
     }
 
-    fun syncRegulars(userId: String) {
+    fun syncRegulars(userId: String, group: String) {
 
     }
 
