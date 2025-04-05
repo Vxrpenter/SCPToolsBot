@@ -1,11 +1,19 @@
 package dev.vxrp.bot.regulars
+import dev.vxrp.api.sla.cedmod.Cedmod
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.RegularsTable
+import dev.vxrp.database.tables.UserTable
+import dev.vxrp.util.Timer
+import dev.vxrp.util.regularsScope
+import kotlinx.coroutines.delay
+import org.slf4j.LoggerFactory
 import java.time.LocalDate
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.seconds
 
 class RegularsManager(val config: Config, val translation: Translation) {
-
+    private val logger = LoggerFactory.getLogger(RegularsManager::class.java)
 
     init {
         RegularsFileHandler(config, translation)
@@ -42,5 +50,53 @@ class RegularsManager(val config: Config, val translation: Translation) {
 
     fun removeSync(userId: String) {
         RegularsTable().delete(userId)
+    }
+
+    fun spinUpChecker() {
+        if (!config.settings.cedmod.active) return
+
+        Timer().runWithTimer(2.hours, regularsScope) { checkerTask() }
+    }
+
+    private suspend fun checkerTask() {
+        logger.info("Starting regulars checker, processing units starting...")
+
+        val currentDate = LocalDate.now()
+
+        for (regular in RegularsTable().getAllEntrys()) {
+            val lastCheckedDate = LocalDate.parse(regular.lastCheckedDate)
+            if (lastCheckedDate == currentDate) continue
+
+            if (!UserTable().exists(regular.id)) {
+                RegularsTable().delete(regular.id)
+                logger.warn("Could not retrieve user: ${regular.id}'s verification data, deleting their regular data because of it being invalid")
+                continue
+            }
+
+            val cedmod = Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api)
+            val steamId = UserTable().getSteamId(regular.id)
+
+            if (regular.playtime == 0.0) {
+                val player = cedmod.playerQuery(q = steamId, activityMin = 365, basicStats = true)
+
+                RegularsTable().setPlaytime(regular.id, player.players[0].activity)
+                RegularsTable().setLastCheckedDate(regular.id, currentDate.toString())
+                logger.info("Updated user: ${regular.id}'s regular data for the first time, new playtime: ${player.players[0].activity}")
+            }
+
+            val activityMin = lastCheckedDate.until(currentDate).days
+            if (activityMin == 0) return
+
+            val player = cedmod.playerQuery(q = steamId, activityMin = activityMin, basicStats = true)
+            val currentPlaytime = RegularsTable().getPlaytime(regular.id)
+
+            val newPlaytime = currentPlaytime+player.players[0].activity
+
+            RegularsTable().setPlaytime(regular.id, newPlaytime)
+            RegularsTable().setLastCheckedDate(regular.id, currentDate.toString())
+            logger.info("Updated user: ${regular.id}'s regular data by adding: ${player.players[0].activity} to their already existing playtime of: $currentPlaytime")
+
+            delay(10.seconds)
+        }
     }
 }
