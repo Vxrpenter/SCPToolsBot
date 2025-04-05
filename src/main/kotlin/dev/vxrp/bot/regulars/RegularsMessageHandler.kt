@@ -8,6 +8,7 @@ import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
+import net.dv8tion.jda.api.interactions.components.buttons.Button
 
 class RegularsMessageHandler(val api: JDA, val config: Config, val translation: Translation) {
     fun sendRegulars(channel: TextChannel) {
@@ -41,6 +42,8 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
             embeds.add(groupEmbed)
         }
 
-        channel.send("", embeds).queue()
+        channel.send("", embeds).addActionRow(
+            Button.success("regulars_sync", translation.buttons.textRegularSync)
+        ).queue()
     }
 }
