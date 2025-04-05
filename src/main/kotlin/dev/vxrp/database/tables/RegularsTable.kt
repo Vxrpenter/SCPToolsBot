@@ -106,7 +106,7 @@ class RegularsTable {
             Regulars.selectAll()
                 .where { Regulars.id eq userId }
                 .forEach {
-                    groupRole = it[Regulars.groupRoleId]
+                    groupRole = it[groupRoleId]
                 }
         }
 
@@ -120,7 +120,7 @@ class RegularsTable {
             Regulars.selectAll()
                 .where { Regulars.id eq userId }
                 .forEach {
-                    role = it[Regulars.roleId]
+                    role = it[roleId]
                 }
         }
 
