@@ -718,10 +718,6 @@ REGULARS:
                         Time: **%time%h**
                         "
 
-  MODAL_DATA_TITLE: "Enter SteamId and Cedmod Username"
-  MODAL_DATA_STEAMID_TITLE: "SteamId"
-  MODAL_DATA_STEAMID_PLACEHOLDER: "What is your steamId?"
-
   EMBED_SYNC_GROUP_SELECT_TITLE: "Choose Group"
   EMBED_SYNC_GROUP_SELECT_BODY: "Choose a group to continue with the regular process. This is the group your role will be based under."
 

@@ -654,13 +654,6 @@ data class TranslationRegulars(
     @SerialName("EMBED_SETTINGS_BODY")
     val embedSettingsBody: String,
 
-    @SerialName("MODAL_DATA_TITLE")
-    val modalDataTitle: String,
-    @SerialName("MODAL_DATA_STEAMID_TITLE")
-    val modalDataSteamIdTitle: String,
-    @SerialName("MODAL_DATA_STEAMID_PLACEHOLDER")
-    val modalDataSteamIdPlaceholder: String,
-
     @SerialName("EMBED_SYNC_GROUP_SELECT_TITLE")
     val embedSyncGroupSelectTitle: String,
     @SerialName("EMBED_SYNC_GROUP_SELECT_BODY")
@@ -690,19 +683,6 @@ data class TranslationRegulars(
     val embedSyncRemovedMessageTitle: String,
     @SerialName("EMBED_SYNC_REMOVED_MESSAGE_BODY")
     val embedSyncRemovedMessageBody: String,
-
-    @SerialName("MESSAGE_SYNC_GROUP_SELECT")
-    val messageSyncGroupSelect: String,
-    @SerialName("MESSAGE_SYNC_SELECT")
-    val messageSyncSelect: String,
-    @SerialName("MESSAGE_SYNC_DEACTIVATED")
-    val messageSyncDeactivated: String,
-    @SerialName("MESSAGE_SYNC_REACTIVATED")
-    val messageSyncReactivated: String,
-    @SerialName("MESSAGE_SYNC_REMOVED_CONFIRM")
-    val messageSyncRemovedConfirm: String,
-    @SerialName("MESSAGE_SYNC_REMOVED_MESSAGE")
-    val messageSyncRemovedMessage: String
 )
 
 @Serializable
