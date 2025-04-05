@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionE
 class RegularsStringSelectMenus(val event: StringSelectInteractionEvent, val config: Config, val translation: Translation) {
     fun init() {
         if (event.selectMenu.id?.startsWith("regulars_group_select") == true) {
+
             RegularsManager(config, translation).syncRegulars(event.user.id, event.selectedOptions[0].value)
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncSentTitle)
