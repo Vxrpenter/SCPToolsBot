@@ -6,7 +6,7 @@ import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 
 class HelpButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {
-    init {
+    fun init() {
         if (event.button.id?.startsWith("help_first_page") == true) {
             event.deferEdit().queue {
                 event.channel.editMessageEmbedsById(event.messageId, HelpCommand(translation).pages().first())

@@ -16,7 +16,7 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
         api.listener<ButtonInteractionEvent> { event ->
             val launchOptionManager = LaunchOptionManager(config, translation)
 
-            if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.HELP_BUTTONS).engage) HelpButtons(event, config, translation)
+            if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.HELP_BUTTONS).engage) HelpButtons(event, config, translation).init()
 
             if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.TICKET_BUTTONS).engage) TicketButtons(event, config, translation).init()
 
@@ -25,6 +25,8 @@ class ButtonListener(val api: JDA, val config: Config, val translation: Translat
             if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.VERIFY_BUTTONS).engage) VerifyButtons(event, config, translation).init()
 
             if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.NOTICE_OF_DEPARTURE_BUTTONS).engage) NoticeOfDepartureButtons(event, config, translation).init()
+
+            if (launchOptionManager.checkSectionOption(LaunchOptionType.BUTTON_LISTENER, LaunchOptionSectionType.REGULARS_BUTTONS).engage) RegularsButtons(event, config, translation).init()
         }
     }
 }
