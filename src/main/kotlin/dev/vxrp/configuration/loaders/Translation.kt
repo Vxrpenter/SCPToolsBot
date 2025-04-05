@@ -644,10 +644,10 @@ data class TranslationRegulars(
     val embedTemplateBody: String,
 
     @SerialName("EMBED_TEMPLATE_GROUP_BODY")
-    val embedTemplateGroup: String,
+    val embedTemplateGroupBody: String,
 
     @SerialName("EMBED_TEMPLATE_ROLE_BODY")
-    val embedTemplateRole: String,
+    val embedTemplateRoleBody: String,
 
     @SerialName("EMBED_SETTINGS_TITLE")
     val embedSettingsTitle: String,
