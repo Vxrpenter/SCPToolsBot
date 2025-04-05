@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 
 class ApplicationCommand(val config: Config, val translation: Translation) {
     fun sendActivationMessage(event: SlashCommandInteractionEvent) {
-        val valuePair = ApplicationMessageHandler(config, translation).getActivationMenu(event.user.id, event.channel.asTextChannel())
+        val valuePair = ApplicationMessageHandler(config, translation).getActivationMenu(event.user.id)
         event.reply_("", listOf(valuePair.first)).addActionRow(
             valuePair.second
         ).queue()

@@ -13,8 +13,6 @@ import java.nio.file.Path
 import kotlin.io.path.Path
 
 class ConfigurationManager {
-    private val logger = LoggerFactory.getLogger(ConfigurationManager::class.java)
-
     private val configManager = ConfigManager()
     private val translationManager = TranslationManager()
 
