@@ -718,10 +718,6 @@ REGULARS:
                         Zeit: **%time%h**\n
                         "
 
-  MODAL_DATA_TITLE: "Gib deine SteamId und deinen Cedmod Username"
-  MODAL_DATA_STEAMID_TITLE: "SteamId"
-  MODAL_DATA_STEAMID_PLACEHOLDER: "Was ist deine steamId?"
-
   EMBED_SYNC_GROUP_SELECT_TITLE: "Gruppe Auswählen"
   EMBED_SYNC_GROUP_SELECT_BODY: "Wähle eine gruppe um mit dem Stammspieler Prozess fortzufahren. Diese Stammspieler Rolle wird unter der Gruppenrolle basiert."
 
@@ -936,9 +932,9 @@ BUTTONS:
 
   TEXT_REGULAR_OPEN_SETTINGS: "Einstellungen öffnen"
   TEXT_REGULAR_SYNC: "Stammspieler Synchronisieren"
-  TEXT_REGULAR_SYNC_DEACTIVATE: "Synchronisierung deaktivieren"
-  TEXT_REGULAR_SYNC_REACTIVATE: "Synchronisierung aktivieren"
-  TEXT_REGULAR_SYNC_REMOVE: "Synchronisierung entfernen"
+  TEXT_REGULAR_SYNC_DEACTIVATE: "Deaktivieren"
+  TEXT_REGULAR_SYNC_REACTIVATE: "Reaktivieren"
+  TEXT_REGULAR_SYNC_REMOVE: "Entfernen"
 
 SELECT_MENUS:
   TEXT_SUPPORT_NAME_GENERAL: "Generelles Ticket"
