@@ -1,10 +1,12 @@
 
 package dev.vxrp.web
 
+import dev.minn.jda.ktx.coroutines.await
 import dev.vxrp.api.discord.Discord
 import dev.vxrp.api.discord.enums.DiscordConnection
 import dev.vxrp.api.discord.enums.DiscordTokenResponse
 import dev.vxrp.api.discord.enums.DiscordUser
+import dev.vxrp.bot.verify.VerifyMessageHandler
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.UserTable
@@ -58,6 +60,8 @@ class WebServerManager(val api: JDA, val config: Config, val translation: Transl
 
             logger.info("Received connection data and refresh token from user: ${user.id}")
             UserTable().addToDatabase(user.id, LocalDate.now().toString(), connection.id, tokenResponse.refreshToken)
+
+            VerifyMessageHandler(api, config, translation).sendVerificationMessage(user.username)
         }
     }
 }

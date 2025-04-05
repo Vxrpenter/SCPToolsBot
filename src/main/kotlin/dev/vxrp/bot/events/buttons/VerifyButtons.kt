@@ -2,6 +2,7 @@ package dev.vxrp.bot.events.buttons
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
+import dev.vxrp.bot.verify.VerifyMessageHandler
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.tables.UserTable
@@ -51,6 +52,7 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            VerifyMessageHandler(event.jda, config, translation).sendDeletionMessage(event.user.name)
         }
     }
 }
