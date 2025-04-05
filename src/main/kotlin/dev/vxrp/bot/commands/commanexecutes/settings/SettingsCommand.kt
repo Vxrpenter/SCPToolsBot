@@ -86,7 +86,7 @@ class SettingsCommand(val config: Config, val translation: Translation) {
                             Github().checkForUpdatesByTag(
                                 "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags",
                                 false
-                            ).toString()
+                            )
                         ).trimIndent()
                 )
             }

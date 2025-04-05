@@ -21,11 +21,12 @@ import net.dv8tion.jda.api.interactions.modals.ModalMapping
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.time.Instant
 
 class TicketMessageHandler(val api: JDA, val config: Config, val translation: Translation) {
-    val logger = LoggerFactory.getLogger(TicketMessageHandler::class.java)
+    val logger: Logger = LoggerFactory.getLogger(TicketMessageHandler::class.java)
 
     suspend fun sendMessage(type: TicketType, channel: ThreadChannel, userId: String, modalId: String, modalValues: MutableList<ModalMapping>): Message {
         when(type) {

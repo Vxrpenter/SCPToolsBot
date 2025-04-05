@@ -61,7 +61,7 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
                 return
             }
 
-            ApplicationTable().addToDatabase(child?.id.toString(), roleId, false, false, event.user.id, null)
+            ApplicationTable().addToDatabase(child?.id.toString(), roleId, state =false, result = false, event.user.id, null)
             respond(child, event)
         }
     }

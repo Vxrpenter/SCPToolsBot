@@ -4,7 +4,7 @@ import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 
-class TemplateCommand(val config: Config, val translations:Translation) {
+class TemplateCommand(val config: Config, private val translations:Translation) {
     fun findOption(event: SlashCommandInteractionEvent) {
         val option = event.getOption("template")?.asString
 

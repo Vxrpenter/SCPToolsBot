@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory
 class ApplicationMessageHandler(val config: Config, val translation: Translation) {
     private val logger: Logger = LoggerFactory.getLogger(ApplicationManager::class.java)
 
-    fun getActivationMenu(userId: String, channel: TextChannel): Pair<MessageEmbed, Collection<ItemComponent>> {
+    fun getActivationMenu(userId: String): Pair<MessageEmbed, Collection<ItemComponent>> {
         val embed = createMessage(userId, true)
 
         return Pair(embed, applicationActionRow(userId, null))

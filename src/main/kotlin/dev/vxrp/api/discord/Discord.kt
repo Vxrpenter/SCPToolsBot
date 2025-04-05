@@ -14,7 +14,7 @@ import kotlinx.serialization.json.Json
 import org.slf4j.LoggerFactory
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation as ClientContentNegotiation
 
-class Discord() {
+class Discord {
     private val logger = LoggerFactory.getLogger(Discord::class.java)
 
     private val json = Json {
