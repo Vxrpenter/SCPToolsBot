@@ -685,9 +685,9 @@ data class TranslationRegulars(
     val embedSyncRemovedConfirmBody: String,
 
     @SerialName("EMBED_SYNC_REMOVED_MESSAGE_TITLE")
-    val embedSyncRemovedMessageTitle: String,
+    val embedSyncRemovedTitle: String,
     @SerialName("EMBED_SYNC_REMOVED_MESSAGE_BODY")
-    val embedSyncRemovedMessageBody: String,
+    val embedSyncRemovedBody: String,
 )
 
 @Serializable
