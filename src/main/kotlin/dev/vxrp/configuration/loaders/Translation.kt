@@ -661,6 +661,36 @@ data class TranslationRegulars(
     @SerialName("MODAL_DATA_STEAMID_PLACEHOLDER")
     val modalDataSteamIdPlaceholder: String,
 
+    @SerialName("EMBED_SYNC_GROUP_SELECT_TITLE")
+    val embedSyncGroupSelectTitle: String,
+    @SerialName("EMBED_SYNC_GROUP_SELECT_BODY")
+    val embedSyncGroupSelectBody: String,
+
+    @SerialName("EMBED_SYNC_SENT_TITLE")
+    val embedSyncSentTitle: String,
+    @SerialName("EMBED_SYNC_SENT_BODY")
+    val embedSyncSentBody: String,
+
+    @SerialName("EMBED_SYNC_DEACTIVATED_TITLE")
+    val embedSyncDeactivatedTitle: String,
+    @SerialName("EMBED_SYNC_DEACTIVATED_BODY")
+    val embedSyncDeactivatedBody: String,
+
+    @SerialName("EMBED_SYNC_REACTIVATED_TITLE")
+    val embedSyncReactivatedTitle: String,
+    @SerialName("EMBED_SYNC_REACTIVATED_BODY")
+    val embedSyncReactivatedBody: String,
+
+    @SerialName("EMBED_SYNC_REMOVED_CONFIRM_TITLE")
+    val embedSyncRemovedConfirmTitle: String,
+    @SerialName("EMBED_SYNC_REMOVED_CONFIRM_BODY")
+    val embedSyncRemovedConfirmBody: String,
+
+    @SerialName("EMBED_SYNC_REMOVED_MESSAGE_TITLE")
+    val embedSyncRemovedMessageTitle: String,
+    @SerialName("EMBED_SYNC_REMOVED_MESSAGE_BODY")
+    val embedSyncRemovedMessageBody: String,
+
     @SerialName("MESSAGE_SYNC_GROUP_SELECT")
     val messageSyncGroupSelect: String,
     @SerialName("MESSAGE_SYNC_SELECT")

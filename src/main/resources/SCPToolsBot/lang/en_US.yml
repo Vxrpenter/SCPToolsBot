@@ -722,12 +722,23 @@ REGULARS:
   MODAL_DATA_STEAMID_TITLE: "SteamId"
   MODAL_DATA_STEAMID_PLACEHOLDER: "What is your steamId?"
 
-  MESSAGE_SYNC_GROUP_SELECT: "Please choose group to continue."
-  MESSAGE_SYNC_SELECT: "Regulars are now automatically synced with your account"
-  MESSAGE_SYNC_DEACTIVATED: "Deactivated regular syncing"
-  MESSAGE_SYNC_REACTIVATED: "Reactivated regular syncing"
-  MESSAGE_SYNC_REMOVED_CONFIRM: "Do you really want to remove syncing and all data with it?"
-  MESSAGE_SYNC_REMOVED_MESSAGE: "Removed you from the regulars database."
+  EMBED_SYNC_GROUP_SELECT_TITLE: "Choose Group"
+  EMBED_SYNC_GROUP_SELECT_BODY: "Choose a group to continue with the regular process. This is the group your role will be based under."
+
+  EMBED_SYNC_SENT_TITLE: "Regulars Synced"
+  EMBED_SYNC_SENT_BODY: "Regulars is now active for your account and will automatically sync playtime roles with your server playtime."
+
+  EMBED_SYNC_DEACTIVATED_TITLE: "Deactivated Sync"
+  EMBED_SYNC_DEACTIVATED_BODY: "Regulars is now deactivated for your account and will no longer automatically sync playtime roles with server playtime."
+
+  EMBED_SYNC_REACTIVATED_TITLE: "Reactivated Sync"
+  EMBED_SYNC_REACTIVATED_BODY: "Regulars is now active for your account and will automatically sync playtime roles with your server playtime."
+
+  EMBED_SYNC_REMOVED_CONFIRM_TITLE: "Confirm Removal"
+  EMBED_SYNC_REMOVED_CONFIRM_BODY: "Please confirm that you want to remove your data from the regulars playtime role syncing database. This will permanently delete all data saved."
+
+  EMBED_SYNC_REMOVED_MESSAGE_TITLE: "Regulars Data Removed"
+  EMBED_SYNC_REMOVED_MESSAGE_BODY: "All regulars data has been removed from the database and regulars has been deactivated. You can re-sync yourself any time."
 
 LOGGING:
 
