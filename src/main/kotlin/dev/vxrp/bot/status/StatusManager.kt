@@ -128,7 +128,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
         if (content != null) {
             mappedPorts = content.second
         }
-        ConnectionHandler(translation, config).postApiConnectionUpdate(globalApi, status, content)
+        StatusConnectionHandler(translation, config).postApiConnectionUpdate(globalApi, status, content)
 
         if (mapped == mappedPorts) {
             nonChangedData = true
@@ -138,7 +138,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
             nonChangedData = false
         }
 
-        if (status.checkPlayerlist) PlayerlistHandler(config, translation).updatePlayerLists(mappedPorts, status.instances, instanceApiMap, mappedStatusConstructor)
+        if (status.checkPlayerlist) StatusPlayerlistHandler(config, translation).updatePlayerLists(mappedPorts, status.instances, instanceApiMap, mappedStatusConstructor)
 
         for (instance in status.instances) {
             val api = instanceApiMap[instance] ?: continue
@@ -172,8 +172,8 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     }
 
     private fun spinUpChecker(api: JDA, server: Server, instance: Instance, info: ServerInfo?) {
-        ActivityHandler(translation, config).updateStatus(api, server, instance)
+        StatusActivityHandler(translation, config).updateStatus(api, server, instance)
 
-        ConnectionHandler(translation, config).postStatusUpdate(server, api, instance, info)
+        StatusConnectionHandler(translation, config).postStatusUpdate(server, api, instance, info)
     }
 }

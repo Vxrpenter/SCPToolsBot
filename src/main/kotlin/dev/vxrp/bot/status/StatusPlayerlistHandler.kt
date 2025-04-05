@@ -22,8 +22,8 @@ import org.jetbrains.exposed.sql.update
 import org.slf4j.LoggerFactory
 import java.time.LocalDate
 
-class PlayerlistHandler(val config: Config, val translation: Translation) {
-    private val logger = LoggerFactory.getLogger(PlayerlistHandler::class.java)
+class StatusPlayerlistHandler(val config: Config, val translation: Translation) {
+    private val logger = LoggerFactory.getLogger(StatusPlayerlistHandler::class.java)
 
     suspend fun updatePlayerLists(ports: MutableMap<Int, Server>, instances: List<Instance>, instanceApiMap: MutableMap<Instance, JDA>, mappedStatusConstructor: MutableMap<Int, StatusConstructor>) {
         for (port in ports) {

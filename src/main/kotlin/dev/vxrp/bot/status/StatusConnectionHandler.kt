@@ -21,8 +21,8 @@ private val reconnectAttempt = hashMapOf<Int, Int>()
 
 private var retryFetchData = 0
 
-class ConnectionHandler(val translation: Translation, val config: Config) {
-    private val logger = LoggerFactory.getLogger(ConnectionHandler::class.java)
+class StatusConnectionHandler(val translation: Translation, val config: Config) {
+    private val logger = LoggerFactory.getLogger(StatusConnectionHandler::class.java)
 
     fun postApiConnectionUpdate(api: JDA, status: Status, content: Pair<ServerInfo?, MutableMap<Int, Server>>?) {
         val apiStatus = ConnectionTable().queryFromTable("api").status == true
