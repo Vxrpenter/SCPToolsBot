@@ -1,4 +1,5 @@
 package dev.vxrp.bot.regulars
+import dev.minn.jda.ktx.coroutines.await
 import dev.vxrp.api.sla.cedmod.Cedmod
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
@@ -7,12 +8,13 @@ import dev.vxrp.database.tables.UserTable
 import dev.vxrp.util.Timer
 import dev.vxrp.util.regularsScope
 import kotlinx.coroutines.delay
+import net.dv8tion.jda.api.JDA
 import org.slf4j.LoggerFactory
 import java.time.LocalDate
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.seconds
 
-class RegularsManager(val config: Config, val translation: Translation) {
+class RegularsManager(val api: JDA, val config: Config, val translation: Translation) {
     private val logger = LoggerFactory.getLogger(RegularsManager::class.java)
 
     init {
@@ -82,6 +84,9 @@ class RegularsManager(val config: Config, val translation: Translation) {
                 RegularsTable().setPlaytime(regular.id, player.players[0].activity)
                 RegularsTable().setLastCheckedDate(regular.id, currentDate.toString())
                 logger.info("Updated user: ${regular.id}'s regular data for the first time, new playtime: ${player.players[0].activity}")
+
+                checkRoles(regular.id, regular.groupRoleId, regular.roleId)
+                return
             }
 
             val activityMin = lastCheckedDate.until(currentDate).days
@@ -96,7 +101,49 @@ class RegularsManager(val config: Config, val translation: Translation) {
             RegularsTable().setLastCheckedDate(regular.id, currentDate.toString())
             logger.info("Updated user: ${regular.id}'s regular data by adding: ${player.players[0].activity} to their already existing playtime of: $currentPlaytime")
 
+            checkRoles(regular.id, regular.groupRoleId, regular.roleId)
             delay(10.seconds)
+        }
+    }
+
+    private suspend fun checkRoles(userId: String, groupRoleId: String?, roleId: String) {
+        val guild = api.getGuildById(config.settings.guildId)!!
+        val member = guild.retrieveMemberById(userId).await()
+
+        member ?: run {
+            logger.error("Could not find user: $userId")
+            return
+        }
+
+        var containGroupRole = false
+        var containsRole = false
+
+        for (role in member.roles) {
+            if (groupRoleId != null && role.id == groupRoleId) containGroupRole = true
+
+            if (role.id == roleId) containsRole = true
+        }
+
+        if (!containGroupRole) {
+            val groupRole = api.getRoleById(groupRoleId!!)
+            groupRole ?: run {
+                logger.error("Could not correctly find group role: $groupRoleId")
+                return
+            }
+
+            guild.addRoleToMember(member, groupRole).queue()
+            logger.info("Updated playtime group role of user: $userId to $groupRole")
+        }
+
+        if (!containsRole) {
+            val role = api.getRoleById(roleId)
+            role ?: run {
+                logger.error("Could not correctly find role: $groupRoleId")
+                return
+            }
+
+            guild.addRoleToMember(member, role).queue()
+            logger.info("Updated playtime role of user: $userId to $roleId")
         }
     }
 }

@@ -12,7 +12,7 @@ class RegularsStringSelectMenus(val event: StringSelectInteractionEvent, val con
     fun init() {
         if (event.selectMenu.id?.startsWith("regulars_group_select") == true) {
 
-            RegularsManager(config, translation).syncRegulars(event.user.id, event.selectedOptions[0].value)
+            RegularsManager(event.jda, config, translation).syncRegulars(event.user.id, event.selectedOptions[0].value)
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncSentTitle)
                 description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncSentBody)

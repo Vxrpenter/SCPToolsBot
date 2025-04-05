@@ -43,7 +43,7 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
         if (event.button.id?.startsWith("regulars_sync_reactivate") == true) {
             if (notVerified()) return
 
-            RegularsManager(config, translation).reactivateSync(event.user.id)
+            RegularsManager(event.jda, config, translation).reactivateSync(event.user.id)
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncReactivatedTitle)
                 description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncReactivatedBody)
@@ -55,7 +55,7 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
         if (event.button.id?.startsWith("regulars_sync_deactivate") == true) {
             if (notVerified()) return
 
-            RegularsManager(config, translation).deactivateSync(event.user.id)
+            RegularsManager(event.jda, config, translation).deactivateSync(event.user.id)
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncDeactivatedTitle)
                 description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncDeactivatedBody)
@@ -80,7 +80,7 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
         if (event.button.id?.startsWith("regulars_sync_remove_confirm") == true) {
             if (notVerified()) return
 
-            RegularsManager(config, translation).removeSync(event.user.id)
+            RegularsManager(event.jda, config, translation).removeSync(event.user.id)
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncRemovedTitle)
                 description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncRemovedBody)

@@ -38,7 +38,7 @@ class BotManager(val config: Config, val translation: Translation) {
 
 
         val launchOptionManager = LaunchOptionManager(config, translation)
-        val regularsManager = RegularsManager(config, translation)
+        val regularsManager = RegularsManager(api, config, translation)
         regularsManager.spinUpChecker()
 
         if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_LISTENER).engage) api.addEventListener(CommandListener(api, config, translation))
