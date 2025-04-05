@@ -22,7 +22,7 @@ class TemplateCommand(val config: Config, val translations:Translation) {
             }
 
             "regulars" -> {
-                RegularsTemplate(config, translations).pasteTemplate()
+                RegularsTemplate(config, translations).pasteTemplate(event)
             }
         }
     }
