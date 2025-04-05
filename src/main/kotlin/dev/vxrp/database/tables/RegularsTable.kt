@@ -69,6 +69,14 @@ class RegularsTable {
         }
     }
 
+    fun setPlaytime(userId: String, time: Double) {
+        transaction {
+            Regulars.update( { Regulars.id eq userId } ) {
+                it[playtime] = time
+            }
+        }
+    }
+
     fun getActive(userId: String): Boolean {
         var active: Boolean? = null
 
