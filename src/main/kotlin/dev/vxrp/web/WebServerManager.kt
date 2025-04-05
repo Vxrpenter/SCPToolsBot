@@ -1,7 +1,6 @@
 
 package dev.vxrp.web
 
-import dev.minn.jda.ktx.coroutines.await
 import dev.vxrp.api.discord.Discord
 import dev.vxrp.api.discord.enums.DiscordConnection
 import dev.vxrp.api.discord.enums.DiscordTokenResponse
