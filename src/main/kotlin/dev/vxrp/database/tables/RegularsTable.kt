@@ -1,5 +1,12 @@
 package dev.vxrp.database.tables
 
+import dev.vxrp.bot.regulars.data.RegularDatabaseEntry
+import dev.vxrp.database.tables.RegularsTable.Regulars.active
+import dev.vxrp.database.tables.RegularsTable.Regulars.group
+import dev.vxrp.database.tables.RegularsTable.Regulars.groupRoleId
+import dev.vxrp.database.tables.RegularsTable.Regulars.lastCheckedDate
+import dev.vxrp.database.tables.RegularsTable.Regulars.playtime
+import dev.vxrp.database.tables.RegularsTable.Regulars.roleId
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -32,6 +39,26 @@ class RegularsTable {
                 it[playtime] = time
             }
         }
+    }
+
+    fun getAllEntry(): List<RegularDatabaseEntry> {
+        val list = mutableListOf<RegularDatabaseEntry>()
+
+        transaction {
+            Regulars.selectAll()
+                .forEach {
+                    list.add(RegularDatabaseEntry(
+                        it[Regulars.id],
+                        it[active],
+                        it[group],
+                        it[groupRoleId],
+                        it[roleId],
+                        it[lastCheckedDate],
+                        it[playtime]))
+                }
+        }
+
+        return list
     }
 
     fun setActive(userId: String, value: Boolean) {
