@@ -77,6 +77,14 @@ class RegularsTable {
         }
     }
 
+    fun setLastCheckedDate(userId: String, timestamp: String) {
+        transaction {
+            Regulars.update( { Regulars.id eq userId } ) {
+                it[lastCheckedDate] = timestamp
+            }
+        }
+    }
+
     fun getActive(userId: String): Boolean {
         var active: Boolean? = null
 
