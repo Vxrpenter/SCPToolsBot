@@ -44,7 +44,7 @@ For more indepth explanation see the [wiki](https://github.com/Vxrpenter/SCPTool
 
 Download the `.jar` from the latest release. Copy it into a folder of your liking and run:
 ```console
-> java -jar <file>
+> java -jar <file.jar>
 ```
 
 For a specific operating system installation guide, check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Installation)
