@@ -708,15 +708,10 @@ REGULARS:
                         "
 
   EMBED_SETTINGS_TITLE: "Persönliche Stammspieler Einstellungen"
-  EMBED_SETTINGS_BODY: "   
-                        Dies sind deine persönlichen Stammspieler Einstellungen. Nur du kannst diese Nachricht sehen und die Einstellungen ändern\n
-
-                        Gruppe: **%group%**\n
-                        
-                        Rolle: **%role%**\n
-                        
-                        Zeit: **%time%h**\n
-                        "
+  EMBED_SETTINGS_BODY: "Dies sind deine persönlichen Stammspieler Einstellungen. Nur du kannst diese Nachricht sehen und die Einstellungen ändern"
+  EMBED_SETTINGS_FIELD_GROUP_NAME: "Gruppe"
+  EMBED_SETTINGS_FIELD_ROLE_NAME: "Rolle"
+  EMBED_SETTINGS_FIELD_PLAYTIME_NAME: "Spielzeit"
 
   EMBED_NOT_VERIFIED_TITLE: "Nicht Verifiziert"
   EMBED_NOT_VERIFIED_BODY: "
