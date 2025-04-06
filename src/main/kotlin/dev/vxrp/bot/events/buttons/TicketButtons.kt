@@ -34,6 +34,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             if(permissionCheck(PermissionType.TICKET, TicketTable().determineTicketType(event.channelId!!))) return
 
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogClaimedTitle
                     .replace("%name%", event.channelId.toString()))
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogClaimedBody)
@@ -50,6 +51,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             }
 
             val embed = Embed {
+                color = 0xE74D3C
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
                     .replace("%name%", event.channelId.toString()))
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogClosedBody)
@@ -87,6 +89,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             }
 
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogOpenedTitle
                     .replace("%name%", event.channelId.toString()))
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogOpenedBody)
@@ -104,6 +107,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             }
 
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogPausedTitle
                     .replace("%name%", event.channelId.toString()))
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogPausedBody)
@@ -121,6 +125,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             }
 
             val embed = Embed {
+                color = 0xE74D3C
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogSuspendedTitle
                     .replace("%name%", event.channelId.toString()))
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogSuspendedBody)
@@ -138,6 +143,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             }
 
             val embed = Embed {
+                color = 0xE74D3C
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
                     .replace("%name%", event.channelId.toString()))
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogClosedBody)
@@ -153,6 +159,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogClaimedTitle
                     .replace("%name%", channelId))
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogClaimedBody)
@@ -171,6 +178,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogOpenedTitle
                     .replace("%name%", channelId))
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogOpenedBody)
@@ -189,6 +197,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogPausedTitle
                     .replace("%name%", channelId))
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogPausedBody)
@@ -207,6 +216,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
+                color = 0xE74D3C
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogSuspendedTitle
                     .replace("%name%", channelId))
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogSuspendedBody)
@@ -225,6 +235,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
+                color = 0xE74D3C
                 title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
                     .replace("%name%", channelId))
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogClosedBody)
