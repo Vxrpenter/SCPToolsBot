@@ -28,6 +28,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 name = user.globalName
                 iconUrl = user.avatarUrl
             }
+            color = 0x2ECC70
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketClaimedTitle
                 .replace("%user%", user.globalName!!))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketClaimedBody
@@ -54,6 +55,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 name = user.globalName
                 iconUrl = user.avatarUrl
             }
+            color = 0x2ECC70
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketOpenedTitle
                 .replace("%user%", user.globalName!!))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketOpenedBody)
@@ -74,6 +76,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 name = user.globalName
                 iconUrl = user.avatarUrl
             }
+            color = 0x2ECC70
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketPausedTitle
                 .replace("%user%", user.globalName!!))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketPausedBody)
@@ -94,6 +97,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 name = user.globalName
                 iconUrl = user.avatarUrl
             }
+            color = 0xE74D3C
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketSuspendedTitle
                 .replace("%user%", user.globalName!!))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketSuspendedBody)
@@ -114,6 +118,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 name = user.globalName
                 iconUrl = user.avatarUrl
             }
+            color = 0xE74D3C
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedTitle
                 .replace("%user%", user.globalName!!))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedBody)
