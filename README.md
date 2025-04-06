@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This branch is not used anymore, look at master for new updates
+
 <div align="center">
   <img src="https://github.com/user-attachments/assets/686226b2-a520-47cc-876e-73fd35f50a06" height="240" width="200" alt="ScpToolsBot" title="ScpToolsBot"/>
 
