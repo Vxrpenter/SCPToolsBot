@@ -23,17 +23,38 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
                 return
             }
 
-            val verified = UserTable().exists(event.user.id)
+            var verified = "${UserTable().exists(event.user.id)}"
+            if (verified == "true") {
+                verified = "🟢 $verified"
+            } else {
+                verified = "🔴 $verified"
+            }
+
             val steamId = UserTable().getSteamId(event.user.id)
             val timestamp = UserTable().getVerifyTime(event.user.id)
 
             val embed = Embed {
                 thumbnail = event.user.avatarUrl
                 title = ColorTool().useCustomColorCodes(translation.verify.embedDataTitle)
-                description = ColorTool().useCustomColorCodes(translation.verify.embedDataBody
-                    .replace("%verified%", verified.toString())
-                    .replace("%steamId%", steamId)
-                    .replace("%timestamp%", timestamp))
+                description = ColorTool().useCustomColorCodes(translation.verify.embedDataBody)
+                field {
+                    inline = true
+                    name = translation.verify.embedDataFieldVerifiedTitle
+                    value = verified.toString()
+                }
+                field {
+                    inline = true
+                    name = translation.verify.embedDataFieldSteamIdTitle
+                    value = steamId
+                }
+                field {
+                    inline = true
+                    name = translation.verify.embedDataFieldTimestampTitle
+                    value = timestamp
+                }
+                field {
+                    value = translation.verify.embedDataFieldDeleteValue
+                }
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
