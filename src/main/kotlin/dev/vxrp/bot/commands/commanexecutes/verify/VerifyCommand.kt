@@ -17,7 +17,7 @@ class VerifyCommand(val config: Config, val translation: Translation) {
                 description = "This panel is deactivated as long as the bot hoster has deactivated certain configurations. Ask them to activate them to use this command."
             }
 
-            event.reply_("", listOf(embed)).queue()
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
             return
         }
 
