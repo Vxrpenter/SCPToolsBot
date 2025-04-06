@@ -52,6 +52,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         val endDate = LocalDate.parse(date, formatter).format(formatter)
 
         val embed = Embed {
+            color = 0x2ECC70
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptedTitle)
             description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptedBody
                 .replace("%current_date%", currentDate)
@@ -65,6 +66,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
 
     suspend fun sendDismissedMessage(reason: String, userId: String) {
         val embed = Embed {
+            color = 0xE74D3C
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissedTitle)
             description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissedBody
                 .replace("%reason%", reason))
@@ -104,6 +106,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
 
     suspend fun sendRevokedMessage(reason: String, userId: String, beginDate: String, endDate: String) {
         val embed = Embed {
+            color = 0xE74D3C
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokedTitle)
             description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokedBody
                 .replace("%current_date%", beginDate)
@@ -117,6 +120,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
 
     suspend fun sendEndedMessage(userId: String, beginDate: String, endDate: String) {
         val embed = Embed {
+            color = 0xE74D3C
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEndedTitle)
             description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEndedBody
                 .replace("%current_date%", beginDate)

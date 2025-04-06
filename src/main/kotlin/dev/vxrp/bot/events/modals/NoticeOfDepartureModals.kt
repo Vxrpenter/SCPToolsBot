@@ -18,6 +18,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             NoticeOfDepartureMessageHandler(event.jda, config, translation).sendDecisionMessage(event.user.id, date, reason)
 
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionSentTitle)
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionSentBody)
             }
@@ -36,6 +37,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             NoticeOfDepartureManager(event.jda, config, translation).createNotice(reason, event.user.id, userId, date)
 
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptationSentTitle)
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptationSentBody)
             }
@@ -53,6 +55,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             NoticeOfDepartureMessageHandler(event.jda, config, translation).sendDismissedMessage(reason, userId)
 
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissingSentTitle)
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissingSentBody)
             }
@@ -71,6 +74,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             NoticeOfDepartureManager(event.jda, config, translation).revokeNotice(reason, userId, date)
 
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokationSentTitle)
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokationSentBody)
             }
