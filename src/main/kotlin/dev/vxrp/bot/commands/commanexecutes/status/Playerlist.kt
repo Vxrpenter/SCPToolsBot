@@ -17,19 +17,21 @@ class Playerlist {
             if (list.isEmpty()) builder.append(translation.status.embedPlayerlistEmpty)
             for (player in list) {
 
-                builder.append(
-                    ColorTool().useCustomColorCodes(
-                        translation.status.embedPlayerlistPlayer
+                builder.append(ColorTool().useCustomColorCodes(translation.status.embedPlayerlistPlayer
                             .replace("%nickname%", player.nickname.toString())
-                            .replace("%id%", player.id.toString())
-                    )
-                )
+                            .replace("%id%", player.id.toString())))
             }
         } else {
             builder.append(ColorTool().useCustomColorCodes(translation.status.embedPlayerlistCouldntFetch).trimIndent())
         }
 
+        var embedColor = 0xE74D3C
+        if (statusConstructor.mappedServers[currentPort]?.online != null) {
+            if (statusConstructor.mappedServers[currentPort]?.online!!) embedColor = 0x2ECC70
+        }
+
         return Embed {
+            color = embedColor
             title = ColorTool().useCustomColorCodes(translation.status.embedPlayerlistTitle).trimIndent()
             description = ColorTool().useCustomColorCodes(
                 translation.status.embedPlayerlistBody
