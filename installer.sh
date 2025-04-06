@@ -116,7 +116,7 @@ esac
 echo ""
 echo "Executing jar-file to generate configuration files..."
 
-java -jar $filename
+sudo java -jar $filename
 
 echo ""
 echo "Bot process has been ended, do you want to do a complete installation with configuration or end it here?"
@@ -162,7 +162,7 @@ function guild() {
 
   read -rp ":: Please repeat id for confirmation: " response
   if [ "$guildResponse" == "$response" ]; then
-    guildId=$guildResponse
+    botGuildId=$guildResponse
   else
     echo "Tokens don't match, please try entering it again"
     token
@@ -337,27 +337,24 @@ confirm
 # Here comes the YAML Parser and the configuration writer stuff
 #
 workingDir=$(pwd)
-config="
-#                                                           ______     ______     ______      ______   ______     ______     __         ______
-#                                                          /\  ___\   /\  ___\   /\  == \    /\__  _\ /\  __ \   /\  __ \   /\ \       /\  ___\
-#                                                          \ \___  \  \ \ \____  \ \  _-/    \/_/\ \/ \ \ \/\ \  \ \ \/\ \  \ \ \____  \ \___  \
-#                                                           \/\_____\  \ \_____\  \ \_\         \ \_\  \ \_____\  \ \_____\  \ \_____\  \/\_____\
+config="#                                                           ______     ______     ______      ______   ______     ______     __         ______
+#                                                          /\  ___\   /\  ___\   /\  == \    /\__  _\ /\  __ \   /\  __ \   /\ \       /\  ___\\
+#                                                          \ \___  \  \ \ \____  \ \  _-/    \/_/\ \/ \ \ \/\ \  \ \ \/\ \  \ \ \____  \ \___  \\
+#                                                           \/\_____\  \ \_____\  \ \_\         \ \_\  \ \_____\  \ \_____\  \ \_____\  \/\_____\\
 #                                                            \/_____/   \/_____/   \/_/          \/_/   \/_____/   \/_____/   \/_____/   \/_____/
 #Copyright (c) 2024 Vxrpenter
 
-
-
 # The token of your bot application, create one here https://discord.com/developers/
-token: $botToken
+token: \"$botToken\"
 # The client secret of your bot, get it from here https://discord.com/developers/ under OAuth section
-client_secret: $botSecret
+client_secret: \"$botSecret\"
 # Your server ID, you can get it by activating discord developer mode and right-clicking your server
-guild_id: $botGuildId
+guild_id: \"$botGuildId\"
 
 # Which language should the bot use?
 #Choose from these supported languages or duplicate one of the translation files and change it yourself
-# available translations: ["en_US", "de_DE"]
-load_translation: $botLanguage
+# available translations: [\"en_US\", \"de_DE\"]
+load_translation: \"$botLanguage\"
 
 # Activates debug logging, which gives you much more information on what the bot is doing.
 debug: false
@@ -366,23 +363,23 @@ debug: false
 advanced_debug: false
 
 # The activity type of the bot, choose from the available list: [COMPETING, CUSTOM_STATUS, LISTENING, PLAYING, WATCHING]
-activity_type: "PLAYING"
+activity_type: \"PLAYING\"
 # The text that is being displayed in the activity
-activity_content: "/help"
+activity_content: \"/help\"
 
 database:
   # Defines which datatype should be used, choose between [NONE, SQLITE]
   # ** WARNING ** if you set this to none, and no other database option is given, the process will crash on startup
-  use_predefined_database_sets: "SQLITE"
+  use_predefined_database_sets: \"SQLITE\"
   # ** WARNING ** When using custom, you may experience issues. This is a work in progress feature, so it is unstable, report problems on the GitHub page
   # Which type of custom db should be used: [SQLITE, MYSQL, POSTGRESQL, MARIADB]
-  custom_type: ""
+  custom_type: \"\"
   # Here you can input a custom database url to connect to. This will only work when the setting is predefined to NONE
-  custom_url: ""
+  custom_url: \"\"
   # Here you've input the custom db password
-  custom_username: ""
+  custom_username: \"\"
   # Here you have to enter the password of your db session
-  custom_password: ""
+  custom_password: \"\"
 
 webserver:
   # Should the webserver be launched? This feature is only used for regulars
@@ -390,28 +387,40 @@ webserver:
   # The port under which the webserver will be launched
   port: $webServerPort
   # What uri to start the webserver under
-  redirect_uri: $webServerRedirectUri
+  redirect_uri: \"$webServerRedirectUri\"
   # Where should the redirect be?
-  uri: $webServerUri
+  uri: \"$webServerUri\"
 
 cedmod:
   # This activates the CedMod Api integration. This feature is only used for the following functions, only activate if you have these features in use: Regulars
   # CedMod Api is only available to users who request access from the CedMod team, ask on their discord for more information - https://discord.gg/p69SGfwxxm
   active: $cedmodActive
   # Include https://
-  instance_url: $cedmodInstanceUrl
+  instance_url: \"$cedmodInstanceUrl\"
   # Put the plain API key here
-  api_key: $cedmodApiKey
+  api_key: \"$cedmodApiKey\"
+
+# ** WARNING ** For this setting to work, you need to activate the webserver.
+#The webserver is generally just a redirect to receive data from the discord OAuth Api, so it
+# should not interrupt any other web stuff running on your server.
+verify:
+  # This link can be obtained from the oauth section on the discord developer portal. First, enter the redirect you entered in the webserver section exactly
+  # as described here: <uri>:<port><redirect_uri>, e.g. http://localhost:80/auth/discord/redirect. After entering the redirect, click on save to proceed with the
+  # setup. You now have to scroll down to the 'OAuth2 URL Generator' where you need to click on 2 options, 'identify' and 'connections', after that scroll down
+  # and select your redirect for the redirect url. Now you can copy the generated url into your clipboard. Paste it in here.
+  oauth_link: \"\"
+  # Which channel should verify logs be sent to?
+  verify_log_channel: \"\"
 
 notice_of_departure:
   # Which channel should the form be sent to be accepted by moderators?
-  decision_channel_id: ""
+  decision_channel_id: \"\"
   # Which channel should the departure timekeeping messages be sent to?
-  notice_channel_id: ""
+  notice_channel_id: \"\"
   # List of role's that are able to accept/dismiss/revoke notices (INPUT ID'S ONLY)
   roles_access_notices: []
   # Put the following in the type: [NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS]
-  check_type: "HOURS"
+  check_type: \"HOURS\"
   # The rate at that the notices are checked.
   check_rate: 1
 
@@ -424,7 +433,7 @@ regulars:
   only_load_folders: []
 "
 
-printf conifig >> "$workingDir/SCPToolsBot/configs/config.yml"
+echo "$config" > "$workingDir/SCPToolsBot/configs/config.yml"
 
 echo ""
 echo "Installation wrapped up, existing..."
