@@ -1,0 +1,96 @@
+#                                                           ______     ______     ______      ______   ______     ______     __         ______
+#                                                          /\  ___\   /\  ___\   /\  == \    /\__  _\ /\  __ \   /\  __ \   /\ \       /\  ___\
+#                                                          \ \___  \  \ \ \____  \ \  _-/    \/_/\ \/ \ \ \/\ \  \ \ \/\ \  \ \ \____  \ \___  \
+#                                                           \/\_____\  \ \_____\  \ \_\         \ \_\  \ \_____\  \ \_____\  \ \_____\  \/\_____\
+#                                                            \/_____/   \/_____/   \/_/          \/_/   \/_____/   \/_____/   \/_____/   \/_____/
+#Copyright (c) 2024 Vxrpenter
+
+
+
+# The token of your bot application, create one here https://discord.com/developers/
+token: ""
+# The client secret of your bot, get it from here https://discord.com/developers/ under OAuth section
+client_secret: ""
+# Your server ID, you can get it by activating discord developer mode and right-clicking your server
+guild_id: ""
+
+# Which language should the bot use?
+#Choose from these supported languages or duplicate one of the translation files and change it yourself
+# available translations: ["en_US", "de_DE"]
+load_translation: "en_US"
+
+# Activates debug logging, which gives you much more information on what the bot is doing.
+debug: false
+# ** Warning ** This feature is not recommended
+#Displays all available information
+advanced_debug: false
+
+# The activity type of the bot, choose from the available list: [COMPETING, CUSTOM_STATUS, LISTENING, PLAYING, WATCHING]
+activity_type: "PLAYING"
+# The text that is being displayed in the activity
+activity_content: "/help"
+
+database:
+  # Defines which datatype should be used, choose between [NONE, SQLITE]
+  # ** WARNING ** if you set this to none, and no other database option is given, the process will crash on startup
+  use_predefined_database_sets: "SQLITE"
+  # ** WARNING ** When using custom, you may experience issues. This is a work in progress feature, so it is unstable, report problems on the GitHub page
+  # Which type of custom db should be used: [SQLITE, MYSQL, POSTGRESQL, MARIADB]
+  custom_type: ""
+  # Here you can input a custom database url to connect to. This will only work when the setting is predefined to NONE
+  custom_url: ""
+  # Here you've input the custom db password
+  custom_username: ""
+  # Here you have to enter the password of your db session
+  custom_password: ""
+
+webserver:
+  # Should the webserver be launched? This feature is only used for regulars
+  active: false
+  # The port under which the webserver will be launched
+  port: 80
+  # What uri to start the webserver under
+  redirect_uri: "/auth/discord/redirect"
+  # Where should the redirect be, include full url!
+  uri: ""
+
+cedmod:
+  # This activates the CedMod Api integration. This feature is only used for the following functions, only activate if you have these features in use: Regulars
+  # CedMod Api is only available to users who request access from the CedMod team, ask on their discord for more information - https://discord.gg/p69SGfwxxm
+  active: false
+  # Include https://
+  instance_url: ""
+  # Put the plain API key here
+  api_key: ""
+
+# ** WARNING ** For this setting to work, you need to activate the webserver.
+#The webserver is generally just a redirect to receive data from the discord OAuth Api, so it
+# should not interrupt any other web stuff running on your server.
+verify:
+  # This link can be obtained from the oauth section on the discord developer portal. First, enter the redirect you entered in the webserver section exactly
+  # as described here: <uri>:<port><redirect_uri>, e.g. http://localhost:80/auth/discord/redirect. After entering the redirect, click on save to proceed with the
+  # setup. You now have to scroll down to the 'OAuth2 URL Generator' where you need to click on 2 options, 'identify' and 'connections', after that scroll down
+  # and select your redirect for the redirect url. Now you can copy the generated url into your clipboard. Paste it in here.
+  oauth_link: ""
+  # Which channel should verify logs be sent to?
+  verify_log_channel: ""
+
+notice_of_departure:
+  # Which channel should the form be sent to, to be accepted by moderators?
+  decision_channel_id: ""
+  # Which channel should the notice messages be sent to?
+  notice_channel_id: ""
+  # List of role's that are able to accept/dismiss/revoke notices (INPUT ID'S ONLY)
+  roles_access_notices: []
+  # Put the following in the type: [NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS]
+  check_type: "HOURS"
+  # The rate at that the notices are checked.
+  check_rate: 1
+
+regulars:
+  # Should example configuration be created (deactivate if you want to delete the example config)
+  create_example_configuration: true
+  # Should the bot only load from specified folder within the /regulars/ folder?
+  only_load_certain_folder: false
+  # Specify which folders should be specified if the option above is active
+  only_load_folders: []

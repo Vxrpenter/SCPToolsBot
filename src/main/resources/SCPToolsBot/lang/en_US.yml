@@ -1,0 +1,842 @@
+# You can use any form of discord formatting in these translations
+#
+# \n will apply a linebreak
+#
+# Everything surrounded like this: %value% will be replaced
+#
+# The bot will load the translations in memory on startup. To apply changes, restart the bot
+#
+# Find color codes and how to use them here https://github.com/Vxrpenter/SCPToolsBot/wiki/Configuring-Translations
+#
+# Use &filler& to fill one embed line, use &filler<count>& to specify character amount
+#
+
+PERMISSIONS:
+
+  EMBED_TICKET_DENIED_TITLE: "Interaction Denied"
+  EMBED_TICKET_DENIED_BODY: "
+                        This Interaction has been denied, the exact reason for it's denial can be viewed underneath this text.
+                        If you have any questions about the reason, contact staff:\n
+                        &filler&
+                        ```ansi
+                        
+                        %permission_message%
+                        ```"
+
+  EMBED_NOTICE_OF_DEPARTURE_DENIED_TITLE: "Interaction Denied"
+  EMBED_NOTICE_OF_DEPARTURE_DENIED_BODY: "
+                        This Interaction has been denied, the exact reason for it's denial can be viewed underneath this text.
+                        If you have any questions about the reason, contact staff:\n
+                        &filler&
+                        ```ansi
+                        
+                        %permission_message%
+                        ```"
+
+  TEXT_INSUFFICIENT_PERMISSION: "&red&&bold&Insufficient Permissions, contact staff for more information&reset&"
+  TEXT_INTERACTION_DISABLED: "&red&&bold&Interaction Disabled, contact staff for more information&reset&"
+
+SETTINGS:
+
+  EMBED_SETTINGS_TITLE: "Settings"
+  EMBED_SETTINGS_BODY: "
+                        In this settings menu you will be able to:\n
+                        - change config settings\n
+                        - view current settings\n
+                        - view bot information\n
+                        &filler&
+                        Click on the buttons below to switch between pages. Information for the main page may take longer to load because a lot of information is queried at the same time\n
+                        &filler&"
+
+  EMBED_SETTINGS_FIELD_LANGUAGE_TITLE: "Language"
+  EMBED_SETTINGS_FIELD_LANGUAGE_VALUE: "`%language%`"
+
+  EMBED_SETTINGS_FIELD_GUILD_TITLE: "&filler<7>& Guild Unavailable"
+  EMBED_SETTINGS_FIELD_GUILD_VALUE: "&filler<10>& `%isAvailable%`"
+
+  EMBED_SETTINGS_FIELD_DATABASE_TITLE: "&filler<30>& Database"
+  EMBED_SETTINGS_FIELD_DATABASE_VALUE: "&filler<30>&%state%"
+
+  EMBED_SETTINGS_FIELD_CEDMOD_TITLE: "Cedmod"
+  EMBED_SETTINGS_FIELD_CEDMOD_VALUE: "%state%"
+
+  EMBED_SETTINGS_FIELD_VERSION_TITLE: "&filler<7>& Version"
+  EMBED_SETTINGS_FIELD_VERSION_VALUE: "&filler<10>&`%version%`"
+
+  EMBED_SETTINGS_FIELD_BUILD_TITLE: "&filler<30>& Latest Build"
+  EMBED_SETTINGS_FIELD_BUILD_VALUE: "&filler<30>& `%build%`"
+
+  EMBED_SETTINGS_FIELD_GATEWAY_TITLE: "&filler<1>&\n Gateway Response Time"
+  EMBED_SETTINGS_FIELD_GATEWAY_VALUE: "||Received in %time% ms||"
+
+  EMBED_SETTINGS_FIELD_REST_TITLE: "&filler<1>& \n REST Response Time"
+  EMBED_SETTINGS_FIELD_REST_VALUE: "&filler<1>& ||Received in %time% ms||"
+
+  TEXT_CEDMOD_ONLINE: ":green_circle: Online"
+  TEXT_CEDMOD_OFFLINE: ":red_circle: Offline"
+
+  TEXT_DATABASE_ONLINE: ":green_circle: Online"
+  TEXT_DATABASE_OFFLINE: ":red_circle: Offline"
+
+HELP:
+
+  EMBED_PAGE_ONE_TITLE: "Scp Tools Help Page"
+  EMBED_PAGE_ONE_BODY: "
+                        > This is ScpTools. A bot for managing your SCP Secret Laboratory Server with community and staff management, quality of life improvements and a custom support system. Translate everything to your liking and choose the settings that fit your server the best to get going.\n
+                        &filler&
+                        [⭐] If you need help with bot setup or you are running into issues then please refer to the documentation [here](https://github.com/Vxrpenter/SCPToolsBot/wiki).\n
+                                
+                        [❌] Is your issue not explained here? Then please create an issue on github [here](https://github.com/Vxrpenter/SCPToolsBot/issues)\n
+                                
+                        ### Short list of commands:\n
+                        `/help` - for help\n
+                        `/template` - for pasting the templates\n
+                        - `rules` - secret lab rules\n
+                        - `support` - support ticket system + unban tickets\n
+                        - `notice of departure` - notice of departure panel for staff\n
+                        - `regulars` - regular panel for users\n
+                        - `applications` - application panel for staff recruitment 
+                        "
+  EMBED_PAGE_TWO_TITLE: "Scp Tools Help Page - Rules"
+  EMBED_PAGE_TWO_BODY: "
+                        > ❌ CAUTION\n
+                        > This feature is experimental and not that tested. Also the update feature is not working the moment\n
+                        &filler&
+                        Use `/template rules` to paste the rule menu.\n
+                        
+                        You can choose between updating the rules and pasting them. This then takes your Scp Secret Laboratory Server ruleset and translate it using a color parser automatically.\n
+                        > define these color translations in the `color-config.json`
+                        "
+  EMBED_PAGE_THREE_TITLE: "Scp Tools Help Page - Support and Unban"
+  EMBED_PAGE_THREE_BODY: "
+                        Use `/template support` command to paste the support template.\n
+                        &filler&
+                        **Options of the template:**\n
+                        - `Create Support Ticket` - Create a support ticket that the question or problem of the user can be processed in\n
+                        - `File Unban Request` - Let's a user file an unban request for your SCP:SL Server. when accepting these requests the user will be automatically be unbanned from the server given they put in the correct steamID
+                        "
+  EMBED_PAGE_FOUR_TITLE: "Scp Tools Help Page - Notice of Departure"
+  EMBED_PAGE_FOUR_BODY: "
+                        Use `/template notice of departure` to paste the notice of departure template\n
+                        &filler&
+                        This feature is to make users able to take time off without worrying about the date to much because the bot notifies them when they have to come on again\n
+                        
+                        When a user files a notice of departure it is send to a predefined channel for acceptance. When accepted is is then processed and added to the database.\n
+                        > if accepted, declined, revoked or it ending normally the user is notified
+                        "
+  EMBED_PAGE_FIVE_TITLE: "Scp Tools Help Page - Regulars"
+  EMBED_PAGE_FIVE_BODY: "
+                        Use `/template regulars` to paste the regular template.\n
+                        &filler&
+                        Offer your users a reward for playing a certain amount off time.\n
+                        
+                        Users can activate/deactivate the regular syncing which automatically caches their time from the server and gives them the roles they deserve for playing that amount of time
+                        "
+  EMBED_PAGE_SIX_TITLE: "Scp Tools Help Page - Applications"
+  EMBED_PAGE_SIX_BODY: "
+                        > ❌ WORK IN PROGRESS\n
+                        > This feature has not been developed yet\n
+                        &filler&
+                        Nothing here yet
+                        "
+
+  EMBED_FOOTER_TEXT: "⭐ Created with lots of passion by Vxrpenter ⭐"
+  EMBED_FOOTER_IMG: "https://avatars.githubusercontent.com/u/110356385?v=4"
+
+STATUS:
+  ACTIVITY_OFFLINE: "Server Offline..."
+  ACTIVITY_MAINTENANCE: "Server is in maintenance..."
+
+  EMBED_ESTABLISHED_TITLE: "%instance% - Connection Reestablished"
+  EMBED_ESTABLISHED_BODY: "The connection to the api has been reestablished! Outages should not occur often when the server is running stable"
+  EMBED_ESTABLISHED_REASON_FIELD_NAME: "Reason"
+  EMBED_ESTABLISHED_REASON_FIELD_VALUE: "Server is online and central servers are up"
+  EMBED_ESTABLISHED_RESPONSE_FIELD_NAME: "Response Time"
+  EMBED_ESTABLISHED_RESPONSE_FIELD_VALUE: "%time% ms"
+
+  EMBED_LOST_TITLE: "%instance% - Connection Lost"
+  EMBED_LOST_BODY: "The connection to the api has been lost after **%retries%** consecutive failures. No data can be queried"
+  EMBED_LOST_REASON_FIELD_NAME: "Reason"
+  EMBED_LOST_REASON_FIELD_VALUE: "Server is down or api is down"
+  EMBED_LOST_RESPONSE_FIELD_NAME: "Response Time"
+  EMBED_LOST_RESPONSE_FIELD_VALUE: "Could not receive data"
+
+  EMBED_ONLINE_TITLE: "%instance% - Server Online"
+  EMBED_ONLINE_BODY: "The connection to the server has been reestablished! Outages should not occur often when the server is running stable"
+  EMBED_ONLINE_REASON_FIELD_NAME: "Reason"
+  EMBED_ONLINE_REASON_FIELD_VALUE: "Server is online and central servers are up"
+  EMBED_ONLINE_RESPONSE_FIELD_NAME: "Response Time"
+  EMBED_ONLINE_RESPONSE_FIELD_VALUE: "%time% ms"
+
+  EMBED_OFFLINE_TITLE: "%instance% - Server Offline"
+  EMBED_OFFLINE_BODY: "The connection to this server has been lost after **%retries%** consecutive failures. Server has been marked as offline"
+  EMBED_OFFLINE_REASON_FIELD_NAME: "Reason"
+  EMBED_OFFLINE_REASON_FIELD_VALUE: "Server is down and no data can be queried"
+  EMBED_OFFLINE_RESPONSE_FIELD_NAME: "Response Time"
+  EMBED_OFFLINE_RESPONSE_FIELD_VALUE: "%time% ms"
+
+  EMBED_MAINTENANCE_ON_TITLE: "%instance% - Maintenance Engaged"
+  EMBED_MAINTENANCE_ON_BODY: "This server has been set to maintenance mode. Server data is not available and players will not be shown in the activity"
+  EMBED_MAINTENANCE_ON_REASON_FIELD_NAME: "Reason"
+  EMBED_MAINTENANCE_ON_REASON_FIELD_VALUE: "There is no reason given for this maintenance, please contact server staff for more info"
+  EMBED_MAINTENANCE_ON_RESPONSE_FIELD_NAME: "Response Time"
+  EMBED_MAINTENANCE_ON_RESPONSE_FIELD_VALUE: "%time% ms"
+
+  EMBED_MAINTENANCE_OFF_TITLE: "%instance% - Maintenance Deactivated"
+  EMBED_MAINTENANCE_OFF_BODY: "This server has been put out of maintenance mode. Server data is now available and players will be shown in activity"
+  EMBED_MAINTENANCE_OFF_REASON_FIELD_NAME: "Reason"
+  EMBED_MAINTENANCE_OFF_REASON_FIELD_VALUE: "There is no reason given for this maintenance, please contact server staff for more info"
+  EMBED_MAINTENANCE_OFF_RESPONSE_FIELD_NAME: "Response Time"
+  EMBED_MAINTENANCE_OFF_RESPONSE_FIELD_VALUE: "%time% ms"
+
+  EMBED_PLAYERLIST_TITLE: "Current Online Players"
+  EMBED_PLAYERLIST_BODY: "
+                        ```ansi\n
+                        Version: &green&&bold&%version%&reset&\n
+                        Online Players: &bold&%player_number%&reset&\n
+                        FriendlyFire: %ff%&reset&\n
+                        Whitelisted: %wl%&reset&\n
+                        Modded: %modded%&reset&\n
+                        Mods: &bold&%mods%&reset&
+                        ```
+                        &filler&
+                        ```ansi
+                        
+                        %players%
+                        ```"
+  EMBED_PLAYERLIST_EMPTY: "&red&The server is empty"
+  EMBED_PLAYERLIST_COULDNT_FETCH: "&red&Could not correctly load playerlist"
+  EMBED_PLAYERLIST_PLAYER: "\n&reset&&bold&%nickname% &reset&(&green&&bold&%id%&reset&)"
+
+  MESSAGE_STATUS_EMPTY: "There is no Statusbot running"
+  MESSAGE_STATUS_DEACTIVATED: "Deactivated maintenance mode for server"
+  MESSAGE_STATUS_ACTIVATED: "Switched server to maintenance mode"
+
+PLAYER:
+  EMBED_STATISTICS_BODY: "
+                        **──────────────────────────────────────**\n
+                        ### `➥` Discord  ID: `%discordId%`\n
+                        ### `➥` Timeouted?  ID: `%discordTimeout%`\n
+                        ### `➥` Muted?  ID: `%discordMute%`\n
+                        **─────────────────────────────────────────────────────────────**"
+
+  EMBED_STEAMID_FIELD_NAME: "`🆔` SteamId"
+  EMBED_STEAMID_FIELD_VALUE: "➥ `%steamId%`"
+
+  EMBED_PLAYTIME_FIELD_NAME: "`⏰` Playtime"
+  EMBED_PLAYTIME_FIELD_VALUE: "➥ `%playtime%`"
+
+  EMBED_BANNED_FIELD_NAME: "`🔨` Currently Banned"
+  EMBED_BANNED_FIELD_VALUE: "➥ `%banState%`"
+
+  EMBED_FILLER_ONE_FIELD_NAME: "**─────────────────────────────────────────────────────────────**"
+  EMBED_FILLER_ONE_FIELD_VALUE: ""
+
+  EMBED_WARNS_FIELD_NAME: "`⚠` Warns"
+  EMBED_WARNS_FIELD_VALUE: "➥ `%warns%`"
+
+  EMBED_MUTES_FIELD_NAME: "`🔇` Mutes"
+  EMBED_MUTES_FIELD_VALUE: "➥ `%mutes%`"
+
+  EMBED_WATCHLIST_FIELD_NAME: "`👁️` Watchlist"
+  EMBED_WATCHLIST_FIELD_VALUE: "➥ `%watchlist%`"
+
+  EMBED_FILLER_TWO_FIELD_NAME: "**─────────────────────────────────────────────────────────────**"
+  EMBED_FILLER_TWO_FIELD_VALUE: "➥ This Information is subject to change when panel information changes"
+
+SUPPORT:
+
+  EMBED_TEMPLATE_SUPPORT_TITLE: "Ticket Support"
+  EMBED_TEMPLATE_SUPPORT_BODY: "
+                        **Choose one of the following tickets to proceed**\n
+
+                        > ⚙️ **General Ticket**\n
+                        >  Ticket about anything not listed below\n
+                        
+                        > ⚖️ **Report Ticket**\n
+                        > Ticket to report a player\n
+                        
+                        > ⛓️‍💥 **Error Ticket**\n
+                        > Ticket to report an error\n
+                        
+                        > ⌛ **Unban Ticket**\n
+                        > Ticket to request an unban\n
+                        
+                        > 🚫 **Complaint Ticket**\n
+                        > Ticket for complaining about a member of the server staff\n
+                        
+                        > 📩 **Application**\n
+                        > Ticket for applying for staff positions, only works when applications are active\n
+                        
+                        _When creating a ticket certain meta data will be saved. This consists of your userId, the date of creation, the tickets type, status and handler_"
+
+  EMBED_REPORT_USER_TITLE: "Choose User"
+  EMBED_REPORT_USER_BODY: "
+                        Choose which user you want to report. Please make sure to select the right person,\n
+                        because this can't be reverted once the ticket is sent.\n
+                      
+                        If you want to report a staff member then please use the complaint ticket type,\n
+                        as it is suited for that kind of operation. It's has an anonymous way for you to send your complaint about the staff member."
+
+  EMBED_COMPLAINT_ANONYMOUS_TITLE: "Send Anonymously?"
+  EMBED_COMPLAINT_ANONYMOUS_BODY: "
+                        If you want you can send this ticket anonymously, meaning that no metadata\n
+                        will be sent with it. This is optional but can prevent problems with staff members and make sure that the ticket issuer is safe."
+
+  EMBED_COMPLAINT_USER_TITLE: "Choose User"
+  EMBED_COMPLAINT_USER_BODY: "
+                        Choose which user you want to report. Please make sure to select the right person,\n
+                        because this can't be reverted once the ticket is sent.\n
+                      
+                        **Special Ticket**\n
+                        This is a special ticket meant for reporting staff members. After choosing a user you will be able to choose if you want to send it anonymously"
+
+  EMBED_APPLICATION_POSITION_TITLE: "Choose Position"
+  EMBED_APPLICATION_POSITION_BODY: "
+                        Choose which position you want to apply for.\n
+                        
+                        You are only able to choose activated positions. They have to be activated by a server administrator."
+
+  MODAL_GENERAL_TITLE: "General Ticket"
+  MODAL_GENERAL_SUBJECT_TITLE: "Subject"
+  MODAL_GENERAL_SUBJECT_PLACEHOLDER: "What is this ticket about?"
+  MODAL_GENERAL_EXPLANATION_TITLE: "Explanation"
+  MODAL_GENERAL_EXPLANATION_PLACEHOLDER: "Explain the exact problem here..."
+
+  MODAL_REPORT_TITLE: "Report Ticket"
+  MODAL_REPORT_REASON_TITLE: "Reason"
+  MODAL_REPORT_REASON_PLACEHOLDER: "What is the reason of your report?"
+  MODAL_REPORT_PROOF_TITLE: "Proof"
+  MODAL_REPORT_PROOF_PLACEHOLDER: "If you have proof then put it in here."
+
+  MODAL_ERROR_TITLE: "Error Ticket"
+  MODAL_ERROR_PROBLEM_TITLE: "Problem"
+  MODAL_ERROR_PROBLEM_PLACEHOLDER: "What is the problem you're experiencing?"
+  MODAL_ERROR_TIMES_TITLE: "Times Experienced"
+  MODAL_ERROR_TIMES_PLACEHOLDER: "How often did you experience this?"
+  MODAL_ERROR_REPRODUCE_TITLE: "How to reproduce"
+  MODAL_ERROR_REPRODUCE_PLACEHOLDER: "How can this error be reproduced?"
+  MODAL_ERROR_ADDITIONAL_TITLE: "Additional Info"
+  MODAL_ERROR_ADDITIONAL_PLACEHOLDER: "Do you have additional information on this problem?"
+
+  MODAL_UNBAN_TITLE: "Unban Ticket"
+  MODAL_UNBAN_STEAMID_TITLE: "SteamID"
+  MODAL_UNBAN_STEAMID_PLACEHOLDER: "What is your SteamID?"
+  MODAL_UNBAN_REASON_TITLE: "Reason to Unban"
+  MODAL_UNBAN_REASON_PLACEHOLDER: "Why should you be unbanned?"
+
+  MODAL_COMPLAINT_TITLE: "Complaint Ticket"
+  MODAL_COMPLAINT_SUBJECT_TITLE: "Reason"
+  MODAL_COMPLAINT_SUBJECT_PLACEHOLDER: "Why do you have a problem with this staff member?"
+  MODAL_COMPLAINT_EXPLANATION_TITLE: "Proof"
+  MODAL_COMPLAINT_EXPLANATION_PLACEHOLDER: "If you have proof then put it in here."
+
+  MODAL_APPLICATION_TITLE: "Application"
+  MODAL_APPLICATION_NAME_TITLE: "Name"
+  MODAL_APPLICATION_PLACEHOLDER_TITLE: "How would you like to be called?"
+  MODAL_APPLICATION_AGE_TITLE: "Age"
+  MODAL_APPLICATION_AGE_PLACEHOLDER: "How old are you?"
+  MODAL_APPLICATION_PLAYTIME_TITLE: "Playtime"
+  MODAL_APPLICATION_PLAYTIME_PLACEHOLDER: "How long have you been playing SCP:SL?"
+  MODAL_APPLICATION_REASON_OF_APPLICATION_TITLE: "Reason of Application"
+  MODAL_APPLICATION_REASON_OF_APPLICATION_PLACEHOLDER: "Why did you apply for this position?"
+  MODAL_APPLICATION_SKILLS_TITLE: "Skills"
+  MODAL_APPLICATION_SKILLS_PLACEHOLDER: "What are you skilled at, have you ever done this task on another server?"
+
+  MODAL_REASON_ACTION_TITLE: "Action Reasoning"
+  MODAL_REASON_ACTION_REASON_TITLE: "Reason"
+  MODAL_REASON_ACTION_REASON_PLACEHOLDER: "What is the reason for your action?"
+
+  EMBED_TICKET_GENERAL_TITLE: "%name% - General"
+  EMBED_TICKET_GENERAL_BODY: "
+                          Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+
+                          **Type:** General\n
+                          **Issuer:** <@%issuerId%>\n
+
+                          **Subject:**\n
+                          ```%subject%```
+
+                          **Explanation:**\n
+                          ```%explanation%```"
+
+  EMBED_TICKET_REPORT_TITLE: "%name% - Report"
+  EMBED_TICKET_REPORT_BODY: "
+                        Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+                        
+                        **Type:** Report\n
+                        **Issuer:** <@%issuerId%>\n
+                        **Reported User:** %reported%\n
+                        
+                        **Reason:**\n
+                        ```%reason%```
+                        
+                        **Proof:**\n
+                        ```%proof%```"
+
+  EMBED_TICKET_ERROR_TITLE: "%name% - Error"
+  EMBED_TICKET_ERROR_BODY: "
+                        Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+
+                        **Type:** Error\n
+                        **Issuer:** <@%issuerId%>\n
+
+                        **Problem:**\n
+                        ```%problem%```
+
+                        **Times:**\n
+                        ```%times%```
+                        
+                        **Reproduce:**\n
+                        ```%reproduce%```
+
+                        **Additional:**\n
+                        ```%additional%```"
+
+  EMBED_TICKET_UNBAN_TITLE: "%name% - Unban"
+  EMBED_TICKET_UNBAN_BODY: "
+                        Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+
+                        **Type:** Unban\n
+                        **Issuer:** <@%issuerId%>\n
+
+                        **SteamID:**\n
+                        ||%steamId%||
+
+                        **Reason:**\n
+                        ```%reason%```"
+
+  EMBED_TICKET_COMPLAINT_TITLE: "%name% - Complaint"
+  EMBED_TICKET_COMPLAINT_BODY: "
+                        Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+
+                        **Type:** Complaint\n
+                        **Issuer:** <@%issuerId%>\n
+                        **Complained about:** %staff%\n
+
+                        **Reason:**\n
+                        ```%reason%```
+
+                        **Proof:**\n
+                        ```%proof%```"
+
+  EMBED_TICKET_APPLICATION_TITLE: "%name% - Application"
+  EMBED_TICKET_APPLICATION_BODY: "
+                        Support Ticket getting reviewed. A response from our moderation team may take a bit\n
+
+                        **Type:** Application\n
+                        **Issuer:** <@%issuerId%>
+                        
+                        ## Role: <@&%roleId%>\n
+                        
+                        **Name:**\n
+                        ```%name%```
+                        
+                        **Age:**\n
+                        ```%age%```
+                        
+                        **Playtime:**\n
+                        ```%playtime%```
+                        
+                        **Reason of Application:**\n
+                        ```%reason%```
+                        
+                        **Skills:**\n
+                        ```%skills%```"
+
+  EMBED_TICKET_CREATED_TITLE: "Ticket Created"
+  EMBED_TICKET_CREATED_BODY: "
+                        Your ticket has been successfully created. A staff member will come to your\n
+                        aid shortly. You can find the ticket here:\n
+                      
+                        %channel%"
+
+  EMBED_SETTINGS_TITLE: "Ticket Settings"
+  EMBED_SETTINGS_BODY: "
+                        In this settings menu, you are able to change the tickets status.\n
+
+                        > 🚪 **Open**\n
+                        - Messages can be written and the ticket can be accessed by all participants\n
+                        
+                        > 🌙 **Paused**\n
+                        - Messages can't be written but ticket can be accessed by all participants\n
+                        
+                        > 🔒 **Suspended**\n
+                        - Messages can't be written and ticket can't be accessed by all participants. Ticket can later be opened by administrator\n
+                        
+                        > 🪫 **Closed**\n
+                        - Messages can't be written and ticket can't be accessed by all participants. Ticket can't be opened again!!!"
+
+  EMBED_LOG_TITLE: "%name% by %user%"
+  EMBED_LOG_BODY: "
+                        **Ticket Status:** %status%\n
+                        **Ticket Id:** %id%\n
+                        **Ticket Created by:** %creator%\n
+                        **Ticket Handled by:** %handler%\n
+
+                        _This log message will be permanently deleted when the ticket is closed. Closed tickets can be found in the thread section of the main ticket channel._"
+
+  EMBED_TICKET_CLAIMED_TITLE: "Ticket Claimed"
+  EMBED_TICKET_CLAIMED_BODY: "This ticket is now being managed by %user%."
+
+  EMBED_TICKET_NO_HANDLER_TITLE: "No Handler"
+  EMBED_TICKET_NO_HANDLER_BODY: "The ticket has to be claimed before any interactions can be performed. Ticket claim will not remove any other users from the channel or block their interactions!"
+
+  EMBED_TICKET_OPENED_TITLE: "Ticket Reopened"
+  EMBED_TICKET_OPENED_BODY: "This ticket has been reopened."
+
+  EMBED_TICKET_PAUSED_TITLE: "Ticket Paused"
+  EMBED_TICKET_PAUSED_BODY: "This ticket has been paused. No messages are allowed but the ticket will be opened shortly in the future"
+
+  EMBED_TICKET_SUSPENDED_TITLE: "Ticket Suspended"
+  EMBED_TICKET_SUSPENDED_BODY: "This ticket has been suspended. Please contact staff on why and how it was suspended"
+
+  EMBED_TICKET_CLOSED_TITLE: "Ticket Closed"
+  EMBED_TICKET_CLOSED_BODY: "This ticket has been closed. It will not be reopened"
+
+  EMBED_LOG_CLAIMED_TITLE: "You Claimed Ticket - %name%"
+  EMBED_LOG_CLAIMED_BODY: "This ticket is now under your management. You will tend to it and help the user correspondingly"
+
+  EMBED_LOG_OPENED_TITLE: "You Reopened Ticket - %name%"
+  EMBED_LOG_OPENED_BODY: "This ticket has been reopened by you."
+
+  EMBED_LOG_PAUSED_TITLE: "You Paused Ticket - %name%"
+  EMBED_LOG_PAUSED_BODY: "This ticket has been paused by you. You can later open it again if needed."
+
+  EMBED_LOG_SUSPENDED_TITLE: "You Suspended Ticket - %name%"
+  EMBED_LOG_SUSPENDED_BODY: "This ticket has been correctly suspended by you. Users may contact you on the reason for it's suspension"
+
+  EMBED_LOG_CLOSED_TITLE: "You Closed Ticket - %name%"
+  EMBED_LOG_CLOSED_BODY: "This ticket has been closed by you. You cannot reopen it and all business with it has been ended."
+
+APPLICATION:
+  EMBED_ACTIVATION_MENU_TITLE: "Active Application Settings"
+  EMBED_ACTIVATION_MENU_BODY: "
+                        Current Status: %status%\n
+                        Active Roles:\n
+                        %active_roles%
+                        _This message will be updated when adding positions for application status_\n
+                        
+                        _When you are done with setup, click the complete setup button down below to proceed with activation._
+                        "
+
+  EMBED_DEACTIVATION_MENU_TITLE: "Deactivate Applications?"
+  EMBED_DEACTIVATION_MENU_BODY: "
+                        Do you want to deactivate the application process.\n
+                        All running applications will be terminated and their tickets will be closed. The current settings will also be wiped\n
+                        and cannot be retrieved.
+                        "
+
+  EMBED_APPLICATION_MESSAGE_TITLE: "Active Applicationphase"
+  EMBED_APPLICATION_MESSAGE_BODY: "
+                        Current Status: %status%\n
+                        Active Roles:\n
+                        %active_roles%
+                        _Creation of tickets can be done from the button below or the ticket support_
+                        "
+
+  TEXT_ROLE_STATUS_TEMPLATE: "
+                          > <@&%roleId%>\n
+                          - Status: **%status%**\n 
+                          - Members: **%max_candidates%**\n\n"
+
+  TEXT_STATUS_ACTIVE: "🟢 Active"
+  TEXT_STATUS_DEACTIVATED: "🔴 Deactivated"
+
+  EMBED_CHOOSE_POSITION_TITLE: "Choose Position"
+  EMBED_CHOOSE_POSITION_BODY: "Choose which position you want to activate"
+
+  MODAL_CHOOSE_COUNT_TITLE: "Candidate Count"
+  MODAL_CHOOSE_COUNT_NUMBER_TITLE: "Number"
+  MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER: "How many members should the candidates have?"
+
+VERIFY:
+  EMBED_TEMPLATE_TITLE: "Verify - Steam and Discord Linking"
+  EMBED_TEMPLATE_BODY: "
+                        To use certain features of this bot you need to verify. This means giving us the following information to work with:\n
+                        - Identification\n
+                        - Account connections\n
+                      
+                        **WE DO NOT** receive any information such as: **E-Mails**, **Passwords**, **Authentication Codes** etc. We do not distribute your information nor use it to monetize or advertise to you."
+
+  EMBED_DATA_TITLE: "User Data"
+  EMBED_DATA_BODY: "This is all data we currently have on you. Do note that the refresh token that we received from discord will not be displayed here."
+  EMBED_DATA_FIELD_VERIFIED_TITLE: "Verified"
+  EMBED_DATA_FIELD_STEAMID_TITLE: "SteamID"
+  EMBED_DATA_FIELD_TIMESTAMP_TITLE: "Timestamp"
+  EMBED_DATA_FIELD_DELETE_VALUE: "_You can delete this data whenever you want to. Just go to the verification panel and click on the 'Delete Data' button._"
+
+  EMBED_NO_DATA_TITLE: "No Data"
+  EMBED_NO_DATA_BODY: "Could not find any verification data associated with your profile. Please verify before requesting your data."
+
+  EMBED_LOG_VERIFIED_TITLE: "User Verified - %name%"
+  EMBED_LOG_VERIFIED_BODY: "This user has been verified successfully. Their data has been retrieved from the OAuth Api and written to the database."
+
+  EMBED_LOG_DELETED_TITLE: "User Deleted - %name%"
+  EMBED_LOG_DELETED_BODY: "The data of this user has been deleted from the database successfully after requesting it's deletion through the verify panel."
+
+  EMBED_DELETION_SENT_TITLE: "Deletion Sent"
+  EMBED_DELETION_SENT_BODY: "Your deletion request has been received and will be processed in a few seconds. You can re-verify any time you want if you want to use the features working with it again."
+
+NOTICE_OF_DEPARTURE:
+  EMBED_TEMPLATE_TITLE: "Notice of Departure Form"
+  EMBED_TEMPLATE_BODY: "
+                        If you are not available for some time, you can apply for time of here. More information can be found below.\n
+                        &filler&
+                        **Needed Information**\n
+                        This information will be needed for your notice of departure.\n
+                        - The date you wish to come back. Please follow this format when entering or it will not be accepted: **dd.MM.yyyy**\n
+                        
+                        - A short explanation on why you need some time off. Don't go into too much detail, just enough for it to make sense.\n
+                        
+                        _All requests can be denied and revoked by higher staff. This form is not legally binding off time but just an agreement between team members._
+                        "
+
+  MODAL_TITLE: "File Notice of Departure"
+  MODAL_TIME_TITLE: "Away time?"
+  MODAL_TIME_PLACEHOLDER: "How long will you be away [dd.MM.yyyy]"
+  MODAL_EXPLANATION_TITLE: "Explanation"
+  MODAL_EXPLANATION_PLACEHOLDER: "Why are you going to be away [exclude details]"
+
+  EMBED_DECISION_TITLE: "Notice of departure - #%number%"
+  EMBED_DECISION_BODY: " 
+                        ```If accepted this user and the date will be added to the database and you will be notified when it runs out```\n
+                        &filler&
+                        __**Timespan**__\n
+                        ```%current_date% till %end_date%```
+                        
+                        __**Reason:**__\n
+                        ```%reason%```
+                        "
+
+  EMBED_DECISION_SENT_TITLE: "Notice of Departure sent for Review"
+  EMBED_DECISION_SENT_BODY: "Your notice of departure has been sent for review. After a decision has been made you will receive a message with it and the decisions reasoning"
+
+  EMBED_ACCEPTED_TITLE: "Notice of Departure Accepted"
+  EMBED_ACCEPTED_BODY: "
+                        Your notice of departure was accepted. You may now take your time off without any consequences. \n
+                        &filler&
+                        __**Acceptance Timeframe:**__\n
+                        ```%current_date% till %end_date%```
+                        
+                        __**Acceptance Reason:**__\n
+                        ```%reason%```
+                        "
+
+  EMBED_DISMISSED_TITLE: "Notice of Departure Dismissed"
+  EMBED_DISMISSED_BODY: "
+                        Your notice of departure was dismissed. You are not allowed to take time off. If you still need to, please talk with a higher staff member about leaving the team\n
+                        &filler&
+                        __**Dismiss Reason:**__\n
+                        ```%reason%```
+                        "
+
+  MODAL_REASON_ACTION_TITLE: "Action Reasoning"
+  MODAL_REASON_ACTION_REASON_TITLE: "Reason"
+  MODAL_REASON_ACTION_REASON_PLACEHOLDER: "What is the reason for your action?"
+
+  EMBED_ACCEPTATION_SENT_TITLE: "Acceptance Sent"
+  EMBED_ACCEPTATION_SENT_BODY: "The accepted notice will now be processed and the user will be notified of you accepting the notice as well as the reason for accepting it"
+
+  EMBED_DISMISSING_SENT_TITLE: "Dismissing Sent"
+  EMBED_DISMISSING_SENT_BODY: "The dismissed notice will now be processed and the user will be notified of you dismissing the notice as well as the reason for dismissing it"
+
+  EMBED_NOTICE_TITLE: "Notice of Departure - #%number%"
+  EMBED_NOTICE_BODY: "
+                        This Notice of Departure can always be revoked by pressing the button down below.
+                        This will also be periodically checked if still valid or not\n
+                        &filler&
+                        __**Accepted by:**__\n
+                        %user%\n
+                        
+                        __**Acceptance Reason:**__\n
+                        ```%current_date% till %end_date%```
+                        
+                        __**Acceptance Reason:**__\n
+                        ```%reason%```
+                        "
+
+  EMBED_ENDED_TITLE: "Notice of Departure has Ended"
+  EMBED_ENDED_BODY: "
+                        Your Notice of Departure has ended and all your benefits going with it have been revoked \n
+                        &filler&
+                        __**Timeframe:**__\n
+                        ```%current_date% till %end_date%```
+                        "
+
+  EMBED_REVOKED_TITLE: "Notice of Departure has been Revoked"
+  EMBED_REVOKED_BODY: "
+                        Your Notice of Departure has been revoked and all benefits going with that do not apply anymore \n
+                        &filler&
+                        __**Timeframe:**__\n
+                        ```%current_date% till %end_date%```
+                        
+                        __**Acceptance Reason:**__\n
+                        ```%reason%```
+                        "
+
+  EMBED_REVOKATION_SENT_TITLE: "Notice of Departure Revoked"
+  EMBED_REVOKATION_SENT_BODY: "Notice of Departure is now getting revoked. The user will be notified shortly, providing him with the reason you entered"
+
+REGULARS:
+
+  EMBED_TEMPLATE_TITLE: "Activate Regular Syncing"
+  EMBED_TEMPLATE_BODY: "
+                        This feature allows you to sync your server playtime with the server and to give you roles for reaching certain timeframes
+                        "
+
+  EMBED_TEMPLATE_GROUP_BODY: "   
+                        # %group%\n
+                        Description: %description%\n
+                        
+                        Custom Role: %group_role%\n
+                        &filler&
+                        %roles%
+                        "
+
+  EMBED_TEMPLATE_ROLE_BODY: "   
+                        Role: %role%\n
+                        Description: %description%\n
+                        TimeFrame: %timeframe%\n
+                        
+                        "
+
+  EMBED_SETTINGS_TITLE: "Personal Regular Settings"
+  EMBED_SETTINGS_BODY: "These are your personal regular settings. Only you are able to see this message and to change the settings\n"
+  EMBED_SETTINGS_FIELD_GROUP_NAME: "Group"
+  EMBED_SETTINGS_FIELD_ROLE_NAME: "Role"
+  EMBED_SETTINGS_FIELD_PLAYTIME_NAME: "Playtime"
+
+  EMBED_NOT_VERIFIED_TITLE: "Not Verified"
+  EMBED_NOT_VERIFIED_BODY: "
+                        You have be not verified. If you want to sync up your playtime roles you are required to verify. This is how you can verify:\n
+
+                        **1.** If there is a verification channel, head there and verify yourself\n
+
+                        **2.** Use the `/verify` command to prompt the verify panel, then follow the steps described there"
+
+  EMBED_SYNC_GROUP_SELECT_TITLE: "Choose Group"
+  EMBED_SYNC_GROUP_SELECT_BODY: "Choose a group to continue with the regular process. This is the group your role will be based under."
+
+  EMBED_SYNC_SENT_TITLE: "Regulars Synced"
+  EMBED_SYNC_SENT_BODY: "Regulars is now active for your account and will automatically sync playtime roles with your server playtime."
+
+  EMBED_SYNC_DEACTIVATED_TITLE: "Deactivated Sync"
+  EMBED_SYNC_DEACTIVATED_BODY: "Regulars is now deactivated for your account and will no longer automatically sync playtime roles with server playtime."
+
+  EMBED_SYNC_REACTIVATED_TITLE: "Reactivated Sync"
+  EMBED_SYNC_REACTIVATED_BODY: "Regulars is now active for your account and will automatically sync playtime roles with your server playtime."
+
+  EMBED_SYNC_REMOVED_CONFIRM_TITLE: "Confirm Removal"
+  EMBED_SYNC_REMOVED_CONFIRM_BODY: "Please confirm that you want to remove your data from the regulars playtime role syncing database. This will permanently delete all data saved."
+
+  EMBED_SYNC_REMOVED_MESSAGE_TITLE: "Regulars Data Removed"
+  EMBED_SYNC_REMOVED_MESSAGE_BODY: "All regulars data has been removed from the database and regulars has been deactivated. You can re-sync yourself any time."
+
+STATUS_BARS:
+
+  EMBED_TICKET_STATUS: "
+                        ```ansi\n
+                        &filler<37>& Ticket Status: %status%&filler<37>&
+                        &filler<20>& Handler: %handler% | Creator: %creator%
+                        ```
+                        "
+  EMBED_NOTICE_OF_DEPARTURE_ACCEPTED: "
+                        ```ansi\n
+                        &filler<37>& Ticket Answer: &red&Dismissed&reset&&filler<29>&
+                        &filler<25>& Creator: &gold&You&reset& | Handler: %handler%
+                        ```
+                        "
+  EMBED_NOTICE_OF_DEPARTURE_DISMISSED: "
+                          ```ansi\n
+                          &filler<37>& Ticket Answer: &green&Accepted&reset&&filler<27>&
+                          &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
+                          ```
+                          "
+  EMBED_NOTICE_OF_DEPARTURE_ENDED: "
+                              ```ansi\n
+                              &filler<27>& Notice of Departure: &red&Ended&reset&&filler<29>&
+                              &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
+                              ```
+                              "
+  EMBED_NOTICE_OF_DEPARTURE_REVOKED: "
+                            ```ansi\n
+                            &filler<27>& Notice of Departure: &red&Revoked&reset&&filler<27>&
+                            &filler<27>& Creator: &gold&You&reset& | Handler: %handler%
+                            ```
+                            "
+
+# You can't use color codes for the following button translations
+BUTTONS:
+  TEXT_SETTINGS_START: "Start"
+  TEXT_SETTINGS_CONFIGURE: "Configure"
+  TEXT_SETTINGS_CURRENT: "Current Settings"
+  TEXT_SETTINGS_INFORMATION: "Information"
+  TEXT_SETTINGS_NEWS: "News"
+
+  TEXT_RULES_PASTE: "Paste Rules"
+  TEXT_RULES_UPDATE: "Update Rules"
+
+  TEXT_PLAYER_STATS: "Statistics"
+  TEXT_PLAYER_MODERATION: "Moderation"
+  TEXT_PLAYER_APPEAL: "Appeals"
+  TEXT_PLAYER_TICKET: "Ticket"
+  TEXT_PLAYER_PANEL: "Open on Panel"
+
+  TEXT_SUPPORT_ANONYMOUS_ACCEPT: "Send Anonymous"
+  TEXT_SUPPORT_ANONYMOUS_DENY: "Send with Information"
+  TEXT_SUPPORT_SETTINGS: "Settings"
+  TEXT_SUPPORT_CLAIM: "Claim"
+  TEXT_SUPPORT_CLOSE: "Close"
+
+  TEXT_SUPPORT_SETTINGS_OPEN: "Open Ticket"
+  TEXT_SUPPORT_SETTINGS_PAUSE: "Pause Ticket"
+  TEXT_SUPPORT_SETTINGS_SUSPEND: "Suspend Ticket"
+  TEXT_SUPPORT_SETTINGS_CLOSE: "Close Ticket"
+
+  TEXT_SUPPORT_LOG_CLAIM: "Claim"
+  TEXT_SUPPORT_LOG_OPEN: "Open"
+  TEXT_SUPPORT_LOG_PAUSE: "Pause"
+  TEXT_SUPPORT_LOG_SUSPEND: "Suspend"
+  TEXT_SUPPORT_LOG_CLOSE: "Close"
+
+  TEXT_APPLICATION_ACTIVATION_ADD: "Add"
+  TEXT_APPLICATION_ACTIVATION_REMOVE: "Remove"
+  TEXT_APPLICATION_ACTIVATION_COMPLETE_SETUP: "Complete Setup"
+  TEXT_APPLICATION_DEACTIVATE: "Deactivate Applications"
+  TEXT_APPLICATION_OPEN_TICKET: "Open Application"
+
+  TEXT_VERIFY_VERIFY: "Verify"
+  TEXT_VERIFY_SHOW_DATA: "Show Data"
+  TEXT_VERIFY_DELETE: "Delete Data"
+
+  TEXT_NOTICE_OF_DEPARTURE_FILE: "File Notice of Departure"
+  TEXT_NOTICE_OF_DEPARTURE_ACCEPT: "Accept Ticket"
+  TEXT_NOTICE_OF_DEPARTURE_DISMISSED: "Dismiss Ticket"
+  TEXT_NOTICE_OF_DEPARTURE_REVOKED: "Revoke Notice of Departure"
+  TEXT_NOTICE_OF_DEPARTURE_DELETE: "Delete Processed Notice of Departure"
+
+  TEXT_REGULAR_OPEN_SETTINGS: "Open Settings"
+  TEXT_REGULAR_SYNC: "Sync Regulars"
+  TEXT_REGULAR_SYNC_DEACTIVATE: "Deactivate Sync"
+  TEXT_REGULAR_SYNC_REACTIVATE: "Reactivate Sync"
+  TEXT_REGULAR_SYNC_REMOVE: "Remove Sync"
+
+SELECT_MENUS:
+  TEXT_SUPPORT_NAME_GENERAL: "General Ticket"
+  TEXT_SUPPORT_DESCRIPTION_GENERAL: "Ticket about anything not listed below"
+
+  TEXT_SUPPORT_NAME_REPORT: "Report Ticket"
+  TEXT_SUPPORT_DESCRIPTION_REPORT: "Ticket to report a player"
+
+  TEXT_SUPPORT_NAME_ERROR: "Error Ticket"
+  TEXT_SUPPORT_DESCRIPTION_ERROR: "Ticket to report an error"
+
+  TEXT_SUPPORT_NAME_UNBAN: "Unban Ticket"
+  TEXT_SUPPORT_DESCRIPTION_UNBAN: "Ticket to request an unban"
+
+  TEXT_SUPPORT_NAME_COMPLAINT: "Complaint Ticket"
+  TEXT_SUPPORT_DESCRIPTION_COMPLAINT: "Ticket for complaining about a member of the server staff"
+
+  TEXT_SUPPORT_NAME_APPLICATION: "Application Ticket"
+  TEXT_SUPPORT_DESCRIPTION_APPLICATION: "Ticket for applying for staff positions"

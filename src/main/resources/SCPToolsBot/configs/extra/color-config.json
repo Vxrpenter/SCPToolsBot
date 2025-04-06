@@ -1,0 +1,26 @@
+{
+  "color_list": {
+    "PINK": "test",
+    "RED": "RED",
+    "BROWN": "WHITE",
+    "SILVER": "DARK_GRAY",
+    "LIGHT_GREEN": "GREEN",
+    "CRIMSON": "RED",
+    "CYAN": "TEAL",
+    "AQUA": "TEAL",
+    "DEEP_PINK": "RED",
+    "TOMATO": "RED",
+    "YELLOW": "GOLD",
+    "MAGENTA": "RED",
+    "BLUE_GREEN": "GREEN",
+    "ORANGE": "RED",
+    "LIME": "GREEN",
+    "GREEN": "GREEN",
+    "EMERALD": "GREEN",
+    "CARMINE": "RED",
+    "NICKEL": "DARK_GRAY",
+    "MINT": "GREEN",
+    "ARMY_GREEN": "GREEN",
+    "PUMPKIN": "RED"
+  }
+}
