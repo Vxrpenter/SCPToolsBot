@@ -16,7 +16,7 @@ class RegularsTemplate(val config: Config, val translation: Translation) {
                 description = "This template is deactivated as long as you have cedmod and webserver deactivated. Navigate to the config to activate and configure them."
             }
 
-            event.reply_("", listOf(embed)).queue()
+            event.reply_("", listOf(embed)).setEphemeral(true).queue()
             return
         }
 
