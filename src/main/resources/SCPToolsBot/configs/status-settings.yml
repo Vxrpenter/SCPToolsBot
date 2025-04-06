@@ -1,0 +1,53 @@
+# Determines if the bot(s) are active or not
+active: false
+
+# Your servers api key. You can get it from the console by typing < !api show >
+api: ""
+# Can be obtained by typing < !id > into your console
+account_id: ""
+
+# ** WARNING ** Turning off messes with template playerlists
+# Turn this of if you don't want playerlists to be periodically updated
+check_playerlist: true
+
+# Should the server status be posted to a specified channel?
+post_server_status: false
+# The channel that the server status is going to be posted to
+post_channel : ""
+# Status page url, change this if you have a custom server status page set up, if not leave it as is
+page_url: "https://status.scpslgame.com/"
+
+# ** WARNING ** If this value is under 10, the api will rate limit all requests
+# The rate at which the bot request updated information from the api
+check_rate: 10
+# If the retrieval of information fails, the bot wil retry for how many times you entered here
+retry_to_fetch_data: 5
+# When the bot fails to retrieve information, it will suspect a rate limit until passing the
+# number you entered here
+suspect_rate_limit_until: 2
+# The time after the bot idles (it will automatically change to a higher check cooldown)
+idle_after: 60
+# The rate at which the bot checks for new information when it idles
+idle_check_rate: 30
+
+# The bot instances you want to create are entered here. To create a second one, copy over the already
+# existing element and paste it underneath the other one (separate with comma)
+instances: [
+  {
+    # The token for the bot you want to be the status bot
+    token: "",
+    # The name of the server the bot represents (can be anything you like)
+    name: "",
+    # The port of the server that this bot represents (e.g., 7777 as the default port)
+    server_port: 0,
+    # How many times should the bot retry to fetch data for this specific server until
+    # declaring it as offline or unavailable
+    retries: 4,
+    playerlist: {
+      # Activates the bots automatic playerlist placement
+      active: false,
+      # The channels the playerlist should be sent to and updated
+      channel_ids: []
+    }
+  },
+]
