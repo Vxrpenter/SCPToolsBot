@@ -707,16 +707,10 @@ REGULARS:
                         "
 
   EMBED_SETTINGS_TITLE: "Personal Regular Settings"
-  EMBED_SETTINGS_BODY: "   
-                        These are your personal regular settings. Only you are able to see this message and to change the settings\n
-                        &filler&
-                        
-                        Group: **%group%**\n
-                        
-                        Role: **%role%**\n
-                        
-                        Time: **%time%h**
-                        "
+  EMBED_SETTINGS_BODY: "These are your personal regular settings. Only you are able to see this message and to change the settings\n"
+  EMBED_SETTINGS_FIELD_GROUP_NAME: "Group"
+  EMBED_SETTINGS_FIELD_ROLE_NAME: "Role"
+  EMBED_SETTINGS_FIELD_PLAYTIME_NAME: "Playtime"
 
   EMBED_NOT_VERIFIED_TITLE: "Not Verified"
   EMBED_NOT_VERIFIED_BODY: "

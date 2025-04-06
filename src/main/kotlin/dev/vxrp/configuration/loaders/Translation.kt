@@ -651,6 +651,12 @@ data class TranslationRegulars(
     val embedSettingsTitle: String,
     @SerialName("EMBED_SETTINGS_BODY")
     val embedSettingsBody: String,
+    @SerialName("EMBED_SETTINGS_FIELD_GROUP_NAME")
+    val embedSettingsFieldGroupName: String,
+    @SerialName("EMBED_SETTINGS_FIELD_ROLE_NAME")
+    val embedSettingsFieldRoleName: String,
+    @SerialName("EMBED_SETTINGS_FIELD_PLAYTIME_NAME")
+    val embedSettingsFieldPlaytimeName: String,
 
     @SerialName("EMBED_SYNC_GROUP_SELECT_TITLE")
     val embedSyncGroupSelectTitle: String,
