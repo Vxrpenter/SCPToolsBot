@@ -19,7 +19,7 @@ class UserTable {
     }
 
     fun addToDatabase(userId: String, verifyTimestamp: String, userSteamId: String, discordRefreshToken: String) {
-        if (!exists(userId)) return
+        if (exists(userId)) return
 
         transaction {
             Users.insert {

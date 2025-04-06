@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {
     fun init() {
         val noDataEmbed = Embed {
+            color = 0xE74D3C
             title = ColorTool().useCustomColorCodes(translation.verify.embedNoDataTitle)
             description = ColorTool().useCustomColorCodes(translation.verify.embedNoDataBody)
         }
@@ -53,7 +54,7 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
-            VerifyMessageHandler(event.jda, config, translation).sendDeletionMessage(event.user.name)
+            VerifyMessageHandler(event.jda, config, translation).sendDeletionMessage(event.user)
         }
     }
 }
