@@ -47,6 +47,7 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
             UserTable().delete(event.user.id)
 
             val embed = Embed {
+                color = 0xE74D3C
                 title = ColorTool().useCustomColorCodes(translation.verify.embedDeletionSentTitle)
                 description = ColorTool().useCustomColorCodes(translation.verify.embedDeletionSentBody)
             }
