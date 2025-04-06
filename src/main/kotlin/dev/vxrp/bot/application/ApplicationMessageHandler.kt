@@ -33,6 +33,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
 
     fun getDeactivationMenu(): Pair<MessageEmbed, Collection<ItemComponent>> {
         val embed = Embed {
+            color = 0xE74D3C
             title = ColorTool().useCustomColorCodes(translation.application.embedDeactivationMenuTitle)
             description = ColorTool().useCustomColorCodes(translation.application.embedDeactivationMenuBody)
         }
@@ -57,7 +58,11 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         var status = translation.application.textStatusActive
         if (!state) status = translation.application.textStatusDeactivated
 
+        var embedColor = 0x2ECC70
+        if (!state) embedColor = 0xE74D3C
+
         val embed = Embed {
+            color = embedColor
             title = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageTitle)
             description = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageBody
                 .replace("%status%", status)
@@ -101,6 +106,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         applicationTypeMap[userId] = roleStringPair.second
 
         return Embed {
+            color = 0x2ECC70
             title = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuTitle)
             description = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuBody
                 .replace("%status%", translation.application.textStatusDeactivated)

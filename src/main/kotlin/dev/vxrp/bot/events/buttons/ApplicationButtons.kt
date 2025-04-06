@@ -20,6 +20,7 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
     suspend fun init() {
         if (event.button.id?.startsWith("application_activation_add") == true && !nullCheck()) {
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.application.embedChoosePositionTitle)
                 description = ColorTool().useCustomColorCodes(translation.application.embedChoosePositionBody)
             }
@@ -35,6 +36,7 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
 
         if (event.button.id?.startsWith("application_activation_remove") == true && !nullCheck()) {
             val embed = Embed {
+                color = 0xE74D3C
                 title = ColorTool().useCustomColorCodes(translation.application.embedChoosePositionTitle)
                 description = ColorTool().useCustomColorCodes(translation.application.embedChoosePositionBody)
             }
