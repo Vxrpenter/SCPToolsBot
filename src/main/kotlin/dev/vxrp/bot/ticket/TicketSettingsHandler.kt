@@ -76,7 +76,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 name = user.globalName
                 iconUrl = user.avatarUrl
             }
-            color = 0x2ECC70
+            color = 0xf1c40f
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketPausedTitle
                 .replace("%user%", user.globalName!!))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketPausedBody)
