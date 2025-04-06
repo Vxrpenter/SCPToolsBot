@@ -63,10 +63,22 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
         val embed = Embed {
             thumbnail = user.avatarUrl
             title = ColorTool().useCustomColorCodes(translation.regulars.embedSettingsTitle)
-            description = ColorTool().useCustomColorCodes(translation.regulars.embedSettingsBody
-                .replace("%group%", groupRole)
-                .replace("%role%", role)
-                .replace("%time%", playtime))
+            description = ColorTool().useCustomColorCodes(translation.regulars.embedSettingsBody)
+            field {
+                inline = true
+                name = translation.regulars.embedSettingsFieldGroupName
+                value = groupRole
+            }
+            field {
+                inline = true
+                name = translation.regulars.embedSettingsFieldRoleName
+                value = role
+            }
+            field {
+                inline = true
+                name = translation.regulars.embedSettingsFieldPlaytimeName
+                value = playtime
+            }
         }
 
         return embed

@@ -1,6 +1,7 @@
 
 package dev.vxrp.web
 
+import dev.minn.jda.ktx.coroutines.await
 import dev.vxrp.api.discord.Discord
 import dev.vxrp.api.discord.enums.DiscordConnection
 import dev.vxrp.api.discord.enums.DiscordTokenResponse
@@ -53,14 +54,15 @@ class WebServerManager(val api: JDA, val config: Config, val translation: Transl
         }.start(wait = true)
     }
 
-    private fun writeToDatabase(tokenResponse: DiscordTokenResponse, user: DiscordUser, connections: List<DiscordConnection>) {
+    private suspend fun writeToDatabase(tokenResponse: DiscordTokenResponse, user: DiscordUser, connections: List<DiscordConnection>) {
         for (connection in connections) {
             if (connection.type != "steam") continue
 
             logger.info("Received connection data and refresh token from user: ${user.id}")
             UserTable().addToDatabase(user.id, LocalDate.now().toString(), connection.id, tokenResponse.refreshToken)
 
-            VerifyMessageHandler(api, config, translation).sendVerificationMessage(user.username)
+            val currentUser = api.retrieveUserById(user.id).await()
+            VerifyMessageHandler(api, config, translation).sendVerificationMessage(currentUser)
         }
     }
 }
