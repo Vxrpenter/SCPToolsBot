@@ -1,7 +1,9 @@
 package dev.vxrp.bot.events.buttons
 
 import dev.minn.jda.ktx.messages.Embed
+import dev.minn.jda.ktx.messages.edit
 import dev.minn.jda.ktx.messages.reply_
+import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.regulars.RegularsFileHandler
 import dev.vxrp.bot.regulars.RegularsManager
 import dev.vxrp.bot.regulars.RegularsMessageHandler
@@ -23,7 +25,7 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
             ).setEphemeral(true).queue()
         }
 
-        if (event.button.id?.startsWith("regulars_sync") == true) {
+        if (event.button.id?.equals("regulars_sync") == true) {
             if (notVerified()) return
 
             val embed = Embed {
@@ -31,6 +33,7 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
                 description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncGroupSelectBody)
             }
 
+            event.message.delete().queue()
             event.reply_("", listOf(embed)).addActionRow(
                 StringSelectMenu.create("regulars_group_select").also {
                     for (group in RegularsFileHandler(config, translation).query()) {
@@ -41,30 +44,42 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
         }
 
         if (event.button.id?.startsWith("regulars_sync_reactivate") == true) {
+            val regularsMessageHandler = RegularsMessageHandler(event.jda, config, translation)
             if (notVerified()) return
 
             RegularsManager(event.jda, config, translation).reactivateSync(event.user.id)
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncReactivatedTitle)
                 description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncReactivatedBody)
             }
 
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.message.delete().queue()
+            event.hook.send("", listOf(embed)).setEphemeral(true).queue()
+            event.reply_("", listOf(RegularsMessageHandler(event.jda, config, translation).getSettings(event.user))).addActionRow(
+                regularsMessageHandler.getSettingsActionRow(event.user.id)
+            ).setEphemeral(true).queue()
         }
 
         if (event.button.id?.startsWith("regulars_sync_deactivate") == true) {
+            val regularsMessageHandler = RegularsMessageHandler(event.jda, config, translation)
             if (notVerified()) return
 
             RegularsManager(event.jda, config, translation).deactivateSync(event.user.id)
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncDeactivatedTitle)
                 description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncDeactivatedBody)
             }
 
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.message.delete().queue()
+            event.hook.send("", listOf(embed)).setEphemeral(true).queue()
+            event.reply_("", listOf(RegularsMessageHandler(event.jda, config, translation).getSettings(event.user))).addActionRow(
+                regularsMessageHandler.getSettingsActionRow(event.user.id)
+            ).setEphemeral(true).queue()
         }
 
-        if (event.button.id?.startsWith("regulars_sync_remove") == true) {
+        if (event.button.id?.equals("regulars_sync_remove") == true) {
             if (notVerified()) return
 
             val embed = Embed {
@@ -72,21 +87,28 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
                 description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncRemovedConfirmBody)
             }
 
+            event.message.delete().queue()
             event.reply_("", listOf(embed)).addActionRow(
                 Button.success("regulars_sync_remove_confirm", translation.buttons.textRegularSyncRemove)
             ).setEphemeral(true).queue()
         }
 
         if (event.button.id?.startsWith("regulars_sync_remove_confirm") == true) {
+            val regularsMessageHandler = RegularsMessageHandler(event.jda, config, translation)
             if (notVerified()) return
 
             RegularsManager(event.jda, config, translation).removeSync(event.user.id)
             val embed = Embed {
+                color = 0x2ECC70
                 title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncRemovedTitle)
                 description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncRemovedBody)
             }
 
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.message.delete().queue()
+            event.hook.send("", listOf(embed)).setEphemeral(true).queue()
+            event.reply_("", listOf(RegularsMessageHandler(event.jda, config, translation).getSettings(event.user))).addActionRow(
+                regularsMessageHandler.getSettingsActionRow(event.user.id)
+            ).setEphemeral(true).queue()
         }
     }
 
