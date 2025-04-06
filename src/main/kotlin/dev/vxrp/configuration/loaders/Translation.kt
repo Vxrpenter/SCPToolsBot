@@ -537,6 +537,17 @@ data class TranslationVerify(
     @SerialName("EMBED_DATA_BODY")
     val embedDataBody: String,
 
+    @SerialName("EMBED_DATA_FIELD_VERIFIED_TITLE")
+    val embedDataFieldVerifiedTitle: String,
+    @SerialName("EMBED_DATA_FIELD_STEAMID_TITLE")
+    val embedDataFieldSteamIdTitle: String,
+    @SerialName("EMBED_DATA_FIELD_TIMESTAMP_TITLE")
+    val embedDataFieldTimestampTitle: String,
+    @SerialName("EMBED_DATA_FIELD_DELETE_VALUE")
+    val embedDataFieldDeleteValue: String,
+
+
+
     @SerialName("EMBED_NO_DATA_TITLE")
     val embedNoDataTitle: String,
     @SerialName("EMBED_NO_DATA_BODY")
