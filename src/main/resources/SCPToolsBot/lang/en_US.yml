@@ -560,16 +560,11 @@ VERIFY:
                         **WE DO NOT** receive any information such as: **E-Mails**, **Passwords**, **Authentication Codes** etc. We do not distribute your information nor use it to monetize or advertise to you."
 
   EMBED_DATA_TITLE: "User Data"
-  EMBED_DATA_BODY: "
-                        This is all data we currently have on you. Do note that the refresh token that we received from discord will not be displayed here.\n
-                      
-                        **Currently Verified?:** %verified%\n
-                        
-                        **Linked Steam Account**: %steamId%\n
-                        
-                        **Verification Timestamp:** %timestamp%\n
-                        
-                        _You can delete this data whenever you want to. Just go to the verification panel and click on the 'Delete Data' button._"
+  EMBED_DATA_BODY: "This is all data we currently have on you. Do note that the refresh token that we received from discord will not be displayed here."
+  EMBED_DATA_FIELD_VERIFIED_TITLE: "Verified"
+  EMBED_DATA_FIELD_STEAMID_TITLE: "SteamID"
+  EMBED_DATA_FIELD_TIMESTAMP_TITLE: "Timestamp"
+  EMBED_DATA_FIELD_DELETE_VALUE: "_You can delete this data whenever you want to. Just go to the verification panel and click on the 'Delete Data' button._"
 
   EMBED_NO_DATA_TITLE: "No Data"
   EMBED_NO_DATA_BODY: "Could not find any verification data associated with your profile. Please verify before requesting your data."
