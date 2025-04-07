@@ -179,10 +179,10 @@ done
 
 case $language in
     English )
-        language="en_US"
+        botLanguage="en_US"
     ;;
     German )
-        language="de_DE"
+        botLanguage="de_DE"
     ;;
     * )
         echo "This is no language, exiting..."
