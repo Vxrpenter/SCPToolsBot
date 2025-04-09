@@ -91,7 +91,7 @@ confirm
 echo ""
 echo "Which version do you want to download?"
 PS3=":: Enter number of version option: "
-select option in 1.0.0 1.0.1
+select option in 1.0.1 1.0.0
 do
   version=$option
   break
