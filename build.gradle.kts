@@ -10,7 +10,7 @@ plugins {
 
 application.mainClass = "dev.vxrp.MainKt"
 group = "dev.vxrp"
-version= "1.0.0"
+version= "1.0.1"
 
 
 repositories {
