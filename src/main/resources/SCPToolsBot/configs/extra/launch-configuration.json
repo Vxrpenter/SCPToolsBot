@@ -185,6 +185,11 @@
       "id": "main:NOTICE_OF_DEPARTURE_CHECKER",
       "engage": true,
       "separate_thread": true
+    },
+    {
+      "id": "main:REGULARS_CHECKER",
+      "engage": true,
+      "separate_thread": true
     }
   ]
 }
