@@ -36,7 +36,6 @@ class BotManager(val config: Config, val translation: Translation) {
             } ?: ActivityType.valueOf(config.settings.activityType), config.settings.activityContent))
         }
 
-
         val launchOptionManager = LaunchOptionManager(config, translation)
 
         if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_LISTENER).engage) api.addEventListener(CommandListener(api, config, translation))
