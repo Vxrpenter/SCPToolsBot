@@ -72,6 +72,20 @@ data class ConfigCedmod(
 )
 
 @Serializable
+data class ConfigXP(
+    @SerialName("database_type")
+    val databaseType: String,
+    @SerialName("database_address")
+    val databaseAddress : String,
+    @SerialName("database_user")
+    val databaseUser: String,
+    @SerialName("database_password")
+    val databasePassword: String,
+    @SerialName("auth_type")
+    val authType: String
+)
+
+@Serializable
 data class ConfigVerify(
     @SerialName("oauth_link")
     val oauthLink: String,
