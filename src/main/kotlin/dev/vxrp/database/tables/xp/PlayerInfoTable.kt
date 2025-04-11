@@ -20,13 +20,4 @@ class PlayerInfoTable {
         override val primaryKey: PrimaryKey
             get() = PrimaryKey(id)
     }
-
-    object PlayerInfoNorthwood : Table("playerinfo_Northwood") {
-        val id = varchar("id", 32)
-        val xp = integer("xp").default(0)
-        val nickname = varchar("nickname", 64)
-
-        override val primaryKey: PrimaryKey
-            get() = PrimaryKey(id)
-    }
 }
