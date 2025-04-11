@@ -13,7 +13,6 @@ class DatabaseManager(val config: Config, folder: String, val file: String) {
 
     init {
         File("$dir/$folder/").also { if (!it.exists()) it.mkdirs() }
-
         File("$dir/$folder/$file").also { if (!it.exists()) it.createNewFile() }
 
         if (config.settings.database.dataUsePredefined == "SQLITE") {
