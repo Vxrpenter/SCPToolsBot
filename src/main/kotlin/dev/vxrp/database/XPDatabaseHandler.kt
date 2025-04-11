@@ -1,7 +1,11 @@
 package dev.vxrp.database
 
 import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.database.enums.AuthType
+import dev.vxrp.database.tables.xp.PlayerInfoTable
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 
 class XPDatabaseHandler(val config: Config) {
@@ -19,5 +23,45 @@ class XPDatabaseHandler(val config: Config) {
         val url = "jdbc:mysql://${config.settings.xp.databaseAddress}"
 
         return Database.connect(url, driver = "com.mysql.cj.jdbc.Driver", config.settings.xp.databaseUser, config.settings.xp.databasePassword)
+    }
+
+    fun queryExperience(authType: AuthType, userId: Long): Int {
+        return when(authType) {
+            AuthType.STEAMID -> {
+                steamTableTransaction(userId)
+            }
+
+            AuthType.DISCORD -> {
+                discordTableTransaction(userId)
+            }
+        }
+    }
+
+    private fun steamTableTransaction(userId: Long): Int {
+        var xp: Int? = null
+
+        transaction(database) {
+            PlayerInfoTable.PlayerInfoSteam.selectAll()
+                .where {PlayerInfoTable.PlayerInfoSteam.id eq userId}
+                .forEach {
+                    xp = it[PlayerInfoTable.PlayerInfoSteam.xp]
+                }
+        }
+
+        return xp!!
+    }
+
+    private fun discordTableTransaction(userId: Long): Int {
+        var xp: Int? = null
+
+        transaction(database) {
+            PlayerInfoTable.PlayerInfoDiscord.selectAll()
+                .where {PlayerInfoTable.PlayerInfoDiscord.id eq userId}
+                .forEach {
+                    xp = it[PlayerInfoTable.PlayerInfoDiscord.xp]
+                }
+        }
+
+        return xp!!
     }
 }

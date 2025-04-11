@@ -1,8 +1,13 @@
 package dev.vxrp.bot.regulars
 import dev.minn.jda.ktx.coroutines.await
 import dev.vxrp.api.sla.cedmod.Cedmod
+import dev.vxrp.bot.regulars.data.RegularDatabaseEntry
+import dev.vxrp.bot.regulars.data.RegularsConfigRole
+import dev.vxrp.bot.regulars.enums.RequirementType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.XPDatabaseHandler
+import dev.vxrp.database.enums.AuthType
 import dev.vxrp.database.tables.RegularsTable
 import dev.vxrp.database.tables.UserTable
 import dev.vxrp.util.Timer
@@ -11,6 +16,7 @@ import kotlinx.coroutines.delay
 import net.dv8tion.jda.api.JDA
 import org.slf4j.LoggerFactory
 import java.time.LocalDate
+import kotlin.math.sqrt
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.seconds
 
@@ -63,11 +69,9 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
     private suspend fun checkerTask() {
         logger.info("Starting regulars checker, processing units starting...")
 
-        val currentDate = LocalDate.now()
-
         for (regular in RegularsTable().getAllEntrys()) {
             val lastCheckedDate = LocalDate.parse(regular.lastCheckedDate)
-            if (lastCheckedDate == currentDate) continue
+            if (lastCheckedDate == LocalDate.now()) continue
 
             if (!UserTable().exists(regular.id)) {
                 RegularsTable().delete(regular.id)
@@ -75,35 +79,82 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
                 continue
             }
 
-            val cedmod = Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api)
-            val steamId = UserTable().getSteamId(regular.id)
-
-            if (regular.playtime == 0.0) {
-                val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = 365, basicStats = true)
-
-                RegularsTable().setPlaytime(regular.id, player.players[0].activity)
-                RegularsTable().setLastCheckedDate(regular.id, currentDate.toString())
-                logger.info("Updated user: ${regular.id}'s regular data for the first time, new playtime: ${player.players[0].activity}")
-
-                checkRoles(regular.id, regular.groupRoleId, regular.roleId)
+            val role = getRole(regular)
+            role ?: run {
+                logger.error("Regulars config does not match up to the database, players have roles in their registry that do not exist anymore")
                 return
             }
 
-            val activityMin = lastCheckedDate.until(currentDate).days
-            if (activityMin == 0) return
+            when(RequirementType.valueOf(role.requirementType)) {
+                RequirementType.PLAYTIME -> {
+                    if (!checkPlaytime(regular, lastCheckedDate)) break
 
-            val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = activityMin, basicStats = true)
-            val currentPlaytime = RegularsTable().getPlaytime(regular.id)
+                    checkRoles(regular.id, regular.groupRoleId, regular.roleId)
+                }
 
-            val newPlaytime = currentPlaytime+player.players[0].activity
+                RequirementType.XP -> {
+                    if (!checkLevel(regular, role)) break
 
-            RegularsTable().setPlaytime(regular.id, newPlaytime)
-            RegularsTable().setLastCheckedDate(regular.id, currentDate.toString())
-            logger.info("Updated user: ${regular.id}'s regular data by adding: ${player.players[0].activity} to their already existing playtime of: $currentPlaytime")
+                    checkRoles(regular.id, regular.groupRoleId, regular.roleId)
+                }
 
-            checkRoles(regular.id, regular.groupRoleId, regular.roleId)
+                RequirementType.BOTH -> {
+                    if (!checkPlaytime(regular, lastCheckedDate) || !checkLevel(regular, role)) break
+
+                    checkRoles(regular.id, regular.groupRoleId, regular.roleId)
+                }
+            }
+
+            RegularsTable().setLastCheckedDate(regular.id, LocalDate.now().toString())
             delay(10.seconds)
         }
+    }
+
+    private fun checkPlaytime(regular: RegularDatabaseEntry, lastCheckedDate: LocalDate): Boolean {
+        val cedmod = Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api)
+        val steamId = UserTable().getSteamId(regular.id)
+
+        if (regular.playtime == 0.0) {
+            val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = 365, basicStats = true)
+
+            RegularsTable().setPlaytime(regular.id, player.players[0].activity)
+            RegularsTable().setLastCheckedDate(regular.id, LocalDate.now().toString())
+            logger.info("Updated user: ${regular.id}'s regular data for the first time, new playtime: ${player.players[0].activity}")
+
+            return true
+        }
+
+        val activityMin = lastCheckedDate.until(LocalDate.now()).days
+        if (activityMin == 0) return false
+
+        val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = activityMin, basicStats = true)
+        val currentPlaytime = RegularsTable().getPlaytime(regular.id)
+
+        val newPlaytime = currentPlaytime+player.players[0].activity
+
+        RegularsTable().setPlaytime(regular.id, newPlaytime)
+        logger.info("Updated user: ${regular.id}'s regular data by adding: ${player.players[0].activity} to their already existing playtime of: $currentPlaytime")
+        return true
+    }
+
+    private fun checkLevel(regular: RegularDatabaseEntry, role: RegularsConfigRole): Boolean {
+        val steamId = UserTable().getSteamId(regular.id)
+        val discordId = regular.id
+
+        val xp: Int = when(AuthType.valueOf(config.settings.xp.authType)) {
+            AuthType.STEAMID -> {
+                XPDatabaseHandler(config).queryExperience(AuthType.STEAMID, steamId.toLong())
+            }
+
+            AuthType.DISCORD -> {
+                XPDatabaseHandler(config).queryExperience(AuthType.DISCORD, discordId.toLong())
+            }
+        }
+
+        val level = (-50 + sqrt(((4 * xp / config.settings.xp.additionalParameter) + 9500).toFloat()) / 2)
+
+        if (level >= role.xpRequirements) return true
+        return false
     }
 
     private suspend fun checkRoles(userId: String, groupRoleId: String?, roleId: String) {
@@ -145,5 +196,21 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
             guild.addRoleToMember(member, role).queue()
             logger.info("Updated playtime role of user: $userId to $roleId")
         }
+    }
+
+    private fun getRole(regular: RegularDatabaseEntry):  RegularsConfigRole? {
+        val configQuery = RegularsFileHandler(config, translation).query()
+
+        for (config in configQuery) {
+            if (config.manifest.name != regular.group) continue
+
+            for (role in config.config.roles) {
+                if (role.id != regular.roleId) continue
+
+                return role
+            }
+        }
+
+        return null
     }
 }
