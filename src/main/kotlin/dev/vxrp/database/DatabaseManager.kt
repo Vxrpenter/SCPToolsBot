@@ -5,6 +5,7 @@ import dev.vxrp.database.enums.DatabaseType
 import dev.vxrp.database.tables.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.io.File
 
@@ -12,17 +13,24 @@ class DatabaseManager(val config: Config, private val folder: String, val file: 
     private val dir = System.getProperty("user.dir")
 
     init {
-        connectToDatabase()
+        val database = connectToDatabase()
+        val xpDatabase = XPDatabaseHandler(config).connectToDatabase()
+
+        TransactionManager.defaultDatabase = database
+
+        if (xpDatabase != null) XPDatabaseHandler(config).database = xpDatabase
+        else XPDatabaseHandler(config).database = database
+
         createTables()
     }
 
-    private fun connectToDatabase() {
+    private fun connectToDatabase(): Database? {
         if (config.settings.database.dataUsePredefined == "SQLITE") {
             File("$dir/$folder/").also { if (!it.exists()) it.mkdirs() }
             File("$dir/$folder/$file").also { if (!it.exists()) it.createNewFile() }
 
             Database.connect("jdbc:sqlite:$dir/$folder/$file", driver = "org.sqlite.JDBC")
-            return
+            return null
         }
 
         when (DatabaseType.SQlITE.takeIf { !enumContains<DatabaseType>(config.settings.database.customType) }
@@ -30,25 +38,25 @@ class DatabaseManager(val config: Config, private val folder: String, val file: 
             DatabaseType.SQlITE -> {
                 val url = "jdbc:sqlite://${config.settings.database.customUrl}"
 
-                Database.connect(url, driver = "com.mysql.cj.jdbc.Driver", config.settings.database.customUsername, config.settings.database.customPassword)
+                return Database.connect(url, driver = "com.mysql.cj.jdbc.Driver", config.settings.database.customUsername, config.settings.database.customPassword)
             }
 
             DatabaseType.MYSQL -> {
                 val url = "jdbc:mysql://${config.settings.database.customUrl}"
 
-                Database.connect(url, driver = "com.mysql.cj.jdbc.Driver", config.settings.database.customUsername, config.settings.database.customPassword)
+                return Database.connect(url, driver = "com.mysql.cj.jdbc.Driver", config.settings.database.customUsername, config.settings.database.customPassword)
             }
 
             DatabaseType.POSTGRESQL -> {
                 val url = "jdbc:postgresql://${config.settings.database.customUrl}"
 
-                Database.connect(url, driver = "org.postgresql.Driver", config.settings.database.customUsername, config.settings.database.customPassword)
+                return Database.connect(url, driver = "org.postgresql.Driver", config.settings.database.customUsername, config.settings.database.customPassword)
             }
 
             DatabaseType.MARiADB -> {
                 val url = "jdbc:mariadb://${config.settings.database.customUrl}"
 
-                Database.connect(url, driver = "org.mariadb.jdbc.Driver", config.settings.database.customUsername, config.settings.database.customPassword)
+                return Database.connect(url, driver = "org.mariadb.jdbc.Driver", config.settings.database.customUsername, config.settings.database.customPassword)
             }
         }
     }
