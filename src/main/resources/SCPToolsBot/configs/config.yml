@@ -80,12 +80,12 @@ XP:
   database_user: ""
   # The password of the user you want the bot to use
   database_password: ""
-  # ** WARNING ** To keep this feature as simple as possible, there will only be one auth type supported.
+  # ** WARNING ** To keep this feature as simple as possible, there will only be one auth type supported. Also, Northwood authtype is currently not supported
   # Which type of authorization table do you want to query from?
-  # Available auth types are [STEAM, DISCORD, NORTHWOOD]
+  # Available auth types are [STEAM, DISCORD]
   auth_type: ""
   # This affects the 'a' parameter in the standard level function. This is the standard function used by the XP plugin: -50 + sqrt((4 * xp / a) + 9800) / 2
-  additional_parameter: "1"
+  additional_parameter: 1
 
 # ** WARNING ** For this setting to work, you need to activate the webserver.
 # The webserver is generally just a redirect to receive data from the discord OAuth Api, so it
