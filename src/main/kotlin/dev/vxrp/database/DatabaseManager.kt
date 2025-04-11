@@ -38,7 +38,10 @@ class DatabaseManager(val config: Config, folder: String, val file: String) {
                 }
 
                 DatabaseType.POSTGRESQL -> {
-                    // WIP
+                    val url = "jdbc:postgresql://${config.settings.database.customUrl}"
+
+                    Database.connect(url, driver = "org.postgresql.Driver", config.settings.database.customUsername, config.settings.database.customUsername)
+                    createTables()
                 }
 
                 DatabaseType.MARiADB -> {
