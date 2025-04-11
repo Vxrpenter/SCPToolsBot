@@ -85,7 +85,7 @@ data class ConfigXP(
     @SerialName("auth_type")
     val authType: String,
     @SerialName("additional_parameter")
-    val additionalParameter: String
+    val additionalParameter: Int
 )
 
 @Serializable
