@@ -71,9 +71,6 @@ XP:
   # This activates the XP integration. This feature is only used for the following functions, only activated if you have these features in use: Regulars
   active: false
   # ** WARNING ** LiteDB will not be supported in any coming version as it would be really challenging to implement, in the end, bringing no real advantage
-  # Because the XP plugin only provides support for the providers LiteDB and MySql, no other database types will be supported here.
-  # Which type of db should be used: [MYSQL]
-  database_type: ""
   # The address of the database which the plugin uses. If the plugin and bot are running on the same DB, the bot will identify it and not connect to the database
   # a second time and just pull data from the existing connection. Make sure you give the bot's user enough rights to do so.
   database_address: ""

@@ -76,8 +76,6 @@ data class ConfigCedmod(
 @Serializable
 data class ConfigXP(
     val active: Boolean,
-    @SerialName("database_type")
-    val databaseType: String,
     @SerialName("database_address")
     val databaseAddress : String,
     @SerialName("database_user")
