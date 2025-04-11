@@ -3,7 +3,7 @@ package dev.vxrp.database.tables.xp
 import org.jetbrains.exposed.sql.Table
 
 class PlayerInfoTable {
-    object PlayerInfoSteam : Table("playerinfo") {
+    object PlayerInfoSteam : Table("playerinfo_Steam") {
         val id = long("id")
         val xp = integer("xp").default(0)
         val nickname = varchar("nickname", 64)
@@ -12,7 +12,7 @@ class PlayerInfoTable {
             get() = PrimaryKey(id)
     }
 
-    object PlayerInfoDiscord: Table("playerinfo") {
+    object PlayerInfoDiscord: Table("playerinfo_Discord") {
         val id = long("id")
         val xp = integer("xp").default(0)
         val nickname = varchar("nickname", 64)
@@ -21,7 +21,7 @@ class PlayerInfoTable {
             get() = PrimaryKey(id)
     }
 
-    object PlayerInfoNorthwood : Table("playerinfo") {
+    object PlayerInfoNorthwood : Table("playerinfo_Northwood") {
         val id = varchar("id", 32)
         val xp = integer("xp").default(0)
         val nickname = varchar("nickname", 64)
