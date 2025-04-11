@@ -38,7 +38,7 @@ database:
   # Which type of custom db should be used: [SQLITE, MYSQL, POSTGRESQL, MARIADB]
   custom_type: ""
   # Here you can input a custom database url to connect to. Make sure to not include https:// or http://, just use the plain url for
-  # database connection, e.g., localhost:3306/test
+  # database connection, e.g., < localhost:3306/test >
   custom_url: ""
   # Here you've input the custom db password
   custom_username: ""
@@ -73,6 +73,7 @@ XP:
   # ** WARNING ** LiteDB will not be supported in any coming version as it would be really challenging to implement, in the end, bringing no real advantage
   # The address of the database which the plugin uses. If the plugin and bot are running on the same DB, the bot will identify it and not connect to the database
   # a second time and just pull data from the existing connection. Make sure you give the bot's user enough rights to do so.
+  # Example database address: < localhost:3306/test >
   database_address: ""
   # The username of the database user you want the bot to use
   database_user: ""
