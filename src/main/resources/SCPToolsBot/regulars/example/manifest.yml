@@ -1,0 +1,16 @@
+#                                                            ______     ______     ______     __  __     __         ______     ______     ______
+#                                                           /\  == \   /\  ___\   /\  ___\   /\ \/\ \   /\ \       /\  __ \   /\  == \   /\  ___\
+#                                                           \ \  __<   \ \  __\   \ \ \__ \  \ \ \_\ \  \ \ \____  \ \  __ \  \ \  __<   \ \___  \
+#                                                            \ \_\ \_\  \ \_____\  \ \_____\  \ \_____\  \ \_____\  \ \_\ \_\  \ \_\ \_\  \/\_____\
+#                                                            \/_/ /_/   \/_____/   \/_____/   \/_____/   \/_____/   \/_/\/_/   \/_/ /_/   \/_____/
+
+
+
+# The name of the group that will be displayed to the users
+name: "Example"
+# The description of the group that will be displayed to the users
+description: "Just an example"
+# The custom role will be a group role, given to all users that have selected this group
+custom_role:
+  use: false
+  id: ""
