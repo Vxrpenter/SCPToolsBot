@@ -24,14 +24,14 @@ class DatabaseManager(val config: Config, folder: String, val file: String) {
             when (DatabaseType.SQlITE.takeIf { !enumContains<DatabaseType>(config.settings.database.customType) }
                 ?: DatabaseType.valueOf(config.settings.database.customType)) {
                 DatabaseType.SQlITE -> {
-                    val url = "jdbc:sqlite:${config.settings.database.customUrl}"
+                    val url = "jdbc:sqlite://${config.settings.database.customUrl}"
 
                     Database.connect(url, driver = "com.mysql.cj.jdbc.Driver", config.settings.database.customUsername, config.settings.database.customUsername)
                     createTables()
                 }
 
                 DatabaseType.MYSQL -> {
-                    val url = "jdbc:mysql:${config.settings.database.customUrl}"
+                    val url = "jdbc:mysql://${config.settings.database.customUrl}"
 
                     Database.connect(url, driver = "")
                     createTables()
@@ -42,7 +42,7 @@ class DatabaseManager(val config: Config, folder: String, val file: String) {
                 }
 
                 DatabaseType.MARiADB -> {
-                    val url = "jdbc:mariadb:${config.settings.database.customUrl}"
+                    val url = "jdbc:mariadb://${config.settings.database.customUrl}"
 
                     Database.connect(url, driver = "org.mariadb.jdbc.Driver", config.settings.database.customUsername, config.settings.database.customUsername)
                     createTables()
