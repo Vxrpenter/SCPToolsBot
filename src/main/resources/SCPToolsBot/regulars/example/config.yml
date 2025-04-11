@@ -16,7 +16,7 @@ roles: [
     description: "",
     # Which type of requirement do you want to use? The requirement_type will define if the role is given to the player when reaching a certain
     # playtime, a certain level, or both. Choose between the types: [PLAYTIME, XP, BOTH]
-    requirement_type: "",
+    requirement_type: "PLAYTIME",
     # Which playtime (in hours) does the user need to reach before getting the role?
     playtime_requirement: 25,
     # Which xp level (in end levels) should the user need to reach before getting the role?
@@ -29,7 +29,7 @@ roles: [
     description: "",
     # Which type of requirement do you want to use? The requirement_type will define if the role is given to the player when reaching a certain
     # playtime, a certain level, or both. Choose between the types: [PLAYTIME, XP, BOTH]
-    requirement_type: "",
+    requirement_type: "PLAYTIME",
     # Which playtime (in hours) does the user need to reach before getting the role?
     playtime_requirement: 50,
     # Which xp level (in end levels) should the user need to reach before getting the role?
@@ -42,7 +42,7 @@ roles: [
     description: "",
     # Which type of requirement do you want to use? The requirement_type will define if the role is given to the player when reaching a certain
     # playtime, a certain level, or both. Choose between the types: [PLAYTIME, XP, BOTH]
-    requirement_type: "",
+    requirement_type: "PLAYTIME",
     # Which playtime (in hours) does the user need to reach before getting the role?
     playtime_requirement: 100,
     # Which xp level (in end levels) should the user need to reach before getting the role?
@@ -55,7 +55,7 @@ roles: [
     description: "",
     # Which type of requirement do you want to use? The requirement_type will define if the role is given to the player when reaching a certain
     # playtime, a certain level, or both. Choose between the types: [PLAYTIME, XP, BOTH]
-    requirement_type: "",
+    requirement_type: "PLAYTIME",
     # Which playtime (in hours) does the user need to reach before getting the role?
     playtime_requirement: 150,
     # Which xp level (in end levels) should the user need to reach before getting the role?
