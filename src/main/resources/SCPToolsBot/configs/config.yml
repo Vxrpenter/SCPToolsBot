@@ -37,7 +37,8 @@ database:
   # ** WARNING ** When using custom, you may experience issues. This is a work in progress feature, so it is unstable, report problems on the GitHub page
   # Which type of custom db should be used: [SQLITE, MYSQL, POSTGRESQL, MARIADB]
   custom_type: ""
-  # Here you can input a custom database url to connect to. This will only work when the setting is predefined to NONE
+  # Here you can input a custom database url to connect to. Make sure to not include https:// or http://, just use the plain url for
+  # database connection, e.g., localhost:3306/test
   custom_url: ""
   # Here you've input the custom db password
   custom_username: ""
