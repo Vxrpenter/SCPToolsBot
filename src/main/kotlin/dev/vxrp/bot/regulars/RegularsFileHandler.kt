@@ -1,5 +1,6 @@
 package dev.vxrp.bot.regulars
 
+import com.charleskorn.kaml.Yaml
 import dev.vxrp.bot.regulars.data.Regulars
 import dev.vxrp.bot.regulars.data.RegularsConfig
 import dev.vxrp.bot.regulars.data.RegularsManifest
@@ -22,20 +23,20 @@ class RegularsFileHandler(config: Config, translation: Translation) {
     private fun createExamples() {
         Files.createDirectories(Path("$workingDirectory/SCPToolsBot/regulars/example/"))
 
-        val configFile = Path("$workingDirectory/SCPToolsBot/regulars/example/config.json").toFile()
-        val manifestFile = Path("$workingDirectory/SCPToolsBot/regulars/example/manifest.json").toFile()
+        val configFile = Path("$workingDirectory/SCPToolsBot/regulars/example/config.yml").toFile()
+        val manifestFile = Path("$workingDirectory/SCPToolsBot/regulars/example/manifest.yml").toFile()
 
         if (!configFile.exists()) {
             configFile.createNewFile()
 
-            val content = RegularsFileHandler::class.java.getResourceAsStream("/SCPToolsBot/regulars/example/config.json")
+            val content = RegularsFileHandler::class.java.getResourceAsStream("/SCPToolsBot/regulars/example/config.yml")
             configFile.appendBytes(content!!.readBytes())
         }
 
         if (!manifestFile.exists()) {
             manifestFile.createNewFile()
 
-            val content = RegularsFileHandler::class.java.getResourceAsStream("/SCPToolsBot/regulars/example/manifest.json")
+            val content = RegularsFileHandler::class.java.getResourceAsStream("/SCPToolsBot/regulars/example/manifest.yml")
             manifestFile.appendBytes(content!!.readBytes())
         }
     }
@@ -60,16 +61,16 @@ class RegularsFileHandler(config: Config, translation: Translation) {
     }
 
     private fun queryConfig(folder: String): RegularsConfig? {
-        val configFile = Path("$workingDirectory/SCPToolsBot/regulars/$folder/config.json").toFile()
+        val configFile = Path("$workingDirectory/SCPToolsBot/regulars/$folder/config.yml").toFile()
         if (!configFile.exists()) return null
 
-        return Json.decodeFromString(RegularsConfig.serializer(), configFile.readText())
+        return Yaml.default.decodeFromString(RegularsConfig.serializer(), configFile.readText())
     }
 
     private fun queryManifest(folder: String): RegularsManifest? {
-        val manifestFile = Path("$workingDirectory/SCPToolsBot/regulars/$folder/manifest.json").toFile()
+        val manifestFile = Path("$workingDirectory/SCPToolsBot/regulars/$folder/manifest.yml").toFile()
         if (!manifestFile.exists()) return null
 
-        return Json.decodeFromString(RegularsManifest.serializer(), manifestFile.readText())
+        return Yaml.default.decodeFromString(RegularsManifest.serializer(), manifestFile.readText())
     }
 }

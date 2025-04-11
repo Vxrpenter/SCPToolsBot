@@ -12,6 +12,10 @@ data class RegularsConfig(
 data class  RegularsConfigRole(
     val id: String,
     val description: String,
-    @SerialName("playtime_requirements")
-    val playtimeRequirements: Int
+    @SerialName("requirement_type")
+    val requirementType: String,
+    @SerialName("playtime_requirement")
+    val playtimeRequirements: Int,
+    @SerialName("xp_requirement")
+    val xpRequirements: Int
 )
