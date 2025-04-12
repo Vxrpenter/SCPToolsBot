@@ -61,8 +61,6 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
     }
 
     fun spinUpChecker() {
-        if (!config.settings.cedmod.active) return
-
         Timer().runWithTimer(2.hours, regularsScope) { checkerTask() }
     }
 
@@ -87,18 +85,33 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
 
             when(RequirementType.valueOf(role.requirementType)) {
                 RequirementType.PLAYTIME -> {
+                    if (!config.settings.cedmod.active) {
+                        logger.error("Could not correctly process regulars with setting 'PLAYTIME', activate cedmod integration!")
+                        return
+                    }
+
                     if (!checkPlaytime(regular, lastCheckedDate)) break
 
                     checkRoles(regular.id, regular.groupRoleId, regular.roleId)
                 }
 
                 RequirementType.XP -> {
+                    if (!config.settings.xp.active) {
+                        logger.error("Could not correctly process regulars with setting 'XP', activate xp integration!")
+                        return
+                    }
+
                     if (!checkLevel(regular, role)) break
 
                     checkRoles(regular.id, regular.groupRoleId, regular.roleId)
                 }
 
                 RequirementType.BOTH -> {
+                    if (!config.settings.cedmod.active || !config.settings.xp.active) {
+                        logger.error("Could not correctly process regulars with setting 'BOTH', activate cedmod and xp integration!")
+                        return
+                    }
+
                     if (!checkPlaytime(regular, lastCheckedDate) || !checkLevel(regular, role)) break
 
                     checkRoles(regular.id, regular.groupRoleId, regular.roleId)
