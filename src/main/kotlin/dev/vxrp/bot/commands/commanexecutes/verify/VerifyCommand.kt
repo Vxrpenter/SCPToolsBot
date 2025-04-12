@@ -13,8 +13,8 @@ class VerifyCommand(val config: Config, val translation: Translation) {
         if (!config.settings.webserver.active) {
             val embed = Embed {
                 color = 0xE74D3C
-                title = "Could not send Panel"
-                description = "This panel is deactivated as long as the bot hoster has deactivated certain configurations. Ask them to activate them to use this command."
+                title = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendPanelTitle)
+                description = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendPanelBody)
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
