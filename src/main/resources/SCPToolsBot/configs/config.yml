@@ -25,6 +25,13 @@ debug: false
 #Displays all available information
 advanced_debug: false
 
+# Settings for the update checker
+updates:
+  # Activate to ignore all versions that contain the beta tag
+  ignore_beta: false
+  # Activate to ignore all versions that contain the alpha tag
+  ignore_alpha: true
+
 # The activity type of the bot, choose from the available list: [COMPETING, CUSTOM_STATUS, LISTENING, PLAYING, WATCHING]
 activity_type: "PLAYING"
 # The text that is being displayed in the activity
