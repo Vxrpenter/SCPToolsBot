@@ -26,6 +26,8 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
     }
 
     fun spinUpChecker() {
+        if (!config.settings.noticeOfDeparture.active) return
+
         Timer().runWithTimer(DurationParser().parse(
             config.settings.noticeOfDeparture.checkRate,
             DurationType.valueOf(config.settings.noticeOfDeparture.checkUnit)),

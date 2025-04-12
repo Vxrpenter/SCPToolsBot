@@ -14,8 +14,8 @@ class VerifyTemplate(val config: Config, val translation: Translation) {
         if (!config.settings.cedmod.active || !config.settings.webserver.active) {
             val embed = Embed {
                 color = 0xE74D3C
-                title = "Could not create Template"
-                description = "This template is deactivated as long as you have webserver deactivated. Navigate to the config to activate and configure it."
+                title = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendTemplateTitle)
+                description = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendTemplateBody)
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
