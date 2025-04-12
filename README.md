@@ -19,7 +19,7 @@ ScpTools Bot is an application
 to enhance your Scp Secret Laboratory server
 by providing quality-of-life features in combination with moderation and team management tools.
 It also integrates with plugins like cedmod
-to build on already existing infrastructure and to utilize features they offer.
+to build on already existing infrastructure and to use features they offer.
 
 For more information check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki)
 
@@ -34,13 +34,13 @@ For more information check out the [wiki](https://github.com/Vxrpenter/SCPToolsB
 | Notice of Departures           | Staff can file a notice of departure that marks a timeframe they will not be available. These are also checked periodically to ensure that everyone gets notified if the notice runs out               |
 | Fully configurable commands    | You can change command names, permissions, options, choices and subcommands without messing with the functionality.                                                                                    |
 | Playtime role syncing          | Give your players a reward by allowing them to earn roles for certain playtime counts. They automatically get synced with their ingame time and updated when reaching a new milestone                  |
-| Cedmod synchronization         | You can link your cedmod instance by utilizing cedmods api user feature. The bot will be able to interact with the panel and use it's features according to your desires                               |
+| Cedmod synchronization         | You can link your cedmod instance by utilizing CedMod's api user feature. The bot will be able to interact with the panel and use it's features according to your desires                              |
 
 For more indepth explanation see the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Feature-Overview)
 
 ## Installation
 > [!NOTE]
-> Bots have to run all the time to be effective so make sure to run it on a machine that is online 24/7
+> Bots have to run all the time to be effective, so make sure to run it on a machine that is online 24/7
 
 Download the `.jar` from the latest release. Copy it into a folder of your liking and run:
 ```console
@@ -87,16 +87,16 @@ I'm not liable for anything done with it, and no warranty is given
 > [!IMPORTANT]
 > When using code from this repo, you have to add a License and copyright notice.
 
-This licence is not in place to annoy anyone but to protect the work, passion and time that has gone into this project
+This license is not in place to annoy anyone but to protect the work, passion and time that has gone into this project
 > This is no legal advice
 
 ## Special Thanks
-- Special thanks goes to [ced777ric](https://github.com/ced777ric) who helped me a lot with the cedmod api integration especially when trying to find the specific endpoints usecase or usability
+- Special thanks goes to [ced777ric](https://github.com/ced777ric) who helped me a lot with the cedmod api integration, especially when trying to find the specific endpoints use case or usability
 - Also to [SeekEDstroy](https://github.com/SeekEDstroy) for help with user id linking and for pointing out some bugs
 ---
 
 ## Star History
-Thank you a lot for starring this repo. It is really helpful and makes me happy to work on this project. 
+Thank you a lot for starring in this repo. It is really helpful and makes me happy to work on this project. 
 
 If you like this project, you may consider sharing it with others Either way, thank you really much
 [![Stargazers over time](https://starchart.cc/Vxrpenter/SCPToolsBot.svg?variant=adaptive)](https://starchart.cc/Vxrpenter/SCPToolsBot)
