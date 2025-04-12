@@ -6,7 +6,7 @@
 
 # Installation Values
 export filename="NULL"
-export versionLink="https://github.com/Vxrpenter/SCPToolsBot/releases/download/v.1.0.1/SCP_Tools-1.0.1.jar"
+export versionLink="https://github.com/Vxrpenter/SCPToolsBot/releases/download/v.1.1.0-alpha1/SCP_Tools-1.1.0-alpha1.jar"
 
 # Base Configuration Values
 export botToken=""
@@ -346,16 +346,17 @@ activity_content: \"/help\"
 database:
   # Defines which datatype should be used, choose between [NONE, SQLITE]
   # ** WARNING ** if you set this to none, and no other database option is given, the process will crash on startup
-  use_predefined_database_sets: \"SQLITE\"
+  use_predefined_database_sets: "SQLITE"
   # ** WARNING ** When using custom, you may experience issues. This is a work in progress feature, so it is unstable, report problems on the GitHub page
   # Which type of custom db should be used: [SQLITE, MYSQL, POSTGRESQL, MARIADB]
-  custom_type: \"\"
-  # Here you can input a custom database url to connect to. This will only work when the setting is predefined to NONE
-  custom_url: \"\"
+  custom_type: ""
+  # Here you can input a custom database url to connect to. Make sure to not include https:// or http://, just use the plain url for
+  # database connection, e.g., < localhost:3306/test >
+  custom_url: ""
   # Here you've input the custom db password
-  custom_username: \"\"
+  custom_username: ""
   # Here you have to enter the password of your db session
-  custom_password: \"\"
+  custom_password: ""
 
 webserver:
   # Should the webserver be launched? This feature is only used for regulars
@@ -368,39 +369,68 @@ webserver:
   uri: \"$webServerUri\"
 
 cedmod:
-  # This activates the CedMod Api integration. This feature is only used for the following functions, only activate if you have these features in use: Regulars
+  # This activates the CedMod Api integration. This feature is only used for the following functions, only activated if you have these features in use: Regulars
   # CedMod Api is only available to users who request access from the CedMod team, ask on their discord for more information - https://discord.gg/p69SGfwxxm
-  active: $cedmodActive
+  active: false
   # Include https://
-  instance_url: \"$cedmodInstanceUrl\"
+  instance_url: ""
   # Put the plain API key here
-  api_key: \"$cedmodApiKey\"
+  api_key: ""
+
+# ** NOTICE ** Custom level functions are currently not supported because of technical complexity
+# This is a work-in-progress compatibility implementation of the XP plugin by RowspannSCP https://github.com/RowpannSCP/XP. It is intended to be used with the
+# regulars feature for providing additional goals for playtime roles. This feature is highly WIP and will probably take a bit longer to implement, as I have to
+# inspect their code to find some necessary information. The current config options are subject to change.
+XP:
+  # This activates the XP integration. This feature is only used for the following functions, only activated if you have these features in use: Regulars
+  active: false
+  # ** WARNING ** LiteDB will not be supported in any coming version as it would be really challenging to implement, in the end, bringing no real advantage
+  # The address of the database which the plugin uses. If the plugin and bot are running on the same DB, the bot will identify it and not connect to the database
+  # a second time and just pull data from the existing connection. Make sure you give the bot's user enough rights to do so.
+  # Example database address: < localhost:3306/test >
+  database_address: ""
+  # The username of the database user you want the bot to use
+  database_user: ""
+  # The password of the user you want the bot to use
+  database_password: ""
+  # ** WARNING ** To keep this feature as simple as possible, there will only be one auth type supported. Also, Northwood authtype is currently not supported
+  # Which type of authorization table do you want to query from?
+  # Available auth types are [STEAM, DISCORD]
+  auth_type: ""
+  # This affects the 'a' parameter in the standard level function. This is the standard function used by the XP plugin: -50 + sqrt((4 * xp / a) + 9800) / 2
+  additional_parameter: 1
 
 # ** WARNING ** For this setting to work, you need to activate the webserver.
-#The webserver is generally just a redirect to receive data from the discord OAuth Api, so it
+# The webserver is generally just a redirect to receive data from the discord OAuth Api, so it
 # should not interrupt any other web stuff running on your server.
 verify:
+  # Activates the verify feature, make sure you have configured webserver accordingly
+  active: false
   # This link can be obtained from the oauth section on the discord developer portal. First, enter the redirect you entered in the webserver section exactly
   # as described here: <uri>:<port><redirect_uri>, e.g. http://localhost:80/auth/discord/redirect. After entering the redirect, click on save to proceed with the
   # setup. You now have to scroll down to the 'OAuth2 URL Generator' where you need to click on 2 options, 'identify' and 'connections', after that scroll down
   # and select your redirect for the redirect url. Now you can copy the generated url into your clipboard. Paste it in here.
-  oauth_link: \"\"
+  oauth_link: ""
   # Which channel should verify logs be sent to?
-  verify_log_channel: \"\"
+  verify_log_channel: ""
 
 notice_of_departure:
-  # Which channel should the form be sent to be accepted by moderators?
-  decision_channel_id: \"\"
-  # Which channel should the departure timekeeping messages be sent to?
-  notice_channel_id: \"\"
+  # Activates the notice of departure feature
+  active: false
+  # Which channel should the form be sent to, to be accepted by moderators?
+  decision_channel_id: ""
+  # Which channel should the notice messages be sent to?
+  notice_channel_id: ""
   # List of role's that are able to accept/dismiss/revoke notices (INPUT ID'S ONLY)
   roles_access_notices: []
   # Put the following in the type: [NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS]
-  check_type: \"HOURS\"
+  check_type: "HOURS"
   # The rate at that the notices are checked.
   check_rate: 1
 
 regulars:
+  # Activates regulars, make sure you have correctly configured the regular's configs, as well as activated the necessary compatibility settings
+  active: false
   # Should example configuration be created (deactivate if you want to delete the example config)
   create_example_configuration: true
   # Should the bot only load from specified folder within the /regulars/ folder?
