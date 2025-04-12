@@ -7,6 +7,7 @@
 # Installation Values
 export filename="NULL"
 export versionLink="https://github.com/Vxrpenter/SCPToolsBot/releases/download/v.1.1.0-alpha1/SCP_Tools-1.1.0-alpha1.jar"
+export filename="SCP_Tools-1.1.0-alpha1.jar"
 
 # Base Configuration Values
 export botToken=""
@@ -86,7 +87,6 @@ echo "Do you want to proceed with the installation?"
 confirm
 
 wget $versionLink
-filename="SCP_Tools-1.0.0.jar"
 
 # First Bot Startup
 echo ""
