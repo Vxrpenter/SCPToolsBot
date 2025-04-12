@@ -5,10 +5,8 @@
 #
 
 # Installation Values
-export version=0
 export filename="NULL"
-export v1_0_0_download="https://github.com/Vxrpenter/SCPToolsBot/releases/download/v.1.0.0/SCP_Tools-1.0.0.jar"
-export v1_0_1_download="https://github.com/Vxrpenter/SCPToolsBot/releases/download/v.1.0.1/SCP_Tools-1.0.1.jar"
+export versionLink="https://github.com/Vxrpenter/SCPToolsBot/releases/download/v.1.0.1/SCP_Tools-1.0.1.jar"
 
 # Base Configuration Values
 export botToken=""
@@ -84,35 +82,11 @@ fi
 echo "Correct java version for bot is installed, proceeding with installation..."
 echo ""
 
-echo Do you want to proceed with the installation?
+echo "Do you want to proceed with the installation?"
 confirm
 
-# Version Selection
-echo ""
-echo "Which version do you want to download?"
-PS3=":: Enter number of version option: "
-select option in 1.0.1 1.0.0
-do
-  version=$option
-  break
-done
-
-echo "Downloading version: $option"
-echo ""
-
-case $version in
-    1.0.0 )
-        wget $v1_0_0_download
-        filename="SCP_Tools-1.0.0.jar"
-    ;;
-    1.0.1 )
-      wget $v1_0_1_download
-      filename="SCP_Tools-1.0.1.jar"
-    ;;
-    * )
-        echo "This is no version, exiting..."
-        exit
-esac
+wget $versionLink
+filename="SCP_Tools-1.0.0.jar"
 
 # First Bot Startup
 echo ""
