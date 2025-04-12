@@ -6,8 +6,8 @@
 
 # Installation Values
 export filename="NULL"
-export versionLink="https://github.com/Vxrpenter/SCPToolsBot/releases/download/v.1.1.0-alpha1/SCP_Tools-1.1.0-alpha1.jar"
-export filename="SCP_Tools-1.1.0-alpha1.jar"
+export versionLink="https://github.com/Vxrpenter/SCPToolsBot/releases/download/v.1.1.0-alpha2/SCP_Tools-1.1.0-alpha2.jar"
+export filename="SCP_Tools-1.1.0-alpha2.jar"
 
 # Base Configuration Values
 export botToken=""
@@ -337,6 +337,13 @@ debug: false
 # ** Warning ** This feature is not recommended
 #Displays all available information
 advanced_debug: false
+
+# Settings for the update checker
+updates:
+  # Activate to ignore all versions that contain the beta tag
+  ignore_beta: false
+  # Activate to ignore all versions that contain the alpha tag
+  ignore_alpha: true
 
 # The activity type of the bot, choose from the available list: [COMPETING, CUSTOM_STATUS, LISTENING, PLAYING, WATCHING]
 activity_type: \"PLAYING\"
