@@ -35,6 +35,16 @@ data class Translation(
 
 @Serializable
 data class TranslationPermissions(
+    @SerialName("EMBED_COULD_NOT_SEND_PANEL_TITLE")
+    val embedCouldNotSendPanelTitle: String,
+    @SerialName("EMBED_COULD_NOT_SEND_PANEL_BODY")
+    val embedCouldNotSendPanelBody: String,
+
+    @SerialName("EMBED_COULD_NOT_SEND_TEMPLATE_TITLE")
+    val embedCouldNotSendTemplateTitle: String,
+    @SerialName("EMBED_COULD_NOT_SEND_TEMPLATE_BODY")
+    val embedCouldNotSendTemplateBody: String,
+
     @SerialName("EMBED_TICKET_DENIED_TITLE")
     val embedTicketDeniedTitle: String,
     @SerialName("EMBED_TICKET_DENIED_BODY")
