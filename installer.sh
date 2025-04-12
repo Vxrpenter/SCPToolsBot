@@ -168,7 +168,7 @@ case $language in
         exit
 esac
 
-# Database Configuration
+# Webserver Configuration
 function webserver() {
   # Port Configuration
   echo ""
