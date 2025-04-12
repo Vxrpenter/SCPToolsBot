@@ -13,6 +13,12 @@
 
 PERMISSIONS:
 
+  EMBED_COULD_NOT_SEND_PANEL_TITLE: "Panel konnte nicht gesendet werden"
+  EMBED_COULD_NOT_SEND_PANEL_BODY: "Dieses Panel ist deaktiviert, solange der Bot-Hoster bestimmte Konfigurationen deaktiviert hat. Bitte ihn, diese zu aktivieren, um diesen Befehl nutzen zu können."
+
+  EMBED_COULD_NOT_SEND_TEMPLATE_TITLE: "Konnte keine Template erstellen"
+  EMBED_COULD_NOT_SEND_TEMPLATE_BODY: "Diese Template ist aufgrund fehlender Konfigurationen deaktiviert. Navigiere zur Config, um sie zu aktivieren und zu konfigurieren."
+
   EMBED_TICKET_DENIED_TITLE: "Interaktion Verweigert"
   EMBED_TICKET_DENIED_BODY: "
                         Diese Interaktion wurde verweigert, der exakte Grund kann unten gefunden werden.
