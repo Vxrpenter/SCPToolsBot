@@ -2,7 +2,7 @@ package dev.vxrp.bot.commands.commanexecutes.settings
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.api.github.Github
+import dev.vxrp.api.updates.Updates
 import dev.vxrp.api.sla.cedmod.Cedmod
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
@@ -83,7 +83,7 @@ class SettingsCommand(val config: Config, val translation: Translation) {
                     translation.settings.embedSettingsFieldBuildValue
                         .replace(
                             "%build%",
-                            Github().checkForUpdatesByTag(
+                            Updates(config).checkForUpdatesByTag(
                                 "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags",
                                 false
                             )
