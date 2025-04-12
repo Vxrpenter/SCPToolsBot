@@ -25,6 +25,7 @@ data class Settings(
     val debug: Boolean,
     @SerialName("advanced_debug")
     val advancedDebug: Boolean,
+    val updates: ConfigUpdates,
     @SerialName("activity_type")
     val activityType: String,
     @SerialName("activity_content")
@@ -38,6 +39,14 @@ data class Settings(
     @SerialName("notice_of_departure")
     val noticeOfDeparture: ConfigNoticeOfDeparture,
     val regulars: ConfigRegulars
+)
+
+@Serializable
+data class ConfigUpdates(
+    @SerialName("ignore_beta")
+    val ignoreBeta: Boolean,
+    @SerialName("ignore_alpha")
+    val ignoreAlpha: Boolean
 )
 
 @Serializable
