@@ -91,6 +91,8 @@ XP:
 # The webserver is generally just a redirect to receive data from the discord OAuth Api, so it
 # should not interrupt any other web stuff running on your server.
 verify:
+  # Activates the verify feature, make sure you have configured webserver accordingly
+  active: false
   # This link can be obtained from the oauth section on the discord developer portal. First, enter the redirect you entered in the webserver section exactly
   # as described here: <uri>:<port><redirect_uri>, e.g. http://localhost:80/auth/discord/redirect. After entering the redirect, click on save to proceed with the
   # setup. You now have to scroll down to the 'OAuth2 URL Generator' where you need to click on 2 options, 'identify' and 'connections', after that scroll down
@@ -100,6 +102,8 @@ verify:
   verify_log_channel: ""
 
 notice_of_departure:
+  # Activates the notice of departure feature
+  active: false
   # Which channel should the form be sent to, to be accepted by moderators?
   decision_channel_id: ""
   # Which channel should the notice messages be sent to?
@@ -112,6 +116,8 @@ notice_of_departure:
   check_rate: 1
 
 regulars:
+  # Activates regulars, make sure you have correctly configured the regular's configs, as well as activated the necessary compatibility settings
+  active: false
   # Should example configuration be created (deactivate if you want to delete the example config)
   create_example_configuration: true
   # Should the bot only load from specified folder within the /regulars/ folder?
