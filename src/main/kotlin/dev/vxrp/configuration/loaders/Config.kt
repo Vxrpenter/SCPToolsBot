@@ -90,6 +90,7 @@ data class ConfigXP(
 
 @Serializable
 data class ConfigVerify(
+    val active: Boolean,
     @SerialName("oauth_link")
     val oauthLink: String,
     @SerialName("verify_log_channel")
@@ -98,6 +99,7 @@ data class ConfigVerify(
 
 @Serializable
 data class ConfigNoticeOfDeparture(
+    val active: Boolean,
     @SerialName("decision_channel_id")
     val decisionChannel: String,
     @SerialName("notice_channel_id")
@@ -112,6 +114,7 @@ data class ConfigNoticeOfDeparture(
 
 @Serializable
 data class ConfigRegulars(
+    val active: Boolean,
     @SerialName("create_example_configuration")
     val createExample: Boolean,
     @SerialName("only_load_certain_folder")
