@@ -96,7 +96,7 @@ This license is not in place to annoy anyone but to protect the work, passion an
 ---
 
 ## Star History
-Thank you a lot for starring in this repo. It is really helpful and makes me happy to work on this project. 
+Thank you a lot for starring this repo. It is really helpful and makes me happy to work on this project. 
 
 If you like this project, you may consider sharing it with others Either way, thank you really much
 [![Stargazers over time](https://starchart.cc/Vxrpenter/SCPToolsBot.svg?variant=adaptive)](https://starchart.cc/Vxrpenter/SCPToolsBot)
