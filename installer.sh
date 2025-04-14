@@ -188,7 +188,11 @@ function webserver() {
 
   case $firewallType in
     UFW )
-      # Put UFW command here
+      if [sudo ufw status | grep -qw active] then
+        ufw allow $webServerPort
+      else
+      echo "Ufw is not installed or deactivated, please add the port $webServerPort to ufw firewall personally or install the package"
+      fi
     ;;
     SKIP )
       echo "Skipping firewall setup, make sure to setup yourself to make webserver work"
