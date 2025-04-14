@@ -288,18 +288,20 @@ echo "Secret: $botSecret"
 echo "GuildId: $botGuildId"
 echo "Language: $botLanguage"
 
-echo ""
-echo " - Webserver Configurations - "
+
 if [ $webServerActive == true ]; then
+  echo ""
+  echo " - Webserver Configurations - "
   echo "Webserver Active: $webServerActive"
   echo "Webserver Port: $webServerPort"
   echo "Webserver Redirect Uri: $webServerRedirectUri"
   echo "Webserver Uri: $webServerUri"
 fi
 
-echo ""
-echo " - CedMod Configurations - "
+
 if [ $cedmodActive == true ]; then
+  echo ""
+  echo " - CedMod Configurations - "
   echo "CedMod Active: $cedmodActive"
   echo "CedMod Instance Url: $cedmodInstanceUrl"
   echo "CedMod Api Key: $cedmodApiKey"
