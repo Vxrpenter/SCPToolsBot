@@ -124,7 +124,7 @@ function secret() {
   if [ "$secretResponse" == "$response" ]; then
     botSecret=$secretResponse
   else
-    echo "Tokens don't match, please try entering it again"
+    echo "Secrets don't match, please try entering it again"
     token
   fi
 }
@@ -140,7 +140,7 @@ function guild() {
   if [ "$guildResponse" == "$response" ]; then
     botGuildId=$guildResponse
   else
-    echo "Tokens don't match, please try entering it again"
+    echo "Id's don't match, please try entering it again"
     token
   fi
 }
