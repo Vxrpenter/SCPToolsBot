@@ -86,13 +86,13 @@ echo ""
 echo "Do you want to proceed with the installation?"
 confirm
 
-wget $versionLink
+curl -LO $versionLink
 
 # First Bot Startup
 echo ""
 echo "Executing jar-file to generate configuration files..."
 
-sudo java -jar $filename
+sudo java -jar $filename > /dev/null 2>&1
 
 echo ""
 echo "Bot process has been ended, do you want to do a complete installation with configuration or end it here?"
@@ -188,11 +188,7 @@ function webserver() {
 
   case $firewallType in
     UFW )
-      if [sudo ufw status | grep -qw active] then
-        ufw allow $webServerPort
-      else
-        echo "Ufw is not installed or deactivated, please add the port $webServerPort to ufw firewall personally or install the package"
-      fi
+      ufw allow $webServerPort
     ;;
     SKIP )
       echo "Skipping firewall setup, make sure to setup yourself to make webserver work"
