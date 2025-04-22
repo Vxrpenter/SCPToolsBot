@@ -1,7 +1,7 @@
 plugins {
     application
     java
-    kotlin("jvm") version "2.0.20"
+    kotlin("jvm") version "2.1.10"
     kotlin("plugin.serialization") version "2.0.20"
     id("com.gradleup.shadow") version("8.3.3")
     id("io.gitlab.arturbosch.detekt").version("1.23.7")
@@ -27,19 +27,19 @@ kotlin {
 }
 
 val ktorVersion = "3.1.2"
-val kotlinxCoroutinesVersion = "1.9.0"
+val kotlinxCoroutinesVersion = "1.10.0"
 
-val exposedVersion = "0.56.0"
-val sqliteVersion = "3.45.1.0"
+val exposedVersion = "0.61.0"
+val sqliteVersion = "3.49.1.0"
 val mySqlVersion = "9.2.0"
-val postgresSqlVersion = "42.7.2"
-val mariaDBVersion = "3.5.0"
+val postgresSqlVersion = "42.7.5"
+val mariaDBVersion = "3.5.3"
 
-val kotlinxSerializationVersion = "1.7.3"
-val kamlVersion = "0.65.0"
-val jdaVersion = "5.2.1"
+val kotlinxSerializationVersion = "1.8.1"
+val kamlVersion = "0.77.0"
+val jdaVersion = "5.4.0"
 val jdaKtxVersion = "0.12.0"
-val logbackVersion = "1.5.6"
+val logbackVersion = "1.5.18"
 val apacheCommonsVersion = "3.4"
 val gsonVersion = "2.11.0"
 
@@ -80,9 +80,6 @@ dependencies {
 
     // Test
     testImplementation(kotlin("test"))
-
-    // DEPRECATED
-    implementation("org.bspfsystems:yamlconfiguration:2.0.2")
 }
 
 val createVersionProperties by tasks.registering(WriteProperties::class) {
