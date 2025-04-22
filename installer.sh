@@ -6,8 +6,8 @@
 
 # Installation Values
 export filename="NULL"
-export versionLink="https://github.com/Vxrpenter/SCPToolsBot/releases/download/v.1.1.0-alpha2/SCP_Tools-1.1.0-alpha2.jar"
-export filename="SCP_Tools-1.1.0-alpha2.jar"
+export versionLink="https://github.com/Vxrpenter/SCPToolsBot/releases/download/v.1.1.0-alpha3/SCP_Tools-1.1.0-alpha3.jar"
+export filename="SCP_Tools-1.1.0-alpha3.jar"
 
 # Base Configuration Values
 export botToken=""
