@@ -4,6 +4,7 @@ import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.XPDatabaseHandler
 import dev.vxrp.database.tables.RegularsTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
@@ -30,14 +31,17 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
                 stringBuilder.append(ColorTool().useCustomColorCodes(translation.regulars.embedTemplateRoleBody
                     .replace("%role%", "<@&${role.id}>")
                     .replace("%description%", role.description)
-                    .replace("%timeframe%", role.playtimeRequirements.toString()+"h")))
+                    .replace("%timeframe%", if (role.requirementType == "PLAYTIME" || role.requirementType == "BOTH") translation.regulars.textTemplateRoleTimeframe else "")
+                    .replace("%playtime%", if (role.requirementType == "PLAYTIME" || role.requirementType == "BOTH") role.playtimeRequirements.toString()+"h" else "")
+                    .replace("%xp%", if (role.requirementType == "XP" || role.requirementType == "BOTH") translation.regulars.textTemplateRoleXp else "")
+                    .replace("%level%", if (role.requirementType == "XP" || role.requirementType == "BOTH") role.xpRequirements.toString()+" Level" else "")))
             }
 
             val groupEmbed = Embed {
                 description = ColorTool().useCustomColorCodes(translation.regulars.embedTemplateGroupBody
                     .replace("%group%", regular.manifest.name)
                     .replace("%description%", regular.manifest.description)
-                    .replace("%group_role%", "<@&${regular.manifest.customRole.id}>")
+                    .replace("%group_role%", "<@&${regular.manifest.customRole.id}>").replace("<@&>", "None")
                     .replace("%roles%", stringBuilder.toString()))
             }
 
@@ -53,11 +57,19 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
         var groupRole = "None"
         var role = "None"
         var playtime = "0"
+        var level = "0"
+        var requirementType = ""
+        var lastChecked = "None"
 
         if (RegularsTable().exists(user.id)) {
-            groupRole = "<@&${RegularsTable().getGroupRole(user.id).replace("null", "None")}>"
-            role = "<@&${RegularsTable().getRole(user.id).replace("null", "None")}>"
+            val regularRole = RegularsFileHandler(config, translation).queryRoleFromConfig(RegularsTable().getGroup(user.id), RegularsTable().getRole(user.id)!!)
+
+            requirementType = regularRole?.requirementType ?: ""
+            groupRole = "<@&${RegularsTable().getGroupRole(user.id) ?: "" }>"
+            role = "<@&${RegularsTable().getRole(user.id) ?: "None"}>"
             playtime = RegularsTable().getPlaytime(user.id).roundToInt().toString()
+            level = RegularsTable().getLevel(user.id).toString()
+            lastChecked = RegularsTable().getLastChecked(user.id) ?: "None"
         }
 
         val embed = Embed {
@@ -67,17 +79,38 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
             field {
                 inline = true
                 name = translation.regulars.embedSettingsFieldGroupName
-                value = groupRole
+                value = groupRole.replace("<@&>", "None")
             }
             field {
                 inline = true
                 name = translation.regulars.embedSettingsFieldRoleName
                 value = role
             }
+            if (requirementType == "PLAYTIME" || requirementType == "BOTH") {
+                field {
+                    inline = true
+                    name = translation.regulars.embedSettingsFieldPlaytimeName
+                    value = playtime
+                }
+            }
+            if (requirementType == "XP" || requirementType == "BOTH") {
+                field {
+                    inline = true
+                    name = translation.regulars.embedSettingsFieldXp
+                    value = level
+                }
+            }
             field {
                 inline = true
-                name = translation.regulars.embedSettingsFieldPlaytimeName
-                value = playtime
+                name = translation.regulars.embedSettingsFieldLastChecked
+                value = lastChecked
+            }
+            if (lastChecked != "None") {
+                field {
+                    inline = true
+                    name = ""
+                    value = ""
+                }
             }
         }
 
