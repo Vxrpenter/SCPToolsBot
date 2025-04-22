@@ -3,9 +3,11 @@ package dev.vxrp.bot.regulars
 import com.charleskorn.kaml.Yaml
 import dev.vxrp.bot.regulars.data.Regulars
 import dev.vxrp.bot.regulars.data.RegularsConfig
+import dev.vxrp.bot.regulars.data.RegularsConfigRole
 import dev.vxrp.bot.regulars.data.RegularsManifest
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.database.tables.RegularsTable
 import kotlinx.serialization.json.Json
 import java.nio.file.Files
 import kotlin.io.path.Path
@@ -72,5 +74,18 @@ class RegularsFileHandler(config: Config, translation: Translation) {
         if (!manifestFile.exists()) return null
 
         return Yaml.default.decodeFromString(RegularsManifest.serializer(), manifestFile.readText())
+    }
+
+    fun queryRoleFromConfig(name: String, roleId: String): RegularsConfigRole? {
+        for (regular in query()) {
+            if (regular.manifest.name != name) continue
+
+            for (role in regular.config.roles) {
+                if (role.id != roleId) continue
+                return role
+            }
+            break
+        }
+        return null
     }
 }

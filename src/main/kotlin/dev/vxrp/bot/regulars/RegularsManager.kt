@@ -45,7 +45,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
             break
         }
 
-        RegularsTable().addToDatabase(userId, true, group, groupRoleId, roleId!!, 0.0, LocalDate.now().toString())
+        RegularsTable().addToDatabase(userId, true, group, groupRoleId, roleId!!, 0.0, LocalDate.now().toString(), 0)
     }
 
     fun reactivateSync(userId: String) {
@@ -169,6 +169,8 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
         val level = (-50 + sqrt(((4 * xp / config.settings.xp.additionalParameter) + 9500).toFloat()) / 2)
 
         if (level >= role.xpRequirements) return true
+        RegularsTable().setLevel(regular.id, level.toInt())
+        logger.info("Updated user: ${regular.id}'s regular data setting their level to: $level")
         return false
     }
 

@@ -19,13 +19,14 @@ class RegularsTable {
         val groupRoleId = text("group_id").nullable()
         val roleId = text("role_id")
         val playtime = double("playtime")
+        val level = integer("level")
         val lastCheckedDate = text("last_checked_date")
 
         override val primaryKey: PrimaryKey
             get() = PrimaryKey(id)
     }
 
-    fun addToDatabase(userId: String, activeRegular: Boolean, roleGroup: String, groupRoleIdentification: String?, roleIdentification: String, time: Double, lastChecked: String) {
+    fun addToDatabase(userId: String, activeRegular: Boolean, roleGroup: String, groupRoleIdentification: String?, roleIdentification: String, time: Double, lastChecked: String, xpLevel: Int) {
         if (exists(userId)) return
 
         transaction {
@@ -35,8 +36,9 @@ class RegularsTable {
                 it[group] = roleGroup
                 it[groupRoleId] = groupRoleIdentification
                 it[roleId] = roleIdentification
-                it[lastCheckedDate] = lastChecked
                 it[playtime] = time
+                it[level] = xpLevel
+                it[lastCheckedDate] = lastChecked
             }
         }
     }
@@ -77,6 +79,14 @@ class RegularsTable {
         }
     }
 
+    fun setLevel(userId: String, xpLevel: Int) {
+        transaction {
+            Regulars.update( { Regulars.id eq userId } ) {
+                it[level] = xpLevel
+            }
+        }
+    }
+
     fun setLastCheckedDate(userId: String, timestamp: String) {
         transaction {
             Regulars.update( { Regulars.id eq userId } ) {
@@ -99,7 +109,7 @@ class RegularsTable {
         return active!!
     }
 
-    fun getGroupRole(userId: String): String {
+    fun getGroupRole(userId: String): String? {
         var groupRole: String? = null
 
         transaction {
@@ -110,10 +120,24 @@ class RegularsTable {
                 }
         }
 
-        return groupRole!!
+        return groupRole
     }
 
-    fun getRole(userId: String): String {
+    fun getGroup(userId: String): String {
+        var groupName: String? = null
+
+        transaction {
+            Regulars.selectAll()
+                .where { Regulars.id eq userId }
+                .forEach {
+                    groupName = it[group]
+                }
+        }
+
+        return groupName!!
+    }
+
+    fun getRole(userId: String): String? {
         var role: String? = null
 
         transaction {
@@ -124,7 +148,7 @@ class RegularsTable {
                 }
         }
 
-        return role!!
+        return role
     }
 
     fun getPlaytime(userId: String): Double {
@@ -139,6 +163,34 @@ class RegularsTable {
         }
 
         return playtime!!
+    }
+
+    fun getLevel(userId: String): Int {
+        var xpLevel: Int? = null
+
+        transaction {
+            Regulars.selectAll()
+                .where { Regulars.id eq userId }
+                .forEach {
+                    xpLevel = it[Regulars.level]
+                }
+        }
+
+        return xpLevel!!
+    }
+
+    fun getLastChecked(userId: String): String? {
+        var lastTimeChecked: String? = null
+
+        transaction {
+            Regulars.selectAll()
+                .where { Regulars.id eq userId }
+                .forEach {
+                    lastTimeChecked = it[lastCheckedDate]
+                }
+        }
+
+        return lastTimeChecked
     }
 
     fun delete(userId: String) {
