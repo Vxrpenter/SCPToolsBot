@@ -664,9 +664,13 @@ data class TranslationRegulars(
 
     @SerialName("EMBED_TEMPLATE_GROUP_BODY")
     val embedTemplateGroupBody: String,
-
     @SerialName("EMBED_TEMPLATE_ROLE_BODY")
     val embedTemplateRoleBody: String,
+
+    @SerialName("TEXT_TEMPLATE_ROLE_TIMEFRAME")
+    val textTemplateRoleTimeframe: String,
+    @SerialName("TEXT_TEMPLATE_ROLE_XP")
+    val textTemplateRoleXp: String,
 
     @SerialName("EMBED_SETTINGS_TITLE")
     val embedSettingsTitle: String,
@@ -678,6 +682,10 @@ data class TranslationRegulars(
     val embedSettingsFieldRoleName: String,
     @SerialName("EMBED_SETTINGS_FIELD_PLAYTIME_NAME")
     val embedSettingsFieldPlaytimeName: String,
+    @SerialName("EMBED_SETTINGS_FIELD_XP_NAME")
+    val embedSettingsFieldXp: String,
+    @SerialName("EMBED_SETTINGS_FIELD_LAST_CHECKED")
+    val embedSettingsFieldLastChecked: String,
 
     @SerialName("EMBED_SYNC_GROUP_SELECT_TITLE")
     val embedSyncGroupSelectTitle: String,

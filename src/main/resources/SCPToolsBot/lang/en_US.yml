@@ -688,10 +688,16 @@ REGULARS:
 
   EMBED_TEMPLATE_TITLE: "Activate Regular Syncing"
   EMBED_TEMPLATE_BODY: "
-                        This feature allows you to sync your server playtime with the server and to give you roles for reaching certain timeframes
+                        This is a way to obtain playtime roles that will automatically sync with your Server Playtime/XP.\n
+                        
+                        _How to obtain?:_\n
+                        1. Verify your steam account with **/verify**\n
+                        2. Activate the regulars syncing\n
+                        
+                        Once you fulfill the requirements for the role it will be automatically given to you. You can check out our progress on your Panel.
                         "
 
-  EMBED_TEMPLATE_GROUP_BODY: "   
+  EMBED_TEMPLATE_GROUP_BODY: " 
                         # %group%\n
                         Description: %description%\n
                         
@@ -700,18 +706,24 @@ REGULARS:
                         %roles%
                         "
 
-  EMBED_TEMPLATE_ROLE_BODY: "   
+  EMBED_TEMPLATE_ROLE_BODY: " 
                         Role: %role%\n
                         Description: %description%\n
-                        TimeFrame: %timeframe%\n
+                        %timeframe%\n
+                        %xp%\n
                         
                         "
+
+  TEXT_TEMPLATE_ROLE_TIMEFRAME: "Timeframe: %playtime%"
+  TEXT_TEMPLATE_ROLE_XP: "Level: %level%"
 
   EMBED_SETTINGS_TITLE: "Personal Regular Settings"
   EMBED_SETTINGS_BODY: "These are your personal regular settings. Only you are able to see this message and to change the settings\n"
   EMBED_SETTINGS_FIELD_GROUP_NAME: "Group"
   EMBED_SETTINGS_FIELD_ROLE_NAME: "Role"
   EMBED_SETTINGS_FIELD_PLAYTIME_NAME: "Playtime"
+  EMBED_SETTINGS_FIELD_XP_NAME: "Level"
+  EMBED_SETTINGS_FIELD_LAST_CHECKED: "Last Checked"
 
   EMBED_NOT_VERIFIED_TITLE: "Not Verified"
   EMBED_NOT_VERIFIED_BODY: "
