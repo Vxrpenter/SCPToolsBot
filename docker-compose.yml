@@ -1,0 +1,9 @@
+version: "1.1.0-alpha3"
+
+services:
+  bot:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - ${CONFIG_PATH}/SCPToolsBot/:/bot/SCPToolsBot/
