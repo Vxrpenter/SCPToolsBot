@@ -1,0 +1,11 @@
+.idea
+.gradle
+.kotlin
+SCPToolsBot
+.gitignore
+CODE_OF_CONDUCT.md
+gradlew.bat
+installer.sh
+LICENSE
+README.md
+settings.gradle.kts
