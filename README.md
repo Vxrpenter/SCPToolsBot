@@ -42,12 +42,13 @@ For more indepth explanation see the [wiki](https://github.com/Vxrpenter/SCPTool
 > [!NOTE]
 > Bots have to run all the time to be effective, so make sure to run it on a machine that is online 24/7
 
-Download the `.jar` from the latest release. Copy it into a folder of your liking and run:
-```console
-> java -jar <file.jar>
-```
+You can easily install the bot by downloading and installing the `installer.sh` from the latest release. For more installation info you can look into the [installation guide](https://github.com/Vxrpenter/SCPToolsBot/wiki/Installation) which covers docker installation etc.
 
-For a specific operating system installation guide, check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Installation)
+```sh
+chmod +x installer.sh
+
+sudo ./installer.sh
+```
 
 ## Build from Source
 ```sh
@@ -68,7 +69,9 @@ If you can't fix the issue, create an issue here so we're able to review it and 
 
 ## Build information
 Full releases are marked as such in the release.
-If a release contains the `pre-release` tag, it is experimental and features may be broken.
+If a release contains the `alpha` tag, it is experimental and features and more have not been tested.
+
+Releases containing the `beta` tag are mostly tested but could still be considered unstable.
 
 Releases will be marked as stable if they're thought to run well after testing.
 If a release is marked as unstable, it might not run well or produce bugs, for example, memory leaks
