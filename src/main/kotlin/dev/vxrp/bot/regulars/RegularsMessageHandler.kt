@@ -18,6 +18,7 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
     fun sendRegulars(channel: TextChannel) {
         val embeds = mutableListOf<MessageEmbed>()
         val embed = Embed {
+            thumbnail = api.getGuildById(config.settings.guildId)?.iconUrl
             title = ColorTool().useCustomColorCodes(translation.regulars.embedTemplateTitle)
             description = ColorTool().useCustomColorCodes(translation.regulars.embedTemplateBody)
         }
