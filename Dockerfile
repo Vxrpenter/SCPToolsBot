@@ -1,15 +1,14 @@
-FROM eclipse-temurin:22-jdk as BUILD
+FROM eclipse-temurin:22-jdk AS build
 
-COPY . /src
-WORKDIR /src
-RUN ./gradlew --no-daemon shadowjar
-
+WORKDIR /SCP_Tools
+COPY . .
+RUN ./gradlew shadowjar --no-daemon
+RUN ls build/libs/
 FROM eclipse-temurin:22-jre
 
-ARG VERSION="1.1.0-alpha3"
+ARG VERSION="1.1.0-alpha4"
 
-RUN mkdir /bot
-COPY --from=BUILD /src/build/libs/SCP_Tools-${VERSION}.jar /bot
 WORKDIR /bot
+COPY --from=build /SCP_Tools/build/libs/SCP_Tools-${VERSION}-all.jar .
 
-CMD ["java","--enable-native-access=ALL-UNNAMED","-jar","SCP_Tools-1.1.0-alpha3.jar"]
+CMD ["java","--enable-native-access=ALL-UNNAMED","-jar","SCP_Tools-1.1.0-alpha4-all.jar"]
