@@ -6,8 +6,14 @@
 
 # Installation Values
 export filename="NULL"
-export versionLink="https://github.com/Vxrpenter/SCPToolsBot/releases/download/v.1.1.0-alpha4/SCP_Tools-1.1.0-alpha4.jar"
-export filename="SCP_Tools-1.1.0-alpha4.jar"
+export installType=""
+export repo="https://github.com/Vxrpenter/SCPToolsBot"
+export version="v.1.1.0-alpha4"
+export configPath=""
+
+# Jar Installation
+export versionLink="${repo}/releases/download/${version}/SCP_Tools-${version}.jar"
+export filename="SCP_Tools-${version}.jar"
 
 # Base Configuration Values
 export botToken=""
@@ -39,18 +45,11 @@ Copyright (c) 2024 Vxrpenter
 
 # Basic Functions
 function confirm() {
-  read -rp ":: Do you wish to proceed? [Y/N]: " response
+  read -rp ":: Do you wish to proceed? [Y/n]: " response
   case $response in
-    [Yy]* )
-
-    ;;
     [Nn]* )
         echo "Stopping installation, exiting..."
         exit
-    ;;
-    * )
-        echo "No clear input given, try again"
-        confirm
   esac
 }
 
@@ -74,8 +73,8 @@ else
 fi
 
 if [[ "$_java" ]]; then
-    version=$("$_java" -version 2>&1 | head -1 | cut -d'"' -f2 | sed '/^1\./s///' | cut -d'.' -f1)
-    if [[ "$version" -lt 22 ]]; then
+    jarVersion=$("$_java" -version 2>&1 | head -1 | cut -d'"' -f2 | sed '/^1\./s///' | cut -d'.' -f1)
+    if [[ "$jarVersion" -lt 22 ]]; then
         echo "Java version lower than 22, please upgrade your java installation"
         exit
     fi
@@ -83,19 +82,92 @@ fi
 echo "Correct java version for bot is installed, proceeding with installation..."
 echo ""
 
+function jarInstall() {
+  curl -LO $versionLink
+
+  echo ""
+  echo "Executing jar-file to generate configuration files..."
+
+  sudo java -jar $filename > /dev/null 2>&1
+  configPath=$(pwd)
+}
+
+function dockerInstall() {
+  echo ""
+  read -rp ":: Please enter the config bind path? Default [/var/lib/ScpTools/]: " response
+  case $response in
+    "" )
+      echo "Using default config bind path: /var/lib/ScpTools/"
+      configPath="/var/lib/ScpTools/"
+    ;;
+    * )
+      echo "Using config bind path: $response"
+      configPath=$response
+  esac
+
+  echo ""
+  echo "Cloning repository branch $version"
+  git clone --depth 1 --branch $version $repo > /dev/null 2>&1
+  cd SCPToolsBot/ || exit > /dev/null 2>&1
+
+  echo ""
+  echo "Setting config bind path in .env file"
+  env="CONFIG_PATH = ${configPath}"
+  echo "$env" > ".env"
+
+  systemctl start docker > /dev/null 2>&1
+
+  sudo docker compose up > /dev/null 2>&1 & pid=$!
+
+  # This spinner code has been mostly taken from stackoverflow - https://stackoverflow.com/a/12498305
+  spin[0]="-"
+  spin[1]="\\"
+  spin[2]="|"
+  spin[3]="/"
+
+  echo ""
+  echo -n "Running docker compose up, this can take a few minutes, don't stop your machine: ${spin[0]}"
+  while kill -0 $pid 2> /dev/null; do
+    for i in "${spin[@]}"; do
+          echo -ne "\b$i"
+          sleep 0.1
+    done
+  done
+
+  echo "Concluded compose, shutting down..."
+  sudo docker compose down > /dev/null 2>&1
+}
+
+function chooseInstall() {
+  echo ""
+  echo "What install do you want to pursue?"
+  PS3=":: Choose install method: "
+  select installOption in Jar Docker
+  do
+    installType=$installOption
+    break
+  done
+
+  case $installType in
+    Jar )
+      jarInstall
+    ;;
+    Docker )
+      dockerInstall
+    ;;
+    * )
+      echo "This is no install method, please repeat..."
+      chooseInstall
+  esac
+}
+
 echo "Do you want to proceed with the installation?"
 confirm
 
-curl -LO $versionLink
-
-# First Bot Startup
-echo ""
-echo "Executing jar-file to generate configuration files..."
-
-sudo java -jar $filename > /dev/null 2>&1
+chooseInstall
 
 echo ""
-echo "Bot process has been ended, do you want to do a complete installation with configuration or end it here?"
+echo "Bot process has concluded, do you want to do a complete installation with configuration or end it here?"
 confirm
 
 # Token Configuration
@@ -188,7 +260,7 @@ function webserver() {
 
   case $firewallType in
     UFW )
-      ufw allow $webServerPort
+      ufw allow "$webServerPort"
     ;;
     SKIP )
       echo "Skipping firewall setup, make sure to setup yourself to make webserver work"
@@ -224,18 +296,14 @@ function webserver() {
 echo ""
 echo "Do you want to set up webserver? This is used for OAuth requests and needed for some features."
 function confirmWebserver() {
-  read -rp ":: Do you wish to proceed? [Y/N]: " response
+  read -rp ":: Do you wish to proceed? [y/N]: " response
   case $response in
     [Yy]* )
       webServerActive=true
       webserver
     ;;
-    [Nn]* )
-        echo "Skipping webserver setup"
-    ;;
     * )
-        echo "No clear input given, try again"
-        confirmWebserver
+      echo "Skipping webserver setup"
   esac
 }
 confirmWebserver
@@ -261,17 +329,14 @@ function cedmod() {
 echo ""
 echo "Do you want to set up cedmod api integration? This is used for some features to request data from the server."
 function confirmCedMod() {
-  read -rp ":: Do you wish to proceed [Y/N]: " response
+  read -rp ":: Do you wish to proceed [y/N]: " response
   case $response in
     [Yy]* )
       cedmodActive=true
       cedmod
     ;;
-    [Nn]* )
-      echo "Skipping CedMod setup"
-    ;;
     * )
-      echo "No clear input given, try again"
+      echo "Skipping CedMod setup"
       confirmCedMod
   esac
 }
@@ -279,42 +344,12 @@ confirmCedMod
 
 # End of configuration States
 echo ""
-echo "The configuration is done, displaying all configured values"
-
-echo ""
-echo " - Bot Configurations - "
-echo "Token: $botToken"
-echo "Secret: $botSecret"
-echo "GuildId: $botGuildId"
-echo "Language: $botLanguage"
-
-
-if [ $webServerActive == true ]; then
-  echo ""
-  echo " - Webserver Configurations - "
-  echo "Webserver Active: $webServerActive"
-  echo "Webserver Port: $webServerPort"
-  echo "Webserver Redirect Uri: $webServerRedirectUri"
-  echo "Webserver Uri: $webServerUri"
-fi
-
-
-if [ $cedmodActive == true ]; then
-  echo ""
-  echo " - CedMod Configurations - "
-  echo "CedMod Active: $cedmodActive"
-  echo "CedMod Instance Url: $cedmodInstanceUrl"
-  echo "CedMod Api Key: $cedmodApiKey"
-fi
-
-echo ""
-echo "Do you want to write them to the configuration?"
+echo "Do you want to write the configured values to the config?"
 confirm
 
 #
 # Here comes the YAML Parser and the configuration writer stuff
 #
-workingDir=$(pwd)
 config="#                                                           ______     ______     ______      ______   ______     ______     __         ______
 #                                                          /\  ___\   /\  ___\   /\  == \    /\__  _\ /\  __ \   /\  __ \   /\ \       /\  ___\\
 #                                                          \ \___  \  \ \ \____  \ \  _-/    \/_/\ \/ \ \ \/\ \  \ \ \/\ \  \ \ \____  \ \___  \\
@@ -448,7 +483,7 @@ regulars:
   only_load_folders: []
 "
 
-echo "$config" > "$workingDir/SCPToolsBot/configs/config.yml"
+echo "$config" > "${configPath}/SCPToolsBot/configs/config.yml"
 
 echo ""
 echo "Installation wrapped up, existing..."
