@@ -89,7 +89,3 @@ tasks.classes {
     dependsOn(createVersionProperties)
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
-
