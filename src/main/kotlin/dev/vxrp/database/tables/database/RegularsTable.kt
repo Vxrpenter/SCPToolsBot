@@ -1,13 +1,9 @@
 package dev.vxrp.database.tables.database
 
 import dev.vxrp.bot.regulars.data.RegularDatabaseEntry
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
-import org.jetbrains.exposed.sql.update
 
 class RegularsTable {
     object Regulars : Table("regulars") {

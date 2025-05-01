@@ -1,7 +1,6 @@
 package dev.vxrp.bot.events.buttons
 
 import dev.minn.jda.ktx.messages.Embed
-import dev.minn.jda.ktx.messages.edit
 import dev.minn.jda.ktx.messages.reply_
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.regulars.RegularsFileHandler

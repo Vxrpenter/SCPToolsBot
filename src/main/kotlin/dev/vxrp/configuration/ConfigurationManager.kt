@@ -33,7 +33,7 @@ class ConfigurationManager {
     }
 
     fun initializeDatabase(config: Config) {
-        val databaseManager = DatabaseManager(config, "/SCPToolsBot/database", "data.db")
+        DatabaseManager(config, "/SCPToolsBot/database", "data.db")
 
         configManager.databaseManagement(
             Path("${System.getProperty("user.dir")}/SCPToolsBot/configs/extra/launch-configuration.json"),
