@@ -7,8 +7,8 @@ import dev.vxrp.bot.ticket.enums.TicketStatus
 import dev.vxrp.bot.ticket.enums.TicketType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.ApplicationTable
-import dev.vxrp.database.tables.ApplicationTypeTable
+import dev.vxrp.database.tables.database.ApplicationTable
+import dev.vxrp.database.tables.database.ApplicationTypeTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent

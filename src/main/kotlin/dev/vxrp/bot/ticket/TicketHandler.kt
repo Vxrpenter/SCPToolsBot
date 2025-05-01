@@ -6,7 +6,7 @@ import dev.vxrp.bot.ticket.enums.TicketStatus
 import dev.vxrp.bot.ticket.enums.TicketType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.TicketTable
+import dev.vxrp.database.tables.database.TicketTable
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.User
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel

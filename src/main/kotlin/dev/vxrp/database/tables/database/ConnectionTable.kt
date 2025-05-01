@@ -1,6 +1,5 @@
-package dev.vxrp.database.tables
+package dev.vxrp.database.tables.database
 
-import dev.vxrp.database.tables.ConnectionTable.Connections.status
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
@@ -42,9 +41,10 @@ class ConnectionTable {
         var status = ConnectionTableData(key, false, maintenance = false)
         transaction {
             Connections.selectAll()
-                .where { Connections.id eq key}
+                .where { Connections.id eq key }
                 .forEach {
-                    status = ConnectionTableData(key, it[Connections.status] == true, it[Connections.maintenance] == true)
+                    status =
+                        ConnectionTableData(key, it[Connections.status] == true, it[Connections.maintenance] == true)
                 }
         }
         return status
@@ -66,7 +66,7 @@ class ConnectionTable {
 
     fun postConnectionToDatabase(key: String, serverStatus: Boolean) {
         transaction {
-            Connections.update({Connections.id eq key}) {
+            Connections.update({ Connections.id eq key }) {
                 it[status] = serverStatus
             }
         }

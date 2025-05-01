@@ -8,8 +8,8 @@ import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.bot.application.enums.MessageType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.ApplicationTypeTable
-import dev.vxrp.database.tables.MessageTable
+import dev.vxrp.database.tables.database.ApplicationTypeTable
+import dev.vxrp.database.tables.database.MessageTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.Message

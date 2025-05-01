@@ -1,4 +1,4 @@
-package dev.vxrp.database.tables
+package dev.vxrp.database.tables.database
 
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.Table
@@ -87,7 +87,7 @@ class NoticeOfDepartureTable {
 
         transaction {
             NoticeOfDepartures.selectAll()
-                .where {NoticeOfDepartures.id eq noticeId}
+                .where { NoticeOfDepartures.id eq noticeId }
                 .forEach {
                     channel = it[NoticeOfDepartures.channelId]
                 }
@@ -101,7 +101,7 @@ class NoticeOfDepartureTable {
 
         transaction {
             NoticeOfDepartures.selectAll()
-                .where {NoticeOfDepartures.id eq noticeId}
+                .where { NoticeOfDepartures.id eq noticeId }
                 .forEach {
                     message = it[NoticeOfDepartures.messageId]
                 }

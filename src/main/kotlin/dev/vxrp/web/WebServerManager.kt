@@ -9,7 +9,7 @@ import dev.vxrp.api.discord.enums.DiscordUser
 import dev.vxrp.bot.verify.VerifyMessageHandler
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.UserTable
+import dev.vxrp.database.tables.database.UserTable
 import dev.vxrp.util.webServerScope
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*

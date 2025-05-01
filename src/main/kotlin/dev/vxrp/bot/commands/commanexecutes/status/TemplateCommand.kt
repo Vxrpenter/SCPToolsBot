@@ -6,7 +6,7 @@ import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.status.enums.PlayerlistType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.StatusTable
+import dev.vxrp.database.tables.database.StatusTable
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
