@@ -52,16 +52,16 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     }
 
     fun initialize(commandManager: CommandManager) {
-        if (config.status.active) {
-            defaultStatusScope.launch {
-                mappedBots.clear()
-                mappedStatusConstructor.clear()
-                mappedServers.clear()
+        if (config.status.active) return
 
-                val status = config.status
+        defaultStatusScope.launch {
+            mappedBots.clear()
+            mappedStatusConstructor.clear()
+            mappedServers.clear()
 
-                initializeBots(status, commandManager)
-            }
+            val status = config.status
+
+            initializeBots(status, commandManager)
         }
     }
 
