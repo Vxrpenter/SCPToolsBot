@@ -1,9 +1,11 @@
 package dev.vxrp.database.tables
 
+import dev.vxrp.database.tables.ConnectionTable.Connections.status
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 
 class ConnectionTable {
     object Connections : Table("connections") {
@@ -46,5 +48,27 @@ class ConnectionTable {
                 }
         }
         return status
+    }
+
+    fun databaseNotExists(key: String, serverStatus: Boolean) {
+        transaction {
+            val exists = Connections.selectAll()
+                .where { Connections.id.eq(key) }.empty()
+
+            if (exists) {
+                Connections.insert {
+                    it[id] = key
+                    it[status] = serverStatus
+                }
+            }
+        }
+    }
+
+    fun postConnectionToDatabase(key: String, serverStatus: Boolean) {
+        transaction {
+            Connections.update({Connections.id eq key}) {
+                it[status] = serverStatus
+            }
+        }
     }
 }
