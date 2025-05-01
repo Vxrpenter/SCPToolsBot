@@ -23,7 +23,7 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
         }
         embeds.add(embed)
 
-        val regulars = RegularsFileHandler(config, translation).query()
+        val regulars = RegularsFileHandler(config).query()
         for (regular in regulars) {
             val stringBuilder: StringBuilder = StringBuilder()
 
@@ -62,7 +62,7 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
         var lastChecked = "None"
 
         if (RegularsTable().exists(user.id)) {
-            val regularRole = RegularsFileHandler(config, translation).queryRoleFromConfig(RegularsTable().getGroup(user.id), RegularsTable().getRole(user.id)!!)
+            val regularRole = RegularsFileHandler(config).queryRoleFromConfig(RegularsTable().getGroup(user.id), RegularsTable().getRole(user.id)!!)
 
             requirementType = regularRole?.requirementType ?: ""
             groupRole = "<@&${RegularsTable().getGroupRole(user.id) ?: "" }>"

@@ -40,7 +40,7 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
                 field {
                     inline = true
                     name = translation.verify.embedDataFieldVerifiedTitle
-                    value = verified.toString()
+                    value = verified
                 }
                 field {
                     inline = true

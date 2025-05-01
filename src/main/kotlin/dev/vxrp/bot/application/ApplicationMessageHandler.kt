@@ -76,7 +76,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         if (applicationMessage != null) {
             try {
                 message = api.getTextChannelById(applicationMessage.channelId)?.editMessage(applicationMessage.id, "", listOf(embed))?.await()
-            } catch (e: ErrorResponseException) {
+            } catch (_: ErrorResponseException) {
                 message = channel.send("", listOf(embed)).addActionRow(
                     Button.success("application_open", translation.buttons.textApplicationOpenTickets).withEmoji(Emoji.fromFormatted("📩"))
                 ).await()

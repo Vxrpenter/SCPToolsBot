@@ -35,7 +35,7 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
             event.message.delete().queue()
             event.reply_("", listOf(embed)).addActionRow(
                 StringSelectMenu.create("regulars_group_select").also {
-                    for (group in RegularsFileHandler(config, translation).query()) {
+                    for (group in RegularsFileHandler(config).query()) {
                         it.addOption(group.manifest.name, group.manifest.name)
                     }
                 }.build()
