@@ -45,7 +45,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
             break
         }
 
-        RegularsTable().addToDatabase(userId, true, group, groupRoleId, roleId!!, 0.0, LocalDate.now().toString(), 0)
+        RegularsTable().addToDatabase(userId, true, group, groupRoleId, roleId!!, 0.0, 0,LocalDate.now().toString())
     }
 
     fun reactivateSync(userId: String) {

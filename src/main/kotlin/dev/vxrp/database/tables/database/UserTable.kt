@@ -18,25 +18,25 @@ class UserTable {
             get() = PrimaryKey(id)
     }
 
-    fun addToDatabase(userId: String, verifyTimestamp: String, userSteamId: String, discordRefreshToken: String) {
-        if (exists(userId)) return
+    fun addToDatabase(id: String, verifyTime: String, steamId: String, refreshToken: String) {
+        if (exists(id)) return
 
         transaction {
             Users.insert {
-                it[id] = userId
-                it[verifyTime] = verifyTimestamp
-                it[steamId] = userSteamId
-                it[refreshToken] = discordRefreshToken
+                it[Users.id] = id
+                it[Users.verifyTime] = verifyTime
+                it[Users.steamId] = steamId
+                it[Users.refreshToken] = refreshToken
             }
         }
     }
 
-    fun getVerifyTime(userId: String): String {
+    fun getVerifyTime(id: String): String {
         var verifiedTime: String? = null
 
         transaction {
             Users.selectAll()
-                .where { Users.id eq userId }
+                .where { Users.id eq id }
                 .forEach {
                     verifiedTime = it[Users.verifyTime]
                 }
@@ -45,12 +45,12 @@ class UserTable {
         return verifiedTime!!
     }
 
-    fun getSteamId(userId: String): String {
+    fun getSteamId(id: String): String {
         var steamId: String? = null
 
         transaction {
             Users.selectAll()
-                .where { Users.id eq userId }
+                .where { Users.id eq id }
                 .forEach {
                     steamId = it[Users.steamId]
                 }
@@ -59,11 +59,11 @@ class UserTable {
         return steamId!!
     }
 
-    fun delete(userId: String) {
-        if (!exists(userId)) return
+    fun delete(id: String) {
+        if (!exists(id)) return
 
         transaction {
-            Users.deleteWhere { id eq userId }
+            Users.deleteWhere { Users.id eq id }
         }
     }
 

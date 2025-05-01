@@ -24,12 +24,12 @@ class StatusTable {
     fun addToDatabase(type: PlayerlistType, channelId: String, messageId: String, port: String, created: String, lastUpdated: String) {
         transaction {
             Status.insert {
-                it[this.type] = type.toString()
-                it[this.channelId] = channelId
-                it[this.messageId] = messageId
-                it[this.port] = port
-                it[this.created] = created
-                it[this.lastUpdated] = lastUpdated
+                it[Status.type] = type.toString()
+                it[Status.channelId] = channelId
+                it[Status.messageId] = messageId
+                it[Status.port] = port
+                it[Status.created] = created
+                it[Status.lastUpdated] = lastUpdated
             }
         }
     }
@@ -37,7 +37,7 @@ class StatusTable {
     fun updateLastUpdated(port: String, lastUpdated: String) {
         transaction {
             Status.update({ Status.port eq port }) {
-                it[this.lastUpdated] =  lastUpdated
+                it[Status.lastUpdated] =  lastUpdated
             }
         }
     }
