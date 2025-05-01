@@ -38,6 +38,8 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
 
     private fun updateMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server>, mappedStatusConstructor: MutableMap<Int, StatusConstructor>) {
         for (entry in StatusTable().getAllEntrys()) {
+            if (entry.port == port.key.toString()) return
+
             val embeds = mutableListOf<MessageEmbed>()
             mappedStatusConstructor[port.key]?.let { statusConst ->
                 Playerlist().getEmbed(api.selfUser.id, translation, statusConst)
@@ -53,9 +55,9 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
             }
 
             logger.debug("Updated playerlist with message id: ${entry.messageId} in channel ${entry.channelId} part of server ${port.key}")
-
-            StatusTable().updateLastUpdated(port.key.toString(), System.currentTimeMillis().toString())
         }
+
+        StatusTable().updateLastUpdated(port.key.toString(), System.currentTimeMillis().toString())
     }
 
     private suspend fun createPresetMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server>, mappedStatusConstructor: MutableMap<Int, StatusConstructor>) {
