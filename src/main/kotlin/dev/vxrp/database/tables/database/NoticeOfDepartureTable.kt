@@ -21,23 +21,23 @@ class NoticeOfDepartureTable {
             get() = PrimaryKey(id)
     }
 
-    fun addToDatabase(noticeId: String, activeNotice: Boolean, handler: String, channel: String, message: String, exactBeginDate: String, exactEndDate: String) {
+    fun addToDatabase(id: String, active: Boolean, handlerId: String, channelId: String, messageId: String, beginDate: String, endDate: String) {
         transaction {
             NoticeOfDepartures.insert {
-                it[id] = noticeId
-                it[active] = activeNotice
-                it[handlerId] = handler
-                it[channelId] = channel
-                it[messageId] = message
-                it[beginDate] = exactBeginDate
-                it[endDate] = exactEndDate
+                it[NoticeOfDepartures.id] = id
+                it[NoticeOfDepartures.active] = active
+                it[NoticeOfDepartures.handlerId] = handlerId
+                it[NoticeOfDepartures.channelId] = channelId
+                it[NoticeOfDepartures.messageId] = messageId
+                it[NoticeOfDepartures.beginDate] = beginDate
+                it[NoticeOfDepartures.endDate] = endDate
             }
         }
     }
 
-    fun deleteEntry(noticeId: String) {
+    fun deleteEntry(id: String) {
         transaction {
-            NoticeOfDepartures.deleteWhere { id eq noticeId }
+            NoticeOfDepartures.deleteWhere { NoticeOfDepartures.id eq id }
         }
     }
 
@@ -54,12 +54,12 @@ class NoticeOfDepartureTable {
         return list
     }
 
-    fun retrieveBeginDate(noticeId: String): String? {
+    fun retrieveBeginDate(id: String): String? {
         var date: String? = null
 
         transaction {
             NoticeOfDepartures.selectAll()
-                .where { NoticeOfDepartures.id eq noticeId }
+                .where { NoticeOfDepartures.id eq id }
                 .forEach {
                     date = it[NoticeOfDepartures.beginDate]
                 }
@@ -68,12 +68,12 @@ class NoticeOfDepartureTable {
         return date
     }
 
-    fun retrieveEndDate(noticeId: String): String? {
+    fun retrieveEndDate(id: String): String? {
         var date: String? = null
 
         transaction {
             NoticeOfDepartures.selectAll()
-                .where { NoticeOfDepartures.id eq noticeId }
+                .where { NoticeOfDepartures.id eq id }
                 .forEach {
                     date = it[NoticeOfDepartures.endDate]
                 }
@@ -82,12 +82,12 @@ class NoticeOfDepartureTable {
         return date
     }
 
-    fun retrieveChannel(noticeId: String): String? {
+    fun retrieveChannel(id: String): String? {
         var channel: String? = null
 
         transaction {
             NoticeOfDepartures.selectAll()
-                .where { NoticeOfDepartures.id eq noticeId }
+                .where { NoticeOfDepartures.id eq id }
                 .forEach {
                     channel = it[NoticeOfDepartures.channelId]
                 }
@@ -96,12 +96,12 @@ class NoticeOfDepartureTable {
         return channel
     }
 
-    fun retrieveMessage(noticeId: String): String? {
+    fun retrieveMessage(id: String): String? {
         var message: String? = null
 
         transaction {
             NoticeOfDepartures.selectAll()
-                .where { NoticeOfDepartures.id eq noticeId }
+                .where { NoticeOfDepartures.id eq id }
                 .forEach {
                     message = it[NoticeOfDepartures.messageId]
                 }

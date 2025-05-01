@@ -18,14 +18,14 @@ class MessageTable {
             get() = PrimaryKey(id)
     }
 
-    fun insertIfNotExists(key: String, type: MessageType, channelId: String) {
+    fun insertIfNotExists(id: String, type: MessageType, channelId: String) {
         transaction {
             val exists = Messages.selectAll()
-                .where { Messages.id eq key }.empty()
+                .where { Messages.id eq id }.empty()
 
             if (exists) {
                 Messages.insert {
-                    it[id] = key
+                    it[Messages.id] = id
                     it[Messages.type] = type.toString()
                     it[Messages.channelId] = channelId
                 }

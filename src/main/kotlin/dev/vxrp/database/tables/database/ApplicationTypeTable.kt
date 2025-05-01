@@ -3,10 +3,11 @@ package dev.vxrp.database.tables.database
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 class ApplicationTypeTable {
-    val logger = LoggerFactory.getLogger(ApplicationTypeTable::class.java)
+    val logger: Logger = LoggerFactory.getLogger(ApplicationTypeTable::class.java)
 
     object ApplicationTypes : Table("application_types") {
         val roleId= text("roleId")
