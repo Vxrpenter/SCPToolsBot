@@ -9,16 +9,10 @@ import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.enums.PlayerlistType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.database.StatusTable.Status
+import dev.vxrp.database.tables.database.StatusTable
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.exceptions.ErrorResponseException
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.transactions.transaction
-import org.jetbrains.exposed.sql.update
 import org.slf4j.LoggerFactory
 import java.time.LocalDate
 
@@ -43,31 +37,24 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
     }
 
     private fun updateMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server>, mappedStatusConstructor: MutableMap<Int, StatusConstructor>) {
-        transaction {
-            Status.select(Status.channelId, Status.messageId)
-                .where { Status.port.eq(port.key.toString()) }
-                .forEach {
-
-                    val embeds = mutableListOf<MessageEmbed>()
-                    mappedStatusConstructor[port.key]?.let { statusConst ->
-                        Playerlist().getEmbed(api.selfUser.id, translation, statusConst)
-                    }?.let { playerListEmbed ->
-                        embeds.add(playerListEmbed)
-                    }
-
-                    try {
-                        api.getTextChannelById(it[Status.channelId])
-                            ?.editMessage(it[Status.messageId], null, embeds)?.complete()
-                    } catch (_: ErrorResponseException) {
-                        Status.deleteWhere { Status.port.eq(port.key.toString()) }
-                    }
-
-                    logger.debug("Updated playerlist with message id: ${it[Status.messageId]} in channel ${it[Status.channelId]} part of server ${port.key}")
-                }
-
-            Status.update({ Status.port.eq(port.key.toString()) }) {
-                it[lastUpdated] =  System.currentTimeMillis().toString()
+        for (entry in StatusTable().getAllEntrys()) {
+            val embeds = mutableListOf<MessageEmbed>()
+            mappedStatusConstructor[port.key]?.let { statusConst ->
+                Playerlist().getEmbed(api.selfUser.id, translation, statusConst)
+            }?.let { playerListEmbed ->
+                embeds.add(playerListEmbed)
             }
+
+            try {
+                api.getTextChannelById(entry.channelId)
+                    ?.editMessage(entry.messageId, null, embeds)?.complete()
+            } catch (_: ErrorResponseException) {
+                StatusTable().deleteFromDatabase(port.key.toString())
+            }
+
+            logger.debug("Updated playerlist with message id: ${entry.messageId} in channel ${entry.channelId} part of server ${port.key}")
+
+            StatusTable().updateLastUpdated(port.key.toString(), System.currentTimeMillis().toString())
         }
     }
 
@@ -76,18 +63,12 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
             if (instance.serverPort != port.key) continue
             if (!instance.playerlist.active) continue
 
-            var present = false
-            transaction {
-                Status.selectAll()
-                    .where { Status.type.eq(PlayerlistType.PRESET.toString()) }
-                    .forEach {
-                        if (it[Status.port] == port.key.toString()) {
-                            logger.debug("Skipping over preset creation for server '{}'", instance.name)
-                            present = true
-                        }
-                    }
+            val playerlistType = StatusTable().getType(port.key.toString())
+
+            if (playerlistType != PlayerlistType.PRESET) {
+                logger.debug("Skipping over preset creation for server '{}'", instance.name)
+                return
             }
-            if (present) return
 
             for (channelId in instance.playerlist.channelId) {
                 val channel = api.getTextChannelById(channelId) ?: run {
@@ -104,16 +85,7 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
 
                 val message = channel.sendMessageEmbeds(embeds).await()
 
-                transaction {
-                    Status.insert {
-                        it[type] = PlayerlistType.PRESET.toString()
-                        it[Status.channelId] = channelId
-                        it[messageId] = message.id
-                        it[Status.port] = port.key.toString()
-                        it[created] = LocalDate.now().toString()
-                        it[lastUpdated] = System.currentTimeMillis().toString()
-                    }
-                }
+                StatusTable().addToDatabase(PlayerlistType.PRESET, channelId, message.id, port.key.toString(), LocalDate.now().toString(), System.currentTimeMillis().toString())
             }
             break
         }
