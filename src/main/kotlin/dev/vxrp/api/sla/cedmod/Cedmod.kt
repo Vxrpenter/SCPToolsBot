@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit
  * You can also implement it yourself and then create a pull request if needed
  *
  * @author Vxrpenter
- * @since Cedmod Version: `3.4.18`so 
+ * @since Cedmod Version: `3.4.18`so
  */
 
 

@@ -7,8 +7,6 @@ import dev.vxrp.bot.regulars.data.RegularsConfigRole
 import dev.vxrp.bot.regulars.data.RegularsManifest
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.database.RegularsTable
-import kotlinx.serialization.json.Json
 import java.nio.file.Files
 import kotlin.io.path.Path
 import kotlin.io.path.name

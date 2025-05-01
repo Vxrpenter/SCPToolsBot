@@ -71,7 +71,7 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
 
         return LaunchArguments(false, engage = false, separateThread = false)
     }
-    
+
     fun checkLaunchOption(type: LaunchOptionType): LaunchArguments {
         for (launchOption in config.launchConfiguration.order) {
             if (launchOption.id.split(":")[1] == type.toString()) return LaunchArguments(false, launchOption.engage, launchOption.separateThread)
