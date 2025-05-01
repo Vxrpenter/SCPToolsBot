@@ -62,7 +62,7 @@ fi
 # Java Checker
 #
 # This part of the script is based of on this post on stackoverflow https://stackoverflow.com/questions/7334754/correct-way-to-check-java-version-from-bash-script/7335524#7335524
-if type -p java; then
+if type -p java > /dev/null 2>&1; then
     echo "Found java in executable PATH"
     _java=java
 elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]];  then
@@ -120,19 +120,28 @@ function dockerInstall() {
   sudo docker compose up > /dev/null 2>&1 & pid=$!
 
   # This spinner code has been mostly taken from stackoverflow - https://stackoverflow.com/a/12498305
-  spin[0]="-"
-  spin[1]="\\"
-  spin[2]="|"
-  spin[3]="/"
+  spin[0]="⠁"
+  spin[1]="⠂"
+  spin[2]="⠄"
+  spin[3]="⡀"
+  spin[4]="⢀"
+  spin[5]="⠠"
+  spin[6]="⠐"
+  spin[7]="⠈"
 
   echo ""
-  echo -n "Running docker compose up, this can take a few minutes, don't stop your machine: ${spin[0]}"
+  echo -en "Running docker compose up, this can take a few minutes, don't stop your machine: ${spin[0]}"
+
+  tput civis
   while kill -0 $pid 2> /dev/null; do
-    for i in "${spin[@]}"; do
+      for i in "${spin[@]}"; do
           echo -ne "\b$i"
+
+
           sleep 0.1
-    done
+      done
   done
+  tput cnorm
 
   echo "Concluded compose, shutting down..."
   sudo docker compose down > /dev/null 2>&1
