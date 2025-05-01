@@ -58,7 +58,7 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
                     try {
                         api.getTextChannelById(it[Status.channelId])
                             ?.editMessage(it[Status.messageId], null, embeds)?.complete()
-                    } catch (e: ErrorResponseException) {
+                    } catch (_: ErrorResponseException) {
                         Status.deleteWhere { Status.port.eq(port.key.toString()) }
                     }
 

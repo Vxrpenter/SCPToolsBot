@@ -24,11 +24,11 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
     private val logger = LoggerFactory.getLogger(RegularsManager::class.java)
 
     init {
-        RegularsFileHandler(config, translation)
+        RegularsFileHandler(config)
     }
 
     fun syncRegulars(userId: String, group: String) {
-        val configQuery = RegularsFileHandler(config, translation).query()
+        val configQuery = RegularsFileHandler(config).query()
 
         var groupRoleId: String? = null
         var roleId: String? = null
@@ -216,7 +216,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
     }
 
     private fun getRole(regular: RegularDatabaseEntry):  RegularsConfigRole? {
-        val configQuery = RegularsFileHandler(config, translation).query()
+        val configQuery = RegularsFileHandler(config).query()
 
         for (config in configQuery) {
             if (config.manifest.name != regular.group) continue

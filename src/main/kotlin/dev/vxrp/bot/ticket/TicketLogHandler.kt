@@ -78,7 +78,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         if (handlerId != null) isHandled = true
 
         channel.editMessage(logMessage!!, "", listOf(logEmbed)).setActionRow(
-            logActionRow(status!!, isHandled, ticketId)
+            logActionRow(status, isHandled, ticketId)
         ).queue()
     }
 

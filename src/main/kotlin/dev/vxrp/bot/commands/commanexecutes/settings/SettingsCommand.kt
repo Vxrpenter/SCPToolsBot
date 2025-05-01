@@ -140,7 +140,7 @@ class SettingsCommand(val config: Config, val translation: Translation) {
             try {
                 Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api).changelogGet()
                 return true
-            } catch (e: UnknownHostException) {
+            } catch (_: UnknownHostException) {
                 return false
             }
         }
