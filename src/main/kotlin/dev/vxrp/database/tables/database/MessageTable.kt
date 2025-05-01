@@ -1,4 +1,4 @@
-package dev.vxrp.database.tables
+package dev.vxrp.database.tables.database
 
 import dev.vxrp.bot.application.enums.MessageType
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
@@ -37,7 +37,7 @@ class MessageTable {
         var message: MessageTableData? = null
         transaction {
             Messages.selectAll()
-                .where { Messages.type eq type.toString()}
+                .where { Messages.type eq type.toString() }
                 .forEach {
                     message = MessageTableData(it[Messages.id], type, it[Messages.channelId])
                 }
@@ -47,7 +47,7 @@ class MessageTable {
 
     fun delete(id: String) {
         transaction {
-            Messages.deleteWhere {Messages.id eq id}
+            Messages.deleteWhere { Messages.id eq id }
         }
     }
 

@@ -2,7 +2,7 @@ package dev.vxrp.bot.noticeofdeparture
 
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.NoticeOfDepartureTable
+import dev.vxrp.database.tables.database.NoticeOfDepartureTable
 import dev.vxrp.util.Timer
 import dev.vxrp.util.duration.DurationParser
 import dev.vxrp.util.duration.enums.DurationType

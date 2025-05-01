@@ -1,15 +1,13 @@
-package dev.vxrp.database.tables
+package dev.vxrp.database.tables.database
 
 import dev.vxrp.bot.regulars.data.RegularDatabaseEntry
-import dev.vxrp.database.tables.RegularsTable.Regulars.active
-import dev.vxrp.database.tables.RegularsTable.Regulars.group
-import dev.vxrp.database.tables.RegularsTable.Regulars.groupRoleId
-import dev.vxrp.database.tables.RegularsTable.Regulars.lastCheckedDate
-import dev.vxrp.database.tables.RegularsTable.Regulars.playtime
-import dev.vxrp.database.tables.RegularsTable.Regulars.roleId
-import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.deleteWhere
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 
 class RegularsTable {
     object Regulars : Table("regulars") {
@@ -49,14 +47,17 @@ class RegularsTable {
         transaction {
             Regulars.selectAll()
                 .forEach {
-                    list.add(RegularDatabaseEntry(
-                        it[Regulars.id],
-                        it[active],
-                        it[group],
-                        it[groupRoleId],
-                        it[roleId],
-                        it[lastCheckedDate],
-                        it[playtime]))
+                    list.add(
+                        RegularDatabaseEntry(
+                            it[Regulars.id],
+                            it[Regulars.active],
+                            it[Regulars.group],
+                            it[Regulars.groupRoleId],
+                            it[Regulars.roleId],
+                            it[Regulars.lastCheckedDate],
+                            it[Regulars.playtime]
+                        )
+                    )
                 }
         }
 
@@ -73,7 +74,7 @@ class RegularsTable {
 
     fun setPlaytime(userId: String, time: Double) {
         transaction {
-            Regulars.update( { Regulars.id eq userId } ) {
+            Regulars.update({ Regulars.id eq userId }) {
                 it[playtime] = time
             }
         }
@@ -81,7 +82,7 @@ class RegularsTable {
 
     fun setLevel(userId: String, xpLevel: Int) {
         transaction {
-            Regulars.update( { Regulars.id eq userId } ) {
+            Regulars.update({ Regulars.id eq userId }) {
                 it[level] = xpLevel
             }
         }
@@ -89,7 +90,7 @@ class RegularsTable {
 
     fun setLastCheckedDate(userId: String, timestamp: String) {
         transaction {
-            Regulars.update( { Regulars.id eq userId } ) {
+            Regulars.update({ Regulars.id eq userId }) {
                 it[lastCheckedDate] = timestamp
             }
         }
@@ -116,7 +117,7 @@ class RegularsTable {
             Regulars.selectAll()
                 .where { Regulars.id eq userId }
                 .forEach {
-                    groupRole = it[groupRoleId]
+                    groupRole = it[Regulars.groupRoleId]
                 }
         }
 
@@ -130,7 +131,7 @@ class RegularsTable {
             Regulars.selectAll()
                 .where { Regulars.id eq userId }
                 .forEach {
-                    groupName = it[group]
+                    groupName = it[Regulars.group]
                 }
         }
 
@@ -144,7 +145,7 @@ class RegularsTable {
             Regulars.selectAll()
                 .where { Regulars.id eq userId }
                 .forEach {
-                    role = it[roleId]
+                    role = it[Regulars.roleId]
                 }
         }
 
@@ -186,7 +187,7 @@ class RegularsTable {
             Regulars.selectAll()
                 .where { Regulars.id eq userId }
                 .forEach {
-                    lastTimeChecked = it[lastCheckedDate]
+                    lastTimeChecked = it[Regulars.lastCheckedDate]
                 }
         }
 

@@ -8,8 +8,8 @@ import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
 import dev.vxrp.database.XPDatabaseHandler
 import dev.vxrp.database.enums.AuthType
-import dev.vxrp.database.tables.RegularsTable
-import dev.vxrp.database.tables.UserTable
+import dev.vxrp.database.tables.database.RegularsTable
+import dev.vxrp.database.tables.database.UserTable
 import dev.vxrp.util.Timer
 import dev.vxrp.util.regularsScope
 import kotlinx.coroutines.delay

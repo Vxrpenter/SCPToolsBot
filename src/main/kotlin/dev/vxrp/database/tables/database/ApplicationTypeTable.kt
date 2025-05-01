@@ -1,8 +1,12 @@
-package dev.vxrp.database.tables
+package dev.vxrp.database.tables.database
 
-import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.deleteWhere
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 import org.slf4j.LoggerFactory
 
 class ApplicationTypeTable {
@@ -35,7 +39,7 @@ class ApplicationTypeTable {
                     val currentId = it[ApplicationTypes.roleId]
 
                     if (!roleIds.contains(currentId)) {
-                        ApplicationTypes.deleteWhere { roleId eq currentId}
+                        ApplicationTypes.deleteWhere { roleId eq currentId }
                         logger.info("Found and deleted redundant application type from database: {}", currentId)
                     }
                 }
@@ -58,9 +62,14 @@ class ApplicationTypeTable {
 
         transaction {
             ApplicationTypes.selectAll()
-                .where {ApplicationTypes.roleId eq roleId}
+                .where { ApplicationTypes.roleId eq roleId }
                 .forEach {
-                    applicationType = ApplicationType(it[ApplicationTypes.roleId], it[ApplicationTypes.active], it[ApplicationTypes.members], it[ApplicationTypes.initializer])
+                    applicationType = ApplicationType(
+                        it[ApplicationTypes.roleId],
+                        it[ApplicationTypes.active],
+                        it[ApplicationTypes.members],
+                        it[ApplicationTypes.initializer]
+                    )
                 }
         }
 

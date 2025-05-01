@@ -9,7 +9,7 @@ import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.enums.PlayerlistType
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.StatusTable.Status
+import dev.vxrp.database.tables.database.StatusTable.Status
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.exceptions.ErrorResponseException

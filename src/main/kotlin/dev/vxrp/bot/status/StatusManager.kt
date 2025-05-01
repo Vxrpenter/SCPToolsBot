@@ -11,7 +11,7 @@ import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.ConnectionTable
+import dev.vxrp.database.tables.database.ConnectionTable
 import dev.vxrp.util.Timer
 import dev.vxrp.util.defaultStatusScope
 import dev.vxrp.util.launch.LaunchOptionManager
@@ -52,7 +52,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     }
 
     fun initialize(commandManager: CommandManager) {
-        if (config.status.active) return
+        if (!config.status.active) return
 
         defaultStatusScope.launch {
             mappedBots.clear()

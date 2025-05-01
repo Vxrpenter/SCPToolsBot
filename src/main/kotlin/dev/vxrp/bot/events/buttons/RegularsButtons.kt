@@ -9,7 +9,7 @@ import dev.vxrp.bot.regulars.RegularsManager
 import dev.vxrp.bot.regulars.RegularsMessageHandler
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.UserTable
+import dev.vxrp.database.tables.database.UserTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 import net.dv8tion.jda.api.interactions.components.buttons.Button

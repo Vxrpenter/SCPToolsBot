@@ -6,7 +6,7 @@ import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.configuration.loaders.Translation
-import dev.vxrp.database.tables.ConnectionTable
+import dev.vxrp.database.tables.database.ConnectionTable
 import net.dv8tion.jda.api.JDA
 import org.slf4j.LoggerFactory
 

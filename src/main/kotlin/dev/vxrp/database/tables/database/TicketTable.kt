@@ -1,4 +1,4 @@
-package dev.vxrp.database.tables
+package dev.vxrp.database.tables.database
 
 import dev.vxrp.bot.ticket.enums.TicketStatus
 import dev.vxrp.bot.ticket.enums.TicketType
@@ -48,7 +48,7 @@ class TicketTable {
 
         transaction {
             Tickets.selectAll()
-                .where {Tickets.id eq ticketId}
+                .where { Tickets.id eq ticketId }
                 .forEach {
                     type = TicketType.valueOf(it[Tickets.type])
                 }

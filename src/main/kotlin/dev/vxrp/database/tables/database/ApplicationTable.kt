@@ -1,8 +1,12 @@
-package dev.vxrp.database.tables
+package dev.vxrp.database.tables.database
 
-import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.deleteWhere
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 
 class ApplicationTable {
     object Applications : Table("applications") {
@@ -32,7 +36,7 @@ class ApplicationTable {
 
     fun updateTicketHandler(id: String, handler: String) {
         transaction {
-            Applications.update({Applications.id eq id}) {
+            Applications.update({ Applications.id eq id }) {
                 it[Applications.handler] = handler
             }
         }
@@ -47,7 +51,7 @@ class ApplicationTable {
     fun retrieveSerial(roleId: String): Long {
         var count: Long = 0
         transaction {
-            count = Applications.selectAll().where{Applications.roleId eq roleId}.count()
+            count = Applications.selectAll().where { Applications.roleId eq roleId }.count()
         }
 
         return count
