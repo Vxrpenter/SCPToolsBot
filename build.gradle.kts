@@ -11,13 +11,12 @@ application.mainClass = "dev.vxrp.MainKt"
 group = "dev.vxrp"
 version= "1.1.0-alpha4"
 
+kotlin {
+    jvmToolchain(22)
+}
 
 repositories {
     mavenCentral()
-}
-
-kotlin {
-    jvmToolchain(22)
 }
 
 val ktorVersion = "3.1.2"
