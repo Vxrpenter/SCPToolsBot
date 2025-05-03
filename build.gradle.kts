@@ -31,7 +31,7 @@ val mariaDBVersion = "3.5.3"
 
 val kotlinxSerializationVersion = "1.8.1"
 val kamlVersion = "0.77.0"
-val jdaVersion = "5.4.0"
+val jdaVersion = "5.5.1"
 val jdaKtxVersion = "0.12.0"
 val logbackVersion = "1.5.18"
 val apacheCommonsVersion = "3.4"
