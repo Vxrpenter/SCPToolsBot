@@ -24,7 +24,7 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
 
         if (content != null) {
             if (apiStatus) return
-            content.first?.let { StatusMessageHandler(config, translation).postConnectionEstablished(api, it) }
+            if (config.status.postServerStatus) content.first?.let { StatusMessageHandler(config, translation).postConnectionEstablished(api, it) }
             ConnectionTable().postConnectionToDatabase("api", true)
             retryFetchData = 0
             logger.info("Regained connection to secretlab api")
@@ -33,7 +33,7 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
             if (retryFetchData == status.retryToFetchData+1) return
             if (retryFetchData == status.retryToFetchData) {
                 logger.error("Completely lost connection to the secretlab api. This is not normal behavior and may be caused by an expired api key or wrong account number.")
-                StatusMessageHandler(config, translation).postConnectionLost(api, status.retryToFetchData)
+                if (config.status.postServerStatus) StatusMessageHandler(config, translation).postConnectionLost(api, status.retryToFetchData)
                 retryFetchData += 1
                 ConnectionTable().postConnectionToDatabase("api", false)
                 return
@@ -56,7 +56,7 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
 
         if (server.online) {
             if (serverStatus) return
-            StatusMessageHandler(config, translation).postConnectionOnline(api, instance, info!!)
+            if (config.status.postServerStatus) StatusMessageHandler(config, translation).postConnectionOnline(api, instance, info!!)
             reconnectAttempt[server.port] = 1
             ConnectionTable().postConnectionToDatabase(server.port.toString(), true)
             logger.info("Connection to server ${instance.name} (${instance.serverPort}) regained")
@@ -67,7 +67,7 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
             if (reconnectAttempt[server.port]!! == instance.retries) {
                 logger.warn("Completely lost connection to server - ${instance.name}. Server is probably offline/unreachable")
 
-                StatusMessageHandler(config, translation).postConnectionOffline(api, instance, info!!)
+                if (config.status.postServerStatus) StatusMessageHandler(config, translation).postConnectionOffline(api, instance, info!!)
                 reconnectAttempt[server.port] = instance.retries + 1
                 ConnectionTable().postConnectionToDatabase(server.port.toString(), false)
                 return

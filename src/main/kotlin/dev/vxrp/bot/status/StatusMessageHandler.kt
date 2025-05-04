@@ -27,9 +27,7 @@ class StatusMessageHandler(val config: Config, val translation: Translation) {
             }
         }
 
-        if (config.status.postServerStatus) {
-            api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
-        }
+        api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
     }
 
     fun postConnectionLost(api: JDA, retry: Int) {
@@ -53,9 +51,7 @@ class StatusMessageHandler(val config: Config, val translation: Translation) {
             }
         }
 
-        if (config.status.postServerStatus) {
-            api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
-        }
+        api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
     }
 
     fun postConnectionOnline(api: JDA, instance: Instance, info: ServerInfo?) {
@@ -76,9 +72,7 @@ class StatusMessageHandler(val config: Config, val translation: Translation) {
             }
         }
 
-        if (config.status.postServerStatus) {
-            api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
-        }
+        api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
     }
 
     fun postConnectionOffline(api: JDA, instance: Instance, info: ServerInfo?) {
@@ -102,8 +96,6 @@ class StatusMessageHandler(val config: Config, val translation: Translation) {
             }
         }
 
-        if (config.status.postServerStatus) {
-            api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
-        }
+        api.getTextChannelById(config.status.postChannel)?.sendMessageEmbeds(embed)?.queue()
     }
 }
