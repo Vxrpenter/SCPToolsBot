@@ -127,7 +127,7 @@ regulars:
   active: false
   # Should example configuration be created (deactivate if you want to delete the example config)
   create_example_configuration: true
-  # Should the bot only load from specified folder within the /regulars/ folder?
+  # Should the bot only load from the specified folder within the /regulars/ folder?
   only_load_certain_folder: false
   # Specify which folders should be specified if the option above is active
   only_load_folders: []

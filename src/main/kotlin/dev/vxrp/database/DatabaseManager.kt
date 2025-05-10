@@ -17,15 +17,15 @@ class DatabaseManager(val config: Config, private val folder: String, val file: 
         val database = connectToDatabase()
         val xpDatabase = XPDatabaseHandler(config).connectToDatabase()
 
-        TransactionManager.defaultDatabase = database
-
         if (xpDatabase == null) {
             XPDatabaseHandler(config).database = database
         } else {
             XPDatabaseHandler(config).database = xpDatabase
         }
 
-        createTables()
+        TransactionManager.defaultDatabase = database
+
+        createTables(database)
     }
 
     private fun connectToDatabase(): Database? {
@@ -65,8 +65,8 @@ class DatabaseManager(val config: Config, private val folder: String, val file: 
         }
     }
 
-    private fun createTables() {
-        transaction {
+    private fun createTables(database: Database?) {
+        transaction(database) {
             SchemaUtils.create(TicketTable.Tickets)
             SchemaUtils.create(NoticeOfDepartureTable.NoticeOfDepartures)
             SchemaUtils.create(RegularsTable.Regulars)
