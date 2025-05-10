@@ -1,5 +1,6 @@
 package dev.vxrp.database
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException
 import dev.vxrp.configuration.loaders.Config
 import dev.vxrp.database.enums.AuthType
 import dev.vxrp.database.tables.xp.PlayerInfoTable
@@ -22,7 +23,12 @@ class XPDatabaseHandler(val config: Config) {
 
         val url = "jdbc:mysql://${config.settings.xp.databaseAddress}"
 
-        return Database.connect(url, driver = "com.mysql.cj.jdbc.Driver", config.settings.xp.databaseUser, config.settings.xp.databasePassword)
+        return try {
+            Database.connect(url, driver = "com.mysql.cj.jdbc.Driver", config.settings.xp.databaseUser, config.settings.xp.databasePassword)
+        } catch (_: CommunicationsException) {
+            logger.error("Could not connect to XP database, all xp database action will fall back to main database, please try fixing your connection")
+            null
+        }
     }
 
     fun queryExperience(authType: AuthType, userId: Long): Int {

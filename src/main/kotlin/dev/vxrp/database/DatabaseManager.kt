@@ -7,6 +7,7 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.slf4j.LoggerFactory
 import java.io.File
 
 class DatabaseManager(val config: Config, private val folder: String, val file: String) {
@@ -18,8 +19,11 @@ class DatabaseManager(val config: Config, private val folder: String, val file: 
 
         TransactionManager.defaultDatabase = database
 
-        if (xpDatabase != null) XPDatabaseHandler(config).database = xpDatabase
-        else XPDatabaseHandler(config).database = database
+        if (xpDatabase == null) {
+            XPDatabaseHandler(config).database = database
+        } else {
+            XPDatabaseHandler(config).database = xpDatabase
+        }
 
         createTables()
     }
