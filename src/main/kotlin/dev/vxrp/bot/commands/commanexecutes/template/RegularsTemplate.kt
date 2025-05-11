@@ -2,9 +2,9 @@ package dev.vxrp.bot.commands.commanexecutes.template
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.bot.regulars.RegularsMessageHandler
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.bot.regulars.handler.RegularsMessageHandler
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 

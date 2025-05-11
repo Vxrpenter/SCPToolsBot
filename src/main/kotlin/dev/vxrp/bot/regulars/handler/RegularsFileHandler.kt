@@ -1,11 +1,11 @@
-package dev.vxrp.bot.regulars
+package dev.vxrp.bot.regulars.handler
 
 import com.charleskorn.kaml.Yaml
 import dev.vxrp.bot.regulars.data.Regulars
 import dev.vxrp.bot.regulars.data.RegularsConfig
 import dev.vxrp.bot.regulars.data.RegularsConfigRole
 import dev.vxrp.bot.regulars.data.RegularsManifest
-import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.configuration.data.Config
 import java.nio.file.Files
 import kotlin.io.path.Path
 import kotlin.io.path.name

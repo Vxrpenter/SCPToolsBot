@@ -1,4 +1,4 @@
-package dev.vxrp.api.discord.enums
+package dev.vxrp.api.discord.data
 
 import kotlinx.serialization.Serializable
 

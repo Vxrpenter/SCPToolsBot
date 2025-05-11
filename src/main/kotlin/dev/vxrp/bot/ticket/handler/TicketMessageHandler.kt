@@ -1,4 +1,4 @@
-package dev.vxrp.bot.ticket
+package dev.vxrp.bot.ticket.handler
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.Embed
@@ -6,8 +6,8 @@ import dev.minn.jda.ktx.messages.editMessage
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.ticket.enums.TicketStatus
 import dev.vxrp.bot.ticket.enums.TicketType
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.TicketTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA

@@ -1,7 +1,7 @@
 package dev.vxrp.bot.modals
 
 import dev.minn.jda.ktx.interactions.components.TextInputBuilder
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Translation
 import net.dv8tion.jda.api.interactions.components.ActionRow
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle
 import net.dv8tion.jda.api.interactions.modals.Modal

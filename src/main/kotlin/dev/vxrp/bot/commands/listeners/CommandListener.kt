@@ -7,8 +7,8 @@ import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
 import dev.vxrp.bot.commands.commanexecutes.settings.SettingsCommand
 import dev.vxrp.bot.commands.commanexecutes.template.TemplateCommand
 import dev.vxrp.bot.commands.commanexecutes.verify.VerifyCommand
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionSectionType
 import dev.vxrp.util.launch.enums.LaunchOptionType

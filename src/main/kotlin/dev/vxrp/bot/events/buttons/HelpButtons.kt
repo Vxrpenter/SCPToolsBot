@@ -1,8 +1,8 @@
 package dev.vxrp.bot.events.buttons
 
 import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 
 class HelpButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {

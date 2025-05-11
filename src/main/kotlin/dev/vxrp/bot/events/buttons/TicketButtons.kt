@@ -5,10 +5,10 @@ import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.modals.SupportTemplateModals
 import dev.vxrp.bot.permissions.PermissionManager
 import dev.vxrp.bot.permissions.enums.PermissionType
-import dev.vxrp.bot.ticket.TicketSettingsHandler
+import dev.vxrp.bot.ticket.handler.TicketSettingsHandler
 import dev.vxrp.bot.ticket.enums.TicketType
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.TicketTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent

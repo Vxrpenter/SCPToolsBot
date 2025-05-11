@@ -5,8 +5,8 @@ import dev.vxrp.bot.commands.data.CommandList
 import dev.vxrp.bot.commands.data.CustomCommand
 import dev.vxrp.bot.commands.data.Options
 import dev.vxrp.bot.commands.data.Subcommands
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.managers.ConfigManager
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.handler.ConfigFileHandler
 import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.Permission
@@ -28,7 +28,7 @@ class CommandManager(val config: Config, val file: String) {
         if (!currentFile.exists()) {
             currentFile.createNewFile()
 
-            val content = ConfigManager::class.java.getResourceAsStream("/$file")
+            val content = ConfigFileHandler::class.java.getResourceAsStream("/$file")
             if (content != null) currentFile.appendBytes(content.readBytes())
         }
     }

@@ -6,8 +6,10 @@ import dev.minn.jda.ktx.messages.editMessage
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.bot.application.enums.MessageType
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.bot.application.handler.ApplicationManager
+import dev.vxrp.bot.application.handler.applicationTypeMap
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ApplicationTypeTable
 import dev.vxrp.database.tables.database.MessageTable
 import dev.vxrp.util.color.ColorTool

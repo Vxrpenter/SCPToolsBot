@@ -2,7 +2,7 @@ package dev.vxrp.bot.commands.commanexecutes.status
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.vxrp.bot.commands.data.StatusConstructor
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.MessageEmbed
 import java.time.Instant

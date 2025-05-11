@@ -3,8 +3,8 @@ package dev.vxrp.util.launch
 import dev.vxrp.bot.BotManager
 import dev.vxrp.bot.status.StatusManager
 import dev.vxrp.bot.timer
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.launch.data.LaunchArguments
 import dev.vxrp.util.launch.data.LaunchConfigurationOrder
 import dev.vxrp.util.launch.enums.LaunchOptionSectionType

@@ -1,6 +1,6 @@
 package dev.vxrp.database
 
-import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.configuration.data.Config
 import dev.vxrp.database.enums.DatabaseType
 import dev.vxrp.database.tables.database.*
 import org.jetbrains.exposed.sql.Database

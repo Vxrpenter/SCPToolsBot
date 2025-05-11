@@ -1,4 +1,4 @@
-package dev.vxrp.api.discord.enums
+package dev.vxrp.api.discord.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -11,8 +11,6 @@ data class DiscordTokenResponse(
     val tokenType: String,
     @SerialName("expires_in")
     val expiresIn: Long,
-    @SerialName("refresh_token")
-    val refreshToken: String,
     @SerialName("scope")
     val scope: String
 )

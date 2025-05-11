@@ -6,8 +6,8 @@ import dev.vxrp.bot.commands.commanexecutes.status.PlayerlistCommand
 import dev.vxrp.bot.commands.commanexecutes.status.StatusCommand
 import dev.vxrp.bot.commands.commanexecutes.status.TemplateCommand
 import dev.vxrp.bot.commands.data.StatusConstructor
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionSectionType
 import dev.vxrp.util.launch.enums.LaunchOptionType

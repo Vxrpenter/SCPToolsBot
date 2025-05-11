@@ -9,8 +9,11 @@ import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.commands.listeners.StatusCommandListener
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.bot.status.handler.StatusActivityHandler
+import dev.vxrp.bot.status.handler.StatusConnectionHandler
+import dev.vxrp.bot.status.handler.StatusPlayerlistHandler
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ConnectionTable
 import dev.vxrp.util.Timer
 import dev.vxrp.util.defaultStatusScope

@@ -1,8 +1,8 @@
 package dev.vxrp.api.discord
 
-import dev.vxrp.api.discord.enums.DiscordConnection
-import dev.vxrp.api.discord.enums.DiscordTokenResponse
-import dev.vxrp.api.discord.enums.DiscordUser
+import dev.vxrp.api.discord.data.DiscordConnection
+import dev.vxrp.api.discord.data.DiscordTokenResponse
+import dev.vxrp.api.discord.data.DiscordUser
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*

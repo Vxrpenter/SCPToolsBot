@@ -2,11 +2,11 @@ package dev.vxrp.bot.events.modals
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.bot.ticket.TicketHandler
+import dev.vxrp.bot.ticket.TicketManager
 import dev.vxrp.bot.ticket.enums.TicketStatus
 import dev.vxrp.bot.ticket.enums.TicketType
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ApplicationTable
 import dev.vxrp.database.tables.database.ApplicationTypeTable
 import dev.vxrp.util.color.ColorTool
@@ -19,25 +19,25 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
         val api = event.jda
 
         if (event.modalId.startsWith("support_general")) {
-            val handler = TicketHandler(api, config, translation)
+            val handler = TicketManager(api, config, translation)
             val child = handler.createTicket(TicketType.GENERAL, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             respond(child, event)
         }
 
         if (event.modalId.startsWith("support_report")) {
-            val handler = TicketHandler(api, config, translation)
+            val handler = TicketManager(api, config, translation)
             val child = handler.createTicket(TicketType.REPORT, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             respond(child, event)
         }
 
         if (event.modalId.startsWith("support_error")) {
-            val handler = TicketHandler(api, config, translation)
+            val handler = TicketManager(api, config, translation)
             val child = handler.createTicket(TicketType.ERROR, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             respond(child, event)
         }
 
         if (event.modalId.startsWith("support_unban")) {
-            val handler = TicketHandler(api, config, translation)
+            val handler = TicketManager(api, config, translation)
             val child = handler.createTicket(TicketType.UNBAN, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             respond(child, event)
         }
@@ -46,13 +46,13 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
             var creator = "anonymous"
             if (event.modalId.split(":")[2] == "false") creator = event.user.id
 
-            val handler = TicketHandler(api, config, translation)
+            val handler = TicketManager(api, config, translation)
             val child = handler.createTicket(TicketType.COMPLAINT, TicketStatus.OPEN, creator, null, event.modalId, event.values)
             respond(child, event)
         }
 
         if (event.modalId.startsWith("support_application")) {
-            val handler = TicketHandler(api, config, translation)
+            val handler = TicketManager(api, config, translation)
             val child = handler.createTicket(TicketType.APPLICATION, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             val roleId = event.modalId.split(":")[1]
 

@@ -12,13 +12,12 @@ class UserTable {
         val id = text("id")
         val verifyTime = text("verify_time")
         val steamId = text("steam_id")
-        val refreshToken = text("refresh_token")
 
         override val primaryKey: PrimaryKey
             get() = PrimaryKey(id)
     }
 
-    fun addToDatabase(id: String, verifyTime: String, steamId: String, refreshToken: String) {
+    fun addToDatabase(id: String, verifyTime: String, steamId: String) {
         if (exists(id)) return
 
         transaction {
@@ -26,7 +25,6 @@ class UserTable {
                 it[Users.id] = id
                 it[Users.verifyTime] = verifyTime
                 it[Users.steamId] = steamId
-                it[Users.refreshToken] = refreshToken
             }
         }
     }

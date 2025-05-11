@@ -4,8 +4,10 @@ import dev.minn.jda.ktx.coroutines.await
 import dev.vxrp.bot.ticket.data.TicketTypes
 import dev.vxrp.bot.ticket.enums.TicketStatus
 import dev.vxrp.bot.ticket.enums.TicketType
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.bot.ticket.handler.TicketLogHandler
+import dev.vxrp.bot.ticket.handler.TicketMessageHandler
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.TicketTable
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.User
@@ -14,8 +16,8 @@ import net.dv8tion.jda.api.interactions.modals.ModalMapping
 import org.slf4j.LoggerFactory
 import java.time.LocalDate
 
-class TicketHandler(val api: JDA, val config: Config, val translation: Translation) {
-    private val logger = LoggerFactory.getLogger(TicketHandler::class.java)
+class TicketManager(val api: JDA, val config: Config, val translation: Translation) {
+    private val logger = LoggerFactory.getLogger(TicketManager::class.java)
 
     suspend fun createTicket(ticketType: TicketType, ticketStatus: TicketStatus, ticketCreator: String, ticketHandler: User?, modalId: String, modalValue: MutableList<ModalMapping>): ThreadChannel? {
         val settings = querySettings(ticketType)
