@@ -11,4 +11,4 @@ ARG VERSION="1.1.0-alpha5"
 WORKDIR /bot
 COPY --from=build /SCP_Tools/build/libs/SCP_Tools-${VERSION}-all.jar .
 
-CMD ["java","--enable-native-access=ALL-UNNAMED","-jar","SCP_Tools-${VERSION}-all.jar"]
+CMD ["java","--enable-native-access=ALL-UNNAMED","-jar","SCP_Tools-1.1.0-alpha5-all.jar"]
