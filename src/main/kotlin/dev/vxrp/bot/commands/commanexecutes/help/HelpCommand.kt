@@ -1,7 +1,7 @@
 package dev.vxrp.bot.commands.commanexecutes.help
 
 import dev.minn.jda.ktx.messages.Embed
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent

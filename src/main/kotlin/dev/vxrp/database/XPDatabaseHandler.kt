@@ -1,7 +1,7 @@
 package dev.vxrp.database
 
 import com.mysql.cj.jdbc.exceptions.CommunicationsException
-import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.configuration.data.Config
 import dev.vxrp.database.enums.AuthType
 import dev.vxrp.database.tables.xp.PlayerInfoTable
 import org.jetbrains.exposed.sql.Database

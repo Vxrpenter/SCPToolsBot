@@ -10,8 +10,8 @@ import dev.vxrp.bot.events.ModalListener
 import dev.vxrp.bot.events.StringSelectListener
 import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureManager
 import dev.vxrp.bot.regulars.RegularsManager
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.Timer
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionType

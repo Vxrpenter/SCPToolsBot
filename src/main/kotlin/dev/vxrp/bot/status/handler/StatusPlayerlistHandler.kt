@@ -1,4 +1,4 @@
-package dev.vxrp.bot.status
+package dev.vxrp.bot.status.handler
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.editMessage
@@ -7,14 +7,15 @@ import dev.vxrp.bot.commands.commanexecutes.status.Playerlist
 import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.enums.PlayerlistType
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.StatusTable
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.exceptions.ErrorResponseException
 import org.slf4j.LoggerFactory
 import java.time.LocalDate
+import kotlin.collections.iterator
 
 class StatusPlayerlistHandler(val config: Config, val translation: Translation) {
     private val logger = LoggerFactory.getLogger(StatusPlayerlistHandler::class.java)

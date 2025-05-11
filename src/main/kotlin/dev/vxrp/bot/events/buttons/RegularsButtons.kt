@@ -3,11 +3,11 @@ package dev.vxrp.bot.events.buttons
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.minn.jda.ktx.messages.send
-import dev.vxrp.bot.regulars.RegularsFileHandler
+import dev.vxrp.bot.regulars.handler.RegularsFileHandler
 import dev.vxrp.bot.regulars.RegularsManager
-import dev.vxrp.bot.regulars.RegularsMessageHandler
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.bot.regulars.handler.RegularsMessageHandler
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.UserTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent

@@ -3,12 +3,12 @@ package dev.vxrp.web
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.vxrp.api.discord.Discord
-import dev.vxrp.api.discord.enums.DiscordConnection
-import dev.vxrp.api.discord.enums.DiscordTokenResponse
-import dev.vxrp.api.discord.enums.DiscordUser
+import dev.vxrp.api.discord.data.DiscordConnection
+import dev.vxrp.api.discord.data.DiscordTokenResponse
+import dev.vxrp.api.discord.data.DiscordUser
 import dev.vxrp.bot.verify.VerifyMessageHandler
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.UserTable
 import dev.vxrp.util.webServerScope
 import io.ktor.server.engine.*
@@ -59,7 +59,7 @@ class WebServerManager(val api: JDA, val config: Config, val translation: Transl
             if (connection.type != "steam") continue
 
             logger.info("Received connection data and refresh token from user: ${user.id}")
-            UserTable().addToDatabase(user.id, LocalDate.now().toString(), connection.id, tokenResponse.refreshToken)
+            UserTable().addToDatabase(user.id, LocalDate.now().toString(), connection.id)
 
             val currentUser = api.retrieveUserById(user.id).await()
             VerifyMessageHandler(api, config, translation).sendVerificationMessage(currentUser)

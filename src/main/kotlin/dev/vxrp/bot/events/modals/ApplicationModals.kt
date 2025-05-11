@@ -1,8 +1,8 @@
 package dev.vxrp.bot.events.modals
 
 import dev.vxrp.bot.application.ApplicationMessageHandler
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent
 
 class ApplicationModals(val event: ModalInteractionEvent, val config: Config, val translation: Translation) {

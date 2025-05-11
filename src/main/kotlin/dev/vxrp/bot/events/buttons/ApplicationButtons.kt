@@ -2,12 +2,12 @@ package dev.vxrp.bot.events.buttons
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.bot.application.ApplicationManager
+import dev.vxrp.bot.application.handler.ApplicationManager
 import dev.vxrp.bot.application.ApplicationMessageHandler
-import dev.vxrp.bot.application.applicationTypeMap
+import dev.vxrp.bot.application.handler.applicationTypeMap
 import dev.vxrp.bot.application.data.ApplicationType
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent

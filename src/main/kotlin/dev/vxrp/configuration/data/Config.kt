@@ -1,4 +1,4 @@
-package dev.vxrp.configuration.loaders
+package dev.vxrp.configuration.data
 
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.bot.ticket.data.Ticket

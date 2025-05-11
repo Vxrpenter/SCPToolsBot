@@ -1,10 +1,10 @@
-package dev.vxrp.bot.noticeofdeparture
+package dev.vxrp.bot.noticeofdeparture.handler
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.send
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.NoticeOfDepartureTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
@@ -25,12 +25,16 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         val endDate = LocalDate.parse(date, formatter).format(formatter)
 
         val embed = Embed {
-            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionTitle
-                .replace("%number%", (NoticeOfDepartureTable().retrieveSerial()+1).toString()))
-            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionBody
-                .replace("%current_date%", currentDate.toString())
-                .replace("%end_date%", endDate.toString())
-                .replace("%reason%", reason))
+            title = ColorTool().useCustomColorCodes(
+                translation.noticeOfDeparture.embedDecisionTitle
+                    .replace("%number%", (NoticeOfDepartureTable().retrieveSerial() + 1).toString())
+            )
+            description = ColorTool().useCustomColorCodes(
+                translation.noticeOfDeparture.embedDecisionBody
+                    .replace("%current_date%", currentDate.toString())
+                    .replace("%end_date%", endDate.toString())
+                    .replace("%reason%", reason)
+            )
             timestamp = Instant.now()
         }
 
@@ -54,10 +58,12 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         val embed = Embed {
             color = 0x2ECC70
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptedTitle)
-            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptedBody
-                .replace("%current_date%", currentDate)
-                .replace("%end_date", endDate)
-                .replace("%reason%", reason))
+            description = ColorTool().useCustomColorCodes(
+                translation.noticeOfDeparture.embedAcceptedBody
+                    .replace("%current_date%", currentDate)
+                    .replace("%end_date", endDate)
+                    .replace("%reason%", reason)
+            )
         }
 
         val privateChannel = api.retrieveUserById(userId).await().openPrivateChannel().await()
@@ -68,8 +74,10 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         val embed = Embed {
             color = 0xE74D3C
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissedTitle)
-            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissedBody
-                .replace("%reason%", reason))
+            description = ColorTool().useCustomColorCodes(
+                translation.noticeOfDeparture.embedDismissedBody
+                    .replace("%reason%", reason)
+            )
         }
 
         val privateChannel = api.retrieveUserById(userId).await().openPrivateChannel().await()
@@ -84,13 +92,17 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         val user = api.retrieveUserById(userId).await()
 
         val embed = Embed {
-            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeTitle
-                .replace("%number%", (NoticeOfDepartureTable().retrieveSerial()+1).toString()))
-            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeBody
-                .replace("%user%", user.asMention)
-                .replace("%current_date%", currentDate)
-                .replace("%end_date", endDate)
-                .replace("%reason%", reason))
+            title = ColorTool().useCustomColorCodes(
+                translation.noticeOfDeparture.embedNoticeTitle
+                    .replace("%number%", (NoticeOfDepartureTable().retrieveSerial() + 1).toString())
+            )
+            description = ColorTool().useCustomColorCodes(
+                translation.noticeOfDeparture.embedNoticeBody
+                    .replace("%user%", user.asMention)
+                    .replace("%current_date%", currentDate)
+                    .replace("%end_date", endDate)
+                    .replace("%reason%", reason)
+            )
         }
 
         val channel = api.getTextChannelById(config.settings.noticeOfDeparture.noticeChannel)
@@ -108,10 +120,12 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         val embed = Embed {
             color = 0xE74D3C
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokedTitle)
-            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokedBody
-                .replace("%current_date%", beginDate)
-                .replace("%end_date", endDate)
-                .replace("%reason%", reason))
+            description = ColorTool().useCustomColorCodes(
+                translation.noticeOfDeparture.embedRevokedBody
+                    .replace("%current_date%", beginDate)
+                    .replace("%end_date", endDate)
+                    .replace("%reason%", reason)
+            )
         }
 
         val privateChannel = api.retrieveUserById(userId).await().openPrivateChannel().await()
@@ -122,9 +136,11 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         val embed = Embed {
             color = 0xE74D3C
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEndedTitle)
-            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEndedBody
-                .replace("%current_date%", beginDate)
-                .replace("%end_date", endDate))
+            description = ColorTool().useCustomColorCodes(
+                translation.noticeOfDeparture.embedEndedBody
+                    .replace("%current_date%", beginDate)
+                    .replace("%end_date", endDate)
+            )
         }
 
         val privateChannel = api.awaitReady().retrieveUserById(userId).await().openPrivateChannel().await()

@@ -1,4 +1,4 @@
-package dev.vxrp.configuration.loaders
+package dev.vxrp.configuration.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -2,8 +2,8 @@ package dev.vxrp.bot.events
 
 import dev.minn.jda.ktx.events.listener
 import dev.vxrp.bot.events.buttons.*
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionSectionType
 import dev.vxrp.util.launch.enums.LaunchOptionType

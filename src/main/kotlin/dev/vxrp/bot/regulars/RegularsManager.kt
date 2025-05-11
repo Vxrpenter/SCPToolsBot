@@ -4,8 +4,9 @@ import dev.vxrp.api.sla.cedmod.Cedmod
 import dev.vxrp.bot.regulars.data.RegularDatabaseEntry
 import dev.vxrp.bot.regulars.data.RegularsConfigRole
 import dev.vxrp.bot.regulars.enums.RequirementType
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.bot.regulars.handler.RegularsFileHandler
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.XPDatabaseHandler
 import dev.vxrp.database.enums.AuthType
 import dev.vxrp.database.tables.database.RegularsTable

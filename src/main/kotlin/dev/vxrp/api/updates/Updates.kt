@@ -1,7 +1,7 @@
 package dev.vxrp.api.updates
 
 import dev.vxrp.api.updates.data.Tag
-import dev.vxrp.configuration.loaders.Config
+import dev.vxrp.configuration.data.Config
 import dev.vxrp.util.color.ColorTool
 import dev.vxrp.util.color.enums.DCColor
 import kotlinx.serialization.json.Json

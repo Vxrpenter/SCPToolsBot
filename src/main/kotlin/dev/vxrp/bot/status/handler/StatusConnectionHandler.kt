@@ -1,11 +1,11 @@
-package dev.vxrp.bot.status
+package dev.vxrp.bot.status.handler
 
 import dev.vxrp.api.sla.secretlab.data.Server
 import dev.vxrp.api.sla.secretlab.data.ServerInfo
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ConnectionTable
 import net.dv8tion.jda.api.JDA
 import org.slf4j.LoggerFactory

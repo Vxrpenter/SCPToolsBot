@@ -2,9 +2,10 @@ package dev.vxrp.bot.permissions
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.vxrp.bot.permissions.enums.PermissionType
+import dev.vxrp.bot.permissions.handler.PermissionMessageHandler
 import dev.vxrp.bot.ticket.enums.TicketType
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.User
 import org.slf4j.Logger

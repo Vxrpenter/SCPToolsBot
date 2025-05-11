@@ -1,10 +1,10 @@
-package dev.vxrp.configuration.managers
+package dev.vxrp.configuration.handler
 
 import com.charleskorn.kaml.Yaml
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.bot.ticket.data.Ticket
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Settings
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Settings
 import dev.vxrp.database.tables.database.ApplicationTypeTable
 import dev.vxrp.util.launch.data.LaunchConfiguration
 import kotlinx.serialization.json.Json
@@ -13,14 +13,14 @@ import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.io.path.Path
 
-class ConfigManager {
-    private val logger = LoggerFactory.getLogger(ConfigManager::class.java)
+class ConfigFileHandler {
+    private val logger = LoggerFactory.getLogger(ConfigFileHandler::class.java)
 
     fun create(dir: String, files: List<Path>) {
         Files.createDirectories(Path("$dir/SCPToolsBot/configs/extra/"))
 
         for (file in files) {
-            val content = ConfigManager::class.java.getResourceAsStream(file.toString())
+            val content = ConfigFileHandler::class.java.getResourceAsStream(file.toString())
 
             val path = Path("$dir$file")
 

@@ -1,8 +1,8 @@
-package dev.vxrp.bot.application
+package dev.vxrp.bot.application.handler
 
 import dev.vxrp.bot.application.data.ApplicationType
-import dev.vxrp.configuration.loaders.Config
-import dev.vxrp.configuration.loaders.Translation
+import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.Translation
 
 val applicationTypeMap: HashMap<String, MutableList<ApplicationType>> = hashMapOf()
 
