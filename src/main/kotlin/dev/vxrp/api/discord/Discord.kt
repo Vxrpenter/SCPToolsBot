@@ -8,6 +8,7 @@ import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
@@ -16,6 +17,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation as ClientCon
 
 class Discord {
     private val logger = LoggerFactory.getLogger(Discord::class.java)
+    private val jsonDecoder = Json { ignoreUnknownKeys = true }
 
     private val json = Json {
         ignoreUnknownKeys = true
@@ -41,7 +43,7 @@ class Discord {
 
         if (!tokenCall.status.isSuccess()) logger.error("Failed to retrieve access token from Discord OAuth Api")
 
-        return tokenCall.body<DiscordTokenResponse>()
+        return jsonDecoder.decodeFromString<DiscordTokenResponse>(tokenCall.bodyAsText())
     }
 
     suspend fun getUser(tokenResponse: DiscordTokenResponse): DiscordUser {
@@ -51,7 +53,7 @@ class Discord {
 
         if (!userCall.status.isSuccess()) logger.error("Failed to retrieve user data from Discord OAuth Api")
 
-        return userCall.body<DiscordUser>()
+        return jsonDecoder.decodeFromString<DiscordUser>(userCall.bodyAsText())
     }
 
     suspend fun getConnections(tokenResponse: DiscordTokenResponse): List<DiscordConnection> {
@@ -61,6 +63,6 @@ class Discord {
 
         if (!connectionCall.status.isSuccess()) logger.error("Failed to retrieve connection data from Discord OAuth Api")
 
-        return connectionCall.body<List<DiscordConnection>>()
+        return jsonDecoder.decodeFromString<List<DiscordConnection>>(connectionCall.bodyAsText())
     }
 }
