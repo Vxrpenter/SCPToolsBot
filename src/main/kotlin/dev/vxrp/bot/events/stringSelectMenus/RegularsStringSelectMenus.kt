@@ -11,7 +11,7 @@ import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent
 
 class RegularsStringSelectMenus(val event: StringSelectInteractionEvent, val config: Config, val translation: Translation) {
-    fun init() {
+    suspend fun init() {
         if (event.selectMenu.id?.startsWith("regulars_group_select") == true) {
             val regularsMessageHandler = RegularsMessageHandler(event.jda, config, translation)
 
