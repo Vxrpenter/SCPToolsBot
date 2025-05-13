@@ -28,7 +28,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
         RegularsFileHandler(config)
     }
 
-    fun syncRegulars(userId: String, group: String) {
+    suspend fun syncRegulars(userId: String, group: String) {
         val configQuery = RegularsFileHandler(config).query()
 
         var groupRoleId: String? = null
@@ -46,7 +46,8 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
             break
         }
 
-        RegularsTable().addToDatabase(userId, true, group, groupRoleId, roleId!!, 0.0, 0,LocalDate.now().toString())
+        RegularsTable().addToDatabase(userId, true, group, groupRoleId, roleId!!, 0.0, 0, null)
+        checkRegular(RegularsTable().getEntry(userId)!!)
     }
 
     fun reactivateSync(userId: String) {
@@ -71,61 +72,67 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
         logger.info("Starting regulars checker, processing units starting...")
 
         for (regular in RegularsTable().getAllEntrys()) {
-            val lastCheckedDate = LocalDate.parse(regular.lastCheckedDate)
-
-            if (!UserTable().exists(regular.id)) {
-                RegularsTable().delete(regular.id)
-                logger.warn("Could not retrieve user: ${regular.id}'s verification data, deleting their regular data because of it being invalid")
-                continue
-            }
-
-            val role = getRole(regular)
-            role ?: run {
-                logger.error("Regulars config does not match up to the database, players have roles in their registry that do not exist anymore")
-                return
-            }
-
-            when(RequirementType.valueOf(role.requirementType)) {
-                RequirementType.PLAYTIME -> {
-                    if (!config.settings.cedmod.active) {
-                        logger.error("Could not correctly process regulars with setting 'PLAYTIME', activate cedmod integration!")
-                        return
-                    }
-
-                    if (!checkPlaytime(regular, lastCheckedDate)) break
-
-                    checkRoles(regular.id, regular.groupRoleId, regular.roleId)
-                }
-
-                RequirementType.XP -> {
-                    if (!config.settings.xp.active) {
-                        logger.error("Could not correctly process regulars with setting 'XP', activate xp integration!")
-                        return
-                    }
-
-                    if (!checkLevel(regular, role)) break
-
-                    checkRoles(regular.id, regular.groupRoleId, regular.roleId)
-                }
-
-                RequirementType.BOTH -> {
-                    if (!config.settings.cedmod.active || !config.settings.xp.active) {
-                        logger.error("Could not correctly process regulars with setting 'BOTH', activate cedmod and xp integration!")
-                        return
-                    }
-
-                    if (!checkPlaytime(regular, lastCheckedDate) || !checkLevel(regular, role)) break
-
-                    checkRoles(regular.id, regular.groupRoleId, regular.roleId)
-                }
-            }
-
-            RegularsTable().setLastCheckedDate(regular.id, LocalDate.now().toString())
+            if (!checkRegular(regular)) continue
             delay(10.seconds)
         }
     }
 
-    private fun checkPlaytime(regular: RegularDatabaseEntry, lastCheckedDate: LocalDate): Boolean {
+    suspend fun checkRegular(regular: RegularDatabaseEntry): Boolean {
+        val lastCheckedDate: LocalDate? = null
+        if (regular.lastCheckedDate != null) LocalDate.parse(regular.lastCheckedDate)
+
+        if (!UserTable().exists(regular.id)) {
+            RegularsTable().delete(regular.id)
+            logger.warn("Could not retrieve user: ${regular.id}'s verification data, deleting their regular data because of it being invalid")
+            return false
+        }
+
+        val role = getRole(regular)
+        role ?: run {
+            logger.error("Regulars config does not match up to the database, players have roles in their registry that do not exist anymore")
+            return false
+        }
+
+        when(RequirementType.valueOf(role.requirementType)) {
+            RequirementType.PLAYTIME -> {
+                if (!config.settings.cedmod.active) {
+                    logger.error("Could not correctly process regulars with setting 'PLAYTIME', activate cedmod integration!")
+                    return false
+                }
+
+                if (!checkPlaytime(regular, lastCheckedDate)) return false
+
+                checkRoles(regular.id, regular.groupRoleId, regular.roleId)
+            }
+
+            RequirementType.XP -> {
+                if (!config.settings.xp.active) {
+                    logger.error("Could not correctly process regulars with setting 'XP', activate xp integration!")
+                    return false
+                }
+
+                if (!checkLevel(regular, role)) return false
+
+                checkRoles(regular.id, regular.groupRoleId, regular.roleId)
+            }
+
+            RequirementType.BOTH -> {
+                if (!config.settings.cedmod.active || !config.settings.xp.active) {
+                    logger.error("Could not correctly process regulars with setting 'BOTH', activate cedmod and xp integration!")
+                    return false
+                }
+
+                if (!checkPlaytime(regular, lastCheckedDate) || !checkLevel(regular, role)) return false
+
+                checkRoles(regular.id, regular.groupRoleId, regular.roleId)
+            }
+        }
+
+        RegularsTable().setLastCheckedDate(regular.id, LocalDate.now().toString())
+        return true
+    }
+
+    private fun checkPlaytime(regular: RegularDatabaseEntry, lastCheckedDate: LocalDate?): Boolean {
         if (lastCheckedDate == LocalDate.now()) return false
         val cedmod = Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api)
         val steamId = UserTable().getSteamId(regular.id)
@@ -140,6 +147,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
             return true
         }
 
+        if (lastCheckedDate == null) return false
         val activityMin = lastCheckedDate.until(LocalDate.now()).days
 
         val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = activityMin, basicStats = true)
