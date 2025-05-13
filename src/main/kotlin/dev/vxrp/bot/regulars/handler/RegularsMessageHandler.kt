@@ -65,7 +65,7 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
             val regularRole = RegularsFileHandler(config).queryRoleFromConfig(RegularsTable().getGroup(user.id), RegularsTable().getRole(user.id)!!)
 
             requirementType = regularRole?.requirementType ?: ""
-            groupRole = "<@&${RegularsTable().getGroupRole(user.id) ?: "" }>"
+            groupRole = "<@&${RegularsTable().getGroupRole(user.id) ?: "None" }>"
             role = "<@&${RegularsTable().getRole(user.id) ?: "None"}>"
             playtime = RegularsTable().getPlaytime(user.id).roundToInt().toString()
             level = RegularsTable().getLevel(user.id).toString()
@@ -84,7 +84,7 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
             field {
                 inline = true
                 name = translation.regulars.embedSettingsFieldRoleName
-                value = role
+                value = role.replace("<@&>", "None")
             }
             if (requirementType == "PLAYTIME" || requirementType == "BOTH") {
                 field {
