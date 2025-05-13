@@ -59,7 +59,7 @@ webserver:
   port: 80
   # What uri to start the webserver under
   redirect_uri: "/auth/discord/redirect"
-  # Where should the redirect be, include full url!
+  # Where should the redirect be, include the full url e.g., https://localhost:80/auth/discord/redirect
   uri: ""
 
 cedmod:
