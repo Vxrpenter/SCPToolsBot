@@ -4,7 +4,6 @@ package dev.vxrp.web
 import dev.minn.jda.ktx.coroutines.await
 import dev.vxrp.api.discord.Discord
 import dev.vxrp.api.discord.data.DiscordConnection
-import dev.vxrp.api.discord.data.DiscordTokenResponse
 import dev.vxrp.api.discord.data.DiscordUser
 import dev.vxrp.bot.verify.VerifyMessageHandler
 import dev.vxrp.configuration.data.Config
@@ -47,14 +46,14 @@ class WebServerManager(val api: JDA, val config: Config, val translation: Transl
                         val user = Discord().getUser(tokenResponse)
                         val connections = Discord().getConnections(tokenResponse)
 
-                        writeToDatabase(tokenResponse, user, connections)
+                        writeToDatabase(user, connections)
                     }
                 }
             }
         }.start(wait = true)
     }
 
-    private suspend fun writeToDatabase(tokenResponse: DiscordTokenResponse, user: DiscordUser, connections: List<DiscordConnection>) {
+    private suspend fun writeToDatabase(user: DiscordUser, connections: List<DiscordConnection>) {
         for (connection in connections) {
             if (connection.type != "steam") continue
 
