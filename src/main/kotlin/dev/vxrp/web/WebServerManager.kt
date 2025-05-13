@@ -43,7 +43,7 @@ class WebServerManager(val api: JDA, val config: Config, val translation: Transl
                             clientId = api.selfUser.id,
                             clientSecret = config.settings.clientSecret,
                             authorizationCode =  authorizationCode,
-                            uri = "${config.settings.webserver.uri}:${config.settings.webserver.port}${config.settings.webserver.redirectUri}")
+                            uri = config.settings.webserver.uri)
                         val user = Discord().getUser(tokenResponse)
                         val connections = Discord().getConnections(tokenResponse)
 
