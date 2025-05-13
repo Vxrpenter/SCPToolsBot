@@ -72,7 +72,6 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
 
         for (regular in RegularsTable().getAllEntrys()) {
             val lastCheckedDate = LocalDate.parse(regular.lastCheckedDate)
-            if (lastCheckedDate == LocalDate.now()) continue
 
             if (!UserTable().exists(regular.id)) {
                 RegularsTable().delete(regular.id)
@@ -127,6 +126,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
     }
 
     private fun checkPlaytime(regular: RegularDatabaseEntry, lastCheckedDate: LocalDate): Boolean {
+        if (lastCheckedDate == LocalDate.now()) return false
         val cedmod = Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api)
         val steamId = UserTable().getSteamId(regular.id)
 
@@ -141,7 +141,6 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
         }
 
         val activityMin = lastCheckedDate.until(LocalDate.now()).days
-        if (activityMin == 0) return false
 
         val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = activityMin, basicStats = true)
         val currentPlaytime = RegularsTable().getPlaytime(regular.id)
