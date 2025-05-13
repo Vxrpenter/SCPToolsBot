@@ -14,13 +14,13 @@ class RegularsTable {
         val roleId = text("role_id")
         val playtime = double("playtime")
         val level = integer("level")
-        val lastCheckedDate = text("last_checked_date")
+        val lastCheckedDate = text("last_checked_date").nullable()
 
         override val primaryKey: PrimaryKey
             get() = PrimaryKey(id)
     }
 
-    fun addToDatabase(id: String, active: Boolean, group: String, groupRoleId: String?, roleId: String, playtime: Double, level: Int, lastCheckedDate: String) {
+    fun addToDatabase(id: String, active: Boolean, group: String, groupRoleId: String?, roleId: String, playtime: Double, level: Int, lastCheckedDate: String?) {
         if (exists(id)) return
 
         transaction {
@@ -35,6 +35,27 @@ class RegularsTable {
                 it[Regulars.lastCheckedDate] = lastCheckedDate
             }
         }
+    }
+
+    fun getEntry(id: String): RegularDatabaseEntry? {
+        var entry: RegularDatabaseEntry? = null
+
+        transaction {
+            Regulars.selectAll()
+                .where { Regulars.id eq id }
+                .forEach {
+                    entry = RegularDatabaseEntry(
+                        it[Regulars.id],
+                        it[Regulars.active],
+                        it[Regulars.group],
+                        it[Regulars.groupRoleId],
+                        it[Regulars.roleId],
+                        it[Regulars.lastCheckedDate],
+                        it[Regulars.playtime])
+                }
+        }
+
+        return entry
     }
 
     fun getAllEntrys(): List<RegularDatabaseEntry> {

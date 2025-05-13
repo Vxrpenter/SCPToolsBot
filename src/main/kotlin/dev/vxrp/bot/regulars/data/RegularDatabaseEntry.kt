@@ -6,6 +6,6 @@ data class RegularDatabaseEntry (
     val group: String,
     val groupRoleId: String?,
     val roleId: String,
-    val lastCheckedDate: String,
+    val lastCheckedDate: String?,
     val playtime: Double
 )
