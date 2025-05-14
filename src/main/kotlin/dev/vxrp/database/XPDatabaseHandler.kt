@@ -33,7 +33,7 @@ class XPDatabaseHandler(val config: Config) {
 
     fun queryExperience(authType: AuthType, userId: Long): Int {
         return when(authType) {
-            AuthType.STEAMID -> {
+            AuthType.STEAM -> {
                 steamTableTransaction(userId)
             }
 

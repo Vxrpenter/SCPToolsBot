@@ -171,8 +171,8 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
         val discordId = regular.id
 
         val xp: Int = when(AuthType.valueOf(config.settings.xp.authType)) {
-            AuthType.STEAMID -> {
-                XPDatabaseHandler(config).queryExperience(AuthType.STEAMID, steamId.toLong())
+            AuthType.STEAM -> {
+                XPDatabaseHandler(config).queryExperience(AuthType.STEAM, steamId.toLong())
             }
 
             AuthType.DISCORD -> {
