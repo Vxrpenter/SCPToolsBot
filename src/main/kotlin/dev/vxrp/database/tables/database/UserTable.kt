@@ -43,7 +43,8 @@ class UserTable {
         return verifiedTime!!
     }
 
-    fun getSteamId(id: String): String {
+    fun getSteamId(id: String): String? {
+        if (!exists(id)) return null
         var steamId: String? = null
 
         transaction {
