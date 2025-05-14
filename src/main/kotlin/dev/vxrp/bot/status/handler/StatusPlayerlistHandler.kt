@@ -3,7 +3,7 @@ package dev.vxrp.bot.status.handler
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.editMessage
 import dev.vxrp.api.sla.secretlab.data.Server
-import dev.vxrp.bot.commands.commanexecutes.status.Playerlist
+import dev.vxrp.bot.commands.handler.status.playerlist.PlayerlistMessageHandler
 import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.enums.PlayerlistType
@@ -43,7 +43,7 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
 
             val embeds = mutableListOf<MessageEmbed>()
             mappedStatusConstructor[port.key]?.let { statusConst ->
-                Playerlist().getEmbed(api.selfUser.id, translation, statusConst)
+                PlayerlistMessageHandler().getEmbed(api.selfUser.id, translation, statusConst)
             }?.let { playerListEmbed ->
                 embeds.add(playerListEmbed)
             }
@@ -81,7 +81,7 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
 
                 val embeds = mutableListOf<MessageEmbed>()
                 mappedStatusConstructor[port.key]?.let { statusConst ->
-                    Playerlist().getEmbed(api.selfUser.id, translation, statusConst)
+                    PlayerlistMessageHandler().getEmbed(api.selfUser.id, translation, statusConst)
                 }?.let { playerListEmbed ->
                     embeds.add(playerListEmbed)
                 }

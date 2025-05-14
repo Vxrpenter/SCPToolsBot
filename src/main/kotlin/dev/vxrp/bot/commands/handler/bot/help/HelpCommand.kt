@@ -1,4 +1,4 @@
-package dev.vxrp.bot.commands.commanexecutes.help
+package dev.vxrp.bot.commands.handler.bot.help
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.vxrp.configuration.data.Translation

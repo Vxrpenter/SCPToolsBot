@@ -79,6 +79,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
             val newApi = light(instance.token, enableCoroutines = true) {
                 setActivity(Activity.playing("pending..."))
             }
+            logger.info("Starting up status-bot: ${newApi.awaitReady().selfUser.id}")
             bots.add(newApi)
 
             mappedBots[newApi.selfUser.id] = instance.serverPort

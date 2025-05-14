@@ -1,4 +1,4 @@
-package dev.vxrp.bot.commands.commanexecutes.application
+package dev.vxrp.bot.commands.handler.bot.application
 
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.application.ApplicationMessageHandler

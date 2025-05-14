@@ -1,12 +1,11 @@
 package dev.vxrp.bot.commands.listeners
 
 import dev.minn.jda.ktx.events.listener
-import dev.vxrp.bot.commands.CommandManager
-import dev.vxrp.bot.commands.commanexecutes.application.ApplicationCommand
-import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
-import dev.vxrp.bot.commands.commanexecutes.settings.SettingsCommand
-import dev.vxrp.bot.commands.commanexecutes.template.TemplateCommand
-import dev.vxrp.bot.commands.commanexecutes.verify.VerifyCommand
+import dev.vxrp.bot.commands.handler.bot.application.ApplicationCommand
+import dev.vxrp.bot.commands.handler.bot.help.HelpCommand
+import dev.vxrp.bot.commands.handler.bot.settings.SettingsCommand
+import dev.vxrp.bot.commands.handler.bot.template.TemplateCommandHandler
+import dev.vxrp.bot.commands.handler.bot.verify.VerifyCommand
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.launch.LaunchOptionManager
@@ -19,8 +18,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
 class CommandListener(val api: JDA, val config: Config, val translation: Translation) : ListenerAdapter() {
     init {
         api.listener<SlashCommandInteractionEvent> { event ->
-            val commandManager = CommandManager(config, "SCPToolsBot/configs/extra/commands.json")
-
             val commandList = config.extra.commands.commands
 
             for (command in commandList) {
@@ -96,7 +93,7 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
     }
 
     private fun templateCommand(event: SlashCommandInteractionEvent) {
-        TemplateCommand(config, translation).findOption(event)
+        TemplateCommandHandler(config, translation).findOption(event)
     }
 
     private fun verifyCommand(event: SlashCommandInteractionEvent) {

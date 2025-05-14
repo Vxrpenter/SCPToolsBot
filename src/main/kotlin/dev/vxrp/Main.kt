@@ -24,10 +24,7 @@ fun main() {
     ScpToolsBot(config, translation)
 }
 
-class ScpToolsBot(currentConfig: Config, currentTranslation: Translation) {
-    var config = currentConfig
-    var translation = currentTranslation
-
+class ScpToolsBot(config: Config, translation: Translation) {
     init {
         LaunchOptionManager(config, translation).startupBots()
     }

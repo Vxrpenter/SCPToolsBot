@@ -1,8 +1,9 @@
-package dev.vxrp.bot.commands.commanexecutes.status
+package dev.vxrp.bot.commands.handler.status.template
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.commands.data.StatusConstructor
+import dev.vxrp.bot.commands.handler.status.playerlist.PlayerlistMessageHandler
 import dev.vxrp.bot.status.enums.PlayerlistType
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
@@ -11,11 +12,12 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
+import kotlin.collections.get
 
-class TemplateCommand(val config: Config, val translation: Translation, private val statusConstructor: StatusConstructor) {
+class TemplateCommandHandler(val config: Config, val translation: Translation, private val statusConstructor: StatusConstructor) {
 
     suspend fun pastePlayerList(event: SlashCommandInteractionEvent) {
-        val embed = Playerlist().getEmbed(event.jda.selfUser.id, translation, statusConstructor)
+        val embed = PlayerlistMessageHandler().getEmbed(event.jda.selfUser.id, translation, statusConstructor)
 
         val message = event.channel.send("", listOf(embed)).await()
         event.reply("Pasted static playerlist").setEphemeral(true).queue()

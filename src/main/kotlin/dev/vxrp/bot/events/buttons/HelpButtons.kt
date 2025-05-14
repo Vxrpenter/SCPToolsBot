@@ -1,6 +1,6 @@
 package dev.vxrp.bot.events.buttons
 
-import dev.vxrp.bot.commands.commanexecutes.help.HelpCommand
+import dev.vxrp.bot.commands.handler.bot.help.HelpCommand
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
