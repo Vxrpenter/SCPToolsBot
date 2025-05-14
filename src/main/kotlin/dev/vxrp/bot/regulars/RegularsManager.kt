@@ -89,7 +89,15 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
 
         val role = getRole(regular)
         role ?: run {
-            logger.error("Regulars config does not match up to the database, players have roles in their registry that do not exist anymore")
+            RegularsTable().delete(regular.id)
+            logger.error("Regular user: ${regular.id}'s role entrys do not match up to the regulars config, their entry will be removed")
+            return false
+        }
+
+        val steamId = UserTable().getSteamId(regular.id)
+        steamId ?: run {
+            RegularsTable().delete(regular.id)
+            logger.error("Could not find user entry of regular user: ${regular.id}, deleting entry")
             return false
         }
 
@@ -100,7 +108,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
                     return false
                 }
 
-                if (!checkPlaytime(regular, lastCheckedDate)) return false
+                if (!checkPlaytime(regular, steamId, lastCheckedDate)) return false
 
                 checkRoles(regular.id, regular.groupRoleId, regular.roleId)
             }
@@ -111,7 +119,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
                     return false
                 }
 
-                if (!checkLevel(regular, role)) return false
+                if (!checkLevel(regular, steamId, role)) return false
 
                 checkRoles(regular.id, regular.groupRoleId, regular.roleId)
             }
@@ -122,7 +130,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
                     return false
                 }
 
-                if (!checkPlaytime(regular, lastCheckedDate) || !checkLevel(regular, role)) return false
+                if (!checkPlaytime(regular, steamId, lastCheckedDate) && !checkLevel(regular, steamId, role)) return false
 
                 checkRoles(regular.id, regular.groupRoleId, regular.roleId)
             }
@@ -132,17 +140,16 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
         return true
     }
 
-    private fun checkPlaytime(regular: RegularDatabaseEntry, lastCheckedDate: LocalDate?): Boolean {
+    private fun checkPlaytime(regular: RegularDatabaseEntry, steamId: String, lastCheckedDate: LocalDate?): Boolean {
         if (lastCheckedDate == LocalDate.now()) return false
         val cedmod = Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api)
-        val steamId = UserTable().getSteamId(regular.id)
 
         if (regular.playtime == 0.0) {
             val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = 365, basicStats = true)
 
             RegularsTable().setPlaytime(regular.id, player.players[0].activity)
             RegularsTable().setLastCheckedDate(regular.id, LocalDate.now().toString())
-            logger.info("Updated user: ${regular.id}'s regular data for the first time, new playtime: ${player.players[0].activity}")
+            logger.info("Updated user: ${regular.id}'s regular playtime data for the first time, new playtime: ${player.players[0].activity}")
 
             return true
         }
@@ -156,12 +163,11 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
         val newPlaytime = currentPlaytime+player.players[0].activity
 
         RegularsTable().setPlaytime(regular.id, newPlaytime)
-        logger.info("Updated user: ${regular.id}'s regular data by adding: ${player.players[0].activity} to their already existing playtime of: $currentPlaytime")
+        logger.info("Updated user: ${regular.id}'s regular playtime data by adding: ${player.players[0].activity} to their already existing playtime of: $currentPlaytime, result: $newPlaytime")
         return true
     }
 
-    private fun checkLevel(regular: RegularDatabaseEntry, role: RegularsConfigRole): Boolean {
-        val steamId = UserTable().getSteamId(regular.id)
+    private fun checkLevel(regular: RegularDatabaseEntry, steamId: String, role: RegularsConfigRole): Boolean {
         val discordId = regular.id
 
         val xp: Int = when(AuthType.valueOf(config.settings.xp.authType)) {
@@ -178,7 +184,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
 
         if (level >= role.xpRequirements) return true
         RegularsTable().setLevel(regular.id, level.toInt())
-        logger.info("Updated user: ${regular.id}'s regular data setting their level to: $level")
+        logger.info("Updated user: ${regular.id}'s regular xp data setting their level to: $level")
         return false
     }
 
@@ -187,7 +193,7 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
         val member = guild.retrieveMemberById(userId).await()
 
         member ?: run {
-            logger.error("Could not find user: $userId")
+            logger.error("Could not grant user: $userId's regular role, do they exist?")
             return
         }
 
@@ -203,23 +209,23 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
         if (!containGroupRole) {
             val groupRole = api.getRoleById(groupRoleId!!)
             groupRole ?: run {
-                logger.error("Could not correctly find group role: $groupRoleId")
+                logger.error("Could not correctly find group role: $groupRoleId, does it exist?")
                 return
             }
 
             guild.addRoleToMember(member, groupRole).queue()
-            logger.info("Updated playtime group role of user: $userId to $groupRole")
+            logger.info("Updated regular group role of user: $userId to $groupRole")
         }
 
         if (!containsRole) {
             val role = api.getRoleById(roleId)
             role ?: run {
-                logger.error("Could not correctly find role: $groupRoleId")
+                logger.error("Could not correctly find role: $roleId, does it exist?")
                 return
             }
 
             guild.addRoleToMember(member, role).queue()
-            logger.info("Updated playtime role of user: $userId to $roleId")
+            logger.info("Updated regular role of user: $userId to $roleId")
         }
     }
 
