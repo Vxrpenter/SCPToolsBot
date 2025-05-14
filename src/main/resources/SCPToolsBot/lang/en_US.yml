@@ -563,10 +563,10 @@ VERIFY:
                         - Identification\n
                         - Account connections\n
                       
-                        **WE DO NOT** receive any information such as: **E-Mails**, **Passwords**, **Authentication Codes** etc. We do not distribute your information nor use it to monetize or advertise to you."
+                        **WE DO NOT** save the refresh code or receive any information such as: **E-Mails**, **Passwords**, **Authentication Codes** etc. We do not distribute your information nor use it to monetize or advertise to you."
 
   EMBED_DATA_TITLE: "User Data"
-  EMBED_DATA_BODY: "This is all data we currently have on you. Do note that the refresh token that we received from discord will not be displayed here."
+  EMBED_DATA_BODY: "This is all data we currently have on you. We only save so much data as we have to keep our systems running."
   EMBED_DATA_FIELD_VERIFIED_TITLE: "Verified"
   EMBED_DATA_FIELD_STEAMID_TITLE: "SteamID"
   EMBED_DATA_FIELD_TIMESTAMP_TITLE: "Timestamp"
