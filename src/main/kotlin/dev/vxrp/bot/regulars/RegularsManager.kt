@@ -11,8 +11,8 @@ import dev.vxrp.database.XPDatabaseHandler
 import dev.vxrp.database.enums.AuthType
 import dev.vxrp.database.tables.database.RegularsTable
 import dev.vxrp.database.tables.database.UserTable
-import dev.vxrp.util.Timer
-import dev.vxrp.util.regularsScope
+import dev.vxrp.util.coroutines.Timer
+import dev.vxrp.util.coroutines.regularsScope
 import kotlinx.coroutines.delay
 import net.dv8tion.jda.api.JDA
 import org.slf4j.LoggerFactory

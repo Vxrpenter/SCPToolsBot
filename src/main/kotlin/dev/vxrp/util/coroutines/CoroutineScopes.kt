@@ -1,4 +1,4 @@
-package dev.vxrp.util
+package dev.vxrp.util.coroutines
 
 import dev.vxrp.bot.BotManager
 import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureManager

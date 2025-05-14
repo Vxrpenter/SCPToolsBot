@@ -12,7 +12,7 @@ import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureManager
 import dev.vxrp.bot.regulars.RegularsManager
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
-import dev.vxrp.util.Timer
+import dev.vxrp.util.coroutines.Timer
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionType
 import net.dv8tion.jda.api.JDA

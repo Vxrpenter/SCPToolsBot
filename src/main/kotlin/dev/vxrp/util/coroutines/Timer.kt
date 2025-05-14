@@ -1,4 +1,4 @@
-package dev.vxrp.util
+package dev.vxrp.util.coroutines
 
 import kotlinx.coroutines.*
 import kotlin.time.Duration

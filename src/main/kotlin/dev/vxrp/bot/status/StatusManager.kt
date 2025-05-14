@@ -15,11 +15,11 @@ import dev.vxrp.bot.status.handler.StatusPlayerlistHandler
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ConnectionTable
-import dev.vxrp.util.Timer
-import dev.vxrp.util.defaultStatusScope
+import dev.vxrp.util.coroutines.Timer
+import dev.vxrp.util.coroutines.defaultStatusScope
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionType
-import dev.vxrp.util.statusbotScope
+import dev.vxrp.util.coroutines.statusbotScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.dv8tion.jda.api.JDA
