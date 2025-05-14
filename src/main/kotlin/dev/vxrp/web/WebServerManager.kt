@@ -57,7 +57,7 @@ class WebServerManager(val api: JDA, val config: Config, val translation: Transl
         for (connection in connections) {
             if (connection.type != "steam") continue
 
-            logger.info("Received connection data and refresh token from user: ${user.id}")
+            logger.info("Received connection data from user: ${user.id}")
             UserTable().addToDatabase(user.id, LocalDate.now().toString(), connection.id)
 
             val currentUser = api.retrieveUserById(user.id).await()
