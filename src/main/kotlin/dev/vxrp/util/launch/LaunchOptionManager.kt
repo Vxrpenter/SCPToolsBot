@@ -53,7 +53,7 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
 
         var currentLaunchOption: LaunchConfigurationOrder? = null
 
-        for (launchOption in config.launchConfiguration.order) {
+        for (launchOption in config.extra.launchConfiguration.order) {
             if (launchOption.id.split(":")[1] == type.toString()) currentLaunchOption = launchOption
         }
 
@@ -64,7 +64,7 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
             }
         }
 
-        if (!config.launchConfiguration.options.ignoreBrokenEntries) {
+        if (!config.extra.launchConfiguration.options.ignoreBrokenEntries) {
             logger.error("Could not find $sectionType section in $type missing entry. This could be a result of a broken launch configuration. Delete current configuration for it to be regenerated")
             return LaunchArguments(broken = true, engage = false, separateThread = false)
         }
@@ -73,11 +73,11 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
     }
 
     fun checkLaunchOption(type: LaunchOptionType): LaunchArguments {
-        for (launchOption in config.launchConfiguration.order) {
+        for (launchOption in config.extra.launchConfiguration.order) {
             if (launchOption.id.split(":")[1] == type.toString()) return LaunchArguments(false, launchOption.engage, launchOption.separateThread)
         }
 
-        if (!config.launchConfiguration.options.ignoreBrokenEntries) {
+        if (!config.extra.launchConfiguration.options.ignoreBrokenEntries) {
             logger.error("Could not find $type, missing entry. This could be a result of a broken launch configuration. Delete current configuration for it to be regenerated")
             return LaunchArguments(broken = true, engage = false, separateThread = false)
         }

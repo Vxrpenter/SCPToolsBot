@@ -21,7 +21,7 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
         api.listener<SlashCommandInteractionEvent> { event ->
             val commandManager = CommandManager(config, "SCPToolsBot/configs/extra/commands.json")
 
-            val commandList = commandManager.query().commands
+            val commandList = config.extra.commands.commands
 
             for (command in commandList) {
                 if (!event.fullCommandName.contains(command.name)) continue

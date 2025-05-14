@@ -95,7 +95,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     }
 
     private fun initializeCommands(commandManager: CommandManager, api: JDA) {
-        commandManager.registerSpecificCommands(commandManager.query().statusCommands, api)
+        commandManager.registerSpecificCommands(config.extra.commands.statusCommands, api)
     }
 
     private fun initializeTimers(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
