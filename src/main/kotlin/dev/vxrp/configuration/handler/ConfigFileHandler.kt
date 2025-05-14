@@ -1,9 +1,11 @@
 package dev.vxrp.configuration.handler
 
 import com.charleskorn.kaml.Yaml
+import dev.vxrp.bot.commands.data.CommandList
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.bot.ticket.data.Ticket
 import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.ConfigExtra
 import dev.vxrp.configuration.data.Settings
 import dev.vxrp.database.tables.database.ApplicationTypeTable
 import dev.vxrp.util.launch.data.LaunchConfiguration
@@ -24,7 +26,6 @@ class ConfigFileHandler {
 
             val path = Path("$dir$file")
 
-
             val currentFile = path.toFile()
             if (!currentFile.exists()) {
                 currentFile.createNewFile()
@@ -38,26 +39,21 @@ class ConfigFileHandler {
         }
     }
 
-    fun query(launchConfigurationLocation: Path, configLocation: Path, statusLocation: Path, ticketLocation: Path): Config {
-        val launchConfigurationFile = launchConfigurationLocation.toFile()
-        val configFile = configLocation.toFile()
-        val statusFile = statusLocation.toFile()
-        val ticketFile = ticketLocation.toFile()
+    fun query(dir: String, configPath: Path, statusPath: Path, ticketPath: Path, commandsPath: Path, launchConfigurationPath: Path): Config {
+        val settings = Yaml.default.decodeFromString(Settings.serializer(), Path("$dir$configPath").toFile().readText())
+        val status = Yaml.default.decodeFromString(Status.serializer(), Path("$dir$statusPath").toFile().readText())
+        val ticket = Yaml.default.decodeFromString(Ticket.serializer(), Path("$dir$ticketPath").toFile().readText())
 
-        val launchConfiguration = Json.decodeFromString(LaunchConfiguration.serializer(), launchConfigurationFile.readText())
-        val settings = Yaml.default.decodeFromString(Settings.serializer(), configFile.readText())
-        val status = Yaml.default.decodeFromString(Status.serializer(), statusFile.readText())
-        val ticket = Yaml.default.decodeFromString(Ticket.serializer(), ticketFile.readText())
+        val commands = Json.decodeFromString(CommandList.serializer(), Path("$dir$commandsPath").toFile().readText())
+        val launchConfiguration = Json.decodeFromString(LaunchConfiguration.serializer(), Path("$dir$launchConfigurationPath").toFile().readText())
 
-        return Config(launchConfiguration, settings, status, ticket)
+        return Config(settings = settings, status = status, ticket = ticket, ConfigExtra(commands = commands, launchConfiguration = launchConfiguration))
     }
 
-    fun databaseManagement(launchConfiguration: Path, configLocation: Path, statusLocation: Path, ticketLocation: Path) {
-        val configs = query(launchConfiguration, configLocation, statusLocation, ticketLocation)
-
+    fun databaseManagement(config: Config) {
         val idList = mutableListOf<String>()
 
-        for (type in configs.ticket.applicationTypes) {
+        for (type in config.ticket.applicationTypes) {
             if (ApplicationTypeTable().exists(type.roleID)) {
                 ApplicationTypeTable().addToDatabase(type.roleID, false, null,null)
             }

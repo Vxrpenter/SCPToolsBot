@@ -1,13 +1,10 @@
 package dev.vxrp.bot.commands
 
 import dev.minn.jda.ktx.interactions.commands.updateCommands
-import dev.vxrp.bot.commands.data.CommandList
 import dev.vxrp.bot.commands.data.CustomCommand
 import dev.vxrp.bot.commands.data.Options
 import dev.vxrp.bot.commands.data.Subcommands
 import dev.vxrp.configuration.data.Config
-import dev.vxrp.configuration.handler.ConfigFileHandler
-import kotlinx.serialization.json.Json
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.interactions.commands.Command
@@ -18,20 +15,9 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import net.dv8tion.jda.api.interactions.commands.build.SubcommandData
 import org.slf4j.LoggerFactory
-import java.io.File
 
 class CommandManager(val config: Config, val file: String) {
     private val logger = LoggerFactory.getLogger(CommandManager::class.java)
-    private val currentFile = File(System.getProperty("user.dir")).resolve(file)
-
-    init {
-        if (!currentFile.exists()) {
-            currentFile.createNewFile()
-
-            val content = ConfigFileHandler::class.java.getResourceAsStream("/$file")
-            if (content != null) currentFile.appendBytes(content.readBytes())
-        }
-    }
 
     fun registerSpecificCommands(commands: List<CustomCommand>, api: JDA) {
         val commandList = mutableListOf<CommandData>()
@@ -39,9 +25,7 @@ class CommandManager(val config: Config, val file: String) {
             if (!command.active) continue
 
             val permissions = mutableListOf<Permission>()
-            if (command.defaultPermissions != null) {
-                command.defaultPermissions.forEach { permission -> permissions.add(Permission.valueOf(permission)) }
-            }
+            command.defaultPermissions?.forEach { permission -> permissions.add(Permission.valueOf(permission)) }
 
             val currentCommand = Commands.slash(command.name, command.description).also { commandData ->
                 if (command.options != null) {
@@ -66,8 +50,7 @@ class CommandManager(val config: Config, val file: String) {
         for (option in options!!) {
             val choices = mutableListOf<Command.Choice>()
 
-            if (option.choices != null) {
-                option.choices.size.let { it -> repeat(it) { choices.add(Command.Choice(option.choices[it].name, option.choices[it].id)) } } }
+            option.choices?.size?.let { it -> repeat(it) { choices.add(Command.Choice(option.choices[it].name, option.choices[it].id)) } }
             optionData.add(OptionData(OptionType.valueOf(option.type), option.name, option.description, option.isRequired).also {
                     if (choices.isNotEmpty()) {
                         it.addChoices(choices)
@@ -91,10 +74,6 @@ class CommandManager(val config: Config, val file: String) {
             subcommandData.add(currentSubCommand)
         }
         return subcommandData
-    }
-
-    fun query(): CommandList {
-        return Json.decodeFromString<CommandList>(currentFile.readText())
     }
 }
 

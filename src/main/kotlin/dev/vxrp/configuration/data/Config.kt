@@ -1,5 +1,6 @@
 package dev.vxrp.configuration.data
 
+import dev.vxrp.bot.commands.data.CommandList
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.bot.ticket.data.Ticket
 import dev.vxrp.util.launch.data.LaunchConfiguration
@@ -7,10 +8,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 data class Config(
-    val launchConfiguration: LaunchConfiguration,
     val settings: Settings,
     val status: Status,
-    val ticket: Ticket
+    val ticket: Ticket,
+    val extra: ConfigExtra
+)
+
+data class ConfigExtra(
+    val commands: CommandList,
+    val launchConfiguration: LaunchConfiguration
 )
 
 @Serializable

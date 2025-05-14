@@ -8,11 +8,13 @@ import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
-import java.io.File
+import java.nio.file.Files
+import java.nio.file.Path
 import java.sql.SQLException
+import kotlin.io.path.Path
 import kotlin.system.exitProcess
 
-class DatabaseManager(val config: Config, private val folder: String, val file: String) {
+class DatabaseManager(val config: Config, val path: Path) {
     private val dir = System.getProperty("user.dir")
     private val logger = LoggerFactory.getLogger(DatabaseManager::class.java)
 
@@ -44,11 +46,11 @@ class DatabaseManager(val config: Config, private val folder: String, val file: 
 
     private fun connectToDatabase(): Database? {
         if (config.settings.database.dataUsePredefined == "SQLITE") {
-            File("$dir/$folder/").also { if (!it.exists()) it.mkdirs() }
-            File("$dir/$folder/$file").also { if (!it.exists()) it.createNewFile() }
+            Files.createDirectories(Path("$dir/SCPToolsBot/database/"))
+            Path("$dir$path").toFile().also { if (!it.exists()) it.createNewFile() }
 
             return try {
-                Database.connect("jdbc:sqlite:$dir/$folder/$file", driver = "org.sqlite.JDBC")
+                Database.connect("jdbc:sqlite:$dir/$path", driver = "org.sqlite.JDBC")
             } catch (_: SQLException) {
                 logger.error("Could not connect to default sqlite database")
                 null
