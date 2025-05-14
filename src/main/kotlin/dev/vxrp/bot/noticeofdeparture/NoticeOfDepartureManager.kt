@@ -4,10 +4,10 @@ import dev.vxrp.bot.noticeofdeparture.handler.NoticeOfDepartureMessageHandler
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.NoticeOfDepartureTable
-import dev.vxrp.util.Timer
+import dev.vxrp.util.coroutines.Timer
 import dev.vxrp.util.duration.DurationParser
 import dev.vxrp.util.duration.enums.DurationType
-import dev.vxrp.util.noticeOfDepartureScope
+import dev.vxrp.util.coroutines.noticeOfDepartureScope
 import net.dv8tion.jda.api.JDA
 import org.slf4j.LoggerFactory
 import java.time.LocalDate

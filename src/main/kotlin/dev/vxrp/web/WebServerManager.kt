@@ -9,7 +9,7 @@ import dev.vxrp.bot.verify.VerifyMessageHandler
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.UserTable
-import dev.vxrp.util.webServerScope
+import dev.vxrp.util.coroutines.webServerScope
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.response.*
