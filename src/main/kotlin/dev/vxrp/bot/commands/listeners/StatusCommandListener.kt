@@ -1,10 +1,9 @@
 package dev.vxrp.bot.commands.listeners
 
 import dev.minn.jda.ktx.events.listener
-import dev.vxrp.bot.commands.CommandManager
-import dev.vxrp.bot.commands.commanexecutes.status.PlayerlistCommand
-import dev.vxrp.bot.commands.commanexecutes.status.StatusCommand
-import dev.vxrp.bot.commands.commanexecutes.status.TemplateCommand
+import dev.vxrp.bot.commands.handler.status.playerlist.PlayerlistCommand
+import dev.vxrp.bot.commands.handler.status.status.StatusCommand
+import dev.vxrp.bot.commands.handler.status.template.TemplateCommandHandler
 import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
@@ -58,6 +57,6 @@ class StatusCommandListener(val api: JDA, val config: Config, val translation: T
     }
 
     private suspend fun templateCommand(event: SlashCommandInteractionEvent) {
-        if (event.getOption("template")?.asString == "playerlist") TemplateCommand(config, translation, statusConstructor).pastePlayerList(event)
+        if (event.getOption("template")?.asString == "playerlist") TemplateCommandHandler(config, translation, statusConstructor).pastePlayerList(event)
     }
 }

@@ -1,4 +1,4 @@
-package dev.vxrp.bot.commands.commanexecutes.status
+package dev.vxrp.bot.commands.handler.status.status
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.send
@@ -23,7 +23,7 @@ class StatusCommand(val config: Config, val translation: Translation, private va
             }
 
             transaction {
-                ConnectionTable.Connections.update( { ConnectionTable.Connections.id eq currentPort.toString()} ) {
+                ConnectionTable.Connections.update({ ConnectionTable.Connections.id eq currentPort.toString() }) {
                     it[maintenance] = false
                 }
             }
@@ -39,7 +39,8 @@ class StatusCommand(val config: Config, val translation: Translation, private va
                 ).trimIndent()
                 description = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOffBody).trimIndent()
                 field {
-                    name = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOffReasonFieldName).trimIndent()
+                    name = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOffReasonFieldName)
+                        .trimIndent()
                     value =
                         ColorTool().useCustomColorCodes(reason).trimIndent()
                 }
@@ -53,7 +54,7 @@ class StatusCommand(val config: Config, val translation: Translation, private va
             }
 
             transaction {
-                ConnectionTable.Connections.update( { ConnectionTable.Connections.id eq currentPort.toString()} ) {
+                ConnectionTable.Connections.update({ ConnectionTable.Connections.id eq currentPort.toString() }) {
                     it[maintenance] = true
                 }
             }
@@ -69,7 +70,8 @@ class StatusCommand(val config: Config, val translation: Translation, private va
                 ).trimIndent()
                 description = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOnBody).trimIndent()
                 field {
-                    name = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOnReasonFieldName).trimIndent()
+                    name = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOnReasonFieldName)
+                        .trimIndent()
                     value =
                         ColorTool().useCustomColorCodes(reason).trimIndent()
                 }

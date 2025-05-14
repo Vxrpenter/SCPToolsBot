@@ -1,4 +1,4 @@
-package dev.vxrp.bot.commands.commanexecutes.settings
+package dev.vxrp.bot.commands.handler.bot.settings
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
