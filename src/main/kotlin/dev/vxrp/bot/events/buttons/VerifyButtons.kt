@@ -45,7 +45,7 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
                 field {
                     inline = true
                     name = translation.verify.embedDataFieldSteamIdTitle
-                    value = steamId
+                    value = steamId!!
                 }
                 field {
                     inline = true
