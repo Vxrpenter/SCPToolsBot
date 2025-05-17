@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events.modals
 
+import dev.minn.jda.ktx.messages.send
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.ticket.TicketManager
@@ -16,6 +17,8 @@ import org.slf4j.Logger
 
 class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val config: Config, val translation: Translation) {
     suspend fun init() {
+        event.deferReply(true).queue()
+
         val api = event.jda
 
         if (event.modalId.startsWith("support_general")) {
@@ -73,7 +76,7 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
             return
         }
 
-        event.reply_("", listOf(Embed {
+        event.hook.send("", listOf(Embed {
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketCreatedTitle)
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketCreatedBody.replace("%channel%", child.asMention))
         })).setEphemeral(true).queue()
