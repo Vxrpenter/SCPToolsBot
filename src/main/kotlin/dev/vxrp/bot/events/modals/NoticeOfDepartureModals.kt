@@ -8,12 +8,21 @@ import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent
+import java.time.LocalDate
+import java.time.format.DateTimeParseException
 
 class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Config, val translation: Translation) {
     suspend fun init() {
         if (event.modalId.startsWith("notice_of_departure_general")) {
             val date = event.values[0].asString
             val reason = event.values[1].asString
+
+            try {
+                LocalDate.parse(date)
+            } catch (_: DateTimeParseException) {
+                event.reply_("Please enter a valid date format to proceed").queue()
+                return
+            }
 
             NoticeOfDepartureMessageHandler(event.jda, config, translation).sendDecisionMessage(event.user.id, date, reason)
 
