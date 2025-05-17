@@ -32,13 +32,12 @@ val kotlinxSerializationVersion = "1.8.1"
 val kamlVersion = "0.77.0"
 val jdaVersion = "5.5.1"
 val jdaKtxVersion = "0.12.0"
+val secretLabKotlinVersion = "0.3.1"
 val logbackVersion = "1.5.18"
 val apacheCommonsVersion = "3.4"
 val gsonVersion = "2.11.0"
 
 dependencies {
-    implementation("io.github.vxrpenter:secretlab-kotlin:0.3.1")
-
     // Default
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("io.ktor:ktor-client-core:$ktorVersion")
@@ -65,6 +64,9 @@ dependencies {
     }
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("club.minnced:jda-ktx:$jdaKtxVersion")
+
+    // Api Wrapper
+    implementation("io.github.vxrpenter:secretlab-kotlin:$secretLabKotlinVersion")
 
     // String and JSON tooling
     implementation("org.apache.commons:commons-lang3:$apacheCommonsVersion")
