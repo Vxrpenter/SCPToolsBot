@@ -2,7 +2,7 @@ package dev.vxrp.bot.status.handler
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.editMessage
-import dev.vxrp.api.sla.secretlab.data.Server
+import io.github.vxrpenter.secretlab.data.Server
 import dev.vxrp.bot.commands.handler.status.playerlist.PlayerlistMessageHandler
 import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.status.data.Instance

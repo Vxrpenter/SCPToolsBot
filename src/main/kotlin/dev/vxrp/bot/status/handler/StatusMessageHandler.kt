@@ -1,7 +1,7 @@
 package dev.vxrp.bot.status.handler
 
 import dev.minn.jda.ktx.messages.Embed
-import dev.vxrp.api.sla.secretlab.data.ServerInfo
+import io.github.vxrpenter.secretlab.data.ServerInfo
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation

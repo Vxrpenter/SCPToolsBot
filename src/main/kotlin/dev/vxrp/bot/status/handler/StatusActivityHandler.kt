@@ -1,6 +1,6 @@
 package dev.vxrp.bot.status.handler
 
-import dev.vxrp.api.sla.secretlab.data.Server
+import io.github.vxrpenter.secretlab.data.Server
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
@@ -52,7 +52,7 @@ class StatusActivityHandler(val translation: Translation, val config: Config) {
         }
 
         if(server.players != null) {
-            api.presence.activity = Activity.playing(server.players)
+            api.presence.activity = Activity.playing(server.players!!)
         }
     }
 }

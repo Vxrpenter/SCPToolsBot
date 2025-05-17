@@ -1,6 +1,6 @@
 package dev.vxrp.bot.commands.data
 
-import dev.vxrp.api.sla.secretlab.data.Server
+import io.github.vxrpenter.secretlab.data.Server
 import dev.vxrp.bot.status.data.Instance
 
 class StatusConstructor(
