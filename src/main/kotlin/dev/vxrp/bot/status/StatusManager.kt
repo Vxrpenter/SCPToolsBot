@@ -20,6 +20,7 @@ import dev.vxrp.util.coroutines.defaultStatusScope
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionType
 import dev.vxrp.util.coroutines.statusbotScope
+import io.github.vxrpenter.secretlab.exceptions.CallFailureException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.dv8tion.jda.api.JDA
@@ -160,7 +161,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
         val secretLab = SecretLab(status.api, status.accountId)
 
         val map = mutableMapOf<Int, Server>()
-        val info = secretLab.serverInfo(lo = false, players = true, list = true) ?: return null
+        val info = secretLab.serverInfo(lo = false, players = true, list = true)
 
         for (port in ports) {
             val server = serverByPort(port, info) ?: return null
