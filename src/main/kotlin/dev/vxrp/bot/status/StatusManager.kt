@@ -1,9 +1,9 @@
 package dev.vxrp.bot.status
 
 import dev.minn.jda.ktx.jdabuilder.light
-import dev.vxrp.api.sla.secretlab.SecretLab
-import dev.vxrp.api.sla.secretlab.data.Server
-import dev.vxrp.api.sla.secretlab.data.ServerInfo
+import io.github.vxrpenter.secretlab.SecretLab
+import io.github.vxrpenter.secretlab.data.Server
+import io.github.vxrpenter.secretlab.data.ServerInfo
 import dev.vxrp.bot.commands.CommandManager
 import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.commands.listeners.StatusCommandListener

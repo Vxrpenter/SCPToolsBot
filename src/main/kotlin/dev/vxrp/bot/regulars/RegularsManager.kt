@@ -1,6 +1,6 @@
 package dev.vxrp.bot.regulars
 import dev.minn.jda.ktx.coroutines.await
-import dev.vxrp.api.sla.cedmod.Cedmod
+import io.github.vxrpenter.cedmod.Cedmod
 import dev.vxrp.bot.regulars.data.RegularDatabaseEntry
 import dev.vxrp.bot.regulars.data.RegularsConfigRole
 import dev.vxrp.bot.regulars.enums.RequirementType

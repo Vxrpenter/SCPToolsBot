@@ -2,7 +2,7 @@ package dev.vxrp.bot.commands.handler.bot.settings
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.api.sla.cedmod.Cedmod
+import io.github.vxrpenter.cedmod.Cedmod
 import dev.vxrp.api.updates.Updates
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation

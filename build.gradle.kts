@@ -37,6 +37,8 @@ val apacheCommonsVersion = "3.4"
 val gsonVersion = "2.11.0"
 
 dependencies {
+    implementation("io.github.vxrpenter:secretlab-kotlin:0.3.1")
+
     // Default
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("io.ktor:ktor-client-core:$ktorVersion")
