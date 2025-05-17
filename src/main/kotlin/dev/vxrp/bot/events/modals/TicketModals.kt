@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events.modals
 
+import dev.minn.jda.ktx.messages.send
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.ticket.TicketManager
@@ -75,7 +76,7 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
             return
         }
 
-        event.hook.sendMessageEmbeds(listOf(Embed {
+        event.hook.send("", listOf(Embed {
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketCreatedTitle)
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketCreatedBody.replace("%channel%", child.asMention))
         })).setEphemeral(true).queue()
