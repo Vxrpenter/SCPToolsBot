@@ -124,13 +124,16 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
         val ports = mutableListOf<Int>()
         status.instances.forEach { currentInstance -> ports.add(currentInstance.serverPort) }
 
-        var mappedPorts = mutableMapOf<Int, Server>()
+        var mappedPorts: MutableMap<Int, Server>
 
         val content: Pair<ServerInfo?, MutableMap<Int, Server>>? = fetchData(status, ports)
 
         // Check if data was received
         if (content != null) {
             mappedPorts = content.second
+        } else {
+            logger.error("Could not receive data for status-bots, skipping iteration")
+            return
         }
         StatusConnectionHandler(translation, config).postApiConnectionUpdate(globalApi, status, content)
 
@@ -149,7 +152,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
 
             api.presence.setStatus(OnlineStatus.IDLE)
 
-            mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it, instance, content?.first) }
+            mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it, instance, content.first) }
         }
     }
 
