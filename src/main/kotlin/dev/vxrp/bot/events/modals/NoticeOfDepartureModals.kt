@@ -2,6 +2,7 @@ package dev.vxrp.bot.events.modals
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
+import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureManager
 import dev.vxrp.bot.noticeofdeparture.handler.NoticeOfDepartureMessageHandler
 import dev.vxrp.configuration.data.Config
@@ -34,7 +35,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionSentBody)
             }
 
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.hook.send("", listOf(embed)).setEphemeral(true).queue()
         }
 
         if (event.modalId.startsWith("notice_of_departure_reason_action_ACCEPTING")) {
