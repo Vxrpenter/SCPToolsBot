@@ -27,6 +27,15 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 return
             }
 
+            // Get current date a day ago to allow for the current day to be selected and to allow different timezones
+            // to be taken into account
+            val currentDate = LocalDate.now().minusDays(1)
+            val parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            if (parsedDate.isBefore(currentDate)) {
+                event.hook.send("Please enter a date in the future to proceed").queue()
+                return
+            }
+
             NoticeOfDepartureMessageHandler(event.jda, config, translation).sendDecisionMessage(event.user.id, date, reason)
 
             val embed = Embed {
