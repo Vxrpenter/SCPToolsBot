@@ -17,6 +17,8 @@ import org.slf4j.Logger
 
 class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val config: Config, val translation: Translation) {
     suspend fun init() {
+        if(!event.modalId.startsWith("support_")) return
+        
         event.deferReply(true).queue()
 
         val api = event.jda
