@@ -9,6 +9,7 @@ import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
 class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Config, val translation: Translation) {
@@ -16,11 +17,18 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
         if (event.modalId.startsWith("notice_of_departure_general")) {
             val date = event.values[0].asString
             val reason = event.values[1].asString
+            val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
 
-            try {
-                LocalDate.parse(date)
+            val parsedDate = try {
+                LocalDate.parse(date, formatter)
             } catch (_: DateTimeParseException) {
                 event.reply_("Please enter a valid date format to proceed").queue()
+                return
+            }
+
+            val currentDate = LocalDate.now()
+            if (parsedDate.isBefore(currentDate)) {
+                event.reply_("Please enter a date in the future to proceed").queue()
                 return
             }
 
