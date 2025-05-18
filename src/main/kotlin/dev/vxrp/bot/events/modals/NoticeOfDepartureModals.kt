@@ -22,13 +22,13 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             val parsedDate = try {
                 LocalDate.parse(date, formatter)
             } catch (_: DateTimeParseException) {
-                event.reply_("Please enter a valid date format to proceed").queue()
+                event.reply_("Please enter a valid date format to proceed").setEphemeral(true).queue()
                 return
             }
 
             val currentDate = LocalDate.now()
             if (parsedDate.isBefore(currentDate)) {
-                event.reply_("Please enter a date in the future to proceed").queue()
+                event.reply_("Please enter a date in the future to proceed").setEphemeral(true).queue()
                 return
             }
 
