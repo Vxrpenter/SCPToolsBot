@@ -23,7 +23,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
                 LocalDate.parse(date, formatter)
             } catch (_: DateTimeParseException) {
-                event.reply_("Please enter a valid date format to proceed").queue()
+                event.hook.send("Please enter a valid date format to proceed").queue()
                 return
             }
 
