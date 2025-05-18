@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+name: Verify build and upload dependency graph
 
 on:
   push:
