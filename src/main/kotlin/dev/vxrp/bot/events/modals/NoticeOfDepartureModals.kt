@@ -18,9 +18,9 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
         if (event.modalId.startsWith("notice_of_departure_general")) {
             val date = event.values[0].asString
             val reason = event.values[1].asString
+            val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
 
             try {
-                val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
                 LocalDate.parse(date, formatter)
             } catch (_: DateTimeParseException) {
                 event.hook.send("Please enter a valid date format to proceed").queue()
@@ -28,7 +28,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             }
 
             val currentDate = LocalDate.now()
-            val parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            val parsedDate = LocalDate.parse(date, formatter)
             if (parsedDate.isBefore(currentDate)) {
                 event.hook.send("Please enter a date in the future to proceed").queue()
                 return
