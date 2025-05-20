@@ -21,7 +21,7 @@ by providing quality-of-life features in combination with moderation and team ma
 It also integrates with plugins like cedmod
 to build on already existing infrastructure and to use features they offer.
 
-For more information check out the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki)
+For more information check out the [wiki](https://override.gitbook.io/scptoolsbot)
 
 ## What Features are included
 
@@ -36,13 +36,13 @@ For more information check out the [wiki](https://github.com/Vxrpenter/SCPToolsB
 | Playtime role syncing          | Give your players a reward by allowing them to earn roles for certain playtime counts. They automatically get synced with their ingame time and updated when reaching a new milestone                  |
 | Cedmod synchronization         | You can link your cedmod instance by utilizing CedMod's api user feature. The bot will be able to interact with the panel and use it's features according to your desires                              |
 
-For more indepth explanation see the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Feature-Overview)
+For more indepth explanation see the [wiki](https://override.gitbook.io/scptoolsbot)
 
 ## Installation
 > [!NOTE]
 > Bots have to run all the time to be effective, so make sure to run it on a machine that is online 24/7
 
-You can easily install the bot by downloading and installing the `installer.sh` from the latest release. For more installation info you can look into the [installation guide](https://github.com/Vxrpenter/SCPToolsBot/wiki/Installation) which covers docker installation etc.
+You can easily install the bot by downloading and installing the `installer.sh` from the latest release. For more installation info you can look into the [installation guide](https://override.gitbook.io/scptoolsbot/setup/getting-started) which covers docker installation etc.
 
 ```sh
 chmod +x installer.sh
@@ -62,7 +62,7 @@ chmod +x gradlew
 
 ## Handling Issues
 If you're running into any issues,
-please first check the [wiki](https://github.com/Vxrpenter/SCPToolsBot/wiki/Issue-Handling) for help.
+please first check the [wiki](https://override.gitbook.io/scptoolsbot) for help.
 If you can't fix the issue, create an issue here so we're able to review it and find possible bugs. If you have any questions about the working or plans of development contact `@vxrpenter` on discord
 
 ---
