@@ -161,15 +161,19 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
         val secretLab = SecretLab(status.api, status.accountId)
 
         val map = mutableMapOf<Int, Server>()
-        val info = secretLab.serverInfo(lo = false, players = true, list = true)
+        try {
+            val info = secretLab.serverInfo(lo = false, players = true, list = true)
+            for (port in ports) {
+                val server = serverByPort(port, info) ?: return null
 
-        for (port in ports) {
-            val server = serverByPort(port, info) ?: return null
-
-            mappedServers[port] = server
-            map[port] = server
+                mappedServers[port] = server
+                map[port] = server
+            }
+            return Pair(info, map)
+        } catch (e: CallFailureException) {
+            logger.error("Could not process secret lab request correctly ${e.message}")
+            return null
         }
-        return Pair(info, map)
     }
 
     private fun serverByPort(port: Int, info: ServerInfo?): Server? {
