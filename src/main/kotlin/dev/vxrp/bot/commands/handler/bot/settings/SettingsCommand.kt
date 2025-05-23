@@ -7,6 +7,7 @@ import dev.vxrp.api.updates.Updates
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
+import io.github.vxrpenter.cedmod.exceptions.CallFailureException
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
@@ -141,6 +142,8 @@ class SettingsCommand(val config: Config, val translation: Translation) {
                 Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api).changelogGet()
                 return true
             } catch (_: UnknownHostException) {
+                return false
+            } catch (e: CallFailureException) {
                 return false
             }
         }
