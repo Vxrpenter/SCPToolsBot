@@ -13,6 +13,7 @@ import dev.vxrp.database.tables.database.RegularsTable
 import dev.vxrp.database.tables.database.UserTable
 import dev.vxrp.util.coroutines.Timer
 import dev.vxrp.util.coroutines.regularsScope
+import io.github.vxrpenter.cedmod.exceptions.CallFailureException
 import kotlinx.coroutines.delay
 import net.dv8tion.jda.api.JDA
 import org.slf4j.LoggerFactory
@@ -144,27 +145,32 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
         if (lastCheckedDate == LocalDate.now()) return false
         val cedmod = Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api)
 
-        if (regular.playtime == 0.0) {
-            val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = 365, basicStats = true)
+        try {
+            if (regular.playtime == 0.0) {
+                val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = 365, basicStats = true)
 
-            RegularsTable().setPlaytime(regular.id, player.players[0].activity)
-            RegularsTable().setLastCheckedDate(regular.id, LocalDate.now().toString())
-            logger.info("Updated user: ${regular.id}'s regular playtime data for the first time, new playtime: ${player.players[0].activity}")
+                RegularsTable().setPlaytime(regular.id, player.players[0].activity)
+                RegularsTable().setLastCheckedDate(regular.id, LocalDate.now().toString())
+                logger.info("Updated user: ${regular.id}'s regular playtime data for the first time, new playtime: ${player.players[0].activity}")
 
+                return true
+            }
+
+            if (lastCheckedDate == null) return false
+            val activityMin = lastCheckedDate.until(LocalDate.now()).days
+
+            val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = activityMin, basicStats = true)
+            val currentPlaytime = RegularsTable().getPlaytime(regular.id)
+
+            val newPlaytime = currentPlaytime+player.players[0].activity
+
+            RegularsTable().setPlaytime(regular.id, newPlaytime)
+            logger.info("Updated user: ${regular.id}'s regular playtime data by adding: ${player.players[0].activity} to their already existing playtime of: $currentPlaytime, result: $newPlaytime")
             return true
+        } catch (e: CallFailureException) {
+            logger.error("Could not correctly execute cedmod call ${e.message}")
+            return false
         }
-
-        if (lastCheckedDate == null) return false
-        val activityMin = lastCheckedDate.until(LocalDate.now()).days
-
-        val player = cedmod.playerQuery(q = "$steamId@steam", activityMin = activityMin, basicStats = true)
-        val currentPlaytime = RegularsTable().getPlaytime(regular.id)
-
-        val newPlaytime = currentPlaytime+player.players[0].activity
-
-        RegularsTable().setPlaytime(regular.id, newPlaytime)
-        logger.info("Updated user: ${regular.id}'s regular playtime data by adding: ${player.players[0].activity} to their already existing playtime of: $currentPlaytime, result: $newPlaytime")
-        return true
     }
 
     private fun checkLevel(regular: RegularDatabaseEntry, steamId: String, role: RegularsConfigRole): Boolean {
