@@ -143,7 +143,7 @@ class SettingsCommand(val config: Config, val translation: Translation) {
                 return true
             } catch (_: UnknownHostException) {
                 return false
-            } catch (e: CallFailureException) {
+            } catch (_: CallFailureException) {
                 return false
             }
         }
