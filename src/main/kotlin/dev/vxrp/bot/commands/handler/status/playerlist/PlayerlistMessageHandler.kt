@@ -6,7 +6,6 @@ import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.MessageEmbed
 import java.time.Instant
-import kotlin.collections.get
 
 class PlayerlistMessageHandler {
     fun getEmbed(botId: String, translation: Translation, statusConstructor: StatusConstructor): MessageEmbed {

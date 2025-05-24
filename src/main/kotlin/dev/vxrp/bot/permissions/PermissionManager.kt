@@ -1,21 +1,14 @@
 package dev.vxrp.bot.permissions
 
 import dev.minn.jda.ktx.coroutines.await
-import dev.minn.jda.ktx.messages.Embed
-import dev.minn.jda.ktx.messages.reply_
-import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.permissions.enums.PermissionType
 import dev.vxrp.bot.permissions.enums.StatusMessageType
 import dev.vxrp.bot.permissions.handler.PermissionMessageHandler
 import dev.vxrp.bot.ticket.enums.TicketType
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
-import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.User
-import net.dv8tion.jda.api.events.GenericEvent
-import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
-import net.dv8tion.jda.api.interactions.InteractionHook
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 

@@ -1,15 +1,12 @@
 package dev.vxrp.bot.events.buttons
 
-import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.modals.NoticeOfDepartureTemplateModals
 import dev.vxrp.bot.noticeofdeparture.enums.ActionId
 import dev.vxrp.bot.permissions.PermissionManager
 import dev.vxrp.bot.permissions.enums.PermissionType
-import dev.vxrp.bot.permissions.enums.StatusMessageType
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
-import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 
 class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {

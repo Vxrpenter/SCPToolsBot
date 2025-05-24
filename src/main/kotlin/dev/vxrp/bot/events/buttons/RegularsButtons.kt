@@ -3,8 +3,8 @@ package dev.vxrp.bot.events.buttons
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.minn.jda.ktx.messages.send
-import dev.vxrp.bot.regulars.handler.RegularsFileHandler
 import dev.vxrp.bot.regulars.RegularsManager
+import dev.vxrp.bot.regulars.handler.RegularsFileHandler
 import dev.vxrp.bot.regulars.handler.RegularsMessageHandler
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation

@@ -1,7 +1,7 @@
 package dev.vxrp.bot.commands.data
 
-import io.github.vxrpenter.secretlab.data.Server
 import dev.vxrp.bot.status.data.Instance
+import io.github.vxrpenter.secretlab.data.Server
 
 class StatusConstructor(
     bots: HashMap<String, Int>, servers: HashMap<Int, Server>, var instance: Instance) {

@@ -12,7 +12,6 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
-import kotlin.collections.get
 
 class TemplateCommandHandler(val config: Config, val translation: Translation, private val statusConstructor: StatusConstructor) {
 

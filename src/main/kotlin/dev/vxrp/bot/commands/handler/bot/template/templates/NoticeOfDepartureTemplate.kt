@@ -4,8 +4,8 @@ import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
-import net.dv8tion.jda.api.entities.emoji.Emoji
 import dev.vxrp.util.color.ColorTool
+import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
 
