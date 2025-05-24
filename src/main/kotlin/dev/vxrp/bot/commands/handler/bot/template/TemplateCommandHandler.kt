@@ -1,5 +1,6 @@
 package dev.vxrp.bot.commands.handler.bot.template
 
+import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.commands.handler.bot.template.templates.NoticeOfDepartureTemplate
 import dev.vxrp.bot.commands.handler.bot.template.templates.RegularsTemplate
 import dev.vxrp.bot.commands.handler.bot.template.templates.SupportTemplate
@@ -20,18 +21,21 @@ class TemplateCommandHandler(val config: Config, private val translation: Transl
             }
 
             "verify" -> {
-                if (!PermissionManager(config, translation).checkStatus(event.hook, StatusMessageType.TEMPLATE, config.settings.verify.active)) return
-                VerifyTemplate(config, translation).pasteTemplate(event)
+                PermissionManager(config, translation).checkStatus(StatusMessageType.TEMPLATE, config.settings.verify.active, config.settings.webserver.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: VerifyTemplate(config, translation).pasteTemplate(event)
             }
 
             "notice_of_departure" -> {
-                if (!PermissionManager(config, translation).checkStatus(event.hook, StatusMessageType.TEMPLATE, config.settings.noticeOfDeparture.active)) return
-                NoticeOfDepartureTemplate(config, translation).pasteTemplate(event)
+                PermissionManager(config, translation).checkStatus(StatusMessageType.TEMPLATE, config.settings.noticeOfDeparture.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: NoticeOfDepartureTemplate(config, translation).pasteTemplate(event)
             }
 
             "regulars" -> {
-                if (!PermissionManager(config, translation).checkStatus(event.hook, StatusMessageType.TEMPLATE, config.settings.regulars.active)) return
-                RegularsTemplate(config, translation).pasteTemplate(event)
+                PermissionManager(config, translation).checkStatus(StatusMessageType.TEMPLATE, config.settings.regulars.active, config.settings.verify.active, config.settings.webserver.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: RegularsTemplate(config, translation).pasteTemplate(event)
             }
         }
     }
