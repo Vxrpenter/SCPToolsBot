@@ -1,13 +1,19 @@
 package dev.vxrp.bot.permissions
 
 import dev.minn.jda.ktx.coroutines.await
+import dev.minn.jda.ktx.messages.Embed
+import dev.minn.jda.ktx.messages.reply_
+import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.permissions.enums.PermissionType
+import dev.vxrp.bot.permissions.enums.StatusMessageType
 import dev.vxrp.bot.permissions.handler.PermissionMessageHandler
 import dev.vxrp.bot.ticket.enums.TicketType
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
+import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.User
+import net.dv8tion.jda.api.interactions.InteractionHook
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -34,9 +40,22 @@ class PermissionManager(val config: Config, val translation: Translation) {
             }
         }
 
-        val message = PermissionMessageHandler(config, translation).getSpecificMessage(permissionType)
+        val message = PermissionMessageHandler(config, translation).getPermissionMessage(permissionType)
         logger.debug("Permission action for user: {}, for permission type: {}, denied", user.id, permissionType)
         return Pair(false, message)
+    }
+
+    fun checkStatus(hook: InteractionHook, messageType: StatusMessageType, vararg checks: Boolean): Boolean {
+        for (check in checks) {
+            if (!check) {
+                val embed = PermissionMessageHandler(config, translation).getStatusMessage(messageType)
+
+                hook.send("", listOf(embed)).setEphemeral(true).queue()
+                return false
+            }
+            continue
+        }
+        return true
     }
 
     private suspend fun queryUserRoles(user: User): MutableList<String>? {
