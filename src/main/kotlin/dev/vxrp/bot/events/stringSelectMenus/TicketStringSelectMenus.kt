@@ -28,7 +28,7 @@ class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val confi
                 }
 
                 event.reply_("", listOf(embed)).addActionRow(
-                    EntitySelectMenu.create("report", EntitySelectMenu.SelectTarget.USER).build())
+                    EntitySelectMenu.create("ticket_report", EntitySelectMenu.SelectTarget.USER).build())
                     .setEphemeral(true).queue()
             }
 
@@ -47,7 +47,7 @@ class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val confi
                 }
 
                 event.reply_("", listOf(embed)).addActionRow(
-                    EntitySelectMenu.create("complaint", EntitySelectMenu.SelectTarget.USER).build())
+                    EntitySelectMenu.create("ticket_complaint", EntitySelectMenu.SelectTarget.USER).build())
                     .setEphemeral(true).queue()
             }
 
