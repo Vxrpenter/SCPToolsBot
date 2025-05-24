@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://github.com/user-attachments/assets/686226b2-a520-47cc-876e-73fd35f50a06" height="240" width="200" alt="ScpToolsBot" title="ScpToolsBot"/>
-
+  
   <a href="https://github.com/Vxrpenter/SCPToolsBot/releases"><img src="https://img.shields.io/github/v/release/Vxrpenter/SCPToolsBot?include_prereleases&logo=github&logoSize=amg&logoColor=%2300DC82&labelColor=333834&sort=date&display_name=tag&style=for-the-badge&label=LATEST%20RELEASE&color=white"/></a>&nbsp;
   <img src="https://img.shields.io/github/downloads/Vxrpenter/SCPToolsBot/total?style=for-the-badge&logo=gitbook&logoSize=amg&label=Downloads&labelColor=333834&logoColor=%2300DC82&color=white"/>&nbsp;
   
@@ -14,14 +14,16 @@
 
 ---
 
-## What is ScpToolsBot
+## What is ScpToolsBot 
 ScpTools Bot is an application
 to enhance your Scp Secret Laboratory server
 by providing quality-of-life features in combination with moderation and team management tools.
 It also integrates with plugins like cedmod
 to build on already existing infrastructure and to use features they offer.
 
-For more information check out the [wiki](https://override.gitbook.io/scptoolsbot)
+For more information check out the [wiki](https://override.gitbook.io/scptoolsbot) or join the discord:
+
+<a href="https://discord.gg/cAXU9Y7T9a"><img src="https://img.shields.io/badge/Discord-%235865F2.svg?&logo=discord&logoColor=white" width="120" height="35"/></a>
 
 ## What Features are included
 
