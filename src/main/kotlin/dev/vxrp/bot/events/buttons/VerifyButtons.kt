@@ -2,6 +2,8 @@ package dev.vxrp.bot.events.buttons
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
+import dev.vxrp.bot.permissions.PermissionManager
+import dev.vxrp.bot.permissions.enums.StatusMessageType
 import dev.vxrp.bot.verify.VerifyMessageHandler
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
@@ -18,6 +20,7 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
         }
 
         if (event.button.id?.startsWith("verify_show_data") == true) {
+            if (!PermissionManager(config, translation).checkStatus(event.hook, StatusMessageType.PANEL, config.settings.verify.active)) return
             if (!UserTable().exists(event.user.id)) {
                 event.reply_("", listOf(noDataEmbed)).setEphemeral(true).queue()
                 return
@@ -61,6 +64,7 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
         }
 
         if (event.button.id?.startsWith("verify_delete") == true) {
+            if (!PermissionManager(config, translation).checkStatus(event.hook, StatusMessageType.PANEL, config.settings.verify.active)) return
             if (!UserTable().exists(event.user.id)) {
                 event.reply_("", listOf(noDataEmbed)).setEphemeral(true).queue()
                 return
