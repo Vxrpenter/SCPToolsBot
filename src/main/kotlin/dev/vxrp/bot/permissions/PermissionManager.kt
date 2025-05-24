@@ -13,6 +13,8 @@ import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.User
+import net.dv8tion.jda.api.events.GenericEvent
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 import net.dv8tion.jda.api.interactions.InteractionHook
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -45,17 +47,14 @@ class PermissionManager(val config: Config, val translation: Translation) {
         return Pair(false, message)
     }
 
-    fun checkStatus(hook: InteractionHook, messageType: StatusMessageType, vararg checks: Boolean): Boolean {
+    fun checkStatus(messageType: StatusMessageType, vararg checks: Boolean): MessageEmbed? {
         for (check in checks) {
             if (!check) {
-                val embed = PermissionMessageHandler(config, translation).getStatusMessage(messageType)
-
-                hook.send("", listOf(embed)).setEphemeral(true).queue()
-                return false
+                return PermissionMessageHandler(config, translation).getStatusMessage(messageType)
             }
             continue
         }
-        return true
+        return null
     }
 
     private suspend fun queryUserRoles(user: User): MutableList<String>? {
