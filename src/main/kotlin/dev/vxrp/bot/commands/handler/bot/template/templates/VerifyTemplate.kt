@@ -1,7 +1,6 @@
 package dev.vxrp.bot.commands.handler.bot.template.templates
 
 import dev.minn.jda.ktx.messages.Embed
-import dev.minn.jda.ktx.messages.reply_
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation

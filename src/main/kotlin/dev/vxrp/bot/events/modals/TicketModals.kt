@@ -1,8 +1,8 @@
 package dev.vxrp.bot.events.modals
 
-import dev.minn.jda.ktx.messages.send
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
+import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.ticket.TicketManager
 import dev.vxrp.bot.ticket.enums.TicketStatus
 import dev.vxrp.bot.ticket.enums.TicketType

@@ -1,9 +1,6 @@
 package dev.vxrp.bot.status
 
 import dev.minn.jda.ktx.jdabuilder.light
-import io.github.vxrpenter.secretlab.SecretLab
-import io.github.vxrpenter.secretlab.data.Server
-import io.github.vxrpenter.secretlab.data.ServerInfo
 import dev.vxrp.bot.commands.CommandManager
 import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.commands.listeners.StatusCommandListener
@@ -17,9 +14,12 @@ import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ConnectionTable
 import dev.vxrp.util.coroutines.Timer
 import dev.vxrp.util.coroutines.defaultStatusScope
+import dev.vxrp.util.coroutines.statusbotScope
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionType
-import dev.vxrp.util.coroutines.statusbotScope
+import io.github.vxrpenter.secretlab.SecretLab
+import io.github.vxrpenter.secretlab.data.Server
+import io.github.vxrpenter.secretlab.data.ServerInfo
 import io.github.vxrpenter.secretlab.exceptions.CallFailureException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

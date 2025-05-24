@@ -1,6 +1,5 @@
 package dev.vxrp.bot.regulars
 import dev.minn.jda.ktx.coroutines.await
-import io.github.vxrpenter.cedmod.Cedmod
 import dev.vxrp.bot.regulars.data.RegularDatabaseEntry
 import dev.vxrp.bot.regulars.data.RegularsConfigRole
 import dev.vxrp.bot.regulars.enums.RequirementType
@@ -13,6 +12,7 @@ import dev.vxrp.database.tables.database.RegularsTable
 import dev.vxrp.database.tables.database.UserTable
 import dev.vxrp.util.coroutines.Timer
 import dev.vxrp.util.coroutines.regularsScope
+import io.github.vxrpenter.cedmod.Cedmod
 import io.github.vxrpenter.cedmod.exceptions.CallFailureException
 import kotlinx.coroutines.delay
 import net.dv8tion.jda.api.JDA

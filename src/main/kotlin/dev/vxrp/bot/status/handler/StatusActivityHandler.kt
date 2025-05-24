@@ -1,10 +1,10 @@
 package dev.vxrp.bot.status.handler
 
-import io.github.vxrpenter.secretlab.data.Server
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ConnectionTable
+import io.github.vxrpenter.secretlab.data.Server
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity

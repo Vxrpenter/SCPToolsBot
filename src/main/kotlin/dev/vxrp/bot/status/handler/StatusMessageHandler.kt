@@ -1,11 +1,11 @@
 package dev.vxrp.bot.status.handler
 
 import dev.minn.jda.ktx.messages.Embed
-import io.github.vxrpenter.secretlab.data.ServerInfo
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
+import io.github.vxrpenter.secretlab.data.ServerInfo
 import net.dv8tion.jda.api.JDA
 
 class StatusMessageHandler(val config: Config, val translation: Translation) {

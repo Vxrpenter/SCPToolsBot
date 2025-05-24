@@ -1,10 +1,10 @@
 package dev.vxrp.bot.commands.listeners
 
 import dev.minn.jda.ktx.events.listener
+import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.commands.handler.status.playerlist.PlayerlistCommand
 import dev.vxrp.bot.commands.handler.status.status.StatusCommand
 import dev.vxrp.bot.commands.handler.status.template.TemplateCommandHandler
-import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.launch.LaunchOptionManager
