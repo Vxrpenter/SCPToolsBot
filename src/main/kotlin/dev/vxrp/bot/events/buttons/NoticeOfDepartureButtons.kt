@@ -14,14 +14,11 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 
 class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {
     suspend fun init() {
-        val permissionManager = PermissionManager(config, translation)
         if (event.button.id?.startsWith("file_notice_of_departure") == true) {
-            if (!permissionManager.checkStatus(event.hook, StatusMessageType.MODAL, config.settings.noticeOfDeparture.active)) return
             event.replyModal(NoticeOfDepartureTemplateModals(translation).generalModal()).queue()
         }
 
         if (event.button.id?.startsWith("notice_of_departure_decision_accept") == true) {
-            if (!permissionManager.checkStatus(event.hook, StatusMessageType.MODAL, config.settings.noticeOfDeparture.active)) return
             if(permissionCheck(PermissionType.NOTICE_OF_DEPARTURES)) return
             val splittetId = event.button.id!!.split(":")
 
@@ -32,7 +29,6 @@ class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Co
         }
 
         if (event.button.id?.startsWith("notice_of_departure_decision_dismiss") == true) {
-            if (!permissionManager.checkStatus(event.hook, StatusMessageType.MODAL, config.settings.noticeOfDeparture.active)) return
             if(permissionCheck(PermissionType.NOTICE_OF_DEPARTURES)) return
             val splittetId = event.button.id!!.split(":")
 
@@ -43,7 +39,6 @@ class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Co
         }
 
         if (event.button.id?.startsWith("notice_of_departure_revoke") == true) {
-            if (!permissionManager.checkStatus(event.hook, StatusMessageType.MODAL, config.settings.noticeOfDeparture.active)) return
             if(permissionCheck(PermissionType.NOTICE_OF_DEPARTURES)) return
             val splittetId = event.button.id!!.split(":")
 
