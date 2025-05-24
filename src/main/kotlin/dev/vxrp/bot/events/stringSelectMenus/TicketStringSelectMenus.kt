@@ -2,7 +2,7 @@ package dev.vxrp.bot.events.stringSelectMenus
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.bot.modals.SupportTemplateModals
+import dev.vxrp.bot.modals.TicketTemplateModals
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ApplicationTypeTable
@@ -14,11 +14,11 @@ import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 
 class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val config: Config, val translation: Translation) {
     fun init() {
-        val supportTemplateModals = SupportTemplateModals(translation)
+        val ticketTemplateModals = TicketTemplateModals(translation)
 
         if (event.selectMenu.id?.startsWith("ticket") == true) {
             if (event.selectedOptions[0].value.startsWith("general")) {
-                event.replyModal(supportTemplateModals.supportGeneralModal()).queue()
+                event.replyModal(ticketTemplateModals.supportGeneralModal()).queue()
             }
 
             if (event.selectedOptions[0].value.startsWith("report")) {
@@ -33,11 +33,11 @@ class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val confi
             }
 
             if (event.selectedOptions[0].value.startsWith("error")) {
-                event.replyModal(supportTemplateModals.supportErrorModal()).queue()
+                event.replyModal(ticketTemplateModals.supportErrorModal()).queue()
             }
 
             if (event.selectedOptions[0].value.startsWith("unban")) {
-                event.replyModal(supportTemplateModals.supportUnbanModal()).queue()
+                event.replyModal(ticketTemplateModals.supportUnbanModal()).queue()
             }
 
             if (event.selectedOptions[0].value.startsWith("complaint")) {
@@ -71,7 +71,7 @@ class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val confi
             if (!ApplicationTypeTable().query(event.selectedOptions[0].value)!!.active) {
                 event.reply_("Position currently not active").setEphemeral(true).queue()
             } else {
-                event.replyModal(SupportTemplateModals(translation).supportApplicationModal(event.selectedOptions[0].value)).queue()
+                event.replyModal(TicketTemplateModals(translation).supportApplicationModal(event.selectedOptions[0].value)).queue()
             }
         }
     }
