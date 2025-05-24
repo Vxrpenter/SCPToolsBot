@@ -17,37 +17,35 @@ import org.slf4j.Logger
 
 class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val config: Config, val translation: Translation) {
     suspend fun init() {
-        if(!event.modalId.startsWith("support_")) return
-        
         event.deferReply(true).queue()
 
         val api = event.jda
 
-        if (event.modalId.startsWith("support_general")) {
+        if (event.modalId.startsWith("ticket_general")) {
             val handler = TicketManager(api, config, translation)
             val child = handler.createTicket(TicketType.GENERAL, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             respond(child, event)
         }
 
-        if (event.modalId.startsWith("support_report")) {
+        if (event.modalId.startsWith("ticket_report")) {
             val handler = TicketManager(api, config, translation)
             val child = handler.createTicket(TicketType.REPORT, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             respond(child, event)
         }
 
-        if (event.modalId.startsWith("support_error")) {
+        if (event.modalId.startsWith("ticket_error")) {
             val handler = TicketManager(api, config, translation)
             val child = handler.createTicket(TicketType.ERROR, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             respond(child, event)
         }
 
-        if (event.modalId.startsWith("support_unban")) {
+        if (event.modalId.startsWith("ticket_unban")) {
             val handler = TicketManager(api, config, translation)
             val child = handler.createTicket(TicketType.UNBAN, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             respond(child, event)
         }
 
-        if (event.modalId.startsWith("support_complaint")) {
+        if (event.modalId.startsWith("ticket_complaint")) {
             var creator = "anonymous"
             if (event.modalId.split(":")[2] == "false") creator = event.user.id
 
@@ -56,7 +54,7 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
             respond(child, event)
         }
 
-        if (event.modalId.startsWith("support_application")) {
+        if (event.modalId.startsWith("ticket_application")) {
             val handler = TicketManager(api, config, translation)
             val child = handler.createTicket(TicketType.APPLICATION, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             val roleId = event.modalId.split(":")[1]

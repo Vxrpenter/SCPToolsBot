@@ -6,12 +6,12 @@ import net.dv8tion.jda.api.interactions.components.ActionRow
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle
 import net.dv8tion.jda.api.interactions.modals.Modal
 
-class SupportTemplateModals(val translation: Translation) {
+class TicketTemplateModals(val translation: Translation) {
     fun supportGeneralModal(): Modal {
-        return Modal.create("support_general", translation.support.modalGeneralTitle).addComponents(
+        return Modal.create("ticket_general", translation.support.modalGeneralTitle).addComponents(
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_general_subject",
+                    id= "general_subject",
                     label = translation.support.modalGeneralSubjectTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
@@ -19,7 +19,7 @@ class SupportTemplateModals(val translation: Translation) {
             ),
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_general_explanation",
+                    id= "general_explanation",
                     label = translation.support.modalComplaintExplanationTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
@@ -29,10 +29,10 @@ class SupportTemplateModals(val translation: Translation) {
     }
 
     fun supportReportModal(userId: String): Modal {
-        return Modal.create("support_report:$userId", translation.support.modalReportTitle).addComponents(
+        return Modal.create("ticket_report:$userId", translation.support.modalReportTitle).addComponents(
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_report_reason",
+                    id= "report_reason",
                     label = translation.support.modalReportReasonTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
@@ -40,7 +40,7 @@ class SupportTemplateModals(val translation: Translation) {
             ),
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_report_proof",
+                    id= "report_proof",
                     label = translation.support.modalReportProofTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
@@ -50,10 +50,10 @@ class SupportTemplateModals(val translation: Translation) {
     }
 
     fun supportErrorModal(): Modal {
-        return Modal.create("support_error", translation.support.modalErrorTitle).addComponents(
+        return Modal.create("ticket_error", translation.support.modalErrorTitle).addComponents(
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_error_problem",
+                    id= "error_problem",
                     label = translation.support.modalErrorProblemTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
@@ -61,7 +61,7 @@ class SupportTemplateModals(val translation: Translation) {
             ),
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_error_times",
+                    id= "error_times",
                     label = translation.support.modalErrorTimesTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
@@ -69,7 +69,7 @@ class SupportTemplateModals(val translation: Translation) {
             ),
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_error_reproduce",
+                    id= "error_reproduce",
                     label = translation.support.modalErrorReproduceTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
@@ -77,7 +77,7 @@ class SupportTemplateModals(val translation: Translation) {
             ),
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_error_additional",
+                    id= "error_additional",
                     label = translation.support.modalErrorAdditionalTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
@@ -87,10 +87,10 @@ class SupportTemplateModals(val translation: Translation) {
     }
 
     fun supportUnbanModal(): Modal {
-        return Modal.create("support_unban", translation.support.modalUnbanTitle).addComponents(
+        return Modal.create("ticket_unban", translation.support.modalUnbanTitle).addComponents(
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_unban_steamID",
+                    id= "unban_steamID",
                     label = translation.support.modalUnbanSteamIdTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
@@ -98,7 +98,7 @@ class SupportTemplateModals(val translation: Translation) {
             ),
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_unban_reason",
+                    id= "unban_reason",
                     label = translation.support.modalUnbanReasonTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
@@ -108,10 +108,10 @@ class SupportTemplateModals(val translation: Translation) {
     }
 
     fun supportComplaintModal(userId: String, anonymous: Boolean): Modal {
-        return Modal.create("support_complaint:$userId:$anonymous", translation.support.modalComplaintTitle).addComponents(
+        return Modal.create("ticket_complaint:$userId:$anonymous", translation.support.modalComplaintTitle).addComponents(
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_complaint_subject",
+                    id= "complaint_subject",
                     label = translation.support.modalComplaintSubjectTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
@@ -119,7 +119,7 @@ class SupportTemplateModals(val translation: Translation) {
             ),
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_complaint_explanation",
+                    id= "complaint_explanation",
                     label = translation.support.modalComplaintExplanationTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
@@ -129,10 +129,10 @@ class SupportTemplateModals(val translation: Translation) {
     }
 
     fun supportApplicationModal(roleId: String): Modal {
-        return Modal.create("support_application:$roleId", translation.support.modalApplicationTitle).addComponents(
+        return Modal.create("ticket_application:$roleId", translation.support.modalApplicationTitle).addComponents(
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_application_name",
+                    id= "application_name",
                     label = translation.support.modalApplicationNameTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
@@ -140,7 +140,7 @@ class SupportTemplateModals(val translation: Translation) {
             ),
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_application_age",
+                    id= "application_age",
                     label = translation.support.modalApplicationAgeTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
@@ -148,7 +148,7 @@ class SupportTemplateModals(val translation: Translation) {
             ),
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_application_playtime",
+                    id= "application_playtime",
                     label = translation.support.modalApplicationPlaytimeTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
@@ -156,7 +156,7 @@ class SupportTemplateModals(val translation: Translation) {
             ),
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_application_reason_of_application",
+                    id= "application_reason_of_application",
                     label = translation.support.modalApplicationReasonsOfApplicationTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
@@ -164,7 +164,7 @@ class SupportTemplateModals(val translation: Translation) {
             ),
             ActionRow.of(
                 TextInputBuilder(
-                    id= "support_application_skills",
+                    id= "application_skills",
                     label = translation.support.modalApplicationSkillsTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
