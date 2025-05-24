@@ -61,7 +61,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
             description = ColorTool().useCustomColorCodes(
                 translation.noticeOfDeparture.embedAcceptedBody
                     .replace("%current_date%", currentDate)
-                    .replace("%end_date", endDate)
+                    .replace("%end_date%", endDate)
                     .replace("%reason%", reason)
             )
         }
