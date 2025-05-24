@@ -12,12 +12,12 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button
 
 class TicketEntitySelectMenus(val event: EntitySelectInteractionEvent, val config: Config, val translation: Translation) {
     init {
-        if (event.selectMenu.id?.startsWith("report") == true) {
+        if (event.selectMenu.id?.startsWith("ticket_report") == true) {
             val user = event.values[0]
             event.replyModal(SupportTemplateModals(translation).supportReportModal(user.id)).queue()
         }
 
-        if (event.selectMenu.id?.startsWith("complaint") == true) {
+        if (event.selectMenu.id?.startsWith("ticket_complaint") == true) {
             val user = event.values[0]
             val embed = Embed {
                 title = ColorTool().useCustomColorCodes(translation.support.embedComplaintAnonymousTitle)
