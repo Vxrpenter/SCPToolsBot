@@ -52,7 +52,6 @@ class PermissionManager(val config: Config, val translation: Translation) {
 
     private suspend fun queryUserRoles(user: User): MutableList<String>? {
         val roleIdList = mutableListOf<String>()
-        println()
         val currentRoles = user.jda.getGuildById(config.settings.guildId)!!.retrieveMemberById(user.id).await()?.roles ?: run {
             logger.error("Could not find any roles to determine permissions for User: {}", user.id)
             return null
