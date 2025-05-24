@@ -18,13 +18,13 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
     suspend fun init() {
         val api = event.jda
 
-        if (event.button.id?.startsWith("anonymous_accept") == true) {
+        if (event.button.id?.startsWith("ticket_anonymous_accept") == true) {
             val userId = event.button.id!!.split(":")[1]
 
             event.replyModal(SupportTemplateModals(translation).supportComplaintModal(userId, true)).queue()
         }
 
-        if (event.button.id?.startsWith("anonymous_deny") == true) {
+        if (event.button.id?.startsWith("ticket_anonymous_deny") == true) {
             val userId = event.button.id!!.split(":")[1]
 
             event.replyModal(SupportTemplateModals(translation).supportComplaintModal(userId, false)).queue()
