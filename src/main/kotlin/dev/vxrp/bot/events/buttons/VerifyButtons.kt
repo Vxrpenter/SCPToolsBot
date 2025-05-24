@@ -20,7 +20,6 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
         }
 
         if (event.button.id?.startsWith("verify_show_data") == true) {
-            if (!PermissionManager(config, translation).checkStatus(event.hook, StatusMessageType.PANEL, config.settings.verify.active)) return
             if (!UserTable().exists(event.user.id)) {
                 event.reply_("", listOf(noDataEmbed)).setEphemeral(true).queue()
                 return
@@ -64,7 +63,6 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
         }
 
         if (event.button.id?.startsWith("verify_delete") == true) {
-            if (!PermissionManager(config, translation).checkStatus(event.hook, StatusMessageType.PANEL, config.settings.verify.active)) return
             if (!UserTable().exists(event.user.id)) {
                 event.reply_("", listOf(noDataEmbed)).setEphemeral(true).queue()
                 return
