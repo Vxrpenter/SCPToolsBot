@@ -25,9 +25,9 @@ class TicketEntitySelectMenus(val event: EntitySelectInteractionEvent, val confi
             }
 
             event.reply_("", listOf(embed)).setActionRow(
-                Button.success("anonymous_accept:${user.id}", translation.buttons.textSupportAnonymousAccept).withEmoji(
+                Button.success("ticket_anonymous_accept:${user.id}", translation.buttons.textSupportAnonymousAccept).withEmoji(
                     Emoji.fromFormatted("🔒")),
-                Button.danger("anonymous_deny:${user.id}", translation.buttons.textSupportAnonymousDeny).withEmoji(Emoji.fromFormatted("🔓"))
+                Button.danger("ticket_anonymous_deny:${user.id}", translation.buttons.textSupportAnonymousDeny).withEmoji(Emoji.fromFormatted("🔓"))
             ).setEphemeral(true).queue()
         }
     }
