@@ -5,8 +5,8 @@ import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.modals.TicketTemplateModals
 import dev.vxrp.bot.permissions.PermissionManager
 import dev.vxrp.bot.permissions.enums.PermissionType
-import dev.vxrp.bot.ticket.handler.TicketSettingsHandler
 import dev.vxrp.bot.ticket.enums.TicketType
+import dev.vxrp.bot.ticket.handler.TicketSettingsHandler
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.TicketTable

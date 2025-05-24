@@ -2,10 +2,10 @@ package dev.vxrp.bot.events.buttons
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.bot.application.handler.ApplicationManager
 import dev.vxrp.bot.application.ApplicationMessageHandler
-import dev.vxrp.bot.application.handler.applicationTypeMap
 import dev.vxrp.bot.application.data.ApplicationType
+import dev.vxrp.bot.application.handler.ApplicationManager
+import dev.vxrp.bot.application.handler.applicationTypeMap
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool

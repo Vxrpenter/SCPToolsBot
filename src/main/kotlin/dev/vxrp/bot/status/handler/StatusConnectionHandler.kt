@@ -1,12 +1,12 @@
 package dev.vxrp.bot.status.handler
 
-import io.github.vxrpenter.secretlab.data.Server
-import io.github.vxrpenter.secretlab.data.ServerInfo
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ConnectionTable
+import io.github.vxrpenter.secretlab.data.Server
+import io.github.vxrpenter.secretlab.data.ServerInfo
 import net.dv8tion.jda.api.JDA
 import org.slf4j.LoggerFactory
 

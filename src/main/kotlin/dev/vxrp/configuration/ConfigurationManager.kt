@@ -2,10 +2,10 @@ package dev.vxrp.configuration
 
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.LoggerContext
-import dev.vxrp.configuration.handler.ConfigFileHandler
-import dev.vxrp.configuration.handler.TranslationFileHandler
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
+import dev.vxrp.configuration.handler.ConfigFileHandler
+import dev.vxrp.configuration.handler.TranslationFileHandler
 import dev.vxrp.database.DatabaseManager
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
