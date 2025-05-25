@@ -6,15 +6,10 @@ import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.RegularsTable
 import dev.vxrp.util.coroutines.Timer
 import dev.vxrp.util.coroutines.regularsScope
-import kotlinx.coroutines.delay
 import net.dv8tion.jda.api.JDA
-import org.slf4j.LoggerFactory
 import kotlin.time.Duration.Companion.hours
-import kotlin.time.Duration.Companion.seconds
 
 class RegularsManager(val api: JDA, val config: Config, val translation: Translation) {
-    private val logger = LoggerFactory.getLogger(RegularsManager::class.java)
-
     init {
         RegularsFileHandler(config)
     }
