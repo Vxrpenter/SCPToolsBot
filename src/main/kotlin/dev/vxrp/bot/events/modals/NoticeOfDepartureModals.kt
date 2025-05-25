@@ -22,13 +22,25 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             val parsedDate = try {
                 LocalDate.parse(date, formatter)
             } catch (_: DateTimeParseException) {
-                event.reply_("Please enter a valid date format to proceed").setEphemeral(true).queue()
+                val embed = Embed {
+                    color = 0xE74D3C
+                    title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterValidDateTitle)
+                    description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterValidDateBody)
+                }
+
+                event.reply_("", listOf(embed)).setEphemeral(true).queue()
                 return
             }
 
             val currentDate = LocalDate.now()
             if (parsedDate.isBefore(currentDate)) {
-                event.reply_("Please enter a date in the future to proceed").setEphemeral(true).queue()
+                val embed = Embed {
+                    color = 0xE74D3C
+                    title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterFutureDateTitle)
+                    description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterFutureDateBody)
+                }
+
+                event.reply_("", listOf(embed)).setEphemeral(true).queue()
                 return
             }
 
