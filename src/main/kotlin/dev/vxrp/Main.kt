@@ -1,6 +1,6 @@
 package dev.vxrp
 
-import dev.vxrp.api.updates.Updates
+import dev.vxrp.updates.Updates
 import dev.vxrp.configuration.ConfigurationManager
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
