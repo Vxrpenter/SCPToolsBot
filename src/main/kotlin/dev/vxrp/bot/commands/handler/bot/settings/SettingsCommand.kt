@@ -84,10 +84,7 @@ class SettingsCommand(val config: Config, val translation: Translation) {
                     translation.settings.embedSettingsFieldBuildValue
                         .replace(
                             "%build%",
-                            Updates(config).checkForUpdatesByTag(
-                                "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags",
-                                false
-                            )
+                            Updates().checkForUpdatesByTag(config, "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags", false)
                         ).trimIndent()
                 )
             }
