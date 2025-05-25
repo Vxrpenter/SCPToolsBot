@@ -12,6 +12,7 @@ import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureManager
 import dev.vxrp.bot.regulars.RegularsManager
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
+import dev.vxrp.updates.handler.UpdatesFileHandler
 import dev.vxrp.util.coroutines.Timer
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionType
@@ -54,6 +55,7 @@ class BotManager(val config: Config, val translation: Translation) {
         }
 
         mainApi = api
+        UpdatesFileHandler().override(System.getProperty("user.dir"))
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean {

@@ -11,6 +11,7 @@ private val logger = LoggerFactory.getLogger("Main")
 
 fun main() {
     logger.info("Starting up...")
+    val updates = Updates()
 
     val configurationManager = ConfigurationManager()
 
@@ -20,7 +21,7 @@ fun main() {
     configurationManager.initializeDatabase(config)
     configurationManager.setLoggingLevel(config)
 
-    Updates(config).checkForUpdatesByTag("https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags")
+    updates.checkForUpdatesByTag(config, "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags")
     ScpToolsBot(config, translation)
 }
 

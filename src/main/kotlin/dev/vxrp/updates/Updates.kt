@@ -2,22 +2,28 @@ package dev.vxrp.updates
 
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.updates.data.Tag
+import dev.vxrp.updates.handler.UpdateHandler
+import dev.vxrp.updates.handler.UpdatesFileHandler
 import dev.vxrp.util.color.ColorTool
 import dev.vxrp.util.color.enums.DCColor
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
 import java.util.*
 
-class Updates(val config: Config) {
-    private val logger: Logger = LoggerFactory.getLogger(Updates::class.java)
+class Updates() {
+    private val logger = LoggerFactory.getLogger(Updates::class.java)
     private val client: OkHttpClient = OkHttpClient()
 
-    fun checkForUpdatesByTag(url: String, log: Boolean = true): String {
+    init {
+        UpdatesFileHandler().create(System.getProperty("user.dir"))
+        UpdateHandler(UpdatesFileHandler().queryOld(System.getProperty("user.dir")), UpdatesFileHandler().queryNew()).checkUpdated()
+    }
+
+    fun checkForUpdatesByTag(config: Config, url: String, log: Boolean = true): String {
         val request = Request.Builder()
             .url(url)
             .build()
@@ -33,7 +39,7 @@ class Updates(val config: Config) {
             val properties = Properties()
 
             Updates::class.java.getResourceAsStream("/dev/vxrp/version.properties").use {
-                versionPropertiesStream -> checkNotNull(versionPropertiesStream) { "Version properties file does not exist" }
+                    versionPropertiesStream -> checkNotNull(versionPropertiesStream) { "Version properties file does not exist" }
                 properties.load(InputStreamReader(versionPropertiesStream, StandardCharsets.UTF_8))
             }
 
