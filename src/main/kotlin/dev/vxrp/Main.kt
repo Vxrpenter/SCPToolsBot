@@ -1,9 +1,9 @@
 package dev.vxrp
 
-import dev.vxrp.updates.Updates
 import dev.vxrp.configuration.ConfigurationManager
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
+import dev.vxrp.updates.Updates
 import dev.vxrp.util.launch.LaunchOptionManager
 import org.slf4j.LoggerFactory
 
