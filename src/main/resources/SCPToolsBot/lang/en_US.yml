@@ -19,6 +19,9 @@ PERMISSIONS:
   EMBED_COULD_NOT_SEND_MODAL_TITLE: "Could not send Modal"
   EMBED_COULD_NOT_SEND_MODAL_BODY: "This modal is deactivated as long as the bot hoster has deactivated certain configurations."
 
+  EMBED_COULD_NOT_SEND_COMMAND_TITLE: "Could not send Command"
+  EMBED_COULD_NOT_SEND_COMMAND_BODY: "This command is deactivated as long as the bot hoster has deactivated certain configurations."
+
   EMBED_COULD_NOT_SEND_TEMPLATE_TITLE: "Could not create Template"
   EMBED_COULD_NOT_SEND_TEMPLATE_BODY: "This template is deactivated because of missing configurations. Navigate to the config to activate and configure it."
 
