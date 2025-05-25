@@ -2,9 +2,9 @@ package dev.vxrp.bot.commands.handler.bot.settings
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.updates.Updates
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
+import dev.vxrp.updates.Updates
 import dev.vxrp.util.color.ColorTool
 import io.github.vxrpenter.cedmod.Cedmod
 import io.github.vxrpenter.cedmod.exceptions.CallFailureException
