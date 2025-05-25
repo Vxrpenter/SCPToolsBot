@@ -11,12 +11,15 @@ import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.TicketTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
+import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.MessageEmbed
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
+import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 import net.dv8tion.jda.api.interactions.modals.ModalMapping
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.selectAll
@@ -27,6 +30,25 @@ import java.time.Instant
 
 class TicketMessageHandler(val api: JDA, val config: Config, val translation: Translation) {
     val logger: Logger = LoggerFactory.getLogger(TicketMessageHandler::class.java)
+    
+    fun sendTemplate(channel: TextChannel, guild: Guild) {
+        val embed = Embed {
+            thumbnail = guild.iconUrl
+            title = ColorTool().useCustomColorCodes(translation.support.embedTemplateSupportTitle).trimIndent()
+            description = ColorTool().useCustomColorCodes(translation.support.embedTemplateSupportBody).trimIndent()
+        }
+
+        channel.send("", listOf(embed))
+            .setActionRow(
+                StringSelectMenu.create("ticket")
+                    .addOption(translation.selectMenus.textSupportNameGeneral, "general", translation.selectMenus.textsupportDescriptionGeneral, Emoji.fromFormatted("⚙️"))
+                    .addOption(translation.selectMenus.textSupportNameReport, "report", translation.selectMenus.textSupportDescriptionReport, Emoji.fromFormatted("⚖️"))
+                    .addOption(translation.selectMenus.textSupportNameError, "error", translation.selectMenus.textSupportDescriptionError, Emoji.fromFormatted("⛓️‍💥"))
+                    .addOption(translation.selectMenus.textSupportNameUnban, "unban", translation.selectMenus.textSupportDescriptionUnban, Emoji.fromFormatted("⌛"))
+                    .addOption(translation.selectMenus.textSupportNameComplaint, "complaint", translation.selectMenus.textSupportDescriptionComplaint, Emoji.fromFormatted("🚫"))
+                    .addOption(translation.selectMenus.textSupportNameApplication, "application", translation.selectMenus.textSupportDescriptionApplication, Emoji.fromFormatted("📩")).build()
+            ).queue() 
+    }
 
     suspend fun sendMessage(type: TicketType, channel: ThreadChannel, userId: String, modalId: String, modalValues: MutableList<ModalMapping>): Message {
         when(type) {
