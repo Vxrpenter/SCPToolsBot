@@ -4,16 +4,9 @@ import dev.vxrp.util.color.enums.DCColor
 import dev.vxrp.util.color.enums.DCColor.*
 import java.util.regex.Pattern
 import kotlin.math.max
+import kotlin.math.roundToInt
 
 class ColorTool {
-    private val filler: String =
-        "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
-                "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
-                "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
-                "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
-                "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
-                "\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E " +
-                "\u200E \u200E \u200E \u200E \u200E \u200E \u200E"
     private val singleFiller: String = "\u200E "
 
     private val darkGray: String = "\u001B[2;30m"
@@ -28,65 +21,26 @@ class ColorTool {
     private val underline: String = "\u001B[4;2m"
     private val reset: String = "\u001B[0m"
 
-
-    fun apply(color: DCColor?, text: String): String {
-        when (color) {
-            DARK_GRAY -> {
-                return "$darkGray$text$reset"
-            }
-
-            RED -> {
-                return "$red$text$reset"
-            }
-
-            GREEN -> {
-                return "$green$text$reset"
-            }
-
-            GOLD -> {
-                return "$gold$text$reset"
-            }
-
-            LIGHT_BLUE -> {
-                return "$lightBlue$text$reset"
-            }
-
-            PINK -> {
-                return "$pink$text$reset"
-            }
-
-            TEAL -> {
-                return "$teal$text$reset"
-            }
-
-            WHITE -> {
-                return "$white$text$reset"
-            }
-
-            BOLD -> {
-                return "$bold$text$reset"
-            }
-
-            UNDERLINE -> {
-                return "$underline$text$reset"
-            }
-
-            null -> {
-                throw RuntimeException()
-            }
+    fun apply(color: DCColor, text: String): String {
+        return when (color) {
+            DARK_GRAY -> "$darkGray$text$reset"
+            RED -> "$red$text$reset"
+            GREEN -> "$green$text$reset"
+            GOLD -> "$gold$text$reset"
+            LIGHT_BLUE -> "$lightBlue$text$reset"
+            PINK -> "$pink$text$reset"
+            TEAL -> "$teal$text$reset"
+            WHITE -> "$white$text$reset"
+            BOLD -> "$bold$text$reset"
+            UNDERLINE -> "$underline$text$reset"
         }
     }
 
     fun useCustomColorCodes(text: String): String {
         val matcher = Pattern.compile("(?<=&filler<).+?(?=>&|$)").matcher(text)
         while (matcher.find()) {
-            val count = Math.round(matcher.group().toInt().toFloat() / 2)
-
-            return text.replace(
-                "&filler<" + matcher.group() + ">&", "\u200E ".repeat(
-                    max(0.0, count.toDouble()).toInt()
-                )
-            )
+            val count = (matcher.group().toInt().toFloat() / 2).roundToInt()
+            return text.replace("&filler<" + matcher.group() + ">&", singleFiller.repeat(max(0.0, count.toDouble()).toInt()))
         }
 
         return text
@@ -101,7 +55,7 @@ class ColorTool {
             .replace("&bold&", bold)
             .replace("&reset&", reset)
             .replace("&underline&", underline)
-            .replace("&filler&", filler)
+            .replace("&filler&", singleFiller.repeat(max(0.0, 140.toDouble()).toInt()))
             .replace("&singleFiller&", singleFiller)
     }
 }
