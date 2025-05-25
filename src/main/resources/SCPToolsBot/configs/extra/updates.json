@@ -5,7 +5,7 @@
     "regenerateStatusSettings": false,
     "regenerateTicketSettings": false,
     "regenerateCommands": true,
-    "launchConfiguration": true,
+    "regenerateLaunchConfiguration": true,
 
     "regenerateTranslations": true
   },
