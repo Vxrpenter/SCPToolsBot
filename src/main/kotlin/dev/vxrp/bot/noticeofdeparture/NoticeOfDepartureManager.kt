@@ -23,11 +23,10 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
     }
 
     fun spinUpChecker() {
-        if (!config.settings.noticeOfDeparture.active) return
+        if (!config.settings.noticeOfDeparture.active || NoticeOfDepartureTable().retrieveSerial() == 0L) return
 
         Timer().runWithTimer(DurationParser().parse(
-            config.settings.noticeOfDeparture.checkRate,
-            DurationType.valueOf(config.settings.noticeOfDeparture.checkUnit)),
+            config.settings.noticeOfDeparture.checkRate, DurationType.valueOf(config.settings.noticeOfDeparture.checkUnit)),
             noticeOfDepartureScope
         ) { NoticeOfDepartureCheckerHandler(api, config, translation).checkerTask() }
     }
