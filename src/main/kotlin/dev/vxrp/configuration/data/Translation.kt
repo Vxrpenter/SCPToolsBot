@@ -609,6 +609,16 @@ data class TranslationNoticeOfDeparture(
     @SerialName("MODAL_EXPLANATION_PLACEHOLDER")
     val modalExplanationPlaceHolder: String,
 
+    @SerialName("EMBED_ENTER_VALID_DATE_TITLE")
+    val embedEnterValidDateTitle: String,
+    @SerialName("EMBED_ENTER_VALID_DATE_BODY")
+    val embedEnterValidDateBody: String,
+
+    @SerialName("EMBED_ENTER_FUTURE_DATE_TITLE")
+    val embedEnterFutureDateTitle: String,
+    @SerialName("EMBED_ENTER_FUTURE_DATE_BODY")
+    val embedEnterFutureDateBody: String,
+
     @SerialName("EMBED_DECISION_TITLE")
     val embedDecisionTitle: String,
     @SerialName("EMBED_DECISION_BODY")

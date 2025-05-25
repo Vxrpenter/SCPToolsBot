@@ -612,6 +612,12 @@ NOTICE_OF_DEPARTURE:
   MODAL_EXPLANATION_TITLE: "Erklärung"
   MODAL_EXPLANATION_PLACEHOLDER: "Wieso wirst du weg sein? [keine details]"
 
+  EMBED_ENTER_VALID_DATE_TITLE: "Gib ein gültiges Datumsformat an"
+  EMBED_ENTER_VALID_DATE_BODY: "Du musst ein gültiges Datumsformat eingeben. Das akzeptierte Format ist: **dd.MM.yyyy**"
+
+  EMBED_ENTER_FUTURE_DATE_TITLE: "Gib ein Datum in der Zukunft an"
+  EMBED_ENTER_FUTURE_DATE_BODY: "Du musst ein Datum angeben das in der Zukunft liegt."
+
   EMBED_DECISION_TITLE: "Abmeldung - #%number%"
 
   EMBED_DECISION_BODY: " 
