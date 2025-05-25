@@ -58,6 +58,14 @@ class PermissionMessageHandler(val config: Config, val translation: Translation)
                 }
             }
 
+            StatusMessageType.COMMAND -> {
+                return Embed {
+                    color = 0xE74D3C
+                    title = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendCommandTitle)
+                    description = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendCommandBody)
+                }
+            }
+
             StatusMessageType.TEMPLATE -> {
                 return Embed {
                     color = 0xE74D3C
