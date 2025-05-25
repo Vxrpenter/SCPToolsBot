@@ -1,6 +1,7 @@
 package dev.vxrp.bot.commands.handler.bot.template.templates
 
 import dev.minn.jda.ktx.messages.Embed
+import dev.minn.jda.ktx.messages.reply_
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.noticeofdeparture.handler.NoticeOfDepartureMessageHandler
 import dev.vxrp.configuration.data.Config
@@ -12,8 +13,10 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button
 
 class NoticeOfDepartureTemplate(val config: Config, val translation: Translation) {
     fun pasteTemplate(event: SlashCommandInteractionEvent) {
-        NoticeOfDepartureMessageHandler(event.jda, config, translation).sendTemplate(event.channel.asTextChannel())
+        NoticeOfDepartureMessageHandler(event.jda,config, translation).sendTemplate( event.channel.asTextChannel())
 
-        event.reply("Created notice of departure template").setEphemeral(true).queue()
+        event.reply_(ColorTool().useCustomColorCodes("%filler<1>%")).queue {
+            it.deleteOriginal().queue()
+        }
     }
 }
