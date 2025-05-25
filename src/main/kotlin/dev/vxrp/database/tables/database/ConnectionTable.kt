@@ -66,4 +66,12 @@ class ConnectionTable {
             }
         }
     }
+
+    fun setMaintenance(id: String, maintenance: Boolean?) {
+        transaction {
+            Connections.update({ Connections.id eq id }) {
+                it[Connections.maintenance] = maintenance
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package dev.vxrp.bot.commands.handler.status.status
 
 import dev.minn.jda.ktx.messages.Embed
+import dev.minn.jda.ktx.messages.reply_
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.configuration.data.Config
@@ -22,12 +23,8 @@ class StatusCommand(val config: Config, val translation: Translation, private va
                 reason = event.getOption("reason")?.asString!!
             }
 
-            transaction {
-                ConnectionTable.Connections.update({ ConnectionTable.Connections.id eq currentPort.toString() }) {
-                    it[maintenance] = false
-                }
-            }
-            event.reply(ColorTool().useCustomColorCodes(translation.status.messageStatusDeactivated).trimIndent())
+            ConnectionTable().setMaintenance(currentPort.toString(), false)
+            event.reply_(ColorTool().useCustomColorCodes(translation.status.messageStatusDeactivated).trimIndent())
                 .setEphemeral(true).queue()
 
             val embed = Embed {
@@ -53,12 +50,8 @@ class StatusCommand(val config: Config, val translation: Translation, private va
                 reason = event.getOption("reason")?.asString!!
             }
 
-            transaction {
-                ConnectionTable.Connections.update({ ConnectionTable.Connections.id eq currentPort.toString() }) {
-                    it[maintenance] = true
-                }
-            }
-            event.reply(ColorTool().useCustomColorCodes(translation.status.messageStatusActivated).trimIndent())
+            ConnectionTable().setMaintenance(currentPort.toString(), true)
+            event.reply_(ColorTool().useCustomColorCodes(translation.status.messageStatusActivated).trimIndent())
                 .setEphemeral(true).queue()
 
             val embed = Embed {
