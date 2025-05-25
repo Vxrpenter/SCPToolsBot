@@ -16,7 +16,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import net.dv8tion.jda.api.interactions.commands.build.SubcommandData
 import org.slf4j.LoggerFactory
 
-class CommandManager(val config: Config, val file: String) {
+class CommandManager(val config: Config) {
     private val logger = LoggerFactory.getLogger(CommandManager::class.java)
 
     fun registerSpecificCommands(commands: List<CustomCommand>, api: JDA) {
