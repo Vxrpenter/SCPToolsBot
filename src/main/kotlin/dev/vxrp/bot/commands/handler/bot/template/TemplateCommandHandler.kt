@@ -17,7 +17,9 @@ class TemplateCommandHandler(val config: Config, private val translation: Transl
 
         when (option) {
             "support" -> {
-                SupportTemplate(config, translation).pasteTemplate(event)
+                PermissionManager(config, translation).checkStatus(StatusMessageType.TEMPLATE, config.ticket.settings.ticketLogChannel != "")?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: SupportTemplate(config, translation).pasteTemplate(event)
             }
 
             "verify" -> {
