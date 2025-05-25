@@ -1,4 +1,4 @@
-package dev.vxrp.api.updates.data
+package dev.vxrp.updates.data
 
 import kotlinx.serialization.Serializable
 
