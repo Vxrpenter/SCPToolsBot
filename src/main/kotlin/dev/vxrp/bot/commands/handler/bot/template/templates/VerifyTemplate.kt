@@ -1,14 +1,11 @@
 package dev.vxrp.bot.commands.handler.bot.template.templates
 
-import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.verify.VerifyMessageHandler
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
-import net.dv8tion.jda.api.interactions.components.buttons.Button
 
 class VerifyTemplate(val config: Config, val translation: Translation) {
     fun pasteTemplate(event: SlashCommandInteractionEvent) {
