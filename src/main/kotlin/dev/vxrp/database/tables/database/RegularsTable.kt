@@ -222,4 +222,13 @@ class RegularsTable {
 
         return exists
     }
+
+    fun retrieveSerial(): Long {
+        var count: Long = 0
+        transaction {
+            count = Regulars.selectAll().count()
+        }
+
+        return count
+    }
 }
