@@ -9,8 +9,6 @@ import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ConnectionTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
-import org.jetbrains.exposed.sql.transactions.transaction
-import org.jetbrains.exposed.sql.update
 
 class StatusCommand(val config: Config, val translation: Translation, private val statusConstructor: StatusConstructor) {
     fun changeMaintenanceState(event: SlashCommandInteractionEvent) {
@@ -24,7 +22,13 @@ class StatusCommand(val config: Config, val translation: Translation, private va
             }
 
             ConnectionTable().setMaintenance(currentPort.toString(), false)
-            event.reply_(ColorTool().useCustomColorCodes(translation.status.messageStatusDeactivated).trimIndent())
+            val deactivatedEmbed = Embed {
+                color = 0xE74D3C
+                title = ColorTool().useCustomColorCodes(translation.status.embedStatusDeactivatedTitle)
+                description = ColorTool().useCustomColorCodes(translation.status.embedStatusDeactivatedBody)
+            }
+
+            event.reply_("", listOf(deactivatedEmbed))
                 .setEphemeral(true).queue()
 
             val embed = Embed {
@@ -51,7 +55,13 @@ class StatusCommand(val config: Config, val translation: Translation, private va
             }
 
             ConnectionTable().setMaintenance(currentPort.toString(), true)
-            event.reply_(ColorTool().useCustomColorCodes(translation.status.messageStatusActivated).trimIndent())
+            val activatedEmbed = Embed {
+                color = 0x2ECC70
+                title = ColorTool().useCustomColorCodes(translation.status.embedStatusActivatedTitle)
+                description = ColorTool().useCustomColorCodes(translation.status.embedStatusActivatedBody)
+            }
+
+            event.reply_("", listOf(activatedEmbed))
                 .setEphemeral(true).queue()
 
             val embed = Embed {
