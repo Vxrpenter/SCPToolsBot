@@ -610,6 +610,13 @@ NOTICE_OF_DEPARTURE:
   MODAL_EXPLANATION_TITLE: "Explanation"
   MODAL_EXPLANATION_PLACEHOLDER: "Why are you going to be away [exclude details]"
 
+  EMBED_ENTER_VALID_DATE_TITLE: "Enter a valid date format"
+  EMBED_ENTER_VALID_DATE_BODY: "You need to enter a valid date format to proceed. The accepted format is: **dd.MM.yyyy**"
+
+  EMBED_ENTER_FUTURE_DATE_TITLE: "Enter a future date"
+  EMBED_ENTER_FUTURE_DATE_BODY: "You need to enter a date in the future to proceed."
+
+
   EMBED_DECISION_TITLE: "Notice of departure - #%number%"
   EMBED_DECISION_BODY: " 
                         ```If accepted this user and the date will be added to the database and you will be notified when it runs out```\n
