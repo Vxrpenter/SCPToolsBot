@@ -17,7 +17,7 @@ class NoticeOfDepartureTemplate(val config: Config, val translation: Translation
         }
 
         event.channel.send("", listOf(embed)).setActionRow(
-            Button.success("file_notice_of_departure", translation.buttons.textNoticeOfDepartureFile).withEmoji(Emoji.fromFormatted("⏰"))
+            Button.success("notice_of_departure_file", translation.buttons.textNoticeOfDepartureFile).withEmoji(Emoji.fromFormatted("⏰"))
         ).queue()
 
         event.reply("Created notice of departure template").setEphemeral(true).queue()
