@@ -37,6 +37,7 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
     }
 
     private suspend fun checkerTask() {
+        val notices = NoticeOfDepartureTable().retrieveSerial()
         logger.info("Starting notice of departure checker, processing units starting...")
         val idList = NoticeOfDepartureTable().retrieveAllIds()
         var redundantNotices = 0
@@ -58,6 +59,6 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
             }
         }
 
-        logger.info("$redundantNotices out of ${NoticeOfDepartureTable().retrieveSerial()} notices were found to be redundant, checker ending process...")
+        logger.info("$redundantNotices out of $notices notices were found to be redundant, checker ending process...")
     }
 }
