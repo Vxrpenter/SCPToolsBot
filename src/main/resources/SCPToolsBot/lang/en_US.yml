@@ -220,9 +220,11 @@ STATUS:
   EMBED_PLAYERLIST_COULDNT_FETCH: "&red&Could not correctly load playerlist"
   EMBED_PLAYERLIST_PLAYER: "\n&reset&&bold&%nickname%&reset&"
 
-  MESSAGE_STATUS_EMPTY: "There is no Statusbot running"
-  MESSAGE_STATUS_DEACTIVATED: "Deactivated maintenance mode for server"
-  MESSAGE_STATUS_ACTIVATED: "Switched server to maintenance mode"
+  EMBED_STATUS_ACTIVATED_TITLE: "Activated maintenance mode"
+  EMBED_STATUS_ACTIVATED_BODY: "The maintenance mode for the server: %server% has been activated."
+
+  EMBED_STATUS_DEACTIVATED_TITLE: "Deactivated maintenance mode"
+  EMBED_STATUS_DEACTIVATED_BODY: "The maintenance mode for the server: %server% has been deactivated."
 
 PLAYER:
   EMBED_STATISTICS_BODY: "
