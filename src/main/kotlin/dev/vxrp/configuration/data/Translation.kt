@@ -243,13 +243,17 @@ data class TranslationStatus(
     val embedPlayerlistCouldntFetch: String,
     @SerialName("EMBED_PLAYERLIST_PLAYER")
     val embedPlayerlistPlayer: String,
-    @SerialName("MESSAGE_STATUS_EMPTY")
-    val messageStatusEmpty: String,
-    @SerialName("MESSAGE_STATUS_DEACTIVATED")
-    val messageStatusDeactivated: String,
-    @SerialName("MESSAGE_STATUS_ACTIVATED")
-    val messageStatusActivated: String
-)
+
+    @SerialName("EMBED_STATUS_ACTIVATED_TITLE")
+    val embedStatusActivatedTitle: String,
+    @SerialName("EMBED_STATUS_ACTIVATED_BODY")
+    val embedStatusActivatedBody: String,
+
+    @SerialName("EMBED_STATUS_DEACTIVATED_TITLE")
+    val embedStatusDeactivatedTitle: String,
+    @SerialName("EMBED_STATUS_DEACTIVATED_BODY")
+    val embedStatusDeactivatedBody: String
+    )
 
 @Serializable
 data class TranslationPlayer(
