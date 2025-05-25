@@ -220,9 +220,11 @@ STATUS:
   EMBED_PLAYERLIST_COULDNT_FETCH: "&red&Konnte die Spielerliste nicht korrekt laden"
   EMBED_PLAYERLIST_PLAYER: "\n&reset&&bold&%nickname%&reset&"
 
-  MESSAGE_STATUS_EMPTY: "Es läuft kein Statusbot"
-  MESSAGE_STATUS_DEACTIVATED: "Wartungsarbeiten für Server deaktiviert"
-  MESSAGE_STATUS_ACTIVATED: "Wartungsarbeiten für Server aktiviert"
+  EMBED_STATUS_ACTIVATED_TITLE: "Wartungsarbeiten Aktiviert"
+  EMBED_STATUS_ACTIVATED_BODY: "Die Wartungsarbeiten für den Server: %server& wurden aktiviert."
+
+  EMBED_STATUS_DEACTIVATED_TITLE: "Wartungsarbeiten Deaktiviert"
+  EMBED_STATUS_DEACTIVATED_BODY: "Die Wartungsarbeiten für den Server: %server& wurden deaktiviert."
 
 PLAYER:
   EMBED_STATISTICS_BODY: "
