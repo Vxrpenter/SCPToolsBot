@@ -15,6 +15,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalGeneralSubjectTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
+                    requiredLength = 4..100,
                     placeholder = translation.support.modalGeneralSubjectPlaceholder).build()
             ),
             ActionRow.of(
@@ -23,6 +24,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalComplaintExplanationTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
+                    requiredLength = 4..2000,
                     placeholder = translation.support.modalComplaintExplanationPlaceholder).build()
             )
         ).build()
@@ -36,6 +38,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalReportReasonTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
+                    requiredLength = 4..100,
                     placeholder = translation.support.modalReportReasonPlaceholder).build()
             ),
             ActionRow.of(
@@ -44,6 +47,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalReportProofTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
+                    requiredLength = 4..2000,
                     placeholder = translation.support.modalReportProofPlaceholder).build()
             )
         ).build()
@@ -57,6 +61,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalErrorProblemTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
+                    requiredLength = 4..100,
                     placeholder = translation.support.modalErrorProblemPlaceholder).build()
             ),
             ActionRow.of(
@@ -65,6 +70,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalErrorTimesTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
+                    requiredLength = 4..100,
                     placeholder = translation.support.modalErrorTimesPlaceholder).build()
             ),
             ActionRow.of(
@@ -73,6 +79,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalErrorReproduceTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
+                    requiredLength = 4..1000,
                     placeholder = translation.support.modalErrorReproducePlaceholder).build()
             ),
             ActionRow.of(
@@ -81,6 +88,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalErrorAdditionalTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
+                    requiredLength = 4..1000,
                     placeholder = translation.support.modalErrorAdditionalPlaceholder).build()
             )
         ).build()
@@ -94,6 +102,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalUnbanSteamIdTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
+                    requiredLength = 17..17,
                     placeholder = translation.support.modalUnbanSteamIdPlaceholder).build()
             ),
             ActionRow.of(
@@ -102,6 +111,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalUnbanReasonTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
+                    requiredLength = 4..2000,
                     placeholder = translation.support.modalUnbanReasonPlaceholder).build()
             )
         ).build()
@@ -115,6 +125,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalComplaintSubjectTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
+                    requiredLength = 4..100,
                     placeholder = translation.support.modalComplaintSubjectPlaceholder).build()
             ),
             ActionRow.of(
@@ -123,6 +134,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalComplaintExplanationTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
+                    requiredLength = 4..2000,
                     placeholder = translation.support.modalComplaintExplanationPlaceholder).build()
             )
         ).build()
@@ -136,6 +148,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalApplicationNameTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
+                    requiredLength = 4..100,
                     placeholder = translation.support.modalApplicationNamePlaceholder).build()
             ),
             ActionRow.of(
@@ -144,6 +157,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalApplicationAgeTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
+                    requiredLength = 4..100,
                     placeholder = translation.support.modalApplicationAgePlaceholder).build()
             ),
             ActionRow.of(
@@ -152,6 +166,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalApplicationPlaytimeTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
+                    requiredLength = 4..100,
                     placeholder = translation.support.modalApplicationPlaytimePlaceholder).build()
             ),
             ActionRow.of(
@@ -160,6 +175,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalApplicationReasonsOfApplicationTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
+                    requiredLength = 4..1000,
                     placeholder = translation.support.modalApplicationReasonsOfApplicationPlaceholder).build()
             ),
             ActionRow.of(
@@ -168,6 +184,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalApplicationSkillsTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
+                    requiredLength = 4..1000,
                     placeholder = translation.support.modalApplicationSkillsPlaceholder).build()
             ),
         ).build()
