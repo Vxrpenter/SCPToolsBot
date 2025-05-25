@@ -49,8 +49,11 @@ class RegularsManager(val api: JDA, val config: Config, val translation: Transla
     }
 
     fun spinUpChecker() {
-        if (!config.settings.regulars.active) return
+        if (!config.settings.regulars.active || RegularsTable().retrieveSerial() == 0L) return
 
-        Timer().runWithTimer(2.hours, regularsScope) { RegularsCheckerHandler(api, config, translation).checkerTask() }
+        Timer().runWithTimer(
+            2.hours,
+            regularsScope
+        ) { RegularsCheckerHandler(api, config, translation).checkerTask() }
     }
 }
