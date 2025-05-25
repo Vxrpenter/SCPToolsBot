@@ -46,6 +46,12 @@ data class TranslationPermissions(
     @SerialName("EMBED_COULD_NOT_SEND_MODAL_BODY")
     val embedCouldNotSendModalBody: String,
 
+    @SerialName("EMBED_COULD_NOT_SEND_COMMAND_TITLE")
+    val embedCouldNotSendCommandTitle: String,
+    @SerialName("EMBED_COULD_NOT_SEND_COMMAND_BODY")
+    val embedCouldNotSendCommandBody: String,
+
+
     @SerialName("EMBED_COULD_NOT_SEND_TEMPLATE_TITLE")
     val embedCouldNotSendTemplateTitle: String,
     @SerialName("EMBED_COULD_NOT_SEND_TEMPLATE_BODY")
