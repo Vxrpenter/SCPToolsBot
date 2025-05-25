@@ -10,11 +10,8 @@ import dev.vxrp.util.coroutines.noticeOfDepartureScope
 import dev.vxrp.util.duration.DurationParser
 import dev.vxrp.util.duration.enums.DurationType
 import net.dv8tion.jda.api.JDA
-import org.slf4j.LoggerFactory
 
 class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation: Translation) {
-    private val logger = LoggerFactory.getLogger(NoticeOfDepartureManager::class.java)
-
     suspend fun createNotice(reason: String, handler: String, userId: String, date: String) {
         NoticeOfDepartureMessageHandler(api, config, translation).sendNoticeMessage(reason, handler, userId, date)
     }
