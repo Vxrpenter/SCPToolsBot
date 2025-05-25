@@ -6,12 +6,29 @@ import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.JDA
+import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.User
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
+import net.dv8tion.jda.api.interactions.components.buttons.Button
 import org.slf4j.LoggerFactory
 
 class VerifyMessageHandler(val api: JDA, val config: Config, val translation: Translation) {
     private val logger = LoggerFactory.getLogger(VerifyMessageHandler::class.java)
+
+    fun sendTemplate(channel: TextChannel, guild: Guild) {
+        val embed = Embed {
+            thumbnail = guild.iconUrl
+            title = ColorTool().useCustomColorCodes(translation.verify.embedTemplateTitle)
+            description = ColorTool().useCustomColorCodes(translation.verify.embedTemplateBody)
+        }
+
+        channel.send("", listOf(embed)).setActionRow(
+            Button.link(config.settings.verify.oauthLink, translation.buttons.textVerifyVerify),
+            Button.secondary("verify_show_data", translation.buttons.textVerifyShowData),
+            Button.danger("verify_delete", translation.buttons.textVerifyDelete)
+        ).queue()
+    }
 
     fun sendVerificationMessage(user: User) {
         val embed = Embed {

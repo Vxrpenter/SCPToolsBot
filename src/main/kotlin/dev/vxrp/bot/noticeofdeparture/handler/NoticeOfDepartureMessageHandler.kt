@@ -19,6 +19,17 @@ import java.time.format.DateTimeFormatter
 class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val translation: Translation) {
     private val logger = LoggerFactory.getLogger(NoticeOfDepartureMessageHandler::class.java)
 
+    fun sendTemplate(channel: TextChannel) {
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedTemplateTitle)
+            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedTemplateBody)
+        }
+
+        channel.send("", listOf(embed)).setActionRow(
+            Button.success("notice_of_departure_file", translation.buttons.textNoticeOfDepartureFile).withEmoji(Emoji.fromFormatted("⏰"))
+        ).queue()
+    }
+
     fun sendDecisionMessage(userId: String, date: String, reason: String) {
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
         val currentDate = LocalDate.now().format(formatter)
