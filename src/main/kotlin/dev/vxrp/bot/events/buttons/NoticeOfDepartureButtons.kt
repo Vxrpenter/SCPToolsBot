@@ -11,7 +11,7 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 
 class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {
     suspend fun init() {
-        if (event.button.id?.startsWith("file_notice_of_departure") == true) {
+        if (event.button.id?.startsWith("notice_of_departure_file") == true) {
             event.replyModal(NoticeOfDepartureTemplateModals(translation).generalModal()).queue()
         }
 
