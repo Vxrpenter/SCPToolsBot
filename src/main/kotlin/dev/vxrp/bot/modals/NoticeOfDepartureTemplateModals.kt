@@ -16,6 +16,7 @@ class NoticeOfDepartureTemplateModals(val translation: Translation) {
                     label = translation.noticeOfDeparture.modalTimeTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
+                    requiredLength = 10..10,
                     placeholder = translation.noticeOfDeparture.modalTimePlaceHolder).build()
             ),
             ActionRow.of(
@@ -24,6 +25,7 @@ class NoticeOfDepartureTemplateModals(val translation: Translation) {
                     label = translation.noticeOfDeparture.modalExplanationTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
+                    requiredLength = 4..2000,
                     placeholder = translation.noticeOfDeparture.modalExplanationPlaceHolder).build()
             )
         ).build()
@@ -37,6 +39,7 @@ class NoticeOfDepartureTemplateModals(val translation: Translation) {
                     label = translation.noticeOfDeparture.modalReasonActionReasonTitle,
                     style = TextInputStyle.PARAGRAPH,
                     required = true,
+                    requiredLength = 4..2000,
                     placeholder = translation.noticeOfDeparture.modalReasonActionPlaceholder).build()
             ),
         ).build()

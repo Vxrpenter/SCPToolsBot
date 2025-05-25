@@ -15,6 +15,7 @@ class ApplicationTemplateModals(val translation: Translation) {
                     label = translation.application.modalChooseCountNumberTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
+                    requiredLength = 1..1000,
                     placeholder = translation.application.modalChooseCountNumberPlaceholder).build()
             )
         ).build()
