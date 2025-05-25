@@ -14,17 +14,11 @@ class DurationParser {
     fun parse(int: Int, durationType: DurationType): Duration {
         return when (durationType) {
             DurationType.NANOSECONDS -> int.nanoseconds
-
             DurationType.MICROSECONDS -> int.microseconds
-
             DurationType.MILLISECONDS -> int.milliseconds
-
             DurationType.SECONDS -> int.seconds
-
             DurationType.MINUTES -> int.minutes
-
             DurationType.HOURS -> int.hours
-
             DurationType.DAYS -> int.days
         }
     }
