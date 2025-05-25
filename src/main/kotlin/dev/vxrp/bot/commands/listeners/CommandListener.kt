@@ -1,11 +1,14 @@
 package dev.vxrp.bot.commands.listeners
 
 import dev.minn.jda.ktx.events.listener
+import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.commands.handler.bot.application.ApplicationCommand
 import dev.vxrp.bot.commands.handler.bot.help.HelpCommand
 import dev.vxrp.bot.commands.handler.bot.settings.SettingsCommand
 import dev.vxrp.bot.commands.handler.bot.template.TemplateCommandHandler
 import dev.vxrp.bot.commands.handler.bot.verify.VerifyCommand
+import dev.vxrp.bot.permissions.PermissionManager
+import dev.vxrp.bot.permissions.enums.StatusMessageType
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.launch.LaunchOptionManager
@@ -39,37 +42,59 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
         when (inherit) {
             "commands.help.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.HELP_COMMAND).engage) helpCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.HELP_COMMAND).engage) {
+                    helpCommand(event)
+                }
                 return true
             }
 
             "commands.template.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.TEMPLATE_COMMAND).engage) templateCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.TEMPLATE_COMMAND).engage) {
+                    templateCommand(event)
+                }
                 return true
             }
 
             "commands.verify.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.VERIFY_COMMAND).engage) verifyCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.VERIFY_COMMAND).engage) {
+                    PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.verify.active, config.settings.webserver.active)?.let { embed ->
+                        event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                    } ?: verifyCommand(event)
+                }
                 return true
             }
 
             "commands.notice_of_departure.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.NOTICE_OF_DEPARTURE_COMMAND).engage) noticeOfDepartureCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.NOTICE_OF_DEPARTURE_COMMAND).engage) {
+                    PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.noticeOfDeparture.active)?.let { embed ->
+                        event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                    } ?: noticeOfDepartureCommand(event)
+                }
                 return true
             }
 
             "commands.regulars.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.REGULARS_COMMAND).engage) regularsCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.REGULARS_COMMAND).engage) {
+                    PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.regulars.active, config.settings.verify.active, config.settings.webserver.active)?.let { embed ->
+                        event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                    } ?: regularsCommand(event)
+                }
                 return true
             }
 
             "commands.settings.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.SETTINGS_COMMAND).engage) settingsCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.SETTINGS_COMMAND).engage) {
+                    settingsCommand(event)
+                }
                 return true
             }
 
             "commands.application.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.APPLICATION_COMMAND).engage) applicationCommand(event)
+                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.APPLICATION_COMMAND).engage) {
+                    PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.ticket.settings.applicationMessageChannel != "")?.let { embed ->
+                        event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                    } ?: applicationCommand(event)
+                }
                 return true
             }
         }
