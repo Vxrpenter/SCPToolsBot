@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Updates(
     val version: String,
+    val force: Boolean,
     val settings: UpdatesSettings,
     val configurationUpdate: UpdatesConfigurationUpdate,
     val translationUpdates: UpdatesTranslationUpdates,
