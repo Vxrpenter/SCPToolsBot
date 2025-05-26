@@ -114,7 +114,48 @@ class UpdateHandler() {
             val latestPreRelease = tagArray.last().ref.replace("refs/tags/v.", "").replace("refs/tags/v", "")
             val latestRelease = tagArray.first().ref.replace("refs/tags/v.", "").replace("refs/tags/v", "")
             var tag = latestRelease
-            if (latestPreRelease.split("-").first() > latestRelease) tag = latestPreRelease
+            var tagNumber = latestRelease
+            if (latestPreRelease.split("-").first() > latestRelease) {
+                var releaseTag = ""
+                val alphaList = mutableListOf<String>()
+                val betaList = mutableListOf<String>()
+
+                if (latestPreRelease.contains("alpha")) {
+                    for (singleTag in tagArray) {
+                        val currentTag = singleTag.ref.replace("refs/tags/v.", "").replace("refs/tags/v", "")
+                        if (currentTag.contains("alpha")) alphaList.add(currentTag)
+                    }
+
+                    var highestCount = 0
+                    for (singleTag in alphaList) {
+                        val currentNumber = singleTag.split("-").last().replace("alpha", "").toInt()
+                        if (currentNumber > highestCount) {
+                            highestCount = currentNumber
+                            releaseTag = singleTag
+                            tagNumber = singleTag.split("-").first()
+                        }
+                    }
+                }
+
+                if (latestPreRelease.contains("beta")) {
+                    for (singleTag in tagArray) {
+                        val currentTag = singleTag.ref.replace("refs/tags/v.", "").replace("refs/tags/v", "")
+                        if (currentTag.contains("beta")) betaList.add(currentTag)
+                    }
+
+                    var highestCount = 0
+                    for (singleTag in alphaList) {
+                        val currentNumber = singleTag.split("-").last().replace("beta", "").toInt()
+                        if (currentNumber > highestCount) {
+                            highestCount = currentNumber
+                            releaseTag = singleTag
+                            tagNumber = singleTag.split("-").first()
+                        }
+                    }
+                }
+
+                tag = releaseTag
+            }
 
             val downloadUrl = "https://github.com/Vxrpenter/SCPToolsBot/releases/tag/v$tag"
             val properties = Properties()
@@ -125,9 +166,9 @@ class UpdateHandler() {
             }
 
             if (log) logger.info("Checking for latest version...")
-            if (properties.getProperty("version") < tag) {
-                if (config.settings.updates.ignoreBeta && tag.contains("beta", true)) return tag
-                if (config.settings.updates.ignoreAlpha && tag.contains("alpha", true)) return tag
+            if (properties.getProperty("version") != tag && properties.getProperty("version") < tagNumber) {
+                //if (config.settings.updates.ignoreBeta && tag.contains("beta", true)) return tag
+                //if (config.settings.updates.ignoreAlpha && tag.contains("alpha", true)) return tag
 
                 if (log) logger.warn("A new version has been found, you can download it from {}", ColorTool().apply(DCColor.LIGHT_BLUE, downloadUrl))
                 return tag
