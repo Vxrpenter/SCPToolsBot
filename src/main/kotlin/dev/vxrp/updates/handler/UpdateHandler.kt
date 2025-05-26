@@ -110,7 +110,7 @@ class UpdateHandler() {
 
             val json = Json { ignoreUnknownKeys = true }
             val tagArray = json.decodeFromString<List<Tag>>(response.body?.string()!!)
-            val tag = tagArray.first().ref.replace("refs/tags/v.", "")
+            val tag = tagArray.first().ref.replace("refs/tags/v", "")
             val downloadUrl = tagArray.first().url
 
             val properties = Properties()
