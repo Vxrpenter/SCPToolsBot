@@ -1,5 +1,5 @@
 <!--
-  That you for creating a PR. Please mark all required information with an 'x' e.g. '- [x]'
+  Thank you for creating a PR. Please mark all required information with an 'x' e.g. '- [x]'
   If you have any questions, join the dc.
 
   NOTICE: If you are creating a PR for fixing an issue, please reference it. If it does not
