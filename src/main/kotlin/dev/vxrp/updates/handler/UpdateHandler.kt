@@ -167,8 +167,8 @@ class UpdateHandler() {
 
             if (log) logger.info("Checking for latest version...")
             if (properties.getProperty("version") != tag && properties.getProperty("version") < tagNumber) {
-                //if (config.settings.updates.ignoreBeta && tag.contains("beta", true)) return tag
-                //if (config.settings.updates.ignoreAlpha && tag.contains("alpha", true)) return tag
+                if (config.settings.updates.ignoreBeta && tag.contains("beta", true)) return tag
+                if (config.settings.updates.ignoreAlpha && tag.contains("alpha", true)) return tag
 
                 if (log) logger.warn("A new version has been found, you can download it from {}", ColorTool().apply(DCColor.LIGHT_BLUE, downloadUrl))
                 return tag
