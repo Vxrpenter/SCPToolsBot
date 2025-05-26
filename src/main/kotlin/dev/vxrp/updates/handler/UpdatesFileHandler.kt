@@ -29,7 +29,11 @@ class UpdatesFileHandler {
         val content = queryNew()
         val currentContent = queryOld(dir)
 
-        val newContent = Json.encodeToString<Updates>(Updates(
+        val jsonEncoder = Json {
+            prettyPrint = true
+        }
+
+        val newContent = jsonEncoder.encodeToString<Updates>(Updates(
             content.version,
             currentContent.settings,
             content.configurationUpdate,
