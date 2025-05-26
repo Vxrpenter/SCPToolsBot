@@ -14,13 +14,13 @@ data class Updates(
 
 @Serializable
 data class UpdatesSettings(
-    var regenerateConfig: Boolean,
-    var regenerateStatusSettings: Boolean,
-    var regenerateTicketSettings: Boolean,
-    var regenerateCommands: Boolean,
-    var regenerateLaunchConfiguration: Boolean,
+    val regenerateConfig: Boolean,
+    val regenerateStatusSettings: Boolean,
+    val regenerateTicketSettings: Boolean,
+    val regenerateCommands: Boolean,
+    val regenerateLaunchConfiguration: Boolean,
 
-    var regenerateTranslations: Boolean
+    val regenerateTranslations: Boolean
 )
 
 @Serializable
