@@ -10,7 +10,7 @@ class UpdateHandler(val old: Updates, val new: Updates) {
     private val dir = System.getProperty("user.dir")
 
     fun checkUpdated() {
-        if (old.version == new.version) return
+        if (old.version == new.version) if (!new.force) return
 
         logger.info("We have detected that you have installed an update for ScpTools. The bot will now run an update check to see if your configurations are still up to date...")
 

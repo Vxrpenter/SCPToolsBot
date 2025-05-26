@@ -35,6 +35,7 @@ class UpdatesFileHandler {
 
         val newContent = jsonEncoder.encodeToString<Updates>(Updates(
             content.version,
+            false,
             currentContent.settings,
             content.configurationUpdate,
             content.translationUpdates,
