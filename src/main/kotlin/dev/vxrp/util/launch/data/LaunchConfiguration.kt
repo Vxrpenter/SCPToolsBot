@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class LaunchConfiguration(
-    @SerialName("launch_options")
     val options: LaunchConfigurationOptions,
     @SerialName("launch_order")
     val order: List<LaunchConfigurationOrder>,
@@ -21,8 +20,6 @@ data class LaunchConfigurationOptions(
 data class LaunchConfigurationOrder(
     val id: String,
     val engage: Boolean,
-    @SerialName("separate_thread")
-    val separateThread: Boolean,
     val sections: List<LaunchConfigurationSection>? = null
 )
 
@@ -30,6 +27,5 @@ data class LaunchConfigurationOrder(
 data class LaunchConfigurationSection(
     val id: String,
     val engage: Boolean,
-    @SerialName("log_action")
     val logAction: Boolean
 )

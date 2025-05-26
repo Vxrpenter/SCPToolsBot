@@ -49,7 +49,7 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
 
     fun checkSectionOption(type: LaunchOptionType, sectionType: LaunchOptionSectionType): LaunchArguments {
         val optionCheck = checkLaunchOption(type)
-        if (!optionCheck.engage || optionCheck.broken) return LaunchArguments(false, engage = false, separateThread = false)
+        if (!optionCheck.engage || optionCheck.broken) return LaunchArguments(false, engage = false)
 
         var currentLaunchOption: LaunchConfigurationOrder? = null
 
@@ -60,28 +60,28 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
         for (sectionOption in currentLaunchOption!!.sections!!) {
             if (sectionOption.id.split(":")[1] == sectionType.toString()) {
                 if (sectionOption.logAction) logger.debug("Launching section {} of {}", sectionType, type)
-                return LaunchArguments(broken = false, engage = true, separateThread = false)
+                return LaunchArguments(broken = false, engage = true)
             }
         }
 
         if (!config.extra.launchConfiguration.options.ignoreBrokenEntries) {
             logger.error("Could not find $sectionType section in $type missing entry. This could be a result of a broken launch configuration. Delete current configuration for it to be regenerated")
-            return LaunchArguments(broken = true, engage = false, separateThread = false)
+            return LaunchArguments(broken = true, engage = false)
         }
 
-        return LaunchArguments(false, engage = false, separateThread = false)
+        return LaunchArguments(false, engage = false)
     }
 
     fun checkLaunchOption(type: LaunchOptionType): LaunchArguments {
         for (launchOption in config.extra.launchConfiguration.order) {
-            if (launchOption.id.split(":")[1] == type.toString()) return LaunchArguments(false, launchOption.engage, launchOption.separateThread)
+            if (launchOption.id.split(":")[1] == type.toString()) return LaunchArguments(false, launchOption.engage)
         }
 
         if (!config.extra.launchConfiguration.options.ignoreBrokenEntries) {
             logger.error("Could not find $type, missing entry. This could be a result of a broken launch configuration. Delete current configuration for it to be regenerated")
-            return LaunchArguments(broken = true, engage = false, separateThread = false)
+            return LaunchArguments(broken = true, engage = false)
         }
 
-        return LaunchArguments(broken = false, engage = false, separateThread = false)
+        return LaunchArguments(broken = false, engage = false)
     }
 }

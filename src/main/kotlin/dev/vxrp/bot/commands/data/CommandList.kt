@@ -6,7 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CommandList(
     val commands: List<CustomCommand>,
-    @SerialName("status_commands")
     val statusCommands: List<CustomCommand>,
 )
 
@@ -16,7 +15,6 @@ data class CustomCommand(
     val inherit: String,
     val name: String,
     val description: String,
-    @SerialName("default_permissions")
     val defaultPermissions: List<String>? = null,
     val options: List<Options>? = null,
     val subcommands: List<Subcommands>? = null,

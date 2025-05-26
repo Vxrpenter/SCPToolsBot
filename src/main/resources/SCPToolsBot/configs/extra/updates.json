@@ -18,7 +18,7 @@
     "ticketSettings": false,
     "extra": {
       "commands": true,
-      "launchConfiguration": false
+      "launchConfiguration": true
     }
   },
 
