@@ -13,7 +13,7 @@ import okhttp3.Request
 import org.slf4j.LoggerFactory
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
-import java.util.Properties
+import java.util.*
 import kotlin.io.path.Path
 
 class UpdateHandler() {

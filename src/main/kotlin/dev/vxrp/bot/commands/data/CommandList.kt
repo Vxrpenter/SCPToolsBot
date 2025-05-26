@@ -1,6 +1,5 @@
 package dev.vxrp.bot.commands.data
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable

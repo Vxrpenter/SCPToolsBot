@@ -1,6 +1,5 @@
 package dev.vxrp.util.launch.data
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
