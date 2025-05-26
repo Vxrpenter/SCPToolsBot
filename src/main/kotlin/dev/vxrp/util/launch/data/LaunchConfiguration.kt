@@ -6,13 +6,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class LaunchConfiguration(
     val options: LaunchConfigurationOptions,
-    @SerialName("launch_order")
     val order: List<LaunchConfigurationOrder>,
 )
 
 @Serializable
 data class LaunchConfigurationOptions(
-    @SerialName("ignore_broken_entries")
     val ignoreBrokenEntries: Boolean
 )
 
