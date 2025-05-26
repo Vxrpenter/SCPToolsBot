@@ -110,9 +110,13 @@ class UpdateHandler() {
 
             val json = Json { ignoreUnknownKeys = true }
             val tagArray = json.decodeFromString<List<Tag>>(response.body?.string()!!)
-            val tag = tagArray.first().ref.replace("refs/tags/v", "")
-            val downloadUrl = tagArray.first().url
 
+            val latestPreRelease = tagArray.last().ref.replace("refs/tags/v.", "").replace("refs/tags/v", "")
+            val latestRelease = tagArray.first().ref.replace("refs/tags/v.", "").replace("refs/tags/v", "")
+            var tag = latestRelease
+            if (latestPreRelease.split("-").first() > latestRelease) tag = latestPreRelease
+
+            val downloadUrl = "https://github.com/Vxrpenter/SCPToolsBot/releases/tag/v$tag"
             val properties = Properties()
 
             UpdateManager::class.java.getResourceAsStream("/dev/vxrp/version.properties").use {
