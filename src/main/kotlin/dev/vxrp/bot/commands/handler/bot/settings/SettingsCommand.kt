@@ -4,7 +4,7 @@ import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
-import dev.vxrp.updates.Updates
+import dev.vxrp.updates.handler.UpdateHandler
 import dev.vxrp.util.color.ColorTool
 import io.github.vxrpenter.cedmod.Cedmod
 import io.github.vxrpenter.cedmod.exceptions.CallFailureException
@@ -84,7 +84,7 @@ class SettingsCommand(val config: Config, val translation: Translation) {
                     translation.settings.embedSettingsFieldBuildValue
                         .replace(
                             "%build%",
-                            Updates().checkForUpdatesByTag(config, "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags", false)
+                            UpdateHandler().checkForUpdatesByTag(config, "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags", false)
                         ).trimIndent()
                 )
             }

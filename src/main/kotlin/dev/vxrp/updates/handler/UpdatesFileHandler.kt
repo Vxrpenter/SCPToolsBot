@@ -21,6 +21,7 @@ class UpdatesFileHandler {
         if (content != null) {
             currentFile.appendBytes(content.readBytes())
         }
+        UpdateHandler(UpdatesFileHandler().queryOld(dir), UpdatesFileHandler().queryNew()).checkUpdated(true)
     }
 
     fun override(dir: String) {
