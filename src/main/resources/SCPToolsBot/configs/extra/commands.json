@@ -5,14 +5,14 @@
       "inherit": "commands.help.default",
       "name": "help",
       "description": "Command annotations and explanations",
-      "default_permissions": ["ADMINISTRATOR"]
+      "defaultPermissions": ["ADMINISTRATOR"]
     },
     {
       "active": true,
       "inherit": "commands.template.default",
       "name": "template",
       "description": "Command for pasting certain templates",
-      "default_permissions": ["ADMINISTRATOR"],
+      "defaultPermissions": ["ADMINISTRATOR"],
       "options": [
         {
           "type": "STRING",
@@ -45,35 +45,35 @@
       "inherit": "commands.verify.default",
       "name": "verify",
       "description": "Command used for member verification",
-      "default_permissions": []
+      "defaultPermissions": []
     },
     {
       "active": true,
       "inherit": "commands.notice_of_departure.default",
       "name": "notice_of_departure",
       "description": "View information on notices and change data",
-      "default_permissions": ["ADMINISTRATOR"]
+      "defaultPermissions": ["ADMINISTRATOR"]
     },
     {
       "active": true,
       "inherit": "commands.regulars.default",
       "name": "regulars",
       "description": "Use for configuring regulars and modifying saved information",
-      "default_permissions": ["ADMINISTRATOR"]
+      "defaultPermissions": ["ADMINISTRATOR"]
     },
     {
       "active": true,
       "inherit": "commands.settings.default",
       "name": "settings",
       "description": "Bot settings/configurations",
-      "default_permissions": ["ADMINISTRATOR"]
+      "defaultPermissions": ["ADMINISTRATOR"]
     },
     {
       "active": true,
       "inherit": "commands.application.default",
       "name": "application",
       "description": "Command for managing applications",
-      "default_permissions": ["VIEW_AUDIT_LOGS"],
+      "defaultPermissions": ["VIEW_AUDIT_LOGS"],
       "options": [
         {
           "type": "STRING",
@@ -94,13 +94,13 @@
       ]
     }
   ],
-  "status_commands": [
+  "statusCommands": [
     {
       "active": true,
       "inherit": "status_commands.status.default",
       "name": "status",
       "description": "Used for customizing status",
-      "default_permissions": ["ADMINISTRATOR"],
+      "defaultPermissions": ["ADMINISTRATOR"],
       "options": [
         {
           "type": "STRING",
@@ -133,7 +133,7 @@
       "inherit": "status_commands.template.default",
       "name": "template",
       "description": "Command for pasting certain templates",
-      "default_permissions": ["ADMINISTRATOR"],
+      "defaultPermissions": ["ADMINISTRATOR"],
       "options": [
         {
           "type": "STRING",
