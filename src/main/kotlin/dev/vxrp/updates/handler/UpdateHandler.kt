@@ -1,16 +1,28 @@
 package dev.vxrp.updates.handler
 
+import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.storage.ConfigPaths
+import dev.vxrp.updates.UpdateManager
+import dev.vxrp.updates.data.Tag
 import dev.vxrp.updates.data.Updates
+import dev.vxrp.util.color.ColorTool
+import dev.vxrp.util.color.enums.DCColor
+import kotlinx.serialization.json.Json
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.slf4j.LoggerFactory
+import java.io.InputStreamReader
+import java.nio.charset.StandardCharsets
+import java.util.Properties
 import kotlin.io.path.Path
 
-class UpdateHandler(val old: Updates, val new: Updates) {
+class UpdateHandler() {
     private val logger = LoggerFactory.getLogger(UpdateHandler::class.java)
+    private val client: OkHttpClient = OkHttpClient()
     private val dir = System.getProperty("user.dir")
 
-    fun checkUpdated() {
-        if (old.version == new.version) return
+    fun checkUpdated(old: Updates, new: Updates, force: Boolean) {
+        if (old.version == new.version) if (!force) return
 
         logger.info("We have detected that you have installed an update for ScpTools. The bot will now run an update check to see if your configurations are still up to date...")
 
@@ -86,5 +98,39 @@ class UpdateHandler(val old: Updates, val new: Updates) {
         }
 
         if (new.additionalInformation != "") logger.warn("Additional Information: ${new.additionalInformation}")
+    }
+
+    fun checkForUpdatesByTag(config: Config, url: String, log: Boolean = true): String {
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        client.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) return "none"
+
+            val json = Json { ignoreUnknownKeys = true }
+            val tagArray = json.decodeFromString<List<Tag>>(response.body?.string()!!)
+            val tag = tagArray.first().ref.replace("refs/tags/v.", "")
+            val downloadUrl = tagArray.first().url
+
+            val properties = Properties()
+
+            UpdateManager::class.java.getResourceAsStream("/dev/vxrp/version.properties").use {
+                    versionPropertiesStream -> checkNotNull(versionPropertiesStream) { "Version properties file does not exist" }
+                properties.load(InputStreamReader(versionPropertiesStream, StandardCharsets.UTF_8))
+            }
+
+            if (log) logger.info("Checking for latest version...")
+            if (properties.getProperty("version") < tag) {
+                if (config.settings.updates.ignoreBeta && tag.contains("beta", true)) return tag
+                if (config.settings.updates.ignoreAlpha && tag.contains("alpha", true)) return tag
+
+                if (log) logger.warn("A new version has been found, you can download it from {}", ColorTool().apply(DCColor.LIGHT_BLUE, downloadUrl))
+                return tag
+            } else {
+                if (log) logger.info("Running latest build")
+                return tag
+            }
+        }
     }
 }
