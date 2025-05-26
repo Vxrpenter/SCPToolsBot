@@ -1,6 +1,6 @@
 {
   "options": {
-    "ignore_broken_entries": false
+    "ignoreBrokenEntries": false
   },
 
   "order": [
@@ -18,7 +18,7 @@
     },
     {
       "id": "main:COMMAND_LISTENER",
-      "engage": true
+      "engage": true,
       "sections": [
         {
           "id": "section:HELP_COMMAND",
@@ -64,7 +64,7 @@
     },
     {
       "id": "main:STATUS_COMMAND_LISTENER",
-      "engage": true
+      "engage": true,
       "sections": [
         {
           "id": "section:STATUS_COMMAND",
@@ -85,7 +85,7 @@
     },
     {
       "id": "main:BUTTON_LISTENER",
-      "engage": true
+      "engage": true,
       "sections": [
         {
           "id": "section:HELP_BUTTONS",
@@ -121,7 +121,7 @@
     },
     {
       "id": "main:ENTITY_SELECT_LISTENER",
-      "engage": true
+      "engage": true,
       "sections": [
         {
           "id": "section:TICKET_ENTITY_SELECT_MENUS",
@@ -132,7 +132,7 @@
     },
     {
       "id": "main:MODAL_LISTENER",
-      "engage": true
+      "engage": true,
       "sections": [
         {
           "id": "section:TICKET_MODALS",
@@ -153,7 +153,7 @@
     },
     {
       "id": "main:STRING_SELECT_LISTENER",
-      "engage": true
+      "engage": true,
       "sections": [
         {
           "id": "section:TICKET_STRING_SELECT_MENUS",
