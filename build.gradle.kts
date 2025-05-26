@@ -9,7 +9,7 @@ plugins {
 
 application.mainClass = "dev.vxrp.MainKt"
 group = "dev.vxrp"
-version= "1.1.0-alpha7"
+version= "1.1.0-beta1"
 
 kotlin {
     jvmToolchain(22)
