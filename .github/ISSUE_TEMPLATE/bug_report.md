@@ -26,7 +26,8 @@ If applicable, add screenshots to help explain your problem.
 **Desktop (please complete the following information):**
  - OS: [e.g. iOS]
 - Installation: [e.g. Source, Docker, Installer, Manual]
- - Version [e.g. 22]
+ - Bot Version [e.g. 1.1.0]
+ - Java Version [e.g. 22]
 
 **Additional context**
 Add any other context about the problem here.
