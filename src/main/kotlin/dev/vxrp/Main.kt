@@ -22,7 +22,7 @@ fun main() {
     configurationManager.initializeDatabase(config)
     configurationManager.setLoggingLevel(config)
 
-    UpdateHandler().checkForUpdatesByTag(config, "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags")
+    UpdateManager().spinUpChecker(config)
     ScpToolsBot(config, translation)
 }
 
