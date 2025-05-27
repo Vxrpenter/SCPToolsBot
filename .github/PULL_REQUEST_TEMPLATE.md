@@ -5,11 +5,9 @@
   NOTICE: If you are creating a PR for fixing an issue, please reference it. If it does not
   exist, please create it and then follow through with the PR.
 -->
-
 ## Etiquette
 - [ ] Did you check the contribution guidelines?
 - [ ] Does this request not already exist in another form?
-
 <!--
   What exactly did you change?
 -->
@@ -19,7 +17,6 @@
 - [ ] Behavior Change
 - [ ] Configuration
 - [ ] Other: ____
-
 <!--
   How thoroughly did you test your changes?
 -->
@@ -28,7 +25,6 @@
 - [ ] Mostly
 - [ ] Partly
 - [ ] Nothing
-
 <!--
   Describe all of your changes and what they purpose is. If you added a new feature, explain
   why you want it implemented and how to use it.
