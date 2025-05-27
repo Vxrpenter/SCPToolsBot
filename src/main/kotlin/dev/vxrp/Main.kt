@@ -4,7 +4,6 @@ import dev.vxrp.configuration.ConfigurationManager
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.updates.UpdateManager
-import dev.vxrp.updates.handler.UpdateHandler
 import dev.vxrp.util.launch.LaunchOptionManager
 import org.slf4j.LoggerFactory
 
@@ -22,7 +21,7 @@ fun main() {
     configurationManager.initializeDatabase(config)
     configurationManager.setLoggingLevel(config)
 
-    UpdateHandler().checkForUpdatesByTag(config, "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags")
+    UpdateManager().spinUpChecker(config)
     ScpToolsBot(config, translation)
 }
 

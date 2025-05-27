@@ -101,63 +101,36 @@ class UpdateHandler() {
     }
 
     fun checkForUpdatesByTag(config: Config, url: String, log: Boolean = true): String {
-        val request = Request.Builder()
-            .url(url)
-            .build()
+        val request = Request.Builder().url(url).build()
 
         client.newCall(request).execute().use { response ->
-            if (!response.isSuccessful) return "none"
+            if (!response.isSuccessful) {
+                logger.warn("Could not fetch newest version from GitHub")
+                return "None"
+            }
 
             val json = Json { ignoreUnknownKeys = true }
             val tagArray = json.decodeFromString<List<Tag>>(response.body?.string()!!)
-
             val latestPreRelease = tagArray.last().ref.replace("refs/tags/v.", "").replace("refs/tags/v", "")
             val latestRelease = tagArray.first().ref.replace("refs/tags/v.", "").replace("refs/tags/v", "")
-            var tag = latestRelease
-            var tagNumber = latestRelease
-            if (latestPreRelease.split("-").first() > latestRelease) {
-                var releaseTag = ""
-                val alphaList = mutableListOf<String>()
-                val betaList = mutableListOf<String>()
 
-                if (latestPreRelease.contains("alpha")) {
-                    for (singleTag in tagArray) {
-                        val currentTag = singleTag.ref.replace("refs/tags/v.", "").replace("refs/tags/v", "")
-                        if (currentTag.contains("alpha")) alphaList.add(currentTag)
-                    }
+            var fullTag: String
+            var tag: String
+            var preReleaseType = ""
+            var preReleaseNumber = 0
+            if (chooseLatestRelease(latestRelease, latestPreRelease)) {
+                val splitArray = latestPreRelease.split("-")
 
-                    var highestCount = 0
-                    for (singleTag in alphaList) {
-                        val currentNumber = singleTag.split("-").last().replace("alpha", "").toInt()
-                        if (currentNumber > highestCount) {
-                            highestCount = currentNumber
-                            releaseTag = singleTag
-                            tagNumber = singleTag.split("-").first()
-                        }
-                    }
-                }
-
-                if (latestPreRelease.contains("beta")) {
-                    for (singleTag in tagArray) {
-                        val currentTag = singleTag.ref.replace("refs/tags/v.", "").replace("refs/tags/v", "")
-                        if (currentTag.contains("beta")) betaList.add(currentTag)
-                    }
-
-                    var highestCount = 0
-                    for (singleTag in alphaList) {
-                        val currentNumber = singleTag.split("-").last().replace("beta", "").toInt()
-                        if (currentNumber > highestCount) {
-                            highestCount = currentNumber
-                            releaseTag = singleTag
-                            tagNumber = singleTag.split("-").first()
-                        }
-                    }
-                }
-
-                tag = releaseTag
+                fullTag = latestPreRelease
+                tag = splitArray.first()
+                preReleaseNumber = splitArray.last().replace("alpha", "").replace("beta", "").toInt()
+                preReleaseType = splitArray.last().replace(preReleaseNumber.toString(), "")
+            } else {
+                fullTag = latestRelease
+                tag = latestRelease
             }
 
-            val downloadUrl = "https://github.com/Vxrpenter/SCPToolsBot/releases/tag/v$tag"
+            val downloadUrl = "https://github.com/Vxrpenter/SCPToolsBot/releases/tag/v$fullTag"
             val properties = Properties()
 
             UpdateManager::class.java.getResourceAsStream("/dev/vxrp/version.properties").use {
@@ -166,7 +139,16 @@ class UpdateHandler() {
             }
 
             if (log) logger.info("Checking for latest version...")
-            if (properties.getProperty("version") != tag && properties.getProperty("version") < tagNumber) {
+            if (properties.getProperty("version") != fullTag && properties.getProperty("version") <= tag) {
+                if (properties.getProperty("version").contains("alpha") || properties.getProperty("version").contains("beta")) {
+                    val propertiesNumber = properties.getProperty("version").split("-").last().replace("alpha", "").replace("beta", "")
+                    val propertiesPreReleaseType = properties.getProperty("version").split("-").last().replace(propertiesNumber, "")
+
+                    if (propertiesPreReleaseType == "alpha" && preReleaseType != "beta" || propertiesPreReleaseType == "beta" && preReleaseType == "beta") {
+                        if (propertiesNumber.toInt() > preReleaseNumber) return "None"
+                    }
+                }
+
                 if (config.settings.updates.ignoreBeta && tag.contains("beta", true)) return tag
                 if (config.settings.updates.ignoreAlpha && tag.contains("alpha", true)) return tag
 
@@ -177,5 +159,11 @@ class UpdateHandler() {
                 return tag
             }
         }
+    }
+
+    private fun chooseLatestRelease(release: String, preRelease: String): Boolean {
+        val preReleaseSplit = preRelease.split("-").first()
+
+        return preReleaseSplit >= release
     }
 }
