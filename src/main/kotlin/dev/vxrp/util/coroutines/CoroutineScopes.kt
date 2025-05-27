@@ -9,6 +9,10 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import org.slf4j.LoggerFactory
 
+val updatesScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
+    LoggerFactory.getLogger(StatusManager::class.java).error("An error occurred in the update coroutine", exception)
+})
+
 val statusbotScope = CoroutineScope(CoroutineExceptionHandler { _, exception ->
     LoggerFactory.getLogger(StatusManager::class.java).error("An error occurred in the statusbot coroutine", exception)
 })
