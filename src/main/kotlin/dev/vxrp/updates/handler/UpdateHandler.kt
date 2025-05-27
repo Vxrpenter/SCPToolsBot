@@ -139,7 +139,7 @@ class UpdateHandler() {
             }
 
             if (log) logger.info("Checking for latest version...")
-            if (properties.getProperty("version") != fullTag && properties.getProperty("version") <= tag) {
+            if (properties.getProperty("version") != fullTag && properties.getProperty("version").split("-").first() <= tag) {
                 if (properties.getProperty("version").contains("alpha") || properties.getProperty("version").contains("beta")) {
                     val propertiesNumber = properties.getProperty("version").split("-").last().replace("alpha", "").replace("beta", "")
                     val propertiesPreReleaseType = properties.getProperty("version").split("-").last().replace(propertiesNumber, "")
