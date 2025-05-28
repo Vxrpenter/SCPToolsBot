@@ -699,6 +699,9 @@ NOTICE_OF_DEPARTURE:
   EMBED_REVOKATION_SENT_TITLE: "Abmeldung Zurückgezogen"
   EMBED_REVOKATION_SENT_BODY: "Die Abmeldung wird nun zurückgezogen. Der Nutzer wird in kürze darüber benachrichtigt wieso die Abmeldung zurückgezogen wurde"
 
+  EMBED_NOT_FOUND_TITLE: "Abmeldung nicht Gefunden"
+  EMBED_NOT_FOUND_BODY: "Es wurde keine Abmeldung für den von dir angegebenen Nutzer gefunden. Vielleicht wurde sie bereits zurückgezogen/ist abgelaufen."
+
 REGULARS:
 
   EMBED_TEMPLATE_TITLE: "Aktiviere Stammspieler Synchronisierung"
