@@ -55,7 +55,7 @@ class ColorTool {
             .replace("&bold&", bold)
             .replace("&reset&", reset)
             .replace("&underline&", underline)
-            .replace("&filler&", singleFiller.repeat(max(0.0, 140.toDouble()).toInt()))
+            .replace("&filler&", singleFiller.repeat(max(0.0, 144.toDouble()).toInt()))
             .replace("&singleFiller&", singleFiller)
     }
 }
