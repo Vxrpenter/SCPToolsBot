@@ -109,7 +109,6 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
-            event.message?.delete()?.queue()
         }
     }
 }
