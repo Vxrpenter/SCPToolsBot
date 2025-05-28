@@ -87,7 +87,35 @@
       "inherit": "commands.regulars.default",
       "name": "regulars",
       "description": "Use for configuring regulars and modifying saved information",
-      "defaultPermissions": ["ADMINISTRATOR"]
+      "defaultPermissions": ["ADMINISTRATOR"],
+      "subcommands": [
+        {
+          "inherit": "regulars.view.sub",
+          "name": "view",
+          "description": "View a regular user",
+          "options": [
+            {
+              "type": "USER",
+              "name": "user",
+              "description": "User to query from",
+              "isRequired": true
+            }
+          ]
+        },
+        {
+          "inherit": "regulars.remove.sub",
+          "name": "remove",
+          "description": "Remove a regular user",
+          "options": [
+            {
+              "type": "USER",
+              "name": "user",
+              "description": "User to remove from",
+              "isRequired": true
+            }
+          ]
+        }
+      ]
     },
     {
       "active": true,
