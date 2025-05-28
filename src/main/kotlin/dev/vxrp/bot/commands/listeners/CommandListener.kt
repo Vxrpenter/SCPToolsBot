@@ -106,12 +106,16 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
     private fun checkSubInheritance(inherit: String, event: SlashCommandInteractionEvent): Boolean {
         when (inherit) {
             "notice_of_departure.view.sub" -> {
-                NoticeOfDepartureCommand(config, translation).view(event)
+                PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.noticeOfDeparture.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: NoticeOfDepartureCommand(config, translation).view(event)
                 return true
             }
 
             "notice_of_departure.revoke.sub" -> {
-                NoticeOfDepartureCommand(config, translation).revoke(event)
+                PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.noticeOfDeparture.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: NoticeOfDepartureCommand(config, translation).revoke(event)
                 return true
             }
         }
