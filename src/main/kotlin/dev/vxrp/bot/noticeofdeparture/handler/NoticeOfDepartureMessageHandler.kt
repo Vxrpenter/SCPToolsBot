@@ -111,7 +111,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
                 translation.noticeOfDeparture.embedNoticeBody
                     .replace("%user%", user.asMention)
                     .replace("%current_date%", currentDate)
-                    .replace("%end_date", endDate)
+                    .replace("%end_date%", endDate)
                     .replace("%reason%", reason)
             )
         }
@@ -134,7 +134,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
             description = ColorTool().useCustomColorCodes(
                 translation.noticeOfDeparture.embedRevokedBody
                     .replace("%current_date%", beginDate)
-                    .replace("%end_date", endDate)
+                    .replace("%end_date%", endDate)
                     .replace("%reason%", reason)
             )
         }
@@ -150,7 +150,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
             description = ColorTool().useCustomColorCodes(
                 translation.noticeOfDeparture.embedEndedBody
                     .replace("%current_date%", beginDate)
-                    .replace("%end_date", endDate)
+                    .replace("%end_date%", endDate)
             )
         }
 
