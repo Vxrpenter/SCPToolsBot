@@ -5,6 +5,7 @@ import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.commands.handler.bot.application.ApplicationCommand
 import dev.vxrp.bot.commands.handler.bot.help.HelpCommand
 import dev.vxrp.bot.commands.handler.bot.noticeofdeparture.NoticeOfDepartureCommand
+import dev.vxrp.bot.commands.handler.bot.regulars.RegularsCommand
 import dev.vxrp.bot.commands.handler.bot.settings.SettingsCommand
 import dev.vxrp.bot.commands.handler.bot.template.TemplateCommandHandler
 import dev.vxrp.bot.commands.handler.bot.verify.VerifyCommand
@@ -116,6 +117,20 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                 PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.noticeOfDeparture.active)?.let { embed ->
                     event.reply_("", listOf(embed)).setEphemeral(true).queue()
                 } ?: NoticeOfDepartureCommand(config, translation).revoke(event)
+                return true
+            }
+
+            "regulars.view.sub" -> {
+                PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.regulars.active, config.settings.verify.active, config.settings.webserver.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: RegularsCommand(config, translation).view(event)
+                return true
+            }
+
+            "regulars.remove.sub" -> {
+                PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.regulars.active, config.settings.verify.active, config.settings.webserver.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: RegularsCommand(config, translation).remove(event)
                 return true
             }
         }
