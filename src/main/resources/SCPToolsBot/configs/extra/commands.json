@@ -52,7 +52,35 @@
       "inherit": "commands.notice_of_departure.default",
       "name": "notice_of_departure",
       "description": "View information on notices and change data",
-      "defaultPermissions": ["ADMINISTRATOR"]
+      "defaultPermissions": ["ADMINISTRATOR"],
+      "subcommands": [
+        {
+          "inherit": "notice_of_departure.view.sub",
+          "name": "view",
+          "description": "View a notice of departure",
+          "options": [
+            {
+              "type": "USER",
+              "name": "user",
+              "description": "User to query from",
+              "isRequired": true
+            }
+          ]
+        },
+        {
+          "inherit": "notice_of_departure.revoke.sub",
+          "name": "revoke",
+          "description": "Revoke a notice of departure",
+          "options": [
+            {
+              "type": "USER",
+              "name": "user",
+              "description": "User to revoke from",
+              "isRequired": true
+            }
+          ]
+        }
+      ]
     },
     {
       "active": true,
