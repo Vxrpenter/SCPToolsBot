@@ -699,6 +699,9 @@ NOTICE_OF_DEPARTURE:
   EMBED_REVOKATION_SENT_TITLE: "Notice of Departure Revoked"
   EMBED_REVOKATION_SENT_BODY: "Notice of Departure is now getting revoked. The user will be notified shortly, providing him with the reason you entered"
 
+  EMBED_NOT_FOUND_TITLE: "Notice of Departure Not Found"
+  EMBED_NOT_FOUND_BODY: "Could not find any notice of departure of the user you entered. Maybe it has already been revoked/ran out."
+
 REGULARS:
 
   EMBED_TEMPLATE_TITLE: "Activate Regular Syncing"
