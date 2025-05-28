@@ -54,32 +54,18 @@ class NoticeOfDepartureTable {
         return list
     }
 
-    fun retrieveBeginDate(id: String): String? {
-        var date: String? = null
+    fun retrieveHandler(id: String): String? {
+        var handler: String? = null
 
         transaction {
             NoticeOfDepartures.selectAll()
                 .where { NoticeOfDepartures.id eq id }
                 .forEach {
-                    date = it[NoticeOfDepartures.beginDate]
+                    handler = it[NoticeOfDepartures.handlerId]
                 }
         }
 
-        return date
-    }
-
-    fun retrieveEndDate(id: String): String? {
-        var date: String? = null
-
-        transaction {
-            NoticeOfDepartures.selectAll()
-                .where { NoticeOfDepartures.id eq id }
-                .forEach {
-                    date = it[NoticeOfDepartures.endDate]
-                }
-        }
-
-        return date
+        return handler
     }
 
     fun retrieveChannel(id: String): String? {
@@ -108,6 +94,34 @@ class NoticeOfDepartureTable {
         }
 
         return message
+    }
+
+    fun retrieveBeginDate(id: String): String? {
+        var date: String? = null
+
+        transaction {
+            NoticeOfDepartures.selectAll()
+                .where { NoticeOfDepartures.id eq id }
+                .forEach {
+                    date = it[NoticeOfDepartures.beginDate]
+                }
+        }
+
+        return date
+    }
+
+    fun retrieveEndDate(id: String): String? {
+        var date: String? = null
+
+        transaction {
+            NoticeOfDepartures.selectAll()
+                .where { NoticeOfDepartures.id eq id }
+                .forEach {
+                    date = it[NoticeOfDepartures.endDate]
+                }
+        }
+
+        return date
     }
 
     fun retrieveSerial(): Long {
