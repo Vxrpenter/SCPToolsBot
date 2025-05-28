@@ -4,6 +4,7 @@ import dev.minn.jda.ktx.events.listener
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.commands.handler.bot.application.ApplicationCommand
 import dev.vxrp.bot.commands.handler.bot.help.HelpCommand
+import dev.vxrp.bot.commands.handler.bot.noticeofdeparture.NoticeOfDepartureCommand
 import dev.vxrp.bot.commands.handler.bot.settings.SettingsCommand
 import dev.vxrp.bot.commands.handler.bot.template.TemplateCommandHandler
 import dev.vxrp.bot.commands.handler.bot.verify.VerifyCommand
@@ -26,7 +27,7 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
             for (command in commandList) {
                 if (!event.fullCommandName.contains(command.name)) continue
 
-                if (checkInheritance(command.inherit, event)) break
+                checkInheritance(command.inherit, event)
 
                 for (subCommand in command.subcommands!!) {
                     if (subCommand.name != event.fullCommandName.split(" ".toRegex())[1]) continue
@@ -37,7 +38,7 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
         }
     }
 
-    private fun checkInheritance(inherit: String, event: SlashCommandInteractionEvent): Boolean {
+    private fun checkInheritance(inherit: String, event: SlashCommandInteractionEvent) {
         val launchOptionManager = LaunchOptionManager(config, translation)
 
         when (inherit) {
@@ -45,14 +46,14 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                 if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.HELP_COMMAND).engage) {
                     helpCommand(event)
                 }
-                return true
+                return
             }
 
             "commands.template.default" -> {
                 if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.TEMPLATE_COMMAND).engage) {
                     templateCommand(event)
                 }
-                return true
+                return
             }
 
             "commands.verify.default" -> {
@@ -61,7 +62,7 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                         event.reply_("", listOf(embed)).setEphemeral(true).queue()
                     } ?: verifyCommand(event)
                 }
-                return true
+                return
             }
 
             "commands.notice_of_departure.default" -> {
@@ -70,7 +71,7 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                         event.reply_("", listOf(embed)).setEphemeral(true).queue()
                     } ?: noticeOfDepartureCommand(event)
                 }
-                return true
+                return
             }
 
             "commands.regulars.default" -> {
@@ -79,14 +80,14 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                         event.reply_("", listOf(embed)).setEphemeral(true).queue()
                     } ?: regularsCommand(event)
                 }
-                return true
+                return
             }
 
             "commands.settings.default" -> {
                 if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.SETTINGS_COMMAND).engage) {
                     settingsCommand(event)
                 }
-                return true
+                return
             }
 
             "commands.application.default" -> {
@@ -95,17 +96,22 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                         event.reply_("", listOf(embed)).setEphemeral(true).queue()
                     } ?: applicationCommand(event)
                 }
-                return true
+                return
             }
         }
 
-        return false
+        return
     }
 
     private fun checkSubInheritance(inherit: String, event: SlashCommandInteractionEvent): Boolean {
         when (inherit) {
-            "commands.kill.sub" -> {
-                // Test Tes Test
+            "notice_of_departure.view.sub" -> {
+                NoticeOfDepartureCommand(config, translation).view(event)
+                return true
+            }
+
+            "notice_of_departure.revoke.sub" -> {
+                NoticeOfDepartureCommand(config, translation).revoke(event)
                 return true
             }
         }
