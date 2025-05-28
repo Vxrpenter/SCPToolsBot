@@ -677,6 +677,18 @@ NOTICE_OF_DEPARTURE:
                         ```%reason%```
                         "
 
+  EMBED_NOTICE_VIEW_TITLE: "Notice of Departure by %user%"
+  EMBED_NOTICE_VIEW_BODY: "
+                          __**Accepted by:**__\n
+                          %user%\n
+                          &filler&
+                          __**Timespan:**__\n
+                          ```%current_date% till %end_date%```
+
+                          __**Acceptance Reason:**__\n
+                          ```ansi\n&red&The acceptance reason can not be displayed, as it is not saved locally&reset&```
+                          "
+
   EMBED_ENDED_TITLE: "Notice of Departure has Ended"
   EMBED_ENDED_BODY: "
                         Your Notice of Departure has ended and all your benefits going with it have been revoked \n
