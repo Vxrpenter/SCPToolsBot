@@ -666,6 +666,11 @@ data class TranslationNoticeOfDeparture(
     @SerialName("EMBED_NOTICE_BODY")
     val embedNoticeBody: String,
 
+    @SerialName("EMBED_NOTICE_VIEW_TITLE")
+    val embedNoticeViewTitle: String,
+    @SerialName("EMBED_NOTICE_VIEW_BODY")
+    val embedNoticeViewBody: String,
+
     @SerialName("EMBED_ENDED_TITLE")
     val embedEndedTitle: String,
     @SerialName("EMBED_ENDED_BODY")
