@@ -1,5 +1,6 @@
 package dev.vxrp.bot.noticeofdeparture
 
+import dev.minn.jda.ktx.coroutines.await
 import dev.vxrp.bot.noticeofdeparture.handler.NoticeOfDepartureCheckerHandler
 import dev.vxrp.bot.noticeofdeparture.handler.NoticeOfDepartureMessageHandler
 import dev.vxrp.configuration.data.Config
@@ -18,6 +19,11 @@ class NoticeOfDepartureManager(val api: JDA, val config: Config, val translation
 
     suspend fun revokeNotice(reason: String, userId: String, date: String) {
         NoticeOfDepartureMessageHandler(api, config, translation).sendRevokedMessage(reason, userId, NoticeOfDepartureTable().retrieveBeginDate(userId)!!, date)
+
+        val channel = api.getTextChannelById(NoticeOfDepartureTable().retrieveChannel(userId)!!)
+        val message = channel?.retrieveMessageById(NoticeOfDepartureTable().retrieveMessage(userId)!!)?.await()
+
+        message?.delete()?.queue()
 
         NoticeOfDepartureTable().deleteEntry(userId)
     }
