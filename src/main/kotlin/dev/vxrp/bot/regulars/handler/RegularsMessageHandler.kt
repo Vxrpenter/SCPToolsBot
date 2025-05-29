@@ -53,7 +53,7 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
         ).queue()
     }
 
-    fun getSettings(user: User): MessageEmbed {
+    fun getSettings(user: User, injectTitle: String? = null, injectDescription: String? = null): MessageEmbed {
         var groupRole = "None"
         var role = "None"
         var playtime = "0"
@@ -72,10 +72,15 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
             lastChecked = RegularsTable().getLastChecked(user.id) ?: "None"
         }
 
+        var embedTitle = injectTitle
+        var embedDescription = injectDescription
+        if (injectTitle == null) embedTitle = translation.regulars.embedSettingsTitle
+        if (injectDescription == null) embedDescription = translation.regulars.embedSettingsBody
+
         val embed = Embed {
             thumbnail = user.avatarUrl
-            title = ColorTool().useCustomColorCodes(translation.regulars.embedSettingsTitle)
-            description = ColorTool().useCustomColorCodes(translation.regulars.embedSettingsBody)
+            title = ColorTool().useCustomColorCodes(embedTitle)
+            description = ColorTool().useCustomColorCodes(embedDescription)
             field {
                 inline = true
                 name = translation.regulars.embedSettingsFieldGroupName
