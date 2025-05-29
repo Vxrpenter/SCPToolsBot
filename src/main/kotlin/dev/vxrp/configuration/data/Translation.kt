@@ -35,6 +35,11 @@ data class Translation(
 
 @Serializable
 data class TranslationPermissions(
+    @SerialName("EMBED_NOT_FOUND_TITLE")
+    val embedNotFoundTitle: String,
+    @SerialName("EMBED_NOT_FOUND_BODY")
+    val embedNotFoundBody: String,
+
     @SerialName("EMBED_COULD_NOT_SEND_PANEL_TITLE")
     val embedCouldNotSendPanelTitle: String,
     @SerialName("EMBED_COULD_NOT_SEND_PANEL_BODY")
@@ -713,6 +718,10 @@ data class TranslationRegulars(
     val embedSettingsTitle: String,
     @SerialName("EMBED_SETTINGS_BODY")
     val embedSettingsBody: String,
+    @SerialName("EMBED_SETTINGS_VIEW_TITLE")
+    val embedSettingsViewTitle: String,
+    @SerialName("EMBED_SETTINGS_VIEW_BODY")
+    val embedSettingsViewBody: String,
     @SerialName("EMBED_SETTINGS_FIELD_GROUP_NAME")
     val embedSettingsFieldGroupName: String,
     @SerialName("EMBED_SETTINGS_FIELD_ROLE_NAME")

@@ -13,6 +13,9 @@
 
 PERMISSIONS:
 
+  EMBED_NOT_FOUND_TITLE: "Not Found"
+  EMBED_NOT_FOUND_BODY: "No data of the queried entry has been found. Entry might not exist or access is blocked."
+
   EMBED_COULD_NOT_SEND_PANEL_TITLE: "Could not send Panel"
   EMBED_COULD_NOT_SEND_PANEL_BODY: "This panel is deactivated as long as the bot hoster has deactivated certain configurations."
 
@@ -749,6 +752,8 @@ REGULARS:
 
   EMBED_SETTINGS_TITLE: "Personal Regular Settings"
   EMBED_SETTINGS_BODY: "These are your personal regular settings. Only you are able to see this message and to change the settings\n"
+  EMBED_SETTINGS_VIEW_TITLE: "Regulars info of - %user%"
+  EMBED_SETTINGS_VIEW_BODY: "This is all currently saved data about this users regulars entry. Note that you are not able to interact with it in any other way than removing it."
   EMBED_SETTINGS_FIELD_GROUP_NAME: "Group"
   EMBED_SETTINGS_FIELD_ROLE_NAME: "Role"
   EMBED_SETTINGS_FIELD_PLAYTIME_NAME: "Playtime"
@@ -779,7 +784,7 @@ REGULARS:
   EMBED_SYNC_REMOVED_CONFIRM_BODY: "Please confirm that you want to remove your data from the regulars playtime role syncing database. This will permanently delete all data saved."
 
   EMBED_SYNC_REMOVED_MESSAGE_TITLE: "Regulars Data Removed"
-  EMBED_SYNC_REMOVED_MESSAGE_BODY: "All regulars data has been removed from the database and regulars has been deactivated. You can re-sync yourself any time."
+  EMBED_SYNC_REMOVED_MESSAGE_BODY: "All regulars data has been removed from the database and regulars has been deactivated."
 
 STATUS_BARS:
 
