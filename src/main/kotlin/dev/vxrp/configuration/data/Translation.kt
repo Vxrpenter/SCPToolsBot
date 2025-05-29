@@ -690,11 +690,6 @@ data class TranslationNoticeOfDeparture(
     val embedRevokationSentTitle: String,
     @SerialName("EMBED_REVOKATION_SENT_BODY")
     val embedRevokationSentBody: String,
-
-    @SerialName("EMBED_NOT_FOUND_TITLE")
-    val embedNotFoundTitle: String,
-    @SerialName("EMBED_NOT_FOUND_BODY")
-    val embedNotFoundBody: String,
 )
 
 @Serializable
