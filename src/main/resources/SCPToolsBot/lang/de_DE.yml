@@ -783,7 +783,7 @@ REGULARS:
   EMBED_SYNC_REMOVED_CONFIRM_TITLE: "Entfernung Bestätigen"
   EMBED_SYNC_REMOVED_CONFIRM_BODY: "Bitte bestätige das du deine daten von der Stammspieler Datenbank löschen möchtest. Dies wird die Daten unwiderruflich löschen!"
 
-  EMBED_SYNC_REMOVED_MESSAGE_TITLE: "Regulars Data Removed"
+  EMBED_SYNC_REMOVED_MESSAGE_TITLE: "Stammspieler Entfernt"
   EMBED_SYNC_REMOVED_MESSAGE_BODY: "Alle Stammspieler Daten wurden von der Datenbank entfernt und die Synchronisierung wurde deaktiviert."
 
 STATUS_BARS:
