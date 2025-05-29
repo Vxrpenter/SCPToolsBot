@@ -1,6 +1,6 @@
 plugins {
     application
-    kotlin("jvm") version "2.1.10"
+    kotlin("jvm") version "2.1.21"
     kotlin("plugin.serialization") version "2.0.20"
     id("com.gradleup.shadow") version("8.3.3")
     id("io.gitlab.arturbosch.detekt").version("1.23.7")
@@ -19,22 +19,21 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "3.1.2"
-val kotlinxCoroutinesVersion = "1.10.0"
+val ktorVersion = "3.1.3"
+val kotlinxCoroutinesVersion = "1.10.2"
 
 val exposedVersion = "0.61.0"
 val sqliteVersion = "3.49.1.0"
-val mySqlVersion = "9.2.0"
-val postgresSqlVersion = "42.7.5"
+val mySqlVersion = "9.3.0"
+val postgresSqlVersion = "42.7.6"
 val mariaDBVersion = "3.5.3"
 
 val kotlinxSerializationVersion = "1.8.1"
-val kamlVersion = "0.77.0"
+val kamlVersion = "0.78.0"
 val jdaVersion = "5.5.1"
 val jdaKtxVersion = "0.12.0"
 val secretLabKotlinVersion = "0.4.1"
 val logbackVersion = "1.5.18"
-val apacheCommonsVersion = "3.4"
 val gsonVersion = "2.11.0"
 
 dependencies {
@@ -69,14 +68,7 @@ dependencies {
     implementation("io.github.vxrpenter:secretlab-kotlin:$secretLabKotlinVersion")
 
     // String and JSON tooling
-    implementation("org.apache.commons:commons-lang3:$apacheCommonsVersion")
     implementation("com.google.code.gson:gson:$gsonVersion")
-
-    // Ascii
-    implementation("com.jakewharton.picnic:picnic:0.7.0")
-
-    // Test
-    testImplementation(kotlin("test"))
 }
 
 val createVersionProperties by tasks.registering(WriteProperties::class) {
