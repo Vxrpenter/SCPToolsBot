@@ -34,8 +34,8 @@ class NoticeOfDepartureCommand(val config: Config,  val translation: Translation
         } else {
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNotFoundTitle)
-                description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNotFoundBody)
+                title = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundTitle)
+                description = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundTitle)
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
@@ -52,8 +52,8 @@ class NoticeOfDepartureCommand(val config: Config,  val translation: Translation
         } else {
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNotFoundTitle)
-                description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNotFoundBody)
+                title = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundTitle)
+                description = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundTitle)
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
