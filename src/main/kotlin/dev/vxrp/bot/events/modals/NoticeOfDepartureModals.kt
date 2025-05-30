@@ -44,7 +44,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 return
             }
 
-            NoticeOfDepartureMessageHandler(event.jda, config, translation).sendDecisionMessage(event.user.id, date, reason)
+            NoticeOfDepartureMessageHandler(event.jda, config, translation).sendDecisionMessage(event.user.id, date.format(formatter), reason)
 
             val embed = Embed {
                 color = 0x2ECC70
