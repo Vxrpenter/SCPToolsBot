@@ -12,7 +12,6 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.interactions.components.buttons.Button
 import net.dv8tion.jda.api.utils.TimeFormat
-import okhttp3.internal.format
 import org.slf4j.LoggerFactory
 import java.time.Instant
 import java.time.LocalDate
