@@ -697,7 +697,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_ENDED_BODY: "
                         Deine Abmeldung ist hiermit vorbei\n
                         &filler&
-                        __**Zeit:**__\n
+                        __**Zeitspanne:**__\n
                         ```%current_date% bis %end_date%```
                         "
 
