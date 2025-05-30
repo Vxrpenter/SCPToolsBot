@@ -623,13 +623,13 @@ NOTICE_OF_DEPARTURE:
   EMBED_ENTER_FUTURE_DATE_TITLE: "Gib ein Datum in der Zukunft an"
   EMBED_ENTER_FUTURE_DATE_BODY: "Du musst ein Datum angeben das in der Zukunft liegt."
 
-  EMBED_DECISION_TITLE: "Abmeldung - #%number%"
+  EMBED_DECISION_TITLE: "Abmeldung von %user% - #%number%"
 
   EMBED_DECISION_BODY: " 
                         Wenn dieser Benutzer akzeptiert wird, wird der Benutzer und das Datum in die Datenbank aufgenommen und du wirst benachrichtigt, wenn es abläuft\n
                         &filler&
                         __**Zeitspanne**__\n
-                        ```\n%current_date% bis %end_date%```\n
+                        %current_date% bis %end_date% %relative%\n
                         
                         __**Grund:**__\n
                         ```%reason%```
@@ -642,8 +642,8 @@ NOTICE_OF_DEPARTURE:
   EMBED_ACCEPTED_BODY: "
                         Deine Mitteilung über die Abmeldung wurde akzeptiert. Sie können sich nun ohne Konsequenzen freinehmen\n
                         &filler&
-                        __**Akzeptanzzeitraum:**__\n
-                        ```%current_date% bis %end_date%```
+                        __**Akzeptierte Zeitspanne:**__\n
+                        %current_date% bis %end_date% %relative%\n
                         
                         __**Akzeptanzgrund:**__\n
                         ```%reason%```
@@ -667,7 +667,7 @@ NOTICE_OF_DEPARTURE:
   EMBED_DISMISSING_SENT_TITLE: "Abweisung Gesendet"
   EMBED_DISMISSING_SENT_BODY: "Die abgewiesene Abmeldung wird nun bearbeitet. Der Nutzer wird über deine Abweisung, sowie dessen Grund, nun informiert"
 
-  EMBED_NOTICE_TITLE: "Abmeldung - #%number%"
+  EMBED_NOTICE_TITLE: "Abmeldung von %user% - #%number%"
   EMBED_NOTICE_BODY: "
                         Diese Abmeldung kann jederzeit durch Drücken des Buttons unten widerrufen werden. Es wird auch regelmäßig überprüft, ob die Abmeldung noch gültig ist oder nicht\n
                         &filler&
@@ -675,7 +675,7 @@ NOTICE_OF_DEPARTURE:
                         %user%\n
                         
                         __**Zeitspanne:**__\n
-                        ```%current_date% bis %end_date%```
+                        %current_date% bis %end_date% %relative%\n
                         
                         __**Akzeptanzgrund:**__\n
                         ```%reason%```
@@ -687,7 +687,7 @@ NOTICE_OF_DEPARTURE:
                           %user%\n
                           &filler&
                           __**Zeitspanne:**__\n
-                          ```%current_date% till %end_date%```
+                          %current_date% till %end_date% %relative%\n
 
                           **Akzeptanzgrund:**
                           ```ansi\n&red&Der Akzeptanzgrund kann nicht angezeigt werden, da er nicht lokal gespeichert ist&reset&```
@@ -698,15 +698,15 @@ NOTICE_OF_DEPARTURE:
                         Deine Abmeldung ist hiermit vorbei\n
                         &filler&
                         __**Zeitspanne:**__\n
-                        ```%current_date% bis %end_date%```
+                        %current_date% bis %end_date%
                         "
 
   EMBED_REVOKED_TITLE: "Abmeldung wurde Zurückgezogen"
   EMBED_REVOKED_BODY: "
                         Deine Abmeldung wurde zurückgezogen\n
                         &filler&
-                        __**Zeit:**__\n
-                        ```%current_date% bis %end_date%```
+                        __**Zeitspanne:**__\n
+                        %current_date% bis %end_date%\n
                         
                         __**Akzeptanz Grund:**__\n
                         ```%reason%```
