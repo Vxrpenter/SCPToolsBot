@@ -34,7 +34,7 @@ val jdaVersion = "5.5.1"
 val jdaKtxVersion = "0.12.0"
 val secretLabKotlinVersion = "0.4.1"
 val logbackVersion = "1.5.18"
-val gsonVersion = "2.11.0"
+val gsonVersion = "2.13.1"
 
 dependencies {
     // Default
