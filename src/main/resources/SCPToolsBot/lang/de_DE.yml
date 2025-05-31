@@ -440,7 +440,7 @@ SUPPORT:
 
   EMBED_TICKET_APPLICATION_TITLE: "%name% - Bewerbung"
   EMBED_TICKET_APPLICATION_BODY: "
-                        Support-Ticket wird geprüft. Eine Antwort unserer Teamleitung kann etwas dauern.\n
+                        Support-Ticket wird geprüft. Eine Antwort unserers Moderationsteams kann etwas dauern.\n
 
                         **Type:** Application\n
                         **Ersteller:** <@%issuerId%>
