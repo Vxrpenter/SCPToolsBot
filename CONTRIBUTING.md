@@ -11,6 +11,7 @@ There are some rules ground rules you'll need to follow before making/proposing 
 3. Only change code that handles internal functions [e.g. configs, translations, updaing etc.] when you absolutely need to
 4. Check if your changes have already been proposed in a similar form through a pull request or issue
 5. Don't import random dependencies without making sure they are from trusted sources and don't contain any critical vulnerabilities
+6. Do not use AI to write any code, comments, pull requests, issues etc.
 
 # Getting Started
 If you want to implement a feature / fix a bug or propose any other big changes, that cannot be changed with a few lines, follow this:
