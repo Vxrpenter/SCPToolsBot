@@ -25,8 +25,8 @@ PERMISSIONS:
   EMBED_COULD_NOT_SEND_COMMAND_TITLE: "Command konnte nicht gesendet werden"
   EMBED_COULD_NOT_SEND_COMMAND_BODY: "Dieser Command ist deaktiviert, solange der Bot-Hoster bestimmte Funktionen deaktiviert hat."
 
-  EMBED_COULD_NOT_SEND_TEMPLATE_TITLE: "Konnte kein Template erstellen"
-  EMBED_COULD_NOT_SEND_TEMPLATE_BODY: "Dieses Template ist aufgrund fehlender Konfigurationen deaktiviert. Navigiere zur Config, um sie zu aktivieren und zu konfigurieren."
+  EMBED_COULD_NOT_SEND_TEMPLATE_TITLE: "Konnte keine Template erstellen"
+  EMBED_COULD_NOT_SEND_TEMPLATE_BODY: "Diese Template ist aufgrund fehlender Konfigurationen deaktiviert. Navigiere zur Config, um sie zu aktivieren und zu konfigurieren."
 
   EMBED_TICKET_DENIED_TITLE: "Interaktion Verweigert"
   EMBED_TICKET_DENIED_BODY: "
@@ -286,7 +286,7 @@ SUPPORT:
                         > 📩 **Application**\n
                         > Ticket um sich als Teammitglied zu bewerben, funktioniert nur wenn die bewerbungen aktiv sind\n
 
-                        _Bei der Erstellung eines Tickets werden bestimmte Metadaten gespeichert. Dazu gehören deine userId, das Erstellungsdatum, der Tickettyp, der Status und de Bearbeiter_"
+                        _Bei der Erstellung eines Tickets werden bestimmte Metadaten gespeichert. Dazu gehören deine userId, das Erstellungsdatum, der Tickettyp, der Status und der Bearbeiter_"
 
   EMBED_REPORT_USER_TITLE: "Nutzer Wählen"
   EMBED_REPORT_USER_BODY: "
@@ -540,7 +540,7 @@ APPLICATION:
 
   EMBED_DEACTIVATION_MENU_TITLE: "Deaktiviere Bewerbung?"
   EMBED_DEACTIVATION_MENU_BODY: "
-                        Möchten Sie die bewerbungsphase deaktivieren?\n
+                        Möchtest du die Bewerbungsphase deaktivieren?\n
                         
                         Alle laufenden bewerbungen werden beendet und alle Tickets geschlossen. Die aktuellen Einstellungen werden ebenfalls gelöscht und können nicht wiederhergestellt werden.
                         "
