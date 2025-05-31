@@ -428,7 +428,7 @@ SUPPORT:
                         Support Ticket getting reviewed. A response from our moderation team may take a bit\n
 
                         **Type:** Complaint\n
-                        **Issuer:** <@%issuerId%>\n
+                        **Issuer:** %issuerId%\n
                         **Complained about:** %staff%\n
 
                         **Reason:**\n

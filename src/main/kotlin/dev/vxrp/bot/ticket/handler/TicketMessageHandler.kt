@@ -184,9 +184,13 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
     }
 
     private suspend fun complaintMessage(channel: ThreadChannel, userId: String, modalId: String, modalValues: MutableList<ModalMapping>): MessageEmbed {
+        var user = "**Anonymous**"
         var staff = "Anonymous"
         if (modalId.split(":")[1] != "anonymous") {
             staff = "<@${modalId.split(":")[1]}>"
+        }
+        if (userId != "anonymous") {
+            user = "<@$userId>"
         }
 
         return Embed {
@@ -202,7 +206,7 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
             }
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketComplaintTitle.replace("%name%", channel.name))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketComplaintBody
-                .replace("%issuerId%", userId.replace("<@anonymous>", "**Anonymous**"))
+                .replace("%issuerId%", user)
                 .replace("%staff%", staff)
                 .replace("%reason%", modalValues[0].asString)
                 .replace("%proof%", modalValues[1].asString))

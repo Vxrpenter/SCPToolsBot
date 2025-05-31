@@ -429,7 +429,7 @@ SUPPORT:
                         Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
 
                         **Type:** Complaint\n
-                        **Ersteller:** <@%issuerId%>\n
+                        **Ersteller:** %issuerId%\n
                         **Beschwerde Über:** %staff%\n
 
                         **Grund:**\n
