@@ -25,8 +25,8 @@ PERMISSIONS:
   EMBED_COULD_NOT_SEND_COMMAND_TITLE: "Command konnte nicht gesendet werden"
   EMBED_COULD_NOT_SEND_COMMAND_BODY: "Dieser Command ist deaktiviert, solange der Bot-Hoster bestimmte Funktionen deaktiviert hat."
 
-  EMBED_COULD_NOT_SEND_TEMPLATE_TITLE: "Konnte keine Template erstellen"
-  EMBED_COULD_NOT_SEND_TEMPLATE_BODY: "Diese Template ist aufgrund fehlender Konfigurationen deaktiviert. Navigiere zur Config, um sie zu aktivieren und zu konfigurieren."
+  EMBED_COULD_NOT_SEND_TEMPLATE_TITLE: "Konnte kein Template erstellen"
+  EMBED_COULD_NOT_SEND_TEMPLATE_BODY: "Dieses Template ist aufgrund fehlender Konfigurationen deaktiviert. Navigiere zur Config, um sie zu aktivieren und zu konfigurieren."
 
   EMBED_TICKET_DENIED_TITLE: "Interaktion Verweigert"
   EMBED_TICKET_DENIED_BODY: "
@@ -97,7 +97,7 @@ HELP:
 
   EMBED_PAGE_ONE_TITLE: "Scp Tools Help Page"
   EMBED_PAGE_ONE_BODY: "
-                        > ScpTools. Ein Bot zur Verwaltung deines SCP Secret Laboratory Servers mit der Community und staff management, quality of life features und einem custom Support-System. Übersetze alles nach deinem Geschmack und wähle die Einstellungen, die am besten zu deinem Server passen.\n
+                        > ScpTools. Ein Bot zur Verwaltung deines SCP Secret Laboratory Servers mit der Community und staff management, quality of life features und einem custom Support-System. Übersetze alles nach deinem Geschmack und wähle die Einstellungen, die am besten zu deinem Server passen!\n
                         &filler&
                         [⭐] Wenn du Hilfe bei der Einrichtung des Bots benötigen oder auf Probleme stoßen solltest, dann guck dir die dokumentation [hier](https://github.com/Vxrpenter/SCPToolsBot/wiki) an.\n
                                 
@@ -115,12 +115,12 @@ HELP:
   EMBED_PAGE_TWO_TITLE: "Scp Tools Help Page - Regeln"
   EMBED_PAGE_TWO_BODY: "
                         > ❌ Achtung\n
-                        > Dieses feature ist experimentell und aktuell nicht völlig funktionsfähig\n
+                        > Dieses feature ist experimentell und aktuell nicht völlig funktionsfähig. Benutze auf eigene Verantwortung!\n
                         &filler&
-                        Benutze `/template rules` um das regel menu zu pasten.\n
+                        Benutze `/template rules` um das regel menu einzufügen.\n
                         
                         Du kannst zwischen dem updaten und pasten der Serverregeln. Die SCP SL regeln werden dann automatisch durch einen Color-Parser gejagt und dann in den Channel gesendet.\n
-                        > Du kannst die Farben des Color-Parsers in der `color-config.json` anpassen
+                        > Du kannst die Farben des Color-Parsers in der `color-config.json` - `SCPToolsBot/configs/extra/color-config.json`anpassen.
                         "
   EMBED_PAGE_THREE_TITLE: "Scp Tools Help Page - Support und Unban"
   EMBED_PAGE_THREE_BODY: "
@@ -170,7 +170,7 @@ STATUS:
   EMBED_ESTABLISHED_RESPONSE_FIELD_VALUE: "%time% ms"
 
   EMBED_LOST_TITLE: "%instance% - verbindung verloren"
-  EMBED_LOST_BODY: "Die Verbindung zu diesem Server wurde nach **%retries%** aufeinanderfolgenden Fehlern unterbrochen. Der Server wurde als offline markiert."
+  EMBED_LOST_BODY: "Die Verbindung zu diesem Server wurde nach **%retries%** aufeinanderfolgenden versuchen unterbrochen. Der Server wurde als offline markiert."
   EMBED_LOST_REASON_FIELD_NAME: "Grund"
   EMBED_LOST_REASON_FIELD_VALUE: "Der Server oder die Api sind offline"
   EMBED_LOST_RESPONSE_FIELD_NAME: "Antwortzeit"
@@ -184,7 +184,7 @@ STATUS:
   EMBED_ONLINE_RESPONSE_FIELD_VALUE: "%time% ms"
 
   EMBED_OFFLINE_TITLE: "%instance% - Server Offline"
-  EMBED_OFFLINE_BODY: "Die Verbindung zu diesem Server wurde nach **%retries%** aufeinanderfolgenden Fehlern getrennt. Der Server wurde als offline markiert."
+  EMBED_OFFLINE_BODY: "Die Verbindung zu diesem Server wurde nach **%retries%** aufeinanderfolgenden versuchen getrennt. Der Server wurde als offline markiert."
   EMBED_OFFLINE_REASON_FIELD_NAME: "Grund"
   EMBED_OFFLINE_REASON_FIELD_VALUE: "Server ist offline (es können keine Daten empfangen werden)"
   EMBED_OFFLINE_RESPONSE_FIELD_NAME: "Antwortzeit"
@@ -193,14 +193,14 @@ STATUS:
   EMBED_MAINTENANCE_ON_TITLE: "%instance% - Wartungsarbeiten aktiviert"
   EMBED_MAINTENANCE_ON_BODY: "Dieser Server wurde in den Wartungsmodus versetzt. Serverdaten sind nicht verfügbar und Spieler werden nicht in der Aktivität angezeigt."
   EMBED_MAINTENANCE_ON_REASON_FIELD_NAME: "Grund"
-  EMBED_MAINTENANCE_ON_REASON_FIELD_VALUE: "Es wurde kein Grund für diese Wartungsarbeiten angegeben. Bitte wende dich sich für weitere Informationen an das Serverteam."
+  EMBED_MAINTENANCE_ON_REASON_FIELD_VALUE: "Es wurde kein Grund für diese Wartungsarbeiten angegeben. Bitte wende dich für weitere Informationen an das Serverteam."
   EMBED_MAINTENANCE_ON_RESPONSE_FIELD_NAME: "Antwortzeit"
   EMBED_MAINTENANCE_ON_RESPONSE_FIELD_VALUE: "%time% ms"
 
   EMBED_MAINTENANCE_OFF_TITLE: "%instance% - Wartungsarbeiten deaktiviert"
   EMBED_MAINTENANCE_OFF_BODY: "Dieser Server wurde aus der Wartung genommen. Serverdaten sind jetzt verfügbar und Spieler werden in der Aktivität angezeigt."
   EMBED_MAINTENANCE_OFF_REASON_FIELD_NAME: "Grund"
-  EMBED_MAINTENANCE_OFF_REASON_FIELD_VALUE: "Es wurde kein Grund für diese Wartungsarbeiten angegeben. Bitte wende dich sich für weitere Informationen an das Serverteam."
+  EMBED_MAINTENANCE_OFF_REASON_FIELD_VALUE: "Es wurde kein Grund für diese Wartungsarbeiten angegeben. Bitte wende dich für weitere Informationen an das Serverteam."
   EMBED_MAINTENANCE_OFF_RESPONSE_FIELD_NAME: "Antwortzeit"
   EMBED_MAINTENANCE_OFF_RESPONSE_FIELD_VALUE: "%time% ms"
 
@@ -266,10 +266,10 @@ SUPPORT:
 
   EMBED_TEMPLATE_SUPPORT_TITLE: "Ticket Support"
   EMBED_TEMPLATE_SUPPORT_BODY: "
-                        Wähle eines der folgenden Tickets, um fortzufahren\n
+                        Wähle eines der folgenden Kategorien, um fortzufahren\n
 
                         > ⚙️ **Generelles Ticket**\n
-                        > Ticket zu einem beliebigen Thema, das nicht unten aufgeführt ist\n
+                        > Ticket zu einer beliebigen Kategorie, die nicht unten aufgeführt ist\n
 
                         > ⚖️ **Report Ticket**\n
                         > Ticket zur Meldung eines Spielers\n
@@ -284,22 +284,22 @@ SUPPORT:
                         > Ticket zur Beschwerde über ein Mitglied des Server-Teams\n
                         
                         > 📩 **Application**\n
-                        > Ticket for applying for staff positions, only works when applications are active\n
+                        > Ticket um sich als Teammitglied zu bewerben, funktioniert nur wenn die bewerbungen aktiv sind\n
 
-                        _Bei der Erstellung eines Tickets werden bestimmte Metadaten gespeichert. Dazu gehören deine userId, das Erstellungsdatum, der Tickettyp, der Status und der Bearbeiter_"
+                        _Bei der Erstellung eines Tickets werden bestimmte Metadaten gespeichert. Dazu gehören deine userId, das Erstellungsdatum, der Tickettyp, der Status und de Bearbeiter_"
 
   EMBED_REPORT_USER_TITLE: "Nutzer Wählen"
   EMBED_REPORT_USER_BODY: "
                         Wähle aus welchen Nutzer du melden willst. Bitte sei dir sicher das du die richtige\n
                         Person auswählst da dies nicht mehr rückgängig gemacht werden kann.\n
 
-                        Wenn du ein Teammitglied melden willst, dann benutze bitte das beschwerde Ticket.\n
+                        Wenn du ein Teammitglied melden möchtest, dann benutze bitte das beschwerde Ticket.\n
                         Dieses ist speziell für solche Beschwerden gedacht und besitzt die Funktion dein Ticket zu Anonymisieren."
 
   EMBED_COMPLAINT_ANONYMOUS_TITLE: "Anonym Senden?"
   EMBED_COMPLAINT_ANONYMOUS_BODY: "
                         Wenn du möchtest, kannst du dieses Ticket anonym senden, d. h.,\n
-                        es werden keine Metadaten mitgesendet. Dies ist optional, kann aber Probleme mit Teammitgliedern verhindern und sicherstellen, dass der Ticketersteller sicher ist."
+                        es werden keine Metadaten mitgesendet. Dies ist optional, kann aber Probleme mit Teammitgliedern verhindern und sicherstellen, dass der Ticketersteller anonym bleibt"
 
   EMBED_COMPLAINT_USER_TITLE: "Nutzer Wählen"
   EMBED_COMPLAINT_USER_BODY: "
@@ -355,7 +355,7 @@ SUPPORT:
   MODAL_APPLICATION_AGE_TITLE: "Alter"
   MODAL_APPLICATION_AGE_PLACEHOLDER: "Wie alt bist du?"
   MODAL_APPLICATION_PLAYTIME_TITLE: "Spielzeit"
-  MODAL_APPLICATION_PLAYTIME_PLACEHOLDER: "Wie lang spielst du SCP:SL?"
+  MODAL_APPLICATION_PLAYTIME_PLACEHOLDER: "Wie lang spielst du schon SCP:SL?"
   MODAL_APPLICATION_REASON_OF_APPLICATION_TITLE: "Grund der Bewerbung"
   MODAL_APPLICATION_REASON_OF_APPLICATION_PLACEHOLDER: "Wieso hast du dich für diese Position beworben?"
   MODAL_APPLICATION_SKILLS_TITLE: "Skills"
@@ -440,7 +440,7 @@ SUPPORT:
 
   EMBED_TICKET_APPLICATION_TITLE: "%name% - Bewerbung"
   EMBED_TICKET_APPLICATION_BODY: "
-                        Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
+                        Support-Ticket wird geprüft. Eine Antwort unserer Teamleitung kann etwas dauern.\n
 
                         **Type:** Application\n
                         **Ersteller:** <@%issuerId%>
@@ -483,7 +483,7 @@ SUPPORT:
                         - Nachrichten können nicht geschrieben werden und das Ticket ist nicht für alle Teilnehmer zugänglich. Das Ticket kann später vom Administrator geöffnet werden.\n
                         
                         > 🪫 **Geschlossen**\n
-                        - Nachrichten können nicht geschrieben werden und das Ticket ist nicht für alle Teilnehmer zugänglich. Das Ticket kann nicht wieder geöffnet werden!!!"
+                        - Nachrichten können nicht geschrieben werden und das Ticket ist nicht für alle Teilnehmer zugänglich. Das Ticket kann nicht wieder geöffnet werden!"
 
   EMBED_LOG_TITLE: "%name% von %user%"
   EMBED_LOG_BODY: "
@@ -492,7 +492,7 @@ SUPPORT:
                         **Ticket erstellt von:** %creator%\n
                         **Ticket bearbeitet von:** %handler%\n
 
-                        _Diese Log-Nachricht wird dauerhaft gelöscht, wenn das Ticket geschlossen wird. Geschlossene Tickets findest du im Thread-Bereich des Hauptticket-Kanals._"
+                        _Diese Log-Nachricht wird dauerhaft gelöscht, wenn das Ticket geschlossen wird. Geschlossene Tickets findest du im Thread-Bereich des Hauptticket-Kanals."
 
   EMBED_TICKET_CLAIMED_TITLE: "Ticket Beansprucht"
   EMBED_TICKET_CLAIMED_BODY: "Dieses ticket wird jetzt von %user% bearbeitet."
@@ -507,10 +507,10 @@ SUPPORT:
   EMBED_TICKET_PAUSED_BODY: "Dieses Ticket wurde pausiert. Aktuell sind keine Nachrichten erlaubt jedoch wird dieses Ticket bald erneut geöffnet"
 
   EMBED_TICKET_SUSPENDED_TITLE: "Ticket Gesperrt"
-  EMBED_TICKET_SUSPENDED_BODY: "Dieses Ticket wurde gesperrt. Bitte kontaktiere das Team um mehr Informationen zu erhalten"
+  EMBED_TICKET_SUSPENDED_BODY: "Dieses Ticket wurde gesperrt. Bitte kontaktiere ein Teammitglied um mehr Informationen zu erhalten"
 
   EMBED_TICKET_CLOSED_TITLE: "Ticket Geschlossen"
-  EMBED_TICKET_CLOSED_BODY: "Dieses Ticket wurde geschlossen. Es wird nicht erneut geöffnet werden"
+  EMBED_TICKET_CLOSED_BODY: "Dieses Ticket wurde geschlossen. Es wird nicht erneut geöffnet"
 
   EMBED_LOG_CLAIMED_TITLE: "Du hast das Ticket beansprucht - %name%"
   EMBED_LOG_CLAIMED_BODY: "Dieses Ticket steht jetzt unter deiner Verantwortung."
@@ -525,7 +525,7 @@ SUPPORT:
   EMBED_LOG_SUSPENDED_BODY: "Du hast dieses Ticket gesperrt. Nutzer werden dich vielleicht wegen dem Schließungsgrund kontaktieren."
 
   EMBED_LOG_CLOSED_TITLE: "Du hast das Ticket geschlossen - %name%"
-  EMBED_LOG_CLOSED_BODY: "Du hast dieses Ticket geschlossen und du kannst es nicht wieder erneut öffnen."
+  EMBED_LOG_CLOSED_BODY: "Du hast dieses Ticket geschlossen und du kannst es nicht erneut öffnen."
 
 APPLICATION:
   EMBED_ACTIVATION_MENU_TITLE: "Aktive Bewerbungseinstellungen"
@@ -533,16 +533,16 @@ APPLICATION:
                         Aktueller Status: %status%\n
                         Aktive Rollen:\n
                         %active_roles%
-                        _Diese Nachricht wird aktualisiert, wenn Positionen für den Bewerbungsstatus hinzugefügt werden_\n
+                        _Diese Nachricht wird aktualisiert, wenn neue Positionen für den Bewerbungsstatus hinzugefügt werden_\n
                         
                         _Wenn du mit der Einrichtung fertig bist, klicke unten auf die Schaltfläche „Einrichtung abschließen“, um mit der Aktivierung fortzufahren._
                         "
 
   EMBED_DEACTIVATION_MENU_TITLE: "Deaktiviere Bewerbung?"
   EMBED_DEACTIVATION_MENU_BODY: "
-                        Möchten Sie den Anwendungsprozess deaktivieren?\n
+                        Möchten Sie die bewerbungsphase deaktivieren?\n
                         
-                        Alle laufenden Anwendungen werden beendet und alle Tickets geschlossen. Die aktuellen Einstellungen werden ebenfalls gelöscht und können nicht wiederhergestellt werden.
+                        Alle laufenden bewerbungen werden beendet und alle Tickets geschlossen. Die aktuellen Einstellungen werden ebenfalls gelöscht und können nicht wiederhergestellt werden.
                         "
 
   EMBED_APPLICATION_MESSAGE_TITLE: "Aktive Bewerbungsphase"
