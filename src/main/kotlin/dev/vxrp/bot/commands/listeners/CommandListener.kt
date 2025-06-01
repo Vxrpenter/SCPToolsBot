@@ -30,7 +30,8 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
                 checkInheritance(command.inherit, event)
 
-                for (subCommand in command.subcommands!!) {
+                if (command.subcommands == null) continue
+                for (subCommand in command.subcommands) {
                     if (subCommand.name != event.fullCommandName.split(" ".toRegex())[1]) continue
 
                     if (checkSubInheritance(subCommand.inherit, event)) continue
