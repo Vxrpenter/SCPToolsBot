@@ -1,7 +1,7 @@
 plugins {
     application
     kotlin("jvm") version "2.1.21"
-    kotlin("plugin.serialization") version "2.0.20"
+    kotlin("plugin.serialization") version "2.1.21"
     id("com.gradleup.shadow") version("8.3.3")
     id("io.gitlab.arturbosch.detekt").version("1.23.7")
 }
@@ -29,12 +29,12 @@ val postgresSqlVersion = "42.7.6"
 val mariaDBVersion = "3.5.3"
 
 val kotlinxSerializationVersion = "1.8.1"
-val kamlVersion = "0.78.0"
+val kamlVersion = "0.80.1"
 val jdaVersion = "5.5.1"
 val jdaKtxVersion = "0.12.0"
 val secretLabKotlinVersion = "0.4.1"
 val logbackVersion = "1.5.18"
-val gsonVersion = "2.11.0"
+val gsonVersion = "2.13.1"
 
 dependencies {
     // Default

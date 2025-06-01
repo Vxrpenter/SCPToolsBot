@@ -33,7 +33,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             }
 
             val currentDate = LocalDate.now()
-            if (parsedDate.isBefore(currentDate)) {
+            if (parsedDate.isBefore(currentDate) || parsedDate.isEqual(currentDate)) {
                 val embed = Embed {
                     color = 0xE74D3C
                     title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterFutureDateTitle)
@@ -44,7 +44,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 return
             }
 
-            NoticeOfDepartureMessageHandler(event.jda, config, translation).sendDecisionMessage(event.user.id, date, reason)
+            NoticeOfDepartureMessageHandler(event.jda, config, translation).sendDecisionMessage(event.user.id, date.format(formatter), reason)
 
             val embed = Embed {
                 color = 0x2ECC70
