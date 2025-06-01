@@ -46,7 +46,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
 
         val child = api.getThreadChannelById(ticketId)
         var handlerUser: User? = null
-        if (handlerId != null) handlerUser = api.retrieveUserById(handlerId!!).await()
+        if (handlerId != null) handlerUser = api.retrieveUserById(handlerId).await()
 
         if (creator != null) creatorId = creator
         if (handler != null) handlerUser = handler
