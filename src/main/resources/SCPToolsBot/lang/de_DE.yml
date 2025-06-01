@@ -503,6 +503,16 @@ SUPPORT:
 
                         _Diese Log-Nachricht wird dauerhaft gelöscht, wenn das Ticket geschlossen wird. Geschlossene Tickets findest du im Thread-Bereich des Hauptticket-Kanals._"
 
+  EMBED_CLOSED_LOG_TITLE: "%name% von %user% - Geschlossen"
+  EMBED_CLOSED_LOG_BODY: "
+                        **Ticketstatus:** %status%\n
+                        **Ticket-ID:** %id%\n
+                        **Ticket erstellt von:** %creator%\n
+                        **Ticket bearbeitet von:** %handler%\n
+                        **Geschlossen von** %closed_user%\n
+                        &filler<255>&
+                        _Diese Log-Nachricht wurde deaktiviert._"
+
   EMBED_TICKET_CLAIMED_TITLE: "Ticket Beansprucht"
   EMBED_TICKET_CLAIMED_BODY: "Dieses ticket wird jetzt von %user% bearbeitet. Bei jeglichen fragen usw. wird dir dieser Nutzer zu Seite stehen."
 

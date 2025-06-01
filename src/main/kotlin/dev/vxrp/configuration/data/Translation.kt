@@ -478,6 +478,11 @@ data class TranslationSupport(
     @SerialName("EMBED_LOG_BODY")
     val embedLogBody: String,
 
+    @SerialName("EMBED_CLOSED_LOG_TITLE")
+    val embedClosedLogTitle: String,
+    @SerialName("EMBED_CLOSED_LOG_BODY")
+    val embedClosedLogBody: String,
+
     @SerialName("EMBED_TICKET_CLAIMED_TITLE")
     val embedTicketClaimedTitle: String,
     @SerialName("EMBED_TICKET_CLAIMED_BODY")

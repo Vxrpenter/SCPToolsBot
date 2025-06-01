@@ -500,7 +500,17 @@ SUPPORT:
                         **Ticket Created by:** %creator%\n
                         **Ticket Handled by:** %handler%\n
 
-                        _This log message will be permanently deleted when the ticket is closed. Closed tickets can be found in the thread section of the main ticket channel._"
+                        _This log message will be deactivated when the ticket is closed. Closed tickets can be found in the thread section of the main ticket channel._"
+
+  EMBED_CLOSED_LOG_TITLE: "%name% by %user% - Closed"
+  EMBED_CLOSED_LOG_BODY: "
+                        **Ticket Status:** %status%\n
+                        **Ticket Id:** %id%\n
+                        **Ticket Created by:** %creator%\n
+                        **Ticket Handled by:** %handler%\n
+                        **Closed By** %closed_user%\n
+                        &filler<255>&
+                        _This log message has been deactivated._"
 
   EMBED_TICKET_CLAIMED_TITLE: "Ticket Claimed"
   EMBED_TICKET_CLAIMED_BODY: "This ticket has been claimed by %user%. They will now be managing all ticket affairs and assist you in your questions."
