@@ -583,8 +583,8 @@ APPLICATION:
   EMBED_APPLICATION_DEACTIVATED_TITLE: "Bewerbungen Deaktiviert"
   EMBED_APPLICATION_DEACTIVATED_BODY: "Die Bewerbungsphase wurde erfolgreich deaktiviert. Alle laufenden Bewerbungstickets werden offen gehalten, jedoch werden neue tickets automatisch blockiert."
 
-  EMBED_POSITION_NOT_ACTIVE_TITLE: "Position not Active"
-  EMBED_POSITION_NOT_ACTIVE_BODY: "This position is currently not open for any application. Contact server staff for more information."
+  EMBED_POSITION_NOT_ACTIVE_TITLE: "Position nicht Aktiv"
+  EMBED_POSITION_NOT_ACTIVE_BODY: "Diese Position ist aktuell nicht für Bewerbungen geöffnet. Für mehr Informationen, melde dich bei einem Administrator."
 
 VERIFY:
   EMBED_TEMPLATE_TITLE: "Verifizierung - Steam und Discord Link"
