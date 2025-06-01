@@ -2,6 +2,7 @@ package dev.vxrp.bot.ticket.handler
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.Embed
+import dev.minn.jda.ktx.messages.edit
 import dev.minn.jda.ktx.messages.editMessage
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.ticket.enums.TicketStatus
@@ -26,7 +27,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
     private val logger = LoggerFactory.getLogger(TicketLogHandler::class.java)
 
     suspend fun logMessage(creator: String, handler: User?, ticketId: String, ticketStatus: TicketStatus, childChannel: ThreadChannel): String? {
-        val logEmbed = createMessage(creator, handler, ticketStatus, childChannel)
+        val logEmbed = createMessage(creator, handler, ticketStatus, childChannel, false)
 
         val channel = api.getTextChannelById(config.ticket.settings.ticketLogChannel) ?: run {
             logger.error("Could not sent ticket log message for ticket '{}'", ticketId)
@@ -67,7 +68,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         if (handler != null) handlerUser = handler
         if (ticketStatus != null) status = ticketStatus
 
-        val logEmbed = createMessage(creatorId!!, handlerUser!!, status!!, child!!)
+        val logEmbed = createMessage(creatorId!!, handlerUser!!, status!!, child!!, false)
 
         val channel = api.getTextChannelById(config.ticket.settings.ticketLogChannel) ?: run {
             logger.error("Could not edit ticket log message for ticket '{}'", ticketId)
@@ -82,26 +83,24 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         ).queue()
     }
 
-    suspend fun deleteMesssage(ticketId: String) {
-        var logMessage: String? = null
+    suspend fun closeMessage(ticketId: String, closedUser: User) {
+        val logMessage = TicketTable().getLogMessage(ticketId)
 
-        transaction {
-            TicketTable.Tickets.selectAll()
-                .where(TicketTable.Tickets.id.eq(ticketId))
-                .forEach {
-                    logMessage = it[TicketTable.Tickets.logMessage]
-                }
-        }
+        val creator = TicketTable().getTicketCreator(ticketId)!!
+        val handler = api.retrieveUserById(TicketTable().getTicketHandler(ticketId)!!).await()
+        val childChannel = api.getThreadChannelById(ticketId)!!
 
         val channel = api.getTextChannelById(config.ticket.settings.ticketLogChannel) ?: run {
             logger.error("Could not delete ticket log message for ticket '{}'", ticketId)
             return
         }
 
-        channel.deleteMessageById(logMessage!!).await()
+        val message = channel.retrieveMessageById(logMessage!!).await()
+        message.editMessageComponents().queue()
+        message.edit("", listOf(createMessage(creator, handler, TicketStatus.CLOSED, childChannel, true, closedUser = closedUser))).queue()
     }
 
-    private suspend fun createMessage(ticketCreator: String, ticketHandler: User?, ticketStatus: TicketStatus, childChannel: ThreadChannel): MessageEmbed {
+    private suspend fun createMessage(ticketCreator: String, ticketHandler: User?, ticketStatus: TicketStatus, childChannel: ThreadChannel, closedMessage: Boolean, closedUser: User? = null): MessageEmbed {
         var thumbnailUrl = "https://www.pngarts.com/files/4/Anonymous-Mask-Transparent-Images.png"
         var creatorUserMention = "anonymous"
         var creatorUserName = "anonymous"
@@ -115,16 +114,35 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         }
         if (ticketHandler != null) handlerUserName = ticketHandler.asMention
 
-        return Embed {
-            thumbnail = thumbnailUrl
-            title = ColorTool().useCustomColorCodes(translation.support.embedLogTitle
+        var usableColor = 0x2ECC70
+        var usableTitle = ColorTool().useCustomColorCodes(translation.support.embedLogTitle
+            .replace("%name%", childChannel.name)
+            .replace("%user%", creatorUserName))
+        var usableDescription = ColorTool().useCustomColorCodes(translation.support.embedLogBody
+            .replace("%status%", ticketStatus.toString())
+            .replace("%id%", childChannel.id)
+            .replace("%creator%", creatorUserMention)
+            .replace("%handler%", handlerUserName))
+
+        if (closedMessage) {
+            usableColor = 0xE74D3C
+            usableTitle = ColorTool().useCustomColorCodes(translation.support.embedClosedLogTitle
                 .replace("%name%", childChannel.name)
                 .replace("%user%", creatorUserName))
-            description = ColorTool().useCustomColorCodes(translation.support.embedLogBody
+
+            usableDescription = ColorTool().useCustomColorCodes(translation.support.embedClosedLogBody
                 .replace("%status%", ticketStatus.toString())
                 .replace("%id%", childChannel.id)
                 .replace("%creator%", creatorUserMention)
-                .replace("%handler%", handlerUserName))
+                .replace("%handler%", handlerUserName)
+                .replace("%closed_user%", closedUser?.asMention!!))
+        }
+
+        return Embed {
+            color = usableColor
+            thumbnail = thumbnailUrl
+            title = usableTitle
+            description = usableDescription
             timestamp = Instant.now()
         }
     }

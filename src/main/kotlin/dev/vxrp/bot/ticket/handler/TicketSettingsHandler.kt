@@ -124,7 +124,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedBody)
         }
         ticketChannel.send("", listOf(embed)).queue()
-        TicketLogHandler(api, config, translation).deleteMesssage(id)
+        TicketLogHandler(api, config, translation).closeMessage(id, user)
         TicketTable().updateTicketStatus(id, TicketStatus.CLOSED)
         val child = api.getThreadChannelById(id)!!
 

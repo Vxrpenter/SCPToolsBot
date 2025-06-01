@@ -63,6 +63,45 @@ class TicketTable {
         }
     }
 
+    fun getTicketCreator(id: String): String? {
+        var creator: String? = null
+        transaction {
+            Tickets.selectAll()
+                .where { Tickets.id eq id }
+                .forEach {
+                    creator = it[Tickets.creator]
+                }
+        }
+
+        return creator
+    }
+
+    fun getTicketHandler(id: String): String? {
+        var handler: String? = null
+        transaction {
+            Tickets.selectAll()
+                .where { Tickets.id eq id }
+                .forEach {
+                    handler = it[Tickets.handler]
+                }
+        }
+
+        return handler
+    }
+
+    fun getLogMessage(id: String): String? {
+        var logMessage: String? = null
+        transaction {
+            Tickets.selectAll()
+                .where { Tickets.id eq id }
+                .forEach {
+                    logMessage = it[Tickets.logMessage]
+                }
+        }
+
+        return logMessage
+    }
+
     fun getTicketStatus(id: String): TicketStatus? {
         var status: TicketStatus? = null
         transaction {
