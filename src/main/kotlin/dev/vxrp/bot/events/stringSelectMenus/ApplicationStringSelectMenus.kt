@@ -1,5 +1,6 @@
 package dev.vxrp.bot.events.stringSelectMenus
 
+import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.application.ApplicationMessageHandler
 import dev.vxrp.bot.modals.ApplicationTemplateModals
@@ -7,6 +8,7 @@ import dev.vxrp.bot.modals.TicketTemplateModals
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ApplicationTypeTable
+import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent
 
 class ApplicationStringSelectMenus(val event: StringSelectInteractionEvent, val config: Config, val translation: Translation) {
@@ -25,7 +27,12 @@ class ApplicationStringSelectMenus(val event: StringSelectInteractionEvent, val 
 
         if (event.selectMenu.id?.startsWith("application_position") == true) {
             if (!ApplicationTypeTable().query(event.selectedOptions[0].value)!!.active) {
-                event.reply_("Position currently not active").setEphemeral(true).queue()
+                val embed = Embed {
+                    color = 0xE74D3C
+                    title = ColorTool().useCustomColorCodes(translation.application.embedPositionNotActiveTitle)
+                    description = ColorTool().useCustomColorCodes(translation.application.embedPositionNotActiveBody)
+                }
+                event.reply_("", listOf(embed)).setEphemeral(true).queue()
             } else {
                 event.replyModal(TicketTemplateModals(translation).supportApplicationModal(event.selectedOptions[0].value)).queue()
             }

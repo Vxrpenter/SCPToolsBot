@@ -33,7 +33,7 @@ class StringSelectListener(val api: JDA, val config: Config, val translation: Tr
                 } ?: ApplicationStringSelectMenus(event, config, translation).init()
             }
 
-            if (launchOptionManager.checkSectionOption(LaunchOptionType.STRING_SELECT_LISTENER, LaunchOptionSectionType.REGULARS_STRING_SELECT_MENUS).engage && event.selectMenu.id!!.startsWith("application")) {
+            if (launchOptionManager.checkSectionOption(LaunchOptionType.STRING_SELECT_LISTENER, LaunchOptionSectionType.REGULARS_STRING_SELECT_MENUS).engage && event.selectMenu.id!!.startsWith("regulars")) {
                 PermissionManager(config, translation).checkStatus(StatusMessageType.PANEL, config.settings.regulars.active, config.settings.verify.active, config.settings.webserver.active)?.let { embed ->
                     event.reply_("", listOf(embed)).setEphemeral(true).queue()
                 } ?: RegularsStringSelectMenus(event, config, translation).init()
