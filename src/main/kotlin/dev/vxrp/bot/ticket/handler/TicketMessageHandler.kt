@@ -21,9 +21,6 @@ import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 import net.dv8tion.jda.api.interactions.modals.ModalMapping
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.time.Instant
@@ -39,81 +36,39 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
         }
 
         channel.send("", listOf(embed))
-            .setActionRow(
-                StringSelectMenu.create("ticket")
+            .setActionRow(StringSelectMenu.create("ticket")
                     .addOption(translation.selectMenus.textSupportNameGeneral, "general", translation.selectMenus.textsupportDescriptionGeneral, Emoji.fromFormatted("⚙️"))
                     .addOption(translation.selectMenus.textSupportNameReport, "report", translation.selectMenus.textSupportDescriptionReport, Emoji.fromFormatted("⚖️"))
                     .addOption(translation.selectMenus.textSupportNameError, "error", translation.selectMenus.textSupportDescriptionError, Emoji.fromFormatted("⛓️‍💥"))
                     .addOption(translation.selectMenus.textSupportNameUnban, "unban", translation.selectMenus.textSupportDescriptionUnban, Emoji.fromFormatted("⌛"))
                     .addOption(translation.selectMenus.textSupportNameComplaint, "complaint", translation.selectMenus.textSupportDescriptionComplaint, Emoji.fromFormatted("🚫"))
                     .addOption(translation.selectMenus.textSupportNameApplication, "application", translation.selectMenus.textSupportDescriptionApplication, Emoji.fromFormatted("📩")).build()
-            ).queue() 
+            ).queue()
     }
 
     suspend fun sendMessage(type: TicketType, channel: ThreadChannel, userId: String, modalId: String, modalValues: MutableList<ModalMapping>): Message {
-        when(type) {
-            TicketType.GENERAL -> {
-                return channel.send("", listOf(generalMessage(channel, userId, modalValues))).setActionRow(
-                    messageActionRow(TicketStatus.OPEN, TicketType.GENERAL, false)
-                ).await()
-            }
-
-            TicketType.REPORT -> {
-                return channel.send("", listOf(reportMessage(channel, userId, modalId, modalValues))).setActionRow(
-                    messageActionRow(TicketStatus.OPEN, TicketType.REPORT, false)
-                ).await()
-            }
-
-            TicketType.ERROR -> {
-                return channel.send("", listOf(errorMessage(channel, userId, modalValues))).setActionRow(
-                    messageActionRow(TicketStatus.OPEN, TicketType.ERROR, false)
-                ).await()
-            }
-
-            TicketType.UNBAN -> {
-                return channel.send("", listOf(unbanMessage(channel, userId, modalValues))).setActionRow(
-                    messageActionRow(TicketStatus.OPEN, TicketType.UNBAN, false)
-                ).await()
-            }
-
-            TicketType.COMPLAINT -> {
-                return channel.send("", listOf(complaintMessage(channel, userId, modalId, modalValues))).setActionRow(
-                    messageActionRow(TicketStatus.OPEN, TicketType.COMPLAINT, false)
-                ).await()
-            }
-
-            TicketType.APPLICATION -> {
-                return channel.send("", listOf(applicationMessage(channel, userId, modalId, modalValues))).setActionRow(
-                    messageActionRow(TicketStatus.OPEN, TicketType.APPLICATION, false)
-                ).await()
-            }
+        return when(type) {
+            TicketType.GENERAL -> channel.send("", listOf(generalMessage(channel, userId, modalValues))).setActionRow(messageActionRow(TicketStatus.OPEN, TicketType.GENERAL, false)).await()
+            TicketType.REPORT -> channel.send("", listOf(reportMessage(channel, userId, modalId, modalValues))).setActionRow(messageActionRow(TicketStatus.OPEN, TicketType.REPORT, false)).await()
+            TicketType.ERROR -> channel.send("", listOf(errorMessage(channel, userId, modalValues))).setActionRow(messageActionRow(TicketStatus.OPEN, TicketType.ERROR, false)).await()
+            TicketType.UNBAN -> channel.send("", listOf(unbanMessage(channel, userId, modalValues))).setActionRow(messageActionRow(TicketStatus.OPEN, TicketType.UNBAN, false)).await()
+            TicketType.COMPLAINT -> channel.send("", listOf(complaintMessage(channel, userId, modalId, modalValues))).setActionRow(messageActionRow(TicketStatus.OPEN, TicketType.COMPLAINT, false)).await()
+            TicketType.APPLICATION -> channel.send("", listOf(applicationMessage(channel, userId, modalId, modalValues))).setActionRow(messageActionRow(TicketStatus.OPEN, TicketType.APPLICATION, false)).await()
         }
     }
     fun editMessage(ticketId: String, ticketChannel: ThreadChannel, ticketStatus: TicketStatus? = null) {
-        var message: String? = null
+        val message = TicketTable().getMessage(ticketId)
 
-        var handlerId: String? = null
-        var status: TicketStatus? = null
-        var ticketType: TicketType? = null
+        val handlerId = TicketTable().getTicketHandler(ticketId)
+        var status = TicketTable().getTicketStatus(ticketId)
+        val ticketType = TicketTable().getTicketType(ticketId)
 
-        transaction {
-            TicketTable.Tickets.selectAll()
-                .where(TicketTable.Tickets.id.eq(ticketId))
-                .forEach {
-                    message = it[TicketTable.Tickets.message]
-                    ticketType = TicketType.valueOf(it[TicketTable.Tickets.type])
-                    handlerId = it[TicketTable.Tickets.handler]
-                    status = TicketStatus.valueOf(it[TicketTable.Tickets.status])
-                }
-        }
         if (ticketStatus != null) status = ticketStatus
 
         var isHandled = false
         if (handlerId != null) isHandled = true
 
-        ticketChannel.editMessage(message!!).setActionRow(
-            messageActionRow(status!!, ticketType!!, isHandled)
-        ).queue()
+        ticketChannel.editMessage(message!!).setActionRow(messageActionRow(status!!, ticketType!!, isHandled)).queue()
     }
 
     private suspend fun generalMessage(channel: ThreadChannel, userId: String, modalValues: MutableList<ModalMapping>): MessageEmbed {
@@ -186,12 +141,8 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
     private suspend fun complaintMessage(channel: ThreadChannel, userId: String, modalId: String, modalValues: MutableList<ModalMapping>): MessageEmbed {
         var user = "**Anonymous**"
         var staff = "Anonymous"
-        if (modalId.split(":")[1] != "anonymous") {
-            staff = "<@${modalId.split(":")[1]}>"
-        }
-        if (userId != "anonymous") {
-            user = "<@$userId>"
-        }
+        if (modalId.split(":")[1] != "anonymous") staff = "<@${modalId.split(":")[1]}>"
+        if (userId != "anonymous") user = "<@$userId>"
 
         return Embed {
             author {

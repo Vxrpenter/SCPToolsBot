@@ -102,6 +102,19 @@ class TicketTable {
         return logMessage
     }
 
+    fun getMessage(id: String): String? {
+        var message: String? = null
+        transaction {
+            Tickets.selectAll()
+                .where { Tickets.id eq id }
+                .forEach {
+                    message = it[Tickets.message]
+                }
+        }
+
+        return message
+    }
+
     fun getTicketStatus(id: String): TicketStatus? {
         var status: TicketStatus? = null
         transaction {

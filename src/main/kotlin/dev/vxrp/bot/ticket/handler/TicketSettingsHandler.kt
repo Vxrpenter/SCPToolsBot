@@ -29,10 +29,8 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 iconUrl = user.avatarUrl
             }
             color = 0x2ECC70
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketClaimedTitle
-                .replace("%user%", user.globalName!!))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketClaimedBody
-                .replace("%user%", user.asMention))
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketClaimedTitle.replace("%user%", user.globalName!!))
+            description = ColorTool().useCustomColorCodes(translation.support.embedTicketClaimedBody.replace("%user%", user.asMention))
         }
         ticketChannel.send("", listOf(embed)).queue()
 
@@ -42,9 +40,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         TicketMessageHandler(api, config, translation).editMessage(id, ticketChannel)
         TicketLogHandler(api, config, translation).editMessage(id, handler = handlerUser)
 
-        if (TicketTable().getTicketType(id) == TicketType.APPLICATION) {
-            ApplicationTable().updateTicketHandler(id, handlerUser.id)
-        }
+        if (TicketTable().getTicketType(id) == TicketType.APPLICATION) ApplicationTable().updateTicketHandler(id, handlerUser.id)
 
         logger.info("Ticket {} claimed by user: {}", id, user.id)
     }
@@ -56,8 +52,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 iconUrl = user.avatarUrl
             }
             color = 0x2ECC70
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketOpenedTitle
-                .replace("%user%", user.globalName!!))
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketOpenedTitle.replace("%user%", user.globalName!!))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketOpenedBody)
         }
         ticketChannel.send("", listOf(embed)).queue()
@@ -77,8 +72,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 iconUrl = user.avatarUrl
             }
             color = 0xf1c40f
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketPausedTitle
-                .replace("%user%", user.globalName!!))
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketPausedTitle.replace("%user%", user.globalName!!))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketPausedBody)
         }
         ticketChannel.send("", listOf(embed)).queue()
@@ -98,8 +92,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 iconUrl = user.avatarUrl
             }
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketSuspendedTitle
-                .replace("%user%", user.globalName!!))
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketSuspendedTitle.replace("%user%", user.globalName!!))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketSuspendedBody)
         }
         ticketChannel.send("", listOf(embed)).queue()
@@ -119,8 +112,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 iconUrl = user.avatarUrl
             }
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedTitle
-                .replace("%user%", user.globalName!!))
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedTitle.replace("%user%", user.globalName!!))
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedBody)
         }
         ticketChannel.send("", listOf(embed)).queue()
@@ -131,9 +123,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         child.manager.setLocked(true).queue()
         child.manager.setArchived(true).queue()
 
-        if (TicketTable().getTicketType(id) == TicketType.APPLICATION) {
-            ApplicationTable().delete(id)
-        }
+        if (TicketTable().getTicketType(id) == TicketType.APPLICATION) ApplicationTable().delete(id)
 
         logger.info("Ticket {} archived by user: {}", id, user.id)
     }
@@ -143,8 +133,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
 
         var open = Button.success("ticket_setting_open", translation.buttons.textSupportSettingsOpen).withEmoji(Emoji.fromFormatted("🚪"))
         var pause = Button.primary("ticket_setting_pause", translation.buttons.textSupportSettingsPause).withEmoji(Emoji.fromFormatted("🌙"))
-        var suspend = Button.primary("ticket_setting_suspend", translation.buttons.textSupportSettingsSuspend).withEmoji(
-            Emoji.fromFormatted("🔒"))
+        var suspend = Button.primary("ticket_setting_suspend", translation.buttons.textSupportSettingsSuspend).withEmoji(Emoji.fromFormatted("🔒"))
         var close = Button.danger("ticket_setting_close", translation.buttons.textSupportSettingsClose).withEmoji(Emoji.fromFormatted("🪫"))
 
         when(status) {

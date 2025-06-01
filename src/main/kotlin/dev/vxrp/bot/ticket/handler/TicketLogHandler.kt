@@ -37,29 +37,16 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         var isHandled = false
         if (handler != null) isHandled = true
 
-        return channel.send("", listOf(logEmbed)).addActionRow(
-            logActionRow(ticketStatus, isHandled, ticketId)
-        ).await().id
+        return channel.send("", listOf(logEmbed)).addActionRow(logActionRow(ticketStatus, isHandled, ticketId)).await().id
     }
 
     suspend fun editMessage(ticketId: String, creator: String? = null, handler: User? = null, ticketStatus: TicketStatus? = null) {
-        var logMessage: String? = null
+        val logMessage = TicketTable().getLogMessage(ticketId)
+        var creatorId = TicketTable().getTicketCreator(ticketId)
+        val handlerId = TicketTable().getTicketHandler(ticketId)
+        var status = TicketTable().getTicketStatus(ticketId)
 
-        var creatorId: String? = null
-        var handlerId: String? = null
-        var status: TicketStatus? = null
 
-        transaction {
-            TicketTable.Tickets.selectAll()
-                .where(TicketTable.Tickets.id.eq(ticketId))
-                .forEach {
-                    logMessage = it[TicketTable.Tickets.logMessage]
-
-                    creatorId = it[TicketTable.Tickets.creator]
-                    handlerId = it[TicketTable.Tickets.handler]
-                    status = TicketStatus.valueOf(it[TicketTable.Tickets.status])
-                }
-        }
         val child = api.getThreadChannelById(ticketId)
         var handlerUser: User? = null
         if (handlerId != null) handlerUser = api.retrieveUserById(handlerId!!).await()
@@ -78,9 +65,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         var isHandled = false
         if (handlerId != null) isHandled = true
 
-        channel.editMessage(logMessage!!, "", listOf(logEmbed)).setActionRow(
-            logActionRow(status, isHandled, ticketId)
-        ).queue()
+        channel.editMessage(logMessage!!, "", listOf(logEmbed)).setActionRow(logActionRow(status, isHandled, ticketId)).queue()
     }
 
     suspend fun closeMessage(ticketId: String, closedUser: User) {
@@ -150,13 +135,10 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
     private fun logActionRow(status: TicketStatus, handler: Boolean, ticketId: String): Collection<ItemComponent> {
         val rows: MutableCollection<ItemComponent> = ArrayList()
 
-        var claim = Button.primary("ticket_log_claim:$ticketId", translation.buttons.textSupportLogClaim).withEmoji(
-            Emoji.fromFormatted("📫"))
+        var claim = Button.primary("ticket_log_claim:$ticketId", translation.buttons.textSupportLogClaim).withEmoji(Emoji.fromFormatted("📫"))
         var open = Button.success("ticket_log_open:$ticketId", translation.buttons.textSupportLogOpen).withEmoji(Emoji.fromFormatted("🚪"))
-        var pause = Button.primary("ticket_log_pause:$ticketId", translation.buttons.textSupportLogPause).withEmoji(
-            Emoji.fromFormatted("🌙"))
-        var suspend = Button.primary("ticket_log_suspend:$ticketId", translation.buttons.textSupportLogSuspend).withEmoji(
-            Emoji.fromFormatted("🔒"))
+        var pause = Button.primary("ticket_log_pause:$ticketId", translation.buttons.textSupportLogPause).withEmoji(Emoji.fromFormatted("🌙"))
+        var suspend = Button.primary("ticket_log_suspend:$ticketId", translation.buttons.textSupportLogSuspend).withEmoji(Emoji.fromFormatted("🔒"))
         var close = Button.danger("ticket_log_close:$ticketId", translation.buttons.textSupportLogClose).withEmoji(Emoji.fromFormatted("🪫"))
 
         if (handler) claim = claim.asDisabled()
