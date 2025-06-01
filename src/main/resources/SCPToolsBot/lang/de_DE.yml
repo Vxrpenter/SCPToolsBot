@@ -469,6 +469,15 @@ SUPPORT:
 
                         %channel%"
 
+  EMBED_INTERACTION_CHAIN_ERROR_TITLE: "Interaktion Unterbrochen"
+  EMBED_INTERACTION_CHAIN_ERROR_BODY: "Modal interaktion gesperrt, fehler in der Interaktion vermutet. Bitte melde dich bei einem Administrator."
+
+  EMBED_NO_MORE_APPLICATIONS_TITLE: "Keine weiteren Bewerbungen"
+  EMBED_NO_MORE_APPLICATIONS_BODY: "Es können keine weiteren bewerbungen geöffnet werden bis eine noch laufende geschlossen wurde. Dies rührt von dem Mitglieder limit von: %members%, das für diese Rolle gilt."
+
+  EMBED_APPLICATION_AGE_NUMERIC_TITLE: "Alter muss eine Zahl sein"
+  EMBED_APPLICATION_AGE_NUMERIC_BODY: "Dein angegebenes Alter ist keine Zahl. Nur Zahlen von 0 - 9 sind als alter erlaubt, alle anderen Zeichen werden abgelehnt."
+
   EMBED_SETTINGS_TITLE: "Ticket Einstellungen"
   EMBED_SETTINGS_BODY: "
                         In diesen Einstellungen kannst du den Status der Tickets ändern.\n
@@ -567,6 +576,15 @@ APPLICATION:
   MODAL_CHOOSE_COUNT_TITLE: "Kandidaten Anzahl"
   MODAL_CHOOSE_COUNT_NUMBER_TITLE: "Nummer"
   MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER: "Wie viele Plätze sollten die Kandidaten haben?"
+
+  EMBED_APPLICATION_ACTIVATED_TITLE: "Bewerbungen Aktiviert"
+  EMBED_APPLICATION_ACTIVATED_BODY: "Die Bewerbungsphase wurde erfolgreich aktiviert. Mitglieder des Servers können sich jetzt für die ausgewählten rollen bewerben. Wenn das Mitgliederlimit erreicht wird, werden neue Bewerbungen blockiert."
+
+  EMBED_APPLICATION_DEACTIVATED_TITLE: "Bewerbungen Deaktiviert"
+  EMBED_APPLICATION_DEACTIVATED_BODY: "Die Bewerbungsphase wurde erfolgreich deaktiviert. Alle laufenden Bewerbungstickets werden offen gehalten, jedoch werden neue tickets automatisch blockiert."
+
+  EMBED_POSITION_NOT_ACTIVE_TITLE: "Position not Active"
+  EMBED_POSITION_NOT_ACTIVE_BODY: "This position is currently not open for any application. Contact server staff for more information."
 
 VERIFY:
   EMBED_TEMPLATE_TITLE: "Verifizierung - Steam und Discord Link"

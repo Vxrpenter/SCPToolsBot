@@ -468,6 +468,15 @@ SUPPORT:
                       
                         %channel%"
 
+  EMBED_INTERACTION_CHAIN_ERROR_TITLE: "Interaction Chain Error"
+  EMBED_INTERACTION_CHAIN_ERROR_BODY: "Modal Interaction suspended, error in interaction suspected. Please notify an administrator about this error."
+
+  EMBED_NO_MORE_APPLICATIONS_TITLE: "No more Applications"
+  EMBED_NO_MORE_APPLICATIONS_BODY: "No more applications can be opened until another is closed. This is caused by the member limit of: %members%, that is enforced on this role."
+
+  EMBED_APPLICATION_AGE_NUMERIC_TITLE: "Age must be numeric"
+  EMBED_APPLICATION_AGE_NUMERIC_BODY: "You have not entered a numeric age. Only numbers from 0 - 9 are allowed as age, any other symbol will be flagged."
+
   EMBED_SETTINGS_TITLE: "Ticket Settings"
   EMBED_SETTINGS_BODY: "
                         In this settings menu, you are able to change the tickets status.\n
@@ -566,6 +575,15 @@ APPLICATION:
   MODAL_CHOOSE_COUNT_TITLE: "Candidate Count"
   MODAL_CHOOSE_COUNT_NUMBER_TITLE: "Number"
   MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER: "How many members should the candidates have?"
+
+  EMBED_APPLICATION_ACTIVATED_TITLE: "Application Activated"
+  EMBED_APPLICATION_ACTIVATED_BODY: "Applications have been successfully activated. Members of your server can now apply for the selected positions. If the member limit is reached, no more application will be accepted."
+
+  EMBED_APPLICATION_DEACTIVATED_TITLE: "Application Deactivated"
+  EMBED_APPLICATION_DEACTIVATED_BODY: "Applications have been successfully deactivated. All running application tickets will be kept open but any creation of new tickets will be blocked."
+
+  EMBED_POSITION_NOT_ACTIVE_TITLE: "Position not Active"
+  EMBED_POSITION_NOT_ACTIVE_BODY: "This position is currently not open for any application. Contact server staff for more information."
 
 VERIFY:
   EMBED_TEMPLATE_TITLE: "Verify - Steam and Discord Linking"

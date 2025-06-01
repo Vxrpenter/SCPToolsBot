@@ -453,6 +453,21 @@ data class TranslationSupport(
     @SerialName("EMBED_TICKET_CREATED_BODY")
     val embedTicketCreatedBody: String,
 
+    @SerialName("EMBED_INTERACTION_CHAIN_ERROR_TITLE")
+    val embedInteractionChainErrorTitle: String,
+    @SerialName("EMBED_INTERACTION_CHAIN_ERROR_BODY")
+    val embedInteractionChainErrorBody: String,
+
+    @SerialName("EMBED_NO_MORE_APPLICATIONS_TITLE")
+    val embedNoMoreApplicationsTitle: String,
+    @SerialName("EMBED_NO_MORE_APPLICATIONS_BODY")
+    val embedNoMoreApplicationsBody: String,
+
+    @SerialName("EMBED_APPLICATION_AGE_NUMERIC_TITLE")
+    val embedApplicationAgeNumericTitle: String,
+    @SerialName("EMBED_APPLICATION_AGE_NUMERIC_BODY")
+    val embedApplicationAgeNumericBody: String,
+
     @SerialName("EMBED_SETTINGS_TITLE")
     val embedSettingsTitle: String,
     @SerialName("EMBED_SETTINGS_BODY")
@@ -553,7 +568,22 @@ data class TranslationApplication(
     @SerialName("MODAL_CHOOSE_COUNT_NUMBER_TITLE")
     val modalChooseCountNumberTitle: String,
     @SerialName("MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER")
-    val modalChooseCountNumberPlaceholder: String
+    val modalChooseCountNumberPlaceholder: String,
+
+    @SerialName("EMBED_APPLICATION_ACTIVATED_TITLE")
+    val embedApplicationActivatedTitle: String,
+    @SerialName("EMBED_APPLICATION_ACTIVATED_BODY")
+    val embedApplicationActivatedBody: String,
+
+    @SerialName("EMBED_APPLICATION_DEACTIVATED_TITLE")
+    val embedApplicationDeactivatedTitle: String,
+    @SerialName("EMBED_APPLICATION_DEACTIVATED_BODY")
+    val embedApplicationDeactivatedBody: String,
+
+    @SerialName("EMBED_POSITION_NOT_ACTIVE_TITLE")
+    val embedPositionNotActiveTitle: String,
+    @SerialName("EMBED_POSITION_NOT_ACTIVE_BODY")
+    val embedPositionNotActiveBody: String,
 )
 
 @Serializable
