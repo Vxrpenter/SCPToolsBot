@@ -428,7 +428,7 @@ SUPPORT:
                         Support Ticket getting reviewed. A response from our moderation team may take a bit\n
 
                         **Type:** Complaint\n
-                        **Issuer:** <@%issuerId%>\n
+                        **Issuer:** %issuerId%\n
                         **Complained about:** %staff%\n
 
                         **Reason:**\n
@@ -468,6 +468,15 @@ SUPPORT:
                       
                         %channel%"
 
+  EMBED_INTERACTION_CHAIN_ERROR_TITLE: "Interaction Chain Error"
+  EMBED_INTERACTION_CHAIN_ERROR_BODY: "Modal Interaction suspended, error in interaction suspected. Please notify an administrator about this error."
+
+  EMBED_NO_MORE_APPLICATIONS_TITLE: "No more Applications"
+  EMBED_NO_MORE_APPLICATIONS_BODY: "No more applications can be opened until another is closed. This is caused by the member limit of: %members%, that is enforced on this role."
+
+  EMBED_APPLICATION_AGE_NUMERIC_TITLE: "Age must be numeric"
+  EMBED_APPLICATION_AGE_NUMERIC_BODY: "You have not entered a numeric age. Only numbers from 0 - 9 are allowed as age, any other symbol will be flagged."
+
   EMBED_SETTINGS_TITLE: "Ticket Settings"
   EMBED_SETTINGS_BODY: "
                         In this settings menu, you are able to change the tickets status.\n
@@ -491,16 +500,26 @@ SUPPORT:
                         **Ticket Created by:** %creator%\n
                         **Ticket Handled by:** %handler%\n
 
-                        _This log message will be permanently deleted when the ticket is closed. Closed tickets can be found in the thread section of the main ticket channel._"
+                        _This log message will be deactivated when the ticket is closed. Closed tickets can be found in the thread section of the main ticket channel._"
+
+  EMBED_CLOSED_LOG_TITLE: "%name% by %user% - Closed"
+  EMBED_CLOSED_LOG_BODY: "
+                        **Ticket Status:** %status%\n
+                        **Ticket Id:** %id%\n
+                        **Ticket Created by:** %creator%\n
+                        **Ticket Handled by:** %handler%\n
+                        **Closed By** %closed_user%\n
+                        &filler<255>&
+                        _This log message has been deactivated._"
 
   EMBED_TICKET_CLAIMED_TITLE: "Ticket Claimed"
-  EMBED_TICKET_CLAIMED_BODY: "This ticket is now being managed by %user%."
+  EMBED_TICKET_CLAIMED_BODY: "This ticket has been claimed by %user%. They will now be managing all ticket affairs and assist you in your questions."
 
   EMBED_TICKET_NO_HANDLER_TITLE: "No Handler"
   EMBED_TICKET_NO_HANDLER_BODY: "The ticket has to be claimed before any interactions can be performed. Ticket claim will not remove any other users from the channel or block their interactions!"
 
   EMBED_TICKET_OPENED_TITLE: "Ticket Reopened"
-  EMBED_TICKET_OPENED_BODY: "This ticket has been reopened."
+  EMBED_TICKET_OPENED_BODY: "This ticket has been reopened. You are now able to resume the conversation or close it if needed."
 
   EMBED_TICKET_PAUSED_TITLE: "Ticket Paused"
   EMBED_TICKET_PAUSED_BODY: "This ticket has been paused. No messages are allowed but the ticket will be opened shortly in the future"
@@ -509,7 +528,7 @@ SUPPORT:
   EMBED_TICKET_SUSPENDED_BODY: "This ticket has been suspended. Please contact staff on why and how it was suspended"
 
   EMBED_TICKET_CLOSED_TITLE: "Ticket Closed"
-  EMBED_TICKET_CLOSED_BODY: "This ticket has been closed. It will not be reopened"
+  EMBED_TICKET_CLOSED_BODY: "This ticket has been closed. It will not be reopened. If you ever have any other problems, you can always create a new ticket."
 
   EMBED_LOG_CLAIMED_TITLE: "You Claimed Ticket - %name%"
   EMBED_LOG_CLAIMED_BODY: "This ticket is now under your management. You will tend to it and help the user correspondingly"
@@ -566,6 +585,15 @@ APPLICATION:
   MODAL_CHOOSE_COUNT_TITLE: "Candidate Count"
   MODAL_CHOOSE_COUNT_NUMBER_TITLE: "Number"
   MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER: "How many members should the candidates have?"
+
+  EMBED_APPLICATION_ACTIVATED_TITLE: "Application Activated"
+  EMBED_APPLICATION_ACTIVATED_BODY: "Applications have been successfully activated. Members of your server can now apply for the selected positions. If the member limit is reached, no more application will be accepted."
+
+  EMBED_APPLICATION_DEACTIVATED_TITLE: "Application Deactivated"
+  EMBED_APPLICATION_DEACTIVATED_BODY: "Applications have been successfully deactivated. All running application tickets will be kept open but any creation of new tickets will be blocked."
+
+  EMBED_POSITION_NOT_ACTIVE_TITLE: "Position not Active"
+  EMBED_POSITION_NOT_ACTIVE_BODY: "This position is currently not open for any application. Contact server staff for more information."
 
 VERIFY:
   EMBED_TEMPLATE_TITLE: "Verify - Steam and Discord Linking"

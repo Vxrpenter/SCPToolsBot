@@ -54,7 +54,12 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
             if (config.ticket.settings.applicationMessageChannel != "") {
                 event.message.delete().queue()
                 ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!, true)
-                event.reply_("Application successfully activated").setEphemeral(true).queue()
+                val embed = Embed {
+                    color = 0x2ECC70
+                    title = ColorTool().useCustomColorCodes(translation.application.embedApplicationActivatedTitle)
+                    description = ColorTool().useCustomColorCodes(translation.application.embedApplicationActivatedBody)
+                }
+                event.reply_("", listOf(embed)).setEphemeral(true).queue()
             } else {
                 logger.warn("Could not complete application setup, add channel id in the config to fix")
             }
@@ -78,7 +83,12 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
                 }
 
                 ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!, false)
-                event.reply_("Application successfully deactivated").setEphemeral(true).queue()
+                val embed = Embed {
+                    color = 0xE74D3C
+                    title = ColorTool().useCustomColorCodes(translation.application.embedApplicationDeactivatedTitle)
+                    description = ColorTool().useCustomColorCodes(translation.application.embedApplicationDeactivatedBody)
+                }
+                event.reply_("", listOf(embed)).setEphemeral(true).queue()
             } else {
                 logger.warn("Could not deactivate application phase, add channel id in the config to fix")
             }

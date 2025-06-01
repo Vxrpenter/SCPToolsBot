@@ -1,7 +1,6 @@
 package dev.vxrp.bot.events.modals
 
 import dev.minn.jda.ktx.messages.Embed
-import dev.minn.jda.ktx.messages.reply_
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.ticket.TicketManager
 import dev.vxrp.bot.ticket.enums.TicketStatus
@@ -55,15 +54,31 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
         }
 
         if (event.modalId.startsWith("ticket_application")) {
-            val handler = TicketManager(api, config, translation)
-            val child = handler.createTicket(TicketType.APPLICATION, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             val roleId = event.modalId.split(":")[1]
 
             if (ApplicationTable().retrieveSerial(roleId) >= ApplicationTypeTable().query(roleId)!!.members!!) {
-                event.reply_("No more applications can't be opened until another is closed").setEphemeral(true).queue()
+                val embed = Embed {
+                    color = 0xE74D3C
+                    title = ColorTool().useCustomColorCodes(translation.support.embedNoMoreApplicationsTitle)
+                    description = ColorTool().useCustomColorCodes(translation.support.embedNoMoreApplicationsBody
+                        .replace("%members%", ApplicationTypeTable().query(roleId)!!.members!!.toString()))
+                }
+                event.hook.send("", listOf(embed)).setEphemeral(true).queue()
                 return
             }
 
+            if (event.values[1].asString.toIntOrNull() == null) {
+                val embed = Embed {
+                    color = 0xE74D3C
+                    title = ColorTool().useCustomColorCodes(translation.support.embedApplicationAgeNumericTitle)
+                    description = ColorTool().useCustomColorCodes(translation.support.embedApplicationAgeNumericBody)
+                }
+                event.hook.send("", listOf(embed)).setEphemeral(true).queue()
+                return
+            }
+
+            val handler = TicketManager(api, config, translation)
+            val child = handler.createTicket(TicketType.APPLICATION, TicketStatus.OPEN, event.user.id, null, event.modalId, event.values)
             ApplicationTable().addToDatabase(child?.id.toString(), roleId, state =false, result = false, event.user.id, null)
             respond(child, event)
         }
@@ -71,12 +86,18 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
 
     private fun respond(child: ThreadChannel?, event: ModalInteractionEvent) {
         if (child == null) {
+            val embed = Embed {
+                color = 0xE74D3C
+                title = ColorTool().useCustomColorCodes(translation.support.embedInteractionChainErrorTitle)
+                description = ColorTool().useCustomColorCodes(translation.support.embedInteractionChainErrorBody)
+            }
             logger.error("Modal Interaction Suspended, error suspected. Child channel could not correctly be returned")
-            event.reply_("Modal Interaction suspended, error in interaction suspected").queue()
+            event.hook.send("", listOf(embed)).setEphemeral(true).queue()
             return
         }
 
         event.hook.send("", listOf(Embed {
+            color = 0x2ECC70
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketCreatedTitle)
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketCreatedBody.replace("%channel%", child.asMention))
         })).setEphemeral(true).queue()

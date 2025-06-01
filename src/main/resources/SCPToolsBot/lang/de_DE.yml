@@ -429,7 +429,7 @@ SUPPORT:
                         Support-Ticket wird geprüft. Eine Antwort unseres Moderationsteams kann etwas dauern.\n
 
                         **Type:** Complaint\n
-                        **Ersteller:** <@%issuerId%>\n
+                        **Ersteller:** %issuerId%\n
                         **Beschwerde Über:** %staff%\n
 
                         **Grund:**\n
@@ -469,6 +469,15 @@ SUPPORT:
 
                         %channel%"
 
+  EMBED_INTERACTION_CHAIN_ERROR_TITLE: "Interaktion Unterbrochen"
+  EMBED_INTERACTION_CHAIN_ERROR_BODY: "Modal interaktion gesperrt, fehler in der Interaktion vermutet. Bitte melde dich bei einem Administrator."
+
+  EMBED_NO_MORE_APPLICATIONS_TITLE: "Keine weiteren Bewerbungen"
+  EMBED_NO_MORE_APPLICATIONS_BODY: "Es können keine weiteren bewerbungen geöffnet werden bis eine noch laufende geschlossen wurde. Dies rührt von dem Mitglieder limit von: %members%, das für diese Rolle gilt."
+
+  EMBED_APPLICATION_AGE_NUMERIC_TITLE: "Alter muss eine Zahl sein"
+  EMBED_APPLICATION_AGE_NUMERIC_BODY: "Dein angegebenes Alter ist keine Zahl. Nur Zahlen von 0 - 9 sind als alter erlaubt, alle anderen Zeichen werden abgelehnt."
+
   EMBED_SETTINGS_TITLE: "Ticket Einstellungen"
   EMBED_SETTINGS_BODY: "
                         In diesen Einstellungen kannst du den Status der Tickets ändern.\n
@@ -494,14 +503,24 @@ SUPPORT:
 
                         _Diese Log-Nachricht wird dauerhaft gelöscht, wenn das Ticket geschlossen wird. Geschlossene Tickets findest du im Thread-Bereich des Hauptticket-Kanals."
 
+  EMBED_CLOSED_LOG_TITLE: "%name% von %user% - Geschlossen"
+  EMBED_CLOSED_LOG_BODY: "
+                        **Ticketstatus:** %status%\n
+                        **Ticket-ID:** %id%\n
+                        **Ticket erstellt von:** %creator%\n
+                        **Ticket bearbeitet von:** %handler%\n
+                        **Geschlossen von** %closed_user%\n
+                        &filler<255>&
+                        _Diese Log-Nachricht wurde deaktiviert._"
+
   EMBED_TICKET_CLAIMED_TITLE: "Ticket Beansprucht"
-  EMBED_TICKET_CLAIMED_BODY: "Dieses ticket wird jetzt von %user% bearbeitet."
+  EMBED_TICKET_CLAIMED_BODY: "Dieses ticket wird jetzt von %user% bearbeitet. Bei jeglichen fragen usw. wird dir dieser Nutzer zu Seite stehen."
 
   EMBED_TICKET_NO_HANDLER_TITLE: "Kein Bearbeiter"
   EMBED_TICKET_NO_HANDLER_BODY: "Das Ticket muss beansprucht werden, bevor Interaktionen durchgeführt werden können. Die Ticket-Beanspruchung entfernt keine anderen Benutzer aus dem Kanal und blockiert deren Interaktionen nicht!"
 
   EMBED_TICKET_OPENED_TITLE: "Ticket wieder Geöffnet"
-  EMBED_TICKET_OPENED_BODY: "Dieses Ticket wurde erneut geöffnet."
+  EMBED_TICKET_OPENED_BODY: "Dieses Ticket wurde erneut geöffnet. Du kannst nun die Konversation wieder aufnehmen oder das Ticket bei bedarf schließen"
 
   EMBED_TICKET_PAUSED_TITLE: "Ticket Pausiert"
   EMBED_TICKET_PAUSED_BODY: "Dieses Ticket wurde pausiert. Aktuell sind keine Nachrichten erlaubt jedoch wird dieses Ticket bald erneut geöffnet"
@@ -510,7 +529,7 @@ SUPPORT:
   EMBED_TICKET_SUSPENDED_BODY: "Dieses Ticket wurde gesperrt. Bitte kontaktiere ein Teammitglied um mehr Informationen zu erhalten"
 
   EMBED_TICKET_CLOSED_TITLE: "Ticket Geschlossen"
-  EMBED_TICKET_CLOSED_BODY: "Dieses Ticket wurde geschlossen. Es wird nicht erneut geöffnet"
+  EMBED_TICKET_CLOSED_BODY: "Dieses Ticket wurde geschlossen. Es wird nicht erneut geöffnet werden. Solltest du erneute Fragen haben, kannst du jederzeit ein weiteres Ticket erstellen."
 
   EMBED_LOG_CLAIMED_TITLE: "Du hast das Ticket beansprucht - %name%"
   EMBED_LOG_CLAIMED_BODY: "Dieses Ticket steht jetzt unter deiner Verantwortung."
@@ -567,6 +586,15 @@ APPLICATION:
   MODAL_CHOOSE_COUNT_TITLE: "Kandidaten Anzahl"
   MODAL_CHOOSE_COUNT_NUMBER_TITLE: "Nummer"
   MODAL_CHOOSE_COUNT_NUMBER_PLACEHOLDER: "Wie viele Plätze sollten die Kandidaten haben?"
+
+  EMBED_APPLICATION_ACTIVATED_TITLE: "Bewerbungen Aktiviert"
+  EMBED_APPLICATION_ACTIVATED_BODY: "Die Bewerbungsphase wurde erfolgreich aktiviert. Mitglieder des Servers können sich jetzt für die ausgewählten rollen bewerben. Wenn das Mitgliederlimit erreicht wird, werden neue Bewerbungen blockiert."
+
+  EMBED_APPLICATION_DEACTIVATED_TITLE: "Bewerbungen Deaktiviert"
+  EMBED_APPLICATION_DEACTIVATED_BODY: "Die Bewerbungsphase wurde erfolgreich deaktiviert. Alle laufenden Bewerbungstickets werden offen gehalten, jedoch werden neue tickets automatisch blockiert."
+
+  EMBED_POSITION_NOT_ACTIVE_TITLE: "Position nicht Aktiv"
+  EMBED_POSITION_NOT_ACTIVE_BODY: "Diese Position ist aktuell nicht für Bewerbungen geöffnet. Für mehr Informationen, melde dich bei einem Administrator."
 
 VERIFY:
   EMBED_TEMPLATE_TITLE: "Verifizierung - Steam und Discord Link"

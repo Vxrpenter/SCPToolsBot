@@ -157,7 +157,7 @@ class TicketTemplateModals(val translation: Translation) {
                     label = translation.support.modalApplicationAgeTitle,
                     style = TextInputStyle.SHORT,
                     required = true,
-                    requiredLength = 4..100,
+                    requiredLength = 2..3,
                     placeholder = translation.support.modalApplicationAgePlaceholder).build()
             ),
             ActionRow.of(

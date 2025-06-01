@@ -2,6 +2,7 @@ package dev.vxrp.bot.ticket.handler
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.Embed
+import dev.minn.jda.ktx.messages.edit
 import dev.minn.jda.ktx.messages.editMessage
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.ticket.enums.TicketStatus
@@ -16,9 +17,6 @@ import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.interactions.components.ItemComponent
 import net.dv8tion.jda.api.interactions.components.buttons.Button
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 import java.time.Instant
 
@@ -26,7 +24,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
     private val logger = LoggerFactory.getLogger(TicketLogHandler::class.java)
 
     suspend fun logMessage(creator: String, handler: User?, ticketId: String, ticketStatus: TicketStatus, childChannel: ThreadChannel): String? {
-        val logEmbed = createMessage(creator, handler, ticketStatus, childChannel)
+        val logEmbed = createMessage(creator, handler, ticketStatus, childChannel, false)
 
         val channel = api.getTextChannelById(config.ticket.settings.ticketLogChannel) ?: run {
             logger.error("Could not sent ticket log message for ticket '{}'", ticketId)
@@ -36,38 +34,25 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         var isHandled = false
         if (handler != null) isHandled = true
 
-        return channel.send("", listOf(logEmbed)).addActionRow(
-            logActionRow(ticketStatus, isHandled, ticketId)
-        ).await().id
+        return channel.send("", listOf(logEmbed)).addActionRow(logActionRow(ticketStatus, isHandled, ticketId)).await().id
     }
 
     suspend fun editMessage(ticketId: String, creator: String? = null, handler: User? = null, ticketStatus: TicketStatus? = null) {
-        var logMessage: String? = null
+        val logMessage = TicketTable().getLogMessage(ticketId)
+        var creatorId = TicketTable().getTicketCreator(ticketId)
+        val handlerId = TicketTable().getTicketHandler(ticketId)
+        var status = TicketTable().getTicketStatus(ticketId)
 
-        var creatorId: String? = null
-        var handlerId: String? = null
-        var status: TicketStatus? = null
 
-        transaction {
-            TicketTable.Tickets.selectAll()
-                .where(TicketTable.Tickets.id.eq(ticketId))
-                .forEach {
-                    logMessage = it[TicketTable.Tickets.logMessage]
-
-                    creatorId = it[TicketTable.Tickets.creator]
-                    handlerId = it[TicketTable.Tickets.handler]
-                    status = TicketStatus.valueOf(it[TicketTable.Tickets.status])
-                }
-        }
         val child = api.getThreadChannelById(ticketId)
         var handlerUser: User? = null
-        if (handlerId != null) handlerUser = api.retrieveUserById(handlerId!!).await()
+        if (handlerId != null) handlerUser = api.retrieveUserById(handlerId).await()
 
         if (creator != null) creatorId = creator
         if (handler != null) handlerUser = handler
         if (ticketStatus != null) status = ticketStatus
 
-        val logEmbed = createMessage(creatorId!!, handlerUser!!, status!!, child!!)
+        val logEmbed = createMessage(creatorId!!, handlerUser!!, status!!, child!!, false)
 
         val channel = api.getTextChannelById(config.ticket.settings.ticketLogChannel) ?: run {
             logger.error("Could not edit ticket log message for ticket '{}'", ticketId)
@@ -77,31 +62,27 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         var isHandled = false
         if (handlerId != null) isHandled = true
 
-        channel.editMessage(logMessage!!, "", listOf(logEmbed)).setActionRow(
-            logActionRow(status, isHandled, ticketId)
-        ).queue()
+        channel.editMessage(logMessage!!, "", listOf(logEmbed)).setActionRow(logActionRow(status, isHandled, ticketId)).queue()
     }
 
-    suspend fun deleteMesssage(ticketId: String) {
-        var logMessage: String? = null
+    suspend fun closeMessage(ticketId: String, closedUser: User) {
+        val logMessage = TicketTable().getLogMessage(ticketId)
 
-        transaction {
-            TicketTable.Tickets.selectAll()
-                .where(TicketTable.Tickets.id.eq(ticketId))
-                .forEach {
-                    logMessage = it[TicketTable.Tickets.logMessage]
-                }
-        }
+        val creator = TicketTable().getTicketCreator(ticketId)!!
+        val handler = api.retrieveUserById(TicketTable().getTicketHandler(ticketId)!!).await()
+        val childChannel = api.getThreadChannelById(ticketId)!!
 
         val channel = api.getTextChannelById(config.ticket.settings.ticketLogChannel) ?: run {
             logger.error("Could not delete ticket log message for ticket '{}'", ticketId)
             return
         }
 
-        channel.deleteMessageById(logMessage!!).await()
+        val message = channel.retrieveMessageById(logMessage!!).await()
+        message.editMessageComponents().queue()
+        message.edit("", listOf(createMessage(creator, handler, TicketStatus.CLOSED, childChannel, true, closedUser = closedUser))).queue()
     }
 
-    private suspend fun createMessage(ticketCreator: String, ticketHandler: User?, ticketStatus: TicketStatus, childChannel: ThreadChannel): MessageEmbed {
+    private suspend fun createMessage(ticketCreator: String, ticketHandler: User?, ticketStatus: TicketStatus, childChannel: ThreadChannel, closedMessage: Boolean, closedUser: User? = null): MessageEmbed {
         var thumbnailUrl = "https://www.pngarts.com/files/4/Anonymous-Mask-Transparent-Images.png"
         var creatorUserMention = "anonymous"
         var creatorUserName = "anonymous"
@@ -115,16 +96,35 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         }
         if (ticketHandler != null) handlerUserName = ticketHandler.asMention
 
-        return Embed {
-            thumbnail = thumbnailUrl
-            title = ColorTool().useCustomColorCodes(translation.support.embedLogTitle
+        var usableColor = 0x2ECC70
+        var usableTitle = ColorTool().useCustomColorCodes(translation.support.embedLogTitle
+            .replace("%name%", childChannel.name)
+            .replace("%user%", creatorUserName))
+        var usableDescription = ColorTool().useCustomColorCodes(translation.support.embedLogBody
+            .replace("%status%", ticketStatus.toString())
+            .replace("%id%", childChannel.id)
+            .replace("%creator%", creatorUserMention)
+            .replace("%handler%", handlerUserName))
+
+        if (closedMessage) {
+            usableColor = 0xE74D3C
+            usableTitle = ColorTool().useCustomColorCodes(translation.support.embedClosedLogTitle
                 .replace("%name%", childChannel.name)
                 .replace("%user%", creatorUserName))
-            description = ColorTool().useCustomColorCodes(translation.support.embedLogBody
+
+            usableDescription = ColorTool().useCustomColorCodes(translation.support.embedClosedLogBody
                 .replace("%status%", ticketStatus.toString())
                 .replace("%id%", childChannel.id)
                 .replace("%creator%", creatorUserMention)
-                .replace("%handler%", handlerUserName))
+                .replace("%handler%", handlerUserName)
+                .replace("%closed_user%", closedUser?.asMention!!))
+        }
+
+        return Embed {
+            color = usableColor
+            thumbnail = thumbnailUrl
+            title = usableTitle
+            description = usableDescription
             timestamp = Instant.now()
         }
     }
@@ -132,13 +132,10 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
     private fun logActionRow(status: TicketStatus, handler: Boolean, ticketId: String): Collection<ItemComponent> {
         val rows: MutableCollection<ItemComponent> = ArrayList()
 
-        var claim = Button.primary("ticket_log_claim:$ticketId", translation.buttons.textSupportLogClaim).withEmoji(
-            Emoji.fromFormatted("📫"))
+        var claim = Button.primary("ticket_log_claim:$ticketId", translation.buttons.textSupportLogClaim).withEmoji(Emoji.fromFormatted("📫"))
         var open = Button.success("ticket_log_open:$ticketId", translation.buttons.textSupportLogOpen).withEmoji(Emoji.fromFormatted("🚪"))
-        var pause = Button.primary("ticket_log_pause:$ticketId", translation.buttons.textSupportLogPause).withEmoji(
-            Emoji.fromFormatted("🌙"))
-        var suspend = Button.primary("ticket_log_suspend:$ticketId", translation.buttons.textSupportLogSuspend).withEmoji(
-            Emoji.fromFormatted("🔒"))
+        var pause = Button.primary("ticket_log_pause:$ticketId", translation.buttons.textSupportLogPause).withEmoji(Emoji.fromFormatted("🌙"))
+        var suspend = Button.primary("ticket_log_suspend:$ticketId", translation.buttons.textSupportLogSuspend).withEmoji(Emoji.fromFormatted("🔒"))
         var close = Button.danger("ticket_log_close:$ticketId", translation.buttons.textSupportLogClose).withEmoji(Emoji.fromFormatted("🪫"))
 
         if (handler) claim = claim.asDisabled()
