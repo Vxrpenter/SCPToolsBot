@@ -49,9 +49,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
     fun editActivationMessage(userId: String, roleId: String, channel: TextChannel, messageId: String, name: String? = null, description: String? = null, emoji: String? = null, state: Boolean? = null, initializer: String? = null, member: Int? = null) {
         ApplicationManager(config, translation).changeApplicationType(roleId, name, description, emoji, state, initializer, member)
 
-        channel.editMessage(messageId, "", listOf(createMessage(false))).setActionRow(
-            applicationActionRow(userId, applicationTypeSet.toList())
-        ).queue()
+        channel.editMessage(messageId, "", listOf(createMessage(false))).setActionRow(applicationActionRow(userId, applicationTypeSet.toList())).queue()
     }
 
     suspend fun sendApplicationMessage(api: JDA, channel: TextChannel, state: Boolean) {
@@ -66,10 +64,9 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         val embed = Embed {
             color = embedColor
             title = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageTitle)
-            description = ColorTool().useCustomColorCodes(
-                translation.application.embedApplicationMessageBody
-                    .replace("%status%", status)
-                    .replace("%active_roles%", roleStringPair.first.toString())
+            description = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageBody
+                .replace("%status%", status)
+                .replace("%active_roles%", roleStringPair.first.toString())
             )
         }
 
@@ -93,9 +90,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
             ).await()
         }
 
-        for (type in applicationTypeSet) {
-            ApplicationTypeTable().changeType(type.roleId, type.state, type.member,type.initializer)
-        }
+        for (type in applicationTypeSet) ApplicationTypeTable().changeType(type.roleId, type.state, type.member,type.initializer)
         if (message == null) {
             logger.error("Could not mirror applied application settings to database")
             return
@@ -112,10 +107,9 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         return Embed {
             color = 0x2ECC70
             title = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuTitle)
-            description = ColorTool().useCustomColorCodes(
-                translation.application.embedActivationMenuBody
-                    .replace("%status%", translation.application.textStatusDeactivated)
-                    .replace("%active_roles%", roleStringPair.first.toString())
+            description = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuBody
+                .replace("%status%", translation.application.textStatusDeactivated)
+                .replace("%active_roles%", roleStringPair.first.toString())
             )
         }
     }
@@ -136,24 +130,12 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         for (type in config.ticket.applicationTypes) {
             count += 1
 
-            applicationTypeList.add(
-                ApplicationType(
-                    count,
-                    type.roleID,
-                    type.name,
-                    type.description,
-                    type.emoji,
-                    false,
-                    null,
-                    0
-                )
-            )
+            applicationTypeList.add(ApplicationType(count, type.roleID, type.name, type.description, type.emoji, false, null, 0))
 
-            stringBuilder.append(
-                ColorTool().useCustomColorCodes(translation.application.textRoleStatusTemplate
-                    .replace("%roleId%", type.roleID)
-                    .replace("%status%", deactivated)
-                    .replace("%max_candidates%", "0")))
+            stringBuilder.append(ColorTool().useCustomColorCodes(translation.application.textRoleStatusTemplate
+                .replace("%roleId%", type.roleID)
+                .replace("%status%", deactivated)
+                .replace("%max_candidates%", "0")))
         }
 
         return Pair(stringBuilder, applicationTypeList)
@@ -169,11 +151,10 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
             if (type.state) status = activated
             if (!type.state) status = deactivated
 
-            stringBuilder.append(
-                ColorTool().useCustomColorCodes(translation.application.textRoleStatusTemplate
-                    .replace("%roleId%", type.roleId)
-                    .replace("%status%", status!!)
-                    .replace("%max_candidates%", type.member.toString())))
+            stringBuilder.append(ColorTool().useCustomColorCodes(translation.application.textRoleStatusTemplate
+                .replace("%roleId%", type.roleId)
+                .replace("%status%", status!!)
+                .replace("%max_candidates%", type.member.toString())))
         }
 
         return Pair(stringBuilder, applicationTypeList)
@@ -182,12 +163,9 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
     private fun applicationActionRow(userId: String, types: List<ApplicationType>?): Collection<ItemComponent> {
         val rows: MutableCollection<ItemComponent> = ArrayList()
 
-        val add = Button.success("application_activation_add:$userId", translation.buttons.textApplicationActivationAdd).withEmoji(
-            Emoji.fromFormatted("➕"))
-        var remove = Button.danger("application_activation_remove:$userId", translation.buttons.textApplicationActivationRemove).withEmoji(
-            Emoji.fromFormatted("➖"))
-        var completeSetup = Button.primary("application_activation_complete_setup:$userId", translation.buttons.textApplicationActivationCompleteSetup).withEmoji(
-            Emoji.fromFormatted("💽"))
+        val add = Button.success("application_activation_add:$userId", translation.buttons.textApplicationActivationAdd).withEmoji(Emoji.fromFormatted("➕"))
+        var remove = Button.danger("application_activation_remove:$userId", translation.buttons.textApplicationActivationRemove).withEmoji(Emoji.fromFormatted("➖"))
+        var completeSetup = Button.primary("application_activation_complete_setup:$userId", translation.buttons.textApplicationActivationCompleteSetup).withEmoji(Emoji.fromFormatted("💽"))
 
         if (types == null) {
             remove = remove.asDisabled()
