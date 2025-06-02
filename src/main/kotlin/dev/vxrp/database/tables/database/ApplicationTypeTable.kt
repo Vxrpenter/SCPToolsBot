@@ -54,6 +54,24 @@ class ApplicationTypeTable {
         }
     }
 
+    fun getAllEntrys(): List<ApplicationType>? {
+        val typeList = mutableListOf<ApplicationType>()
+
+        transaction {
+            ApplicationTypes.selectAll()
+                .forEach {
+                    typeList.add(ApplicationType(
+                        it[ApplicationTypes.roleId],
+                        it[ApplicationTypes.active],
+                        it[ApplicationTypes.members],
+                        it[ApplicationTypes.initializer]
+                    ))
+                }
+        }
+
+        return typeList
+    }
+
     fun query(roleId: String): ApplicationType? {
         var applicationType: ApplicationType? = null
 
