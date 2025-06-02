@@ -27,8 +27,16 @@ class ApplicationManager(val config: Config, val translation: Translation) {
             if (member != null) typeMember = member
 
             val applicationTypeList = applicationTypeSet
-
-            applicationTypeList.add(ApplicationType(type.pos, type.roleId, typeName, typeDescription, typeEmoji, typeState, typeInitializer, typeMember))
+            applicationTypeList.filter { it.pos == type.pos }.forEach {
+                it.pos = type.pos
+                it.roleId = type.roleId
+                it.name = typeName
+                it.description = typeDescription
+                it.emoji = typeEmoji
+                it.state = typeState
+                it.initializer = typeInitializer
+                it.member = typeMember
+            }
             break
         }
     }
