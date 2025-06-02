@@ -2,7 +2,7 @@ package dev.vxrp.bot.events.stringSelectMenus
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.bot.application.ApplicationMessageHandler
+import dev.vxrp.bot.application.handler.ApplicationMessageHandler
 import dev.vxrp.bot.modals.ApplicationTemplateModals
 import dev.vxrp.bot.modals.TicketTemplateModals
 import dev.vxrp.configuration.data.Config
