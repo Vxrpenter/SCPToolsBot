@@ -9,15 +9,13 @@ var applicationTypeSet: HashSet<ApplicationType> = hashSetOf()
 class ApplicationManager(val config: Config, val translation: Translation) {
 
     fun changeApplicationType(roleID: String, name: String? = null, description: String? = null, emoji: String? = null, state: Boolean? = null, initializer: String? = null, member: Int? = null) {
-        for (type in applicationTypeSet) {
-            if (type.roleId != roleID) continue
-
-            var typeName = type.name
-            var typeDescription = type.description
-            var typeEmoji = type.emoji
-            var typeState = type.state
-            var typeInitializer = type.initializer
-            var typeMember = type.member
+        applicationTypeSet.filter { it.roleId == roleID }.forEach {
+            var typeName = it.name
+            var typeDescription = it.description
+            var typeEmoji = it.emoji
+            var typeState = it.state
+            var typeInitializer = it.initializer
+            var typeMember = it.member
 
             if (name != null) typeName = name
             if (description != null) typeDescription = description
@@ -26,18 +24,12 @@ class ApplicationManager(val config: Config, val translation: Translation) {
             if (initializer != null) typeInitializer = initializer
             if (member != null) typeMember = member
 
-            val applicationTypeList = applicationTypeSet
-            applicationTypeList.filter { it.pos == type.pos }.forEach {
-                it.pos = type.pos
-                it.roleId = type.roleId
-                it.name = typeName
-                it.description = typeDescription
-                it.emoji = typeEmoji
-                it.state = typeState
-                it.initializer = typeInitializer
-                it.member = typeMember
-            }
-            break
+            it.name = typeName
+            it.description = typeDescription
+            it.emoji = typeEmoji
+            it.state = typeState
+            it.initializer = typeInitializer
+            it.member = typeMember
         }
     }
 }

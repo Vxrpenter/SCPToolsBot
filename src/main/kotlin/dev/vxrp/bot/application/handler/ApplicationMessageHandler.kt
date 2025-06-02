@@ -66,7 +66,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
             title = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageTitle)
             description = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageBody
                 .replace("%status%", status)
-                .replace("%active_roles%", roleStringPair.first.toString())
+                .replace("%active_roles%", roleStringPair.toString())
             )
         }
 
@@ -102,28 +102,31 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
     private fun createMessage(useBaseValue: Boolean): MessageEmbed {
         val roleStringPair = createRoleString(useBaseValue)
 
-        applicationTypeSet = roleStringPair.second.toHashSet()
-
         return Embed {
             color = 0x2ECC70
             title = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuTitle)
             description = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuBody
                 .replace("%status%", translation.application.textStatusDeactivated)
-                .replace("%active_roles%", roleStringPair.first.toString())
+                .replace("%active_roles%", roleStringPair.toString())
             )
         }
     }
 
-    private fun createRoleString(useBaseValue: Boolean): Pair<StringBuilder, MutableList<ApplicationType>> {
+    private fun createRoleString(useBaseValue: Boolean): StringBuilder {
         val applicationTypeList: MutableList<ApplicationType> = mutableListOf()
 
-        var pairValue: Pair<StringBuilder, MutableList<ApplicationType>> = createStringBaseValue(applicationTypeList)
-        if (!useBaseValue) pairValue = createStringValue(applicationTypeSet.toMutableList())
+        if (useBaseValue && ApplicationTypeTable().getAllEntrys() != null) {
+            val baseTypes = createStringBaseValue(applicationTypeList)
+            applicationTypeSet = baseTypes.toHashSet()
 
-        return pairValue
+            for (type in ApplicationTypeTable().getAllEntrys()!!) {
+                baseTypes.filter { it.roleId == type.roleId }.forEach { ApplicationManager(config, translation).changeApplicationType(type.roleId, it.name, it.description, it.emoji, type.active, type.initializer, type.members) }
+            }
+        }
+        return createStringValue()
     }
 
-    private fun createStringBaseValue(applicationTypeList: MutableList<ApplicationType>): Pair<StringBuilder, MutableList<ApplicationType>> {
+    private fun createStringBaseValue(applicationTypeList: MutableList<ApplicationType>): MutableList<ApplicationType> {
         val stringBuilder: StringBuilder = StringBuilder()
         val deactivated = ColorTool().useCustomColorCodes(translation.application.textStatusDeactivated)
         var count = 0
@@ -138,15 +141,15 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
                 .replace("%max_candidates%", "0")))
         }
 
-        return Pair(stringBuilder, applicationTypeList)
+        return applicationTypeList
     }
 
-    private fun createStringValue(applicationTypeList: MutableList<ApplicationType>): Pair<StringBuilder, MutableList<ApplicationType>> {
+    private fun createStringValue(): StringBuilder {
         val stringBuilder: StringBuilder = StringBuilder()
         val activated = ColorTool().useCustomColorCodes(translation.application.textStatusActive)
         val deactivated = ColorTool().useCustomColorCodes(translation.application.textStatusDeactivated)
 
-        for (type in applicationTypeList) {
+        for (type in applicationTypeSet) {
             var status: String? = null
             if (type.state) status = activated
             if (!type.state) status = deactivated
@@ -157,7 +160,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
                 .replace("%max_candidates%", type.member.toString())))
         }
 
-        return Pair(stringBuilder, applicationTypeList)
+        return stringBuilder
     }
 
     private fun applicationActionRow(userId: String, types: List<ApplicationType>?): Collection<ItemComponent> {
