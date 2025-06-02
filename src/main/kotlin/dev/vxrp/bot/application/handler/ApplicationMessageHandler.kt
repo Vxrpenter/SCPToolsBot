@@ -1,13 +1,13 @@
-package dev.vxrp.bot.application
+package dev.vxrp.bot.application.handler
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.editMessage
 import dev.minn.jda.ktx.messages.send
+import dev.vxrp.bot.application.ApplicationManager
+import dev.vxrp.bot.application.applicationTypeMap
 import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.bot.application.enums.MessageType
-import dev.vxrp.bot.application.handler.ApplicationManager
-import dev.vxrp.bot.application.handler.applicationTypeMap
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ApplicationTypeTable
@@ -41,7 +41,9 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         }
 
         val actionRow: MutableCollection<ItemComponent> = ArrayList()
-        actionRow.add(Button.danger("application_deactivate", translation.buttons.textApplicationDeactivate).withEmoji(Emoji.fromFormatted("🪫")))
+        actionRow.add(
+            Button.danger("application_deactivate", translation.buttons.textApplicationDeactivate).withEmoji(
+                Emoji.fromFormatted("🪫")))
 
         return Pair(embed, actionRow)
     }
@@ -66,9 +68,11 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         val embed = Embed {
             color = embedColor
             title = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageTitle)
-            description = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageBody
-                .replace("%status%", status)
-                .replace("%active_roles%", roleStringPair.first.toString()))
+            description = ColorTool().useCustomColorCodes(
+                translation.application.embedApplicationMessageBody
+                    .replace("%status%", status)
+                    .replace("%active_roles%", roleStringPair.first.toString())
+            )
         }
 
         val applicationMessage = MessageTable().queryFromTable(MessageType.APPLICATION)
@@ -110,9 +114,11 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         return Embed {
             color = 0x2ECC70
             title = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuTitle)
-            description = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuBody
-                .replace("%status%", translation.application.textStatusDeactivated)
-                .replace("%active_roles%", roleStringPair.first.toString()))
+            description = ColorTool().useCustomColorCodes(
+                translation.application.embedActivationMenuBody
+                    .replace("%status%", translation.application.textStatusDeactivated)
+                    .replace("%active_roles%", roleStringPair.first.toString())
+            )
         }
     }
 
@@ -132,7 +138,18 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         for (type in config.ticket.applicationTypes) {
             count += 1
 
-            applicationTypeList.add(ApplicationType(count, type.roleID, type.name,type.description, type.emoji, false, null, 0))
+            applicationTypeList.add(
+                ApplicationType(
+                    count,
+                    type.roleID,
+                    type.name,
+                    type.description,
+                    type.emoji,
+                    false,
+                    null,
+                    0
+                )
+            )
 
             stringBuilder.append(
                 ColorTool().useCustomColorCodes(translation.application.textRoleStatusTemplate
@@ -167,9 +184,12 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
     private fun applicationActionRow(userId: String, types: List<ApplicationType>?): Collection<ItemComponent> {
         val rows: MutableCollection<ItemComponent> = ArrayList()
 
-        val add = Button.success("application_activation_add:$userId", translation.buttons.textApplicationActivationAdd).withEmoji(Emoji.fromFormatted("➕"))
-        var remove = Button.danger("application_activation_remove:$userId", translation.buttons.textApplicationActivationRemove).withEmoji(Emoji.fromFormatted("➖"))
-        var completeSetup = Button.primary("application_activation_complete_setup:$userId", translation.buttons.textApplicationActivationCompleteSetup).withEmoji(Emoji.fromFormatted("💽"))
+        val add = Button.success("application_activation_add:$userId", translation.buttons.textApplicationActivationAdd).withEmoji(
+            Emoji.fromFormatted("➕"))
+        var remove = Button.danger("application_activation_remove:$userId", translation.buttons.textApplicationActivationRemove).withEmoji(
+            Emoji.fromFormatted("➖"))
+        var completeSetup = Button.primary("application_activation_complete_setup:$userId", translation.buttons.textApplicationActivationCompleteSetup).withEmoji(
+            Emoji.fromFormatted("💽"))
 
         if (types == null) {
             remove = remove.asDisabled()

@@ -1,6 +1,6 @@
 package dev.vxrp.bot.events.modals
 
-import dev.vxrp.bot.application.ApplicationMessageHandler
+import dev.vxrp.bot.application.handler.ApplicationMessageHandler
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent
