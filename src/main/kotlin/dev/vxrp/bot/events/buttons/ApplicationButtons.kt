@@ -5,7 +5,7 @@ import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.application.handler.ApplicationMessageHandler
 import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.bot.application.ApplicationManager
-import dev.vxrp.bot.application.applicationTypeMap
+import dev.vxrp.bot.application.applicationTypeSet
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
@@ -27,7 +27,7 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
 
             event.reply_("", listOf(embed)).addActionRow(
                 StringSelectMenu.create("application_activation_add:${event.user.id}:${event.message.id}").also {
-                    for (application in applicationTypeMap[event.user.id]!!) {
+                    for (application in applicationTypeSet) {
                         it.addOption(application.name, application.roleId, application.description, Emoji.fromFormatted(application.emoji))
                     }
                 }.build()
@@ -43,7 +43,7 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
 
             event.reply_("", listOf(embed)).addActionRow(
                 StringSelectMenu.create("application_activation_remove:${event.user.id}:${event.messageId}").also {
-                    for (application in applicationTypeMap[event.user.id]!!) {
+                    for (application in applicationTypeSet) {
                         it.addOption(application.name, application.roleId, application.description, Emoji.fromFormatted(application.emoji))
                     }
                 }.build()
@@ -53,7 +53,7 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
         if (event.button.id?.startsWith("application_activation_complete_setup") == true && !nullCheck()) {
             if (config.ticket.settings.applicationMessageChannel != "") {
                 event.message.delete().queue()
-                ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!, true)
+                ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!, true)
                 val embed = Embed {
                     color = 0x2ECC70
                     title = ColorTool().useCustomColorCodes(translation.application.embedApplicationActivatedTitle)
@@ -76,13 +76,13 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
                     listOfTypes.add(ApplicationType(position, type.roleID, "/", "/", "/", false, event.user.id, 0))
                 }
 
-                applicationTypeMap[event.user.id] = listOfTypes
+                applicationTypeSet = listOfTypes.toHashSet()
 
                 for (type in config.ticket.applicationTypes) {
                     ApplicationManager(config, translation).changeApplicationType(event.user.id, type.roleID, initializer = event.user.id, state = false, member = 0)
                 }
 
-                ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.user.id, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!, false)
+                ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!, false)
                 val embed = Embed {
                     color = 0xE74D3C
                     title = ColorTool().useCustomColorCodes(translation.application.embedApplicationDeactivatedTitle)
@@ -111,7 +111,7 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
     }
 
     private fun nullCheck(): Boolean {
-        if (applicationTypeMap.isNotEmpty()) return false
+        if (applicationTypeSet.isNotEmpty()) return false
         event.message.delete().queue()
         event.reply_("This message has expired, please execute the command again").setEphemeral(true).queue()
 

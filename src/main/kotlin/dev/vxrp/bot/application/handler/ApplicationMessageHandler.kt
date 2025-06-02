@@ -5,7 +5,7 @@ import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.editMessage
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.application.ApplicationManager
-import dev.vxrp.bot.application.applicationTypeMap
+import dev.vxrp.bot.application.applicationTypeSet
 import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.bot.application.enums.MessageType
 import dev.vxrp.configuration.data.Config
@@ -28,7 +28,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
     private val logger: Logger = LoggerFactory.getLogger(ApplicationManager::class.java)
 
     fun getActivationMenu(userId: String): Pair<MessageEmbed, Collection<ItemComponent>> {
-        val embed = createMessage(userId, true)
+        val embed = createMessage(true)
 
         return Pair(embed, applicationActionRow(userId, null))
     }
@@ -41,23 +41,21 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         }
 
         val actionRow: MutableCollection<ItemComponent> = ArrayList()
-        actionRow.add(
-            Button.danger("application_deactivate", translation.buttons.textApplicationDeactivate).withEmoji(
-                Emoji.fromFormatted("🪫")))
+        actionRow.add(Button.danger("application_deactivate", translation.buttons.textApplicationDeactivate).withEmoji(Emoji.fromFormatted("🪫")))
 
         return Pair(embed, actionRow)
     }
 
     fun editActivationMessage(userId: String, roleId: String, channel: TextChannel, messageId: String, name: String? = null, description: String? = null, emoji: String? = null, state: Boolean? = null, initializer: String? = null, member: Int? = null) {
-        ApplicationManager(config, translation).changeApplicationType(userId, roleId, name, description, emoji, state, initializer, member)
+        ApplicationManager(config, translation).changeApplicationType(roleId, name, description, emoji, state, initializer, member)
 
-        channel.editMessage(messageId, "", listOf(createMessage(userId, false))).setActionRow(
-            applicationActionRow(userId, applicationTypeMap[userId])
+        channel.editMessage(messageId, "", listOf(createMessage(false))).setActionRow(
+            applicationActionRow(userId, applicationTypeSet.toList())
         ).queue()
     }
 
-    suspend fun sendApplicationMessage(api: JDA, userId: String, channel: TextChannel, state: Boolean) {
-        val roleStringPair = createRoleString(userId, false)
+    suspend fun sendApplicationMessage(api: JDA, channel: TextChannel, state: Boolean) {
+        val roleStringPair = createRoleString(false)
 
         var status = translation.application.textStatusActive
         if (!state) status = translation.application.textStatusDeactivated
@@ -95,7 +93,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
             ).await()
         }
 
-        for (type in applicationTypeMap[userId]!!) {
+        for (type in applicationTypeSet) {
             ApplicationTypeTable().changeType(type.roleId, type.state, type.member,type.initializer)
         }
         if (message == null) {
@@ -106,10 +104,10 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         MessageTable().insertIfNotExists(message.id, MessageType.APPLICATION, message.channelId)
     }
 
-    private fun createMessage(userId: String, useBaseValue: Boolean): MessageEmbed {
-        val roleStringPair = createRoleString(userId, useBaseValue)
+    private fun createMessage(useBaseValue: Boolean): MessageEmbed {
+        val roleStringPair = createRoleString(useBaseValue)
 
-        applicationTypeMap[userId] = roleStringPair.second
+        applicationTypeSet = roleStringPair.second.toHashSet()
 
         return Embed {
             color = 0x2ECC70
@@ -122,11 +120,11 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
         }
     }
 
-    private fun createRoleString(userId: String, useBaseValue: Boolean): Pair<StringBuilder, MutableList<ApplicationType>> {
+    private fun createRoleString(useBaseValue: Boolean): Pair<StringBuilder, MutableList<ApplicationType>> {
         val applicationTypeList: MutableList<ApplicationType> = mutableListOf()
 
         var pairValue: Pair<StringBuilder, MutableList<ApplicationType>> = createStringBaseValue(applicationTypeList)
-        if (!useBaseValue) pairValue = createStringValue(applicationTypeMap[userId]!!)
+        if (!useBaseValue) pairValue = createStringValue(applicationTypeSet.toMutableList())
 
         return pairValue
     }
@@ -134,7 +132,7 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
     private fun createStringBaseValue(applicationTypeList: MutableList<ApplicationType>): Pair<StringBuilder, MutableList<ApplicationType>> {
         val stringBuilder: StringBuilder = StringBuilder()
         val deactivated = ColorTool().useCustomColorCodes(translation.application.textStatusDeactivated)
-        var count: Int = -1
+        var count = 0
         for (type in config.ticket.applicationTypes) {
             count += 1
 
