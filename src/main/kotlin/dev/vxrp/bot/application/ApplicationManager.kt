@@ -1,4 +1,4 @@
-package dev.vxrp.bot.application.handler
+package dev.vxrp.bot.application
 
 import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.configuration.data.Config

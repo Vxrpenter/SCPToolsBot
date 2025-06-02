@@ -1,7 +1,7 @@
 package dev.vxrp.bot.commands.handler.bot.application
 
 import dev.minn.jda.ktx.messages.reply_
-import dev.vxrp.bot.application.ApplicationMessageHandler
+import dev.vxrp.bot.application.handler.ApplicationMessageHandler
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
