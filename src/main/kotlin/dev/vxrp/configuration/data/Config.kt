@@ -144,12 +144,12 @@ data class ConfigStrikes(
     val active: Boolean,
     @SerialName("auto_enforce_strikes")
     val autoEnforceStrikes: Boolean,
+    @SerialName("roles_view_strikes")
+    val rolesViewStrikes: List<String>,
     @SerialName("roles_add_strikes")
     val rolesAddStrikes: List<String>,
-    @SerialName("roles_remove_strikes")
-    val rolesRemoveStrikes: List<String>,
     @SerialName("roles_enforce_strikes")
     val rolesEnforceStrikes: List<String>,
-    @SerialName("roles_view_strikes")
-    val rolesViewStrikes: List<String>
+    @SerialName("roles_remove_strikes")
+    val rolesRemoveStrikes: List<String>
 )
