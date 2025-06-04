@@ -7,6 +7,7 @@ import dev.vxrp.bot.commands.handler.bot.help.HelpCommand
 import dev.vxrp.bot.commands.handler.bot.noticeofdeparture.NoticeOfDepartureCommand
 import dev.vxrp.bot.commands.handler.bot.regulars.RegularsCommand
 import dev.vxrp.bot.commands.handler.bot.settings.SettingsCommand
+import dev.vxrp.bot.commands.handler.bot.strikes.StrikesCommand
 import dev.vxrp.bot.commands.handler.bot.template.TemplateCommandHandler
 import dev.vxrp.bot.commands.handler.bot.verify.VerifyCommand
 import dev.vxrp.bot.permissions.PermissionManager
@@ -132,6 +133,34 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                 PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.regulars.active, config.settings.verify.active, config.settings.webserver.active)?.let { embed ->
                     event.reply_("", listOf(embed)).setEphemeral(true).queue()
                 } ?: RegularsCommand(config, translation).remove(event)
+                return true
+            }
+
+            "strikes.view.sub" -> {
+                PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.strikes.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: StrikesCommand(config, translation).view()
+                return true
+            }
+
+            "strikes.add.sub" -> {
+                PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.strikes.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: StrikesCommand(config, translation).add()
+                return true
+            }
+
+            "strikes.enforce.sub" -> {
+                PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.strikes.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: StrikesCommand(config, translation).enforce()
+                return true
+            }
+
+            "strikes.remove.sub" -> {
+                PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.strikes.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: StrikesCommand(config, translation).remove()
                 return true
             }
         }
