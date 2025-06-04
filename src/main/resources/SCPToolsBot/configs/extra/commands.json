@@ -225,6 +225,43 @@
           ]
         },
         {
+          "inherit": "strikes.revoke.sub",
+          "name": "revoke",
+          "description": "Revoke an enforcement",
+          "options": [
+            {
+              "type": "USER",
+              "name": "user",
+              "description": "User to revoke from",
+              "isRequired": true
+            },
+            {
+              "type": "STRING",
+              "name": "action",
+              "description": "Action to revoke",
+              "isRequired": true,
+              "choices": [
+                {
+                  "name": "HELP_BLOCK",
+                  "id": "HELP_BLOCK"
+                },
+                {
+                  "name": "NOTICE_BLOCK",
+                  "id": "NOTICE_BLOCK"
+                },
+                {
+                  "name": "REGULARS_BLOCK",
+                  "id": "REGULARS_BLOCK"
+                },
+                {
+                  "name": "TICKET_BLOCK",
+                  "id": "TICKET_BLOCK"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "inherit": "strikes.remove.sub",
           "name": "remove",
           "description": "Remove a strike",
