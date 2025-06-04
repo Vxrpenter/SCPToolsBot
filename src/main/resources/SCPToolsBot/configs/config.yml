@@ -131,3 +131,17 @@ regulars:
   only_load_certain_folder: false
   # Specify which folders should be specified if the option above is active
   only_load_folders: []
+
+strikes:
+  # Activates strikes
+  active: false
+  # Should strikes be automatically enforced? This will use enforcements configured in .SCPToolsBot/configs/extra/strikes.json. You can leave the standard configuration or change to your liking
+  auto_enforce_strikes: true
+  # Roles that are able to add strikes
+  roles_add_strikes: []
+  # Roles that are able to remove strikes
+  roles_remove_strikes: []
+  # Roles that are able to enforce strikes
+  roles_enforce_strikes: []
+  # Roles that are able to view strikes
+  roles_view_strikes: []

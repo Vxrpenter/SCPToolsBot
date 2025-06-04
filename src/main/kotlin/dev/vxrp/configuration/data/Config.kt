@@ -44,7 +44,8 @@ data class Settings(
     val verify: ConfigVerify,
     @SerialName("notice_of_departure")
     val noticeOfDeparture: ConfigNoticeOfDeparture,
-    val regulars: ConfigRegulars
+    val regulars: ConfigRegulars,
+    val strikes: ConfigStrikes
 )
 
 @Serializable
@@ -136,4 +137,19 @@ data class ConfigRegulars(
     val onlyLoad: Boolean,
     @SerialName("only_load_folders")
     val loadFolders: List<String>
+)
+
+@Serializable
+data class ConfigStrikes(
+    val active: Boolean,
+    @SerialName("auto_enforce_strikes")
+    val autoEnforceStrikes: Boolean,
+    @SerialName("roles_add_strikes")
+    val rolesAddStrikes: List<String>,
+    @SerialName("roles_remove_strikes")
+    val rolesRemoveStrikes: List<String>,
+    @SerialName("roles_enforce_strikes")
+    val rolesEnforceStrikes: List<String>,
+    @SerialName("roles_view_strikes")
+    val rolesViewStrikes: List<String>
 )
