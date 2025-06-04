@@ -154,7 +154,6 @@
       "inherit": "commands.strikes.default",
       "name": "strikes",
       "description": "Command for managing strikes",
-      "defaultPermissions": ["ADMINISTRATOR"],
       "subcommands": [
         {
           "inherit": "strikes.view.sub",
