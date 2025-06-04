@@ -16,6 +16,10 @@ class StrikesCommand(val config: Config, val translation: Translation) {
 
     }
 
+    fun revoke() {
+
+    }
+
     fun remove() {
 
     }

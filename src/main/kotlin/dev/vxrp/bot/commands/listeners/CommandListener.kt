@@ -157,6 +157,13 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                 return true
             }
 
+            "strikes.revoke.sub" -> {
+                PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.strikes.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: StrikesCommand(config, translation).revoke()
+                return true
+            }
+
             "strikes.remove.sub" -> {
                 PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.strikes.active)?.let { embed ->
                     event.reply_("", listOf(embed)).setEphemeral(true).queue()
