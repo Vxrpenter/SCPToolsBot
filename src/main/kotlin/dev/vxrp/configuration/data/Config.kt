@@ -150,6 +150,8 @@ data class ConfigStrikes(
     val rolesAddStrikes: List<String>,
     @SerialName("roles_enforce_strikes")
     val rolesEnforceStrikes: List<String>,
+    @SerialName("roles_revoke_enforcements")
+    val rolesRevokeEnforcements: List<String>,
     @SerialName("roles_remove_strikes")
     val rolesRemoveStrikes: List<String>
 )

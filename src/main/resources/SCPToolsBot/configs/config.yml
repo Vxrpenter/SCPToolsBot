@@ -143,5 +143,7 @@ strikes:
   roles_add_strikes: []
   # Roles that are able to enforce strikes
   roles_enforce_strikes: []
+  # Roles that are able to revoke enforcements
+  roles_revoke_enforcements: []
   # Roles that are able to remove strikes
   roles_remove_strikes: []
