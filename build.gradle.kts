@@ -23,7 +23,7 @@ val ktorVersion = "3.1.3"
 val kotlinxCoroutinesVersion = "1.10.2"
 
 val exposedVersion = "0.61.0"
-val sqliteVersion = "3.49.1.0"
+val sqliteVersion = "3.50.1.0"
 val mySqlVersion = "9.3.0"
 val postgresSqlVersion = "42.7.6"
 val mariaDBVersion = "3.5.3"
