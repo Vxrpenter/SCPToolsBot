@@ -271,6 +271,12 @@
               "name": "user",
               "description": "User to remove from",
               "isRequired": true
+            },
+            {
+              "type": "INTEGER",
+              "name": "count",
+              "description": "Number of strikes to be removed",
+              "isRequired": true
             }
           ]
         }
