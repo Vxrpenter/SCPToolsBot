@@ -25,6 +25,8 @@ data class Translation(
     val noticeOfDeparture: TranslationNoticeOfDeparture,
     @SerialName("REGULARS")
     val regulars: TranslationRegulars,
+    @SerialName("STRIKES")
+    val strikes: TranslationStrikes,
     @SerialName("STATUS_BARS")
     val statusBars: TranslationStatusBars,
     @SerialName("BUTTONS")
@@ -797,6 +799,44 @@ data class TranslationRegulars(
     val embedSyncRemovedTitle: String,
     @SerialName("EMBED_SYNC_REMOVED_MESSAGE_BODY")
     val embedSyncRemovedBody: String,
+)
+
+@Serializable
+data class TranslationStrikes(
+    @SerialName("EMBED_VIEW_TITLE")
+    val embedViewTitle: String,
+    @SerialName("EMBED_VIEW_BODY")
+    val embedViewBody: String,
+
+    @SerialName("EMBED_STRIKED_TITLE")
+    val embedStrikedTitle: String,
+    @SerialName("EMBED_STRIKED_BODY")
+    val embedStrikedBody: String,
+
+    @SerialName("EMBED_ADDED_STRIKE_TITLE")
+    val embedAddedStrikeTitle: String,
+    @SerialName("EMBED_ADDED_STRIKE_BODY")
+    val embedAddedStrikeBody: String,
+
+    @SerialName("EMBED_ENFORCED_STRIKE_TITLE")
+    val embedEnforcedStrikeTitle: String,
+    @SerialName("EMBED_ENFORCED_STRIKE_BODY")
+    val embedEnforcedStrikeBody: String,
+
+    @SerialName("EMBED_REVOKE_ENFORCEMENT_TITLE")
+    val embedRevokeEnforcedTitle: String,
+    @SerialName("EMBED_REVOKE_ENFORCEMENT_BODY")
+    val embedRevokeEnforcedBody: String,
+
+    @SerialName("EMBED_REMOVE_STRIKE_TITLE")
+    val embedRemoveStrikeTitle: String,
+    @SerialName("EMBED_REMOVE_STRIKE_BODY")
+    val embedRemoveStrikeBody: String,
+
+    @SerialName("EMBED_REMOVE_COUNT_NOT_EXIST_TITLE")
+    val embedRemoveCountNotExistTitle: String,
+    @SerialName("EMBED_REMOVE_COUNT_NOT_EXIST_BODY")
+    val embedRemoveCountNotExistBody: String,
 )
 
 @Serializable

@@ -811,6 +811,37 @@ REGULARS:
   EMBED_SYNC_REMOVED_MESSAGE_TITLE: "Regulars Data Removed"
   EMBED_SYNC_REMOVED_MESSAGE_BODY: "All regulars data has been removed from the database and regulars has been deactivated."
 
+STRIKES:
+  EMBED_VIEW_TITLE: "Strikes for - %user%"
+  EMBED_VIEW_BODY: "
+                        Current Strike Count: %count%\n
+                        
+                        Enforced Punishments:\n
+                        ```%punishments%```"
+
+  EMBED_STRIKED_TITLE: "New Strike Added - %count%"
+  EMBED_STRIKED_BODY: "
+                        A new strike has been added to your profile. THe following reason has been given:
+                        &filler&
+                        ```%reason%```\n
+                        Enforced Punishments:\n
+                        ```%punishments%```"
+
+  EMBED_ADDED_STRIKE_TITLE: "Strike Added - Total %strikes% Strikes"
+  EMBED_ADDED_STRIKE_BODY: "A strike has been successfully added to **%user%**. They will receive a notification containing their current strike count of **%strikes%** and the current given reason."
+
+  EMBED_ENFORCED_STRIKE_TITLE: "Strike Enforced - %user%"
+  EMBED_ENFORCED_STRIKE_BODY: "You have enforced **%enforcement%** for user **%user%**. This punishment can be lifted using the **/strikes revoke** command."
+
+  EMBED_REVOKE_ENFORCEMENT_TITLE: "Enforcement Revoked - %user%"
+  EMBED_REVOKE_ENFORCEMENT_BODY: "The enforcement **%enforcement%** for user **%user%** has been successfully revoked. You can reapply it with **/strikes enforce**."
+
+  EMBED_REMOVE_STRIKE_TITLE: "Strike Removed - %user%"
+  EMBED_REMOVE_STRIKE_BODY: "You have successfully removed **%count%** strikes from **%user%**. You can apply new strikes using **/strikes add**"
+
+  EMBED_REMOVE_COUNT_NOT_EXIST_TITLE: "Count too High?"
+  EMBED_REMOVE_COUNT_NOT_EXIST_BODY: "The entered count is either too low or too high, the user **%user%** does not have **%count%** strikes."
+
 STATUS_BARS:
 
   EMBED_TICKET_STATUS: "
