@@ -50,14 +50,14 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
 
     fun postStatusUpdate(server: Server, api: JDA, instance: Instance, info: ServerInfo?) {
         ConnectionTable().databaseNotExists(server.port.toString(), server.online)
-        reconnectAttempt.putIfAbsent(server.port, 1)
+        reconnectAttempt.putIfAbsent(server.port, 0)
 
         val serverStatus = ConnectionTable().queryFromTable(server.port.toString()).status == true
 
         if (server.online) {
             if (serverStatus) return
             if (config.status.postServerStatus) StatusMessageHandler(config, translation).postConnectionOnline(api, instance, info!!)
-            reconnectAttempt[server.port] = 1
+            reconnectAttempt[server.port] = 0
             ConnectionTable().postConnectionToDatabase(server.port.toString(), true)
             logger.info("Connection to server ${instance.name} (${instance.serverPort}) regained")
         } else {
