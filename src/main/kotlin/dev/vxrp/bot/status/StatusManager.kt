@@ -136,7 +136,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
             logger.error("Could not receive data for status-bots, skipping iteration")
             return
         }
-        StatusConnectionHandler(translation, config).postApiConnectionUpdate(globalApi, status, content)
+        StatusConnectionHandler(translation, config).postApiConnectionUpdate(globalApi, content.first)
 
         if (mapped == mappedPorts) {
             nonChangedData = true
