@@ -2,7 +2,6 @@ package dev.vxrp.bot.status
 
 import dev.minn.jda.ktx.jdabuilder.light
 import dev.vxrp.bot.commands.CommandManager
-import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.commands.listeners.StatusCommandListener
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.data.Status
@@ -17,6 +16,9 @@ import dev.vxrp.util.coroutines.defaultStatusScope
 import dev.vxrp.util.coroutines.statusbotScope
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionType
+import dev.vxrp.util.statusInstances
+import dev.vxrp.util.statusMappedBots
+import dev.vxrp.util.statusMappedServers
 import io.github.vxrpenter.secretlab.SecretLab
 import io.github.vxrpenter.secretlab.data.Server
 import io.github.vxrpenter.secretlab.data.ServerInfo
@@ -35,11 +37,6 @@ val bots = mutableListOf<JDA>()
 class StatusManager(private val globalApi: JDA, val config: Config, val translation: Translation, private val timer: Timer, val file: String) {
     private val logger = LoggerFactory.getLogger(StatusManager::class.java)
     private val currentFile = File(System.getProperty("user.dir")).resolve(file)
-
-    private val mappedBots = hashMapOf<String, Int>()
-
-    private val mappedStatusConstructor = mutableMapOf<Int, StatusConstructor>()
-    private val mappedServers = hashMapOf<Int, Server>()
     
     private var secondsWithoutNewData = 0
     private var nonChangedData = false
@@ -59,10 +56,6 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
         if (!config.status.active) return
 
         defaultStatusScope.launch {
-            mappedBots.clear()
-            mappedStatusConstructor.clear()
-            mappedServers.clear()
-
             val status = config.status
 
             initializeBots(status, commandManager)
@@ -83,11 +76,11 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
             logger.info("Starting up status-bot: ${newApi.awaitReady().selfUser.id}")
             bots.add(newApi)
 
-            mappedBots[newApi.selfUser.id] = instance.serverPort
-            mappedStatusConstructor[instance.serverPort] = StatusConstructor(mappedBots, mappedServers, instance)
+            statusMappedBots[newApi.selfUser.id] = instance.serverPort
+            statusInstances[instance.serverPort] = instance
 
             val launchOptionManager = LaunchOptionManager(config, translation)
-            if (launchOptionManager.checkLaunchOption(LaunchOptionType.STATUS_COMMAND_LISTENER).engage) StatusCommandListener(newApi, config, translation, StatusConstructor(mappedBots, mappedServers, instance))
+            if (launchOptionManager.checkLaunchOption(LaunchOptionType.STATUS_COMMAND_LISTENER).engage) StatusCommandListener(newApi, config, translation)
 
             if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_MANAGER).engage) initializeCommands(commandManager, newApi)
             instanceApiMapping[instance] = newApi
@@ -129,7 +122,6 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
 
         val content: Pair<ServerInfo?, MutableMap<Int, Server>>? = fetchData(status, ports)
 
-        // Check if data was received
         if (content != null) {
             mappedPorts = content.second
         } else {
@@ -146,7 +138,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
             nonChangedData = false
         }
 
-        if (status.checkPlayerlist) StatusPlayerlistHandler(config, translation).updatePlayerLists(mappedPorts, status.instances, instanceApiMap, mappedStatusConstructor)
+        if (status.checkPlayerlist) StatusPlayerlistHandler(config, translation).updatePlayerLists(mappedPorts, status.instances, instanceApiMap)
 
         for (instance in status.instances) {
             val api = instanceApiMap[instance] ?: continue
@@ -166,7 +158,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
             for (port in ports) {
                 val server = serverByPort(port, info) ?: return null
 
-                mappedServers[port] = server
+                statusMappedServers[port] = server
                 map[port] = server
             }
             return Pair(info, map)
