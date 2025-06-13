@@ -163,7 +163,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
             }
             return Pair(info, map)
         } catch (e: CallFailureException) {
-            logger.error("Could not process secret lab request correctly ${e.message}")
+            logger.error("Could not process secret lab request correctly ${e.cause}")
             return null
         }
     }
