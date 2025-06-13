@@ -40,7 +40,7 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     
     private var secondsWithoutNewData = 0
     private var nonChangedData = false
-    private var mapped: MutableMap<Int, Server>? = null
+    private var portToServerMap: MutableMap<Int, Server?>? = null
 
 
     init {
@@ -118,50 +118,50 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
         val ports = mutableListOf<Int>()
         status.instances.forEach { currentInstance -> ports.add(currentInstance.serverPort) }
 
-        var mappedPorts: MutableMap<Int, Server>
+        var portToServerMap: MutableMap<Int, Server?>
 
-        val content: Pair<ServerInfo?, MutableMap<Int, Server>>? = fetchData(status, ports)
+        val content: Pair<ServerInfo?, MutableMap<Int, Server?>>? = fetchData(status, ports)
 
         if (content != null) {
-            mappedPorts = content.second
+            portToServerMap = content.second
         } else {
             logger.error("Could not receive data for status-bots, skipping iteration")
             return
         }
         StatusConnectionHandler(translation, config).postApiConnectionUpdate(globalApi, content.first)
 
-        if (mapped == mappedPorts) {
+        if (this.portToServerMap == portToServerMap) {
             nonChangedData = true
         } else {
             secondsWithoutNewData = 0
-            mapped = mappedPorts
+            this.portToServerMap = portToServerMap
             nonChangedData = false
         }
 
-        if (status.checkPlayerlist) StatusPlayerlistHandler(config, translation).updatePlayerLists(mappedPorts, status.instances, instanceApiMap)
+        if (status.checkPlayerlist) StatusPlayerlistHandler(config, translation).updatePlayerLists(portToServerMap, status.instances, instanceApiMap)
 
         for (instance in status.instances) {
             val api = instanceApiMap[instance] ?: continue
 
             api.presence.setStatus(OnlineStatus.IDLE)
 
-            mappedPorts[instance.serverPort]?.let { spinUpChecker(api, it, instance, content.first) }
+            portToServerMap[instance.serverPort]?.let { spinUpChecker(api, it, instance, content.first) }
         }
     }
 
-    private fun fetchData(status: Status, ports: List<Int>): Pair<ServerInfo?, MutableMap<Int, Server>>? {
+    private fun fetchData(status: Status, ports: List<Int>): Pair<ServerInfo?, MutableMap<Int, Server?>>? {
         val secretLab = SecretLab(status.api, status.accountId)
 
-        val map = mutableMapOf<Int, Server>()
+        val portToServerMap = mutableMapOf<Int, Server?>()
         try {
             val info = secretLab.serverInfo(lo = false, players = true, list = true)
             for (port in ports) {
-                val server = serverByPort(port, info) ?: return null
+                val server = serverByPort(port, info)
 
                 statusMappedServers[port] = server
-                map[port] = server
+                portToServerMap[port] = server
             }
-            return Pair(info, map)
+            return Pair(info, portToServerMap)
         } catch (e: CallFailureException) {
             logger.error("Could not process secret lab request correctly ${e.cause}")
             return null
@@ -169,7 +169,8 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     }
 
     private fun serverByPort(port: Int, info: ServerInfo?): Server? {
-        for (server in info?.servers!!) {
+        if (info?.servers == null) return null
+        for (server in info.servers!!) {
             if (server.port == port) return server
         }
         return null

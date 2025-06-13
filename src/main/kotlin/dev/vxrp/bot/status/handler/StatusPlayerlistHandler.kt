@@ -8,6 +8,7 @@ import dev.vxrp.bot.status.enums.PlayerlistType
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.StatusTable
+import dev.vxrp.util.statusInstances
 import dev.vxrp.util.statusMappedServers
 import io.github.vxrpenter.secretlab.data.Server
 import net.dv8tion.jda.api.JDA
@@ -19,24 +20,29 @@ import java.time.LocalDate
 class StatusPlayerlistHandler(val config: Config, val translation: Translation) {
     private val logger = LoggerFactory.getLogger(StatusPlayerlistHandler::class.java)
 
-    suspend fun updatePlayerLists(ports: MutableMap<Int, Server>, instances: List<Instance>, instanceApiMap: MutableMap<Instance, JDA>) {
-        for (port in ports) {
+    suspend fun updatePlayerLists(portToServerMap: MutableMap<Int, Server?>, instances: List<Instance>, instanceApiMap: MutableMap<Instance, JDA>) {
+        for (server in portToServerMap) {
+            if (portToServerMap[server.key] == null) {
+                logger.debug("No data for servers received, skipping message for server ${statusInstances[server.key]?.name} (${statusInstances[server.key]?.serverPort})")
+                return
+            }
+
             var api: JDA? = null
 
             for (instance in instances) {
-                if (instance.serverPort != port.key) continue
+                if (instance.serverPort != server.key) continue
                 api = instanceApiMap[instance] ?: run {
-                    logger.error("Could not retrieve mapped bot for port: {}", port)
+                    logger.error("Could not retrieve mapped bot for port: {}", server)
                     return
                 }
                 break
             }
-            createPresetMessage(api!!, port)
-            updateMessage(api, port)
+            createPresetMessage(api!!, server)
+            updateMessage(api, server)
         }
     }
 
-    private fun updateMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server>) {
+    private fun updateMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server?>) {
         for (entry in StatusTable().getAllEntrys()) {
             if (entry.port == port.key.toString()) return
 
@@ -60,7 +66,7 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
         StatusTable().updateLastUpdated(port.key.toString(), System.currentTimeMillis().toString())
     }
 
-    private suspend fun createPresetMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server>) {
+    private suspend fun createPresetMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server?>) {
         for (instance in config.status.instances) {
             if (instance.serverPort != port.key) continue
             if (!instance.playerlist.active) continue
