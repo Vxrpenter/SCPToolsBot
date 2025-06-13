@@ -4,6 +4,8 @@ import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ConnectionTable
+import dev.vxrp.util.statusApiSessionStatus
+import dev.vxrp.util.statusServerSessionStatus
 import io.github.vxrpenter.secretlab.data.Server
 import io.github.vxrpenter.secretlab.data.ServerInfo
 import net.dv8tion.jda.api.JDA
@@ -23,10 +25,11 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
 
         if (info != null && info.success) {
             logger.debug("Connection to api successful")
-            if (apiStatus) return
+            if (apiStatus && statusApiSessionStatus) return
             if (config.status.postServerStatus) info.let { StatusMessageHandler(config, translation).postConnectionEstablished(api, it) }
             ConnectionTable().postConnectionToDatabase("api", true)
             retryFetchData = 0
+            statusApiSessionStatus = true
             logger.info("Regained connection to secretlab api")
         } else {
             logger.debug("Connection to api failed")
@@ -48,6 +51,7 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
                 logger.warn("Failed to access the secretlab api, suspecting rate limiting or small outage, retrying in ${config.status.checkRate} seconds")
             }
             retryFetchData += 1
+            statusApiSessionStatus = false
         }
     }
 
@@ -56,12 +60,14 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
         reconnectAttempt.putIfAbsent(server.port, 0)
 
         val serverStatus = ConnectionTable().queryFromTable(server.port.toString()).status == true
+        statusServerSessionStatus.putIfAbsent(server.port, serverStatus)
 
         if (server.online) {
             logger.debug("Connection to server ${instance.name} (${instance.serverPort}), established and returned online")
-            if (serverStatus) return
+            if (serverStatus && statusServerSessionStatus[server.port] == true) return
             if (config.status.postServerStatus) StatusMessageHandler(config, translation).postConnectionOnline(api, instance, info!!)
             reconnectAttempt[server.port] = 0
+            statusServerSessionStatus[server.port] = true
             ConnectionTable().postConnectionToDatabase(server.port.toString(), true)
             logger.info("Connection to server ${instance.name} (${instance.serverPort}) regained")
         } else {
@@ -79,6 +85,7 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
             }
             logger.warn("Failed to query data from \"${instance.name}\", trying to reconnect ${ instance.retries - reconnectAttempt[server.port]!!} more times")
             reconnectAttempt[server.port] = reconnectAttempt[server.port]!! + 1
+            statusServerSessionStatus[server.port] = false
         }
     }
 }
