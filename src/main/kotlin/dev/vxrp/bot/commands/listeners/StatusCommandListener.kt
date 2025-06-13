@@ -1,7 +1,6 @@
 package dev.vxrp.bot.commands.listeners
 
 import dev.minn.jda.ktx.events.listener
-import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.commands.handler.status.playerlist.PlayerlistCommand
 import dev.vxrp.bot.commands.handler.status.status.StatusCommand
 import dev.vxrp.bot.commands.handler.status.template.TemplateCommandHandler
@@ -14,7 +13,7 @@ import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 
-class StatusCommandListener(val api: JDA, val config: Config, val translation: Translation, private val statusConstructor: StatusConstructor) : ListenerAdapter() {
+class StatusCommandListener(val api: JDA, val config: Config, val translation: Translation) : ListenerAdapter() {
 
     init {
         api.listener<SlashCommandInteractionEvent> { event ->
@@ -48,15 +47,15 @@ class StatusCommandListener(val api: JDA, val config: Config, val translation: T
 
     private fun statusCommand(event: SlashCommandInteractionEvent) {
         if (event.getOption("setting")?.asString == "maintenance") {
-            StatusCommand(config, translation, statusConstructor).changeMaintenanceState(event)
+            StatusCommand(config, translation).changeMaintenanceState(event)
         }
     }
 
     private fun playerListCommand(event: SlashCommandInteractionEvent) {
-        PlayerlistCommand(config, translation, statusConstructor).pastePlayerList(event)
+        PlayerlistCommand(config, translation).pastePlayerList(event)
     }
 
     private suspend fun templateCommand(event: SlashCommandInteractionEvent) {
-        if (event.getOption("template")?.asString == "playerlist") TemplateCommandHandler(config, translation, statusConstructor).pastePlayerList(event)
+        if (event.getOption("template")?.asString == "playerlist") TemplateCommandHandler(config, translation).pastePlayerList(event)
     }
 }
