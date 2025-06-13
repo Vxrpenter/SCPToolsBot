@@ -2,13 +2,13 @@ package dev.vxrp.bot.status.handler
 
 import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.messages.editMessage
-import dev.vxrp.bot.commands.data.StatusConstructor
 import dev.vxrp.bot.commands.handler.status.playerlist.PlayerlistMessageHandler
 import dev.vxrp.bot.status.data.Instance
 import dev.vxrp.bot.status.enums.PlayerlistType
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.StatusTable
+import dev.vxrp.util.statusMappedServers
 import io.github.vxrpenter.secretlab.data.Server
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.MessageEmbed
@@ -19,7 +19,7 @@ import java.time.LocalDate
 class StatusPlayerlistHandler(val config: Config, val translation: Translation) {
     private val logger = LoggerFactory.getLogger(StatusPlayerlistHandler::class.java)
 
-    suspend fun updatePlayerLists(ports: MutableMap<Int, Server>, instances: List<Instance>, instanceApiMap: MutableMap<Instance, JDA>, mappedStatusConstructor: MutableMap<Int, StatusConstructor>) {
+    suspend fun updatePlayerLists(ports: MutableMap<Int, Server>, instances: List<Instance>, instanceApiMap: MutableMap<Instance, JDA>) {
         for (port in ports) {
             var api: JDA? = null
 
@@ -31,18 +31,18 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
                 }
                 break
             }
-            createPresetMessage(api!!, port, mappedStatusConstructor)
-            updateMessage(api, port, mappedStatusConstructor)
+            createPresetMessage(api!!, port)
+            updateMessage(api, port)
         }
     }
 
-    private fun updateMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server>, mappedStatusConstructor: MutableMap<Int, StatusConstructor>) {
+    private fun updateMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server>) {
         for (entry in StatusTable().getAllEntrys()) {
             if (entry.port == port.key.toString()) return
 
             val embeds = mutableListOf<MessageEmbed>()
-            mappedStatusConstructor[port.key]?.let { statusConst ->
-                PlayerlistMessageHandler().getEmbed(api.selfUser.id, translation, statusConst)
+            statusMappedServers[port.key]?.let { _ ->
+                PlayerlistMessageHandler().getEmbed(api.selfUser.id, translation)
             }?.let { playerListEmbed ->
                 embeds.add(playerListEmbed)
             }
@@ -60,7 +60,7 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
         StatusTable().updateLastUpdated(port.key.toString(), System.currentTimeMillis().toString())
     }
 
-    private suspend fun createPresetMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server>, mappedStatusConstructor: MutableMap<Int, StatusConstructor>) {
+    private suspend fun createPresetMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server>) {
         for (instance in config.status.instances) {
             if (instance.serverPort != port.key) continue
             if (!instance.playerlist.active) continue
@@ -79,8 +79,8 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
                 }
 
                 val embeds = mutableListOf<MessageEmbed>()
-                mappedStatusConstructor[port.key]?.let { statusConst ->
-                    PlayerlistMessageHandler().getEmbed(api.selfUser.id, translation, statusConst)
+                statusMappedServers[port.key]?.let { statusConst ->
+                    PlayerlistMessageHandler().getEmbed(api.selfUser.id, translation)
                 }?.let { playerListEmbed ->
                     embeds.add(playerListEmbed)
                 }
