@@ -1,7 +1,6 @@
 package dev.vxrp.bot.status.handler
 
 import dev.vxrp.bot.status.data.Instance
-import dev.vxrp.bot.status.data.Status
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ConnectionTable
@@ -16,33 +15,37 @@ private var retryFetchData = 0
 class StatusConnectionHandler(val translation: Translation, val config: Config) {
     private val logger = LoggerFactory.getLogger(StatusConnectionHandler::class.java)
 
-    fun postApiConnectionUpdate(api: JDA, status: Status, content: Pair<ServerInfo?, MutableMap<Int, Server>>?) {
+    fun postApiConnectionUpdate(api: JDA, info: ServerInfo?) {
         val apiStatus = ConnectionTable().queryFromTable("api").status == true
 
-        if (content != null) ConnectionTable().databaseNotExists("api", true)
+        if (info != null && info.success) ConnectionTable().databaseNotExists("api", true)
         else ConnectionTable().databaseNotExists("api", false)
 
-        if (content != null) {
+        if (info != null && info.success) {
+            logger.debug("Connection to api successful")
             if (apiStatus) return
-            if (config.status.postServerStatus) content.first?.let { StatusMessageHandler(config, translation).postConnectionEstablished(api, it) }
+            if (config.status.postServerStatus) info.let { StatusMessageHandler(config, translation).postConnectionEstablished(api, it) }
             ConnectionTable().postConnectionToDatabase("api", true)
             retryFetchData = 0
             logger.info("Regained connection to secretlab api")
         } else {
+            logger.debug("Connection to api failed")
             if (!apiStatus) return
-            if (retryFetchData == status.retryToFetchData+1) return
-            if (retryFetchData == status.retryToFetchData) {
-                logger.error("Completely lost connection to the secretlab api. This is not normal behavior and may be caused by an expired api key or wrong account number.")
-                if (config.status.postServerStatus) StatusMessageHandler(config, translation).postConnectionLost(api, status.retryToFetchData)
+            if (retryFetchData == config.status.retryToFetchData+1) return
+            if (retryFetchData == config.status.retryToFetchData) {
+                var errorMessage = "No json body was returned for serialization"
+                if (info != null && info.error != null) errorMessage = info.error!!
+                logger.error("SecretLabApi connection lost, request returned unsuccessful, $errorMessage")
+                if (config.status.postServerStatus) StatusMessageHandler(config, translation).postConnectionLost(api, config.status.retryToFetchData)
                 retryFetchData += 1
                 ConnectionTable().postConnectionToDatabase("api", false)
                 return
             }
-            if (retryFetchData >= status.suspectRateLimitUntil && retryFetchData != status.retryToFetchData+1) {
-                logger.warn("Failed $retryFetchData consecutive times to connect to the api. Suspecting an api outage or invalid key. Retrying ${status.retryToFetchData- retryFetchData} more times")
+            if (retryFetchData >= config.status.suspectRateLimitUntil && retryFetchData != config.status.retryToFetchData+1) {
+                logger.warn("Failed $retryFetchData consecutive times to connect to the api. Suspecting an api outage or invalid key. Retrying ${config.status.retryToFetchData- retryFetchData} more times")
             }
-            if (retryFetchData < status.suspectRateLimitUntil) {
-                logger.warn("Failed to access the secretlab api, suspecting rate limiting, retrying in ${status.checkRate} seconds")
+            if (retryFetchData < config.status.suspectRateLimitUntil) {
+                logger.warn("Failed to access the secretlab api, suspecting rate limiting or small outage, retrying in ${config.status.checkRate} seconds")
             }
             retryFetchData += 1
         }
@@ -55,12 +58,14 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
         val serverStatus = ConnectionTable().queryFromTable(server.port.toString()).status == true
 
         if (server.online) {
+            logger.debug("Connection to server ${instance.name} (${instance.serverPort}), established and returned online")
             if (serverStatus) return
             if (config.status.postServerStatus) StatusMessageHandler(config, translation).postConnectionOnline(api, instance, info!!)
             reconnectAttempt[server.port] = 0
             ConnectionTable().postConnectionToDatabase(server.port.toString(), true)
             logger.info("Connection to server ${instance.name} (${instance.serverPort}) regained")
         } else {
+            logger.debug("Connection to server ${instance.name} (${instance.serverPort}), not established and returned offline")
             if (!serverStatus) return
 
             if (reconnectAttempt[server.port]!! == instance.retries + 1) return
