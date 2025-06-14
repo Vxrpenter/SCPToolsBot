@@ -60,7 +60,7 @@ class StatusTable {
         return list
     }
 
-    fun getType(port: String): PlayerlistType {
+    fun getType(port: String): PlayerlistType? {
         var type: PlayerlistType? = null
 
         transaction {
@@ -73,6 +73,6 @@ class StatusTable {
                 }
         }
 
-        return type!!
+        return type
     }
 }
