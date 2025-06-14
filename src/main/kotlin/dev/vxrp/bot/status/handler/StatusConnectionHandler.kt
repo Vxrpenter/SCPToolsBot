@@ -26,7 +26,7 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
         if (info != null && info.success) {
             logger.debug("Connection to api successful")
             if (apiStatus && statusApiSessionStatus) return
-            if (config.status.postServerStatus) info.let { StatusMessageHandler(config, translation).postConnectionEstablished(api, it) }
+            if (config.status.postServerStatus && !apiStatus) info.let { StatusMessageHandler(config, translation).postConnectionEstablished(api, it) }
             ConnectionTable().postConnectionToDatabase("api", true)
             retryFetchData = 0
             statusApiSessionStatus = true
@@ -65,7 +65,7 @@ class StatusConnectionHandler(val translation: Translation, val config: Config) 
         if (server.online) {
             logger.debug("Connection to server ${instance.name} (${instance.serverPort}), established and returned online")
             if (serverStatus && statusServerSessionStatus[server.port] == true) return
-            if (config.status.postServerStatus) StatusMessageHandler(config, translation).postConnectionOnline(api, instance, info!!)
+            if (config.status.postServerStatus && !serverStatus) StatusMessageHandler(config, translation).postConnectionOnline(api, instance, info!!)
             reconnectAttempt[server.port] = 0
             statusServerSessionStatus[server.port] = true
             ConnectionTable().postConnectionToDatabase(server.port.toString(), true)
