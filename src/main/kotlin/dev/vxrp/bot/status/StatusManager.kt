@@ -32,8 +32,6 @@ import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
 
-val bots = mutableListOf<JDA>()
-
 class StatusManager(private val globalApi: JDA, val config: Config, val translation: Translation, private val timer: Timer, val file: String) {
     private val logger = LoggerFactory.getLogger(StatusManager::class.java)
     private val currentFile = File(System.getProperty("user.dir")).resolve(file)
@@ -74,7 +72,6 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
                 setActivity(Activity.playing("pending..."))
             }
             logger.info("Starting up status-bot: ${newApi.awaitReady().selfUser.id}")
-            bots.add(newApi)
 
             statusMappedBots[newApi.selfUser.id] = instance.serverPort
             statusInstances[instance.serverPort] = instance
