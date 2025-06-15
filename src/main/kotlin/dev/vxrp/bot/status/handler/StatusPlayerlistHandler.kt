@@ -28,7 +28,6 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
             }
 
             var api: JDA? = null
-
             for (instance in instances) {
                 if (instance.serverPort != server.key) continue
                 api = instanceApiMap[instance] ?: run {
@@ -71,7 +70,6 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
             if (!instance.playerlist.active) continue
 
             val playerlistType = StatusTable().getType(port.key.toString())
-
             if (playerlistType != PlayerlistType.PRESET) {
                 logger.debug("Skipping over preset creation for server '{}'", instance.name)
                 return
