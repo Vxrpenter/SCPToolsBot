@@ -111,6 +111,8 @@ verify:
 notice_of_departure:
   # Activates the notice of departure feature
   active: false
+  # The formatting that is used to format the notice of departure dates
+  date_formatting: "dd.MM.yyyy"
   # Which channel should the form be sent to, to be accepted by moderators?
   decision_channel_id: ""
   # Which channel should the notice messages be sent to?
