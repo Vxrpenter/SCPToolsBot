@@ -110,7 +110,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         privateChannel.send("", listOf(embed)).queue()
     }
 
-    suspend fun sendNoticeMessage(reason: String, handler: String, userId: String, date: String) {
+    suspend fun sendNoticeMessage(reason: String, handlerId: String, userId: String, date: String) {
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
         val currentDate = LocalDate.now()
         val endDate = LocalDate.parse(date, formatter)
@@ -119,6 +119,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         val discordEndDate = TimeFormat.DATE_LONG.atInstant(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant()).toString()
         val relativeTime = TimeFormat.RELATIVE.atInstant(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant()).toString()
 
+        val handler = api.retrieveUserById(handlerId).await()
         val user = api.retrieveUserById(userId).await()
 
         val embed = Embed {
@@ -129,7 +130,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
             )
             description = ColorTool().useCustomColorCodes(
                 translation.noticeOfDeparture.embedNoticeBody
-                    .replace("%user%", user.asMention)
+                    .replace("%user%", handler.asMention)
                     .replace("%current_date%", discordCurrentDate)
                     .replace("%end_date%", discordEndDate)
                     .replace("%relative%", relativeTime)
@@ -145,7 +146,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
             return
         }
 
-        NoticeOfDepartureTable().addToDatabase(userId, true, handler, channel.id, message.id, currentDate.format(formatter), endDate.format(formatter))
+        NoticeOfDepartureTable().addToDatabase(userId, true, handlerId, channel.id, message.id, currentDate.format(formatter), endDate.format(formatter))
     }
 
     suspend fun sendRevokedMessage(reason: String, userId: String, beginDate: String, endDate: String) {
