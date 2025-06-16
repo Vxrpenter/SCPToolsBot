@@ -2,7 +2,7 @@
 
 changelog:
   categories:
-    - title: Breaking Changes 🛠
+    - title: ⛔ Breaking Changes ⛔
       labels:
         - breaking
     - title: Added 
