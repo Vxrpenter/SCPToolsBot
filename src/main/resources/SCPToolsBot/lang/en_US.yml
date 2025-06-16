@@ -630,7 +630,7 @@ NOTICE_OF_DEPARTURE:
                         &filler&
                         **Needed Information**\n
                         This information will be needed for your notice of departure.\n
-                        - The date you wish to come back. Please follow this format when entering or it will not be accepted: **dd.MM.yyyy**\n
+                        - The date you wish to come back. Please follow this format when entering or it will not be accepted: **%formatter%**\n
                         
                         - A short explanation on why you need some time off. Don't go into too much detail, just enough for it to make sense.\n
                         
@@ -639,12 +639,12 @@ NOTICE_OF_DEPARTURE:
 
   MODAL_TITLE: "File Notice of Departure"
   MODAL_TIME_TITLE: "Away time?"
-  MODAL_TIME_PLACEHOLDER: "How long will you be away [dd.MM.yyyy]"
+  MODAL_TIME_PLACEHOLDER: "How long will you be away [%formatter%]"
   MODAL_EXPLANATION_TITLE: "Explanation"
   MODAL_EXPLANATION_PLACEHOLDER: "Why are you going to be away [exclude details]"
 
   EMBED_ENTER_VALID_DATE_TITLE: "Enter a valid date format"
-  EMBED_ENTER_VALID_DATE_BODY: "You need to enter a valid date format to proceed. The accepted format is: **dd.MM.yyyy**"
+  EMBED_ENTER_VALID_DATE_BODY: "You need to enter a valid date format to proceed. The accepted format is: **%formatter%**"
 
   EMBED_ENTER_FUTURE_DATE_TITLE: "Enter a future date"
   EMBED_ENTER_FUTURE_DATE_BODY: "You need to enter a date in the future to proceed."
