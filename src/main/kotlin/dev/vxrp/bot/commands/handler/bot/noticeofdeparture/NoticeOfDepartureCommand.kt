@@ -48,7 +48,7 @@ class NoticeOfDepartureCommand(val config: Config,  val translation: Translation
         val endDate = NoticeOfDepartureTable().retrieveEndDate(user.id)
 
         if (endDate != null) {
-            event.replyModal(NoticeOfDepartureTemplateModals(translation).reasonActionModal(ActionId.REVOKING, user.id, endDate)).queue()
+            event.replyModal(NoticeOfDepartureTemplateModals(config, translation).reasonActionModal(ActionId.REVOKING, user.id, endDate)).queue()
         } else {
             val embed = Embed {
                 color = 0xE74D3C
