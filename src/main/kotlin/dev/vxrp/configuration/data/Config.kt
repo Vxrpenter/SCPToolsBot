@@ -115,6 +115,8 @@ data class ConfigVerify(
 @Serializable
 data class ConfigNoticeOfDeparture(
     val active: Boolean,
+    @SerialName("date_formatting")
+    val dateFormatting: String,
     @SerialName("decision_channel_id")
     val decisionChannel: String,
     @SerialName("notice_channel_id")
