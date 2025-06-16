@@ -27,7 +27,8 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 val embed = Embed {
                     color = 0xE74D3C
                     title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterValidDateTitle)
-                    description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterValidDateBody)
+                    description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterValidDateBody
+                        .replace("%formatter%", config.settings.noticeOfDeparture.dateFormatting))
                 }
 
                 event.hook.send("", listOf(embed)).setEphemeral(true).queue()
