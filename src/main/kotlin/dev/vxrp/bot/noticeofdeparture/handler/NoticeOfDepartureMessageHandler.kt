@@ -34,7 +34,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
     }
 
     suspend fun sendDecisionMessage(userId: String, date: String, reason: String) {
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val formatter = DateTimeFormatter.ofPattern(config.settings.noticeOfDeparture.dateFormatting)
         val currentDate = LocalDate.now()
         val endDate = LocalDate.parse(date, formatter)
 
@@ -73,7 +73,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
     }
 
     suspend fun sendAcceptedMessage(reason: String, userId: String, date: String) {
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val formatter = DateTimeFormatter.ofPattern(config.settings.noticeOfDeparture.dateFormatting)
         val currentDate = LocalDate.now()
         val endDate = LocalDate.parse(date, formatter)
 
@@ -112,7 +112,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
     }
 
     suspend fun sendNoticeMessage(reason: String, handlerId: String, userId: String, date: String) {
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val formatter = DateTimeFormatter.ofPattern(config.settings.noticeOfDeparture.dateFormatting)
         val currentDate = LocalDate.now()
         val endDate = LocalDate.parse(date, formatter)
 
@@ -151,7 +151,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
     }
 
     suspend fun sendRevokedMessage(reason: String, userId: String, beginDate: String, endDate: String) {
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val formatter = DateTimeFormatter.ofPattern(config.settings.noticeOfDeparture.dateFormatting)
         val currentDate = LocalDate.parse(beginDate, formatter)
         val endDate = LocalDate.parse(endDate, formatter)
 
@@ -174,7 +174,7 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
     }
 
     suspend fun sendEndedMessage(userId: String, beginDate: String, endDate: String) {
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val formatter = DateTimeFormatter.ofPattern(config.settings.noticeOfDeparture.dateFormatting)
         val currentDate = LocalDate.parse(beginDate, formatter)
         val endDate = LocalDate.parse(endDate, formatter)
 

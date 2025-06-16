@@ -19,7 +19,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
         if (event.modalId.startsWith("notice_of_departure_general")) {
             val date = event.values[0].asString
             val reason = event.values[1].asString
-            val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+            val formatter = DateTimeFormatter.ofPattern(config.settings.noticeOfDeparture.dateFormatting)
 
             val parsedDate = try {
                 LocalDate.parse(date, formatter)
