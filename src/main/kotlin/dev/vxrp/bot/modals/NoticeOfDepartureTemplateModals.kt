@@ -2,12 +2,13 @@ package dev.vxrp.bot.modals
 
 import dev.minn.jda.ktx.interactions.components.TextInputBuilder
 import dev.vxrp.bot.noticeofdeparture.enums.ActionId
+import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import net.dv8tion.jda.api.interactions.components.ActionRow
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle
 import net.dv8tion.jda.api.interactions.modals.Modal
 
-class NoticeOfDepartureTemplateModals(val translation: Translation) {
+class NoticeOfDepartureTemplateModals(val config: Config, val translation: Translation) {
     fun generalModal(): Modal {
         return Modal.create("notice_of_departure_general", translation.noticeOfDeparture.modalTitle).addComponents(
             ActionRow.of(
@@ -17,7 +18,8 @@ class NoticeOfDepartureTemplateModals(val translation: Translation) {
                     style = TextInputStyle.SHORT,
                     required = true,
                     requiredLength = 10..10,
-                    placeholder = translation.noticeOfDeparture.modalTimePlaceHolder).build()
+                    placeholder = translation.noticeOfDeparture.modalTimePlaceHolder
+                        .replace("%formatter%", config.settings.noticeOfDeparture.dateFormatting)).build()
             ),
             ActionRow.of(
                 TextInputBuilder(

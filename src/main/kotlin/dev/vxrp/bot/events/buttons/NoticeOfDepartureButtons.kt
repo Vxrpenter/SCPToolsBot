@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Config, val translation: Translation) {
     suspend fun init() {
         if (event.button.id?.startsWith("notice_of_departure_file") == true) {
-            event.replyModal(NoticeOfDepartureTemplateModals(translation).generalModal()).queue()
+            event.replyModal(NoticeOfDepartureTemplateModals(config, translation).generalModal()).queue()
         }
 
         if (event.button.id?.startsWith("notice_of_departure_decision_accept") == true) {
@@ -22,7 +22,7 @@ class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Co
             val userId = splittetId[1]
             val endTime = splittetId[2]
 
-            event.replyModal(NoticeOfDepartureTemplateModals(translation).reasonActionModal(ActionId.ACCEPTING, userId, endTime)).queue()
+            event.replyModal(NoticeOfDepartureTemplateModals(config, translation).reasonActionModal(ActionId.ACCEPTING, userId, endTime)).queue()
         }
 
         if (event.button.id?.startsWith("notice_of_departure_decision_dismiss") == true) {
@@ -32,7 +32,7 @@ class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Co
             val userId = splittetId[1]
             val endTime = splittetId[2]
 
-            event.replyModal(NoticeOfDepartureTemplateModals(translation).reasonActionModal(ActionId.DISMISSING, userId, endTime)).queue()
+            event.replyModal(NoticeOfDepartureTemplateModals(config, translation).reasonActionModal(ActionId.DISMISSING, userId, endTime)).queue()
         }
 
         if (event.button.id?.startsWith("notice_of_departure_revoke") == true) {
@@ -42,7 +42,7 @@ class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Co
             val userId = splittetId[1]
             val endTime = splittetId[2]
 
-            event.replyModal(NoticeOfDepartureTemplateModals(translation).reasonActionModal(ActionId.REVOKING, userId, endTime)).queue()
+            event.replyModal(NoticeOfDepartureTemplateModals(config, translation).reasonActionModal(ActionId.REVOKING, userId, endTime)).queue()
         }
     }
 
