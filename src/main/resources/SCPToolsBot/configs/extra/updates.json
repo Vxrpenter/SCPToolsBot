@@ -12,7 +12,7 @@
   },
 
   "configurationUpdate": {
-    "config": false,
+    "config": true,
     "statusSettings": false,
     "ticketSettings": false,
     "extra": {
