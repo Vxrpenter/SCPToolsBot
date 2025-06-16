@@ -1,7 +1,7 @@
 package dev.vxrp.bot.events.modals
 
 import dev.minn.jda.ktx.messages.Embed
-import dev.minn.jda.ktx.messages.reply_
+import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.noticeofdeparture.NoticeOfDepartureManager
 import dev.vxrp.bot.noticeofdeparture.handler.NoticeOfDepartureMessageHandler
 import dev.vxrp.configuration.data.Config
@@ -14,6 +14,7 @@ import java.time.format.DateTimeParseException
 
 class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Config, val translation: Translation) {
     suspend fun init() {
+        event.deferReply(true).queue()
         if (event.modalId.startsWith("notice_of_departure_general")) {
             val date = event.values[0].asString
             val reason = event.values[1].asString
@@ -28,7 +29,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                     description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterValidDateBody)
                 }
 
-                event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                event.hook.send("", listOf(embed)).setEphemeral(true).queue()
                 return
             }
 
@@ -40,7 +41,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                     description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterFutureDateBody)
                 }
 
-                event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                event.hook.send("", listOf(embed)).setEphemeral(true).queue()
                 return
             }
 
@@ -52,7 +53,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionSentBody)
             }
 
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.hook.send("", listOf(embed)).setEphemeral(true).queue()
         }
 
         if (event.modalId.startsWith("notice_of_departure_reason_action_ACCEPTING")) {
@@ -71,7 +72,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptationSentBody)
             }
 
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.hook.send("", listOf(embed)).setEphemeral(true).queue()
             event.message?.delete()?.queue()
         }
 
@@ -89,7 +90,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissingSentBody)
             }
 
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.hook.send("", listOf(embed)).setEphemeral(true).queue()
             event.message?.delete()?.queue()
         }
 
@@ -108,7 +109,7 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
                 description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokationSentBody)
             }
 
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            event.hook.send("", listOf(embed)).setEphemeral(true).queue()
         }
     }
 }
