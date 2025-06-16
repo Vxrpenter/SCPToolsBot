@@ -17,7 +17,6 @@ class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Co
 
         if (event.button.id?.startsWith("notice_of_departure_decision_accept") == true) {
             if(permissionCheck(PermissionType.NOTICE_OF_DEPARTURES)) return
-            event.deferReply(true).queue()
             val splittetId = event.button.id!!.split(":")
 
             val userId = splittetId[1]
@@ -28,7 +27,6 @@ class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Co
 
         if (event.button.id?.startsWith("notice_of_departure_decision_dismiss") == true) {
             if(permissionCheck(PermissionType.NOTICE_OF_DEPARTURES)) return
-            event.deferReply(true).queue()
             val splittetId = event.button.id!!.split(":")
 
             val userId = splittetId[1]
@@ -38,7 +36,6 @@ class NoticeOfDepartureButtons(val event: ButtonInteractionEvent, val config: Co
         }
 
         if (event.button.id?.startsWith("notice_of_departure_revoke") == true) {
-            event.deferReply(true).queue()
             if(permissionCheck(PermissionType.NOTICE_OF_DEPARTURES)) return
             val splittetId = event.button.id!!.split(":")
 
