@@ -17,7 +17,7 @@ class NoticeOfDepartureCommand(val config: Config,  val translation: Translation
         val user = event.options[0].asUser
         if (user.isBot) return
         val handler = NoticeOfDepartureTable().retrieveHandler(user.id)!!
-        val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+        val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern(config.settings.noticeOfDeparture.dateFormatting))
         val endDate = NoticeOfDepartureTable().retrieveEndDate(user.id)
 
         if (endDate != null) {
