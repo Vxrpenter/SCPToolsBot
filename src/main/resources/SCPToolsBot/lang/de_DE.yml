@@ -632,7 +632,7 @@ NOTICE_OF_DEPARTURE:
                         &filler&
                         **Benötigte Informationen**\n
                         Diese Informationen werden für deine Abmeldung benötigt.\n
-                        - Das Datum deiner Rückkehr. Bitte verwende dieses Format, andernfalls wird die Abmeldung nicht akzeptiert: **dd.MM.yyyy**\n
+                        - Das Datum deiner Rückkehr. Bitte verwende dieses Format, andernfalls wird die Abmeldung nicht akzeptiert: **%formatter%**\n
                         
                         - Eine kurze Erklärung, warum du eine Auszeit benötigen. Gehe nicht zu sehr ins Detail, nur so viel, dass es Sinn ergibt.\n
                         
@@ -641,12 +641,12 @@ NOTICE_OF_DEPARTURE:
 
   MODAL_TITLE: "Abmeldung stellen"
   MODAL_TIME_TITLE: "Wie lange bist du weg?"
-  MODAL_TIME_PLACEHOLDER: "wie lange, immer im format [dd.MM.yyyy]"
+  MODAL_TIME_PLACEHOLDER: "wie lange, immer im format [%formatter%]"
   MODAL_EXPLANATION_TITLE: "Erklärung"
   MODAL_EXPLANATION_PLACEHOLDER: "Wieso wirst du weg sein? [keine details]"
 
   EMBED_ENTER_VALID_DATE_TITLE: "Gib ein gültiges Datumsformat an"
-  EMBED_ENTER_VALID_DATE_BODY: "Du musst ein gültiges Datumsformat eingeben. Das akzeptierte Format ist: **dd.MM.yyyy**"
+  EMBED_ENTER_VALID_DATE_BODY: "Du musst ein gültiges Datumsformat eingeben. Das akzeptierte Format ist: **%formatter%**"
 
   EMBED_ENTER_FUTURE_DATE_TITLE: "Gib ein Datum in der Zukunft an"
   EMBED_ENTER_FUTURE_DATE_BODY: "Du musst ein Datum angeben das in der Zukunft liegt."
