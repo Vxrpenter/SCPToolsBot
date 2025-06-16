@@ -19,7 +19,7 @@ class NoticeOfDepartureCheckerHandler(val api: JDA, val config: Config, val tran
 
         for (id in idList) {
             val currentDate = LocalDate.now()
-            val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+            val formatter = DateTimeFormatter.ofPattern(config.settings.noticeOfDeparture.dateFormatting)
             val beginDate = LocalDate.parse(NoticeOfDepartureTable().retrieveBeginDate(id)!!, formatter)
             val endDate = LocalDate.parse(NoticeOfDepartureTable().retrieveEndDate(id)!!, formatter)
 
