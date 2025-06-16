@@ -24,7 +24,8 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
     fun sendTemplate(channel: TextChannel) {
         val embed = Embed {
             title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedTemplateTitle)
-            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedTemplateBody)
+            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedTemplateBody
+                .replace("%formatter%", config.settings.noticeOfDeparture.dateFormatting))
         }
 
         channel.send("", listOf(embed)).setActionRow(
