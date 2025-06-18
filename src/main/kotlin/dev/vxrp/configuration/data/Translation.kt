@@ -75,7 +75,12 @@ data class TranslationPermissions(
     @SerialName("TEXT_INSUFFICIENT_PERMISSION")
     val textInsufficientPermission: String,
     @SerialName("TEXT_INTERACTION_DISABLED")
-    val textInteractionDisabled: String
+    val textInteractionDisabled: String,
+
+    @SerialName("MODAL_ENTER_REASON_TITLE")
+    val modalEnterReasonTitle: String,
+    @SerialName("MODAL_ENTER_REASON_BODY")
+    val modalEnterReasonBody: String
 )
 
 @Serializable
