@@ -185,6 +185,25 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
         }
     }
 
+    suspend fun sendClosedMessage(userId: String, handlerId: String, threadChannel: ThreadChannel, reason: String) {
+        val user = api.retrieveUserById(userId).await()
+        val handler = api.retrieveUserById(handlerId).await()
+
+        val embed = Embed {
+            color = 0xE74D3C
+            title = ColorTool().useCustomColorCodes(translation.support.embedClosedTitle
+                .replace("%channel%", threadChannel.asMention))
+            description = ColorTool().useCustomColorCodes(translation.support.embedClosedBody
+                .replace("%ticket%", threadChannel.name)
+                .replace("%handler%", handler.asMention)
+                .replace("%reason%", reason))
+        }
+
+        user.openPrivateChannel().queue {
+            it.send("", listOf(embed)).queue()
+        }
+    }
+
     private fun messageActionRow(status: TicketStatus, type: TicketType, handler: Boolean): Collection<ItemComponent> {
         val rows: MutableCollection<ItemComponent> = ArrayList()
 
