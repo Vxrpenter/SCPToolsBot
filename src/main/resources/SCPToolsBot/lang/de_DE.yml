@@ -546,6 +546,14 @@ SUPPORT:
   EMBED_LOG_CLOSED_TITLE: "Du hast das Ticket geschlossen - %name%"
   EMBED_LOG_CLOSED_BODY: "Du hast dieses Ticket geschlossen und du kannst es nicht erneut öffnen."
 
+  EMBED_CLOSED_TITLE: "Ticket Geschlossen - %channel%"
+  EMBED_CLOSED_BODY: "
+                        Dein Ticket **%ticket%** wurde von %handler% mit folgendem Grund geschlossen:\n
+                        &filler&
+                        __**Schließungsgrund:**__\n
+                        ```%reason%```
+                        "
+
 APPLICATION:
   EMBED_ACTIVATION_MENU_TITLE: "Aktive Bewerbungseinstellungen"
   EMBED_ACTIVATION_MENU_BODY: "

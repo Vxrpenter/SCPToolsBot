@@ -537,6 +537,11 @@ data class TranslationSupport(
     val embedLogClosedTitle: String,
     @SerialName("EMBED_LOG_CLOSED_BODY")
     val embedLogClosedBody: String,
+
+    @SerialName("EMBED_CLOSED_TITLE")
+    val embedClosedTitle: String,
+    @SerialName("EMBED_CLOSED_BODY")
+    val embedClosedBody: String
 )
 
 @Serializable
@@ -611,8 +616,6 @@ data class TranslationVerify(
     val embedDataFieldTimestampTitle: String,
     @SerialName("EMBED_DATA_FIELD_DELETE_VALUE")
     val embedDataFieldDeleteValue: String,
-
-
 
     @SerialName("EMBED_NO_DATA_TITLE")
     val embedNoDataTitle: String,
