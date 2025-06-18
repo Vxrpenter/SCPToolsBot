@@ -51,6 +51,9 @@ PERMISSIONS:
   TEXT_INSUFFICIENT_PERMISSION: "&red&&bold&Unzureichende Berechtigungen, wende dich für weitere Informationen an Staff&reset&"
   TEXT_INTERACTION_DISABLED: "&red&&bold&Interaktion Deaktiviert, wende dich für weitere Informationen an Staff&reset&"
 
+  MODAL_ENTER_REASON_TITLE: "Grund Angeben"
+  MODAL_ENTER_REASON_PLACEHOLDER: "Bitte gib für die zu tätigende Aktion einen Grund an"
+
 SETTINGS:
 
   EMBED_SETTINGS_TITLE: "Einstellungen"
