@@ -545,6 +545,14 @@ SUPPORT:
   EMBED_LOG_CLOSED_TITLE: "You Closed Ticket - %name%"
   EMBED_LOG_CLOSED_BODY: "This ticket has been closed by you. You cannot reopen it and all business with it has been ended."
 
+  EMBED_CLOSED_TITLE: "Ticket Closed - %channel%"
+  EMBED_CLOSED_BODY: "
+                        Your ticket **%ticket%** has been closed by %handler%, the following reason was given:\n
+                        &filler&
+                        __**Close Reason:**__\n
+                        ```%reason%```
+                        "
+
 APPLICATION:
   EMBED_ACTIVATION_MENU_TITLE: "Active Application Settings"
   EMBED_ACTIVATION_MENU_BODY: "
