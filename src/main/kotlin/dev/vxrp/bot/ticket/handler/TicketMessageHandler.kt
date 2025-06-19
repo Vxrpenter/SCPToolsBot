@@ -191,11 +191,11 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
 
         val embed = Embed {
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.support.embedClosedTitle
-                .replace("%channel%", threadChannel.asMention))
+            title = ColorTool().useCustomColorCodes(translation.support.embedClosedTitle)
             description = ColorTool().useCustomColorCodes(translation.support.embedClosedBody
-                .replace("%ticket%", threadChannel.name)
+                .replace("%name%", threadChannel.name)
                 .replace("%handler%", handler.asMention)
+                .replace("%ticket%", threadChannel.asMention)
                 .replace("%reason%", reason))
         }
 
