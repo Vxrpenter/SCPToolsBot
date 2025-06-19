@@ -98,8 +98,7 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
-                    .replace("%name%", channelId))
+                title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle)
                 description = ColorTool().useCustomColorCodes(translation.support.embedLogClosedBody
                     .replace("reason", reason))
             }
