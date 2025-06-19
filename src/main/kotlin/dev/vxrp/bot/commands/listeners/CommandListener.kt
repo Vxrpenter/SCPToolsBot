@@ -17,12 +17,14 @@ import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionSectionType
 import dev.vxrp.util.launch.enums.LaunchOptionType
 import net.dv8tion.jda.api.JDA
+import net.dv8tion.jda.api.entities.channel.ChannelType
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 
 class CommandListener(val api: JDA, val config: Config, val translation: Translation) : ListenerAdapter() {
     init {
         api.listener<SlashCommandInteractionEvent> { event ->
+            if (event.channel.type == ChannelType.PRIVATE) return@listener
             val commandList = config.extra.commands.commands
 
             for (command in commandList) {
