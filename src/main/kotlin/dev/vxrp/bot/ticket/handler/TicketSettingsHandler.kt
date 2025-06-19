@@ -112,8 +112,10 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 iconUrl = user.avatarUrl
             }
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedTitle.replace("%user%", user.globalName!!))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedBody)
+            title = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedTitle
+                .replace("%user%", user.globalName!!))
+            description = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedBody
+                .replace("%reason%", reason))
         }
         ticketChannel.send("", listOf(embed)).queue()
         TicketLogHandler(api, config, translation).closeMessage(id, user)
