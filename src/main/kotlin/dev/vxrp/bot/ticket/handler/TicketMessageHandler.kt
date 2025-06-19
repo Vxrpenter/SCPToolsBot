@@ -186,6 +186,7 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
     }
 
     suspend fun sendClosedMessage(userId: String, handlerId: String, threadChannel: ThreadChannel, reason: String) {
+        if (userId == "anonymous") return
         val user = api.retrieveUserById(userId).await()
         val handler = api.retrieveUserById(handlerId).await()
 
