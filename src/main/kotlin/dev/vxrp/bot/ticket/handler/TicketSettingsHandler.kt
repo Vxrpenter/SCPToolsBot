@@ -105,7 +105,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         logger.info("Ticket {} suspended by user: {}", id, user.id)
     }
 
-    suspend fun archiveTicket(user: User, ticketChannel: ThreadChannel, id: String) {
+    suspend fun archiveTicket(user: User, ticketChannel: ThreadChannel, id: String, reason: String) {
         val embed = Embed {
             author {
                 name = user.globalName
@@ -117,7 +117,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
         }
         ticketChannel.send("", listOf(embed)).queue()
         TicketLogHandler(api, config, translation).closeMessage(id, user)
-        TicketMessageHandler(api, config, translation).sendClosedMessage(TicketTable().getTicketCreator(id)!!, user.id, ticketChannel,"TestReason")
+        TicketMessageHandler(api, config, translation).sendClosedMessage(TicketTable().getTicketCreator(id)!!, user.id, ticketChannel,reason)
         TicketTable().updateTicketStatus(id, TicketStatus.CLOSED)
         val child = api.getThreadChannelById(id)!!
 

@@ -1,14 +1,18 @@
 package dev.vxrp.bot.events.modals
 
 import dev.minn.jda.ktx.messages.Embed
+import dev.minn.jda.ktx.messages.reply_
 import dev.minn.jda.ktx.messages.send
+import dev.vxrp.bot.permissions.enums.PermissionType
 import dev.vxrp.bot.ticket.TicketManager
 import dev.vxrp.bot.ticket.enums.TicketStatus
 import dev.vxrp.bot.ticket.enums.TicketType
+import dev.vxrp.bot.ticket.handler.TicketSettingsHandler
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.ApplicationTable
 import dev.vxrp.database.tables.database.ApplicationTypeTable
+import dev.vxrp.database.tables.database.TicketTable
 import dev.vxrp.util.color.ColorTool
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent
@@ -82,6 +86,26 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
             ApplicationTable().addToDatabase(child?.id.toString(), roleId, state =false, result = false, event.user.id, null)
             respond(child, event)
         }
+
+        if (event.modalId.startsWith("ticket_close")) {
+            val channelId = event.modalId.split(":")[1]
+            val reason = event.values.first().asString
+            if (TicketTable().determineHandler(channelId)) {
+                event.hook.send("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
+                return
+            }
+
+            val channel = event.jda.getThreadChannelById(channelId)!!
+            val embed = Embed {
+                color = 0xE74D3C
+                title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
+                    .replace("%name%", channelId))
+                description = ColorTool().useCustomColorCodes(translation.support.embedLogClosedBody
+                    .replace("reason", reason))
+            }
+            event.hook.send("", listOf(embed)).setEphemeral(true).queue()
+            TicketSettingsHandler(api, config, translation).archiveTicket(event.user, channel, channelId, reason)
+        }
     }
 
     private fun respond(child: ThreadChannel?, event: ModalInteractionEvent) {
@@ -101,5 +125,10 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
             title = ColorTool().useCustomColorCodes(translation.support.embedTicketCreatedTitle)
             description = ColorTool().useCustomColorCodes(translation.support.embedTicketCreatedBody.replace("%channel%", child.asMention))
         })).setEphemeral(true).queue()
+    }
+
+    private val noHandlerEmbed = Embed {
+        title = ColorTool().useCustomColorCodes(translation.support.embedTicketNoHandlerTitle)
+        description = ColorTool().useCustomColorCodes(translation.support.embedTicketNoHandlerBody)
     }
 }

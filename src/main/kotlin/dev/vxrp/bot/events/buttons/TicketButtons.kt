@@ -2,6 +2,7 @@ package dev.vxrp.bot.events.buttons
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
+import dev.vxrp.bot.modals.GlobalTemplateModals
 import dev.vxrp.bot.modals.TicketTemplateModals
 import dev.vxrp.bot.permissions.PermissionManager
 import dev.vxrp.bot.permissions.enums.PermissionType
@@ -45,19 +46,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
         if (event.button.id?.startsWith("ticket_close") == true) {
             if(permissionCheck(PermissionType.TICKET, TicketTable().determineTicketType(event.channelId!!))) return
-            if (TicketTable().determineHandler(event.channelId!!)) {
-                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
-                return
-            }
 
-            val embed = Embed {
-                color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
-                    .replace("%name%", event.channelId.toString()))
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogClosedBody)
-            }
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
-            TicketSettingsHandler(api, config, translation).archiveTicket(event.user, event.channel.asThreadChannel(), event.channelId!!)
+            event.replyModal(GlobalTemplateModals(translation).reasonModal("ticket_close:${event.channelId}")).queue()
         }
 
         if (event.button.id?.startsWith("ticket_settings") == true) {
@@ -137,20 +127,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
         if (event.button.id?.startsWith("ticket_setting_close") == true) {
             if(permissionCheck(PermissionType.TICKET, TicketTable().determineTicketType(event.channelId!!))) return
-            if (TicketTable().determineHandler(event.channelId!!)) {
-                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
-                return
-            }
 
-            val embed = Embed {
-                color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
-                    .replace("%name%", event.channelId.toString()))
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogClosedBody)
-            }
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
-            event.message.delete().queue()
-            TicketSettingsHandler(api, config, translation).archiveTicket(event.user, event.channel.asThreadChannel(), event.channelId!!)
+            event.replyModal(GlobalTemplateModals(translation).reasonModal("ticket_close:${event.channelId}")).queue()
         }
 
         if (event.button.id?.startsWith("ticket_log_claim") == true) {
@@ -228,20 +206,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
         if (event.button.id?.startsWith("ticket_log_close") == true) {
             val channelId = event.button.id!!.split(":")[1]
             if(permissionCheck(PermissionType.TICKET_LOGS, TicketTable().determineTicketType(event.button.id!!.split(":")[1]))) return
-            if (TicketTable().determineHandler(channelId)) {
-                event.reply_("", listOf(noHandlerEmbed)).setEphemeral(true).queue()
-                return
-            }
 
-            val channel = event.jda.getThreadChannelById(channelId)!!
-            val embed = Embed {
-                color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle
-                    .replace("%name%", channelId))
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogClosedBody)
-            }
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
-            TicketSettingsHandler(api, config, translation).archiveTicket(event.user, channel, channelId)
+            event.replyModal(GlobalTemplateModals(translation).reasonModal("ticket_close:$channelId")).queue()
         }
     }
 
