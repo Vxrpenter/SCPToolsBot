@@ -533,7 +533,11 @@ SUPPORT:
   EMBED_TICKET_SUSPENDED_BODY: "Dieses Ticket wurde gesperrt. Bitte kontaktiere ein Teammitglied um mehr Informationen zu erhalten"
 
   EMBED_TICKET_CLOSED_TITLE: "Ticket Geschlossen"
-  EMBED_TICKET_CLOSED_BODY: "Dieses Ticket wurde geschlossen. Es wird nicht erneut geöffnet werden. Solltest du erneute Fragen haben, kannst du jederzeit ein weiteres Ticket erstellen."
+  EMBED_TICKET_CLOSED_BODY: "
+                        Dieses Ticket wurde geschlossen. Es wird nicht erneut geöffnet werden. Solltest du erneute Fragen haben, kannst du jederzeit ein weiteres Ticket erstellen.\n
+                        &filler&\n
+                        __**Schließungsgrund:**__\n
+                        ```%reason%```"
 
   EMBED_LOG_CLAIMED_TITLE: "Du hast das Ticket beansprucht - %name%"
   EMBED_LOG_CLAIMED_BODY: "Dieses Ticket steht jetzt unter deiner Verantwortung."

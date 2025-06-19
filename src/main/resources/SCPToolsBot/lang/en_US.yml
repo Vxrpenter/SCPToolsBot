@@ -534,7 +534,8 @@ SUPPORT:
   EMBED_TICKET_CLOSED_TITLE: "Ticket Closed"
   EMBED_TICKET_CLOSED_BODY: "
                         This ticket has been closed. It will not be reopened. If you ever have any other problems, you can always create a new ticket.
-                        &filler&
+                        &filler&\n
+                        __**Close Reason:**__\n
                         ```%reason%```"
 
   EMBED_LOG_CLAIMED_TITLE: "You Claimed Ticket - %name%"
@@ -550,9 +551,7 @@ SUPPORT:
   EMBED_LOG_SUSPENDED_BODY: "This ticket has been correctly suspended by you. Users may contact you on the reason for it's suspension"
 
   EMBED_LOG_CLOSED_TITLE: "You Closed Ticket - %name%"
-  EMBED_LOG_CLOSED_BODY: "This ticket has been closed by you. You cannot reopen it and all business with it has been ended.
-                          &filler&
-                          ```%reason%```"
+  EMBED_LOG_CLOSED_BODY: "This ticket has been closed by you. You cannot reopen it and all business with it has been ended."
 
   EMBED_CLOSED_TITLE: "Ticket Closed"
   EMBED_CLOSED_BODY: "
