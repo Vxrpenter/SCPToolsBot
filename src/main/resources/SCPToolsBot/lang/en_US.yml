@@ -51,8 +51,9 @@ PERMISSIONS:
   TEXT_INSUFFICIENT_PERMISSION: "&red&&bold&Insufficient Permissions, contact staff for more information&reset&"
   TEXT_INTERACTION_DISABLED: "&red&&bold&Interaction Disabled, contact staff for more information&reset&"
 
-  MODAL_ENTER_REASON_TITLE: "Enter Reason"
-  MODAL_ENTER_REASON_PLACEHOLDER: "Please enter a reason for the action you are trying to take"
+  MODAL_REASON_TITLE: "Enter Reason"
+  MODAL_REASON_ENTER_REASON_TITLE: "Reason"
+  MODAL_REASON_ENTER_REASON_PLACEHOLDER: "Please enter a reason for the action you are trying to take!"
 
 SETTINGS:
 
@@ -531,9 +532,10 @@ SUPPORT:
   EMBED_TICKET_SUSPENDED_BODY: "This ticket has been suspended. Please contact staff on why and how it was suspended"
 
   EMBED_TICKET_CLOSED_TITLE: "Ticket Closed"
-  EMBED_TICKET_CLOSED_BODY: "This ticket has been closed. It will not be reopened. If you ever have any other problems, you can always create a new ticket.
-                          &filler&
-                          ```%reason%```"
+  EMBED_TICKET_CLOSED_BODY: "
+                        This ticket has been closed. It will not be reopened. If you ever have any other problems, you can always create a new ticket.
+                        &filler&
+                        ```%reason%```"
 
   EMBED_LOG_CLAIMED_TITLE: "You Claimed Ticket - %name%"
   EMBED_LOG_CLAIMED_BODY: "This ticket is now under your management. You will tend to it and help the user correspondingly"
@@ -552,10 +554,13 @@ SUPPORT:
                           &filler&
                           ```%reason%```"
 
-  EMBED_CLOSED_TITLE: "Ticket Closed - %channel%"
+  EMBED_CLOSED_TITLE: "Ticket Closed"
   EMBED_CLOSED_BODY: "
-                        Your ticket **%ticket%** has been closed by %handler%, the following reason was given:\n
+                        Your ticket **%name%** has been closed. You can return to see the latest chats with the channel links in this message!\n
                         &filler&
+                        Handler: %handler%\n
+                        Ticket: %ticket%\n
+                        
                         __**Close Reason:**__\n
                         ```%reason%```
                         "
