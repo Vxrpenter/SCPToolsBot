@@ -51,8 +51,9 @@ PERMISSIONS:
   TEXT_INSUFFICIENT_PERMISSION: "&red&&bold&Unzureichende Berechtigungen, wende dich für weitere Informationen an Staff&reset&"
   TEXT_INTERACTION_DISABLED: "&red&&bold&Interaktion Deaktiviert, wende dich für weitere Informationen an Staff&reset&"
 
-  MODAL_ENTER_REASON_TITLE: "Grund Angeben"
-  MODAL_ENTER_REASON_PLACEHOLDER: "Bitte gib für die zu tätigende Aktion einen Grund an"
+  MODAL_REASON_TITLE: "Grund Angeben"
+  MODAL_REASON_ENTER_REASON_TITLE: "Grund"
+  MODAL_REASON_ENTER_REASON_PLACEHOLDER: "Bitte gib für die zu tätigende Aktion einen Grund an!"
 
 SETTINGS:
 
@@ -549,10 +550,13 @@ SUPPORT:
   EMBED_LOG_CLOSED_TITLE: "Du hast das Ticket geschlossen - %name%"
   EMBED_LOG_CLOSED_BODY: "Du hast dieses Ticket geschlossen und du kannst es nicht erneut öffnen."
 
-  EMBED_CLOSED_TITLE: "Ticket Geschlossen - %channel%"
+  EMBED_CLOSED_TITLE: "Ticket Geschlossen"
   EMBED_CLOSED_BODY: "
-                        Dein Ticket **%ticket%** wurde von %handler% mit folgendem Grund geschlossen:\n
+                        Dein Ticket **%name%** wurde geschlossen. Du kannst jedoch mit dem angegebenen Channel-Link die letzten Nachrichten betrachten:\n
                         &filler&
+                        Handler: %handler%\n
+                        Ticket: %ticket%\n
+                        
                         __**Schließungsgrund:**__\n
                         ```%reason%```
                         "
