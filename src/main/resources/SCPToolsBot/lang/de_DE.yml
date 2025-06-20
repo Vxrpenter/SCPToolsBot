@@ -221,7 +221,7 @@ STATUS:
                         Modded: %modded%&reset&\n
                         Mods: &bold&%mods%&reset&
                         ```
-                        &filler&
+                        &filler&\n
                         ```ansi
                         
                         %players%
