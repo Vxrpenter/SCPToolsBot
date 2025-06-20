@@ -2,7 +2,6 @@ package dev.vxrp.util.launch
 
 import dev.vxrp.bot.BotManager
 import dev.vxrp.bot.status.StatusManager
-import dev.vxrp.bot.timer
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.launch.data.LaunchArguments
@@ -40,7 +39,7 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
             return
         }
         if (clusterOptions.engage && botOptions.engage) {
-            val statusManager = StatusManager(botManager.mainApi!!, config, translation, timer, "SCPToolsBot/configs/status-settings.yml")
+            val statusManager = StatusManager(botManager.mainApi!!, config, translation, "SCPToolsBot/configs/status-settings.yml")
             statusManager.initialize(botManager.mainCommandManager!!)
         }
 
