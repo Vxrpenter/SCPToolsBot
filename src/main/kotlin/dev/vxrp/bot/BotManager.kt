@@ -15,16 +15,14 @@ import dev.vxrp.configuration.data.Translation
 import dev.vxrp.updates.handler.UpdatesFileHandler
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionType
-import net.dv8tion.jda.api.JDA
+import dev.vxrp.util.mainApi
+import dev.vxrp.util.mainCommandManager
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.Activity.ActivityType
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
 
 class BotManager(val config: Config, val translation: Translation) {
-    var mainApi: JDA? = null
-    var mainCommandManager: CommandManager? = null
-
     fun init() {
         val api = light(config.settings.token, enableCoroutines = true) {
             intents += listOf(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
