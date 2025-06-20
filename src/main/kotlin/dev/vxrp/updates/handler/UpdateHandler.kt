@@ -100,7 +100,7 @@ class UpdateHandler() {
         if (new.additionalInformation != "") logger.warn("Additional Information: ${new.additionalInformation}")
     }
 
-    fun checkForUpdatesByTag(config: Config, url: String, log: Boolean = true): String {
+    fun checkForUpdatesByTag(config: Config, url: String): String {
         val request = Request.Builder().url(url).build()
 
         client.newCall(request).execute().use { response ->
@@ -138,7 +138,7 @@ class UpdateHandler() {
                 properties.load(InputStreamReader(versionPropertiesStream, StandardCharsets.UTF_8))
             }
 
-            if (log) logger.info("Checking for latest version...")
+            logger.info("Checking for latest version...")
             if (properties.getProperty("version") != fullTag && properties.getProperty("version").split("-").first() <= tag) {
                 if (properties.getProperty("version").contains("alpha") || properties.getProperty("version").contains("beta")) {
                     val propertiesNumber = properties.getProperty("version").split("-").last().replace("alpha", "").replace("beta", "")
@@ -152,10 +152,10 @@ class UpdateHandler() {
                 if (config.settings.updates.ignoreBeta && tag.contains("beta", true)) return tag
                 if (config.settings.updates.ignoreAlpha && tag.contains("alpha", true)) return tag
 
-                if (log) logger.warn("A new version has been found, you can download it from {}", ColorTool().apply(DCColor.LIGHT_BLUE, downloadUrl))
+                logger.warn("A new version has been found, you can download it from {}", ColorTool().apply(DCColor.LIGHT_BLUE, downloadUrl))
                 return tag
             } else {
-                if (log) logger.info("Running latest build")
+                logger.info("Running latest build")
                 return tag
             }
         }
