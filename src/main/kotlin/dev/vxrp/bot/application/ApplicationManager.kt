@@ -1,10 +1,8 @@
 package dev.vxrp.bot.application
 
-import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
-
-var applicationTypeSet: HashSet<ApplicationType> = hashSetOf()
+import dev.vxrp.util.applicationTypeSet
 
 class ApplicationManager(val config: Config, val translation: Translation) {
 
