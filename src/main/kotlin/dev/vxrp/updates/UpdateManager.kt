@@ -19,10 +19,7 @@ class UpdateManager() {
     }
 
     fun spinUpChecker(config: Config) {
-        Timer().runWithTimer(
-            1.hours,
-            updatesScope
-        ) {
+        Timer().runWithTimer(1.hours, updatesScope) {
             try {
                 upstreamVersion = UpdateHandler().checkForUpdatesByTag(config, "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags")
             } catch (_: Exception) {
