@@ -142,6 +142,8 @@ class SettingsCommand(val config: Config, val translation: Translation) {
                 return false
             } catch (_: CallFailureException) {
                 return false
+            } catch (_: IllegalArgumentException) {
+                return false
             }
         }
         return false
