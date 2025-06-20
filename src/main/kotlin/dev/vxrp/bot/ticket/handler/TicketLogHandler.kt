@@ -97,10 +97,10 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         if (ticketHandler != null) handlerUserName = ticketHandler.asMention
 
         var usableColor = 0x2ECC70
-        var usableTitle = ColorTool().useCustomColorCodes(translation.support.embedLogTitle
+        var usableTitle = ColorTool().parse(translation.support.embedLogTitle
             .replace("%name%", childChannel.name)
             .replace("%user%", creatorUserName))
-        var usableDescription = ColorTool().useCustomColorCodes(translation.support.embedLogBody
+        var usableDescription = ColorTool().parse(translation.support.embedLogBody
             .replace("%status%", ticketStatus.toString())
             .replace("%id%", childChannel.id)
             .replace("%creator%", creatorUserMention)
@@ -108,11 +108,11 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
 
         if (closedMessage) {
             usableColor = 0xE74D3C
-            usableTitle = ColorTool().useCustomColorCodes(translation.support.embedClosedLogTitle
+            usableTitle = ColorTool().parse(translation.support.embedClosedLogTitle
                 .replace("%name%", childChannel.name)
                 .replace("%user%", creatorUserName))
 
-            usableDescription = ColorTool().useCustomColorCodes(translation.support.embedClosedLogBody
+            usableDescription = ColorTool().parse(translation.support.embedClosedLogBody
                 .replace("%status%", ticketStatus.toString())
                 .replace("%id%", childChannel.id)
                 .replace("%creator%", creatorUserMention)

@@ -23,8 +23,8 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
 
     fun sendTemplate(channel: TextChannel) {
         val embed = Embed {
-            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedTemplateTitle)
-            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedTemplateBody
+            title = ColorTool().parse(translation.noticeOfDeparture.embedTemplateTitle)
+            description = ColorTool().parse(translation.noticeOfDeparture.embedTemplateBody
                 .replace("%formatter%", config.settings.noticeOfDeparture.dateFormatting))
         }
 
@@ -45,12 +45,12 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         val user = api.retrieveUserById(userId).await()
 
         val embed = Embed {
-            title = ColorTool().useCustomColorCodes(
+            title = ColorTool().parse(
                 translation.noticeOfDeparture.embedDecisionTitle
                     .replace("%number%", (NoticeOfDepartureTable().retrieveSerial() + 1).toString())
                     .replace("%user%", user.globalName.toString())
             )
-            description = ColorTool().useCustomColorCodes(
+            description = ColorTool().parse(
                 translation.noticeOfDeparture.embedDecisionBody
                     .replace("%current_date%", discordCurrentDate)
                     .replace("%end_date%", discordEndDate)
@@ -83,8 +83,8 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
 
         val embed = Embed {
             color = 0x2ECC70
-            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptedTitle)
-            description = ColorTool().useCustomColorCodes(
+            title = ColorTool().parse(translation.noticeOfDeparture.embedAcceptedTitle)
+            description = ColorTool().parse(
                 translation.noticeOfDeparture.embedAcceptedBody
                     .replace("%current_date%", discordCurrentDate)
                     .replace("%end_date%", discordEndDate)
@@ -100,8 +100,8 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
     suspend fun sendDismissedMessage(reason: String, userId: String) {
         val embed = Embed {
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissedTitle)
-            description = ColorTool().useCustomColorCodes(
+            title = ColorTool().parse(translation.noticeOfDeparture.embedDismissedTitle)
+            description = ColorTool().parse(
                 translation.noticeOfDeparture.embedDismissedBody
                     .replace("%reason%", reason)
             )
@@ -124,12 +124,12 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
         val user = api.retrieveUserById(userId).await()
 
         val embed = Embed {
-            title = ColorTool().useCustomColorCodes(
+            title = ColorTool().parse(
                 translation.noticeOfDeparture.embedNoticeTitle
                     .replace("%number%", (NoticeOfDepartureTable().retrieveSerial() + 1).toString())
                     .replace("%user%", user.globalName.toString())
             )
-            description = ColorTool().useCustomColorCodes(
+            description = ColorTool().parse(
                 translation.noticeOfDeparture.embedNoticeBody
                     .replace("%user%", handler.asMention)
                     .replace("%current_date%", discordCurrentDate)
@@ -160,8 +160,8 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
 
         val embed = Embed {
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokedTitle)
-            description = ColorTool().useCustomColorCodes(
+            title = ColorTool().parse(translation.noticeOfDeparture.embedRevokedTitle)
+            description = ColorTool().parse(
                 translation.noticeOfDeparture.embedRevokedBody
                     .replace("%current_date%", discordCurrentDate)
                     .replace("%end_date%", discordEndDate)
@@ -183,8 +183,8 @@ class NoticeOfDepartureMessageHandler(val api: JDA, val config: Config, val tran
 
         val embed = Embed {
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEndedTitle)
-            description = ColorTool().useCustomColorCodes(
+            title = ColorTool().parse(translation.noticeOfDeparture.embedEndedTitle)
+            description = ColorTool().parse(
                 translation.noticeOfDeparture.embedEndedBody
                     .replace("%current_date%", discordCurrentDate)
                     .replace("%end_date%", discordEndDate)

@@ -13,15 +13,15 @@ class StatusMessageHandler(val config: Config, val translation: Translation) {
         val embed = Embed {
             color = 0x2ECC70
             url = config.status.pageUrl
-            title = ColorTool().useCustomColorCodes(translation.status.embedEstablishedTitle).replace("%instance%", "Status Server System")
-            description = ColorTool().useCustomColorCodes(translation.status.embedEstablishedBody)
+            title = ColorTool().parse(translation.status.embedEstablishedTitle).replace("%instance%", "Status Server System")
+            description = ColorTool().parse(translation.status.embedEstablishedBody)
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldName)
-                value = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldValue.replace("%time%", "${info.response}"))
+                name = ColorTool().parse(translation.status.embedEstablishedResponseFieldName)
+                value = ColorTool().parse(translation.status.embedEstablishedResponseFieldValue.replace("%time%", "${info.response}"))
             }
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedEstablishedReasonFieldName)
-                value = ColorTool().useCustomColorCodes(translation.status.embedEstablishedReasonFieldValue)
+                name = ColorTool().parse(translation.status.embedEstablishedReasonFieldName)
+                value = ColorTool().parse(translation.status.embedEstablishedReasonFieldValue)
             }
         }
 
@@ -32,16 +32,16 @@ class StatusMessageHandler(val config: Config, val translation: Translation) {
         val embed = Embed {
             color = 0xE74D3C
             url = config.status.pageUrl
-            title = ColorTool().useCustomColorCodes(translation.status.embedLostTitle).replace("%instance%", "Status Server System")
-            description = ColorTool().useCustomColorCodes(translation.status.embedLostBody.replace("%retries%", "$retry"))
+            title = ColorTool().parse(translation.status.embedLostTitle).replace("%instance%", "Status Server System")
+            description = ColorTool().parse(translation.status.embedLostBody.replace("%retries%", "$retry"))
 
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldName)
-                value = ColorTool().useCustomColorCodes(translation.status.embedEstablishedResponseFieldValue.replace("%time%", "Unknown"))
+                name = ColorTool().parse(translation.status.embedEstablishedResponseFieldName)
+                value = ColorTool().parse(translation.status.embedEstablishedResponseFieldValue.replace("%time%", "Unknown"))
             }
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedLostReasonFieldName)
-                value = ColorTool().useCustomColorCodes(translation.status.embedLostReasonFieldValue)
+                name = ColorTool().parse(translation.status.embedLostReasonFieldName)
+                value = ColorTool().parse(translation.status.embedLostReasonFieldValue)
             }
         }
 
@@ -52,16 +52,16 @@ class StatusMessageHandler(val config: Config, val translation: Translation) {
         val embed = Embed {
             color = 0x2ECC70
             url = config.status.pageUrl
-            title = ColorTool().useCustomColorCodes(translation.status.embedOnlineTitle).replace("%instance%", instance.name)
-            description = ColorTool().useCustomColorCodes(translation.status.embedOnlineBody)
+            title = ColorTool().parse(translation.status.embedOnlineTitle).replace("%instance%", instance.name)
+            description = ColorTool().parse(translation.status.embedOnlineBody)
 
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedOnlineResponseFieldName)
-                value = ColorTool().useCustomColorCodes(translation.status.embedOnlineResponseFieldValue.replace("%time%", "${info?.response}"))
+                name = ColorTool().parse(translation.status.embedOnlineResponseFieldName)
+                value = ColorTool().parse(translation.status.embedOnlineResponseFieldValue.replace("%time%", "${info?.response}"))
             }
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedOnlineReasonFieldName)
-                value = ColorTool().useCustomColorCodes(translation.status.embedOnlineReasonFieldValue)
+                name = ColorTool().parse(translation.status.embedOnlineReasonFieldName)
+                value = ColorTool().parse(translation.status.embedOnlineReasonFieldValue)
             }
         }
 
@@ -72,16 +72,16 @@ class StatusMessageHandler(val config: Config, val translation: Translation) {
         val embed = Embed {
             color = 0xE74D3C
             url = config.status.pageUrl
-            title = ColorTool().useCustomColorCodes(translation.status.embedOfflineTitle).replace("%instance%", instance.name)
-            description = ColorTool().useCustomColorCodes(translation.status.embedOfflineBody.replace("%retries%", instance.retries.toString()))
+            title = ColorTool().parse(translation.status.embedOfflineTitle).replace("%instance%", instance.name)
+            description = ColorTool().parse(translation.status.embedOfflineBody.replace("%retries%", instance.retries.toString()))
 
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedOfflineResponseFieldName)
-                value = ColorTool().useCustomColorCodes(translation.status.embedOfflineResponseFieldValue.replace("%time%", "${info?.response}"))
+                name = ColorTool().parse(translation.status.embedOfflineResponseFieldName)
+                value = ColorTool().parse(translation.status.embedOfflineResponseFieldValue.replace("%time%", "${info?.response}"))
             }
             field {
-                name = ColorTool().useCustomColorCodes(translation.status.embedOfflineReasonFieldName)
-                value = ColorTool().useCustomColorCodes(translation.status.embedOfflineReasonFieldValue)
+                name = ColorTool().parse(translation.status.embedOfflineReasonFieldName)
+                value = ColorTool().parse(translation.status.embedOfflineReasonFieldValue)
             }
         }
 

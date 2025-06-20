@@ -29,8 +29,8 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 iconUrl = user.avatarUrl
             }
             color = 0x2ECC70
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketClaimedTitle.replace("%user%", user.globalName!!))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketClaimedBody.replace("%user%", user.asMention))
+            title = ColorTool().parse(translation.support.embedTicketClaimedTitle.replace("%user%", user.globalName!!))
+            description = ColorTool().parse(translation.support.embedTicketClaimedBody.replace("%user%", user.asMention))
         }
         ticketChannel.send("", listOf(embed)).queue()
 
@@ -52,8 +52,8 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 iconUrl = user.avatarUrl
             }
             color = 0x2ECC70
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketOpenedTitle.replace("%user%", user.globalName!!))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketOpenedBody)
+            title = ColorTool().parse(translation.support.embedTicketOpenedTitle.replace("%user%", user.globalName!!))
+            description = ColorTool().parse(translation.support.embedTicketOpenedBody)
         }
         ticketChannel.send("", listOf(embed)).queue()
         TicketMessageHandler(api, config, translation).editMessage(id, ticketChannel, ticketStatus = TicketStatus.OPEN)
@@ -72,8 +72,8 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 iconUrl = user.avatarUrl
             }
             color = 0xf1c40f
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketPausedTitle.replace("%user%", user.globalName!!))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketPausedBody)
+            title = ColorTool().parse(translation.support.embedTicketPausedTitle.replace("%user%", user.globalName!!))
+            description = ColorTool().parse(translation.support.embedTicketPausedBody)
         }
         ticketChannel.send("", listOf(embed)).queue()
         TicketMessageHandler(api, config, translation).editMessage(id, ticketChannel, ticketStatus = TicketStatus.PAUSED)
@@ -92,8 +92,8 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 iconUrl = user.avatarUrl
             }
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketSuspendedTitle.replace("%user%", user.globalName!!))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketSuspendedBody)
+            title = ColorTool().parse(translation.support.embedTicketSuspendedTitle.replace("%user%", user.globalName!!))
+            description = ColorTool().parse(translation.support.embedTicketSuspendedBody)
         }
         ticketChannel.send("", listOf(embed)).queue()
         TicketMessageHandler(api, config, translation).editMessage(id, ticketChannel, ticketStatus = TicketStatus.SUSPENDED)
@@ -112,9 +112,9 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 iconUrl = user.avatarUrl
             }
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedTitle
+            title = ColorTool().parse(translation.support.embedTicketClosedTitle
                 .replace("%user%", user.globalName!!))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketClosedBody
+            description = ColorTool().parse(translation.support.embedTicketClosedBody
                 .replace("%reason%", reason))
         }
         ticketChannel.send("", listOf(embed)).queue()

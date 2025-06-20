@@ -26,8 +26,8 @@ class RegularsCommand(val config: Config, val translation: Translation) {
 
         val embed = Embed {
             color = 0x2ECC70
-            title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncRemovedTitle)
-            description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncRemovedBody)
+            title = ColorTool().parse(translation.regulars.embedSyncRemovedTitle)
+            description = ColorTool().parse(translation.regulars.embedSyncRemovedBody)
         }
 
         RegularsManager(event.jda, config, translation).removeSync(user.id)
@@ -38,8 +38,8 @@ class RegularsCommand(val config: Config, val translation: Translation) {
         if (user.isBot || !RegularsTable().exists(user.id)) {
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundTitle)
-                description = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundBody)
+                title = ColorTool().parse(translation.permissions.embedNotFoundTitle)
+                description = ColorTool().parse(translation.permissions.embedNotFoundBody)
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()

@@ -22,9 +22,9 @@ class NoticeOfDepartureCommand(val config: Config,  val translation: Translation
         val endDate = NoticeOfDepartureTable().retrieveEndDate(user.id)!!
 
         val embed = Embed {
-            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeViewTitle
+            title = ColorTool().parse(translation.noticeOfDeparture.embedNoticeViewTitle
                 .replace("%user%", user.name))
-            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeViewBody
+            description = ColorTool().parse(translation.noticeOfDeparture.embedNoticeViewBody
                 .replace("%user%", "<@$handler>")
                 .replace("%current_date%", currentDate)
                 .replace("%end_date%", endDate))
@@ -45,8 +45,8 @@ class NoticeOfDepartureCommand(val config: Config,  val translation: Translation
         if (user.isBot || !NoticeOfDepartureTable().exists(user.id)) {
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundTitle)
-                description = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundBody)
+                title = ColorTool().parse(translation.permissions.embedNotFoundTitle)
+                description = ColorTool().parse(translation.permissions.embedNotFoundBody)
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()

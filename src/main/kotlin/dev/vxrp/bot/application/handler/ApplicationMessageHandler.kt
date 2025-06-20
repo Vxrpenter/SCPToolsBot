@@ -36,8 +36,8 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
     fun getDeactivationMenu(): Pair<MessageEmbed, Collection<ItemComponent>> {
         val embed = Embed {
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.application.embedDeactivationMenuTitle)
-            description = ColorTool().useCustomColorCodes(translation.application.embedDeactivationMenuBody)
+            title = ColorTool().parse(translation.application.embedDeactivationMenuTitle)
+            description = ColorTool().parse(translation.application.embedDeactivationMenuBody)
         }
 
         val actionRow: MutableCollection<ItemComponent> = ArrayList()
@@ -63,8 +63,8 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
 
         val embed = Embed {
             color = embedColor
-            title = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageTitle)
-            description = ColorTool().useCustomColorCodes(translation.application.embedApplicationMessageBody
+            title = ColorTool().parse(translation.application.embedApplicationMessageTitle)
+            description = ColorTool().parse(translation.application.embedApplicationMessageBody
                 .replace("%status%", status)
                 .replace("%active_roles%", roleStringPair.toString())
             )
@@ -104,8 +104,8 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
 
         return Embed {
             color = 0x2ECC70
-            title = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuTitle)
-            description = ColorTool().useCustomColorCodes(translation.application.embedActivationMenuBody
+            title = ColorTool().parse(translation.application.embedActivationMenuTitle)
+            description = ColorTool().parse(translation.application.embedActivationMenuBody
                 .replace("%status%", translation.application.textStatusDeactivated)
                 .replace("%active_roles%", roleStringPair.toString())
             )
@@ -128,14 +128,14 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
 
     private fun createStringBaseValue(applicationTypeList: MutableList<ApplicationType>): MutableList<ApplicationType> {
         val stringBuilder: StringBuilder = StringBuilder()
-        val deactivated = ColorTool().useCustomColorCodes(translation.application.textStatusDeactivated)
+        val deactivated = ColorTool().parse(translation.application.textStatusDeactivated)
         var count = 0
         for (type in config.ticket.applicationTypes) {
             count += 1
 
             applicationTypeList.add(ApplicationType(count, type.roleID, type.name, type.description, type.emoji, false, null, 0))
 
-            stringBuilder.append(ColorTool().useCustomColorCodes(translation.application.textRoleStatusTemplate
+            stringBuilder.append(ColorTool().parse(translation.application.textRoleStatusTemplate
                 .replace("%roleId%", type.roleID)
                 .replace("%status%", deactivated)
                 .replace("%max_candidates%", "0")))
@@ -146,15 +146,15 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
 
     private fun createStringValue(): StringBuilder {
         val stringBuilder: StringBuilder = StringBuilder()
-        val activated = ColorTool().useCustomColorCodes(translation.application.textStatusActive)
-        val deactivated = ColorTool().useCustomColorCodes(translation.application.textStatusDeactivated)
+        val activated = ColorTool().parse(translation.application.textStatusActive)
+        val deactivated = ColorTool().parse(translation.application.textStatusDeactivated)
 
         for (type in applicationTypeSet) {
             var status: String? = null
             if (type.state) status = activated
             if (!type.state) status = deactivated
 
-            stringBuilder.append(ColorTool().useCustomColorCodes(translation.application.textRoleStatusTemplate
+            stringBuilder.append(ColorTool().parse(translation.application.textRoleStatusTemplate
                 .replace("%roleId%", type.roleId)
                 .replace("%status%", status!!)
                 .replace("%max_candidates%", type.member.toString())))

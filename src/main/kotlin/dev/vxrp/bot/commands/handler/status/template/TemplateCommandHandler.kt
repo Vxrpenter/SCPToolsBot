@@ -22,7 +22,7 @@ class TemplateCommandHandler(val config: Config, val translation: Translation) {
         val embed = PlayerlistMessageHandler().getEmbed(event.jda.selfUser.id, translation)
 
         val message = event.channel.send("", listOf(embed)).await()
-        event.reply_(ColorTool().useCustomColorCodes("%filler<1>%")).queue {
+        event.reply_(ColorTool().parse("%filler<1>%")).queue {
             it.deleteOriginal().queue()
         }
         val id = message.id
