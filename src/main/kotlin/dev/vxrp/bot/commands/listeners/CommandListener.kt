@@ -80,24 +80,6 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
                 return
             }
 
-            "commands.notice_of_departure.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.NOTICE_OF_DEPARTURE_COMMAND).engage) {
-                    PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.noticeOfDeparture.active)?.let { embed ->
-                        event.reply_("", listOf(embed)).setEphemeral(true).queue()
-                    } ?: noticeOfDepartureCommand(event)
-                }
-                return
-            }
-
-            "commands.regulars.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.REGULARS_COMMAND).engage) {
-                    PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.regulars.active, config.settings.verify.active, config.settings.webserver.active)?.let { embed ->
-                        event.reply_("", listOf(embed)).setEphemeral(true).queue()
-                    } ?: regularsCommand(event)
-                }
-                return
-            }
-
             "commands.settings.default" -> {
                 if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.SETTINGS_COMMAND).engage) {
                     settingsCommand(event)
@@ -162,14 +144,6 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
 
     private fun verifyCommand(event: SlashCommandInteractionEvent) {
         VerifyCommand(config, translation).pasteVerifyMenu(event)
-    }
-
-    private fun noticeOfDepartureCommand(event: SlashCommandInteractionEvent) {
-
-    }
-
-    private fun regularsCommand(event: SlashCommandInteractionEvent) {
-
     }
 
     private fun settingsCommand(event: SlashCommandInteractionEvent) {
