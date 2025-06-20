@@ -1,6 +1,8 @@
 package dev.vxrp.bot.commands.listeners
 
+import dev.minn.jda.ktx.coroutines.await
 import dev.minn.jda.ktx.events.listener
+import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.bot.commands.handler.bot.application.ApplicationCommand
 import dev.vxrp.bot.commands.handler.bot.help.HelpCommand
@@ -13,6 +15,7 @@ import dev.vxrp.bot.permissions.PermissionManager
 import dev.vxrp.bot.permissions.enums.StatusMessageType
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
+import dev.vxrp.util.color.ColorTool
 import dev.vxrp.util.launch.LaunchOptionManager
 import dev.vxrp.util.launch.enums.LaunchOptionSectionType
 import dev.vxrp.util.launch.enums.LaunchOptionType
@@ -24,7 +27,15 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
 class CommandListener(val api: JDA, val config: Config, val translation: Translation) : ListenerAdapter() {
     init {
         api.listener<SlashCommandInteractionEvent> { event ->
-            if (event.channel.type == ChannelType.PRIVATE) return@listener
+            if (event.channel.type == ChannelType.PRIVATE) {
+                val embed = Embed {
+                    color = 0xE74D3C
+                    title = ColorTool().useCustomColorCodes(translation.permissions.embedCommandDeniedTitle)
+                    description = ColorTool().useCustomColorCodes(translation.permissions.embedCommandDeniedBody)
+                }
+                event.reply_("", listOf(embed)).setEphemeral(true).await()
+                return@listener
+            }
             val commandList = config.extra.commands.commands
 
             for (command in commandList) {
