@@ -8,6 +8,7 @@ import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.database.tables.database.NoticeOfDepartureTable
 import dev.vxrp.util.color.ColorTool
+import net.dv8tion.jda.api.entities.User
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -15,48 +16,42 @@ import java.time.format.DateTimeFormatter
 class NoticeOfDepartureCommand(val config: Config,  val translation: Translation) {
     fun view(event: SlashCommandInteractionEvent) {
         val user = event.options[0].asUser
-        if (user.isBot) return
+        if (!checkExistence(event, user)) return
         val handler = NoticeOfDepartureTable().retrieveHandler(user.id)!!
         val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern(config.settings.noticeOfDeparture.dateFormatting))
-        val endDate = NoticeOfDepartureTable().retrieveEndDate(user.id)
+        val endDate = NoticeOfDepartureTable().retrieveEndDate(user.id)!!
 
-        if (endDate != null) {
-            val embed = Embed {
-                title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeViewTitle
-                    .replace("%user%", user.name))
-                description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeViewBody
-                    .replace("%user%", "<@$handler>")
-                    .replace("%current_date%", currentDate)
-                    .replace("%end_date%", endDate))
-            }
-
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
-        } else {
-            val embed = Embed {
-                color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundTitle)
-                description = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundTitle)
-            }
-
-            event.reply_("", listOf(embed)).setEphemeral(true).queue()
+        val embed = Embed {
+            title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeViewTitle
+                .replace("%user%", user.name))
+            description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedNoticeViewBody
+                .replace("%user%", "<@$handler>")
+                .replace("%current_date%", currentDate)
+                .replace("%end_date%", endDate))
         }
+
+        event.reply_("", listOf(embed)).setEphemeral(true).queue()
     }
 
     fun revoke(event: SlashCommandInteractionEvent) {
         val user = event.options[0].asUser
-        if (user.isBot) return
-        val endDate = NoticeOfDepartureTable().retrieveEndDate(user.id)
+        if (!checkExistence(event, user)) return
 
-        if (endDate != null) {
-            event.replyModal(NoticeOfDepartureTemplateModals(config, translation).reasonActionModal(ActionId.REVOKING, user.id, endDate)).queue()
-        } else {
+        val endDate = NoticeOfDepartureTable().retrieveEndDate(user.id)!!
+        event.replyModal(NoticeOfDepartureTemplateModals(config, translation).reasonActionModal(ActionId.REVOKING, user.id, endDate)).queue()
+    }
+
+    private fun checkExistence(event: SlashCommandInteractionEvent, user: User): Boolean {
+        if (user.isBot || !NoticeOfDepartureTable().exists(user.id)) {
             val embed = Embed {
                 color = 0xE74D3C
                 title = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundTitle)
-                description = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundTitle)
+                description = ColorTool().useCustomColorCodes(translation.permissions.embedNotFoundBody)
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
+            return false
         }
+        return true
     }
 }
