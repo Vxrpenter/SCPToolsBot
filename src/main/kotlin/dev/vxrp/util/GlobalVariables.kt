@@ -1,5 +1,6 @@
 package dev.vxrp.util
 
+import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.bot.status.data.Instance
 import io.github.vxrpenter.secretlab.data.Server
 
@@ -32,3 +33,8 @@ var statusApiSessionStatus: Boolean = true
  * SCP: Secret Laboratory, to allow session and database status comparing
  */
 var statusServerSessionStatus = hashMapOf<Int, Boolean>()
+
+/**
+ * Saves the currently selected application types for global editing
+ */
+var applicationTypeSet: HashSet<ApplicationType> = hashSetOf()
