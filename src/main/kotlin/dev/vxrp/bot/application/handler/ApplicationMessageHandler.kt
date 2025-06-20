@@ -5,7 +5,7 @@ import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.editMessage
 import dev.minn.jda.ktx.messages.send
 import dev.vxrp.bot.application.ApplicationManager
-import dev.vxrp.bot.application.applicationTypeSet
+import dev.vxrp.util.applicationTypeSet
 import dev.vxrp.bot.application.data.ApplicationType
 import dev.vxrp.bot.application.enums.MessageType
 import dev.vxrp.configuration.data.Config
