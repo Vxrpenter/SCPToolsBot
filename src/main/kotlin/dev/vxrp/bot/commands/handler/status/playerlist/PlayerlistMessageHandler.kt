@@ -19,11 +19,11 @@ class PlayerlistMessageHandler {
             for (player in list) {
 
                 builder.append(
-                    ColorTool().useCustomColorCodes(translation.status.embedPlayerlistPlayer
+                    ColorTool().parse(translation.status.embedPlayerlistPlayer
                             .replace("%nickname%", player.nickname.toString())))
             }
         } else {
-            builder.append(ColorTool().useCustomColorCodes(translation.status.embedPlayerlistCouldntFetch).trimIndent())
+            builder.append(ColorTool().parse(translation.status.embedPlayerlistCouldntFetch).trimIndent())
         }
 
         var embedColor = 0xE74D3C
@@ -33,8 +33,8 @@ class PlayerlistMessageHandler {
 
         return Embed {
             color = embedColor
-            title = ColorTool().useCustomColorCodes(translation.status.embedPlayerlistTitle).trimIndent()
-            description = ColorTool().useCustomColorCodes(
+            title = ColorTool().parse(translation.status.embedPlayerlistTitle).trimIndent()
+            description = ColorTool().parse(
                 translation.status.embedPlayerlistBody
                     .replace("%players%", builder.toString())
                     .replace("%version%", statusMappedServers[currentPort]?.version ?: "&red&&bold&Not Fetched")

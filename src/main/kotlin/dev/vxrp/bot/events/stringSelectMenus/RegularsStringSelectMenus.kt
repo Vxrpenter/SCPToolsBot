@@ -18,8 +18,8 @@ class RegularsStringSelectMenus(val event: StringSelectInteractionEvent, val con
             RegularsManager(event.jda, config, translation).syncRegulars(event.user.id, event.selectedOptions[0].value)
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncSentTitle)
-                description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncSentBody)
+                title = ColorTool().parse(translation.regulars.embedSyncSentTitle)
+                description = ColorTool().parse(translation.regulars.embedSyncSentBody)
             }
 
             event.message.delete().queue()

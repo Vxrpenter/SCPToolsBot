@@ -18,8 +18,8 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
         val embeds = mutableListOf<MessageEmbed>()
         val embed = Embed {
             thumbnail = api.getGuildById(config.settings.guildId)?.iconUrl
-            title = ColorTool().useCustomColorCodes(translation.regulars.embedTemplateTitle)
-            description = ColorTool().useCustomColorCodes(translation.regulars.embedTemplateBody)
+            title = ColorTool().parse(translation.regulars.embedTemplateTitle)
+            description = ColorTool().parse(translation.regulars.embedTemplateBody)
         }
         embeds.add(embed)
 
@@ -28,7 +28,7 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
             val stringBuilder: StringBuilder = StringBuilder()
 
             for (role in regular.config.roles) {
-                stringBuilder.append(ColorTool().useCustomColorCodes(translation.regulars.embedTemplateRoleBody
+                stringBuilder.append(ColorTool().parse(translation.regulars.embedTemplateRoleBody
                     .replace("%role%", "<@&${role.id}>")
                     .replace("%description%", role.description)
                     .replace("%timeframe%", if (role.requirementType == "PLAYTIME" || role.requirementType == "BOTH") translation.regulars.textTemplateRoleTimeframe else "")
@@ -38,7 +38,7 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
             }
 
             val groupEmbed = Embed {
-                description = ColorTool().useCustomColorCodes(translation.regulars.embedTemplateGroupBody
+                description = ColorTool().parse(translation.regulars.embedTemplateGroupBody
                     .replace("%group%", regular.manifest.name)
                     .replace("%description%", regular.manifest.description)
                     .replace("%group_role%", "<@&${regular.manifest.customRole.id}>").replace("<@&>", "None")
@@ -79,8 +79,8 @@ class RegularsMessageHandler(val api: JDA, val config: Config, val translation: 
 
         val embed = Embed {
             thumbnail = user.avatarUrl
-            title = ColorTool().useCustomColorCodes(embedTitle)
-            description = ColorTool().useCustomColorCodes(embedDescription)
+            title = ColorTool().parse(embedTitle)
+            description = ColorTool().parse(embedDescription)
             field {
                 inline = true
                 name = translation.regulars.embedSettingsFieldGroupName

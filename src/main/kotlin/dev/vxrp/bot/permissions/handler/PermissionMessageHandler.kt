@@ -45,32 +45,32 @@ class PermissionMessageHandler(val config: Config, val translation: Translation)
             StatusMessageType.PANEL -> {
                 return Embed {
                     color = 0xE74D3C
-                    title = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendPanelTitle)
-                    description = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendPanelBody)
+                    title = ColorTool().parse(translation.permissions.embedCouldNotSendPanelTitle)
+                    description = ColorTool().parse(translation.permissions.embedCouldNotSendPanelBody)
                 }
             }
 
             StatusMessageType.MODAL -> {
                 return Embed {
                     color = 0xE74D3C
-                    title = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendModalTitle)
-                    description = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendModalBody)
+                    title = ColorTool().parse(translation.permissions.embedCouldNotSendModalTitle)
+                    description = ColorTool().parse(translation.permissions.embedCouldNotSendModalBody)
                 }
             }
 
             StatusMessageType.COMMAND -> {
                 return Embed {
                     color = 0xE74D3C
-                    title = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendCommandTitle)
-                    description = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendCommandBody)
+                    title = ColorTool().parse(translation.permissions.embedCouldNotSendCommandTitle)
+                    description = ColorTool().parse(translation.permissions.embedCouldNotSendCommandBody)
                 }
             }
 
             StatusMessageType.TEMPLATE -> {
                 return Embed {
                     color = 0xE74D3C
-                    title = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendTemplateTitle)
-                    description = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendTemplateBody)
+                    title = ColorTool().parse(translation.permissions.embedCouldNotSendTemplateTitle)
+                    description = ColorTool().parse(translation.permissions.embedCouldNotSendTemplateBody)
                 }
             }
         }
@@ -78,8 +78,8 @@ class PermissionMessageHandler(val config: Config, val translation: Translation)
 
     private fun ticketMessage(permissionMessageType: PermissionMessageType): MessageEmbed {
         val embed = Embed {
-            title = ColorTool().useCustomColorCodes(translation.permissions.embedTicketDeniedTitle)
-            description = ColorTool().useCustomColorCodes(
+            title = ColorTool().parse(translation.permissions.embedTicketDeniedTitle)
+            description = ColorTool().parse(
                 translation.permissions.embedTicketDeniedBody
                     .replace("%permission_message%", choosePermissionMessage(permissionMessageType).trimIndent())
             )
@@ -89,8 +89,8 @@ class PermissionMessageHandler(val config: Config, val translation: Translation)
 
     private fun noticeOfDepartureMessage(permissionMessageType: PermissionMessageType): MessageEmbed {
         val embed = Embed {
-            title = ColorTool().useCustomColorCodes(translation.permissions.embedNoticeOfDepartureDeniedTitle)
-            description = ColorTool().useCustomColorCodes(
+            title = ColorTool().parse(translation.permissions.embedNoticeOfDepartureDeniedTitle)
+            description = ColorTool().parse(
                 translation.permissions.embedNoticeOfDepartureDeniedBody
                     .replace("%permission_message%", choosePermissionMessage(permissionMessageType).trimIndent())
             )

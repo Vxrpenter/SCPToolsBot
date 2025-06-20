@@ -21,7 +21,7 @@ class HelpCommand(val translation: Translation) {
         pages.add(Embed {
             title = translation.help.embedPageOneTitle
             color = 0x000000
-            description = ColorTool().useCustomColorCodes(translation.help.embedPageOneBody).trimIndent()
+            description = ColorTool().parse(translation.help.embedPageOneBody).trimIndent()
             timestamp = Instant.now()
             footer(translation.help.embedFooterText, translation.help.embedFooterImg)
         })
@@ -29,14 +29,14 @@ class HelpCommand(val translation: Translation) {
         pages.add(Embed {
             title = translation.help.embedPageTwoTitle
             color = 0x000000
-            description = ColorTool().useCustomColorCodes(translation.help.embedPageTwoBody).trimIndent()
+            description = ColorTool().parse(translation.help.embedPageTwoBody).trimIndent()
             timestamp = Instant.now()
             footer(translation.help.embedFooterText, translation.help.embedFooterImg)
         })
         pages.add(Embed {
             title = translation.help.embedPageThreeTitle
             color = 0x000000
-            description = ColorTool().useCustomColorCodes(translation.help.embedPageThreeBody).trimIndent()
+            description = ColorTool().parse(translation.help.embedPageThreeBody).trimIndent()
             timestamp = Instant.now()
             footer(translation.help.embedFooterText, translation.help.embedFooterImg)
         })
@@ -44,7 +44,7 @@ class HelpCommand(val translation: Translation) {
         pages.add(Embed {
             title = translation.help.embedPageFourTitle
             color = 0x000000
-            description = ColorTool().useCustomColorCodes(translation.help.embedPageFourBody).trimIndent()
+            description = ColorTool().parse(translation.help.embedPageFourBody).trimIndent()
             timestamp = Instant.now()
             footer(translation.help.embedFooterText, translation.help.embedFooterImg)
         })
@@ -52,7 +52,7 @@ class HelpCommand(val translation: Translation) {
         pages.add(Embed {
             title = translation.help.embedPageFiveTitle
             color = 0x000000
-            description = ColorTool().useCustomColorCodes(translation.help.embedPageFiveBody).trimIndent()
+            description = ColorTool().parse(translation.help.embedPageFiveBody).trimIndent()
             timestamp = Instant.now()
             footer(translation.help.embedFooterText, translation.help.embedFooterImg)
         })
@@ -60,7 +60,7 @@ class HelpCommand(val translation: Translation) {
         pages.add(Embed {
             title = translation.help.embedPageSixTitle
             color = 0x000000
-            description = ColorTool().useCustomColorCodes(translation.help.embedPageSixBody).trimIndent()
+            description = ColorTool().parse(translation.help.embedPageSixBody).trimIndent()
             timestamp = Instant.now()
             footer(translation.help.embedFooterText, translation.help.embedFooterImg)
         })

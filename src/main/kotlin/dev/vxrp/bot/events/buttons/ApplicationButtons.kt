@@ -21,8 +21,8 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
         if (event.button.id?.startsWith("application_activation_add") == true && !nullCheck()) {
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.application.embedChoosePositionTitle)
-                description = ColorTool().useCustomColorCodes(translation.application.embedChoosePositionBody)
+                title = ColorTool().parse(translation.application.embedChoosePositionTitle)
+                description = ColorTool().parse(translation.application.embedChoosePositionBody)
             }
 
             event.reply_("", listOf(embed)).addActionRow(
@@ -37,8 +37,8 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
         if (event.button.id?.startsWith("application_activation_remove") == true && !nullCheck()) {
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.application.embedChoosePositionTitle)
-                description = ColorTool().useCustomColorCodes(translation.application.embedChoosePositionBody)
+                title = ColorTool().parse(translation.application.embedChoosePositionTitle)
+                description = ColorTool().parse(translation.application.embedChoosePositionBody)
             }
 
             event.reply_("", listOf(embed)).addActionRow(
@@ -56,8 +56,8 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
                 ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!, true)
                 val embed = Embed {
                     color = 0x2ECC70
-                    title = ColorTool().useCustomColorCodes(translation.application.embedApplicationActivatedTitle)
-                    description = ColorTool().useCustomColorCodes(translation.application.embedApplicationActivatedBody)
+                    title = ColorTool().parse(translation.application.embedApplicationActivatedTitle)
+                    description = ColorTool().parse(translation.application.embedApplicationActivatedBody)
                 }
                 event.reply_("", listOf(embed)).setEphemeral(true).queue()
             } else {
@@ -85,8 +85,8 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
                 ApplicationMessageHandler(config, translation).sendApplicationMessage(event.jda, event.jda.getTextChannelById(config.ticket.settings.applicationMessageChannel)!!, false)
                 val embed = Embed {
                     color = 0xE74D3C
-                    title = ColorTool().useCustomColorCodes(translation.application.embedApplicationDeactivatedTitle)
-                    description = ColorTool().useCustomColorCodes(translation.application.embedApplicationDeactivatedBody)
+                    title = ColorTool().parse(translation.application.embedApplicationDeactivatedTitle)
+                    description = ColorTool().parse(translation.application.embedApplicationDeactivatedBody)
                 }
                 event.reply_("", listOf(embed)).setEphemeral(true).queue()
             } else {
@@ -96,8 +96,8 @@ class ApplicationButtons(val event: ButtonInteractionEvent, val config: Config, 
 
         if (event.button.id?.startsWith("application_open") == true) {
             val embed = Embed {
-                title = ColorTool().useCustomColorCodes(translation.support.embedApplicationPositionTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedApplicationPositionBody)
+                title = ColorTool().parse(translation.support.embedApplicationPositionTitle)
+                description = ColorTool().parse(translation.support.embedApplicationPositionBody)
             }
 
             event.reply_("", listOf(embed)).addActionRow(

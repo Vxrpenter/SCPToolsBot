@@ -29,8 +29,8 @@ class ApplicationStringSelectMenus(val event: StringSelectInteractionEvent, val 
             if (!ApplicationTypeTable().query(event.selectedOptions[0].value)!!.active) {
                 val embed = Embed {
                     color = 0xE74D3C
-                    title = ColorTool().useCustomColorCodes(translation.application.embedPositionNotActiveTitle)
-                    description = ColorTool().useCustomColorCodes(translation.application.embedPositionNotActiveBody)
+                    title = ColorTool().parse(translation.application.embedPositionNotActiveTitle)
+                    description = ColorTool().parse(translation.application.embedPositionNotActiveBody)
                 }
                 event.reply_("", listOf(embed)).setEphemeral(true).queue()
             } else {

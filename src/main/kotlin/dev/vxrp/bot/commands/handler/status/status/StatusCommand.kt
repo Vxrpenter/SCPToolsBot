@@ -25,8 +25,8 @@ class StatusCommand(val config: Config, val translation: Translation) {
             ConnectionTable().setMaintenance(currentPort.toString(), false)
             val deactivatedEmbed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.status.embedStatusDeactivatedTitle)
-                description = ColorTool().useCustomColorCodes(translation.status.embedStatusDeactivatedBody)
+                title = ColorTool().parse(translation.status.embedStatusDeactivatedTitle)
+                description = ColorTool().parse(translation.status.embedStatusDeactivatedBody)
             }
 
             event.reply_("", listOf(deactivatedEmbed))
@@ -35,16 +35,16 @@ class StatusCommand(val config: Config, val translation: Translation) {
             val embed = Embed {
                 color = 0x2ECC70
                 url = config.status.pageUrl
-                title = ColorTool().useCustomColorCodes(
+                title = ColorTool().parse(
                     translation.status.embedMaintenanceOffTitle
                         .replace("%instance%", statusInstances[currentPort]!!.name)
                 ).trimIndent()
-                description = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOffBody).trimIndent()
+                description = ColorTool().parse(translation.status.embedMaintenanceOffBody).trimIndent()
                 field {
-                    name = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOffReasonFieldName)
+                    name = ColorTool().parse(translation.status.embedMaintenanceOffReasonFieldName)
                         .trimIndent()
                     value =
-                        ColorTool().useCustomColorCodes(reason).trimIndent()
+                        ColorTool().parse(reason).trimIndent()
                 }
             }
 
@@ -58,8 +58,8 @@ class StatusCommand(val config: Config, val translation: Translation) {
             ConnectionTable().setMaintenance(currentPort.toString(), true)
             val activatedEmbed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.status.embedStatusActivatedTitle)
-                description = ColorTool().useCustomColorCodes(translation.status.embedStatusActivatedBody)
+                title = ColorTool().parse(translation.status.embedStatusActivatedTitle)
+                description = ColorTool().parse(translation.status.embedStatusActivatedBody)
             }
 
             event.reply_("", listOf(activatedEmbed))
@@ -68,16 +68,16 @@ class StatusCommand(val config: Config, val translation: Translation) {
             val embed = Embed {
                 color = 0xf1c40f
                 url = config.status.pageUrl
-                title = ColorTool().useCustomColorCodes(
+                title = ColorTool().parse(
                     translation.status.embedMaintenanceOnTitle
                         .replace("%instance%", statusInstances[currentPort]!!.name)
                 ).trimIndent()
-                description = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOnBody).trimIndent()
+                description = ColorTool().parse(translation.status.embedMaintenanceOnBody).trimIndent()
                 field {
-                    name = ColorTool().useCustomColorCodes(translation.status.embedMaintenanceOnReasonFieldName)
+                    name = ColorTool().parse(translation.status.embedMaintenanceOnReasonFieldName)
                         .trimIndent()
                     value =
-                        ColorTool().useCustomColorCodes(reason).trimIndent()
+                        ColorTool().parse(reason).trimIndent()
                 }
             }
 

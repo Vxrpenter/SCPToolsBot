@@ -13,8 +13,8 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
     fun init() {
         val noDataEmbed = Embed {
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.verify.embedNoDataTitle)
-            description = ColorTool().useCustomColorCodes(translation.verify.embedNoDataBody)
+            title = ColorTool().parse(translation.verify.embedNoDataTitle)
+            description = ColorTool().parse(translation.verify.embedNoDataBody)
         }
 
         if (event.button.id?.startsWith("verify_show_data") == true) {
@@ -35,8 +35,8 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
             val embed = Embed {
                 thumbnail = event.user.avatarUrl
-                title = ColorTool().useCustomColorCodes(translation.verify.embedDataTitle)
-                description = ColorTool().useCustomColorCodes(translation.verify.embedDataBody)
+                title = ColorTool().parse(translation.verify.embedDataTitle)
+                description = ColorTool().parse(translation.verify.embedDataBody)
                 field {
                     inline = true
                     name = translation.verify.embedDataFieldVerifiedTitle
@@ -70,8 +70,8 @@ class VerifyButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.verify.embedDeletionSentTitle)
-                description = ColorTool().useCustomColorCodes(translation.verify.embedDeletionSentBody)
+                title = ColorTool().parse(translation.verify.embedDeletionSentTitle)
+                description = ColorTool().parse(translation.verify.embedDeletionSentBody)
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()

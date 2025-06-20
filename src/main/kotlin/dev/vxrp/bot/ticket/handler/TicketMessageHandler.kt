@@ -31,8 +31,8 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
     fun sendTemplate(channel: TextChannel, guild: Guild) {
         val embed = Embed {
             thumbnail = guild.iconUrl
-            title = ColorTool().useCustomColorCodes(translation.support.embedTemplateSupportTitle).trimIndent()
-            description = ColorTool().useCustomColorCodes(translation.support.embedTemplateSupportBody).trimIndent()
+            title = ColorTool().parse(translation.support.embedTemplateSupportTitle).trimIndent()
+            description = ColorTool().parse(translation.support.embedTemplateSupportBody).trimIndent()
         }
 
         channel.send("", listOf(embed))
@@ -78,8 +78,8 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
                 iconUrl = user.avatarUrl
                 name = user.name
             }
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketGeneralTitle.replace("%name%", channel.name))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketGeneralBody
+            title = ColorTool().parse(translation.support.embedTicketGeneralTitle.replace("%name%", channel.name))
+            description = ColorTool().parse(translation.support.embedTicketGeneralBody
                 .replace("%issuerId%", userId)
                 .replace("%subject%", modalValues[0].asString)
                 .replace("%explanation%", modalValues[1].asString))
@@ -94,8 +94,8 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
                 iconUrl = user.avatarUrl
                 name = user.name
             }
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketReportTitle.replace("%name%", channel.name))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketReportBody
+            title = ColorTool().parse(translation.support.embedTicketReportTitle.replace("%name%", channel.name))
+            description = ColorTool().parse(translation.support.embedTicketReportBody
                 .replace("%issuerId%", userId)
                 .replace("%reported%", "<@${modalId.split(":")[1]}>")
                 .replace("%reason%", modalValues[0].asString)
@@ -111,8 +111,8 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
                 iconUrl = user.avatarUrl
                 name = user.name
             }
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketErrorTitle.replace("%name%", channel.name))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketErrorBody
+            title = ColorTool().parse(translation.support.embedTicketErrorTitle.replace("%name%", channel.name))
+            description = ColorTool().parse(translation.support.embedTicketErrorBody
                 .replace("%issuerId%", userId)
                 .replace("%problem%", modalValues[0].asString)
                 .replace("%times%", modalValues[1].asString)
@@ -129,8 +129,8 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
                 iconUrl = user.avatarUrl
                 name = user.name
             }
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketUnbanTitle.replace("%name%", channel.name))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketUnbanBody
+            title = ColorTool().parse(translation.support.embedTicketUnbanTitle.replace("%name%", channel.name))
+            description = ColorTool().parse(translation.support.embedTicketUnbanBody
                 .replace("%issuerId%", userId)
                 .replace("%steamId%", modalValues[0].asString)
                 .replace("%reason%", modalValues[1].asString))
@@ -155,8 +155,8 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
                     name = "Anonymous"
                 }
             }
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketComplaintTitle.replace("%name%", channel.name))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketComplaintBody
+            title = ColorTool().parse(translation.support.embedTicketComplaintTitle.replace("%name%", channel.name))
+            description = ColorTool().parse(translation.support.embedTicketComplaintBody
                 .replace("%issuerId%", user)
                 .replace("%staff%", staff)
                 .replace("%reason%", modalValues[0].asString)
@@ -172,8 +172,8 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
                 iconUrl = user.avatarUrl
                 name = user.name
             }
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketApplicationTitle.replace("%name%", channel.name))
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketApplicationBody
+            title = ColorTool().parse(translation.support.embedTicketApplicationTitle.replace("%name%", channel.name))
+            description = ColorTool().parse(translation.support.embedTicketApplicationBody
                 .replace("%issuerId%", userId)
                 .replace("%roleId%", modalId.split(":")[1])
                 .replace("%name%", modalValues[0].asString))
@@ -192,8 +192,8 @@ class TicketMessageHandler(val api: JDA, val config: Config, val translation: Tr
 
         val embed = Embed {
             color = 0xE74D3C
-            title = ColorTool().useCustomColorCodes(translation.support.embedClosedTitle)
-            description = ColorTool().useCustomColorCodes(translation.support.embedClosedBody
+            title = ColorTool().parse(translation.support.embedClosedTitle)
+            description = ColorTool().parse(translation.support.embedClosedBody
                 .replace("%name%", threadChannel.name)
                 .replace("%handler%", handler.asMention)
                 .replace("%ticket%", threadChannel.asMention)
