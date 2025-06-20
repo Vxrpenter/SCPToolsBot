@@ -4,7 +4,6 @@ import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.reply_
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
-import dev.vxrp.updates.handler.UpdateHandler
 import dev.vxrp.util.color.ColorTool
 import dev.vxrp.util.upstreamVersion
 import io.github.vxrpenter.cedmod.Cedmod
