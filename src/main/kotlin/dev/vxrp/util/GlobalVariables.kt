@@ -7,6 +7,12 @@ import io.github.vxrpenter.secretlab.data.Server
 import net.dv8tion.jda.api.JDA
 
 /**
+ * Saves the current upstream version being queried from https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags,
+ * for later usage
+ */
+var upstreamVersion: String? = ""
+
+/**
  * Saves status bots id's in correlation to its respective SCP: Secret Laboratory
  * server port
  */
