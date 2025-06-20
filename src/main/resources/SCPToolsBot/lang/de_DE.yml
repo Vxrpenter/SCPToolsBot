@@ -16,6 +16,9 @@ PERMISSIONS:
   EMBED_NOT_FOUND_TITLE: "Nicht Gefunden"
   EMBED_NOT_FOUND_BODY: "Es wurden keine Daten zum abgefragten Eintrag gefunden. Der Eintrag existiert möglicherweise nicht oder der Zugriff wurde verweigert."
 
+  EMBED_COMMAND_DENIED_TITLE: "Command Abgelehnt"
+  EMBED_COMMAND_DENIED_BODY: "Die Ausführung diese Commands wurde abgelehnt. Versuche ihn in einem normalen Textkanal erneut auszuführen oder versuche es später erneut."
+
   EMBED_COULD_NOT_SEND_PANEL_TITLE: "Panel konnte nicht gesendet werden"
   EMBED_COULD_NOT_SEND_PANEL_BODY: "Dieses Panel ist deaktiviert, solange der Bot-Hoster bestimmte Funktionen deaktiviert hat."
 

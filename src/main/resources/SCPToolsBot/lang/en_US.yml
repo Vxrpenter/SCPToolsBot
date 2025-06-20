@@ -16,6 +16,9 @@ PERMISSIONS:
   EMBED_NOT_FOUND_TITLE: "Not Found"
   EMBED_NOT_FOUND_BODY: "No data of the queried entry has been found. Entry might not exist or access is blocked."
 
+  EMBED_COMMAND_DENIED_TITLE: "Command Denied"
+  EMBED_COMMAND_DENIED_BODY: "The execution of this command has been denied. Please try running it in a normal text chat or try it again later."
+
   EMBED_COULD_NOT_SEND_PANEL_TITLE: "Could not send Panel"
   EMBED_COULD_NOT_SEND_PANEL_BODY: "This panel is deactivated as long as the bot hoster has deactivated certain configurations."
 

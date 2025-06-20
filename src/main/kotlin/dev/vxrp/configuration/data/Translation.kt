@@ -40,11 +40,15 @@ data class TranslationPermissions(
     @SerialName("EMBED_NOT_FOUND_BODY")
     val embedNotFoundBody: String,
 
+    @SerialName("EMBED_COMMAND_DENIED_TITLE")
+    val embedCommandDeniedTitle: String,
+    @SerialName("EMBED_COMMAND_DENIED_BODY")
+    val embedCommandDeniedBody: String,
+
     @SerialName("EMBED_COULD_NOT_SEND_PANEL_TITLE")
     val embedCouldNotSendPanelTitle: String,
     @SerialName("EMBED_COULD_NOT_SEND_PANEL_BODY")
     val embedCouldNotSendPanelBody: String,
-
 
     @SerialName("EMBED_COULD_NOT_SEND_MODAL_TITLE")
     val embedCouldNotSendModalTitle: String,
@@ -55,7 +59,6 @@ data class TranslationPermissions(
     val embedCouldNotSendCommandTitle: String,
     @SerialName("EMBED_COULD_NOT_SEND_COMMAND_BODY")
     val embedCouldNotSendCommandBody: String,
-
 
     @SerialName("EMBED_COULD_NOT_SEND_TEMPLATE_TITLE")
     val embedCouldNotSendTemplateTitle: String,
