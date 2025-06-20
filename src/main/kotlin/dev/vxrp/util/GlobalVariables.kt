@@ -1,8 +1,10 @@
 package dev.vxrp.util
 
 import dev.vxrp.bot.application.data.ApplicationType
+import dev.vxrp.bot.commands.CommandManager
 import dev.vxrp.bot.status.data.Instance
 import io.github.vxrpenter.secretlab.data.Server
+import net.dv8tion.jda.api.JDA
 
 /**
  * Saves status bots id's in correlation to its respective SCP: Secret Laboratory
@@ -38,3 +40,13 @@ var statusServerSessionStatus = hashMapOf<Int, Boolean>()
  * Saves the currently selected application types for global editing
  */
 var applicationTypeSet: HashSet<ApplicationType> = hashSetOf()
+
+/**
+ * Saves the instance of the main discord bot application, for easy access from all classes
+ */
+var mainApi: JDA? = null
+
+/**
+ * Saves the instance of the command manager for easy access from all classes
+ */
+var mainCommandManager: CommandManager? = null

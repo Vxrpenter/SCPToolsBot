@@ -8,6 +8,8 @@ import dev.vxrp.util.launch.data.LaunchArguments
 import dev.vxrp.util.launch.data.LaunchConfigurationOrder
 import dev.vxrp.util.launch.enums.LaunchOptionSectionType
 import dev.vxrp.util.launch.enums.LaunchOptionType
+import dev.vxrp.util.mainApi
+import dev.vxrp.util.mainCommandManager
 import dev.vxrp.web.WebServerManager
 import org.slf4j.LoggerFactory
 
@@ -34,16 +36,16 @@ class LaunchOptionManager(val config: Config, val translation: Translation) {
             logger.error("Because main bot is disabled, any other launches will be canceled")
         }
 
-        if (botManager.mainCommandManager == null) {
+        if (mainCommandManager == null) {
             logger.error("Command Manager must be engaged for Status bots to work")
             return
         }
         if (clusterOptions.engage && botOptions.engage) {
-            val statusManager = StatusManager(botManager.mainApi!!, config, translation, "SCPToolsBot/configs/status-settings.yml")
-            statusManager.initialize(botManager.mainCommandManager!!)
+            val statusManager = StatusManager(mainApi!!, config, translation, "SCPToolsBot/configs/status-settings.yml")
+            statusManager.initialize(mainCommandManager!!)
         }
 
-        if (config.settings.webserver.active) WebServerManager(botManager.mainApi!!, config, translation)
+        if (config.settings.webserver.active) WebServerManager(mainApi!!, config, translation)
     }
 
     fun checkSectionOption(type: LaunchOptionType, sectionType: LaunchOptionSectionType): LaunchArguments {
