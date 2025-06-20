@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
 
-class StatusManager(private val globalApi: JDA, val config: Config, val translation: Translation, private val timer: Timer, val file: String) {
+class StatusManager(private val globalApi: JDA, val config: Config, val translation: Translation, val file: String) {
     private val logger = LoggerFactory.getLogger(StatusManager::class.java)
     private val currentFile = File(System.getProperty("user.dir")).resolve(file)
     
@@ -91,11 +91,11 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
     }
 
     private fun initializeTimers(status: Status, instanceApiMap: MutableMap<Instance, JDA>) {
-        timer.runWithTimer(1.seconds, statusbotScope) {
+        Timer().runWithTimer(1.seconds, statusbotScope) {
             if (nonChangedData && status.idleAfter != secondsWithoutNewData) secondsWithoutNewData += 1
         }
 
-        timer.runLooped(statusbotScope) {
+        Timer().runLooped(statusbotScope) {
             runTimer(status, instanceApiMap)
         }
     }
