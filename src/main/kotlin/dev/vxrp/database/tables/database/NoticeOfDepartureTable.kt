@@ -132,4 +132,14 @@ class NoticeOfDepartureTable {
 
         return count
     }
+
+    fun exists(id: String): Boolean {
+        var exists = false
+        transaction {
+            exists = !NoticeOfDepartures.selectAll()
+                .where { NoticeOfDepartures.id eq id }.empty()
+        }
+
+        return exists
+    }
 }
