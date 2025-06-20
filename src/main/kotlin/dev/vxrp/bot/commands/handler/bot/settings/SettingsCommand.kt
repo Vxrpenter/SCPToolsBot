@@ -6,6 +6,7 @@ import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.updates.handler.UpdateHandler
 import dev.vxrp.util.color.ColorTool
+import dev.vxrp.util.upstreamVersion
 import io.github.vxrpenter.cedmod.Cedmod
 import io.github.vxrpenter.cedmod.exceptions.CallFailureException
 import net.dv8tion.jda.api.entities.emoji.Emoji
@@ -84,7 +85,7 @@ class SettingsCommand(val config: Config, val translation: Translation) {
                     translation.settings.embedSettingsFieldBuildValue
                         .replace(
                             "%build%",
-                            UpdateHandler().checkForUpdatesByTag(config, "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags", false)
+                            upstreamVersion!!
                         ).trimIndent()
                 )
             }

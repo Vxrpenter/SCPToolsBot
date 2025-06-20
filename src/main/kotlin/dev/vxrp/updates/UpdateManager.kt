@@ -5,6 +5,7 @@ import dev.vxrp.updates.handler.UpdateHandler
 import dev.vxrp.updates.handler.UpdatesFileHandler
 import dev.vxrp.util.coroutines.Timer
 import dev.vxrp.util.coroutines.updatesScope
+import dev.vxrp.util.upstreamVersion
 import org.slf4j.LoggerFactory
 import kotlin.time.Duration.Companion.hours
 
@@ -23,7 +24,7 @@ class UpdateManager() {
             updatesScope
         ) {
             try {
-                UpdateHandler().checkForUpdatesByTag(config, "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags")
+                upstreamVersion = UpdateHandler().checkForUpdatesByTag(config, "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags")
             } catch (_: Exception) {
                 logger.error("Could not proceed with update check correctly")
             }
