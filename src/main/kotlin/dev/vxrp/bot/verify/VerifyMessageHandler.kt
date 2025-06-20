@@ -19,8 +19,8 @@ class VerifyMessageHandler(val api: JDA, val config: Config, val translation: Tr
     fun sendTemplate(channel: TextChannel, guild: Guild) {
         val embed = Embed {
             thumbnail = guild.iconUrl
-            title = ColorTool().useCustomColorCodes(translation.verify.embedTemplateTitle)
-            description = ColorTool().useCustomColorCodes(translation.verify.embedTemplateBody)
+            title = ColorTool().parse(translation.verify.embedTemplateTitle)
+            description = ColorTool().parse(translation.verify.embedTemplateBody)
         }
 
         channel.send("", listOf(embed)).setActionRow(
@@ -34,9 +34,9 @@ class VerifyMessageHandler(val api: JDA, val config: Config, val translation: Tr
         val embed = Embed {
             color = 0x2ECC70
             thumbnail = user.avatarUrl
-            title = ColorTool().useCustomColorCodes(translation.verify.embedLogVerifiedTitle
+            title = ColorTool().parse(translation.verify.embedLogVerifiedTitle
                 .replace("%name%", user.globalName.toString()))
-            description = ColorTool().useCustomColorCodes(translation.verify.embedLogVerifiedBody)
+            description = ColorTool().parse(translation.verify.embedLogVerifiedBody)
         }
 
         sendMessage(embed)
@@ -46,9 +46,9 @@ class VerifyMessageHandler(val api: JDA, val config: Config, val translation: Tr
         val embed = Embed {
             color = 0xE74D3C
             thumbnail = user.avatarUrl
-            title = ColorTool().useCustomColorCodes(translation.verify.embedLogDeletedTitle
+            title = ColorTool().parse(translation.verify.embedLogDeletedTitle
                 .replace("%name%", user.globalName.toString()))
-            description = ColorTool().useCustomColorCodes(translation.verify.embedLogDeletedBody)
+            description = ColorTool().parse(translation.verify.embedLogDeletedBody)
         }
 
         sendMessage(embed)

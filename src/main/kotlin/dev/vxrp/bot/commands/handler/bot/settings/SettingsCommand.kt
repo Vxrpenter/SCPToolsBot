@@ -29,15 +29,15 @@ class SettingsCommand(val config: Config, val translation: Translation) {
                 iconUrl = event.guild?.iconUrl
             }
             color = currentColor
-            title = ColorTool().useCustomColorCodes(translation.settings.embedSettingsTitle.trimIndent())
+            title = ColorTool().parse(translation.settings.embedSettingsTitle.trimIndent())
             timestamp = Instant.now()
-            description = ColorTool().useCustomColorCodes(translation.settings.embedSettingsBody.trimIndent())
+            description = ColorTool().parse(translation.settings.embedSettingsBody.trimIndent())
 
             field {
                 inline = true
                 name =
-                    ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldLanguageTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(
+                    ColorTool().parse(translation.settings.embedSettingsFieldLanguageTitle.trimIndent())
+                value = ColorTool().parse(
                     translation.settings.embedSettingsFieldLanguageValue
                         .replace("%language%", config.settings.loadTranslation).trimIndent()
                 )
@@ -45,8 +45,8 @@ class SettingsCommand(val config: Config, val translation: Translation) {
 
             field {
                 inline = true
-                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldGuildTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldGuildValue
+                name = ColorTool().parse(translation.settings.embedSettingsFieldGuildTitle.trimIndent())
+                value = ColorTool().parse(translation.settings.embedSettingsFieldGuildValue
                     .replace("%isAvailable%", "${event.guild?.idLong?.let { event.jda.isUnavailable(it) }}")
                     .trimIndent()
                 )
@@ -55,8 +55,8 @@ class SettingsCommand(val config: Config, val translation: Translation) {
             field {
                 inline = true
                 name =
-                    ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldDatabaseTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(
+                    ColorTool().parse(translation.settings.embedSettingsFieldDatabaseTitle.trimIndent())
+                value = ColorTool().parse(
                     translation.settings.embedSettingsFieldDatabaseValue
                         .replace("%state%", translation.settings.textDatabaseOnline).trimIndent()
                 )
@@ -64,14 +64,14 @@ class SettingsCommand(val config: Config, val translation: Translation) {
 
             field {
                 inline = true
-                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldCedmodTitle.trimIndent())
+                name = ColorTool().parse(translation.settings.embedSettingsFieldCedmodTitle.trimIndent())
                 value = cedmod
             }
 
             field {
                 inline = true
-                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldVersionTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(
+                name = ColorTool().parse(translation.settings.embedSettingsFieldVersionTitle.trimIndent())
+                value = ColorTool().parse(
                     translation.settings.embedSettingsFieldVersionValue
                         .replace("%version%", version()).trimIndent()
                 )
@@ -79,8 +79,8 @@ class SettingsCommand(val config: Config, val translation: Translation) {
 
             field {
                 inline = true
-                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldBuildTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(
+                name = ColorTool().parse(translation.settings.embedSettingsFieldBuildTitle.trimIndent())
+                value = ColorTool().parse(
                     translation.settings.embedSettingsFieldBuildValue
                         .replace(
                             "%build%",
@@ -91,8 +91,8 @@ class SettingsCommand(val config: Config, val translation: Translation) {
 
             field {
                 inline = true
-                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldGatewayTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(
+                name = ColorTool().parse(translation.settings.embedSettingsFieldGatewayTitle.trimIndent())
+                value = ColorTool().parse(
                     translation.settings.embedSettingsFieldGatewayValue
                         .replace("%time%", "${event.jda.gatewayPing}").trimIndent()
                 )
@@ -106,8 +106,8 @@ class SettingsCommand(val config: Config, val translation: Translation) {
 
             field {
                 inline = true
-                name = ColorTool().useCustomColorCodes(translation.settings.embedSettingsFieldRestTitle.trimIndent())
-                value = ColorTool().useCustomColorCodes(
+                name = ColorTool().parse(translation.settings.embedSettingsFieldRestTitle.trimIndent())
+                value = ColorTool().parse(
                     translation.settings.embedSettingsFieldRestValue
                         .replace("%time%", "${event.jda.restPing.complete()}").trimIndent()
                 )
@@ -115,20 +115,20 @@ class SettingsCommand(val config: Config, val translation: Translation) {
         }
 
         event.reply_("", listOf(embed)).setActionRow(
-            Button.secondary("start_page", ColorTool().useCustomColorCodes(translation.buttons.textSettingsStart))
+            Button.secondary("start_page", ColorTool().parse(translation.buttons.textSettingsStart))
                 .asDisabled(),
             Button.primary(
                 "configure_page",
-                ColorTool().useCustomColorCodes(translation.buttons.textSettingsConfigure)
+                ColorTool().parse(translation.buttons.textSettingsConfigure)
             ),
             Button.primary(
                 "current_settings",
-                ColorTool().useCustomColorCodes(translation.buttons.textSettingsCurrent)
+                ColorTool().parse(translation.buttons.textSettingsCurrent)
             ),
-            Button.primary("bot_info", ColorTool().useCustomColorCodes(translation.buttons.textSettingsInformation)),
+            Button.primary("bot_info", ColorTool().parse(translation.buttons.textSettingsInformation)),
             Button.link(
                 "https://github.com/Vxrpenter/SCPToolsBot",
-                ColorTool().useCustomColorCodes(translation.buttons.textSettingsNews)
+                ColorTool().parse(translation.buttons.textSettingsNews)
             ).withEmoji(Emoji.fromFormatted("🗞️"))
         ).setEphemeral(true).queue()
     }

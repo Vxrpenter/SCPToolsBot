@@ -26,8 +26,8 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             } catch (_: DateTimeParseException) {
                 val embed = Embed {
                     color = 0xE74D3C
-                    title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterValidDateTitle)
-                    description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterValidDateBody
+                    title = ColorTool().parse(translation.noticeOfDeparture.embedEnterValidDateTitle)
+                    description = ColorTool().parse(translation.noticeOfDeparture.embedEnterValidDateBody
                         .replace("%formatter%", config.settings.noticeOfDeparture.dateFormatting))
                 }
 
@@ -39,8 +39,8 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
             if (parsedDate.isBefore(currentDate) || parsedDate.isEqual(currentDate)) {
                 val embed = Embed {
                     color = 0xE74D3C
-                    title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterFutureDateTitle)
-                    description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedEnterFutureDateBody)
+                    title = ColorTool().parse(translation.noticeOfDeparture.embedEnterFutureDateTitle)
+                    description = ColorTool().parse(translation.noticeOfDeparture.embedEnterFutureDateBody)
                 }
 
                 event.hook.send("", listOf(embed)).setEphemeral(true).queue()
@@ -51,8 +51,8 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
 
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionSentTitle)
-                description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDecisionSentBody)
+                title = ColorTool().parse(translation.noticeOfDeparture.embedDecisionSentTitle)
+                description = ColorTool().parse(translation.noticeOfDeparture.embedDecisionSentBody)
             }
 
             event.hook.send("", listOf(embed)).setEphemeral(true).queue()
@@ -70,8 +70,8 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
 
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptationSentTitle)
-                description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedAcceptationSentBody)
+                title = ColorTool().parse(translation.noticeOfDeparture.embedAcceptationSentTitle)
+                description = ColorTool().parse(translation.noticeOfDeparture.embedAcceptationSentBody)
             }
 
             event.hook.send("", listOf(embed)).setEphemeral(true).queue()
@@ -88,8 +88,8 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
 
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissingSentTitle)
-                description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedDismissingSentBody)
+                title = ColorTool().parse(translation.noticeOfDeparture.embedDismissingSentTitle)
+                description = ColorTool().parse(translation.noticeOfDeparture.embedDismissingSentBody)
             }
 
             event.hook.send("", listOf(embed)).setEphemeral(true).queue()
@@ -107,8 +107,8 @@ class NoticeOfDepartureModals(val event: ModalInteractionEvent, val config: Conf
 
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokationSentTitle)
-                description = ColorTool().useCustomColorCodes(translation.noticeOfDeparture.embedRevokationSentBody)
+                title = ColorTool().parse(translation.noticeOfDeparture.embedRevokationSentTitle)
+                description = ColorTool().parse(translation.noticeOfDeparture.embedRevokationSentBody)
             }
 
             event.hook.send("", listOf(embed)).setEphemeral(true).queue()

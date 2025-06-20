@@ -28,8 +28,8 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
             if (notVerified()) return
 
             val embed = Embed {
-                title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncGroupSelectTitle)
-                description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncGroupSelectBody)
+                title = ColorTool().parse(translation.regulars.embedSyncGroupSelectTitle)
+                description = ColorTool().parse(translation.regulars.embedSyncGroupSelectBody)
             }
 
             event.message.delete().queue()
@@ -49,8 +49,8 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
             RegularsManager(event.jda, config, translation).reactivateSync(event.user.id)
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncReactivatedTitle)
-                description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncReactivatedBody)
+                title = ColorTool().parse(translation.regulars.embedSyncReactivatedTitle)
+                description = ColorTool().parse(translation.regulars.embedSyncReactivatedBody)
             }
 
             event.message.delete().queue()
@@ -67,8 +67,8 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
             RegularsManager(event.jda, config, translation).deactivateSync(event.user.id)
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncDeactivatedTitle)
-                description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncDeactivatedBody)
+                title = ColorTool().parse(translation.regulars.embedSyncDeactivatedTitle)
+                description = ColorTool().parse(translation.regulars.embedSyncDeactivatedBody)
             }
 
             event.message.delete().queue()
@@ -82,8 +82,8 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
             if (notVerified()) return
 
             val embed = Embed {
-                title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncRemovedConfirmTitle)
-                description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncRemovedConfirmBody)
+                title = ColorTool().parse(translation.regulars.embedSyncRemovedConfirmTitle)
+                description = ColorTool().parse(translation.regulars.embedSyncRemovedConfirmBody)
             }
 
             event.message.delete().queue()
@@ -99,8 +99,8 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
             RegularsManager(event.jda, config, translation).removeSync(event.user.id)
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.regulars.embedSyncRemovedTitle)
-                description = ColorTool().useCustomColorCodes(translation.regulars.embedSyncRemovedBody)
+                title = ColorTool().parse(translation.regulars.embedSyncRemovedTitle)
+                description = ColorTool().parse(translation.regulars.embedSyncRemovedBody)
             }
 
             event.message.delete().queue()
@@ -115,8 +115,8 @@ class RegularsButtons(val event: ButtonInteractionEvent, val config: Config, val
         if (!UserTable().exists(event.user.id)) {
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.regulars.embedNotVerifiedTitle)
-                description = ColorTool().useCustomColorCodes(translation.regulars.embedNotVerifiedBody)
+                title = ColorTool().parse(translation.regulars.embedNotVerifiedTitle)
+                description = ColorTool().parse(translation.regulars.embedNotVerifiedBody)
             }
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
             return true

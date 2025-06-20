@@ -13,8 +13,8 @@ class VerifyCommand(val config: Config, val translation: Translation) {
         if (!config.settings.webserver.active) {
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendPanelTitle)
-                description = ColorTool().useCustomColorCodes(translation.permissions.embedCouldNotSendPanelBody)
+                title = ColorTool().parse(translation.permissions.embedCouldNotSendPanelTitle)
+                description = ColorTool().parse(translation.permissions.embedCouldNotSendPanelBody)
             }
 
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
@@ -23,8 +23,8 @@ class VerifyCommand(val config: Config, val translation: Translation) {
 
         val embed = Embed {
             thumbnail = event.guild?.iconUrl
-            title = ColorTool().useCustomColorCodes(translation.verify.embedTemplateTitle)
-            description = ColorTool().useCustomColorCodes(translation.verify.embedTemplateBody)
+            title = ColorTool().parse(translation.verify.embedTemplateTitle)
+            description = ColorTool().parse(translation.verify.embedTemplateBody)
         }
 
         event.reply_("", listOf(embed)).setActionRow(

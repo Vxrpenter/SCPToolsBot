@@ -61,8 +61,8 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
             if (ApplicationTable().retrieveSerial(roleId) >= ApplicationTypeTable().query(roleId)!!.members!!) {
                 val embed = Embed {
                     color = 0xE74D3C
-                    title = ColorTool().useCustomColorCodes(translation.support.embedNoMoreApplicationsTitle)
-                    description = ColorTool().useCustomColorCodes(translation.support.embedNoMoreApplicationsBody
+                    title = ColorTool().parse(translation.support.embedNoMoreApplicationsTitle)
+                    description = ColorTool().parse(translation.support.embedNoMoreApplicationsBody
                         .replace("%members%", ApplicationTypeTable().query(roleId)!!.members!!.toString()))
                 }
                 event.hook.send("", listOf(embed)).setEphemeral(true).queue()
@@ -72,8 +72,8 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
             if (event.values[1].asString.toIntOrNull() == null) {
                 val embed = Embed {
                     color = 0xE74D3C
-                    title = ColorTool().useCustomColorCodes(translation.support.embedApplicationAgeNumericTitle)
-                    description = ColorTool().useCustomColorCodes(translation.support.embedApplicationAgeNumericBody)
+                    title = ColorTool().parse(translation.support.embedApplicationAgeNumericTitle)
+                    description = ColorTool().parse(translation.support.embedApplicationAgeNumericBody)
                 }
                 event.hook.send("", listOf(embed)).setEphemeral(true).queue()
                 return
@@ -96,8 +96,8 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogClosedTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogClosedBody
+                title = ColorTool().parse(translation.support.embedLogClosedTitle)
+                description = ColorTool().parse(translation.support.embedLogClosedBody
                     .replace("reason", reason))
             }
             event.hook.send("", listOf(embed)).setEphemeral(true).queue()
@@ -109,8 +109,8 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
         if (child == null) {
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.support.embedInteractionChainErrorTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedInteractionChainErrorBody)
+                title = ColorTool().parse(translation.support.embedInteractionChainErrorTitle)
+                description = ColorTool().parse(translation.support.embedInteractionChainErrorBody)
             }
             logger.error("Modal Interaction Suspended, error suspected. Child channel could not correctly be returned")
             event.hook.send("", listOf(embed)).setEphemeral(true).queue()
@@ -119,13 +119,13 @@ class TicketModals(val logger: Logger, val event: ModalInteractionEvent, val con
 
         event.hook.send("", listOf(Embed {
             color = 0x2ECC70
-            title = ColorTool().useCustomColorCodes(translation.support.embedTicketCreatedTitle)
-            description = ColorTool().useCustomColorCodes(translation.support.embedTicketCreatedBody.replace("%channel%", child.asMention))
+            title = ColorTool().parse(translation.support.embedTicketCreatedTitle)
+            description = ColorTool().parse(translation.support.embedTicketCreatedBody.replace("%channel%", child.asMention))
         })).setEphemeral(true).queue()
     }
 
     private val noHandlerEmbed = Embed {
-        title = ColorTool().useCustomColorCodes(translation.support.embedTicketNoHandlerTitle)
-        description = ColorTool().useCustomColorCodes(translation.support.embedTicketNoHandlerBody)
+        title = ColorTool().parse(translation.support.embedTicketNoHandlerTitle)
+        description = ColorTool().parse(translation.support.embedTicketNoHandlerBody)
     }
 }

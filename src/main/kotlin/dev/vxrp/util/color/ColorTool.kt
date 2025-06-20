@@ -36,7 +36,7 @@ class ColorTool {
         }
     }
 
-    fun useCustomColorCodes(text: String): String {
+    fun parse(text: String): String {
         val matcher = Pattern.compile("(?<=&filler<).+?(?=>&|$)").matcher(text)
         while (matcher.find()) {
             val count = (matcher.group().toInt().toFloat() / 2).roundToInt()

@@ -20,8 +20,8 @@ class TicketEntitySelectMenus(val event: EntitySelectInteractionEvent, val confi
         if (event.selectMenu.id?.startsWith("ticket_complaint") == true) {
             val user = event.values[0]
             val embed = Embed {
-                title = ColorTool().useCustomColorCodes(translation.support.embedComplaintAnonymousTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedComplaintAnonymousBody)
+                title = ColorTool().parse(translation.support.embedComplaintAnonymousTitle)
+                description = ColorTool().parse(translation.support.embedComplaintAnonymousBody)
             }
 
             event.reply_("", listOf(embed)).setActionRow(

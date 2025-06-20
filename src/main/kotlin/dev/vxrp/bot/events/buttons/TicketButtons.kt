@@ -36,8 +36,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogClaimedTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogClaimedBody)
+                title = ColorTool().parse(translation.support.embedLogClaimedTitle)
+                description = ColorTool().parse(translation.support.embedLogClaimedBody)
             }
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
             TicketSettingsHandler(api, config, translation).claimTicket(event.user, event.channel.asThreadChannel() ,event.channelId!!, event.user.id)
@@ -59,9 +59,9 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             val ticketHandler = TicketSettingsHandler(api, config, translation)
 
             val settings = Embed {
-                title = ColorTool().useCustomColorCodes(translation.support.embedSettingsTitle
+                title = ColorTool().parse(translation.support.embedSettingsTitle
                     .replace("%user%", event.user.globalName!!))
-                description = ColorTool().useCustomColorCodes(translation.support.embedSettingsBody)
+                description = ColorTool().parse(translation.support.embedSettingsBody)
                 timestamp = Instant.now()
             }
 
@@ -79,8 +79,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogOpenedTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogOpenedBody)
+                title = ColorTool().parse(translation.support.embedLogOpenedTitle)
+                description = ColorTool().parse(translation.support.embedLogOpenedBody)
             }
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
             event.message.delete().queue()
@@ -96,8 +96,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
             val embed = Embed {
                 color = 0xf1c40f
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogPausedTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogPausedBody)
+                title = ColorTool().parse(translation.support.embedLogPausedTitle)
+                description = ColorTool().parse(translation.support.embedLogPausedBody)
             }
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
             event.message.delete().queue()
@@ -113,8 +113,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
 
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogSuspendedTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogSuspendedBody)
+                title = ColorTool().parse(translation.support.embedLogSuspendedTitle)
+                description = ColorTool().parse(translation.support.embedLogSuspendedBody)
             }
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
             event.message.delete().queue()
@@ -134,8 +134,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogClaimedTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogClaimedBody)
+                title = ColorTool().parse(translation.support.embedLogClaimedTitle)
+                description = ColorTool().parse(translation.support.embedLogClaimedBody)
             }
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
             TicketSettingsHandler(api, config, translation).claimTicket(event.user, channel, channelId, event.user.id)
@@ -152,8 +152,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
                 color = 0x2ECC70
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogOpenedTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogOpenedBody)
+                title = ColorTool().parse(translation.support.embedLogOpenedTitle)
+                description = ColorTool().parse(translation.support.embedLogOpenedBody)
             }
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
             TicketSettingsHandler(api, config, translation).openTicket(event.user, channel, channelId)
@@ -170,8 +170,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
                 color = 0xf1c40f
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogPausedTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogPausedBody)
+                title = ColorTool().parse(translation.support.embedLogPausedTitle)
+                description = ColorTool().parse(translation.support.embedLogPausedBody)
             }
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
             TicketSettingsHandler(api, config, translation).pauseTicket(event.user, channel, channelId)
@@ -188,8 +188,8 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
             val channel = event.jda.getThreadChannelById(channelId)!!
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.support.embedLogSuspendedTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedLogSuspendedBody)
+                title = ColorTool().parse(translation.support.embedLogSuspendedTitle)
+                description = ColorTool().parse(translation.support.embedLogSuspendedBody)
             }
             event.reply_("", listOf(embed)).setEphemeral(true).queue()
             TicketSettingsHandler(api, config, translation).suspendTicket(event.user, channel, channelId)
@@ -213,7 +213,7 @@ class TicketButtons(val event: ButtonInteractionEvent, val config: Config, val t
     }
 
     private val noHandlerEmbed = Embed {
-        title = ColorTool().useCustomColorCodes(translation.support.embedTicketNoHandlerTitle)
-        description = ColorTool().useCustomColorCodes(translation.support.embedTicketNoHandlerBody)
+        title = ColorTool().parse(translation.support.embedTicketNoHandlerTitle)
+        description = ColorTool().parse(translation.support.embedTicketNoHandlerBody)
     }
 }

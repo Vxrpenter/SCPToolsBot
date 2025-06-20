@@ -21,8 +21,8 @@ class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val confi
 
         if (event.selectedOptions[0].value.startsWith("report")) {
             val embed = Embed {
-                title = ColorTool().useCustomColorCodes(translation.support.embedReportUserTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedReportUserBody)
+                title = ColorTool().parse(translation.support.embedReportUserTitle)
+                description = ColorTool().parse(translation.support.embedReportUserBody)
             }
 
             event.reply_("", listOf(embed)).addActionRow(
@@ -40,8 +40,8 @@ class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val confi
 
         if (event.selectedOptions[0].value.startsWith("complaint")) {
             val embed = Embed {
-                title = ColorTool().useCustomColorCodes(translation.support.embedComplaintUserTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedComplaintUserBody)
+                title = ColorTool().parse(translation.support.embedComplaintUserTitle)
+                description = ColorTool().parse(translation.support.embedComplaintUserBody)
             }
 
             event.reply_("", listOf(embed)).addActionRow(
@@ -51,8 +51,8 @@ class TicketStringSelectMenus(val event: StringSelectInteractionEvent, val confi
 
         if (event.selectedOptions[0].value.startsWith("application")) {
             val embed = Embed {
-                title = ColorTool().useCustomColorCodes(translation.support.embedApplicationPositionTitle)
-                description = ColorTool().useCustomColorCodes(translation.support.embedApplicationPositionBody)
+                title = ColorTool().parse(translation.support.embedApplicationPositionTitle)
+                description = ColorTool().parse(translation.support.embedApplicationPositionBody)
             }
 
             event.reply_("", listOf(embed)).addActionRow(

@@ -25,8 +25,8 @@ class StatusCommandListener(val api: JDA, val config: Config, val translation: T
             if (event.channel.type == ChannelType.PRIVATE) {
             val embed = Embed {
                 color = 0xE74D3C
-                title = ColorTool().useCustomColorCodes(translation.permissions.embedCommandDeniedTitle)
-                description = ColorTool().useCustomColorCodes(translation.permissions.embedCommandDeniedBody)
+                title = ColorTool().parse(translation.permissions.embedCommandDeniedTitle)
+                description = ColorTool().parse(translation.permissions.embedCommandDeniedBody)
             }
             event.reply_("", listOf(embed)).setEphemeral(true).await()
             return@listener
