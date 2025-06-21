@@ -117,13 +117,13 @@ class UpdateHandler() {
             var fullTag: String
             var tag: String
             var preReleaseType = ""
-            var preReleaseNumber = 0
+            var preReleaseNumber = "0"
             if (chooseLatestRelease(latestRelease, latestPreRelease)) {
                 val splitArray = latestPreRelease.split("-")
 
                 fullTag = latestPreRelease
                 tag = splitArray.first()
-                preReleaseNumber = splitArray.last().replace("alpha", "").replace("beta", "").toInt()
+                preReleaseNumber = splitArray.last().replace("alpha", "").replace("beta", "")
                 preReleaseType = splitArray.last().replace(preReleaseNumber.toString(), "")
             } else {
                 fullTag = latestRelease
@@ -145,7 +145,9 @@ class UpdateHandler() {
                     val propertiesPreReleaseType = properties.getProperty("version").split("-").last().replace(propertiesNumber, "")
 
                     if (propertiesPreReleaseType == "alpha" && preReleaseType != "beta" || propertiesPreReleaseType == "beta" && preReleaseType == "beta") {
-                        if (propertiesNumber.toInt() > preReleaseNumber) return "None"
+                        val propertiesSplit = propertiesNumber.split(".")
+                        val preReleaseSplit = preReleaseNumber.split(".")
+                        if (propertiesSplit.first() > preReleaseSplit.first() && propertiesSplit[1] > preReleaseSplit[1] && propertiesSplit.last() > preReleaseSplit.last()) return "None"
                     }
                 }
 
