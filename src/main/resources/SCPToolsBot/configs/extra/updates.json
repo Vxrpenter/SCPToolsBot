@@ -11,26 +11,26 @@
     "regenerateTranslations": true
   },
 
-  "configurationUpdate": {
-    "config": {
+  "configurationUpdate": [
+    {
       "changed": false,
       "filename": "config.yml",
       "location": "/SCPToolsBot/configs/",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/config.yml"
     },
-    "statusSettings": {
+    {
       "changed": false,
       "filename": "status-settings.yml",
       "location": "/SCPToolsBot/configs/",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/status-settings.yml"
     },
-    "ticketSettings": {
+    {
       "changed": false,
       "filename": "ticket-settings.yml",
       "location": "/SCPToolsBot/configs/",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/ticket-settings.yml"
     },
-    "extra": {
+    {
       "commands": {
         "changed": false,
         "filename": "commands.json",
@@ -44,37 +44,37 @@
         "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/extra/launch-configuration.json"
       }
     }
-  },
+  ],
 
-  "translationUpdates": {
-    "enUs": {
+  "translationUpdates": [
+    {
       "changed": false,
       "filename": "en_US.yml",
       "location": "/SCPToolsBot/lang/",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/lang/en_US.yml"
     },
-    "deDe": {
+    {
       "changed": false,
       "filename": "de_DE.yml",
       "location": "/SCPToolsBot/lang/",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/lang/de_DE.yml"
     }
-  },
+  ],
 
-  "regularsUpdate": {
-    "config": {
+  "regularsUpdate": [
+    {
       "changed": false,
       "filename": "config.yml",
       "location": "/SCPToolsBot/regulars/.../",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/regulars/example/config.yml"
     },
-    "manifest": {
+    {
       "changed": false,
       "filename": "manifest.yml",
       "location": "/SCPToolsBot/regulars/.../",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/regulars/example/manifest.yml"
     }
-  },
+  ],
 
   "additionalInformation": ""
 }
