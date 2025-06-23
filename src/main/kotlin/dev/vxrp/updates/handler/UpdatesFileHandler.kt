@@ -35,9 +35,9 @@ class UpdatesFileHandler {
 
         val newContent = jsonEncoder.encodeToString<Updates>(Updates(
             content.version,
-            updateList(content.configurationUpdate, currentContent.configurationUpdate),
-            updateList(content.translationUpdates, currentContent.translationUpdates),
-            updateList(content.regularsUpdate, currentContent.regularsUpdate),
+            updateList(content.configurationUpdate.toMutableList(), currentContent.configurationUpdate.toMutableList()),
+            updateList(content.translationUpdates.toMutableList(), currentContent.translationUpdates.toMutableList()),
+            updateList(content.regularsUpdate.toMutableList(), currentContent.regularsUpdate.toMutableList()),
             content.additionalInformation
         ))
 
@@ -69,10 +69,23 @@ class UpdatesFileHandler {
         return Json.decodeFromString<Updates>(Path("$dir$file").toFile().readText())
     }
 
-    private fun updateList(newList: List<UpdatesConfigurationSegment>, oldList: List<UpdatesConfigurationSegment>): List<UpdatesConfigurationSegment> {
+    private fun updateList(newList: MutableList<UpdatesConfigurationSegment>, oldList: MutableList<UpdatesConfigurationSegment>): List<UpdatesConfigurationSegment> {
         val list = mutableListOf<UpdatesConfigurationSegment>()
-        newList.zip(oldList) {config, currentConfig -> list.add(UpdatesConfigurationSegment(config.changed, currentConfig.changed, config.type, config.filename, config.location, config.upstream)) }
 
+        val extraElements = mutableListOf<UpdatesConfigurationSegment>()
+        val currentExtraElements = mutableListOf<UpdatesConfigurationSegment>()
+
+        if (newList.size > oldList.size) newList.forEach { if (!oldList.contains(it)) extraElements.add(it) }
+        if (newList.size < oldList.size) oldList.forEach { if (!oldList.contains(it)) oldList.toMutableList().remove(it) }
+
+        extraElements.forEach { newList.remove(it) }
+        currentExtraElements.forEach { oldList.remove(it) }
+
+        newList.zip(oldList) {config, currentConfig ->
+            list.add(UpdatesConfigurationSegment(config.changed, currentConfig.regenerate, config.type, config.filename, config.location, config.upstream))
+        }
+
+        list.addAll(extraElements)
         return list
     }
 }

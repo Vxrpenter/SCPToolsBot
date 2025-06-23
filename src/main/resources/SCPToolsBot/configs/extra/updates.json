@@ -33,15 +33,15 @@
         "filename": "commands.json",
         "location": "/SCPToolsBot/configs/extra/",
         "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/extra/commands.json"
-      },
-      {
+    },
+    {
         "changed": false,
         "regenerate": true,
         "type": "config",
         "filename": "launch-configuration.json",
         "location": "/SCPToolsBot/configs/extra/",
         "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/extra/launch-configuration.json"
-      }
+    }
   ],
 
   "translationUpdates": [
