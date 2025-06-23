@@ -17,14 +17,12 @@
 package dev.vxrp.updates.handler
 
 import dev.vxrp.configuration.data.Config
-import dev.vxrp.configuration.storage.ConfigPaths
 import dev.vxrp.updates.UpdateManager
 import dev.vxrp.updates.data.Tag
 import dev.vxrp.updates.data.Updates
 import dev.vxrp.updates.data.UpdatesConfigurationSegment
 import dev.vxrp.util.color.ColorTool
 import dev.vxrp.util.color.enums.DCColor
-import dev.vxrp.util.upstreamVersion
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.Request
