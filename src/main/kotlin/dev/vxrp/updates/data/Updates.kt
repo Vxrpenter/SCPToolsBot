@@ -26,6 +26,7 @@ data class UpdatesSettings(
 @Serializable
 data class UpdatesConfigurationSegment(
     val changed: Boolean,
+    val regenerate: Boolean,
     val filename: String,
     val location: String,
     val upstream: String,
