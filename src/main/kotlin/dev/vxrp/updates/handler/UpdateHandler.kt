@@ -21,8 +21,8 @@ class UpdateHandler() {
     private val client: OkHttpClient = OkHttpClient()
     private val dir = System.getProperty("user.dir")
 
-    fun checkUpdated(old: Updates, new: Updates, force: Boolean) {
-        if (old.version == new.version) if (!force) return
+    fun checkUpdated(old: Updates, new: Updates) {
+        if (old.version == new.version) return
 
         logger.warn("We have detected that you have installed an update for SCPToolsBot. The bot will now run an update check to see if your configurations are still up to date...")
 
@@ -124,7 +124,7 @@ class UpdateHandler() {
                 fullTag = latestPreRelease
                 tag = splitArray.first()
                 preReleaseNumber = splitArray.last().replace("alpha", "").replace("beta", "")
-                preReleaseType = splitArray.last().replace(preReleaseNumber.toString(), "")
+                preReleaseType = splitArray.last().replace(preReleaseNumber, "")
             } else {
                 fullTag = latestRelease
                 tag = latestRelease
