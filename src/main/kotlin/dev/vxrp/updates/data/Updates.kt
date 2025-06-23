@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 data class Updates(
     val version: String,
     val settings: UpdatesSettings,
-    val configurationUpdate: UpdatesConfigurationUpdate,
-    val translationUpdates: UpdatesTranslationUpdates,
-    val regularsUpdate: UpdatesRegularsUpdate,
+    val configurationUpdate: List<UpdatesConfigurationSegment>,
+    val translationUpdates: List<UpdatesConfigurationSegment>,
+    val regularsUpdate: List<UpdatesConfigurationSegment>,
     val additionalInformation: String
 )
 
@@ -21,32 +21,6 @@ data class UpdatesSettings(
     val regenerateLaunchConfiguration: Boolean,
 
     val regenerateTranslations: Boolean
-)
-
-@Serializable
-data class UpdatesConfigurationUpdate(
-    val config: UpdatesConfigurationSegment,
-    val statusSettings: UpdatesConfigurationSegment,
-    val ticketSettings: UpdatesConfigurationSegment,
-    val extra: UpdatesConfigurationUpdateExtra
-)
-
-@Serializable
-data class UpdatesConfigurationUpdateExtra(
-    val commands: UpdatesConfigurationSegment,
-    val launchConfiguration: UpdatesConfigurationSegment
-)
-
-@Serializable
-data class UpdatesTranslationUpdates(
-    val enUs: UpdatesConfigurationSegment,
-    val deDe: UpdatesConfigurationSegment
-)
-
-@Serializable
-data class UpdatesRegularsUpdate(
-    val config: UpdatesConfigurationSegment,
-    val manifest: UpdatesConfigurationSegment
 )
 
 @Serializable
