@@ -25,26 +25,34 @@ data class UpdatesSettings(
 
 @Serializable
 data class UpdatesConfigurationUpdate(
-    val config: Boolean,
-    val statusSettings: Boolean,
-    val ticketSettings: Boolean,
+    val config: UpdatesConfigurationSegment,
+    val statusSettings: UpdatesConfigurationSegment,
+    val ticketSettings: UpdatesConfigurationSegment,
     val extra: UpdatesConfigurationUpdateExtra
 )
 
 @Serializable
 data class UpdatesConfigurationUpdateExtra(
-    val commands: Boolean,
-    val launchConfiguration: Boolean
+    val commands: UpdatesConfigurationSegment,
+    val launchConfiguration: UpdatesConfigurationSegment
 )
 
 @Serializable
 data class UpdatesTranslationUpdates(
-    val enUs: Boolean,
-    val deDe: Boolean
+    val enUs: UpdatesConfigurationSegment,
+    val deDe: UpdatesConfigurationSegment
 )
 
 @Serializable
 data class UpdatesRegularsUpdate(
-    val config: Boolean,
-    val manifest: Boolean
+    val config: UpdatesConfigurationSegment,
+    val manifest: UpdatesConfigurationSegment
+)
+
+@Serializable
+data class UpdatesConfigurationSegment(
+    val changed: Boolean,
+    val filename: String,
+    val location: String,
+    val upstream: String,
 )
