@@ -16,6 +16,13 @@ class UpdateManager() {
         val dir = System.getProperty("user.dir")
         val fileHandler = UpdatesFileHandler()
         fileHandler.create(dir)
+
+        try { fileHandler.queryOld(dir) } catch (e: Exception) {
+            fileHandler.delete(dir)
+            fileHandler.create(dir)
+        }
+
+
         fileHandler.setConfigPaths(fileHandler.queryNew())
         UpdateHandler().checkUpdated(fileHandler.queryOld(dir), fileHandler.queryNew())
     }
