@@ -25,6 +25,11 @@ class UpdatesFileHandler {
         }
     }
 
+    fun delete(dir: String) {
+        val currentFile = Path("$dir$file").toFile()
+        currentFile.delete()
+    }
+
     fun override(dir: String) {
         val currentFile = Path("$dir$file").toFile()
 
