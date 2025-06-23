@@ -14,8 +14,10 @@ class UpdateManager() {
 
     fun checkUpdated() {
         val dir = System.getProperty("user.dir")
-        UpdatesFileHandler().create(dir)
-        UpdateHandler().checkUpdated(UpdatesFileHandler().queryOld(dir), UpdatesFileHandler().queryNew())
+        val fileHandler = UpdatesFileHandler()
+        fileHandler.create(dir)
+        fileHandler.setConfigPaths(fileHandler.queryNew())
+        UpdateHandler().checkUpdated(fileHandler.queryOld(dir), fileHandler.queryNew())
     }
 
     fun spinUpChecker(config: Config) {
