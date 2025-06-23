@@ -17,7 +17,7 @@ class UpdateManager() {
         val fileHandler = UpdatesFileHandler()
         fileHandler.create(dir)
 
-        try { fileHandler.queryOld(dir) } catch (e: Exception) {
+        try { fileHandler.queryOld(dir) } catch (_: Exception) {
             fileHandler.delete(dir)
             fileHandler.create(dir)
         }
