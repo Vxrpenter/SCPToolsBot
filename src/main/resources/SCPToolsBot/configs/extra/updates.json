@@ -27,7 +27,6 @@
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/ticket-settings.yml"
     },
     {
-      "commands": {
         "changed": false,
         "regenerate": true,
         "type": "config",
@@ -35,7 +34,7 @@
         "location": "/SCPToolsBot/configs/extra/",
         "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/extra/commands.json"
       },
-      "launchConfiguration": {
+      {
         "changed": false,
         "regenerate": true,
         "type": "config",
@@ -43,7 +42,6 @@
         "location": "/SCPToolsBot/configs/extra/",
         "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/extra/launch-configuration.json"
       }
-    }
   ],
 
   "translationUpdates": [
