@@ -5,6 +5,7 @@
     {
       "changed": false,
       "regenerate": false,
+      "type": "config",
       "filename": "config.yml",
       "location": "/SCPToolsBot/configs/",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/config.yml"
@@ -12,6 +13,7 @@
     {
       "changed": false,
       "regenerate": false,
+      "type": "config",
       "filename": "status-settings.yml",
       "location": "/SCPToolsBot/configs/",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/status-settings.yml"
@@ -19,6 +21,7 @@
     {
       "changed": false,
       "regenerate": false,
+      "type": "config",
       "filename": "ticket-settings.yml",
       "location": "/SCPToolsBot/configs/",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/ticket-settings.yml"
@@ -27,6 +30,7 @@
       "commands": {
         "changed": false,
         "regenerate": true,
+        "type": "config",
         "filename": "commands.json",
         "location": "/SCPToolsBot/configs/extra/",
         "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/extra/commands.json"
@@ -34,6 +38,7 @@
       "launchConfiguration": {
         "changed": false,
         "regenerate": true,
+        "type": "config",
         "filename": "launch-configuration.json",
         "location": "/SCPToolsBot/configs/extra/",
         "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/extra/launch-configuration.json"
@@ -45,6 +50,7 @@
     {
       "changed": false,
       "regenerate": true,
+      "type": "translation",
       "filename": "en_US.yml",
       "location": "/SCPToolsBot/lang/",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/lang/en_US.yml"
@@ -52,6 +58,7 @@
     {
       "changed": false,
       "regenerate": true,
+      "type": "translation",
       "filename": "de_DE.yml",
       "location": "/SCPToolsBot/lang/",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/lang/de_DE.yml"
@@ -62,6 +69,7 @@
     {
       "changed": false,
       "regenerate": false,
+      "type": "regulars",
       "filename": "config.yml",
       "location": "/SCPToolsBot/regulars/.../",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/regulars/example/config.yml"
@@ -69,6 +77,7 @@
     {
       "changed": false,
       "regenerate": false,
+      "type": "regulars",
       "filename": "manifest.yml",
       "location": "/SCPToolsBot/regulars/.../",
       "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/regulars/example/manifest.yml"

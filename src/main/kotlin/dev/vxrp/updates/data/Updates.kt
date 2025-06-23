@@ -27,6 +27,7 @@ data class UpdatesSettings(
 data class UpdatesConfigurationSegment(
     val changed: Boolean,
     val regenerate: Boolean,
+    val type: String,
     val filename: String,
     val location: String,
     val upstream: String,
