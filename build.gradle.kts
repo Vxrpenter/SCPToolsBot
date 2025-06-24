@@ -1,6 +1,6 @@
 plugins {
     application
-    kotlin("jvm") version "2.1.21"
+    kotlin("jvm") version "2.2.0"
     kotlin("plugin.serialization") version "2.1.21"
     id("com.gradleup.shadow") version("8.3.3")
     id("io.gitlab.arturbosch.detekt").version("1.23.7")
