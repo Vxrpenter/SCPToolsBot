@@ -8,11 +8,11 @@
 export filename="NULL"
 export installType=""
 export repo="https://github.com/Vxrpenter/SCPToolsBot"
-export version="v1.1.1"
+export version="1.1.1"
 export configPath=""
 
 # Jar Installation
-export versionLink="${repo}/releases/download/${version}/SCP_Tools-${version}.jar"
+export versionLink="${repo}/releases/download/v${version}/SCP_Tools-${version}.jar"
 export filename="SCP_Tools-${version}.jar"
 
 # Base Configuration Values
@@ -346,7 +346,6 @@ function confirmCedMod() {
     ;;
     * )
       echo "Skipping CedMod setup"
-      confirmCedMod
   esac
 }
 confirmCedMod
