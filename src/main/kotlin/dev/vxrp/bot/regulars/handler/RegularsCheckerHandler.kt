@@ -32,6 +32,7 @@ import kotlinx.coroutines.delay
 import net.dv8tion.jda.api.JDA
 import org.slf4j.LoggerFactory
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import kotlin.math.sqrt
 import kotlin.time.Duration.Companion.seconds
 
@@ -111,7 +112,8 @@ class RegularsCheckerHandler(val api: JDA, val config: Config, val translation: 
     }
 
     private fun checkPlaytime(regular: RegularDatabaseEntry, steamId: String, lastCheckedDate: LocalDate?): Boolean {
-        if (lastCheckedDate == LocalDate.now()) return false
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        if (lastCheckedDate?.format(formatter) == LocalDate.now().format(formatter)) return false
         val cedmod = Cedmod(config.settings.cedmod.instance, config.settings.cedmod.api)
 
         try {
