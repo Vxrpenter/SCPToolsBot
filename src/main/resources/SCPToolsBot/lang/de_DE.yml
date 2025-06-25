@@ -504,19 +504,21 @@ SUPPORT:
   EMBED_LOG_TITLE: "%name% von %user%"
   EMBED_LOG_BODY: "
                         **Ticketstatus:** %status%\n
-                        **Ticket-ID:** %id%\n
+                        **Ticket Channel:** %channel%\n
                         **Ticket erstellt von:** %creator%\n
                         **Ticket bearbeitet von:** %handler%\n
 
-                        _Diese Log-Nachricht wird dauerhaft gelöscht, wenn das Ticket geschlossen wird. Geschlossene Tickets findest du im Thread-Bereich des Hauptticket-Kanals."
+                        _Diese Log-Nachricht wird dauerhaft gelöscht, wenn das Ticket geschlossen wird. Geschlossene Tickets findest du im Thread-Bereich des Hauptticket-Kanals._"
 
   EMBED_CLOSED_LOG_TITLE: "%name% von %user% - Geschlossen"
   EMBED_CLOSED_LOG_BODY: "
                         **Ticketstatus:** %status%\n
-                        **Ticket-ID:** %id%\n
+                        **Ticket Channel:** %channel%\n
                         **Ticket erstellt von:** %creator%\n
                         **Ticket bearbeitet von:** %handler%\n
                         **Geschlossen von** %closed_user%\n
+                        
+                        **Schließungsgrund:** %reason%\n
                         &filler<255>&
                         _Diese Log-Nachricht wurde deaktiviert._"
 
