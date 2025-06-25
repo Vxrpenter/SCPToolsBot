@@ -134,7 +134,7 @@ class TicketSettingsHandler(val api: JDA, val config: Config, val translation: T
                 .replace("%reason%", reason))
         }
         ticketChannel.send("", listOf(embed)).queue()
-        TicketLogHandler(api, config, translation).closeMessage(id, user)
+        TicketLogHandler(api, config, translation).closeMessage(id, user, reason)
         TicketMessageHandler(api, config, translation).sendClosedMessage(TicketTable().getTicketCreator(id)!!, user.id, ticketChannel,reason)
         TicketTable().updateTicketStatus(id, TicketStatus.CLOSED)
         val child = api.getThreadChannelById(id)!!
