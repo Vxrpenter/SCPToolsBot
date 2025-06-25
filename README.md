@@ -40,18 +40,15 @@ For more information check out the [wiki](https://override.gitbook.io/scptoolsbo
 For more indepth explanation see the [wiki](https://override.gitbook.io/scptoolsbot)
 
 ## Installation
-> [!NOTE]
-> Bots have to run all the time to be effective, so make sure to run it on a machine that is online 24/7
 
-You can easily install the bot by downloading and installing the `installer.sh` from the latest release. For more installation info you can look into the [installation guide](https://override.gitbook.io/scptoolsbot/setup/getting-started) which covers docker installation etc.
-
+### Quick Install
+Install the installer from the latest release or download it from the master branch:
 ```sh
-chmod +x installer.sh
-
-sudo ./installer.sh
+sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/Vxrpenter/SCPToolsBot/master/installer.sh)"
 ```
+For more (detailed) installation methods, look into the setup guide:
 
-## Build from Source
+### Build from Source
 ```sh
 git clone https://github.com/Vxrpenter/SCPToolsBot
 
@@ -62,9 +59,8 @@ chmod +x gradlew
 ```
 
 ## Handling Issues
-If you're running into any issues,
-please first check the [wiki](https://override.gitbook.io/scptoolsbot) for help.
-If you can't fix the issue, create an issue here so we're able to review it and find possible bugs. If you have any questions about the working or plans of development contact `@vxrpenter` on discord
+If you're running into any issues, please first check the [wiki](https://override.gitbook.io/scptoolsbot) for help.
+If you can't fix the issue, create an issue here so we're able to review it and find possible bugs. If you have any questions about the working or plans of development contact `@vxrpenter` on discord, or open up a [discussion](https://github.com/Vxrpenter/SCPToolsBot/discussions/new?category=questions)
 
 ---
 
@@ -74,25 +70,19 @@ If a release contains the `alpha` tag, it is experimental and features and more 
 
 Releases containing the `beta` tag are mostly tested but could still be considered unstable.
 
-Releases will be marked as stable if they're thought to run well after testing.
-If a release is marked as unstable, it might not run well or produce bugs, for example, memory leaks
-
-When a new build is released, it might take some time until the wiki is updated
-
-Changelogs only contain the most important information,
-and small one-line changes will not be included if they don't have a major effect on stability and/or performance
-
 ## Licencing
-This project, as stated above, is licenced under the MIT license.
-It can be modified and used commercially.
-You can distribute it as you like.
-I'm not liable for anything done with it, and no warranty is given
-
 > [!IMPORTANT]
-> When using code from this repo, you have to add a License and copyright notice.
+> Copyright (c) 2024 Vxrpenter and the SCPToolsBot Contributors
+>
+> Licenced under the MIT License, any non-license compliant usage of this projects file(s) content
+> is prohibited. You can find the complete license agreement [here](https://github.com/Vxrpenter/SCPToolsBot/blob/master/LICENSE)
+>
+> This software may be used commercially if the usage is license compliant. The software
+> is provided without any sort of WARRANTY, and the authors cannot be held liable for
+> any form of claim, damages or other liabilities.
 
-This license is not in place to annoy anyone but to protect the work, passion and time that has gone into this project
-> This is no legal advice
+> [!NOTE]
+> This is no legal advice, please read the license conditions
 
 ## Special Thanks
 - Special thanks goes to [ced777ric](https://github.com/ced777ric) who helped me a lot with the cedmod api integration, especially when trying to find the specific endpoints use case or usability
