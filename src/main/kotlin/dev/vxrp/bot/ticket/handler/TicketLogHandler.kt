@@ -81,7 +81,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
         channel.editMessage(logMessage!!, "", listOf(logEmbed)).setActionRow(logActionRow(status, isHandled, ticketId)).queue()
     }
 
-    suspend fun closeMessage(ticketId: String, closedUser: User) {
+    suspend fun closeMessage(ticketId: String, closedUser: User, reason: String) {
         val logMessage = TicketTable().getLogMessage(ticketId)
 
         val creator = TicketTable().getTicketCreator(ticketId)!!
@@ -95,10 +95,10 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
 
         val message = channel.retrieveMessageById(logMessage!!).await()
         message.editMessageComponents().queue()
-        message.edit("", listOf(createMessage(creator, handler, TicketStatus.CLOSED, childChannel, true, closedUser = closedUser))).queue()
+        message.edit("", listOf(createMessage(creator, handler, TicketStatus.CLOSED, childChannel, true, closedUser = closedUser, reason = reason))).queue()
     }
 
-    private suspend fun createMessage(ticketCreator: String, ticketHandler: User?, ticketStatus: TicketStatus, childChannel: ThreadChannel, closedMessage: Boolean, closedUser: User? = null): MessageEmbed {
+    private suspend fun createMessage(ticketCreator: String, ticketHandler: User?, ticketStatus: TicketStatus, childChannel: ThreadChannel, closedMessage: Boolean, closedUser: User? = null, reason: String = "None"): MessageEmbed {
         var thumbnailUrl = "https://www.pngarts.com/files/4/Anonymous-Mask-Transparent-Images.png"
         var creatorUserMention = "anonymous"
         var creatorUserName = "anonymous"
@@ -118,7 +118,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
             .replace("%user%", creatorUserName))
         var usableDescription = ColorTool().parse(translation.support.embedLogBody
             .replace("%status%", ticketStatus.toString())
-            .replace("%id%", childChannel.id)
+            .replace("%channel%", childChannel.asMention)
             .replace("%creator%", creatorUserMention)
             .replace("%handler%", handlerUserName))
 
@@ -130,10 +130,11 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
 
             usableDescription = ColorTool().parse(translation.support.embedClosedLogBody
                 .replace("%status%", ticketStatus.toString())
-                .replace("%id%", childChannel.id)
+                .replace("%channel%", childChannel.asMention)
                 .replace("%creator%", creatorUserMention)
                 .replace("%handler%", handlerUserName)
-                .replace("%closed_user%", closedUser?.asMention!!))
+                .replace("%closed_user%", closedUser?.asMention!!)
+                .replace("%reason%", reason))
         }
 
         return Embed {
