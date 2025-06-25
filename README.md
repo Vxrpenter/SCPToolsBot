@@ -46,7 +46,7 @@ Install the installer from the latest release or download it from the master bra
 ```sh
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/Vxrpenter/SCPToolsBot/master/installer.sh)"
 ```
-For more (detailed) installation methods, look into the setup guide:
+A more detailed installation and setup guide can be found on the [wiki](https://override.gitbook.io/scptoolsbot/setup/getting-started)
 
 ### Build from Source
 ```sh
