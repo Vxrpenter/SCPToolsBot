@@ -517,7 +517,7 @@ SUPPORT:
                         **Ticket Handled by:** %handler%\n
                         **Closed By** %closed_user%\n
                         
-                        **Close Reason:**\n
+                        __**Close Reason:**__\n
                          ```%reason%```
                         &filler<255>&
                         _This log message has been deactivated._"
