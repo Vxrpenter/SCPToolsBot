@@ -503,7 +503,7 @@ SUPPORT:
   EMBED_LOG_TITLE: "%name% by %user%"
   EMBED_LOG_BODY: "
                         **Ticket Status:** %status%\n
-                        **Ticket Id:** %id%\n
+                        **Ticket Channel:** %channel%\n
                         **Ticket Created by:** %creator%\n
                         **Ticket Handled by:** %handler%\n
 
@@ -512,10 +512,12 @@ SUPPORT:
   EMBED_CLOSED_LOG_TITLE: "%name% by %user% - Closed"
   EMBED_CLOSED_LOG_BODY: "
                         **Ticket Status:** %status%\n
-                        **Ticket Id:** %id%\n
+                        **Ticket Channel:** %channel%\n
                         **Ticket Created by:** %creator%\n
                         **Ticket Handled by:** %handler%\n
                         **Closed By** %closed_user%\n
+                        
+                        **Close Reason:** %reason%\n
                         &filler<255>&
                         _This log message has been deactivated._"
 
