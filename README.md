@@ -88,13 +88,27 @@ Releases containing the `beta` tag are mostly tested but could still be consider
 - Special thanks goes to [ced777ric](https://github.com/ced777ric) who helped me a lot with the cedmod api integration, especially when trying to find the specific endpoints use case or usability
 - Also to [SeekEDstroy](https://github.com/SeekEDstroy) for help with user id linking and for pointing out some bugs
 - A big thank you goes [Kaeseekuchen](https://github.com/Kaeseekuchen) for providing many feature ideas, real server data and enviorments for testing and feature improvements
----
 
 ## Star History
 Thank you a lot for starring this repo. It is really helpful and makes me happy to work on this project. 
 
 If you like this project, you may consider sharing it with others Either way, thank you really much
-[![Stargazers over time](https://starchart.cc/Vxrpenter/SCPToolsBot.svg?variant=adaptive)](https://starchart.cc/Vxrpenter/SCPToolsBot)
+
+<a href="https://www.star-history.com/#Vxrpenter/SCPToolsBot&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Vxrpenter/SCPToolsBot&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Vxrpenter/SCPToolsBot&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Vxrpenter/SCPToolsBot&type=Timeline" />
+ </picture>
+</a>
+
+## Contributors
+
+<a href="https://github.com/Vxrpenter/SCPToolsBot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Vxrpenter/SCPToolsBot" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
 
 ---
 
