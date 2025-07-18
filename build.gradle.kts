@@ -29,7 +29,7 @@ val postgresSqlVersion = "42.7.7"
 val mariaDBVersion = "3.5.4"
 
 val kotlinxSerializationVersion = "1.9.0"
-val kamlVersion = "0.83.0"
+val kamlVersion = "0.85.0"
 val jdaVersion = "5.6.1"
 val jdaKtxVersion = "0.12.0"
 val secretLabKotlinVersion = "0.4.3"
