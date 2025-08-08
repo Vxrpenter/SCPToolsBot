@@ -25,7 +25,7 @@ import dev.vxrp.util.upstreamVersion
 import org.slf4j.LoggerFactory
 import kotlin.time.Duration.Companion.hours
 
-class UpdateManager() {
+class UpdateManager {
     private val logger = LoggerFactory.getLogger(UpdateManager::class.java)
 
     fun checkUpdated() {

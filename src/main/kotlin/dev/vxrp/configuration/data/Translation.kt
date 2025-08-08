@@ -16,6 +16,7 @@
 
 package dev.vxrp.configuration.data
 
+import dev.vxrp.configuration.ConfigurationManager
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -47,7 +48,13 @@ data class Translation(
     val buttons: TranslationButtons,
     @SerialName("SELECT_MENUS")
     val selectMenus: TranslationSelectMenus
-)
+) {
+    companion object {
+        val instance: Translation by lazy {
+            ConfigurationManager.initializeTranslations(Config.instance)
+        }
+    }
+}
 
 @Serializable
 data class TranslationPermissions(

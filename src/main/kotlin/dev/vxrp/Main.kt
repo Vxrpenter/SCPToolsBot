@@ -16,33 +16,28 @@
 
 package dev.vxrp
 
+import dev.vxrp.bot.Bot
 import dev.vxrp.configuration.ConfigurationManager
 import dev.vxrp.configuration.data.Config
-import dev.vxrp.configuration.data.Translation
 import dev.vxrp.updates.UpdateManager
-import dev.vxrp.util.launch.LaunchOptionManager
+import io.github.freya022.botcommands.api.core.BotCommands
 import org.slf4j.LoggerFactory
 
 private val logger = LoggerFactory.getLogger("Main")
 
 fun main() {
     logger.info("Starting up...")
-    UpdateManager().checkUpdated()
+    val updateManager = UpdateManager()
+    updateManager.checkUpdated()
 
-    val configurationManager = ConfigurationManager()
+    val config = Config.instance
+    val translation = ConfigurationManager.initializeTranslations(config)
+    ConfigurationManager.initializeDatabase(config)
+    ConfigurationManager.setLoggingLevel(config)
 
-    val config = configurationManager.initializeConfigs()
+    updateManager.spinUpChecker(config)
 
-    val translation = configurationManager.initializeTranslations(config)
-    configurationManager.initializeDatabase(config)
-    configurationManager.setLoggingLevel(config)
-
-    UpdateManager().spinUpChecker(config)
-    ScpToolsBot(config, translation)
-}
-
-class ScpToolsBot(config: Config, translation: Translation) {
-    init {
-        LaunchOptionManager(config, translation).startupBots()
+    BotCommands.create {
+        addSearchPath("dev.vxrp.bot")
     }
 }
