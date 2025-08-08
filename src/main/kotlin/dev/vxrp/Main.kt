@@ -16,28 +16,10 @@
 
 package dev.vxrp
 
-import dev.vxrp.bot.Bot
-import dev.vxrp.configuration.ConfigurationManager
-import dev.vxrp.configuration.data.Config
-import dev.vxrp.updates.UpdateManager
-import io.github.freya022.botcommands.api.core.BotCommands
 import org.slf4j.LoggerFactory
 
 private val logger = LoggerFactory.getLogger("Main")
 
 fun main() {
-    logger.info("Starting up...")
-    val updateManager = UpdateManager()
-    updateManager.checkUpdated()
 
-    val config = Config.instance
-    val translation = ConfigurationManager.initializeTranslations(config)
-    ConfigurationManager.initializeDatabase(config)
-    ConfigurationManager.setLoggingLevel(config)
-
-    updateManager.spinUpChecker(config)
-
-    BotCommands.create {
-        addSearchPath("dev.vxrp.bot")
-    }
 }
