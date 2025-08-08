@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     application
     kotlin("jvm") version "2.2.0"
@@ -32,9 +34,13 @@ val kotlinxSerializationVersion = "1.8.1"
 val kamlVersion = "0.82.0"
 val jdaVersion = "5.6.1"
 val jdaKtxVersion = "0.12.0"
+val botCommandsVersion = "3.0.0-beta.3"
 val secretLabKotlinVersion = "0.4.3"
 val logbackVersion = "1.5.18"
+
 val gsonVersion = "2.13.1"
+
+val stacktraceDecoroutinatorVersion = "2.5.6"
 
 dependencies {
     // Default
@@ -63,12 +69,16 @@ dependencies {
     }
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("club.minnced:jda-ktx:$jdaKtxVersion")
+    implementation("io.github.freya022:BotCommands:$botCommandsVersion")
 
     // Api Wrapper
     implementation("io.github.vxrpenter:secretlab-kotlin:$secretLabKotlinVersion")
 
     // String and JSON tooling
     implementation("com.google.code.gson:gson:$gsonVersion")
+
+    // Stacktraces
+    implementation("dev.reformator.stacktracedecoroutinator:stacktrace-decoroutinator-jvm:$stacktraceDecoroutinatorVersion")
 }
 
 val createVersionProperties by tasks.registering(WriteProperties::class) {
@@ -82,5 +92,10 @@ val createVersionProperties by tasks.registering(WriteProperties::class) {
 
 tasks.classes {
     dependsOn(createVersionProperties)
+}
+
+tasks.withType<ShadowJar> {
+    mergeServiceFiles()
+    archiveFileName.set("SCP_Tools.jar")
 }
 
