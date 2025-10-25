@@ -35,9 +35,8 @@ val updaterVersion = "0.1.0-rc3"
 val jdaVersion = "5.6.1"
 val botCommandsVersion = "3.0.0-beta.3"
 val secretLabKotlinVersion = "0.4.3"
+val kotlinLoggingVersion = "7.0.3"
 val logbackVersion = "1.5.20"
-
-val gsonVersion = "2.13.1"
 
 val stacktraceDecoroutinatorVersion = "2.5.6"
 
@@ -66,14 +65,12 @@ dependencies {
     implementation("net.dv8tion:JDA:$jdaVersion") {
         exclude(module = "opus-java")
     }
+    implementation("io.github.oshai:kotlin-logging-jvm:$kotlinLoggingVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("io.github.freya022:BotCommands:$botCommandsVersion")
 
     // Api Wrapper
     implementation("io.github.vxrpenter:secretlab-kotlin:$secretLabKotlinVersion")
-
-    // String and JSON tooling
-    implementation("com.google.code.gson:gson:$gsonVersion")
 
     // Stacktraces
     implementation("dev.reformator.stacktracedecoroutinator:stacktrace-decoroutinator-jvm:$stacktraceDecoroutinatorVersion")
