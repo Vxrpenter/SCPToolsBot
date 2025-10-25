@@ -16,6 +16,8 @@
 
 package dev.vxrp.configuration
 
+import dev.vxrp.configlite.ConfigLite
+import dev.vxrp.translationName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -66,4 +68,10 @@ data class PlayerList(
     val active: Boolean,
     @SerialName("channel_ids")
     val channelId: List<String>
-)
+)  {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Translation>("status.yml")
+        }
+    }
+}

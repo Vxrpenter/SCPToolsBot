@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory
 
 private val logger = LoggerFactory.getLogger("Main")
 
+var translationName = "en_US.yml"
+
 fun main() {
 
 }

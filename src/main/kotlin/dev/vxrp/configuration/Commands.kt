@@ -16,6 +16,7 @@
 
 package dev.vxrp.configuration
 
+import dev.vxrp.configlite.ConfigLite
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -56,4 +57,10 @@ data class Options(
 data class Choices(
     val name: String,
     val id: String
-)
+)  {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Translation>("commands.json")
+        }
+    }
+}

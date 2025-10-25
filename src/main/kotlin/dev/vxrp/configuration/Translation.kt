@@ -16,6 +16,8 @@
 
 package dev.vxrp.configuration
 
+import dev.vxrp.configlite.ConfigLite
+import dev.vxrp.translationName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -973,4 +975,10 @@ data class TranslationSelectMenus(
     val textSupportNameApplication: String,
     @SerialName("TEXT_SUPPORT_DESCRIPTION_APPLICATION")
     val textSupportDescriptionApplication : String,
-)
+) {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Translation>(translationName)
+        }
+    }
+}

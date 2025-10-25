@@ -16,6 +16,8 @@
 
 package dev.vxrp.configuration
 
+import dev.vxrp.configlite.ConfigLite
+import dev.vxrp.translationName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -65,4 +67,10 @@ data class TicketChildRules(
     val useStatusBar: Boolean,
     @SerialName("lock_on_default")
     val lockOnDefault: Boolean
-)
+) {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Translation>("tickets.yml")
+        }
+    }
+}

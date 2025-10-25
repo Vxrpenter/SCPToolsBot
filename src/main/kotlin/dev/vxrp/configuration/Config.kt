@@ -16,6 +16,7 @@
 
 package dev.vxrp.configuration
 
+import dev.vxrp.configlite.ConfigLite
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -149,4 +150,10 @@ data class ConfigRegulars(
     val onlyLoad: Boolean,
     @SerialName("only_load_folders")
     val loadFolders: List<String>
-)
+)  {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Translation>("config.yml")
+        }
+    }
+}
