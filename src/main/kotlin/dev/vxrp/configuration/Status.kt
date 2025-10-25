@@ -51,7 +51,13 @@ data class Status(
     val idleCheckRate: Int,
 
     val instances: List<Instance>
-)
+)  {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Status>("status.yml")
+        }
+    }
+}
 
 @Serializable
 data class Instance(
@@ -68,10 +74,4 @@ data class PlayerList(
     val active: Boolean,
     @SerialName("channel_ids")
     val channelId: List<String>
-)  {
-    companion object {
-        val instance by lazy {
-            ConfigLite.load<Translation>("status.yml")
-        }
-    }
-}
+)

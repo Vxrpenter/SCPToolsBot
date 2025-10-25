@@ -25,7 +25,13 @@ data class Config(
     val status: Status,
     val ticket: Ticket,
     val extra: ConfigExtra
-)
+)  {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Config>("config.yml")
+        }
+    }
+}
 
 data class ConfigExtra(
     val commands: Commands
@@ -150,10 +156,4 @@ data class ConfigRegulars(
     val onlyLoad: Boolean,
     @SerialName("only_load_folders")
     val loadFolders: List<String>
-)  {
-    companion object {
-        val instance by lazy {
-            ConfigLite.load<Translation>("config.yml")
-        }
-    }
-}
+)

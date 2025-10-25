@@ -26,7 +26,14 @@ data class Ticket(
     val settings: TicketSettings,
     @SerialName("application_types")
     val applicationTypes: List<ApplicationTypes>,
-    val types: List<TicketTypes>)
+    val types: List<TicketTypes>
+) {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Ticket>("tickets.yml")
+        }
+    }
+}
 
 @Serializable
 data class TicketSettings(
@@ -67,10 +74,4 @@ data class TicketChildRules(
     val useStatusBar: Boolean,
     @SerialName("lock_on_default")
     val lockOnDefault: Boolean
-) {
-    companion object {
-        val instance by lazy {
-            ConfigLite.load<Translation>("tickets.yml")
-        }
-    }
-}
+)
