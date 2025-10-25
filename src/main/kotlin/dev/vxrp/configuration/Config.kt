@@ -16,8 +16,6 @@
 
 package dev.vxrp.configuration
 
-import dev.vxrp.configlite.ConfigLite
-
 data class Config(
     val settings: Settings,
     val status: Status,
