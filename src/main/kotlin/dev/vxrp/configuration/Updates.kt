@@ -17,15 +17,29 @@
 package dev.vxrp.configuration
 
 import dev.vxrp.configlite.ConfigLite
+import kotlinx.serialization.Serializable
 
-data class Config(
-    val settings: Settings,
-    val status: Status,
-    val ticket: Ticket,
-    val extra: ConfigExtra
-)
+@Serializable
+data class Updates(
+    val version: String,
+    val configurationUpdate: List<UpdatesConfigurationSegment>,
+    val translationUpdates: List<UpdatesConfigurationSegment>,
+    val regularsUpdate: List<UpdatesConfigurationSegment>,
+    val additionalInformation: String
+) {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Updates>("updates.json")
+        }
+    }
+}
 
-data class ConfigExtra(
-    val commands: Commands,
-    val updates: Updates
+@Serializable
+data class UpdatesConfigurationSegment(
+    val changed: Boolean,
+    val regenerate: Boolean,
+    val type: String,
+    val filename: String,
+    val location: String,
+    val upstream: String,
 )

@@ -17,7 +17,6 @@
 package dev.vxrp.configuration
 
 import dev.vxrp.configlite.ConfigLite
-import dev.vxrp.translationName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
