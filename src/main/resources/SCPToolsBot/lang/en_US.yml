@@ -764,8 +764,8 @@ NOTICE_OF_DEPARTURE:
                         ```%reason%```
                         "
 
-  EMBED_REVOKATION_SENT_TITLE: "Notice of Departure Revoked"
-  EMBED_REVOKATION_SENT_BODY: "Notice of Departure is now getting revoked. The user will be notified shortly, providing him with the reason you entered"
+  EMBED_REVOCATION_SENT_TITLE: "Notice of Departure Revoked"
+  EMBED_REVOCATION_SENT_BODY: "Notice of Departure is now getting revoked. The user will be notified shortly, providing him with the reason you entered"
 
 REGULARS:
 

@@ -764,8 +764,8 @@ NOTICE_OF_DEPARTURE:
                         __**Akzeptanz Grund:**__\n
                         ```%reason%```
                         "
-  EMBED_REVOKATION_SENT_TITLE: "Abmeldung Zurückgezogen"
-  EMBED_REVOKATION_SENT_BODY: "Die Abmeldung wird nun zurückgezogen. Der Nutzer wird in kürze darüber benachrichtigt wieso die Abmeldung zurückgezogen wurde"
+  EMBED_REVOCATION_SENT_TITLE: "Abmeldung Zurückgezogen"
+  EMBED_REVOCATION_SENT_BODY: "Die Abmeldung wird nun zurückgezogen. Der Nutzer wird in kürze darüber benachrichtigt wieso die Abmeldung zurückgezogen wurde"
 
 REGULARS:
 
