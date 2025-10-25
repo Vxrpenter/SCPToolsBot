@@ -30,13 +30,12 @@ val mySqlVersion = "9.3.0"
 val postgresSqlVersion = "42.7.7"
 val mariaDBVersion = "3.5.3"
 
-val kotlinxSerializationVersion = "1.8.1"
-val kamlVersion = "0.82.0"
+val configLiteVersion = "0.1.1"
+val updaterVersion = "0.1.0-rc3"
 val jdaVersion = "5.6.1"
-val jdaKtxVersion = "0.12.0"
 val botCommandsVersion = "3.0.0-beta.3"
 val secretLabKotlinVersion = "0.4.3"
-val logbackVersion = "1.5.18"
+val logbackVersion = "1.5.20"
 
 val gsonVersion = "2.13.1"
 
@@ -59,16 +58,15 @@ dependencies {
     implementation("org.postgresql:postgresql:$postgresSqlVersion")
     implementation("org.mariadb.jdbc:mariadb-java-client:$mariaDBVersion")
 
-    // Config and Serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
-    implementation("com.charleskorn.kaml:kaml:$kamlVersion")
+    // Config and Updates
+    implementation("io.github.vxrpenter:config-lite:$configLiteVersion")
+    implementation("io.github.vxrpenter:updater:$updaterVersion")
 
     // Discord api implementation + Logback
     implementation("net.dv8tion:JDA:$jdaVersion") {
         exclude(module = "opus-java")
     }
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
-    implementation("club.minnced:jda-ktx:$jdaKtxVersion")
     implementation("io.github.freya022:BotCommands:$botCommandsVersion")
 
     // Api Wrapper
