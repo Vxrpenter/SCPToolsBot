@@ -8,10 +8,9 @@ plugins {
     id("io.gitlab.arturbosch.detekt").version("1.23.7")
 }
 
-
 application.mainClass = "dev.vxrp.MainKt"
 group = "dev.vxrp"
-version= "1.1.1"
+version= "2.0.0"
 
 kotlin {
     jvmToolchain(22)
@@ -78,7 +77,7 @@ dependencies {
 
 val createVersionProperties by tasks.registering(WriteProperties::class) {
     val filePath = sourceSets.main.map {
-        it.output.resourcesDir!!.resolve("dev/vxrp/version.properties")
+        it.output.resourcesDir!!.resolve("dev/vxrp/resources/version.properties")
     }
     destinationFile = filePath
 
@@ -93,4 +92,3 @@ tasks.withType<ShadowJar> {
     mergeServiceFiles()
     archiveFileName.set("SCP_Tools.jar")
 }
-

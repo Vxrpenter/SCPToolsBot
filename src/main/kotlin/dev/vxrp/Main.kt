@@ -16,6 +16,7 @@
 
 package dev.vxrp
 
+import dev.reformator.stacktracedecoroutinator.jvm.DecoroutinatorJvmApi
 import dev.vxrp.configlite.ConfigLite
 import dev.vxrp.configuration.Commands
 import dev.vxrp.configuration.Config
@@ -25,15 +26,21 @@ import dev.vxrp.configuration.Status
 import dev.vxrp.configuration.Ticket
 import dev.vxrp.configuration.Translation
 import dev.vxrp.configuration.Updates
+import dev.vxrp.updates.UpdateManager
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.slf4j.LoggerFactory
+import java.lang.management.ManagementFactory
 
-private val logger = LoggerFactory.getLogger("Main")
+private val logger = KotlinLogging.logger {}
 
 var config: Config? = null
+var translation: Translation? = null
 var loadTranslation = "en_US.yml"
 
 fun main() {
+    decoroutinator()
     registerConfigurations()
+    UpdateManager.checkUpdated()
 }
 
 private fun registerConfigurations() {
@@ -56,4 +63,20 @@ private fun registerConfigurations() {
     ConfigLite.register(workingDirectory, "/SCPToolsBot/configs/extra", "updates.json")
 
     config = Config(settings = settings, status = Status.instance!!, ticket = Ticket.instance!!, ConfigExtra(commands = Commands.instance!!, updates = Updates.instance!!))
+    translation = Translation.instance
+}
+
+private fun decoroutinator() {
+    val logger = KotlinLogging.logger {}
+    val args = ManagementFactory.getRuntimeMXBean().inputArguments
+
+    if ("-XX:+EnableDynamicAgentLoading" !in args) logger.warn { "This project uses a serviceability tool, please use '-XX:+EnableDynamicAgentLoading' on startup" }
+
+    if ("-XX:+AllowEnhancedClassRedefinition" in args) {
+        logger.info { "Skipping stacktrace-decoroutinator as enhanced hotswap is active" }
+    } else if ("--no-decoroutinator" in args) {
+        logger.info { "Skipping stacktrace-decoroutinator as --no-decoroutinator is specified" }
+    } else {
+        DecoroutinatorJvmApi.install()
+    }
 }
