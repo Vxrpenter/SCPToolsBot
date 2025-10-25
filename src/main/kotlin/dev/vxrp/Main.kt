@@ -28,7 +28,6 @@ import dev.vxrp.configuration.Translation
 import dev.vxrp.configuration.Updates
 import dev.vxrp.updates.UpdateManager
 import io.github.oshai.kotlinlogging.KotlinLogging
-import org.slf4j.LoggerFactory
 import java.lang.management.ManagementFactory
 
 private val logger = KotlinLogging.logger {}
@@ -39,6 +38,7 @@ var loadTranslation = "en_US.yml"
 
 fun main() {
     decoroutinator()
+    logger.info { "Registering configuration files" }
     registerConfigurations()
     UpdateManager.checkUpdated()
 }

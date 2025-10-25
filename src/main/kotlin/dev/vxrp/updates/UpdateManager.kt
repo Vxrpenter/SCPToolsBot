@@ -16,7 +16,6 @@
 
 package dev.vxrp.updates
 
-import io.github.oshai.kotlinlogging.KotlinLogging
 import io.github.vxrpenter.updater.Updater
 import io.github.vxrpenter.updater.priority.Priority.Companion.priority
 import io.github.vxrpenter.updater.schema.Schema
