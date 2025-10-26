@@ -17,6 +17,7 @@
 package dev.vxrp
 
 import dev.reformator.stacktracedecoroutinator.jvm.DecoroutinatorJvmApi
+import dev.vxrp.bot.Bot
 import dev.vxrp.configlite.ConfigLite
 import dev.vxrp.configuration.Commands
 import dev.vxrp.configuration.Config
@@ -29,6 +30,7 @@ import dev.vxrp.configuration.Updates
 import dev.vxrp.updates.UpdateManager
 import io.github.oshai.kotlinlogging.KotlinLogging
 import java.lang.management.ManagementFactory
+import kotlin.system.exitProcess
 
 private val logger = KotlinLogging.logger {}
 
@@ -41,6 +43,8 @@ fun main() {
     logger.info { "Registering configuration files" }
     registerConfigurations()
     UpdateManager.checkUpdated()
+
+    Bot(config!!, translation!!)
 }
 
 private fun registerConfigurations() {

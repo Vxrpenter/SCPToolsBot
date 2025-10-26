@@ -31,7 +31,8 @@ val mariaDBVersion = "3.5.3"
 
 val configLiteVersion = "0.1.1"
 val updaterVersion = "0.1.0-rc3"
-val jdaVersion = "5.6.1"
+val jdaVersion = "6.1.0"
+val jdaKtxVersion = "0.12.0"
 val secretLabKotlinVersion = "0.4.3"
 val kotlinLoggingVersion = "7.0.3"
 val logbackVersion = "1.5.20"
@@ -63,6 +64,7 @@ dependencies {
     implementation("net.dv8tion:JDA:$jdaVersion") {
         exclude(module = "opus-java")
     }
+    implementation("club.minnced:jda-ktx:$jdaKtxVersion")
     implementation("io.github.oshai:kotlin-logging-jvm:$kotlinLoggingVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
 
