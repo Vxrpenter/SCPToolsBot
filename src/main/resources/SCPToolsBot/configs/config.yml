@@ -27,6 +27,8 @@ advanced_debug: false
 
 # Settings for the update checker
 updates:
+  # Activate to ignore all versions that contain the rc tag
+  ignore_rc: false
   # Activate to ignore all versions that contain the beta tag
   ignore_beta: false
   # Activate to ignore all versions that contain the alpha tag

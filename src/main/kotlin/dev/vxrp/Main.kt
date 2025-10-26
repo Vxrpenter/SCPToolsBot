@@ -40,7 +40,7 @@ fun main() {
     val translation = Translation.instance!!
 
     // Check updates
-    UpdateManager.checkUpdated()
+    UpdateManager(config).checkUpdated()
 
     // Starting up the main bot
     val api = Bot(config, translation).api
@@ -50,6 +50,8 @@ fun main() {
     // Starting up the status bots
     if (config.status.active) {
         val apiList = StatusBot(config, translation).apiList!!
+
+
     }
 }
 

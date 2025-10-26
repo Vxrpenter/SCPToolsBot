@@ -50,6 +50,8 @@ data class Settings(
 
 @Serializable
 data class ConfigUpdates(
+    @SerialName("ignore_rc")
+    val ignoreRc: Boolean,
     @SerialName("ignore_beta")
     val ignoreBeta: Boolean,
     @SerialName("ignore_alpha")

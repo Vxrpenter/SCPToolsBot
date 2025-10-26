@@ -16,6 +16,7 @@
 
 package dev.vxrp.updates
 
+import dev.vxrp.configuration.Config
 import io.github.vxrpenter.updater.Updater
 import io.github.vxrpenter.updater.priority.Priority.Companion.priority
 import io.github.vxrpenter.updater.schema.Schema
@@ -25,14 +26,14 @@ import java.nio.charset.StandardCharsets
 import java.util.Properties
 import kotlin.time.Duration.Companion.minutes
 
-object UpdateManager {
+class UpdateManager(private val config: Config) {
     fun checkUpdated() {
         val schema = Schema {
             prefixes = listOf("v", "v.")
             divider = "."
-            classifier { value = "alpha"; divider = "-"; componentDivider = "."; priority = 1.priority }
-            classifier { value = "beta"; divider = "-"; componentDivider = "."; priority = 2.priority }
-            classifier { value = "rc"; divider = "-"; componentDivider = "."; priority = 3.priority }
+            classifier { value = "alpha"; divider = "-"; componentDivider = "."; priority = 1.priority; ignore = config.settings.updates.ignoreAlpha }
+            classifier { value = "beta"; divider = "-"; componentDivider = "."; priority = 2.priority; ignore = config.settings.updates.ignoreBeta }
+            classifier { value = "rc"; divider = "-"; componentDivider = "."; priority = 3.priority; ignore = config.settings.updates.ignoreRc }
         }
 
         Updater.checkUpdates(currentVersion = getVersion(), schema = schema, upstream = GitHubUpstream("Vxrpenter", "SCPToolsBot")) {
