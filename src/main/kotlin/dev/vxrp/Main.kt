@@ -17,57 +17,40 @@
 package dev.vxrp
 
 import dev.reformator.stacktracedecoroutinator.jvm.DecoroutinatorJvmApi
-import dev.vxrp.bot.Bot
-import dev.vxrp.configlite.ConfigLite
-import dev.vxrp.configuration.Commands
+import dev.vxrp.bot.main.Bot
+import dev.vxrp.bot.status.StatusBot
 import dev.vxrp.configuration.Config
-import dev.vxrp.configuration.ConfigExtra
-import dev.vxrp.configuration.Settings
-import dev.vxrp.configuration.Status
-import dev.vxrp.configuration.Ticket
 import dev.vxrp.configuration.Translation
-import dev.vxrp.configuration.Updates
 import dev.vxrp.updates.UpdateManager
 import io.github.oshai.kotlinlogging.KotlinLogging
 import java.lang.management.ManagementFactory
 import kotlin.system.exitProcess
 
 private val logger = KotlinLogging.logger {}
-
-var config: Config? = null
-var translation: Translation? = null
 var loadTranslation = "en_US.yml"
 
 fun main() {
     decoroutinator()
+
+    // Configuration and Translation
     logger.info { "Registering configuration files" }
-    registerConfigurations()
+    val config = Config.instance
+
+    logger.info { "Registering translation files" }
+    val translation = Translation.instance!!
+
+    // Check updates
     UpdateManager.checkUpdated()
 
-    Bot(config!!, translation!!)
-}
+    // Starting up the main bot
+    val api = Bot(config, translation).api
+    api ?: exitProcess(1)
+    api.awaitReady()
 
-private fun registerConfigurations() {
-    val workingDirectory = System.getProperty("user.dir")
-
-    // Register the main configuration file
-    ConfigLite.register(workingDirectory, "/SCPToolsBot/configs", "config.yml")
-    val settings = Settings.instance
-    settings ?: throw NullPointerException("Could not load config.yml, returned null")
-    loadTranslation = "${settings.loadTranslation}.yml"
-
-    // Register translation
-    ConfigLite.register(workingDirectory, "/SCPToolsBot/lang", "en_US.yml")
-    ConfigLite.register(workingDirectory, "/SCPToolsBot/lang", "de_DE.yml")
-
-    // Register remaining configs
-    ConfigLite.register(workingDirectory, "/SCPToolsBot/configs", "status.yml")
-    ConfigLite.register(workingDirectory, "/SCPToolsBot/configs", "tickets.yml")
-    ConfigLite.register(workingDirectory, "/SCPToolsBot/configs/extra", "commands.json")
-    ConfigLite.register(workingDirectory, "/SCPToolsBot/configs/extra", "updates.json")
-
-    config = Config(settings = settings, status = Status.instance!!, ticket = Ticket.instance!!, ConfigExtra(commands = Commands.instance!!, updates = Updates.instance!!))
-    translation = Translation.instance
+    // Starting up the status bots
+    if (config.status.active) {
+        val apiList = StatusBot(config, translation).apiList!!
+    }
 }
 
 private fun decoroutinator() {

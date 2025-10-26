@@ -14,19 +14,27 @@
  * Note: This is no legal advice, please read the license conditions
  */
 
-package dev.vxrp.bot
+package dev.vxrp.bot.main
 
 import dev.minn.jda.ktx.jdabuilder.intents
 import dev.minn.jda.ktx.jdabuilder.light
+import dev.vxrp.bot.main.events.ButtonListener
+import dev.vxrp.bot.main.events.CommandListener
+import dev.vxrp.bot.main.events.EntitySelectListener
+import dev.vxrp.bot.main.events.ModalListener
+import dev.vxrp.bot.main.events.StringSelectListener
 import dev.vxrp.configuration.Config
 import dev.vxrp.configuration.Translation
+import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
 
 class Bot(private val config: Config, private val translation: Translation) {
+    var api: JDA? = null
+
     init {
-        val bot = light(config.settings.token, enableCoroutines = true) {
+        val api = light(config.settings.token, enableCoroutines = true) {
             // Set intents and disable flags
             intents += listOf(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
             disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
@@ -35,9 +43,19 @@ class Bot(private val config: Config, private val translation: Translation) {
             setActivity(Activity.of(Activity.ActivityType.PLAYING.takeIf {
                 !enumContains<Activity.ActivityType>(config.settings.activityType)
             } ?: Activity.ActivityType.valueOf(config.settings.activityType), config.settings.activityContent))
-
-            // Activating the listeners
         }
+
+
+        // Adding the event listeners
+        api.addEventListener(
+            ButtonListener(api, config, translation),
+            CommandListener(api, config, translation),
+            EntitySelectListener(api, config, translation),
+            ModalListener(api, config, translation),
+            StringSelectListener(api, config, translation)
+        )
+
+        this.api = api
     }
 
     private inline fun <reified T : Enum<T>> enumContains(name: String): Boolean = enumValues<T>().any { it.name == name }
