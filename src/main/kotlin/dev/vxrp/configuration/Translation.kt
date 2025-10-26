@@ -49,13 +49,7 @@ data class Translation(
     val buttons: TranslationButtons,
     @SerialName("SELECT_MENUS")
     val selectMenus: TranslationSelectMenus
-) {
-    companion object {
-        val instance by lazy {
-            ConfigLite.load<Translation>(loadTranslation)
-        }
-    }
-}
+) { companion object { val instance by lazy { ConfigLite.load<Translation>(loadTranslation) } } }
 
 @Serializable
 data class TranslationPermissions(

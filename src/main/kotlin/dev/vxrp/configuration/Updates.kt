@@ -26,13 +26,7 @@ data class Updates(
     val translationUpdates: List<UpdatesConfigurationSegment>,
     val regularsUpdate: List<UpdatesConfigurationSegment>,
     val additionalInformation: String
-) {
-    companion object {
-        val instance by lazy {
-            ConfigLite.load<Updates>("updates.json")
-        }
-    }
-}
+) { companion object { val instance by lazy { ConfigLite.load<Updates>("updates.json") } } }
 
 @Serializable
 data class UpdatesConfigurationSegment(

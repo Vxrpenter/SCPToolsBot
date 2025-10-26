@@ -23,13 +23,7 @@ import kotlinx.serialization.Serializable
 data class Commands(
     val commands: List<CustomCommand>,
     val statusCommands: List<CustomCommand>,
-)  {
-    companion object {
-        val instance by lazy {
-            ConfigLite.load<Commands>("commands.json")
-        }
-    }
-}
+)  { companion object { val instance by lazy { ConfigLite.load<Commands>("commands.json") } } }
 
 @Serializable
 data class CustomCommand(

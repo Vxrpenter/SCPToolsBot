@@ -50,13 +50,7 @@ data class Status(
     val idleCheckRate: Int,
 
     val instances: List<Instance>
-)  {
-    companion object {
-        val instance by lazy {
-            ConfigLite.load<Status>("status.yml")
-        }
-    }
-}
+)  { companion object { val instance by lazy { ConfigLite.load<Status>("status.yml") } } }
 
 @Serializable
 data class Instance(

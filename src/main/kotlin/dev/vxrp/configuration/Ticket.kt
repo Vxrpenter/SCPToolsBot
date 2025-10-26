@@ -26,13 +26,7 @@ data class Ticket(
     @SerialName("application_types")
     val applicationTypes: List<ApplicationTypes>,
     val types: List<TicketTypes>
-) {
-    companion object {
-        val instance by lazy {
-            ConfigLite.load<Ticket>("tickets.yml")
-        }
-    }
-}
+) { companion object { val instance by lazy { ConfigLite.load<Ticket>("tickets.yml") } } }
 
 @Serializable
 data class TicketSettings(

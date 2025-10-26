@@ -46,13 +46,7 @@ data class Settings(
     @SerialName("notice_of_departure")
     val noticeOfDeparture: ConfigNoticeOfDeparture,
     val regulars: ConfigRegulars
-) {
-    companion object {
-        val instance by lazy {
-            ConfigLite.load<Settings>("config.yml")
-        }
-    }
-}
+) { companion object { val instance by lazy { ConfigLite.load<Settings>("config.yml") } } }
 
 @Serializable
 data class ConfigUpdates(
