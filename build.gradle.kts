@@ -32,7 +32,6 @@ val mariaDBVersion = "3.5.3"
 val configLiteVersion = "0.1.1"
 val updaterVersion = "0.1.0-rc3"
 val jdaVersion = "5.6.1"
-val botCommandsVersion = "3.0.0-beta.3"
 val secretLabKotlinVersion = "0.4.3"
 val kotlinLoggingVersion = "7.0.3"
 val logbackVersion = "1.5.20"
@@ -66,7 +65,6 @@ dependencies {
     }
     implementation("io.github.oshai:kotlin-logging-jvm:$kotlinLoggingVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
-    implementation("io.github.freya022:BotCommands:$botCommandsVersion")
 
     // Api Wrapper
     implementation("io.github.vxrpenter:secretlab-kotlin:$secretLabKotlinVersion")
