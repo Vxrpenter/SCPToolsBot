@@ -18,6 +18,7 @@ package dev.vxrp.bot.main
 
 import dev.minn.jda.ktx.jdabuilder.intents
 import dev.minn.jda.ktx.jdabuilder.light
+import dev.vxrp.bot.main.commands.Commands
 import dev.vxrp.bot.main.events.ButtonListener
 import dev.vxrp.bot.main.events.CommandListener
 import dev.vxrp.bot.main.events.EntitySelectListener
@@ -45,7 +46,6 @@ class Bot(private val config: Config, private val translation: Translation) {
             } ?: Activity.ActivityType.valueOf(config.settings.activityType), config.settings.activityContent))
         }
 
-
         // Adding the event listeners
         api.addEventListener(
             ButtonListener(api, config, translation),
@@ -55,6 +55,8 @@ class Bot(private val config: Config, private val translation: Translation) {
             StringSelectListener(api, config, translation)
         )
 
+        // Adding commands
+        Commands.initializeCommands(api)
         this.api = api
     }
 

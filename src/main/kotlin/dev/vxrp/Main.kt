@@ -16,6 +16,8 @@
 
 package dev.vxrp
 
+import dev.minn.jda.ktx.interactions.commands.slash
+import dev.minn.jda.ktx.interactions.commands.updateCommands
 import dev.reformator.stacktracedecoroutinator.jvm.DecoroutinatorJvmApi
 import dev.vxrp.bot.main.Bot
 import dev.vxrp.bot.status.StatusBot
