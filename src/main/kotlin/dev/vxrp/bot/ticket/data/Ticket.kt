@@ -16,6 +16,8 @@
 
 package dev.vxrp.bot.ticket.data
 
+import dev.vxrp.configlite.ConfigLite
+import dev.vxrp.configuration.storage.ConfigPaths
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -24,7 +26,15 @@ data class Ticket(
     val settings: TicketSettings,
     @SerialName("application_types")
     val applicationTypes: List<ApplicationTypes>,
-    val types: List<TicketTypes>)
+    val types: List<TicketTypes>
+) {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Ticket>(ConfigPaths().ticketPath.fileName.toString())
+        }
+
+    }
+}
 
 @Serializable
 data class TicketSettings(

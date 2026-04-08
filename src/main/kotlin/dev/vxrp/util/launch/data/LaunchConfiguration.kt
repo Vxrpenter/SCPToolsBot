@@ -16,13 +16,22 @@
 
 package dev.vxrp.util.launch.data
 
+import dev.vxrp.configlite.ConfigLite
+import dev.vxrp.configuration.storage.ConfigPaths
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class LaunchConfiguration(
     val options: LaunchConfigurationOptions,
     val order: List<LaunchConfigurationOrder>,
-)
+) {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<LaunchConfiguration>(ConfigPaths().launchConfigurationPath.fileName.toString())
+        }
+
+    }
+}
 
 @Serializable
 data class LaunchConfigurationOptions(

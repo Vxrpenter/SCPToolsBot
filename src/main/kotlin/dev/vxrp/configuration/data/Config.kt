@@ -19,6 +19,8 @@ package dev.vxrp.configuration.data
 import dev.vxrp.bot.commands.data.CommandList
 import dev.vxrp.bot.status.data.Status
 import dev.vxrp.bot.ticket.data.Ticket
+import dev.vxrp.configlite.ConfigLite
+import dev.vxrp.configuration.storage.ConfigPaths
 import dev.vxrp.util.launch.data.LaunchConfiguration
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -61,7 +63,14 @@ data class Settings(
     @SerialName("notice_of_departure")
     val noticeOfDeparture: ConfigNoticeOfDeparture,
     val regulars: ConfigRegulars
-)
+) {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Settings>(ConfigPaths().configPath.fileName.toString())
+        }
+        
+    }
+}
 
 @Serializable
 data class ConfigUpdates(

@@ -18,12 +18,19 @@ package dev.vxrp.configuration
 
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.LoggerContext
+import dev.vxrp.bot.commands.data.CommandList
+import dev.vxrp.bot.status.data.Status
+import dev.vxrp.bot.ticket.data.Ticket
+import dev.vxrp.configlite.ConfigLite
 import dev.vxrp.configuration.data.Config
+import dev.vxrp.configuration.data.ConfigExtra
+import dev.vxrp.configuration.data.Settings
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.configuration.handler.ConfigFileHandler
 import dev.vxrp.configuration.handler.TranslationFileHandler
 import dev.vxrp.configuration.storage.ConfigPaths
 import dev.vxrp.database.DatabaseManager
+import dev.vxrp.util.launch.data.LaunchConfiguration
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
@@ -36,8 +43,13 @@ class ConfigurationManager {
     private val workDir = System.getProperty("user.dir")
 
     fun initializeConfigs(): Config  {
-        createConfigurations(configFileHandler, workDir)
-        return configFileHandler.query(dir = workDir, configPath = ConfigPaths().configPath, statusPath = ConfigPaths().statusPath, ticketPath = ConfigPaths().ticketPath, commandsPath = ConfigPaths().commandsPath, launchConfigurationPath= ConfigPaths().launchConfigurationPath)
+        ConfigLite.register(workDir, ConfigPaths().configPath.parent.toString(), ConfigPaths().configPath.fileName.toString())
+        ConfigLite.register(workDir, ConfigPaths().ticketPath.parent.toString(), ConfigPaths().ticketPath.fileName.toString())
+        ConfigLite.register(workDir, ConfigPaths().statusPath.parent.toString(), ConfigPaths().statusPath.fileName.toString())
+        ConfigLite.register(workDir, ConfigPaths().commandsPath.parent.toString(), ConfigPaths().commandsPath.fileName.toString())
+        ConfigLite.register(workDir, ConfigPaths().launchConfigurationPath.parent.toString(), ConfigPaths().launchConfigurationPath.fileName.toString())
+
+        return Config(Settings.instance!!, Status.instance!!, Ticket.instance!!, ConfigExtra(CommandList.instance!!, LaunchConfiguration.instance!!))
     }
 
     fun initializeTranslations(config: Config): Translation {
@@ -64,17 +76,6 @@ class ConfigurationManager {
         val loggerContext = LoggerFactory.getILoggerFactory() as LoggerContext
         val log = loggerContext.exists(Logger.ROOT_LOGGER_NAME)
         log.level = level
-    }
-
-    private fun createConfigurations(configFileHandler: ConfigFileHandler, dir: String) {
-        val configs = ArrayList<Path>()
-        configs.add(ConfigPaths().configPath)
-        configs.add(ConfigPaths().ticketPath)
-        configs.add(ConfigPaths().statusPath)
-        configs.add(ConfigPaths().commandsPath)
-        configs.add(ConfigPaths().launchConfigurationPath)
-
-        configFileHandler.create(dir, configs)
     }
 
     private fun createTranslations(translationFileHandler: TranslationFileHandler) {

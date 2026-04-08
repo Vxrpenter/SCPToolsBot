@@ -16,13 +16,22 @@
 
 package dev.vxrp.bot.commands.data
 
+import dev.vxrp.configlite.ConfigLite
+import dev.vxrp.configuration.storage.ConfigPaths
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class CommandList(
     val commands: List<CustomCommand>,
     val statusCommands: List<CustomCommand>,
-)
+) {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<CommandList>(ConfigPaths().commandsPath.fileName.toString())
+        }
+
+    }
+}
 
 @Serializable
 data class CustomCommand(

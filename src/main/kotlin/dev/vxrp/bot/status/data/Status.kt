@@ -16,6 +16,8 @@
 
 package dev.vxrp.bot.status.data
 
+import dev.vxrp.configlite.ConfigLite
+import dev.vxrp.configuration.storage.ConfigPaths
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -49,7 +51,14 @@ data class Status(
     val idleCheckRate: Int,
 
     val instances: List<Instance>
-)
+) {
+    companion object {
+        val instance by lazy {
+            ConfigLite.load<Status>(ConfigPaths().statusPath.fileName.toString())
+        }
+
+    }
+}
 
 @Serializable
 data class Instance(
