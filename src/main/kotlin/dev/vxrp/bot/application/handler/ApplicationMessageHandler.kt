@@ -131,11 +131,11 @@ class ApplicationMessageHandler(val config: Config, val translation: Translation
     private fun createRoleString(useBaseValue: Boolean): StringBuilder {
         val applicationTypeList: MutableList<ApplicationType> = mutableListOf()
 
-        if (useBaseValue && ApplicationTypeTable().getAllEntrys() != null) {
+        if (useBaseValue && ApplicationTypeTable().getAllEntries() != null) {
             val baseTypes = createStringBaseValue(applicationTypeList)
             applicationTypeSet = baseTypes.toHashSet()
 
-            for (type in ApplicationTypeTable().getAllEntrys()!!) {
+            for (type in ApplicationTypeTable().getAllEntries()!!) {
                 baseTypes.filter { it.roleId == type.roleId }.forEach { ApplicationManager(config, translation).changeApplicationType(type.roleId, it.name, it.description, it.emoji, type.active, type.initializer, type.members) }
             }
         }

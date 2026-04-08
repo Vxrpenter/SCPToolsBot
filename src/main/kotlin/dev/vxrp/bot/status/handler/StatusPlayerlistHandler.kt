@@ -58,7 +58,7 @@ class StatusPlayerlistHandler(val config: Config, val translation: Translation) 
     }
 
     private fun updateMessage(api: JDA, port: MutableMap.MutableEntry<Int, Server?>) {
-        for (entry in StatusTable().getAllEntrys()) {
+        for (entry in StatusTable().getAllEntries()) {
 
             val embeds = mutableListOf<MessageEmbed>()
             statusMappedServers[port.key]?.let { _ ->

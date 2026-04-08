@@ -16,7 +16,7 @@
 
 package dev.vxrp.database.tables.xp
 
-import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.v1.core.Table
 
 class PlayerInfoTable {
     object PlayerInfoSteam : Table("playerinfo_Steam") {

@@ -19,22 +19,24 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "3.2.3"
+val ktorVersion = "3.4.2"
 val kotlinxCoroutinesVersion = "1.10.2"
 
-val exposedVersion = "0.61.0"
-val sqliteVersion = "3.50.3.0"
-val mySqlVersion = "9.4.0"
-val postgresSqlVersion = "42.7.7"
-val mariaDBVersion = "3.5.4"
+val exposedVersion = "1.2.0"
+val sqliteVersion = "3.51.3.0"
+val mySqlVersion = "9.6.0"
+val postgresSqlVersion = "42.7.10"
+val mariaDBVersion = "3.5.8"
 
-val kotlinxSerializationVersion = "1.9.0"
-val kamlVersion = "0.85.0"
+val kotlinxSerializationVersion = "1.10.0"
+val kamlVersion = "0.104.0"
 val jdaVersion = "5.6.1"
 val jdaKtxVersion = "0.12.0"
 val secretLabKotlinVersion = "0.4.3"
-val logbackVersion = "1.5.18"
-val gsonVersion = "2.13.1"
+val updaterVersion = "0.1.0"
+val configLiteVersion = "0.1.1"
+val logbackVersion = "1.5.32"
+val gsonVersion = "2.13.2"
 
 dependencies {
     // Default
@@ -54,6 +56,7 @@ dependencies {
     implementation("org.mariadb.jdbc:mariadb-java-client:$mariaDBVersion")
 
     // Config and Serialization
+    implementation("io.github.vxrpenter:config-lite:$configLiteVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
     implementation("com.charleskorn.kaml:kaml:$kamlVersion")
 
@@ -65,6 +68,7 @@ dependencies {
     implementation("club.minnced:jda-ktx:$jdaKtxVersion")
 
     // Api Wrapper
+    implementation("io.github.vxrpenter:updater:$updaterVersion")
     implementation("io.github.vxrpenter:secretlab-kotlin:$secretLabKotlinVersion")
 
     // String and JSON tooling

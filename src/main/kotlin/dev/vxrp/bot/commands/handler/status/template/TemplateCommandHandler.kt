@@ -28,8 +28,8 @@ import dev.vxrp.util.color.ColorTool
 import dev.vxrp.util.statusMappedBots
 import dev.vxrp.util.statusMappedServers
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import org.jetbrains.exposed.v1.jdbc.insert
 import java.time.LocalDate
 
 class TemplateCommandHandler(val config: Config, val translation: Translation) {
