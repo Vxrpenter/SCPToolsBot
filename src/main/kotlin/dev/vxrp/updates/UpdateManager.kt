@@ -19,15 +19,16 @@ package dev.vxrp.updates
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.updates.handler.UpdateHandler
 import dev.vxrp.updates.handler.UpdatesFileHandler
-import dev.vxrp.util.coroutines.Timer
-import dev.vxrp.util.coroutines.updatesScope
-import dev.vxrp.util.upstreamVersion
-import org.slf4j.LoggerFactory
+import io.github.vxrpenter.updater.Updater
+import io.github.vxrpenter.updater.priority.Priority.Companion.priority
+import io.github.vxrpenter.updater.schema.builder.Schema
+import io.github.vxrpenter.updater.upstream.GitHubUpstream
+import java.io.InputStreamReader
+import java.nio.charset.StandardCharsets
+import java.util.*
 import kotlin.time.Duration.Companion.hours
 
-class UpdateManager() {
-    private val logger = LoggerFactory.getLogger(UpdateManager::class.java)
-
+class UpdateManager {
     fun checkUpdated() {
         val dir = System.getProperty("user.dir")
         val fileHandler = UpdatesFileHandler()
@@ -44,11 +45,26 @@ class UpdateManager() {
     }
 
     fun spinUpChecker(config: Config) {
-        Timer().runWithTimer(1.hours, updatesScope) {
-            try {
-                upstreamVersion = UpdateHandler().checkForUpdatesByTag(config, "https://api.github.com/repos/Vxrpenter/SCPToolsBot/git/refs/tags")
-            } catch (_: Exception) {
-                logger.error("Could not proceed with update check correctly")
+        val schema = Schema {
+            prefixes = listOf("v", "v."); divider = "."
+            classifier { value = "alpha"; divider = "-"; componentDivider = "."; priority = 1.priority; ignore = config.settings.updates.ignoreBeta }
+            classifier { value = "beta"; divider = "-"; componentDivider = "."; priority = 2.priority; ignore = config.settings.updates.ignoreAlpha  }
+            //classifier { value = "rc"; divider = "-"; componentDivider = "."; priority = 3.priority; ignore = config.settings.updates.ignoreRc  }
+        }
+
+        val properties = Properties()
+        UpdateManager::class.java.getResourceAsStream("/dev/vxrp/version.properties").use {
+                versionPropertiesStream -> checkNotNull(versionPropertiesStream) { "Version properties file does not exist" }
+            properties.load(InputStreamReader(versionPropertiesStream, StandardCharsets.UTF_8))
+        }
+        val version = properties.getProperty("version")
+
+        val upstream = GitHubUpstream(user = "Vxrpenter", repo = "SCPToolsBot")
+        Updater.checkUpdates(currentVersion = version, schema = schema, upstream = upstream) {
+            periodic = 1.hours
+            notification {
+                notify = true
+                message = "A new version has been found, you can download Version {version} here {url}"
             }
         }
     }

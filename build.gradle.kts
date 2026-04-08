@@ -1,15 +1,14 @@
 plugins {
     application
-    kotlin("jvm") version "2.2.0"
-    kotlin("plugin.serialization") version "2.2.0"
-    id("com.gradleup.shadow") version("8.3.3")
-    id("io.gitlab.arturbosch.detekt").version("1.23.7")
+    kotlin("jvm") version "2.3.10"
+    kotlin("plugin.serialization") version "2.3.20"
+    id("com.gradleup.shadow") version("9.4.1")
+    id("io.gitlab.arturbosch.detekt").version("1.23.8")
 }
-
 
 application.mainClass = "dev.vxrp.MainKt"
 group = "dev.vxrp"
-version= "1.1.1"
+version= "1.1.0"
 
 kotlin {
     jvmToolchain(22)
@@ -33,7 +32,7 @@ val kamlVersion = "0.104.0"
 val jdaVersion = "5.6.1"
 val jdaKtxVersion = "0.12.0"
 val secretLabKotlinVersion = "0.4.3"
-val updaterVersion = "0.1.0"
+val updaterVersion = "0.1.1"
 val configLiteVersion = "0.1.1"
 val logbackVersion = "1.5.32"
 val gsonVersion = "2.13.2"
