@@ -27,7 +27,7 @@ val mySqlVersion = "9.6.0"
 val postgresSqlVersion = "42.7.10"
 val mariaDBVersion = "3.5.8"
 
-val kotlinxSerializationVersion = "1.10.0"
+val kotlinxSerializationVersion = "1.11.0"
 val kamlVersion = "0.104.0"
 val jdaVersion = "5.6.1"
 val jdaKtxVersion = "0.12.0"
