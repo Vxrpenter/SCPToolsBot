@@ -21,7 +21,7 @@ import dev.vxrp.updates.data.UpdatesConfigurationSegment
 import org.slf4j.LoggerFactory
 import kotlin.io.path.Path
 
-class UpdateHandler() {
+class UpdateHandler {
     private val logger = LoggerFactory.getLogger(UpdateHandler::class.java)
     private val dir = System.getProperty("user.dir")
 

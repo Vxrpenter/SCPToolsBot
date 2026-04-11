@@ -30,8 +30,6 @@ import dev.vxrp.database.tables.database.ConnectionTable
 import dev.vxrp.util.coroutines.Timer
 import dev.vxrp.util.coroutines.defaultStatusScope
 import dev.vxrp.util.coroutines.statusbotScope
-import dev.vxrp.util.launch.LaunchOptionManager
-import dev.vxrp.util.launch.enums.LaunchOptionType
 import dev.vxrp.util.statusInstances
 import dev.vxrp.util.statusMappedBots
 import dev.vxrp.util.statusMappedServers
@@ -92,10 +90,9 @@ class StatusManager(private val globalApi: JDA, val config: Config, val translat
             statusMappedBots[newApi.selfUser.id] = instance.serverPort
             statusInstances[instance.serverPort] = instance
 
-            val launchOptionManager = LaunchOptionManager(config, translation)
-            if (launchOptionManager.checkLaunchOption(LaunchOptionType.STATUS_COMMAND_LISTENER).engage) StatusCommandListener(newApi, config, translation)
+            StatusCommandListener(newApi, config, translation)
 
-            if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_MANAGER).engage) initializeCommands(commandManager, newApi)
+            initializeCommands(commandManager, newApi)
             instanceApiMapping[instance] = newApi
         }
 

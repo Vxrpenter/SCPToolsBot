@@ -29,8 +29,6 @@ import dev.vxrp.bot.regulars.RegularsManager
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.updates.handler.UpdatesFileHandler
-import dev.vxrp.util.launch.LaunchOptionManager
-import dev.vxrp.util.launch.enums.LaunchOptionType
 import dev.vxrp.util.mainApi
 import dev.vxrp.util.mainCommandManager
 import net.dv8tion.jda.api.entities.Activity
@@ -48,22 +46,18 @@ class BotManager(val config: Config, val translation: Translation) {
             } ?: ActivityType.valueOf(config.settings.activityType), config.settings.activityContent))
         }
 
-        val launchOptionManager = LaunchOptionManager(config, translation)
+        api.addEventListener(CommandListener(api, config, translation))
+        api.addEventListener(ButtonListener(api, config, translation))
+        api.addEventListener(StringSelectListener(api, config, translation))
+        api.addEventListener(EntitySelectListener(api, config, translation))
+        api.addEventListener(ModalListener(api, config, translation))
+        NoticeOfDepartureManager(api, config, translation).spinUpChecker()
+        RegularsManager(api, config, translation).spinUpChecker()
 
-        if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_LISTENER).engage) api.addEventListener(CommandListener(api, config, translation))
-        if (launchOptionManager.checkLaunchOption(LaunchOptionType.BUTTON_LISTENER).engage) api.addEventListener(ButtonListener(api, config, translation))
-        if (launchOptionManager.checkLaunchOption(LaunchOptionType.STRING_SELECT_LISTENER).engage) api.addEventListener(StringSelectListener(api, config, translation))
-        if (launchOptionManager.checkLaunchOption(LaunchOptionType.ENTITY_SELECT_LISTENER).engage) api.addEventListener(EntitySelectListener(api, config, translation))
-        if (launchOptionManager.checkLaunchOption(LaunchOptionType.MODAL_LISTENER).engage) api.addEventListener(ModalListener(api, config, translation))
-        if (launchOptionManager.checkLaunchOption(LaunchOptionType.NOTICE_OF_DEPARTURE_CHECKER).engage) NoticeOfDepartureManager(api, config, translation).spinUpChecker()
-        if (launchOptionManager.checkLaunchOption(LaunchOptionType.REGULARS_CHECKER).engage) RegularsManager(api, config, translation).spinUpChecker()
+        val commandManager = CommandManager(config)
 
-        if (launchOptionManager.checkLaunchOption(LaunchOptionType.COMMAND_MANAGER).engage) {
-            val commandManager = CommandManager(config)
-
-            commandManager.registerSpecificCommands(config.extra.commands.commands, api)
-            mainCommandManager = commandManager
-        }
+        commandManager.registerSpecificCommands(config.extra.commands.commands, api)
+        mainCommandManager = commandManager
 
         mainApi = api
         UpdatesFileHandler().override(System.getProperty("user.dir"))

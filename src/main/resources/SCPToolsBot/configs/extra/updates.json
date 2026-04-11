@@ -1,5 +1,5 @@
 {
-  "version": "1.1.1",
+  "version": "1.1.2",
 
   "configurationUpdate": [
     {
@@ -35,7 +35,7 @@
         "upstream": "https://github.com/Vxrpenter/SCPToolsBot/blob/master/src/main/resources/SCPToolsBot/configs/extra/commands.json"
     },
     {
-        "changed": false,
+        "changed": true,
         "regenerate": true,
         "type": "config",
         "filename": "launch-configuration.json",
@@ -82,5 +82,5 @@
     }
   ],
 
-  "additionalInformation": ""
+  "additionalInformation": "The launch configuration has been trimmed down significantly, removing all listener and the command manager options"
 }

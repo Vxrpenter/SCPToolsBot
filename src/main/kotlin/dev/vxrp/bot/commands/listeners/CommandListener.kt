@@ -32,9 +32,6 @@ import dev.vxrp.bot.permissions.enums.StatusMessageType
 import dev.vxrp.configuration.data.Config
 import dev.vxrp.configuration.data.Translation
 import dev.vxrp.util.color.ColorTool
-import dev.vxrp.util.launch.LaunchOptionManager
-import dev.vxrp.util.launch.enums.LaunchOptionSectionType
-import dev.vxrp.util.launch.enums.LaunchOptionType
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.channel.ChannelType
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
@@ -70,45 +67,33 @@ class CommandListener(val api: JDA, val config: Config, val translation: Transla
     }
 
     private fun checkInheritance(inherit: String, event: SlashCommandInteractionEvent) {
-        val launchOptionManager = LaunchOptionManager(config, translation)
-
         when (inherit) {
             "commands.help.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.HELP_COMMAND).engage) {
-                    helpCommand(event)
-                }
+                helpCommand(event)
                 return
             }
 
             "commands.template.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.TEMPLATE_COMMAND).engage) {
-                    templateCommand(event)
-                }
+                templateCommand(event)
                 return
             }
 
             "commands.verify.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.VERIFY_COMMAND).engage) {
-                    PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.verify.active, config.settings.webserver.active)?.let { embed ->
-                        event.reply_("", listOf(embed)).setEphemeral(true).queue()
-                    } ?: verifyCommand(event)
-                }
+                PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.settings.verify.active, config.settings.webserver.active)?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: verifyCommand(event)
                 return
             }
 
             "commands.settings.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.SETTINGS_COMMAND).engage) {
-                    settingsCommand(event)
-                }
+                settingsCommand(event)
                 return
             }
 
             "commands.application.default" -> {
-                if (launchOptionManager.checkSectionOption(LaunchOptionType.COMMAND_LISTENER, LaunchOptionSectionType.APPLICATION_COMMAND).engage) {
-                    PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.ticket.settings.applicationMessageChannel != "")?.let { embed ->
-                        event.reply_("", listOf(embed)).setEphemeral(true).queue()
-                    } ?: applicationCommand(event)
-                }
+                PermissionManager(config, translation).checkStatus(StatusMessageType.COMMAND, config.ticket.settings.applicationMessageChannel != "")?.let { embed ->
+                    event.reply_("", listOf(embed)).setEphemeral(true).queue()
+                } ?: applicationCommand(event)
                 return
             }
         }
