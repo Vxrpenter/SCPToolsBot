@@ -99,7 +99,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
     }
 
     private suspend fun createMessage(ticketCreator: String, ticketHandler: User?, ticketStatus: TicketStatus, childChannel: ThreadChannel, closedMessage: Boolean, closedUser: User? = null, reason: String = "None"): MessageEmbed {
-        var thumbnailUrl = "https://www.pngarts.com/files/4/Anonymous-Mask-Transparent-Images.png"
+        var thumbnailUrl = ""
         var creatorUserMention = "anonymous"
         var creatorUserName = "anonymous"
         var handlerUserName = "none"
@@ -139,7 +139,7 @@ class TicketLogHandler(val api: JDA, val config: Config, val translation: Transl
 
         return Embed {
             color = usableColor
-            thumbnail = thumbnailUrl
+            if (thumbnailUrl.isNotBlank()) thumbnail = thumbnailUrl
             title = usableTitle
             description = usableDescription
             timestamp = Instant.now()
