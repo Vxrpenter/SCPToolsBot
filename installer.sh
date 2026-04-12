@@ -24,7 +24,7 @@
 export filename="NULL"
 export installType=""
 export repo="https://github.com/Vxrpenter/SCPToolsBot"
-export version="1.1.1"
+export version="1.1.2"
 export configPath=""
 
 # Jar Installation
