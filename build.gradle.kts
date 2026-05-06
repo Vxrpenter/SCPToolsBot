@@ -24,7 +24,7 @@ val kotlinxCoroutinesVersion = "1.10.2"
 val exposedVersion = "1.2.0"
 val sqliteVersion = "3.51.3.0"
 val mySqlVersion = "9.6.0"
-val postgresSqlVersion = "42.7.10"
+val postgresSqlVersion = "42.7.11"
 val mariaDBVersion = "3.5.8"
 
 val kotlinxSerializationVersion = "1.10.0"
