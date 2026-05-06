@@ -29,7 +29,7 @@ val mariaDBVersion = "3.5.8"
 
 val kotlinxSerializationVersion = "1.10.0"
 val kamlVersion = "0.104.0"
-val jdaVersion = "5.6.1"
+val jdaVersion = "6.4.1"
 val jdaKtxVersion = "0.12.0"
 val secretLabKotlinVersion = "0.4.3"
 val updaterVersion = "0.1.1"
